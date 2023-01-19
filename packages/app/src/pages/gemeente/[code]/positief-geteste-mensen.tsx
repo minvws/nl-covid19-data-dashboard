@@ -146,7 +146,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 <BoldText variant="body2">
                   {replaceComponentsInText(textGm.infected_kpi.last_value_text, {
                     infected: <InlineText color="data.primary">{`${formatNumber(lastValue.infected)}`}</InlineText>,
-                    dateTo: formatDateFromSeconds(lastValue.date_unix, 'weekday-medium'),
+                    dateTo: formatDateFromSeconds(lastValue.date_unix, 'weekday-long'),
                   })}
                 </BoldText>
                 {textGm.infected_kpi.link_cta && <Markdown content={textGm.infected_kpi.link_cta} />}

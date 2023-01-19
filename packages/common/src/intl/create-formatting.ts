@@ -11,15 +11,7 @@ export interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
   timeStyle?: 'full' | 'long' | 'medium' | 'short';
 }
 
-export type formatStyle =
-  | 'time'
-  | 'long'
-  | 'medium'
-  | 'iso'
-  | 'axis'
-  | 'axis-with-year'
-  | 'weekday-medium'
-  | 'day-month';
+export type formatStyle = 'time' | 'long' | 'medium' | 'iso' | 'axis' | 'axis-with-year' | 'weekday-medium' | 'weekday-long' | 'day-month';
 
 // Helper functions
 
@@ -45,10 +37,7 @@ function parseDateDefinition(dateDefinition: DateDefinition) {
     return new Date(dateDefinition.seconds * 1000);
   }
 
-  if (
-    'milliseconds' in dateDefinition &&
-    isDefined(dateDefinition.milliseconds)
-  ) {
+  if ('milliseconds' in dateDefinition && isDefined(dateDefinition.milliseconds)) {
     return new Date(dateDefinition.milliseconds);
   }
 
@@ -65,10 +54,7 @@ export function createFormatting(
     date_day_before_yesterday: string;
   }
 ) {
-  function formatNumber(
-    value: number | string | undefined | null,
-    numFractionDigits?: number
-  ): string {
+  function formatNumber(value: number | string | undefined | null, numFractionDigits?: number): string {
     if (typeof value === 'undefined' || value === null) return '-';
     const options = isDefined(numFractionDigits)
       ? {
@@ -129,11 +115,20 @@ export function createFormatting(
     timeZone: 'Europe/Amsterdam',
   });
 
-  const WeekdayMedium = new Intl.DateTimeFormat(languageTag, {
+  const sharedWeekdayOptions = {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
     timeZone: 'Europe/Amsterdam',
+  };
+
+  const WeekdayMedium = new Intl.DateTimeFormat(languageTag, {
+    ...sharedWeekdayOptions,
+  } as DateTimeFormatOptions);
+
+  const WeekdayLong = new Intl.DateTimeFormat(languageTag, {
+    ...sharedWeekdayOptions,
+    year: 'numeric',
   } as DateTimeFormatOptions);
 
   // The actual functions
@@ -168,6 +163,9 @@ export function createFormatting(
       case 'weekday-medium':
         return WeekdayMedium.format(date);
 
+      case 'weekday-long':
+        return WeekdayLong.format(date);
+
       case 'day-month':
       default:
         return DayMonth.format(date);
@@ -185,23 +183,11 @@ export function createFormatting(
       throw new Error('formatRelativeDate cannot be called server-side');
     }
 
-    return isToday(date)
-      ? text.date_today
-      : isYesterday(date)
-      ? text.date_yesterday
-      : isDayBeforeYesterday(date, new Date())
-      ? text.date_day_before_yesterday
-      : undefined;
+    return isToday(date) ? text.date_today : isYesterday(date) ? text.date_yesterday : isDayBeforeYesterday(date, new Date()) ? text.date_day_before_yesterday : undefined;
   }
 
-  function formatDate(
-    dateOrTimestamp: Date | number,
-    style: formatStyle = 'day-month'
-  ) {
-    const date =
-      dateOrTimestamp instanceof Date
-        ? dateOrTimestamp
-        : new Date(dateOrTimestamp as number);
+  function formatDate(dateOrTimestamp: Date | number, style: formatStyle = 'day-month') {
+    const date = dateOrTimestamp instanceof Date ? dateOrTimestamp : new Date(dateOrTimestamp as number);
 
     const cacheKey = `${date.getTime()}-${style}`;
     const dateCached = formatCache[cacheKey];
@@ -228,19 +214,13 @@ export function createFormatting(
    *    formatDateFromTo(29 maart, 4 april)
    *    output: ['29 maart', '4 april']
    */
-  function formatDateSpan(
-    startDateDefinition: DateDefinition,
-    endDateDefinition: DateDefinition,
-    format?: formatStyle
-  ) {
+  function formatDateSpan(startDateDefinition: DateDefinition, endDateDefinition: DateDefinition, format?: formatStyle) {
     const startDate = parseDateDefinition(startDateDefinition);
     const endDate = parseDateDefinition(endDateDefinition);
 
     const isSameMonth = startDate.getMonth() === endDate.getMonth();
 
-    const startDateText = isSameMonth
-      ? `${startDate.getDate()}`
-      : formatDate(startDate, format);
+    const startDateText = isSameMonth ? `${startDate.getDate()}` : formatDate(startDate, format);
     const endDateText = formatDate(endDate, format);
 
     return [startDateText, endDateText] as [start: string, end: string];
@@ -260,10 +240,7 @@ export function createFormatting(
     return formatDateFromMilliseconds(milliseconds, style);
   }
 
-  function formatDateFromMilliseconds(
-    milliseconds: number,
-    style?: formatStyle
-  ) {
+  function formatDateFromMilliseconds(milliseconds: number, style?: formatStyle) {
     assert(!isNaN(milliseconds), 'milliseconds is NaN');
 
     return formatDate(new Date(milliseconds), style);

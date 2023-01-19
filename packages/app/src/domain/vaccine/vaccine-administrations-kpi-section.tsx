@@ -26,9 +26,7 @@ export function VaccineAdministrationsKpiSection({
   >;
   text: SiteText['pages']['vaccinations_page']['nl'];
 }) {
-  const [selectedTab, setSelectedTab] = useState(
-    text.gezette_prikken.tab_first.title
-  );
+  const [selectedTab, setSelectedTab] = useState(text.gezette_prikken.tab_first.title);
 
   return (
     <TwoKpiSection>
@@ -56,14 +54,10 @@ export function VaccineAdministrationsKpiSection({
         </Box>
         {selectedTab == text.gezette_prikken.tab_first.title && (
           <>
-            <KpiValue
-              absolute={data.vaccine_administered_total.last_value.estimated}
-            />
+            <KpiValue absolute={data.vaccine_administered_total.last_value.estimated} />
             <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
               <Box flex={{ lg: '1 1 50%' }} mb={3}>
-                <Markdown
-                  content={text.gezette_prikken.tab_first.description}
-                />
+                <Markdown content={text.gezette_prikken.tab_first.description} />
               </Box>
               <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }} spacing={3}>
                 <VaccineAdministeredItem
@@ -74,18 +68,9 @@ export function VaccineAdministrationsKpiSection({
                 />
 
                 <VaccineAdministeredItem
-                  value={
-                    data.vaccine_administered_hospitals_and_care_institutions
-                      .last_value.estimated
-                  }
-                  description={
-                    text.gezette_prikken.estimated
-                      .hospitals_and_care_institutions
-                  }
-                  date={
-                    data.vaccine_administered_hospitals_and_care_institutions
-                      .last_value.date_unix
-                  }
+                  value={data.vaccine_administered_hospitals_and_care_institutions.last_value.estimated}
+                  description={text.gezette_prikken.estimated.hospitals_and_care_institutions}
+                  date={data.vaccine_administered_hospitals_and_care_institutions.last_value.date_unix}
                   text={text.gezette_prikken}
                 />
 
@@ -101,14 +86,10 @@ export function VaccineAdministrationsKpiSection({
         )}
         {selectedTab == text.gezette_prikken.tab_second.title && (
           <>
-            <KpiValue
-              absolute={data.vaccine_administered_total.last_value.reported}
-            />
+            <KpiValue absolute={data.vaccine_administered_total.last_value.reported} />
             <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
               <Box flex={{ lg: '1 1 50%' }}>
-                <Markdown
-                  content={text.gezette_prikken.tab_second.description}
-                />
+                <Markdown content={text.gezette_prikken.tab_second.description} />
               </Box>
               <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
                 <VaccineAdministeredItem
@@ -148,12 +129,9 @@ function VaccineAdministeredItem(props: VaccineAdministeredProps) {
       </BoldText>
 
       <Text variant="label1" color="gray7">
-        {replaceVariablesInText(
-          isReported ? text.reported_until : text.estimated_until,
-          {
-            reportedDate: formatDateFromSeconds(date, 'weekday-medium'),
-          }
-        )}
+        {replaceVariablesInText(isReported ? text.reported_until : text.estimated_until, {
+          reportedDate: formatDateFromSeconds(date, 'weekday-long'),
+        })}
       </Text>
     </Box>
   );
