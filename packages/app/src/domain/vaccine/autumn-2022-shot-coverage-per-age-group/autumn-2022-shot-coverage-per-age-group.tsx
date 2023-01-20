@@ -20,7 +20,6 @@ interface Autumn2022ShotCoveragePerAgeGroupProps {
 }
 
 export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata, values, sortingOrder, text }: Autumn2022ShotCoveragePerAgeGroupProps) => {
-console.log('values :', values);
   const breakpoints = useBreakpoints(true);
   const { formatPercentage } = useIntl();
   const componentName = Autumn2022ShotCoveragePerAgeGroup.name;
@@ -29,31 +28,26 @@ console.log('values :', values);
   const colors = { first: COLOR_AUTUMN_2022_SHOT, second: COLOR_FULLY_VACCINATED };
   const percentageKeys = {
     first: { propertyKey: 'autumn_2022_vaccinated_percentage', shouldFormat: true },
-    second: { propertyKey: 'fully_vaccinated_percentage', shouldFormat: true }
-  }
+    second: { propertyKey: 'fully_vaccinated_percentage', shouldFormat: true },
+  };
   const percentageData = getPercentageData(sortedValues, titles, colors, percentageKeys, undefined, text.no_data, formatPercentage);
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
       {breakpoints.lg ? (
-        <WideTable 
+        <WideTable
           headerText={{
             firstColumn: text.headers.agegroup,
             secondColumn: text.headers.autumn_2022_shot,
             thirdColumn: text.headers.fully_vaccinated,
-            fourthColumn: ''
+            fourthColumn: '',
           }}
           tableData={sortedValues}
           percentageData={percentageData}
           hasAgeGroups
         />
       ) : (
-        <NarrowTable 
-          headerText={text.headers.agegroup}
-          tableData={sortedValues}
-          percentageData={percentageData}
-          hasAgeGroups
-        />
+        <NarrowTable headerText={text.headers.agegroup} tableData={sortedValues} percentageData={percentageData} hasAgeGroups />
       )}
     </ChartTile>
   );

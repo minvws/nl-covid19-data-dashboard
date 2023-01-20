@@ -56,7 +56,6 @@ export const getStaticProps = createGetStaticProps(
 
 export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>) {
   const { pageText, lastGenerated, content, selectedVrData: data, vrName, chartBehaviorOptions } = props;
-
   const { commonTexts, formatDateFromSeconds, formatNumber } = useIntl();
   const { text } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -115,15 +114,20 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
           </TwoKpiSection>
 
           <BehaviorTableTile
-            title={text.vr.basisregels.title}
+            title={text.shared.basisregels.title}
             description={text.vr.basisregels.description}
             complianceExplanation={text.vr.basisregels.volgen_beschrijving}
             supportExplanation={text.vr.basisregels.steunen_beschrijving}
             value={behaviorLastValue}
-            annotation={text.vr.basisregels.annotatie}
+            annotation={text.shared.basisregels.annotation}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
             text={text.shared}
+            metadata={{
+              datumsText: text.vr.datums,
+              date: data.behavior_archived_20221019.values[0].date_end_unix,
+              source: text.vr.bronnen.rivm,
+            }}
           />
 
           <span ref={scrollToRef} />

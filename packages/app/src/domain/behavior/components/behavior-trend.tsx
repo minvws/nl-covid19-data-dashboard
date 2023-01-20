@@ -11,14 +11,14 @@ type TrendIcon = {
 };
 interface BehaviorTrendProps {
   trend: BehaviorTrendType | null;
-  color?: string;
   text: string;
+  hasMarginRight?: boolean;
 }
 
-export function BehaviorTrend({ trend, text }: BehaviorTrendProps) {
+export function BehaviorTrend({ trend, text, hasMarginRight }: BehaviorTrendProps) {
   if (trend === 'up') {
     return (
-      <Trend color={colors.black}>
+      <Trend color={colors.black} hasMarginRight={hasMarginRight || false}>
         {text}
         <TrendIcon trendDirection={TrendDirection.UP} />
       </Trend>
@@ -26,7 +26,7 @@ export function BehaviorTrend({ trend, text }: BehaviorTrendProps) {
   }
   if (trend === 'down') {
     return (
-      <Trend color={colors.black}>
+      <Trend color={colors.black} hasMarginRight={hasMarginRight || false}>
         {text}
         <TrendIcon trendDirection={TrendDirection.DOWN} />
       </Trend>
@@ -40,6 +40,7 @@ export function BehaviorTrend({ trend, text }: BehaviorTrendProps) {
 
 interface TrendProps {
   color: string;
+  hasMarginRight: boolean;
 }
 
 const Trend = styled.span<TrendProps>`
@@ -49,7 +50,8 @@ const Trend = styled.span<TrendProps>`
   color: ${({ color }) => color};
 
   svg {
-    margin-left: ${space[1]};
+    margin-left: ${({ hasMarginRight }) => (hasMarginRight ? undefined : space[1])};
+    margin-right: ${({ hasMarginRight }) => (hasMarginRight ? space[1] : undefined)};
     height: 12px;
     width: 12px;
   }

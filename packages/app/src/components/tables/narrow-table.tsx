@@ -15,58 +15,64 @@ interface NarrowTableProps extends CommonTableProps {
   tableData: any[]; // TODO:AP - figure out how to properly type this.
 }
 
-// Component shown for tables on narrow screens. 
+// Component shown for tables on narrow screens.
 export const NarrowTable = ({ tableData, headerText, hasAgeGroups, hasIcon, percentageData, onClickConfig }: NarrowTableProps) => {
   const { commonTexts } = useIntl();
 
   return (
     <Box overflow="auto">
       <Table>
-          <thead>
-            <Row>
-              <HeaderCell width="100%">{headerText} - Mobile table</HeaderCell>
-            </Row>
-          </thead>
+        <thead>
+          <Row>
+            <HeaderCell width="100%">{headerText}</HeaderCell>
+          </Row>
+        </thead>
 
-          <tbody>
-            {tableData.map((item, tableDataIndex) => (
-              <Row key={`narrow-${item.id}`} display="flex">
-                <Cell minWidth="100%">
-                  <Box display="flex" alignItems="center" marginBottom={space[2]}>
-                    {hasIcon && (
-                      <>
-                        <Box minWidth="32px" color="black" paddingRight={space[2]} display="flex">
-                          <BehaviorIcon name={item.id} size={25} />
+        <tbody>
+          {tableData.map((item, tableDataIndex) => (
+            <Row key={`narrow-${item.id}`} display="flex">
+              <Cell minWidth="100%">
+                <Box display="flex" alignItems="center" marginBottom={space[2]}>
+                  {hasIcon && (
+                    <>
+                      <Box minWidth="32px" color="black" paddingRight={space[2]} display="flex">
+                        <BehaviorIcon name={item.id} size={25} />
+                      </Box>
+
+                      <BehaviorAnchor
+                        as="button"
+                        underline="hover"
+                        color="black"
+                        onClick={onClickConfig ? () => onClickConfig.handler(item.id, onClickConfig.scrollRef) : undefined}
+                      >
+                        <Box as="span" display="flex" alignItems="center" textAlign="left" flexWrap="wrap">
+                          <BoldText>{item.description}</BoldText>
                         </Box>
+                      </BehaviorAnchor>
+                    </>
+                  )}
 
-                        <BehaviorAnchor as="button" underline="hover" color="black" onClick={onClickConfig ? () => onClickConfig.handler(item.id, onClickConfig.scrollRef) : undefined}>
-                            <Box as="span" display="flex" alignItems="center" textAlign="left" flexWrap="wrap">
-                              <BoldText>{item.description}</BoldText>
-                            </Box>
-                        </BehaviorAnchor>
-                      </>
-                    )}
+                  {hasAgeGroups && (
+                    <AgeGroup
+                      range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
+                      ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
+                      birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
+                      text={commonTexts.common.agegroup.total_people}
+                    />
+                  )}
+                </Box>
 
-                    {hasAgeGroups && (
-                      <AgeGroup
-                        range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
-                        ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
-                        birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
-                        text={commonTexts.common.agegroup.total_people}
-                      />
-                    )}
-                  </Box>
-
-                  <Box display="flex" flexDirection="column">
-                    {percentageData.map((percentageDataPoints, percentageDataIndex) => (
+                <Box display="flex" flexDirection="column">
+                  {percentageData.map(
+                    (percentageDataPoints, percentageDataIndex) =>
                       percentageDataIndex === tableDataIndex && <PercentageData percentageDataPoints={percentageDataPoints} key={`narrow-${item.id}-${percentageDataIndex}`} />
-                    ))}
-                  </Box>
-                </Cell>
-              </Row>
-            ))}
-          </tbody>
-        </Table>
+                  )}
+                </Box>
+              </Cell>
+            </Row>
+          ))}
+        </tbody>
+      </Table>
     </Box>
   );
 };

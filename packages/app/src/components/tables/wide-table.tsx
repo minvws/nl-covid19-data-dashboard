@@ -15,8 +15,8 @@ import { CommonTableProps } from './types';
 export const tableColumnWidths = {
   labelColumn: '30%',
   percentageColumn: '20%',
-  percentageBarColumn: '30%'
-}
+  percentageBarColumn: '30%',
+};
 
 interface WideTableProps extends CommonTableProps {
   headerText: { [key: string]: string }; // Covert this to an object
@@ -32,9 +32,15 @@ export const WideTable = ({ tableData, headerText, hasAgeGroups, hasIcon, percen
       <Table>
         <TableHead>
           <Row>
-            <HeaderCell minWidth="300px" width={tableColumnWidths.labelColumn}>{headerText.firstColumn} - Desktop table</HeaderCell>
-            <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>{headerText.secondColumn}</HeaderCell>
-            <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>{headerText.thirdColumn}</HeaderCell>
+            <HeaderCell minWidth="300px" width={tableColumnWidths.labelColumn}>
+              {headerText.firstColumn}
+            </HeaderCell>
+            <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>
+              {headerText.secondColumn}
+            </HeaderCell>
+            <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>
+              {headerText.thirdColumn}
+            </HeaderCell>
             <HeaderCell width={tableColumnWidths.percentageBarColumn}>{headerText.fourthColumn}</HeaderCell>
           </Row>
         </TableHead>
@@ -43,7 +49,7 @@ export const WideTable = ({ tableData, headerText, hasAgeGroups, hasIcon, percen
           {tableData.map((item, tableDataIndex) => (
             <Row key={`wide-${item.id}`}>
               <Cell minWidth={tableColumnWidths.labelColumn} border="0">
-                { hasIcon && (
+                {hasIcon && (
                   <Box display="flex">
                     <Box minWidth="32px" color="black" paddingRight={space[2]} display="flex">
                       <BehaviorIcon name={item.id} size={25} />
@@ -57,20 +63,20 @@ export const WideTable = ({ tableData, headerText, hasAgeGroups, hasIcon, percen
                   </Box>
                 )}
 
-                { hasAgeGroups && (
-                    <AgeGroup
-                      ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
-                      text={commonTexts.common.agegroup.total_people}
-                      range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
-                      birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
-                    />
-                  )
-                }
+                {hasAgeGroups && (
+                  <AgeGroup
+                    ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
+                    text={commonTexts.common.agegroup.total_people}
+                    range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
+                    birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
+                  />
+                )}
               </Cell>
 
-              {percentageData.map((percentageDataPoints, percentageDataIndex) => (
-                percentageDataIndex === tableDataIndex && <PercentageData percentageDataPoints={percentageDataPoints} key={`wide-${item.id}-${percentageDataIndex}`} />
-              ))}
+              {percentageData.map(
+                (percentageDataPoints, percentageDataIndex) =>
+                  percentageDataIndex === tableDataIndex && <PercentageData percentageDataPoints={percentageDataPoints} key={`wide-${item.id}-${percentageDataIndex}`} />
+              )}
             </Row>
           ))}
         </tbody>
