@@ -9,12 +9,7 @@ interface AgeGroupProps {
   text: string;
 }
 
-export function AgeGroup({
-  range,
-  ageGroupTotal,
-  birthyear_range,
-  text,
-}: AgeGroupProps) {
+export function AgeGroup({ range, ageGroupTotal, birthyear_range, text }: AgeGroupProps) {
   const { formatNumber } = useIntl();
 
   const totalText = replaceVariablesInText(text, {

@@ -194,8 +194,6 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
             <BehaviorPerAgeGroup
               title={textNl.tabel_per_leeftijdsgroep.title}
               description={textNl.tabel_per_leeftijdsgroep.description}
-              complianceExplanation={textNl.tabel_per_leeftijdsgroep.explanation.compliance}
-              supportExplanation={textNl.tabel_per_leeftijdsgroep.explanation.support}
               data={data.behavior_per_age_group}
               currentId={currentId}
               setCurrentId={setCurrentId}

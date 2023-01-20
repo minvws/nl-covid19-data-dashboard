@@ -52,9 +52,9 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
       {breakpoints.lg ? (
         <WideTable 
           headerText={{
-            firstColumn: 'Corona adviezen',
-            secondColumn: 'Coronaregel volgen',
-            thirdColumn: 'Coronaregel steunen',
+            firstColumn: text.basisregels.header_basisregel,
+            secondColumn: 'Coronaregel volgen', // TODO:AP - add sanity key
+            thirdColumn: 'Coronaregel steunen', // TODO:AP - add sanity key
             fourthColumn: ''
           }}
           tableData={behaviorsTableData}
@@ -66,7 +66,7 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
         <NarrowTable
           tableData={behaviorsTableData}
           percentageData={percentageData}
-          headerText={text.basisregels.header_basisregel}
+          headerText="Corona adviezen" // TODO:AP - add sanity key
           onClickConfig={onClickConfig}
           hasIcon
         />

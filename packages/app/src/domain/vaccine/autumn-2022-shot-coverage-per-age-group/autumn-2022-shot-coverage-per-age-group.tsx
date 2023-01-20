@@ -20,6 +20,7 @@ interface Autumn2022ShotCoveragePerAgeGroupProps {
 }
 
 export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata, values, sortingOrder, text }: Autumn2022ShotCoveragePerAgeGroupProps) => {
+console.log('values :', values);
   const breakpoints = useBreakpoints(true);
   const { formatPercentage } = useIntl();
   const componentName = Autumn2022ShotCoveragePerAgeGroup.name;

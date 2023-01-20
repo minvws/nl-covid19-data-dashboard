@@ -11,7 +11,7 @@ export const PercentageBarWithoutNumber = ({ color, percentage, marginBottom }: 
   return (
     <Box display="flex" alignItems="center" spacingHorizontal={2} marginBottom={marginBottom}>
       <Box color={color} flexGrow={1}>
-        <PercentageBar percentage={percentage} height="8px" />
+        <PercentageBar percentage={isNaN(percentage) ? 0 : percentage} height="8px" />
       </Box>
     </Box>
   );

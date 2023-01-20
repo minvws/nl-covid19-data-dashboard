@@ -18,13 +18,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
  * @returns
  */
 
-export function formatAgeGroupString(
-  ageGroup: string,
-  templates: {
-    oldest: string;
-    group: string;
-  }
-) {
+export function formatAgeGroupString(ageGroup: string, templates: { oldest: string; group: string;}) {
   switch (true) {
     case ageGroup.includes('-'): {
       const [age_low, age_high] = ageGroup.split('-');
