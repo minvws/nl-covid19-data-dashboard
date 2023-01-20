@@ -66,7 +66,7 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   vaccine_administered_total: 'Totaal gezette prikken',
   nursing_home: 'Verpleeghuizen',
   disability_care: 'Gehandicaptenzorg',
-  deceased_rivm: 'Sterfte (RIVM)',
+  deceased_rivm_archived_20221231: 'Sterfte (RIVM)',
   intensive_care_nice_per_age_group: 'IC-opnames (per leeftijd)',
   hospital_nice_per_age_group: 'Ziekenhuisopnames (per leeftijd)',
   tested_per_age_group: 'Positief getest (per leeftijd)',
