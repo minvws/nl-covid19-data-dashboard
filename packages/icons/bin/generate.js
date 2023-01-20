@@ -108,29 +108,6 @@ fs.writeFileSync(
 );
 
 /**
- * Generate schema entries of all the icons
- * Appends an enum to files in the filesToUpdate array.
- */
-const filesToUpdate = ['topical/icon.json'];
-const appBasePath = path.join(
-  rootDir,
-  '..', // packages
-  'app'
-);
-const schemaDirectory = path.join(appBasePath, 'schema');
-filesToUpdate.forEach((fileToUpdate) => {
-  const iconFile = fs.readFileSync(path.resolve(schemaDirectory, fileToUpdate));
-  const parsedIconFile = JSON.parse(iconFile);
-  const formattedIcons = icons.sort().map((icon) => pascalcase(icon));
-  parsedIconFile.enum = formattedIcons;
-  const updatedIconFile = JSON.stringify(parsedIconFile, null, 2);
-  fs.writeFileSync(
-    path.resolve(schemaDirectory, fileToUpdate),
-    updatedIconFile
-  );
-});
-
-/**
  * Generate documentation of all the icons
  * Outputs icons.md
  */

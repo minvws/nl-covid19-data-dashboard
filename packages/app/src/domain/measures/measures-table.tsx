@@ -7,7 +7,7 @@ import { space } from '~/style/theme';
 import { Measures } from '~/types/cms';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import DynamicIcon from '~/components/get-icon-by-name';
-import { TopicalIcon as MeasuresIcon } from '@corona-dashboard/common/src/types';
+import { IconName as MeasuresIcon } from '@corona-dashboard/icons/src/icon-name2filename';
 import { getFilenameToIconName } from '~/utils';
 import styled from 'styled-components';
 import { colors } from '@corona-dashboard/common';
