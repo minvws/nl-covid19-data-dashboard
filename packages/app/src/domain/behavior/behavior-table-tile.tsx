@@ -32,17 +32,11 @@ interface BehaviorTableTileProps {
 export function BehaviorTableTile({ title, description, value, annotation, setCurrentId, scrollRef, text, metadata }: BehaviorTableTileProps) {
   const breakpoints = useBreakpoints(true);
   const behaviorsTableData = useBehaviorTableData(value as NlBehaviorValue);
-  const titles = { first: 'Coronaregel volgen', second: 'Coronaregel steunen' };
+  const titles = { first: text.basisregels.rules_followed, second: text.basisregels.rules_supported };
   const colorValues = { first: colors.blue6, second: colors.yellow3 };
-  const percentageKeys = {
-    first: { propertyKey: 'compliancePercentage', shouldFormat: false },
-    second: { propertyKey: 'supportPercentage', shouldFormat: false },
-  };
-  const trendDirectionKeys = {
-    first: { propertyKey: 'complianceTrend' },
-    second: { propertyKey: 'supportTrend' },
-  };
-  const percentageData = getPercentageData(behaviorsTableData, titles, colorValues, percentageKeys, trendDirectionKeys);
+  const percentageFormattingRules = { first: { shouldFormat: false }, second: { shouldFormat: false } };
+  const trendDirectionKeys = { first: 'complianceTrend', second: 'supportTrend' };
+  const percentageData = getPercentageData(behaviorsTableData, titles, colorValues, percentageFormattingRules, trendDirectionKeys);
 
   const anchorButtonClickHandler = (id: BehaviorIdentifier, scrollRef: { current: HTMLDivElement | null }) => {
     scrollIntoView(scrollRef.current as Element);
@@ -56,8 +50,8 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
         <WideTable
           headerText={{
             firstColumn: text.basisregels.header_basisregel,
-            secondColumn: 'Coronaregel volgen', // TODO:AP - add sanity key
-            thirdColumn: 'Coronaregel steunen', // TODO:AP - add sanity key
+            secondColumn: text.basisregels.rules_followed,
+            thirdColumn: text.basisregels.rules_supported,
             fourthColumn: '',
           }}
           tableData={behaviorsTableData}
@@ -112,14 +106,14 @@ function useBehaviorTableData(value: NlBehaviorValue) {
           return {
             id: x.key,
             description: x.description,
-            compliancePercentage,
+            firstPercentage: compliancePercentage,
             complianceTrend,
-            supportPercentage,
+            secondPercentage: supportPercentage,
             supportTrend,
           };
         }
       })
       .filter(isDefined)
-      .sort((a, b) => (b.compliancePercentage ?? 0) - (a.compliancePercentage ?? 0));
+      .sort((a, b) => (b.firstPercentage ?? 0) - (a.firstPercentage ?? 0));
   }, [value, behaviorLookupKeys]);
 }

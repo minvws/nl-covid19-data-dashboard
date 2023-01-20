@@ -21,16 +21,24 @@ interface Autumn2022ShotCoveragePerAgeGroupProps {
 
 export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata, values, sortingOrder, text }: Autumn2022ShotCoveragePerAgeGroupProps) => {
   const breakpoints = useBreakpoints(true);
-  const { formatPercentage } = useIntl();
+  const { commonTexts, formatPercentage } = useIntl();
   const componentName = Autumn2022ShotCoveragePerAgeGroup.name;
-  const sortedValues = values.sort((a, b) => getSortingOrder(a.age_group_range, sortingOrder, componentName) - getSortingOrder(b.age_group_range, sortingOrder, componentName));
+  const requiredData = values.map((value) => {
+    return {
+      id: value.age_group_range,
+      ageGroupTotal: 'age_group_total' in value ? value.age_group_total : undefined,
+      ageGroupRange: value.age_group_range,
+      birthYearRange: value.birthyear_range,
+      firstPercentage: value.autumn_2022_vaccinated_percentage,
+      secondPercentage: value.fully_vaccinated_percentage,
+    };
+  });
+
+  const sortedData = requiredData.sort((a, b) => getSortingOrder(a.ageGroupRange, sortingOrder, componentName) - getSortingOrder(b.ageGroupRange, sortingOrder, componentName));
   const titles = { first: text.headers.autumn_2022_shot, second: text.headers.fully_vaccinated };
   const colors = { first: COLOR_AUTUMN_2022_SHOT, second: COLOR_FULLY_VACCINATED };
-  const percentageKeys = {
-    first: { propertyKey: 'autumn_2022_vaccinated_percentage', shouldFormat: true },
-    second: { propertyKey: 'fully_vaccinated_percentage', shouldFormat: true },
-  };
-  const percentageData = getPercentageData(sortedValues, titles, colors, percentageKeys, undefined, text.no_data, formatPercentage);
+  const percentageFormattingRules = { first: { shouldFormat: true }, second: { shouldFormat: true } };
+  const percentageData = getPercentageData(sortedData, titles, colors, percentageFormattingRules, undefined, commonTexts.common.no_data, formatPercentage);
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
@@ -42,12 +50,12 @@ export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata
             thirdColumn: text.headers.fully_vaccinated,
             fourthColumn: '',
           }}
-          tableData={sortedValues}
+          tableData={sortedData}
           percentageData={percentageData}
           hasAgeGroups
         />
       ) : (
-        <NarrowTable headerText={text.headers.agegroup} tableData={sortedValues} percentageData={percentageData} hasAgeGroups />
+        <NarrowTable headerText={text.headers.agegroup} tableData={sortedData} percentageData={percentageData} hasAgeGroups />
       )}
     </ChartTile>
   );

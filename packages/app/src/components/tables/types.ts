@@ -1,4 +1,4 @@
-import { BehaviorIdentifier } from "~/domain/behavior/logic/behavior-types";
+import { BehaviorIdentifier, BehaviorTrendType } from '~/domain/behavior/logic/behavior-types';
 
 export type PercentageDataPoint = {
   title: string;
@@ -16,7 +16,19 @@ export interface CommonTableProps {
   hasAgeGroups?: boolean;
   hasIcon?: boolean;
   onClickConfig?: {
-    handler: (id: BehaviorIdentifier, scrollRef: ScrollRef) => void,
+    handler: (id: BehaviorIdentifier, scrollRef: ScrollRef) => void;
     scrollRef: ScrollRef;
   };
+}
+
+export interface TableData {
+  id: string;
+  firstPercentage: number | string;
+  secondPercentage: number | string;
+  description?: string;
+  complianceTrend?: BehaviorTrendType | null;
+  supportTrend?: BehaviorTrendType | null;
+  ageGroupTotal?: number;
+  ageGroupRange?: string;
+  birthYearRange?: string;
 }

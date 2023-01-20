@@ -9,6 +9,7 @@ type TrendIcon = {
   direction: 'UP' | 'DOWN' | ' NEUTRAL';
   color: string;
 };
+
 interface BehaviorTrendProps {
   trend: BehaviorTrendType | null;
   text: string;
@@ -24,6 +25,7 @@ export function BehaviorTrend({ trend, text, hasMarginRight }: BehaviorTrendProp
       </Trend>
     );
   }
+
   if (trend === 'down') {
     return (
       <Trend color={colors.black} hasMarginRight={hasMarginRight || false}>
@@ -32,9 +34,11 @@ export function BehaviorTrend({ trend, text, hasMarginRight }: BehaviorTrendProp
       </Trend>
     );
   }
+
   if (trend === 'equal') {
     return <span>{text}</span>;
   }
+
   return <Box paddingLeft={`calc(12px + 0.25rem)`}>–</Box>;
 }
 

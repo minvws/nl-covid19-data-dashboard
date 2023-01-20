@@ -12,7 +12,7 @@ import { CommonTableProps } from './types';
 
 interface NarrowTableProps extends CommonTableProps {
   headerText: string;
-  tableData: any[]; // TODO:AP - figure out how to properly type this.
+  tableData: any[]; // TODO:AP - figure out how to properly type this
 }
 
 // Component shown for tables on narrow screens.
@@ -52,11 +52,11 @@ export const NarrowTable = ({ tableData, headerText, hasAgeGroups, hasIcon, perc
                     </>
                   )}
 
-                  {hasAgeGroups && (
+                  {hasAgeGroups && item?.ageGroupRange && item?.birthYearRange && (
                     <AgeGroup
-                      range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
-                      ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
-                      birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
+                      range={formatAgeGroupString(item.ageGroupRange, commonTexts.common.agegroup)}
+                      ageGroupTotal={item.ageGroupTotal ? item.ageGroupTotal : undefined}
+                      birthyear_range={formatBirthyearRangeString(item.birthYearRange, commonTexts.common.birthyears)}
                       text={commonTexts.common.agegroup.total_people}
                     />
                   )}

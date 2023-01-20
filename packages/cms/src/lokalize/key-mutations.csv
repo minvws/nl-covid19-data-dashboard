@@ -1,1 +1,11 @@
 timestamp,action,key,document_id,move_to
+2023-01-20T11:18:51.430Z,add,common.common.no_data,say0BNKaNSuhganBi4t19E,__
+2023-01-20T15:21:49.589Z,delete,pages.behavior_page.nl.basisregels.annotatie,sNNH6WARQASU7sDHsCGsgD,__
+2023-01-20T15:21:49.590Z,delete,pages.behavior_page.vr.basisregels.annotatie,7wdlutZNkP0LZIK1UVt4fP,__
+2023-01-20T15:22:47.686Z,add,pages.behavior_page.shared.basisregels.annotation,AE5jpq5sZWNgXeEUcIj5Tz,__
+2023-01-20T15:58:15.143Z,add,pages.behavior_page.shared.basisregels.title,AE5jpq5sZWNgXeEUcIwuRL,__
+2023-01-20T16:15:30.973Z,delete,pages.behavior_page.shared.leeftijden.tabel.compliance_no_data,A5Y41hFe5J3wNnB7Np5dWd,__
+2023-01-20T16:15:30.974Z,delete,pages.behavior_page.shared.leeftijden.tabel.support_no_data,X8Z1HTDxqJ9pM59361JkzO,__
+2023-01-20T16:15:30.976Z,delete,pages.vaccinations_page.nl.vaccination_coverage.no_data,hqivmGf8UPzCLjKFjLpCSD,__
+2023-01-20T16:16:02.980Z,add,pages.behavior_page.shared.basisregels.rules_followed,JaNe91xDWEANMVTM14jkIY,__
+2023-01-20T16:16:04.215Z,add,pages.behavior_page.shared.basisregels.rules_supported,AE5jpq5sZWNgXeEUcJ13cd,__

@@ -1,16 +1,15 @@
-import { colors } from "@corona-dashboard/common"
-import { Box } from "~/components/base"
-import { BehaviorTrend } from "~/domain/behavior/components/behavior-trend"
-import { NarrowPercentage } from "~/domain/vaccine/components/narrow-percentage"
-import { space } from "~/style/theme"
-import { PercentageDataPoint } from "../types"
-import { PercentageBarWithoutNumber } from "./percentage-bar-without-number"
+import { Box } from '~/components/base';
+import { BehaviorTrend } from '~/domain/behavior/components/behavior-trend';
+import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
+import { space } from '~/style/theme';
+import { PercentageDataPoint } from '../types';
+import { PercentageBarWithoutNumber } from './percentage-bar-without-number';
 
 interface PercentageDataProps {
   percentageDataPoints: PercentageDataPoint[];
 }
 
-export const PercentageData = ({percentageDataPoints}: PercentageDataProps) => {
+export const PercentageData = ({ percentageDataPoints }: PercentageDataProps) => {
   return (
     <>
       {percentageDataPoints.map((percentageDataPoint, index) => (
@@ -19,18 +18,23 @@ export const PercentageData = ({percentageDataPoints}: PercentageDataProps) => {
             <NarrowPercentage
               value={
                 percentageDataPoint.trendDirection ? (
-                  <BehaviorTrend trend={percentageDataPoint.trendDirection} color={colors.black} text={`${percentageDataPoint.percentage.value}%`} />
-                ) : percentageDataPoint.percentage.value
+                  <BehaviorTrend trend={percentageDataPoint.trendDirection} text={`${percentageDataPoint.percentage.value}%`} />
+                ) : (
+                  percentageDataPoint.percentage.value
+                )
               }
               color={percentageDataPoint.percentage.color}
               textLabel={percentageDataPoint.title}
             />
           </Box>
-          
+
           {/* In some cases, the percentage value is a string so it needs to be parsed for the progress bar to be filled properly. */}
-          <PercentageBarWithoutNumber percentage={typeof percentageDataPoint.percentage.value === 'number' ? percentageDataPoint.percentage.value : parseFloat(percentageDataPoint.percentage.value)} color={percentageDataPoint.percentage.color} />
+          <PercentageBarWithoutNumber
+            percentage={typeof percentageDataPoint.percentage.value === 'number' ? percentageDataPoint.percentage.value : parseFloat(percentageDataPoint.percentage.value)}
+            color={percentageDataPoint.percentage.color}
+          />
         </Box>
       ))}
     </>
-  )
-}
+  );
+};

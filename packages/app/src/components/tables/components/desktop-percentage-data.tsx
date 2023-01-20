@@ -1,4 +1,3 @@
-import { colors } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { BehaviorTrend } from '~/domain/behavior/components/behavior-trend';
 import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
@@ -20,8 +19,10 @@ export const PercentageData = ({ percentageDataPoints }: PercentageDataProps) =>
           <WidePercentage
             value={
               percentageDataPoint.trendDirection ? (
-                <BehaviorTrend trend={percentageDataPoint.trendDirection} color={colors.black} text={`${percentageDataPoint.percentage.value}%`} />
-              ) : percentageDataPoint.percentage.value
+                <BehaviorTrend trend={percentageDataPoint.trendDirection} text={`${percentageDataPoint.percentage.value}%`} />
+              ) : (
+                percentageDataPoint.percentage.value
+              )
             }
             color={percentageDataPoint.percentage.color}
             justifyContent="flex-start"
@@ -32,9 +33,9 @@ export const PercentageData = ({ percentageDataPoints }: PercentageDataProps) =>
       <Cell minWidth={tableColumnWidths.percentageBarColumn} border="0">
         <Box display="flex" flexDirection="column">
           {percentageDataPoints.map((percentageDataPoint, index) => (
-            <PercentageBarWithoutNumber 
-              key={index} 
-              percentage={typeof percentageDataPoint.percentage.value === 'number' ? percentageDataPoint.percentage.value : parseFloat(percentageDataPoint.percentage.value)} 
+            <PercentageBarWithoutNumber
+              key={index}
+              percentage={typeof percentageDataPoint.percentage.value === 'number' ? percentageDataPoint.percentage.value : parseFloat(percentageDataPoint.percentage.value)}
               color={percentageDataPoint.percentage.color}
               marginBottom={index === 0 ? space[2] : undefined}
             />

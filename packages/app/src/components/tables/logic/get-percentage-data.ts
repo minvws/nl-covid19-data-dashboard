@@ -1,46 +1,44 @@
-import { createFormatting } from "@corona-dashboard/common";
-import { PercentageDataPoint } from "../types";
+import { createFormatting } from '@corona-dashboard/common';
+import { PercentageDataPoint } from '../types';
 
-type percentageParam = { propertyKey: string, shouldFormat?: boolean };
-type percentageParams = { first: percentageParam, second: percentageParam };
-type trendDirectionParams = { first: percentageParam, second: percentageParam };
-type colorParam = { first: string, second: string };
-type titleParam = { first: string, second: string };
+type FormatParam = { shouldFormat?: boolean };
+type PercentageFormattingParams = { first: FormatParam; second: FormatParam };
+type TrendDirectionParams = { first: string; second: string };
+type ColorParam = { first: string; second: string };
+type TitleParam = { first: string; second: string };
 
 // Returns an array of objects corresponding to percentage data used by tables on the dashboard
 export const getPercentageData = (
   dataset: any[], // TODO:AP - figure out how to properly type this
-  title: titleParam,
-  color: colorParam,
-  percentageKeys: percentageParams,
-  trendDirection?: trendDirectionParams,
+  title: TitleParam,
+  color: ColorParam,
+  percentageFormattingRules: PercentageFormattingParams,
+  trendDirection?: TrendDirectionParams,
   noDataText?: string,
   formatPercentage?: ReturnType<typeof createFormatting>['formatPercentage']
 ): PercentageDataPoint[][] => {
-  const getPercentageValue = (datasetItem: any, percentageItem: percentageParam) => {
+  const getFormattedPercentageValue = (percentage: number | null) => {
     if (formatPercentage === undefined) return;
 
-    return typeof percentageItem !== 'number' && datasetItem[percentageItem.propertyKey] !== null
-      ? `${formatPercentage(datasetItem[percentageItem.propertyKey])}%` 
-      : noDataText;
-  }
+    return percentage !== null ? `${formatPercentage(percentage)}%` : noDataText;
+  };
 
   return dataset.map((datasetItem) => {
     return [
       {
         title: title.first,
-        trendDirection: trendDirection?.first.propertyKey !== undefined && trendDirection.first.propertyKey in datasetItem ? datasetItem[trendDirection.first.propertyKey] : null,
+        trendDirection: trendDirection?.first !== undefined && trendDirection.first in datasetItem ? datasetItem[trendDirection.first] : null,
         percentage: {
           color: color.first,
-          value: percentageKeys.first.shouldFormat ? getPercentageValue(datasetItem, percentageKeys.first) : datasetItem[percentageKeys.first.propertyKey],
+          value: percentageFormattingRules.first.shouldFormat ? getFormattedPercentageValue(datasetItem.firstPercentage) : datasetItem.firstPercentage,
         },
       },
       {
         title: title.second,
-        trendDirection: trendDirection?.second.propertyKey !== undefined && trendDirection.second.propertyKey in datasetItem ? datasetItem[trendDirection.second.propertyKey] : null,
+        trendDirection: trendDirection?.second !== undefined && trendDirection.second in datasetItem ? datasetItem[trendDirection.second] : null,
         percentage: {
           color: color.second,
-          value: percentageKeys.second.shouldFormat ? getPercentageValue(datasetItem, percentageKeys.second) : datasetItem[percentageKeys.second.propertyKey],
+          value: percentageFormattingRules.second.shouldFormat ? getFormattedPercentageValue(datasetItem.secondPercentage) : datasetItem.secondPercentage,
         },
       },
     ];

@@ -49,21 +49,18 @@ export function BehaviorPerAgeGroup({ title, description, data, currentId, setCu
   const requiredData = AGE_KEYS_NEW.map((age, index) => {
     return {
       id: `${age.ageGroup}-${index}`,
-      compliancePercentage: complianceValue?.[age.ageGroup],
-      supportPercentage: supportValue?.[age.ageGroup],
-      age_group_total: null, // Passing null as the dataset does not contain information about the total number of people in an age group.
-      age_group_range: text.shared.leeftijden.tabel[age.ageGroup],
-      birthyear_range: age.birthYearRange,
+      firstPercentage: complianceValue?.[age.ageGroup],
+      secondPercentage: supportValue?.[age.ageGroup],
+      ageGroupTotal: null, // Passing null as the dataset does not contain information about the total number of people in an age group.
+      ageGroupRange: text.shared.leeftijden.tabel[age.ageGroup],
+      birthYearRange: age.birthYearRange,
     };
   });
 
-  const titles = { first: 'Coronaregel volgen', second: 'Coronaregel steunen' };
+  const titles = { first: text.shared.basisregels.rules_followed, second: text.shared.basisregels.rules_supported };
   const colorValues = { first: colors.blue6, second: colors.yellow3 };
-  const percentageKeys = {
-    first: { propertyKey: 'compliancePercentage', shouldFormat: true },
-    second: { propertyKey: 'supportPercentage', shouldFormat: true },
-  };
-  const percentageData = getPercentageData(requiredData, titles, colorValues, percentageKeys, undefined, commonTexts.common.no_data, formatPercentage);
+  const percentageFormattingRules = { first: { shouldFormat: true }, second: { shouldFormat: true } };
+  const percentageData = getPercentageData(requiredData, titles, colorValues, percentageFormattingRules, undefined, commonTexts.common.no_data, formatPercentage);
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
@@ -76,8 +73,8 @@ export function BehaviorPerAgeGroup({ title, description, data, currentId, setCu
               <WideTable
                 headerText={{
                   firstColumn: text.shared.leeftijden.tabel.age_group,
-                  secondColumn: 'Coronaregel volgen',
-                  thirdColumn: 'Coronaregel steunen',
+                  secondColumn: text.shared.basisregels.rules_followed,
+                  thirdColumn: text.shared.basisregels.rules_supported,
                   fourthColumn: '',
                 }}
                 tableData={requiredData}

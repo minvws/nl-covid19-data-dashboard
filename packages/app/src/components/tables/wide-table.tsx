@@ -19,8 +19,8 @@ export const tableColumnWidths = {
 };
 
 interface WideTableProps extends CommonTableProps {
-  headerText: { [key: string]: string }; // Covert this to an object
-  tableData: any[]; // TODO:AP - figure out how to properly type this. Create an interface for it which requires only the data actually used in this component.
+  headerText: { [key: string]: string };
+  tableData: any[]; // TODO:AP - figure out how to properly type this
 }
 
 // Component shown for tables on wide screens.
@@ -63,12 +63,12 @@ export const WideTable = ({ tableData, headerText, hasAgeGroups, hasIcon, percen
                   </Box>
                 )}
 
-                {hasAgeGroups && (
+                {hasAgeGroups && item?.ageGroupRange && item?.birthYearRange && (
                   <AgeGroup
-                    ageGroupTotal={'age_group_total' in item ? item.age_group_total : undefined}
+                    range={formatAgeGroupString(item.ageGroupRange, commonTexts.common.agegroup)}
+                    ageGroupTotal={item.ageGroupTotal ? item.ageGroupTotal : undefined}
+                    birthyear_range={formatBirthyearRangeString(item.birthYearRange, commonTexts.common.birthyears)}
                     text={commonTexts.common.agegroup.total_people}
-                    range={formatAgeGroupString(item.age_group_range, commonTexts.common.agegroup)}
-                    birthyear_range={formatBirthyearRangeString(item.birthyear_range, commonTexts.common.birthyears)}
                   />
                 )}
               </Cell>
