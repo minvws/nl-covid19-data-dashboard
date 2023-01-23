@@ -200,6 +200,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                       shortLabel: commonTexts.common.incomplete,
                     },
                   ],
+                  timelineEvents: getTimelineEvents(content.elements.timeSeries, 'hospital_lcps', 'beds_occupied_covid'),
                 }}
               />
             </ChartTile>
@@ -226,16 +227,6 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 values={data.intensive_care_lcps.values}
                 timeframe={intensiveCareBedsTimeframe}
                 forceLegend
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: data.intensive_care_lcps.values[0].date_unix,
-                      end: new Date('1 June 2020').getTime() / 1000,
-                      label: textNl.icu.chart_beds_occupied.legend_inaccurate_label,
-                      shortLabel: commonTexts.common.incomplete,
-                    },
-                  ],
-                }}
                 seriesConfig={[
                   {
                     type: 'line',
@@ -252,6 +243,17 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.primary,
                   },
                 ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: data.intensive_care_lcps.values[0].date_unix,
+                      end: new Date('1 June 2020').getTime() / 1000,
+                      label: textNl.icu.chart_beds_occupied.legend_inaccurate_label,
+                      shortLabel: commonTexts.common.incomplete,
+                    },
+                  ],
+                  timelineEvents: getTimelineEvents(content.elements.timeSeries, 'intensive_care_lcps', 'beds_occupied_covid'),
+                }}
               />
             </ChartTile>
           )}
