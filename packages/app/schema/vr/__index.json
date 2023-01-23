@@ -84,7 +84,7 @@
       "$ref": "behavior_archived_20221019.json"
     },
     "deceased_rivm_archived_20221231": {
-      "$ref": "deceased_rivm.json"
+      "$ref": "deceased_rivm_archived_20221231.json"
     },
     "deceased_cbs": {
       "$ref": "deceased_cbs.json"
