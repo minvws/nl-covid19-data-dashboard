@@ -2,7 +2,7 @@ import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard
 import { useState } from 'react';
 import { Coronavirus, Location, VulnerableGroups as VulnerableGroupsIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { Markdown, ChartTile, Divider, KpiTile, KpiValue, PageInformationBlock, TwoKpiSection, TimeSeriesChart, TileList } from '~/components';
+import { Markdown, InView, ChartTile, Divider, KpiTile, KpiValue, PageInformationBlock, TwoKpiSection, TimeSeriesChart, TileList } from '~/components';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -69,6 +69,8 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
 
   const [nursingHomeDeceasedTimeframe, setNursingHomeDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
+  const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
+  setHideArchivedCharts(false);
   const { commonTexts } = useIntl();
 
   const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -328,6 +330,11 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
               }}
             />
           </ChartTile>
+          {hasHideArchivedCharts && (
+            <InView rootMargin="400px">
+              <></>
+            </InView>
+          )}
         </TileList>
       </VrLayout>
     </Layout>
