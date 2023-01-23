@@ -45,9 +45,11 @@ export function WarningTile({ message, variant = 'default', icon = Warning, isFu
   return (
     <Article isFullWidth={isFullWidth}>
       <WarningBox variant={variant}>
-        <IconWrapper>
-          <Icon aria-label={WarningIconAriaLabel} />
-        </IconWrapper>
+        {variant !== 'informational' && (
+          <IconWrapper>
+            <Icon aria-label={WarningIconAriaLabel} />
+          </IconWrapper>
+        )}
       </WarningBox>
       <WarningMessageBox variant={variant}>
         {typeof message === 'string' ? (
@@ -82,6 +84,7 @@ const WarningBox = styled.div<{ variant: WarningMessageVariant }>`
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
+  min-width: ${({ variant }) => (variant === 'informational' ? space[2] : 'undefined')};
   background-color: ${({ variant }) => WarningVariantStylingConfig[variant].iconBackgroundColor};
   border-bottom-left-radius: ${radii[1]}px;
   border-top-left-radius: ${radii[1]}px;
