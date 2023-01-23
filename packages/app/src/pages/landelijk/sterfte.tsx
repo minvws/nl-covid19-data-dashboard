@@ -76,6 +76,8 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
+  const lastdeceasedPerAgeGroupInsertionDate = getLastInsertionDateOfPage(data, ['deceased_rivm_per_age_group_archived_20221231']);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -189,7 +191,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 title={textShared.age_groups.title}
                 description={textShared.age_groups.description}
                 metadata={{
-                  date: dataRivm.last_value.date_unix,
+                  date: lastdeceasedPerAgeGroupInsertionDate,
                   source: textShared.age_groups.bronnen.rivm,
                 }}
               >
