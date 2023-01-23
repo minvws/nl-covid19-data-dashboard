@@ -30,8 +30,8 @@ const WarningVariantStylingConfig = {
   default: { fontWeight: 'normal', iconBackgroundColor: colors.white, textBackgroundColor: colors.white, paddingLeft: space[0] },
   informational: {
     fontWeight: 'bold',
-    iconBackgroundColor: colors.gray2,
-    textBackgroundColor: colors.gray1,
+    iconBackgroundColor: colors.gray4,
+    textBackgroundColor: colors.gray2,
     paddingLeft: space[3],
   },
 };
@@ -74,45 +74,48 @@ const Article = styled.article<{ isFullWidth?: boolean }>`
   padding: 0;
   box-shadow: none;
   display: ${({ isFullWidth }) => (isFullWidth ? 'flex' : 'inline-flex')};
-  border-radius: ${radii[1]};
+  border-radius: ${radii[1]}px;
 `;
 
 const WarningBox = styled.div<{ variant: WarningMessageVariant }>`
   display: flex;
-  align-ttems: center;
+  align-items: center;
   justify-content: center;
   flex: 0 0 auto;
   background-color: ${({ variant }) => WarningVariantStylingConfig[variant].iconBackgroundColor};
-  border-bottom-left-radius: ${radii[1]};
-  border-top-left-radius: ${radii[1]};
+  border-bottom-left-radius: ${radii[1]}px;
+  border-top-left-radius: ${radii[1]}px;
 `;
 
 const IconWrapper = styled.div`
-  svg: {
-    borderradius: ${radii[1]};
+  display: block;
+  svg {
+    border-radius: ${radii[1]}pxpx;
     display: block;
     width: 24px;
     height: 24px;
-    marginx: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 `;
 
 const WarningMessageBox = styled.div<{ variant: WarningMessageVariant }>`
   display: flex;
-  align-ttems: center;
+  align-items: center;
   flex: 1 1 auto;
-  paddingy: ${space[2]};
+  padding-top: ${space[2]};
+  padding-bottom: ${space[2]};
   padding-left: ${({ variant }) => WarningVariantStylingConfig[variant].paddingLeft};
-  background-color: ${({ variant }) => WarningVariantStylingConfig[variant].iconBackgroundColor};
-  border-bottom-right-radius: ${radii[1]};
-  border-top-right-radius: ${radii[1]};
+  background-color: ${({ variant }) => WarningVariantStylingConfig[variant].textBackgroundColor};
+  border-bottom-right-radius: ${radii[1]}px;
+  border-top-right-radius: ${radii[1]}px;
 `;
 
 const Content = styled.div<{ variant: WarningMessageVariant; hasTooltip: boolean }>`
   font-size: ${fontSizes[2]};
   font-weight: ${({ variant }) => WarningVariantStylingConfig[variant].fontWeight};
-  border-bottom-right-radius: ${radii[1]};
-  border-top-right-radius: ${radii[1]};
+  border-bottom-right-radius: ${radii[1]}px;
+  border-top-right-radius: ${radii[1]}px;
   padding-right: ${fontSizes[4]};
   '> *': {
     margin-top: ${fontSizes[0]};
