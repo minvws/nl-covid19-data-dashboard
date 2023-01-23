@@ -4,22 +4,19 @@
   "title": "vr_collection_vulnerable_nursing_home",
   "type": "object",
   "properties": {
-    "newly_infected_people": {
+    "newly_infected_locations": {
       "type": "integer"
     },
-    "newly_infected_people_moving_average": {
-      "type": ["number", "null"]
-    },
-    "deceased_daily": {
+    "infected_locations_total": {
       "type": "integer"
     },
-    "deceased_daily_moving_average": {
-      "type": ["number", "null"]
-    },
-    "date_unix": {
-      "type": "integer"
+    "infected_locations_percentage": {
+      "type": "number"
     },
     "date_of_insertion_unix": {
+      "type": "integer"
+    },
+    "date_unix": {
       "type": "integer"
     },
     "vrcode": {
@@ -28,10 +25,9 @@
     }
   },
   "required": [
-    "newly_infected_people",
-    "newly_infected_people_moving_average",
-    "deceased_daily",
-    "deceased_daily_moving_average",
+    "newly_infected_locations",
+    "infected_locations_total",
+    "infected_locations_percentage",
     "date_unix",
     "vrcode",
     "date_of_insertion_unix"

@@ -64,6 +64,14 @@
         "$ref": "vulnerable_nursing_home.json"
       }
     },
+    "nursing_home_archived_20230126": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "nursing_home_archived_20230126.json"
+      }
+    },
     "sewer": {
       "type": "array",
       "minItems": 25,
