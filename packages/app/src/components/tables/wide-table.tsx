@@ -1,7 +1,7 @@
 import { colors } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { PercentageData } from './components/desktop-percentage-data';
+import { PercentageData } from './components/wide-percentage-data';
 import { Cell, HeaderCell, Table, TableHead } from './components/shared-styled-components';
 import { CommonTableProps } from './types';
 

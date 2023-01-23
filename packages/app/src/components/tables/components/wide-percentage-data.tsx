@@ -1,6 +1,6 @@
 import { Box } from '~/components/base';
 import { BehaviorTrend } from '~/domain/behavior/components/behavior-trend';
-import { WidePercentage } from '~/domain/vaccine/components/wide-percentage';
+import { WidePercentage } from '~/components/tables/components/wide-percentage';
 import { space } from '~/style/theme';
 import { PercentageDataPoint } from '../types';
 import { tableColumnWidths } from '../wide-table';
@@ -11,6 +11,7 @@ interface PercentageDataProps {
   percentageDataPoints: PercentageDataPoint[];
 }
 
+// Component used to show percentages on wide screens.
 export const PercentageData = ({ percentageDataPoints }: PercentageDataProps) => {
   return (
     <>

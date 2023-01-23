@@ -1,6 +1,6 @@
 import { Box } from '~/components/base';
 import { BehaviorTrend } from '~/domain/behavior/components/behavior-trend';
-import { NarrowPercentage } from '~/domain/vaccine/components/narrow-percentage';
+import { NarrowPercentage } from '~/components/tables/components/narrow-percentage';
 import { space } from '~/style/theme';
 import { PercentageDataPoint } from '../types';
 import { PercentageBarWithoutNumber } from './percentage-bar-without-number';
@@ -9,6 +9,7 @@ interface PercentageDataProps {
   percentageDataPoints: PercentageDataPoint[];
 }
 
+// Component used to show percentage data on narrow screens.
 export const PercentageData = ({ percentageDataPoints }: PercentageDataProps) => {
   return (
     <>

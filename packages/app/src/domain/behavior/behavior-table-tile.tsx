@@ -55,7 +55,7 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
         <NarrowTable tableData={behaviorsTableData} percentageData={percentageData} headerText={text.basisregels.header_basisregel} />
       )}
 
-      <Box marginTop={space[2]}>
+      <Box marginTop={space[3]}>
         <Box display="flex">
           <Box display="flex" marginRight={space[3]}>
             <BehaviorTrend trend="down" text="" hasMarginRight />

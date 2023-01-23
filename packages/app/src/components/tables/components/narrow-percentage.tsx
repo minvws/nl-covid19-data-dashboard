@@ -2,14 +2,12 @@ import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { space } from '~/style/theme';
 
-
 interface NarrowPercentageProps {
   value: number | React.ReactNode;
   color: string;
   textLabel: string;
 }
 
-// TODO: AP: Move to tables directory
 export function NarrowPercentage({ value, color, textLabel }: NarrowPercentageProps) {
   return (
     <Box display="grid" gridTemplateColumns="auto 2fr" width="100%">
@@ -18,13 +16,7 @@ export function NarrowPercentage({ value, color, textLabel }: NarrowPercentagePr
       </Box>
 
       <Box display="flex" alignItems="center">
-        <Box
-          width="10px"
-          height="10px"
-          backgroundColor={color}
-          borderRadius="50%"
-          marginRight={space[2]}
-        />
+        <Box width="10px" height="10px" backgroundColor={color} borderRadius="50%" marginRight={space[2]} />
         {value}
       </Box>
     </Box>

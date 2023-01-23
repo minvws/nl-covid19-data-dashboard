@@ -1,6 +1,6 @@
 import { Box } from '~/components/base';
 import { space } from '~/style/theme';
-import { PercentageData } from './components/mobile-percentage-data';
+import { PercentageData } from './components/narrow-percentage-data';
 import { Cell, HeaderCell, Row, Table } from './components/shared-styled-components';
 import { CommonTableProps } from './types';
 

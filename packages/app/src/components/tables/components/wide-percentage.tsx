@@ -9,7 +9,6 @@ interface PercentageWideNumberProps {
   justifyContent: string;
 }
 
-// TODO: AP: Move to tables directory
 export function WidePercentage({ value, color, justifyContent }: PercentageWideNumberProps) {
   return (
     <StyledInlineText justifyContent={justifyContent}>
@@ -20,15 +19,15 @@ export function WidePercentage({ value, color, justifyContent }: PercentageWideN
 }
 
 interface StyledInlineTextProps {
-  justifyContent: string
+  justifyContent: string;
 }
 
 const StyledInlineText = styled(InlineText)<StyledInlineTextProps>`
   align-items: center;
   display: flex;
   font-size: ${fontSizes[2]};
-  justify-content: ${({justifyContent}) => justifyContent};
+  justify-content: ${({ justifyContent }) => justifyContent};
   line-height: ${lineHeights[2]};
   padding-right: ${space[4]};
   text-align: left;
-`
+`;
