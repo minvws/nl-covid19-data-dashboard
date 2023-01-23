@@ -1,34 +1,29 @@
-import { BehaviorIdentifier, BehaviorTrendType } from '~/domain/behavior/logic/behavior-types';
+import React from 'react';
+import { BehaviorTrendType } from '~/domain/behavior/logic/behavior-types';
+
+type TrendDirection = BehaviorTrendType | null;
 
 export type PercentageDataPoint = {
   title: string;
-  trendDirection?: 'up' | 'down' | 'equal' | null;
+  trendDirection?: TrendDirection;
   percentage: {
     color: string;
     value: number | string;
   };
 };
 
-type ScrollRef = { current: HTMLDivElement | null };
-
-export interface CommonTableProps {
-  percentageData: PercentageDataPoint[][];
-  hasAgeGroups?: boolean;
-  hasIcon?: boolean;
-  onClickConfig?: {
-    handler: (id: BehaviorIdentifier, scrollRef: ScrollRef) => void;
-    scrollRef: ScrollRef;
-  };
-}
-
 export interface TableData {
   id: string;
-  firstPercentage: number | string;
-  secondPercentage: number | string;
+  firstColumnLabel: React.ReactNode;
+  firstPercentage: number | null;
+  secondPercentage: number | null;
+  firstPercentageTrend?: TrendDirection;
+  secondPercentageTrend?: TrendDirection;
   description?: string;
-  complianceTrend?: BehaviorTrendType | null;
-  supportTrend?: BehaviorTrendType | null;
-  ageGroupTotal?: number;
   ageGroupRange?: string;
-  birthYearRange?: string;
+}
+
+export interface CommonTableProps {
+  tableData: TableData[];
+  percentageData: PercentageDataPoint[][];
 }

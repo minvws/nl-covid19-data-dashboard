@@ -3,10 +3,12 @@ import {
   NlVaccineCoveragePerAgeGroupArchived_20220908Value,
   VrVaccineCoveragePerAgeGroupArchived_20220908Value,
 } from '@corona-dashboard/common';
+import { AgeGroup } from '~/components/age-groups/age-group';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
 import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
 import { NarrowTable } from '~/components/tables/narrow-table';
+import { TableData } from '~/components/tables/types';
 import { WideTable } from '~/components/tables/wide-table';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
@@ -27,21 +29,23 @@ export function BoosterShotCoveragePerAgeGroup({ title, description, metadata, v
   const breakpoints = useBreakpoints(true);
   const { commonTexts, formatPercentage } = useIntl();
   const componentName = BoosterShotCoveragePerAgeGroup.name;
-  const requiredData = values.map((value) => {
+  const requiredData: TableData[] = values.map((value) => {
     return {
-      id: value.age_group_range,
-      ageGroupTotal: 'age_group_total' in value ? value.age_group_total : undefined,
-      ageGroupRange: value.age_group_range,
-      birthYearRange: value.birthyear_range,
+      id: `${componentName}-${value.age_group_range}`,
       firstPercentage: value.fully_vaccinated_percentage,
       secondPercentage: value.booster_shot_percentage,
+      ageGroupRange: value.age_group_range,
+      firstColumnLabel: (
+        <AgeGroup peopleInAgeGroup={'age_group_total' in value ? value.age_group_total : undefined} range={value.age_group_range} birthYearRange={value.birthyear_range} />
+      ),
     };
   });
+
   const sortedData = requiredData.sort((a, b) => getSortingOrder(a.ageGroupRange, sortingOrder, componentName) - getSortingOrder(b.ageGroupRange, sortingOrder, componentName));
-  const titles = { first: text.vaccination_coverage.headers.fully_vaccinated, second: text.archived.vaccination_coverage.campaign_headers.booster_shot };
-  const colors = { first: COLOR_FULLY_VACCINATED, second: COLOR_FULLY_BOOSTERED };
+  const percentageTitles = { first: text.vaccination_coverage.headers.fully_vaccinated, second: text.archived.vaccination_coverage.campaign_headers.booster_shot };
+  const percentageColors = { first: COLOR_FULLY_VACCINATED, second: COLOR_FULLY_BOOSTERED };
   const percentageFormattingRules = { first: { shouldFormat: true }, second: { shouldFormat: true } };
-  const percentageData = getPercentageData(sortedData, titles, colors, percentageFormattingRules, undefined, commonTexts.common.no_data, formatPercentage);
+  const percentageData = getPercentageData(sortedData, percentageTitles, percentageColors, percentageFormattingRules, commonTexts.common.no_data, formatPercentage);
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
@@ -55,10 +59,9 @@ export function BoosterShotCoveragePerAgeGroup({ title, description, metadata, v
           }}
           tableData={sortedData}
           percentageData={percentageData}
-          hasAgeGroups
         />
       ) : (
-        <NarrowTable headerText={text.vaccination_coverage.headers.agegroup} tableData={sortedData} percentageData={percentageData} hasAgeGroups />
+        <NarrowTable headerText={text.vaccination_coverage.headers.agegroup} tableData={sortedData} percentageData={percentageData} />
       )}
     </ChartTile>
   );

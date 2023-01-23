@@ -1,17 +1,18 @@
 import { colors, NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
 import React, { useMemo } from 'react';
-import scrollIntoView from 'scroll-into-view-if-needed';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
 import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
 import { NarrowTable } from '~/components/tables/narrow-table';
+import { TableData } from '~/components/tables/types';
 import { WideTable } from '~/components/tables/wide-table';
 import { Text } from '~/components/typography';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { BehaviorIconWithLabel, OnClickConfig } from './components/behavior-icon-with-label';
 import { BehaviorTrend } from './components/behavior-trend';
 import { BehaviorIdentifier } from './logic/behavior-types';
 import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
@@ -31,18 +32,11 @@ interface BehaviorTableTileProps {
 
 export function BehaviorTableTile({ title, description, value, annotation, setCurrentId, scrollRef, text, metadata }: BehaviorTableTileProps) {
   const breakpoints = useBreakpoints(true);
-  const behaviorsTableData = useBehaviorTableData(value as NlBehaviorValue);
+  const behaviorsTableData: TableData[] = useBehaviorTableData(value as NlBehaviorValue, { scrollRef, setCurrentId });
   const titles = { first: text.basisregels.rules_followed, second: text.basisregels.rules_supported };
   const colorValues = { first: colors.blue6, second: colors.yellow3 };
   const percentageFormattingRules = { first: { shouldFormat: false }, second: { shouldFormat: false } };
-  const trendDirectionKeys = { first: 'complianceTrend', second: 'supportTrend' };
-  const percentageData = getPercentageData(behaviorsTableData, titles, colorValues, percentageFormattingRules, trendDirectionKeys);
-
-  const anchorButtonClickHandler = (id: BehaviorIdentifier, scrollRef: { current: HTMLDivElement | null }) => {
-    scrollIntoView(scrollRef.current as Element);
-    setCurrentId(id);
-  };
-  const onClickConfig = { handler: anchorButtonClickHandler, scrollRef: scrollRef };
+  const percentageData = getPercentageData(behaviorsTableData, titles, colorValues, percentageFormattingRules);
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
@@ -56,11 +50,9 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
           }}
           tableData={behaviorsTableData}
           percentageData={percentageData}
-          onClickConfig={onClickConfig}
-          hasIcon
         />
       ) : (
-        <NarrowTable tableData={behaviorsTableData} percentageData={percentageData} headerText={text.basisregels.header_basisregel} onClickConfig={onClickConfig} hasIcon />
+        <NarrowTable tableData={behaviorsTableData} percentageData={percentageData} headerText={text.basisregels.header_basisregel} />
       )}
 
       <Box marginTop={space[2]}>
@@ -68,14 +60,14 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
           <Box display="flex" marginRight={space[3]}>
             <BehaviorTrend trend="down" text="" hasMarginRight />
             <Text variant="label1" color="gray7">
-              Verschil met de vorige meting is lager
+              {text.basisregels.footer_trend_down_annotation}
             </Text>
           </Box>
 
           <Box display="flex">
             <BehaviorTrend trend="up" text="" hasMarginRight />
             <Text variant="label1" color="gray7">
-              Verschil met de vorige meting is hoger
+              {text.basisregels.footer_trend_up_annotation}
             </Text>
           </Box>
         </Box>
@@ -90,30 +82,31 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
   );
 }
 
-function useBehaviorTableData(value: NlBehaviorValue) {
+function useBehaviorTableData(value: NlBehaviorValue, onClickConfig: OnClickConfig) {
   const behaviorLookupKeys = useBehaviorLookupKeys();
 
   return useMemo(() => {
     return behaviorLookupKeys
-      .map((x) => {
-        const compliancePercentage = value[x.complianceKey];
-        const complianceTrend = value[`${x.complianceKey}_trend` as const];
+      .map((lookupKey) => {
+        const compliancePercentage = value[lookupKey.complianceKey];
+        const complianceTrend = value[`${lookupKey.complianceKey}_trend` as const];
 
-        const supportPercentage = value[x.supportKey];
-        const supportTrend = value[`${x.supportKey}_trend` as const];
+        const supportPercentage = value[lookupKey.supportKey];
+        const supportTrend = value[`${lookupKey.supportKey}_trend` as const];
 
         if (isPresent(supportPercentage) && isDefined(supportTrend) && isPresent(compliancePercentage) && isDefined(complianceTrend)) {
           return {
-            id: x.key,
-            description: x.description,
+            id: lookupKey.key,
+            description: lookupKey.description,
             firstPercentage: compliancePercentage,
-            complianceTrend,
+            firstPercentageTrend: complianceTrend,
             secondPercentage: supportPercentage,
-            supportTrend,
+            secondPercentageTrend: supportTrend,
+            firstColumnLabel: <BehaviorIconWithLabel id={lookupKey.key} description={lookupKey.description} onClickConfig={onClickConfig} />,
           };
         }
       })
       .filter(isDefined)
       .sort((a, b) => (b.firstPercentage ?? 0) - (a.firstPercentage ?? 0));
-  }, [value, behaviorLookupKeys]);
+  }, [value, behaviorLookupKeys, onClickConfig]);
 }

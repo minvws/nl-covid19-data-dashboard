@@ -9,3 +9,5 @@ timestamp,action,key,document_id,move_to
 2023-01-20T16:15:30.976Z,delete,pages.vaccinations_page.nl.vaccination_coverage.no_data,hqivmGf8UPzCLjKFjLpCSD,__
 2023-01-20T16:16:02.980Z,add,pages.behavior_page.shared.basisregels.rules_followed,JaNe91xDWEANMVTM14jkIY,__
 2023-01-20T16:16:04.215Z,add,pages.behavior_page.shared.basisregels.rules_supported,AE5jpq5sZWNgXeEUcJ13cd,__
+2023-01-23T15:40:31.128Z,add,pages.behavior_page.shared.basisregels.footer_trend_up_annotation,say0BNKaNSuhganBiTKhoE,__
+2023-01-23T15:40:32.050Z,add,pages.behavior_page.shared.basisregels.footer_trend_down_annotation,gwBtgw3hhC8JAGy8EpyiE9,__

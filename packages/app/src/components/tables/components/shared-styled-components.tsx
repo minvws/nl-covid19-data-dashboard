@@ -1,7 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { border, BorderProps, compose, display, DisplayProps, minWidth, MinWidthProps, width, WidthProps } from 'styled-system';
-import { Anchor } from '~/components/typography';
 import { fontWeights, mediaQueries, space } from '~/style/theme';
 
 export const Table = styled.table`
@@ -43,10 +42,4 @@ export const Cell = styled.td<CellProps>`
   padding-block: ${space[3]};
   vertical-align: middle;
   ${compose(border, minWidth)};
-`;
-
-export const BehaviorAnchor = styled(Anchor)`
-  &:hover {
-    color: ${colors.blue8};
-  }
 `;

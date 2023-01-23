@@ -3,7 +3,6 @@ import { PercentageDataPoint } from '../types';
 
 type FormatParam = { shouldFormat?: boolean };
 type PercentageFormattingParams = { first: FormatParam; second: FormatParam };
-type TrendDirectionParams = { first: string; second: string };
 type ColorParam = { first: string; second: string };
 type TitleParam = { first: string; second: string };
 
@@ -13,7 +12,6 @@ export const getPercentageData = (
   title: TitleParam,
   color: ColorParam,
   percentageFormattingRules: PercentageFormattingParams,
-  trendDirection?: TrendDirectionParams,
   noDataText?: string,
   formatPercentage?: ReturnType<typeof createFormatting>['formatPercentage']
 ): PercentageDataPoint[][] => {
@@ -27,7 +25,7 @@ export const getPercentageData = (
     return [
       {
         title: title.first,
-        trendDirection: trendDirection?.first !== undefined && trendDirection.first in datasetItem ? datasetItem[trendDirection.first] : null,
+        trendDirection: 'firstPercentageTrend' in datasetItem ? datasetItem['firstPercentageTrend'] : null,
         percentage: {
           color: color.first,
           value: percentageFormattingRules.first.shouldFormat ? getFormattedPercentageValue(datasetItem.firstPercentage) : datasetItem.firstPercentage,
@@ -35,7 +33,7 @@ export const getPercentageData = (
       },
       {
         title: title.second,
-        trendDirection: trendDirection?.second !== undefined && trendDirection.second in datasetItem ? datasetItem[trendDirection.second] : null,
+        trendDirection: 'secondPercentageTrend' in datasetItem ? datasetItem['secondPercentageTrend'] : null,
         percentage: {
           color: color.second,
           value: percentageFormattingRules.second.shouldFormat ? getFormattedPercentageValue(datasetItem.secondPercentage) : datasetItem.secondPercentage,
