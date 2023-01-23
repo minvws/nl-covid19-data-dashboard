@@ -1,6 +1,5 @@
 import { colors, TimeframeOption } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
-import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -63,7 +62,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
           />
 
-          {text.belangrijk_bericht && isPresent(text.belangrijk_bericht) && <WarningTile isFullWidth message={text.belangrijk_bericht} variant="informational" />}
+          {text.belangrijk_bericht && text.belangrijk_bericht !== '' && <WarningTile isFullWidth message={text.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile

@@ -2,7 +2,6 @@ import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard
 import { useState } from 'react';
 import { External as ExternalLinkIcon, Phone } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
-import { isEmpty } from 'lodash';
 import { WarningTile } from '~/components';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
@@ -75,7 +74,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={corona_melder_app.header.reference.href}
           />
 
-          {corona_melder_app.belangrijk_bericht && !isEmpty(corona_melder_app.belangrijk_bericht) && (
+          {corona_melder_app.belangrijk_bericht && corona_melder_app.belangrijk_bericht !== '' && (
             <WarningTile isFullWidth message={corona_melder_app.belangrijk_bericht} variant="informational" />
           )}
 
