@@ -34,7 +34,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlData(
     'difference.vulnerable_nursing_home__infected_locations_total',
-    'difference.nursing_home__newly_infected_people',
+    'difference.nursing_home__newly_infected_people_archived_20230126',
     'difference.vulnerable_tested_per_age_group',
     'difference.vulnerable_hospital_admissions',
     'vulnerable_nursing_home',
@@ -169,7 +169,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                     source: positiveTestedPeopleText.bronnen.rivm,
                   }}
                 >
-                  <KpiValue data-cy="newly_infected_people" absolute={2} difference={data.difference.nursing_home__newly_infected_people} isAmount />
+                  <KpiValue data-cy="newly_infected_people" absolute={2} difference={data.difference.nursing_home__newly_infected_people_archived_20230126} isAmount />
                 </KpiTile>
               </TwoKpiSection>
 

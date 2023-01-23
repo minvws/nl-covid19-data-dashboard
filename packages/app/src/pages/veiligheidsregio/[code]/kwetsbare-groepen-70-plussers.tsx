@@ -33,12 +33,11 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectVrData(
-    'difference.nursing_home__deceased_daily',
+    'difference.nursing_home__deceased_daily_archived_20230126',
     'difference.vulnerable_nursing_home__infected_locations_total',
-    'difference.nursing_home__newly_infected_people',
-    'difference.vulnerable_groups__positive_tested',
-    'difference.vulnerable_groups__hospital_admissions',
-    'vulnerable_nursing_home'
+    'difference.nursing_home__newly_infected_people_archived_20230126',
+    'vulnerable_nursing_home',
+    'nursing_home_archived_20230126'
   ),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -48,7 +47,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
       "parts": ${getPagePartsQuery('nursing_home_page')},
-      "elements": ${getElementsQuery('vr', ['nursing_home'], locale)}
+      "elements": ${getElementsQuery('vr', ['nursing_home_archived_20230126'], locale)}
      }`;
     })(context);
 
@@ -74,8 +73,8 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
 
   const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const nursinghomeLastValue = data.nursing_home.last_value;
-  const underReportedDateStart = getBoundaryDateStartUnix(data.nursing_home.values, 7);
+  const nursinghomeLastValue = data.nursing_home_archived_20230126.last_value;
+  const underReportedDateStart = getBoundaryDateStartUnix(data.nursing_home_archived_20230126.values, 7);
 
   const metadata = {
     ...commonTexts.veiligheidsregio_index.metadata,
@@ -129,7 +128,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
               <KpiValue
                 data-cy="newly_infected_people"
                 absolute={nursinghomeLastValue.newly_infected_people}
-                difference={data.difference.nursing_home__newly_infected_people}
+                difference={data.difference.nursing_home__newly_infected_people_archived_20230126}
                 isAmount
               />
             </KpiTile>
@@ -146,7 +145,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'nursing_home_confirmed_cases_over_time_chart',
               }}
-              values={data.nursing_home.values}
+              values={data.nursing_home_archived_20230126.values}
               timeframe={nursingHomeConfirmedCasesTimeframe}
               seriesConfig={[
                 {
@@ -174,7 +173,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                     cutValuesForMetricProperties: ['newly_infected_people_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'nursing_home', 'newly_infected_people'),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'nursing_home_archived_20230126', 'newly_infected_people'),
               }}
             />
           </ChartTile>
@@ -209,7 +208,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 data-cy="infected_locations_total"
                 absolute={nursinghomeLastValue.infected_locations_total}
                 percentage={nursinghomeLastValue.infected_locations_percentage}
-                difference={data.difference.nursing_home__infected_locations_total}
+                difference={data.difference.vulnerable_nursing_home__infected_locations_total}
                 isAmount
               />
               <Text>{textVr.besmette_locaties.kpi_toelichting}</Text>
@@ -237,7 +236,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'nursing_home_infected_locations_over_time_chart',
               }}
-              values={data.nursing_home.values}
+              values={data.nursing_home_archived_20230126.values}
               timeframe={nursingHomeInfectedLocationsTimeframe}
               seriesConfig={[
                 {
@@ -277,7 +276,12 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                 source: textVr.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="deceased_daily" absolute={nursinghomeLastValue.deceased_daily} difference={data.difference.nursing_home__deceased_daily} isAmount />
+              <KpiValue
+                data-cy="deceased_daily"
+                absolute={nursinghomeLastValue.deceased_daily}
+                difference={data.difference.nursing_home__deceased_daily_archived_20230126}
+                isAmount
+              />
             </KpiTile>
           </TwoKpiSection>
 
@@ -292,7 +296,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'nursing_home_deceased_over_time_chart',
               }}
-              values={data.nursing_home.values}
+              values={data.nursing_home_archived_20230126.values}
               timeframe={nursingHomeDeceasedTimeframe}
               seriesConfig={[
                 {
@@ -320,7 +324,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
                     cutValuesForMetricProperties: ['deceased_daily_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'nursing_home', 'deceased_daily'),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'nursing_home_archived_20230126', 'deceased_daily'),
               }}
             />
           </ChartTile>
