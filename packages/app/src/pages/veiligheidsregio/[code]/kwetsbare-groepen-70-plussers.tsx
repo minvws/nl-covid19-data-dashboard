@@ -114,7 +114,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
             warning={textVr.positief_geteste_personen.warning}
           />
 
-          {textShared.osiris_archiving_notification && textShared.osiris_archiving_notification !== '' && <Markdown content={`> > ${textShared.osiris_archiving_notification}`} />}
+          {textShared.osiris_archiving_notification && <Markdown content={`> > ${textShared.osiris_archiving_notification}`} />}
 
           <TwoKpiSection>
             <KpiTile

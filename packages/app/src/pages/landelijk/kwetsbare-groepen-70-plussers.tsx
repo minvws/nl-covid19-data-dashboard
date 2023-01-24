@@ -114,7 +114,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          {textShared.osiris_archiving_notification && textShared.osiris_archiving_notification !== '' && <Markdown content={`> > ${textShared.osiris_archiving_notification}`} />}
+          {textShared.osiris_archiving_notification && <Markdown content={`> > ${textShared.osiris_archiving_notification}`} />}
 
           <Divider />
 
