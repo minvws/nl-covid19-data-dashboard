@@ -7,7 +7,7 @@ import { Box } from './base';
 import { Markdown } from './markdown';
 import { useIntl } from '~/intl';
 import { colors } from '@corona-dashboard/common';
-import { radii, space, fontSizes } from '~/style/theme';
+import { radii, space, fontSizes, fontWeights } from '~/style/theme';
 
 type WarningMessageVariant = 'emphasis' | 'default' | 'informational';
 
@@ -22,14 +22,14 @@ interface WarningMessageProps {
 
 const WarningVariantStylingConfig = {
   emphasis: {
-    fontWeight: 'bold',
+    fontWeight: fontWeights.bold,
     iconBackgroundColor: colors.yellow2,
     textBackgroundColor: colors.yellow1,
     paddingLeft: space[3],
   },
-  default: { fontWeight: 'normal', iconBackgroundColor: colors.white, textBackgroundColor: colors.white, paddingLeft: space[0] },
+  default: { fontWeight: fontWeights.normal, iconBackgroundColor: colors.white, textBackgroundColor: colors.white, paddingLeft: space[0] },
   informational: {
-    fontWeight: 'bold',
+    fontWeight: fontWeights.bold,
     iconBackgroundColor: colors.gray4,
     textBackgroundColor: colors.gray2,
     paddingLeft: space[3],
