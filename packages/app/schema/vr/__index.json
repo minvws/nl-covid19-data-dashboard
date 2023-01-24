@@ -15,7 +15,7 @@
     "sewer",
     "sewer_per_installation",
     "difference",
-    "deceased_rivm",
+    "deceased_rivm_archived_20221231",
     "deceased_cbs",
     "elderly_at_home",
     "disability_care",
@@ -79,8 +79,8 @@
     "behavior_archived_20221019": {
       "$ref": "behavior_archived_20221019.json"
     },
-    "deceased_rivm": {
-      "$ref": "deceased_rivm.json"
+    "deceased_rivm_archived_20221231": {
+      "$ref": "deceased_rivm_archived_20221231.json"
     },
     "deceased_cbs": {
       "$ref": "deceased_cbs.json"

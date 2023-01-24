@@ -12,7 +12,7 @@ export interface Gm {
   name: GmCode;
   code: GmCode;
   static_values: GmStaticValues;
-  deceased_rivm: GmDeceasedRivm;
+  deceased_rivm_archived_20221231: GmDeceasedRivmArchived_20221231;
   difference: GmDifference;
   hospital_nice: GmHospitalNice;
   tested_overall: GmTestedOverall;
@@ -26,11 +26,11 @@ export interface Gm {
 export interface GmStaticValues {
   population_count: number;
 }
-export interface GmDeceasedRivm {
-  values: GmDeceasedRivmValue[];
-  last_value: GmDeceasedRivmValue;
+export interface GmDeceasedRivmArchived_20221231 {
+  values: GmDeceasedRivmArchived_20221231Value[];
+  last_value: GmDeceasedRivmArchived_20221231Value;
 }
-export interface GmDeceasedRivmValue {
+export interface GmDeceasedRivmArchived_20221231Value {
   covid_daily: number;
   covid_daily_moving_average: number | null;
   covid_total: number;
@@ -42,7 +42,7 @@ export interface GmDifference {
   tested_overall__infected_moving_average: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average?: DifferenceInteger;
-  deceased_rivm__covid_daily: DifferenceInteger;
+  deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -250,8 +250,8 @@ export interface Nl {
   behavior_per_age_group?: NlBehaviorPerAgeGroup;
   behavior_get_tested_support_per_age_group?: NlBehaviorGetTestedSupportPerAgeGroup;
   behavior_annotations: NlBehaviorAnnotations;
-  deceased_rivm: NlDeceasedRivm;
-  deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
+  deceased_rivm_archived_20221231: NlDeceasedRivmArchived_20221231;
+  deceased_rivm_per_age_group_archived_20221231: NlDeceasedRivmPerAgeGroupArchived_20221231;
   deceased_cbs: NlDeceasedCbs;
   elderly_at_home: NlElderlyAtHome;
   vaccine_vaccinated_or_support: NlVaccineVaccinatedOrSupport;
@@ -303,7 +303,7 @@ export interface NlDifference {
   disability_care__newly_infected_people: DifferenceInteger;
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
-  deceased_rivm__covid_daily: DifferenceInteger;
+  deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -735,21 +735,21 @@ export interface NlBehaviorAnnotations1 {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlDeceasedRivm {
-  values: NlDeceasedRivmValue[];
-  last_value: NlDeceasedRivmValue;
+export interface NlDeceasedRivmArchived_20221231 {
+  values: NlDeceasedRivmArchived_20221231Value[];
+  last_value: NlDeceasedRivmArchived_20221231Value;
 }
-export interface NlDeceasedRivmValue {
+export interface NlDeceasedRivmArchived_20221231Value {
   covid_daily: number;
   covid_daily_moving_average: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlDeceasedRivmPerAgeGroup {
-  values: NlDeceasedRivmPerAgeGroupValue[];
+export interface NlDeceasedRivmPerAgeGroupArchived_20221231 {
+  values: NlDeceasedRivmPerAgeGroupArchived_20221231Value[];
 }
-export interface NlDeceasedRivmPerAgeGroupValue {
+export interface NlDeceasedRivmPerAgeGroupArchived_20221231Value {
   age_group_range: string;
   age_group_percentage: number;
   covid_percentage: number;
@@ -1169,7 +1169,7 @@ export interface Vr {
   nursing_home: VrNursingHome;
   disability_care: VrDisabilityCare;
   behavior_archived_20221019: VrBehaviorArchived_20221019;
-  deceased_rivm: VrDeceasedRivm;
+  deceased_rivm_archived_20221231: VrDeceasedRivmArchived_20221231;
   deceased_cbs: VrDeceasedCbs;
   elderly_at_home: VrElderlyAtHome;
   tested_overall_sum: VrTestedOverallSum;
@@ -1196,7 +1196,7 @@ export interface VrDifference {
   disability_care__newly_infected_people: DifferenceInteger;
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
-  deceased_rivm__covid_daily: DifferenceInteger;
+  deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -1376,11 +1376,11 @@ export interface VrBehaviorArchived_20221019Value {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface VrDeceasedRivm {
-  values: VrDeceasedRivmValue[];
-  last_value: VrDeceasedRivmValue;
+export interface VrDeceasedRivmArchived_20221231 {
+  values: VrDeceasedRivmArchived_20221231Value[];
+  last_value: VrDeceasedRivmArchived_20221231Value;
 }
-export interface VrDeceasedRivmValue {
+export interface VrDeceasedRivmArchived_20221231Value {
   covid_daily: number;
   covid_daily_moving_average: number | null;
   covid_total: number;

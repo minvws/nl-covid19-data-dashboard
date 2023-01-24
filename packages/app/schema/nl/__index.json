@@ -12,8 +12,8 @@
     "corona_melder_app_download",
     "corona_melder_app_warning",
     "deceased_cbs",
-    "deceased_rivm",
-    "deceased_rivm_per_age_group",
+    "deceased_rivm_archived_20221231",
+    "deceased_rivm_per_age_group_archived_20221231",
     "difference",
     "named_difference",
     "disability_care",
@@ -153,11 +153,11 @@
     "behavior_annotations": {
       "$ref": "behavior_annotations.json"
     },
-    "deceased_rivm": {
-      "$ref": "deceased_rivm.json"
+    "deceased_rivm_archived_20221231": {
+      "$ref": "deceased_rivm_archived_20221231.json"
     },
-    "deceased_rivm_per_age_group": {
-      "$ref": "deceased_rivm_per_age_group.json"
+    "deceased_rivm_per_age_group_archived_20221231": {
+      "$ref": "deceased_rivm_per_age_group_archived_20221231.json"
     },
     "deceased_cbs": {
       "$ref": "deceased_cbs.json"
