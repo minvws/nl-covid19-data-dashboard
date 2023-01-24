@@ -3,17 +3,18 @@ import { useState } from 'react';
 import { Elderly } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { Divider } from '~/components/divider';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components/warning-tile';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
@@ -33,6 +34,7 @@ const pageMetrics = ['elderly_at_home'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textShared: siteText.pages.elderly_at_home_page.shared,
   textNl: siteText.pages.elderly_at_home_page.nl,
 });
 
@@ -79,7 +81,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
   const elderlyAtHomeDeceasedUnderReportedRange = getBoundaryDateStartUnix(elderlyAtHomeData.values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textShared, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const reverseRouter = useReverseRouter();
 
@@ -90,6 +92,8 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
   };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -110,6 +114,8 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             referenceLink={textNl.section_positive_tested.reference.href}
             articles={content.articles}
           />
+
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile
@@ -138,7 +144,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               <Text>{textNl.section_positive_tested.kpi_daily_per_100k_description}</Text>
             </KpiTile>
           </TwoKpiSection>
-
           <ChartTile
             timeframeOptions={TimeframeOptionsList}
             title={textNl.section_positive_tested.line_chart_daily_title}
@@ -181,7 +186,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               }}
             />
           </ChartTile>
-
           <ChoroplethTile
             title={textNl.section_positive_tested.choropleth_daily_title}
             description={textNl.section_positive_tested.choropleth_daily_description}
@@ -212,9 +216,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               }}
             />
           </ChoroplethTile>
-
           <Divider />
-
           <PageInformationBlock
             title={textNl.section_deceased.title}
             icon={<Elderly />}
@@ -227,7 +229,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             }}
             referenceLink={textNl.section_deceased.reference.href}
           />
-
           <TwoKpiSection>
             <KpiTile
               title={textNl.section_deceased.kpi_daily_title}
@@ -240,7 +241,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               <KpiValue data-cy="deceased_daily" absolute={elderlyAtHomeData.last_value.deceased_daily} />
             </KpiTile>
           </TwoKpiSection>
-
           <ChartTile
             timeframeOptions={TimeframeOptionsList}
             title={textNl.section_deceased.line_chart_daily_title}

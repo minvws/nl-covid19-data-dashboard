@@ -7,6 +7,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components/warning-tile';
 import { Heading, InlineText, Text, BoldText } from '~/components/typography';
 import { BehaviorLineChartTile, getBehaviorChartOptions } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
@@ -28,6 +29,7 @@ const pageMetrics = ['behavior'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   text: siteText.pages.behavior_page,
+  textShared: siteText.pages.behavior_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -58,7 +60,7 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
   const { pageText, lastGenerated, content, selectedVrData: data, vrName, chartBehaviorOptions } = props;
 
   const { commonTexts, formatDateFromSeconds, formatNumber } = useIntl();
-  const { text } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { text, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...commonTexts.veiligheidsregio_index.metadata,
@@ -72,6 +74,8 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
   const scrollToRef = useRef<HTMLDivElement>(null);
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -96,6 +100,8 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
             vrNameOrGmName={vrName}
             warning={text.vr.warning}
           />
+
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <Tile>

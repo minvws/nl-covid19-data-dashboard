@@ -13,6 +13,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components/warning-tile';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
@@ -31,11 +32,12 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 const pageMetrics = ['disability_care'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  caterogyTexts: {
+  categoryTexts: {
     category: siteText.common.sidebar.categories.consequences_for_healthcare.title,
     screenReaderCategory: siteText.common.sidebar.metrics.disabled_care.title,
   },
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textShared: siteText.pages.disability_care_page.shared,
   textNl: siteText.pages.disability_care_page.nl,
 });
 
@@ -88,7 +90,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
 
   const { commonTexts, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { caterogyTexts, metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { categoryTexts, metadataTexts, textShared, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -98,13 +100,15 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={caterogyTexts.category}
-            screenReaderCategory={caterogyTexts.screenReaderCategory}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
+            screenReaderCategory={categoryTexts.screenReaderCategory}
             title={textNl.positief_geteste_personen.titel}
             icon={<Gehandicaptenzorg aria-hidden="true" />}
             description={textNl.positief_geteste_personen.pagina_toelichting}
@@ -117,6 +121,8 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             referenceLink={textNl.positief_geteste_personen.reference.href}
             articles={content.articles}
           />
+
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile
@@ -212,7 +218,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               />
               <Text>{textNl.besmette_locaties.kpi_toelichting}</Text>
             </KpiTile>
-
             <KpiTile
               title={textNl.besmette_locaties.barscale_titel}
               metadata={{

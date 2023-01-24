@@ -10,6 +10,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components/warning-tile';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -28,6 +29,7 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 const pageMetrics = ['elderly_at_home'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
+  textShared: siteText.pages.elderly_at_home_page.shared,
   textVr: siteText.pages.elderly_at_home_page.vr,
 });
 
@@ -70,7 +72,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
   const { elderly_at_home_archived_20230126, difference } = data;
 
   const { commonTexts } = useIntl();
-  const { textVr } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textShared, textVr } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const elderlyAtHomeUnderReportedRange = getBoundaryDateStartUnix(elderly_at_home_archived_20230126.values, 4);
 
   const elderlyAtHomeDeceasedUnderReportedRange = getBoundaryDateStartUnix(elderly_at_home_archived_20230126.values, 7);
@@ -86,6 +88,8 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
   };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -112,6 +116,8 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
             vrNameOrGmName={vrName}
             warning={textVr.warning}
           />
+
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile

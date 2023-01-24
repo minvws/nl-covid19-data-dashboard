@@ -9,6 +9,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components/warning-tile';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -26,6 +27,7 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textVr: siteText.pages.disability_care_page.vr,
+  textShared: siteText.pages.disability_care_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -39,8 +41,8 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrData(
     'disability_care_archived_20230126',
-    'difference.disability_care__infected_locations_total_archived_20230126',
-    'difference.disability_care__newly_infected_people_archived_20230126'
+    'difference.disability_care__newly_infected_people_archived_20230126',
+    'difference.disability_care__infected_locations_total_archived_20230126'
   ),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -73,7 +75,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   const [disabilityCareDeceasedTimeframe, setDisabilityCareDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
-  const { textVr } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textShared, textVr } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const lastValue = data.disability_care_archived_20230126.last_value;
   const values = data.disability_care_archived_20230126.values;
@@ -90,6 +92,8 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -116,6 +120,8 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             vrNameOrGmName={vrName}
             warning={textVr.besmette_locaties.warning}
           />
+
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile
