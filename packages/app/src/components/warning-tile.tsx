@@ -95,8 +95,7 @@ const IconWrapper = styled.div`
     display: block;
     width: 24px;
     height: 24px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 0 10px;
   }
 `;
 
@@ -104,8 +103,7 @@ const WarningMessageBox = styled.div<{ variant: WarningMessageVariant }>`
   display: flex;
   align-items: center;
   flex: 1 1 auto;
-  padding-top: ${space[2]};
-  padding-bottom: ${space[2]};
+  padding: ${space[2]} 0;
   padding-left: ${({ variant }) => WarningVariantStylingConfig[variant].paddingLeft};
   background-color: ${({ variant }) => WarningVariantStylingConfig[variant].textBackgroundColor};
   border-bottom-right-radius: ${radii[1]}px;
