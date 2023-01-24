@@ -2,7 +2,7 @@ import { Box } from '~/components/base';
 import styled from 'styled-components';
 import { Heading } from '~/components/typography';
 import { RichContent } from '~/components/cms/rich-content';
-import { TopicalIcon } from '@corona-dashboard/common/src/types';
+import { IconName as TopicalIcon } from '@corona-dashboard/icons/src/icon-name2filename';
 import DynamicIcon from '~/components/get-icon-by-name';
 import theme from '~/style/theme';
 import { PortableTextEntry } from '@sanity/block-content-to-react';

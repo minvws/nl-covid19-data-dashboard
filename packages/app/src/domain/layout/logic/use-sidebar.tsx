@@ -1,22 +1,9 @@
-import {
-  Maatregelen,
-  Archive,
-  Eye,
-  MedischeScreening,
-} from '@corona-dashboard/icons';
+import { Maatregelen, Archive, Eye, MedischeScreening } from '@corona-dashboard/icons';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { ReverseRouter, useReverseRouter } from '~/utils/use-reverse-router';
-import {
-  ExpandedSidebarMap,
-  ItemKeys,
-  Layout,
-  SidebarCategory,
-  SidebarElement,
-  SidebarItem,
-  SidebarMap,
-} from './types';
+import { ExpandedSidebarMap, ItemKeys, Layout, SidebarCategory, SidebarElement, SidebarItem, SidebarMap } from './types';
 
 const mapCategoriesToIcons = {
   development_of_the_virus: <Eye />,
@@ -36,7 +23,8 @@ const mapKeysToReverseRouter = {
   intensive_care_admissions: 'intensiveCareOpnames',
   current_advices: 'geldendeAdviezen',
   mortality: 'sterfte',
-  nursing_home_care: 'verpleeghuiszorg',
+  // Still the nursing home care name is used because of legacy naming inside of sanity's lokalize texts.
+  nursing_home_care: 'kwetsbareGroepen',
   positive_tests: 'positiefGetesteMensen',
   sewage_measurement: 'rioolwater',
   source_investigation: 'brononderzoek',
@@ -55,11 +43,7 @@ type Content = {
   title: string;
 };
 
-export function useSidebar<T extends Layout>({
-  layout,
-  map,
-  code,
-}: UseSidebarArgs<T>): ExpandedSidebarMap<T> {
+export function useSidebar<T extends Layout>({ layout, map, code }: UseSidebarArgs<T>): ExpandedSidebarMap<T> {
   const reverseRouter = useReverseRouter();
   const { commonTexts } = useIntl();
 
@@ -100,8 +84,7 @@ export function useSidebar<T extends Layout>({
       };
     };
 
-    const expandMap = (map: SidebarMap<T>): ExpandedSidebarMap<T> =>
-      map.map((x) => (typeof x === 'string' ? getItem(x) : getCategory(x)));
+    const expandMap = (map: SidebarMap<T>): ExpandedSidebarMap<T> => map.map((x) => (typeof x === 'string' ? getItem(x) : getCategory(x)));
 
     return expandMap(map);
   }, [code, layout, map, reverseRouter, commonTexts.sidebar]);

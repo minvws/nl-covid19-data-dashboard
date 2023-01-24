@@ -9,12 +9,13 @@
     "name",
     "code",
     "tested_overall",
-    "nursing_home",
+    "vulnerable_nursing_home",
+    "nursing_home_archived_20230126",
     "behavior_archived_20221019",
     "hospital_nice",
     "hospital_nice_choropleth",
-    "elderly_at_home",
-    "disability_care",
+    "elderly_at_home_archived_20230126",
+    "disability_care_archived_20230126",
     "sewer",
     "situations",
     "vaccine_coverage_per_age_group"
@@ -55,12 +56,20 @@
         "$ref": "tested_overall.json"
       }
     },
-    "nursing_home": {
+    "vulnerable_nursing_home": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "nursing_home.json"
+        "$ref": "vulnerable_nursing_home.json"
+      }
+    },
+    "nursing_home_archived_20230126": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "nursing_home_archived_20230126.json"
       }
     },
     "sewer": {
@@ -79,20 +88,20 @@
         "$ref": "behavior_archived_20221019.json"
       }
     },
-    "disability_care": {
+    "disability_care_archived_20230126": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "disability_care.json"
+        "$ref": "disability_care_archived_20230126.json"
       }
     },
-    "elderly_at_home": {
+    "elderly_at_home_archived_20230126": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "elderly_at_home.json"
+        "$ref": "elderly_at_home_archived_20230126.json"
       }
     },
     "situations": {

@@ -2,8 +2,17 @@ import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { ChartTile, KpiTile, KpiValue, Markdown, PageInformationBlock, TileList, TimeSeriesChart, TwoKpiSection, WarningTile } from '~/components';
+import { ChartTile } from '~/components/chart-tile';
+import { Divider } from '~/components/divider';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { DeceasedMonitorSection } from '~/domain/deceased';
 import { Layout, VrLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
@@ -105,6 +114,8 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <DeceasedMonitorSection text={textShared.section_sterftemonitor} data={dataCbs} />
 
+          <Divider />
+
           <PageInformationBlock
             title={textShared.section_archived.title}
             description={textShared.section_archived.description}
@@ -114,6 +125,8 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
 
           {isArchivedContentShown && (
             <>
+              <Divider />
+
               <PageInformationBlock
                 category={categoryTexts}
                 title={replaceVariablesInText(textVr.section_deceased_rivm.title, {

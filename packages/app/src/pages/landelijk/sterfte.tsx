@@ -2,8 +2,18 @@ import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { AgeDemographic, ChartTile, KpiTile, KpiValue, Markdown, PageInformationBlock, TileList, TimeSeriesChart, TwoKpiSection, WarningTile } from '~/components';
+import { AgeDemographic } from '~/components/age-demographic';
+import { ChartTile } from '~/components/chart-tile';
+import { Divider } from '~/components/divider';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { DeceasedMonitorSection } from '~/domain/deceased';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
@@ -102,6 +112,8 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <DeceasedMonitorSection data={dataCbs} text={textShared.section_sterftemonitor} showCauseMessage />
 
+          <Divider />
+
           <PageInformationBlock
             title={textShared.section_archived.title}
             description={textShared.section_archived.description}
@@ -111,6 +123,8 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
 
           {isArchivedContentShown && (
             <>
+              <Divider />
+
               <PageInformationBlock
                 category={commonTexts.sidebar.categories.development_of_the_virus.title}
                 title={textNl.section_deceased_rivm.title}

@@ -64,13 +64,13 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   vaccine_coverage_per_age_group_estimated_fully_vaccinated: 'Vaccinatiegraad basisserie berekend (per leeftijd)',
   vaccine_coverage_per_age_group_estimated_autumn_2022: 'Vaccinatiegraad herfst 2022 booster berekend (per leeftijd)',
   vaccine_administered_total: 'Totaal gezette prikken',
-  nursing_home: 'Verpleeghuizen',
-  disability_care: 'Gehandicaptenzorg',
+  nursing_home_archived_20230126: 'Verpleeghuizen',
+  disability_care_archived_20230126: 'Gehandicaptenzorg',
   deceased_rivm_archived_20221231: 'Sterfte (RIVM)',
   intensive_care_nice_per_age_group: 'IC-opnames (per leeftijd)',
   hospital_nice_per_age_group: 'Ziekenhuisopnames (per leeftijd)',
   tested_per_age_group: 'Positief getest (per leeftijd)',
-  elderly_at_home: '70-plussers',
+  elderly_at_home_archived_20230126: '70-plussers',
   self_test_overall: 'Zelfgerapporteerde positieve coronatestuitslagen',
 };
 
