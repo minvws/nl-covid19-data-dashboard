@@ -37,7 +37,7 @@ import { ChevronRight, Download, External as ExternalLinkIcon } from '@corona-da
 type ElementAlignment = 'start' | 'center' | 'end' | 'stretch';
 
 interface RichContentProps {
-  blocks: PortableTextEntry[];
+  blocks?: PortableTextEntry[];
   contentWrapper?: FunctionComponent;
   imageSizes?: number[][];
   elementAlignment?: ElementAlignment;
