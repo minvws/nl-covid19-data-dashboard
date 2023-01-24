@@ -105,7 +105,9 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                       <ExternalLinkIcon aria-hidden="true" />
                     </IconWrapper>
                   </Box>
-                  <span css={css({ maxWidth: 200 })}>{corona_melder_app.rapport.link.text}</span>
+                  <Box as="span" maxWidth="200px">
+                    {corona_melder_app.rapport.link.text}
+                  </Box>
                 </a>
               </Link>
             </Tile>
