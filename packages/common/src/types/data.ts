@@ -577,10 +577,10 @@ export interface NlTestedGgdArchivedValue {
   date_of_insertion_unix: number;
 }
 export interface NlNursingHomeArchived_20230126 {
-  values: NlNursingHomeValue[];
-  last_value: NlNursingHomeValue;
+  values: NlNursingHomeArchived_20230126Value[];
+  last_value: NlNursingHomeArchived_20230126Value;
 }
-export interface NlNursingHomeValue {
+export interface NlNursingHomeArchived_20230126Value {
   newly_infected_people: number;
   newly_infected_people_moving_average: number | null;
   deceased_daily: number;
@@ -614,10 +614,10 @@ export interface NlVulnerableHospitalAdmissions {
   date_of_insertion_unix: number;
 }
 export interface NlDisabilityCareArchived_20230126 {
-  values: NlDisabilityCareValue[];
-  last_value: NlDisabilityCareValue;
+  values: NlDisabilityCareArchived_20230126Value[];
+  last_value: NlDisabilityCareArchived_20230126Value;
 }
-export interface NlDisabilityCareValue {
+export interface NlDisabilityCareArchived_20230126Value {
   newly_infected_people: number;
   newly_infected_people_moving_average: number | null;
   deceased_daily: number;
@@ -797,10 +797,10 @@ export interface NlDeceasedCbsValue {
   date_of_insertion_unix: number;
 }
 export interface NlElderlyAtHomeArchived_20230126 {
-  values: NlElderlyAtHomeValue[];
-  last_value: NlElderlyAtHomeValue;
+  values: NlElderlyAtHomeArchived_20230126Value[];
+  last_value: NlElderlyAtHomeArchived_20230126Value;
 }
-export interface NlElderlyAtHomeValue {
+export interface NlElderlyAtHomeArchived_20230126Value {
   positive_tested_daily: number;
   positive_tested_daily_moving_average: number | null;
   positive_tested_daily_per_100k: number;
@@ -1349,10 +1349,10 @@ export interface VrNursingHomeArchived_20230126Value {
   vrcode: string;
 }
 export interface VrDisabilityCareArchived_20230126 {
-  values: VrDisabilityCareValue[];
-  last_value: VrDisabilityCareValue;
+  values: VrDisabilityCareArchived_20230126Value[];
+  last_value: VrDisabilityCareArchived_20230126Value;
 }
-export interface VrDisabilityCareValue {
+export interface VrDisabilityCareArchived_20230126Value {
   newly_infected_people: number;
   newly_infected_people_moving_average: number | null;
   newly_infected_locations: number;
@@ -1441,10 +1441,10 @@ export interface VrDeceasedCbsValue {
   date_of_insertion_unix: number;
 }
 export interface VrElderlyAtHomeArchived_20230126 {
-  values: VrElderlyAtHomeValue[];
-  last_value: VrElderlyAtHomeValue;
+  values: VrElderlyAtHomeArchived_20230126Value[];
+  last_value: VrElderlyAtHomeArchived_20230126Value;
 }
-export interface VrElderlyAtHomeValue {
+export interface VrElderlyAtHomeArchived_20230126Value {
   positive_tested_daily: number;
   positive_tested_daily_moving_average: number | null;
   positive_tested_daily_per_100k: number;

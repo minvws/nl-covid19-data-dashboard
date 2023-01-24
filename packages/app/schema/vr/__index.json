@@ -78,7 +78,7 @@
       "$ref": "nursing_home_archived_20230126.json"
     },
     "disability_care_archived_20230126": {
-      "$ref": "disability_care.json"
+      "$ref": "disability_care_archived_20230126.json"
     },
     "behavior_archived_20221019": {
       "$ref": "behavior_archived_20221019.json"
@@ -90,7 +90,7 @@
       "$ref": "deceased_cbs.json"
     },
     "elderly_at_home_archived_20230126": {
-      "$ref": "elderly_at_home.json"
+      "$ref": "elderly_at_home_archived_20230126.json"
     },
     "tested_overall_sum": {
       "$ref": "tested_overall_sum.json"

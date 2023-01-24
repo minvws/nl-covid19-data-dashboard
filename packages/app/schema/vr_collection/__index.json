@@ -93,7 +93,7 @@
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "disability_care.json"
+        "$ref": "disability_care_archived_20230126.json"
       }
     },
     "elderly_at_home_archived_20230126": {
@@ -101,7 +101,7 @@
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "elderly_at_home.json"
+        "$ref": "elderly_at_home_archived_20230126.json"
       }
     },
     "situations": {

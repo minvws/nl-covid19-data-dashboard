@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_elderly_at_home_archived_20230126",
+  "title": "vr_elderly_at_home_archived_20230126",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_elderly_at_home_value",
+      "title": "vr_elderly_at_home_archived_20230126_value",
       "type": "object",
       "properties": {
         "positive_tested_daily": {
@@ -40,6 +40,10 @@
         },
         "date_of_insertion_unix": {
           "type": "integer"
+        },
+        "vrcode": {
+          "type": "string",
+          "equalsRootProperty": "code"
         }
       },
       "required": [
@@ -49,7 +53,8 @@
         "deceased_daily",
         "deceased_daily_moving_average",
         "date_unix",
-        "date_of_insertion_unix"
+        "date_of_insertion_unix",
+        "vrcode"
       ],
       "additionalProperties": false
     }

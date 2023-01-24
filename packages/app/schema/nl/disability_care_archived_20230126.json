@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_disability_care_value",
+      "title": "nl_disability_care_archived_20230126_value",
       "type": "object",
       "properties": {
         "newly_infected_people": {

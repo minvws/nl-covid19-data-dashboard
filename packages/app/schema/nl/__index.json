@@ -151,7 +151,7 @@
       "$ref": "vulnerable_hospital_admissions.json"
     },
     "disability_care_archived_20230126": {
-      "$ref": "disability_care.json"
+      "$ref": "disability_care_archived_20230126.json"
     },
     "behavior": {
       "$ref": "behavior.json"
@@ -175,7 +175,7 @@
       "$ref": "deceased_cbs.json"
     },
     "elderly_at_home_archived_20230126": {
-      "$ref": "elderly_at_home.json"
+      "$ref": "elderly_at_home_archived_20230126.json"
     },
     "vaccine_vaccinated_or_support": {
       "$ref": "vaccine_vaccinated_or_support.json"

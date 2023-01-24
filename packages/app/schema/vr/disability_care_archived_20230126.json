@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "vr_disability_care_value",
+      "title": "vr_disability_care_archived_20230126_value",
       "type": "object",
       "properties": {
         "newly_infected_people": {
