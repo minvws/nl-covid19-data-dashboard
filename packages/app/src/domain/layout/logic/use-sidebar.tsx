@@ -23,6 +23,7 @@ const mapKeysToReverseRouter = {
   intensive_care_admissions: 'intensiveCareOpnames',
   current_advices: 'geldendeAdviezen',
   mortality: 'sterfte',
+  // Still the nursing home care name is used because of legacy naming inside of sanity's lokalize texts.
   nursing_home_care: 'kwetsbareGroepen',
   positive_tests: 'positiefGetesteMensen',
   sewage_measurement: 'rioolwater',
