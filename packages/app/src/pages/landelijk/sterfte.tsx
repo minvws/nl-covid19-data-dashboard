@@ -1,6 +1,5 @@
 import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
-import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { AgeDemographic, ChartTile, KpiTile, KpiValue, Markdown, PageInformationBlock, TileList, TimeSeriesChart, TwoKpiSection, WarningTile } from '~/components';
@@ -72,7 +71,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
-  const hasActiveWarningTile = !!textShared.notification.message && !isEmpty(textShared.notification.message);
+  const hasActiveWarningTile = !!textShared.notification.message;
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
