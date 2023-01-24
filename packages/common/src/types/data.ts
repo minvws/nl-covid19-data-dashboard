@@ -245,7 +245,7 @@ export interface Nl {
   tested_ggd: NlTestedGgd;
   tested_ggd_archived: NlTestedGgdArchived;
   nursing_home_archived_20230126: NlNursingHomeArchived_20230126;
-  vulnerable_nursing_home: NlNursingHomeArchived_202301261;
+  vulnerable_nursing_home: NlVulnerableNursingHome;
   vulnerable_tested_per_age_group: NlVulnerableTestedPerAgeGroup;
   vulnerable_hospital_admissions: NlVulnerableHospitalAdmissions;
   disability_care_archived_20230126: NlDisabilityCareArchived_20230126;
@@ -591,11 +591,11 @@ export interface NlNursingHomeValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlNursingHomeArchived_202301261 {
-  values: NlNursingHomeValue1[];
-  last_value: NlNursingHomeValue1;
+export interface NlVulnerableNursingHome {
+  values: NlVulnerableNursingHomeValue[];
+  last_value: NlVulnerableNursingHomeValue;
 }
-export interface NlNursingHomeValue1 {
+export interface NlVulnerableNursingHomeValue {
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
