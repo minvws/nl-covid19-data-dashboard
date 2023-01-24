@@ -68,7 +68,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
+function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedVrData: data, vrName, lastGenerated, content } = props;
 
   const [nursingHomeConfirmedCasesTimeframe, setNursingHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -419,4 +419,4 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
   );
 }
 
-export default NursingHomeCare;
+export default VulnerableGroups;
