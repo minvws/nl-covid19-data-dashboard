@@ -120,7 +120,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          {textShared.belangrijk_bericht && textShared.belangrijk_bericht !== '' && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
+          {!!textShared.belangrijk_bericht && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile

@@ -62,7 +62,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
           />
 
-          {text.belangrijk_bericht && text.belangrijk_bericht !== '' && <WarningTile isFullWidth message={text.belangrijk_bericht} variant="informational" />}
+          {!!text.belangrijk_bericht && <WarningTile isFullWidth message={text.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile

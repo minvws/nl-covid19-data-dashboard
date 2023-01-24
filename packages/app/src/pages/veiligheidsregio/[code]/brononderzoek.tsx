@@ -106,7 +106,7 @@ export default function BrononderzoekPage(props: StaticProps<typeof getStaticPro
             warning={textShared.warning}
           />
 
-          {textShared.belangrijk_bericht && textShared.belangrijk_bericht !== '' && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+          {!!textShared.belangrijk_bericht && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <SituationsDataCoverageTile data={lastValue} text={textShared.veiligheidsregio_dekking} />

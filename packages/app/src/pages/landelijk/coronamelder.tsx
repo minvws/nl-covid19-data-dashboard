@@ -74,9 +74,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={corona_melder_app.header.reference.href}
           />
 
-          {corona_melder_app.belangrijk_bericht && corona_melder_app.belangrijk_bericht !== '' && (
-            <WarningTile isFullWidth message={corona_melder_app.belangrijk_bericht} variant="informational" />
-          )}
+          {!!corona_melder_app.belangrijk_bericht && <WarningTile isFullWidth message={corona_melder_app.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile

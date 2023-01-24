@@ -72,7 +72,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          {textShared.belangrijk_bericht && textShared.belangrijk_bericht !== '' && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+          {!!textShared.belangrijk_bericht && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
 
           <ChartTile metadata={{ source: textNl.bronnen.rivm }} title={textNl.linechart_titel} description={textNl.linechart_description}>
             <TimeSeriesChart

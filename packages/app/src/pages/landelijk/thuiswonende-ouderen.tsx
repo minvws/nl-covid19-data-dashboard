@@ -113,7 +113,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          {textShared.belangrijk_bericht && textShared.belangrijk_bericht !== '' && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
+          {!!textShared.belangrijk_bericht && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile
@@ -142,7 +142,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               <Text>{textNl.section_positive_tested.kpi_daily_per_100k_description}</Text>
             </KpiTile>
           </TwoKpiSection>
-
           <ChartTile
             timeframeOptions={TimeframeOptionsList}
             title={textNl.section_positive_tested.line_chart_daily_title}
@@ -185,7 +184,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               }}
             />
           </ChartTile>
-
           <ChoroplethTile
             title={textNl.section_positive_tested.choropleth_daily_title}
             description={textNl.section_positive_tested.choropleth_daily_description}
@@ -216,9 +214,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               }}
             />
           </ChoroplethTile>
-
           <Divider />
-
           <PageInformationBlock
             title={textNl.section_deceased.title}
             icon={<Elderly />}
@@ -231,7 +227,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             }}
             referenceLink={textNl.section_deceased.reference.href}
           />
-
           <TwoKpiSection>
             <KpiTile
               title={textNl.section_deceased.kpi_daily_title}
@@ -244,7 +239,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               <KpiValue data-cy="deceased_daily" absolute={elderlyAtHomeData.last_value.deceased_daily} />
             </KpiTile>
           </TwoKpiSection>
-
           <ChartTile
             timeframeOptions={TimeframeOptionsList}
             title={textNl.section_deceased.line_chart_daily_title}
