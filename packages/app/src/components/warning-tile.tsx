@@ -91,9 +91,7 @@ const WarningBox = styled.div<{ variant: WarningMessageVariant }>`
 `;
 
 const IconWrapper = styled.div`
-  display: block;
   svg {
-    border-radius: ${radii[1]}pxpx;
     display: block;
     width: 24px;
     height: 24px;
@@ -120,14 +118,14 @@ const Content = styled.div<{ variant: WarningMessageVariant; hasTooltip: boolean
   border-bottom-right-radius: ${radii[1]}px;
   border-top-right-radius: ${radii[1]}px;
   padding-right: ${fontSizes[4]};
-  '> *': {
+  > * {
     margin-top: ${fontSizes[0]};
     margin-bottom: ${fontSizes[3]};
-    ':last-child': {
+    :last-child: {
       margin-bottom: ${fontSizes[0]};
-    },
-  },
-  '& *': {
+    }
+  }
+  & * {
     text-underline-offset: ${({ hasTooltip }) => (hasTooltip ? '0.3em' : undefined)};
     text-decoration-line:  ${({ hasTooltip }) => (hasTooltip ? 'underline' : undefined)};
     text-decoration-style:  ${({ hasTooltip }) => (hasTooltip ? 'dotted' : undefined)};
