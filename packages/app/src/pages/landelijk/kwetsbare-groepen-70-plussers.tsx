@@ -4,7 +4,18 @@ import { Coronavirus, Location, ElderlyPeople, VulnerableGroups as VulnerableGro
 import { GetStaticPropsContext } from 'next';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { Text } from '~/components/typography';
-import { Markdown, Divider, KpiValue, ChartTile, KpiTile, TileList, TimeSeriesChart, TwoKpiSection, PageInformationBlock, ChoroplethTile, DynamicChoropleth } from '~/components';
+import { Markdown } from '~/components/markdown';
+import { Divider } from '~/components/divider';
+import { KpiValue } from '~/components/kpi-value';
+import { ChartTile } from '~/components/chart-tile';
+import { KpiTile } from '~/components/kpi-tile';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { WarningTile } from '~/components/warning-tile';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { ChoroplethTile } from '~/components/choropleth-tile';
+import { DynamicChoropleth } from '~/components/';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { Languages, SiteText } from '~/locale';
@@ -92,6 +103,8 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
     description: infectedLocationsText.metadata.description,
   };
 
+  const hasActiveWarningTile = textShared.osiris_archiving_notification;
+
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
@@ -114,7 +127,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          {textShared.osiris_archiving_notification && <Markdown content={`> > ${textShared.osiris_archiving_notification}`} />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={hasActiveWarningTile} variant="emphasis" />}
 
           <Divider />
 
