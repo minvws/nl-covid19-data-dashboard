@@ -37,15 +37,37 @@ if (!fs.existsSync(dir)) {
 const initialTypeDefinitions = `/// <reference types="react" />
 import { FC, SVGAttributes } from 'react';
 
-export interface IconProps extends SVGAttributes<SVGElement> {}
+export type IconProps = SVGAttributes<SVGElement>;
 
 export type Icon = FC<IconProps>;
 `;
 
+/*
+ * initialize the icon type files. So it's cleared before appening.
+ * And added the proper type declarations on top of the file.
+ */
 fs.writeFileSync(
   path.join(rootDir, 'src', 'index.ts'),
-  `${initialTypeDefinitions}\nexport { iconName2filename } from './icon-name2filename';\n`,
-  'utf-8'
+  format({
+    text: `${initialTypeDefinitions}\nexport { iconName2filename } from './icon-name2filename';\n`,
+    eslintConfig,
+    prettierOptions: {
+      ...prettierOptions,
+    },
+  }),
+  { encoding: 'utf-8' }
+);
+
+fs.writeFileSync(
+  path.join(rootDir, 'src', 'index.d.ts'),
+  format({
+    text: `import { Icon } from './index';`,
+    eslintConfig,
+    prettierOptions: {
+      ...prettierOptions,
+    },
+  }),
+  { encoding: 'utf-8' }
 );
 
 // We want our icons to predictable in usage. That means we filter out properties that we think

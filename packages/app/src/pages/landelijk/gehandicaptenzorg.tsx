@@ -44,9 +44,13 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('difference.disability_care__newly_infected_people', 'difference.disability_care__infected_locations_total', 'disability_care'),
+  selectNlData(
+    'difference.disability_care__newly_infected_people_archived_20230126',
+    'difference.disability_care__infected_locations_total_archived_20230126',
+    'disability_care_archived_20230126'
+  ),
   createGetChoroplethData({
-    vr: ({ disability_care }) => ({ disability_care }),
+    vr: ({ disability_care_archived_20230126 }) => ({ disability_care_archived_20230126 }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -56,7 +60,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
       "parts": ${getPagePartsQuery('disability_care_page')},
-      "elements": ${getElementsQuery('nl', ['disability_care'], locale)}
+      "elements": ${getElementsQuery('nl', ['disability_care_archived_20230126'], locale)}
      }`;
     })(context);
 
@@ -78,8 +82,8 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
 
   const [disabilityCareDeceasedTimeframe, setDisabilityCareDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const lastValue = data.disability_care.last_value;
-  const values = data.disability_care.values;
+  const lastValue = data.disability_care_archived_20230126.last_value;
+  const values = data.disability_care_archived_20230126.values;
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
@@ -123,7 +127,12 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.positief_geteste_personen.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="newly_infected_people" absolute={lastValue.newly_infected_people} difference={data.difference.disability_care__newly_infected_people} isAmount />
+              <KpiValue
+                data-cy="newly_infected_people"
+                absolute={lastValue.newly_infected_people}
+                difference={data.difference.disability_care__newly_infected_people_archived_20230126}
+                isAmount
+              />
             </KpiTile>
           </TwoKpiSection>
 
@@ -165,7 +174,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                     cutValuesForMetricProperties: ['newly_infected_people_moving_average'],
                   },
                 ],
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'disability_care', 'newly_infected_people'),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'disability_care_archived_20230126', 'newly_infected_people'),
               }}
             />
           </ChartTile>
@@ -198,7 +207,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 data-cy="infected_locations_total"
                 absolute={lastValue.infected_locations_total}
                 percentage={lastValue.infected_locations_percentage}
-                difference={data.difference.disability_care__infected_locations_total}
+                difference={data.difference.disability_care__infected_locations_total_archived_20230126}
                 isAmount
               />
               <Text>{textNl.besmette_locaties.kpi_toelichting}</Text>
@@ -233,9 +242,9 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'disability_care_infected_people_choropleth',
               }}
-              data={choropleth.vr.disability_care}
+              data={choropleth.vr.disability_care_archived_20230126}
               dataConfig={{
-                metricName: 'disability_care',
+                metricName: 'disability_care_archived_20230126',
                 metricProperty: 'infected_locations_percentage',
                 dataFormatters: {
                   infected_locations_percentage: formatNumber,
