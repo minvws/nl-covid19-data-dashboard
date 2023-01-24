@@ -1,5 +1,6 @@
 import { colors, NlSewer, SewerPerInstallationData, TimeframeOption, TimeframeOptionsList, VrSewer } from '@corona-dashboard/common';
-import { useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Warning } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
@@ -73,6 +74,14 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
         ],
       } as SewerPerInstallationData)
   );
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const routeChangeHandler = () => onChange(undefined);
+    router.events.on('routeChangeStart', routeChangeHandler);
+    return () => router.events.off('routeChangeStart', routeChangeHandler);
+  }, [onChange, router.events]);
 
   const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
