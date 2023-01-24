@@ -73,10 +73,7 @@ export function WarningTile({ message, variant = 'default', icon = Warning, isFu
 const Article = styled.article<{ isFullWidth?: boolean }>`
   background-color: ${colors.white};
   border-radius: ${radii[1]}px;
-  box-shadow: none;
   display: ${({ isFullWidth }) => (isFullWidth ? 'flex' : 'inline-flex')};
-  flex-direction: row;
-  padding: 0;
 `;
 
 const WarningBox = styled.div<{ variant: WarningMessageVariant }>`
@@ -115,12 +112,12 @@ const Content = styled.div<{ variant: WarningMessageVariant; hasTooltip: boolean
   font-weight: ${({ variant }) => WarningVariantStylingConfig[variant].fontWeight};
   border-bottom-right-radius: ${radii[1]}px;
   border-top-right-radius: ${radii[1]}px;
-  padding-right: ${fontSizes[4]};
+  padding-right: ${space[4]};
   > * {
-    margin-top: ${fontSizes[0]};
-    margin-bottom: ${fontSizes[3]};
+    margin-top: ${space[0]};
+    margin-bottom: ${space[3]};
     &:last-child {
-      margin-bottom: ${fontSizes[0]};
+      margin-bottom: ${space[0]};
     }
   }
   & * {
