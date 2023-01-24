@@ -291,7 +291,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               }}
               dataOptions={{
                 isPercentage: true,
-                getLink: reverseRouter.vr.verpleeghuiszorg,
+                getLink: reverseRouter.vr.kwetsbareGroepen,
               }}
             />
           </ChoroplethTile>
