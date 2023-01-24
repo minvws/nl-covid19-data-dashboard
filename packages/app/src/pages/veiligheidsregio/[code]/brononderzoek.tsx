@@ -1,7 +1,14 @@
 import { TimeframeOption } from '@corona-dashboard/common';
 import { Bevolking } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { ChartTile, WarningTile, KpiTile, KpiValue, Markdown, PageInformationBlock, TileList, TwoKpiSection } from '~/components';
+import { ChartTile } from '~/components/chart-tile';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components/warning-tile';
 import { InlineText, BoldText } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';

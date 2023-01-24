@@ -1,6 +1,8 @@
 import { Bevolking } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { PageInformationBlock, TileList, WarningTile } from '~/components';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { TileList } from '~/components/tile-list';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situations-data-coverage-choropleth-tile';
@@ -14,7 +16,7 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  caterogyTexts: {
+  categoryTexts: {
     category: siteText.common.sidebar.categories.archived_metrics.title,
     screenReaderCategory: siteText.common.sidebar.metrics.source_investigation.title,
   },
@@ -46,7 +48,7 @@ export const getStaticProps = createGetStaticProps(
 
 export default function BrononderzoekPage(props: StaticProps<typeof getStaticProps>) {
   const { pageText, choropleth, lastGenerated, content } = props;
-  const { caterogyTexts, metadataTexts, textShared, textChoroplethTooltips } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { categoryTexts, metadataTexts, textShared, textChoroplethTooltips } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
 
   const metadata = {
@@ -63,7 +65,7 @@ export default function BrononderzoekPage(props: StaticProps<typeof getStaticPro
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.archived_metrics.title}
-            screenReaderCategory={caterogyTexts.screenReaderCategory}
+            screenReaderCategory={categoryTexts.screenReaderCategory}
             title={textShared.titel}
             icon={<Bevolking aria-hidden="true" />}
             description={textShared.pagina_toelichting}

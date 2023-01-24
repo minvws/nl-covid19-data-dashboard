@@ -2,7 +2,6 @@ import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard
 import { useState } from 'react';
 import { External as ExternalLinkIcon, Phone } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
-import { WarningTile } from '~/components';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -12,6 +11,7 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components';
 import { Heading, Text, BoldText } from '~/components/typography';
 import { Box } from '~/components/base';
 import { IconWrapper } from '~/components/anchor-tile';

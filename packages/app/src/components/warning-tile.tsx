@@ -72,22 +72,22 @@ export function WarningTile({ message, variant = 'default', icon = Warning, isFu
 
 const Article = styled.article<{ isFullWidth?: boolean }>`
   background-color: ${colors.white};
-  flex-direction: row;
-  padding: 0;
+  border-radius: ${radii[1]}px;
   box-shadow: none;
   display: ${({ isFullWidth }) => (isFullWidth ? 'flex' : 'inline-flex')};
-  border-radius: ${radii[1]}px;
+  flex-direction: row;
+  padding: 0;
 `;
 
 const WarningBox = styled.div<{ variant: WarningMessageVariant }>`
-  display: flex;
   align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  min-width: ${({ variant }) => (variant === 'informational' ? space[2] : 'undefined')};
   background-color: ${({ variant }) => WarningVariantStylingConfig[variant].iconBackgroundColor};
   border-bottom-left-radius: ${radii[1]}px;
   border-top-left-radius: ${radii[1]}px;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  min-width: ${({ variant }) => (variant === 'informational' ? space[2] : 'undefined')};
 `;
 
 const IconWrapper = styled.div`
@@ -121,13 +121,13 @@ const Content = styled.div<{ variant: WarningMessageVariant; hasTooltip: boolean
   > * {
     margin-top: ${fontSizes[0]};
     margin-bottom: ${fontSizes[3]};
-    :last-child: {
+    &:last-child {
       margin-bottom: ${fontSizes[0]};
     }
   }
   & * {
     text-underline-offset: ${({ hasTooltip }) => (hasTooltip ? '0.3em' : undefined)};
-    text-decoration-line:  ${({ hasTooltip }) => (hasTooltip ? 'underline' : undefined)};
-    text-decoration-style:  ${({ hasTooltip }) => (hasTooltip ? 'dotted' : undefined)};
-  },
+    text-decoration-line: ${({ hasTooltip }) => (hasTooltip ? 'underline' : undefined)};
+    text-decoration-style: ${({ hasTooltip }) => (hasTooltip ? 'dotted' : undefined)};
+  }
 `;

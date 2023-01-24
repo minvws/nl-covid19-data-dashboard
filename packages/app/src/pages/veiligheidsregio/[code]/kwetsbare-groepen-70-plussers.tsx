@@ -2,7 +2,16 @@ import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard
 import { useState } from 'react';
 import { Coronavirus, Location, VulnerableGroups as VulnerableGroupsIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { Markdown, InView, ChartTile, Divider, KpiTile, KpiValue, PageInformationBlock, TwoKpiSection, TimeSeriesChart, TileList } from '~/components';
+import { Markdown } from '~/components/markdown';
+import { ChartTile } from '~/components/chart-tile';
+import { Divider } from '~/components/divider';
+import { InView } from '~/components/in-view';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
