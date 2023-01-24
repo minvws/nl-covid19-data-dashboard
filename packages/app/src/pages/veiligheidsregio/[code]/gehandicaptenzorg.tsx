@@ -41,8 +41,8 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrData(
     'disability_care_archived_20230126',
-    'difference.disability_care__infected_locations_total_archived_20230126',
-    'difference.disability_care__newly_infected_people_archived_20230126'
+    'difference.disability_care__newly_infected_people_archived_20230126',
+    'disability_care__infected_locations_total_archived_20230126'
   ),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -75,7 +75,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   const [disabilityCareDeceasedTimeframe, setDisabilityCareDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
-  const { textVr } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textShared, textVr } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const lastValue = data.disability_care_archived_20230126.last_value;
   const values = data.disability_care_archived_20230126.values;

@@ -45,7 +45,6 @@ export const getStaticProps = createGetStaticProps(
     'difference.nursing_home__deceased_daily_archived_20230126',
     'difference.vulnerable_nursing_home__infected_locations_total',
     'difference.nursing_home__newly_infected_people_archived_20230126',
-    'vulnerable_nursing_home',
     'nursing_home_archived_20230126'
   ),
   async (context: GetStaticPropsContext) => {

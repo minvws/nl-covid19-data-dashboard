@@ -72,7 +72,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
   const { elderly_at_home_archived_20230126, difference } = data;
 
   const { commonTexts } = useIntl();
-  const { textVr } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textShared, textVr } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const elderlyAtHomeUnderReportedRange = getBoundaryDateStartUnix(elderly_at_home_archived_20230126.values, 4);
 
   const elderlyAtHomeDeceasedUnderReportedRange = getBoundaryDateStartUnix(elderly_at_home_archived_20230126.values, 7);
