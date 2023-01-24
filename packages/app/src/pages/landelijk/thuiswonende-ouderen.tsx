@@ -93,6 +93,8 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -113,7 +115,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          {!!textShared.belangrijk_bericht && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile

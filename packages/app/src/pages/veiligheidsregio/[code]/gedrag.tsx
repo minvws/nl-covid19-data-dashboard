@@ -75,6 +75,8 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
@@ -99,7 +101,7 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
             warning={text.vr.warning}
           />
 
-          {!!textShared.belangrijk_bericht && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <Tile>

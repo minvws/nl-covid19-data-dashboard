@@ -43,6 +43,8 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
+  const hasActiveWarningTile = !!text.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -62,7 +64,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
           />
 
-          {!!text.belangrijk_bericht && <WarningTile isFullWidth message={text.belangrijk_bericht} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={text.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile

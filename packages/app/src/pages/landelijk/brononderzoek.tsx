@@ -59,6 +59,8 @@ export default function BrononderzoekPage(props: StaticProps<typeof getStaticPro
 
   const singleValue = choropleth.vr.situations[0];
 
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -82,7 +84,7 @@ export default function BrononderzoekPage(props: StaticProps<typeof getStaticPro
             articles={content.articles}
           />
 
-          {!!textShared.belangrijk_bericht && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
 
           <SituationsDataCoverageChoroplethTile data={choropleth.vr} text={textShared} tooltipText={textChoroplethTooltips} />
 

@@ -93,6 +93,8 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
@@ -119,7 +121,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             warning={textVr.besmette_locaties.warning}
           />
 
-          {!!textShared.belangrijk_bericht && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
 
           <TwoKpiSection>
             <KpiTile

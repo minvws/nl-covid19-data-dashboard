@@ -52,6 +52,8 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -72,7 +74,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          {!!textShared.belangrijk_bericht && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
 
           <ChartTile metadata={{ source: textNl.bronnen.rivm }} title={textNl.linechart_titel} description={textNl.linechart_description}>
             <TimeSeriesChart

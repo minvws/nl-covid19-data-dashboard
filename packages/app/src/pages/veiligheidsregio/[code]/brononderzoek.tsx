@@ -78,6 +78,8 @@ export default function BrononderzoekPage(props: StaticProps<typeof getStaticPro
 
   const [date_from, date_to] = formatDateSpan({ seconds: lastValue.date_start_unix }, { seconds: lastValue.date_end_unix });
 
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout vrName={vrName}>
@@ -106,7 +108,7 @@ export default function BrononderzoekPage(props: StaticProps<typeof getStaticPro
             warning={textShared.warning}
           />
 
-          {!!textShared.belangrijk_bericht && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <SituationsDataCoverageTile data={lastValue} text={textShared.veiligheidsregio_dekking} />

@@ -56,6 +56,8 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
+  const hasActiveWarningTile = !!corona_melder_app.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -74,7 +76,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={corona_melder_app.header.reference.href}
           />
 
-          {!!corona_melder_app.belangrijk_bericht && <WarningTile isFullWidth message={corona_melder_app.belangrijk_bericht} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={corona_melder_app.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile
