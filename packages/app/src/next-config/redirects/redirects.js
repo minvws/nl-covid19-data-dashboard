@@ -84,7 +84,7 @@ async function redirects() {
       destination: '/veiligheidsregio/VR:nr',
       permanent: false,
     },
-    // Redirects for OSIRS change
+    // Redirects for OSIRIS change
     {
       source: '/veiligheidsregio/:code/verpleeghuiszorg',
       destination: '/veiligheidsregio/:code/kwetsbare-groepen-70-plussers',
