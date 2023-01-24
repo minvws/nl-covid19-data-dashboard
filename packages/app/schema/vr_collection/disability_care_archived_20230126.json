@@ -1,12 +1,18 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "vr_collection_elderly_at_home",
+  "title": "vr_collection_disability_care_archived_20230126",
   "type": "object",
   "properties": {
-    "positive_tested_daily": {
+    "newly_infected_people": {
       "type": "integer"
     },
-    "positive_tested_daily_per_100k": {
+    "newly_infected_locations": {
+      "type": "integer"
+    },
+    "infected_locations_total": {
+      "type": "integer"
+    },
+    "infected_locations_percentage": {
       "type": "number"
     },
     "deceased_daily": {
@@ -24,8 +30,10 @@
     }
   },
   "required": [
-    "positive_tested_daily",
-    "positive_tested_daily_per_100k",
+    "newly_infected_people",
+    "newly_infected_locations",
+    "infected_locations_total",
+    "infected_locations_percentage",
     "deceased_daily",
     "date_unix",
     "date_of_insertion_unix",

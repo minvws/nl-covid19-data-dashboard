@@ -6,10 +6,11 @@ import type {
   GmCollectionVaccineCoveragePerAgeGroup,
   VrCollection,
   VrCollectionBehaviorArchived_20221019,
-  VrCollectionDisabilityCare,
-  VrCollectionElderlyAtHome,
+  VrCollectionDisabilityCareArchived_20230126,
+  VrCollectionElderlyAtHomeArchived_20230126,
   VrCollectionHospitalNice,
-  VrCollectionNursingHome,
+  VrCollectionNursingHomeArchived_20230126,
+  VrCollectionVulnerableNursingHome,
   VrCollectionSewer,
   VrCollectionSituations,
   VrCollectionTestedOverall,
@@ -58,11 +59,12 @@ export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDa
 export type VrDataCollection =
   | VrCollectionHospitalNice[]
   | VrCollectionTestedOverall[]
-  | VrCollectionNursingHome[]
+  | VrCollectionNursingHomeArchived_20230126[]
+  | VrCollectionVulnerableNursingHome[]
   | VrCollectionSewer[]
   | VrCollectionBehaviorArchived_20221019[]
-  | VrCollectionDisabilityCare[]
-  | VrCollectionElderlyAtHome[]
+  | VrCollectionDisabilityCareArchived_20230126[]
+  | VrCollectionElderlyAtHomeArchived_20230126[]
   | VrCollectionSituations[]
   | VrCollectionVaccineCoveragePerAgeGroup[];
 export type VrDataItem = VrDataCollection[number];
