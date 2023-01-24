@@ -78,7 +78,7 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
 
   const [nursingHomeDeceasedTimeframe, setNursingHomeDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
+  const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
   const { commonTexts } = useIntl();
 
@@ -265,11 +265,11 @@ function NursingHomeCare(props: StaticProps<typeof getStaticProps>) {
           <PageInformationBlock
             title={textShared.section_archived.title}
             description={textShared.section_archived.description}
-            isArchivedHidden={hasHideArchivedCharts}
-            onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
+            isArchivedHidden={isArchivedContentShown}
+            onToggleArchived={() => setIsArchivedContentShown(!isArchivedContentShown)}
           />
 
-          {hasHideArchivedCharts && (
+          {isArchivedContentShown && (
             <InView rootMargin="400px">
               <TwoKpiSection>
                 <KpiTile
