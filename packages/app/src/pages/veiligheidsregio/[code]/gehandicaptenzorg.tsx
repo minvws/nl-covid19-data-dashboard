@@ -42,7 +42,7 @@ export const getStaticProps = createGetStaticProps(
   selectVrData(
     'disability_care_archived_20230126',
     'difference.disability_care__newly_infected_people_archived_20230126',
-    'disability_care__infected_locations_total_archived_20230126'
+    'difference.disability_care__infected_locations_total_archived_20230126'
   ),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
