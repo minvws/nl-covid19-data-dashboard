@@ -17,6 +17,8 @@ timestamp,action,key,document_id,move_to
 2023-01-23T09:46:18.896Z,add,pages.nursing_home_page.shared.70_plussers.reference.href,AE5jpq5sZWNgXeEUcVU4hL,__
 2023-01-23T09:46:19.915Z,add,pages.nursing_home_page.shared.70_plussers.titel,AE5jpq5sZWNgXeEUcVU5qZ,__
 2023-01-23T09:46:20.939Z,add,pages.nursing_home_page.shared.70_plussers.titel_kpi,gwBtgw3hhC8JAGy8EmvmVt,__
+2023-01-23T09:46:19.915Z,add,pages.nursing_home_page.shared.section_archived.description,OlenTyA85WiX6qWIyIW1Pc,__
+2023-01-23T09:46:20.939Z,add,pages.nursing_home_page.shared.section_archived.title,Jp4H89EOJuHb9XQr5XdbDg,__
 2023-01-23T10:07:22.471Z,add,pages.elderly_at_home_page.shared.belangrijk_bericht,AE5jpq5sZWNgXeEUcVY8Nz,__
 2023-01-23T10:07:22.471Z,delete,pages.elderly_at_home_page.shared,tX1MPJIDnGqPfyLRsKwNFp,__
 2023-01-23T10:07:55.358Z,add,pages.disability_care_page.shared.belangrijk_bericht,say0BNKaNSuhganBiQDVwp,__
