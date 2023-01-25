@@ -111,7 +111,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.monitorArticles}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="emphasis" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="informational" />}
 
           <DeceasedMonitorSection data={dataCbs} text={textShared.section_sterftemonitor} showCauseMessage />
 
