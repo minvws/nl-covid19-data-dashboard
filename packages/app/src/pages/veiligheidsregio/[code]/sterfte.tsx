@@ -2,6 +2,7 @@ import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
+import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Divider } from '~/components/divider';
 import { KpiTile } from '~/components/kpi-tile';
@@ -21,6 +22,7 @@ import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/quer
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectVrData } from '~/static-props/get-data';
+import { space } from '~/style/theme';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -124,9 +126,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           {isArchivedContentShown && (
-            <>
-              <Divider />
-
+            <Box borderTop={`2px solid ${colors.gray2}`} spacing={5} paddingTop={space[4]}>
               <PageInformationBlock
                 category={categoryTexts}
                 title={replaceVariablesInText(textVr.section_deceased_rivm.title, {
@@ -206,7 +206,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                   }}
                 />
               </ChartTile>
-            </>
+            </Box>
           )}
         </TileList>
       </VrLayout>

@@ -3,6 +3,7 @@ import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { AgeDemographic } from '~/components/age-demographic';
+import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Divider } from '~/components/divider';
 import { KpiTile } from '~/components/kpi-tile';
@@ -22,6 +23,7 @@ import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/quer
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { space } from '~/style/theme';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
@@ -122,9 +124,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           {isArchivedContentShown && (
-            <>
-              <Divider />
-
+            <Box borderTop={`2px solid ${colors.gray2}`} spacing={5} paddingTop={space[4]}>
               <PageInformationBlock
                 category={commonTexts.sidebar.categories.development_of_the_virus.title}
                 title={textNl.section_deceased_rivm.title}
@@ -222,7 +222,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                   formatValue={(a: number) => `${formatPercentage(a * 100)}%`}
                 />
               </ChartTile>
-            </>
+            </Box>
           )}
         </TileList>
       </NlLayout>
