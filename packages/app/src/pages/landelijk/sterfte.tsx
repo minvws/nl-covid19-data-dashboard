@@ -94,6 +94,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
+            category={commonTexts.sidebar.categories.development_of_the_virus.title}
             title={textShared.section_sterftemonitor.title}
             icon={<Coronavirus />}
             description={textShared.section_sterftemonitor.description}

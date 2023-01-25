@@ -46,7 +46,8 @@ export const getStaticProps = createGetStaticProps(
     'difference.nursing_home__deceased_daily_archived_20230126',
     'difference.vulnerable_nursing_home__infected_locations_total',
     'difference.nursing_home__newly_infected_people_archived_20230126',
-    'nursing_home_archived_20230126'
+    'nursing_home_archived_20230126',
+    'vulnerable_nursing_home'
   ),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -84,7 +85,8 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
 
   const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const nursinghomeLastValue = data.nursing_home_archived_20230126.last_value;
+  const nursingHomeArchived20230126LastValue = data.nursing_home_archived_20230126.last_value;
+  const vulnerableNursingHomeLastValue = data.nursing_home_archived_20230126.last_value;
   const underReportedDateStart = getBoundaryDateStartUnix(data.nursing_home_archived_20230126.values, 7);
 
   const metadata = {
@@ -117,7 +119,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             })}
             metadata={{
               datumsText: textVr.positief_geteste_personen.datums,
-              dateOrRange: nursinghomeLastValue.date_unix,
+              dateOrRange: vulnerableNursingHomeLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textVr.positief_geteste_personen.bronnen.rivm],
             }}
@@ -129,70 +131,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={hasActiveWarningTile} variant="informational" />}
 
-          <TwoKpiSection>
-            <KpiTile
-              title={textVr.positief_geteste_personen.barscale_titel}
-              description={textVr.positief_geteste_personen.extra_uitleg}
-              metadata={{
-                date: nursinghomeLastValue.date_unix,
-                source: textVr.positief_geteste_personen.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="newly_infected_people"
-                absolute={nursinghomeLastValue.newly_infected_people}
-                difference={data.difference.nursing_home__newly_infected_people_archived_20230126}
-                isAmount
-              />
-            </KpiTile>
-          </TwoKpiSection>
-
-          <ChartTile
-            metadata={{ source: textVr.positief_geteste_personen.bronnen.rivm }}
-            title={textVr.positief_geteste_personen.linechart_titel}
-            timeframeOptions={TimeframeOptionsList}
-            description={textVr.positief_geteste_personen.linechart_description}
-            onSelectTimeframe={setNursingHomeConfirmedCasesTimeframe}
-          >
-            <TimeSeriesChart
-              accessibility={{
-                key: 'nursing_home_confirmed_cases_over_time_chart',
-              }}
-              values={data.nursing_home_archived_20230126.values}
-              timeframe={nursingHomeConfirmedCasesTimeframe}
-              seriesConfig={[
-                {
-                  type: 'line',
-                  metricProperty: 'newly_infected_people_moving_average',
-                  color: colors.primary,
-                  label: textVr.positief_geteste_personen.line_chart_legend_trend_moving_average_label,
-                  shortLabel: textVr.positief_geteste_personen.tooltip_labels.newly_infected_people_moving_average,
-                },
-                {
-                  type: 'bar',
-                  metricProperty: 'newly_infected_people',
-                  color: colors.primary,
-                  label: textVr.positief_geteste_personen.line_chart_legend_trend_label,
-                  shortLabel: textVr.positief_geteste_personen.tooltip_labels.newly_infected_people,
-                },
-              ]}
-              dataOptions={{
-                timespanAnnotations: [
-                  {
-                    start: underReportedDateStart,
-                    end: Infinity,
-                    label: textVr.positief_geteste_personen.line_chart_legend_inaccurate_label,
-                    shortLabel: textVr.positief_geteste_personen.tooltip_labels.inaccurate,
-                    cutValuesForMetricProperties: ['newly_infected_people_moving_average'],
-                  },
-                ],
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'nursing_home_archived_20230126', 'newly_infected_people'),
-              }}
-            />
-          </ChartTile>
-
-          <Divider />
-
           <PageInformationBlock
             id="besmette-locaties"
             title={replaceVariablesInText(textVr.besmette_locaties.titel, {
@@ -202,8 +140,8 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             description={textVr.besmette_locaties.pagina_toelichting}
             metadata={{
               datumsText: textVr.besmette_locaties.datums,
-              dateOrRange: nursinghomeLastValue.date_unix,
-              dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+              dateOrRange: vulnerableNursingHomeLastValue.date_unix,
+              dateOfInsertionUnix: vulnerableNursingHomeLastValue.date_of_insertion_unix,
               dataSources: [textVr.besmette_locaties.bronnen.rivm],
             }}
             referenceLink={textVr.besmette_locaties.reference.href}
@@ -213,14 +151,14 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             <KpiTile
               title={textVr.besmette_locaties.kpi_titel}
               metadata={{
-                date: nursinghomeLastValue.date_unix,
+                date: vulnerableNursingHomeLastValue.date_unix,
                 source: textVr.besmette_locaties.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="infected_locations_total"
-                absolute={nursinghomeLastValue.infected_locations_total}
-                percentage={nursinghomeLastValue.infected_locations_percentage}
+                absolute={vulnerableNursingHomeLastValue.infected_locations_total}
+                percentage={vulnerableNursingHomeLastValue.infected_locations_percentage}
                 difference={data.difference.vulnerable_nursing_home__infected_locations_total}
                 isAmount
               />
@@ -229,11 +167,11 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             <KpiTile
               title={textVr.besmette_locaties.barscale_titel}
               metadata={{
-                date: nursinghomeLastValue.date_unix,
+                date: vulnerableNursingHomeLastValue.date_unix,
                 source: textVr.besmette_locaties.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="newly_infected_locations" absolute={nursinghomeLastValue.newly_infected_locations} />
+              <KpiValue data-cy="newly_infected_locations" absolute={vulnerableNursingHomeLastValue.newly_infected_locations} />
               <Text>{textVr.besmette_locaties.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
@@ -279,13 +217,13 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                     title={textVr.positief_geteste_personen.barscale_titel}
                     description={textVr.positief_geteste_personen.extra_uitleg}
                     metadata={{
-                      date: nursinghomeLastValue.date_unix,
+                      date: nursingHomeArchived20230126LastValue.date_unix,
                       source: textVr.positief_geteste_personen.bronnen.rivm,
                     }}
                   >
                     <KpiValue
                       data-cy="newly_infected_people"
-                      absolute={nursinghomeLastValue.newly_infected_people}
+                      absolute={nursingHomeArchived20230126LastValue.newly_infected_people}
                       difference={data.difference.nursing_home__newly_infected_people_archived_20230126}
                       isAmount
                     />
@@ -347,8 +285,8 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                   description={textVr.pagina_toelichting}
                   metadata={{
                     datumsText: textVr.datums,
-                    dateOrRange: nursinghomeLastValue.date_unix,
-                    dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
+                    dateOrRange: nursingHomeArchived20230126LastValue.date_unix,
+                    dateOfInsertionUnix: nursingHomeArchived20230126LastValue.date_of_insertion_unix,
                     dataSources: [textVr.bronnen.rivm],
                   }}
                   referenceLink={textVr.reference.href}
@@ -359,13 +297,13 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                     title={textVr.barscale_titel}
                     description={textVr.extra_uitleg}
                     metadata={{
-                      date: nursinghomeLastValue.date_unix,
+                      date: nursingHomeArchived20230126LastValue.date_unix,
                       source: textVr.bronnen.rivm,
                     }}
                   >
                     <KpiValue
                       data-cy="deceased_daily"
-                      absolute={nursinghomeLastValue.deceased_daily}
+                      absolute={nursingHomeArchived20230126LastValue.deceased_daily}
                       difference={data.difference.nursing_home__deceased_daily_archived_20230126}
                       isAmount
                     />
