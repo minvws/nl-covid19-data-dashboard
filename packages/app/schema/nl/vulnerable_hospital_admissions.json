@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_vulnerable_hospital_admissions",
+  "type": "object",
+  "properties": {
+    "admissions_age_70_plus": {
+      "type": "integer"
+    },
+    "date_start_unix": {
+      "type": "integer"
+    },
+    "date_end_unix": {
+      "type": "integer"
+    },
+    "date_of_insertion_unix": {
+      "type": "integer"
+    }
+  },
+  "required":[
+    "admissions_age_70_plus",
+    "date_start_unix",
+    "date_end_unix",
+    "date_of_insertion_unix"
+  ],
+  "additionalProperties": false
+}

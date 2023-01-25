@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { TopicalIcon as PageIcon } from '@corona-dashboard/common/src/types';
+import { IconName as PageIcon } from '@corona-dashboard/icons/src/icon-name2filename';
 import { AnchorTile } from '~/components/anchor-tile';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';

@@ -6,7 +6,7 @@ context('Gemeente - Sterfte', () => {
   });
 
   it('Should show the correct KPI values', function (this: GmContext) {
-    const lastValue = this.municipalData.deceased_rivm.last_value;
+    const lastValue = this.municipalData.deceased_rivm_archived_20221231.last_value;
 
     const kpiTestInfo = {
       covid_daily: cy.formatters.formatNumber(lastValue.covid_daily),

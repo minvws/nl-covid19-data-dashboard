@@ -25,7 +25,7 @@
    correct commit in `master`.
 9. Important before running the next step is building the common package to avoid any typescript errors,
    so run `yarn build:common`.
-10. After we are sure we are moving to production with the release as it is,
+10. After the release has been deployed to production,
     run the `yarn cms:sync-after-release`
     script. This script will perform any necessary text mutations for keys that
     have been moved, and also cleans up any deleted texts from the Sanity

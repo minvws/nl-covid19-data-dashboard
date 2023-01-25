@@ -10,7 +10,7 @@
     "code",
     "tested_overall",
     "hospital_nice",
-    "deceased_rivm",
+    "deceased_rivm_archived_20221231",
     "difference",
     "static_values",
     "sewer",
@@ -35,8 +35,8 @@
     "static_values": {
       "$ref": "__static_values.json"
     },
-    "deceased_rivm": {
-      "$ref": "deceased_rivm.json"
+    "deceased_rivm_archived_20221231": {
+      "$ref": "deceased_rivm_archived_20221231.json"
     },
     "difference": {
       "$ref": "__difference.json"

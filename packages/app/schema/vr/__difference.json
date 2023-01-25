@@ -21,25 +21,25 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"
     },
-    "nursing_home__newly_infected_people": {
+    "vulnerable_nursing_home__infected_locations_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "nursing_home__infected_locations_total": {
+    "nursing_home__newly_infected_people_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
-    "nursing_home__deceased_daily": {
+    "nursing_home__deceased_daily_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
-    "disability_care__newly_infected_people": {
+    "disability_care__newly_infected_people_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
-    "disability_care__infected_locations_total": {
+    "disability_care__infected_locations_total_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
-    "elderly_at_home__positive_tested_daily": {
+    "elderly_at_home__positive_tested_daily_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
-    "deceased_rivm__covid_daily": {
+    "deceased_rivm__covid_daily_archived_20221231": {
       "$ref": "#/definitions/diff_integer"
     }
   },
@@ -50,13 +50,13 @@
     "tested_ggd__tested_total_moving_average",
     "tested_ggd__infected_percentage_moving_average",
     "sewer__average",
-    "nursing_home__newly_infected_people",
-    "nursing_home__infected_locations_total",
-    "nursing_home__deceased_daily",
-    "disability_care__newly_infected_people",
-    "disability_care__infected_locations_total",
-    "elderly_at_home__positive_tested_daily",
-    "deceased_rivm__covid_daily"
+    "nursing_home__newly_infected_people_archived_20230126",
+    "nursing_home__deceased_daily_archived_20230126",
+    "vulnerable_nursing_home__infected_locations_total",
+    "disability_care__newly_infected_people_archived_20230126",
+    "disability_care__infected_locations_total_archived_20230126",
+    "elderly_at_home__positive_tested_daily_archived_20230126",
+    "deceased_rivm__covid_daily_archived_20221231"
   ],
   "additionalProperties": false,
   "definitions": {
