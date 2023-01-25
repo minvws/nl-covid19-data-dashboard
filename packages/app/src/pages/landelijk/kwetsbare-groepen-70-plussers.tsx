@@ -2,21 +2,22 @@ import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard
 import { useState } from 'react';
 import { Coronavirus, Location, ElderlyPeople, VulnerableGroups as VulnerableGroupsIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
+import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { ChoroplethTile } from '~/components/choropleth-tile';
 import { Divider } from '~/components/divider';
+import { DynamicChoropleth } from '~/components/';
 import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { ChoroplethTile } from '~/components/choropleth-tile';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { Text } from '~/components/typography';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { Text } from '~/components/typography';
-import { DynamicChoropleth } from '~/components/';
-import { WarningTile } from '~/components/warning-tile';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { Languages, SiteText } from '~/locale';
@@ -30,7 +31,6 @@ import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { Box } from '~/components/base';
 
 const pageMetrics = ['nursing_home'];
 
@@ -136,7 +136,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={hasActiveWarningTile} variant="emphasis" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={hasActiveWarningTile} variant="informational" />}
 
           <Divider />
 

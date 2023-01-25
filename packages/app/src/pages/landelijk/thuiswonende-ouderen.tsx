@@ -100,7 +100,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={commonTexts.sidebar.metrics.elderly_at_home.title}
             title={textNl.section_positive_tested.title}
             icon={<Elderly aria-hidden="true" />}
