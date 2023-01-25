@@ -100,7 +100,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={commonTexts.sidebar.metrics.nursing_home_care.title}
             title={replaceVariablesInText(textVr.positief_geteste_personen.titel, {
               safetyRegion: vrName,

@@ -96,7 +96,7 @@ function ElderlyAtHomeRegionalPage(props: StaticProps<typeof getStaticProps>) {
       <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={commonTexts.sidebar.metrics.elderly_at_home.title}
             title={replaceVariablesInText(textVr.section_positive_tested.title, {
               safetyRegion: vrName,
