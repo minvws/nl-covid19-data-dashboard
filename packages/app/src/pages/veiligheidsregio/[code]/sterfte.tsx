@@ -113,7 +113,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.monitorArticles}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="emphasis" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="informational" />}
 
           <DeceasedMonitorSection text={textShared.section_sterftemonitor} data={dataCbs} />
 
