@@ -97,7 +97,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             warning={textGm.warning}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="emphasis" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textGm.notification.message} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile

@@ -4,7 +4,7 @@
  */
 export const dataStructure = {
   gm: {
-    deceased_rivm: ['covid_daily', 'covid_daily_moving_average', 'covid_total'],
+    deceased_rivm_archived_20221231: ['covid_daily', 'covid_daily_moving_average', 'covid_total'],
     hospital_nice: [
       'admissions_on_date_of_admission',
       'admissions_on_date_of_admission_moving_average',
@@ -134,7 +134,7 @@ export const dataStructure = {
       'tested_total_moving_average_rounded',
     ],
     tested_ggd_archived: ['infected_percentage', 'infected_percentage_moving_average'],
-    nursing_home: [
+    nursing_home_archived_20230126: [
       'newly_infected_people',
       'newly_infected_people_moving_average',
       'deceased_daily',
@@ -143,7 +143,8 @@ export const dataStructure = {
       'infected_locations_total',
       'infected_locations_percentage',
     ],
-    disability_care: [
+    vulnerable_nursing_home: ['newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage'],
+    disability_care_archived_20230126: [
       'newly_infected_people',
       'newly_infected_people_moving_average',
       'deceased_daily',
@@ -213,10 +214,16 @@ export const dataStructure = {
     ],
     behavior_get_tested_support_per_age_group: ['percentage_average', 'percentage_70_plus', 'percentage_55_69', 'percentage_40_54', 'percentage_25_39', 'percentage_16_24'],
     behavior_annotations: ['behavior_indicator', 'message_title_nl', 'message_title_en', 'message_desc_nl', 'message_desc_en'],
-    deceased_rivm: ['covid_daily', 'covid_daily_moving_average', 'covid_total'],
-    deceased_rivm_per_age_group: ['age_group_range', 'age_group_percentage', 'covid_percentage'],
+    deceased_rivm_archived_20221231: ['covid_daily', 'covid_daily_moving_average', 'covid_total'],
+    deceased_rivm_per_age_group_archived_20221231: ['age_group_range', 'age_group_percentage', 'covid_percentage'],
     deceased_cbs: ['registered', 'expected', 'expected_min', 'expected_max'],
-    elderly_at_home: ['positive_tested_daily', 'positive_tested_daily_moving_average', 'positive_tested_daily_per_100k', 'deceased_daily', 'deceased_daily_moving_average'],
+    elderly_at_home_archived_20230126: [
+      'positive_tested_daily',
+      'positive_tested_daily_moving_average',
+      'positive_tested_daily_per_100k',
+      'deceased_daily',
+      'deceased_daily_moving_average',
+    ],
     vaccine_vaccinated_or_support: ['percentage_average', 'percentage_70_plus', 'percentage_55_69', 'percentage_40_54', 'percentage_25_39', 'percentage_16_24'],
     corona_melder_app_download: ['count'],
     corona_melder_app_warning: ['count'],
@@ -294,7 +301,6 @@ export const dataStructure = {
     variants: ['variant_code', 'values', 'last_value'],
     self_test_overall: ['infected_percentage'],
   },
-  topical: {},
   vr: {
     g_number: ['g_number'],
     sewer: ['average', 'data_is_outdated'],
@@ -315,7 +321,8 @@ export const dataStructure = {
       'tested_total_moving_average_rounded',
     ],
     tested_ggd_archived: ['infected_percentage', 'infected_percentage_moving_average'],
-    nursing_home: [
+    vulnerable_nursing_home: ['newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage'],
+    nursing_home_archived_20230126: [
       'newly_infected_people',
       'newly_infected_people_moving_average',
       'newly_infected_locations',
@@ -324,7 +331,7 @@ export const dataStructure = {
       'deceased_daily',
       'deceased_daily_moving_average',
     ],
-    disability_care: [
+    disability_care_archived_20230126: [
       'newly_infected_people',
       'newly_infected_people_moving_average',
       'newly_infected_locations',
@@ -376,9 +383,15 @@ export const dataStructure = {
       'selftest_visit_support',
       'selftest_visit_support_trend',
     ],
-    deceased_rivm: ['covid_daily', 'covid_daily_moving_average', 'covid_total'],
+    deceased_rivm_archived_20221231: ['covid_daily', 'covid_daily_moving_average', 'covid_total'],
     deceased_cbs: ['registered', 'expected', 'expected_min', 'expected_max'],
-    elderly_at_home: ['positive_tested_daily', 'positive_tested_daily_moving_average', 'positive_tested_daily_per_100k', 'deceased_daily', 'deceased_daily_moving_average'],
+    elderly_at_home_archived_20230126: [
+      'positive_tested_daily',
+      'positive_tested_daily_moving_average',
+      'positive_tested_daily_per_100k',
+      'deceased_daily',
+      'deceased_daily_moving_average',
+    ],
     tested_overall_sum: ['infected_per_100k'],
     hospital_nice_sum: ['admissions_per_1m'],
     situations: [
@@ -431,7 +444,8 @@ export const dataStructure = {
     hospital_nice: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
     hospital_nice_choropleth: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
     tested_overall: ['infected_per_100k', 'infected'],
-    nursing_home: ['newly_infected_people', 'newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage', 'deceased_daily'],
+    vulnerable_nursing_home: ['newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage'],
+    nursing_home_archived_20230126: ['newly_infected_people', 'newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage', 'deceased_daily'],
     sewer: ['average', 'data_is_outdated'],
     behavior_archived_20221019: [
       'number_of_participants',
@@ -472,8 +486,8 @@ export const dataStructure = {
       'ventilate_home_support',
       'ventilate_home_support_trend',
     ],
-    disability_care: ['newly_infected_people', 'newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage', 'deceased_daily'],
-    elderly_at_home: ['positive_tested_daily', 'positive_tested_daily_per_100k', 'deceased_daily'],
+    disability_care_archived_20230126: ['newly_infected_people', 'newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage', 'deceased_daily'],
+    elderly_at_home_archived_20230126: ['positive_tested_daily', 'positive_tested_daily_per_100k', 'deceased_daily'],
     situations: ['has_sufficient_data', 'home_and_visits', 'work', 'school_and_day_care', 'health_care', 'gathering', 'travel', 'hospitality', 'other'],
     vaccine_coverage_per_age_group: [
       'vaccination_type',
