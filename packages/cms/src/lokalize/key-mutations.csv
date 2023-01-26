@@ -11,3 +11,6 @@ timestamp,action,key,document_id,move_to
 2023-01-20T16:16:04.215Z,add,pages.behavior_page.shared.basisregels.rules_supported,AE5jpq5sZWNgXeEUcJ13cd,__
 2023-01-23T15:40:31.128Z,add,pages.behavior_page.shared.basisregels.footer_trend_up_annotation,say0BNKaNSuhganBiTKhoE,__
 2023-01-23T15:40:32.050Z,add,pages.behavior_page.shared.basisregels.footer_trend_down_annotation,gwBtgw3hhC8JAGy8EpyiE9,__
+2023-01-26T11:19:17.324Z,add,pages.behavior_page.nl.tabel_per_leeftijdsgroep.narrow_table_header,wvJta9ElXUYLPkPUArz3Ny,__
+2023-01-26T11:19:17.326Z,delete,pages.behavior_page.nl.tabel_per_leeftijdsgroep.explanation.compliance,cnFn4yM5oz3WY1CrntwS2v,__
+2023-01-26T11:19:17.328Z,delete,pages.behavior_page.nl.tabel_per_leeftijdsgroep.explanation.support,Ks5SlP9grM5GaBz68RNpjk,__

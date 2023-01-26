@@ -49,7 +49,7 @@ export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata
             firstColumn: text.headers.agegroup,
             secondColumn: text.headers.autumn_2022_shot,
             thirdColumn: text.headers.fully_vaccinated,
-            fourthColumn: '',
+            fourthColumn: '', // Intentionally left empty for spacing purposes.
           }}
           tableData={sortedData}
           percentageData={percentageData}

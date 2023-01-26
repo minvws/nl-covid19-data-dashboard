@@ -6,9 +6,9 @@ import { formatBirthyearRangeString } from '~/utils/format-birthyear-range-strin
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 interface AgeGroupProps {
+  birthYearRange: string;
   range: string;
   peopleInAgeGroup?: number;
-  birthYearRange: string;
 }
 
 export const AgeGroup = ({ range, peopleInAgeGroup, birthYearRange }: AgeGroupProps) => {

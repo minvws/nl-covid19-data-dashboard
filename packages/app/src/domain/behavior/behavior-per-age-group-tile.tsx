@@ -72,13 +72,13 @@ export const BehaviorPerAgeGroup = ({ title, description, data, currentId, setCu
                   firstColumn: text.shared.leeftijden.tabel.age_group,
                   secondColumn: text.shared.basisregels.rules_followed,
                   thirdColumn: text.shared.basisregels.rules_supported,
-                  fourthColumn: '',
+                  fourthColumn: '', // Intentionally left empty for spacing purposes.
                 }}
                 tableData={requiredData}
                 percentageData={percentageData}
               />
             ) : (
-              <NarrowTable headerText="Corona adviezen" tableData={requiredData} percentageData={percentageData} />
+              <NarrowTable headerText={text.nl.tabel_per_leeftijdsgroep.narrow_table_header} tableData={requiredData} percentageData={percentageData} />
             )
           ) : (
             <Box display="flex" alignItems="center" minHeight="325px" maxWidth="300px" width="100%" marginX="auto">

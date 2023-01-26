@@ -3,16 +3,16 @@ import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { fontSizes, lineHeights, space } from '~/style/theme';
 
-interface PercentageWideNumberProps {
+interface WidePercentageProps {
   value: string | React.ReactNode;
   color: string;
   justifyContent: string;
 }
 
-export const WidePercentage = ({ value, color, justifyContent }: PercentageWideNumberProps) => {
+export const WidePercentage = ({ value, color, justifyContent }: WidePercentageProps) => {
   return (
     <StyledInlineText justifyContent={justifyContent}>
-      <Box minWidth="10px" width="10px" height="10px" backgroundColor={color} borderRadius="50%" mr={2} />
+      <Box minWidth="10px" width="10px" height="10px" backgroundColor={color} borderRadius="50%" marginRight={space[2]} />
       <span>{value}</span>
     </StyledInlineText>
   );

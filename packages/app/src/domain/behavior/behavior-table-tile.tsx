@@ -45,7 +45,7 @@ export const BehaviorTableTile = ({ title, description, value, annotation, setCu
             firstColumn: text.basisregels.header_basisregel,
             secondColumn: text.basisregels.rules_followed,
             thirdColumn: text.basisregels.rules_supported,
-            fourthColumn: '',
+            fourthColumn: '', // Intentionally left empty for spacing purposes.
           }}
           tableData={behaviorsTableData}
           percentageData={percentageData}

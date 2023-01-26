@@ -34,6 +34,7 @@ export const PercentageData = ({ percentageDataPoints }: PercentageDataProps) =>
       <Cell minWidth={tableColumnWidths.percentageBarColumn} border="0">
         <Box display="flex" flexDirection="column">
           {percentageDataPoints.map((percentageDataPoint, index) => (
+            // In some cases, the percentage value is a string so it needs to be parsed for the progress bar to be filled properly.
             <PercentageBarWithoutNumber
               key={index}
               percentage={typeof percentageDataPoint.percentage.value === 'number' ? percentageDataPoint.percentage.value : parseFloat(percentageDataPoint.percentage.value)}
