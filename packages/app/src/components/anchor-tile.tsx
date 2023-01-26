@@ -26,24 +26,26 @@ export function AnchorTile({ title, href, label, children, external = false }: A
         {children}
       </Content>
 
-      <LinkContainer>
-        {external ? (
-          <ExternalLink href={href}>
-            <Box display="flex" alignItems="center">
-              <IconWrapper>
-                <ExternalLinkIcon />
-              </IconWrapper>
-              {label}
-            </Box>
-          </ExternalLink>
-        ) : (
-          <Link href={href} passHref>
-            <StyledAnchor>
-              <span>{label}</span>
-            </StyledAnchor>
-          </Link>
-        )}
-      </LinkContainer>
+      {href && (
+        <LinkContainer>
+          {external ? (
+            <ExternalLink href={href}>
+              <Box display="flex" alignItems="center">
+                <IconWrapper>
+                  <ExternalLinkIcon />
+                </IconWrapper>
+                {label}
+              </Box>
+            </ExternalLink>
+          ) : (
+            <Link href={href} passHref>
+              <StyledAnchor>
+                <span>{label}</span>
+              </StyledAnchor>
+            </Link>
+          )}
+        </LinkContainer>
+      )}
     </Container>
   );
 }
