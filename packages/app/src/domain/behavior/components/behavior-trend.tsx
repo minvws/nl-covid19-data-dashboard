@@ -16,10 +16,10 @@ interface BehaviorTrendProps {
   hasMarginRight?: boolean;
 }
 
-export const BehaviorTrend = ({ trend, text, hasMarginRight }: BehaviorTrendProps) => {
+export const BehaviorTrend = ({ trend, text, hasMarginRight = false }: BehaviorTrendProps) => {
   if (trend === 'up') {
     return (
-      <Trend color={colors.black} hasMarginRight={hasMarginRight || false}>
+      <Trend color={colors.black} hasMarginRight={hasMarginRight}>
         {text}
         <TrendIcon trendDirection={TrendDirection.UP} />
       </Trend>
@@ -28,7 +28,7 @@ export const BehaviorTrend = ({ trend, text, hasMarginRight }: BehaviorTrendProp
 
   if (trend === 'down') {
     return (
-      <Trend color={colors.black} hasMarginRight={hasMarginRight || false}>
+      <Trend color={colors.black} hasMarginRight={hasMarginRight}>
         {text}
         <TrendIcon trendDirection={TrendDirection.DOWN} />
       </Trend>

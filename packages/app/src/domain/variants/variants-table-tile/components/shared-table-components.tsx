@@ -34,6 +34,6 @@ export const Cell = styled.td<CellProps>`
   border-bottom: ${({ border, mobile }) => (border || !mobile ? `1px solid ${colors.gray2}` : undefined)};
   float: ${({ alignRight }) => (alignRight ? 'right' : undefined)};
   max-width: ${({ narrow }) => (narrow ? space[4] : undefined)};
-  padding: ${({ hasPaddingRight }) => (hasPaddingRight ? `${space[3]} ${space[3]} ${space[3]} ${space[0]}` : `${space[3]} ${space[0]}`)};
+  padding: ${({ hasPaddingRight }) => (hasPaddingRight ? `${space[3]} ${space[3]} ${space[3]} 0` : `${space[3]} 0`)};
   vertical-align: top;
 `;

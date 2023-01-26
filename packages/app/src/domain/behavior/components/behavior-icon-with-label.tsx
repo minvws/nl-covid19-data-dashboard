@@ -28,7 +28,7 @@ export const BehaviorIconWithLabel = ({ id, description, onClickConfig }: Behavi
 
   return (
     <Box display="flex" alignItems="center">
-      <Box minWidth="32px" color="black" paddingRight={space[2]} display="flex">
+      <Box minWidth="32px" color={colors.black} paddingRight={space[2]} display="flex">
         <BehaviorIcon name={id} size={25} />
       </Box>
 

@@ -16,14 +16,16 @@ export const AgeGroup = ({ range, peopleInAgeGroup, birthYearRange }: AgeGroupPr
   const ageRange = formatAgeGroupString(range, commonTexts.common.agegroup);
   const yearOfBirthRange = formatBirthyearRangeString(birthYearRange, commonTexts.common.birthyears);
 
-  const totalText = replaceVariablesInText(commonTexts.common.agegroup.total_people, {
-    total: formatNumber(peopleInAgeGroup),
-  });
+  const totalText = peopleInAgeGroup
+    ? replaceVariablesInText(commonTexts.common.agegroup.total_people, {
+        total: formatNumber(peopleInAgeGroup),
+      })
+    : '';
 
   return (
     <Box display="flex" flexDirection="column">
       <BoldText>{ageRange}</BoldText>
-      <InlineText variant="label1">{`${yearOfBirthRange}${peopleInAgeGroup ? `: ${totalText}` : ''}`}</InlineText>
+      <InlineText variant="label1">{`${yearOfBirthRange}: ${totalText}`}</InlineText>
     </Box>
   );
 };

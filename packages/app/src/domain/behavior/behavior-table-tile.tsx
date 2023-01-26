@@ -58,21 +58,21 @@ export const BehaviorTableTile = ({ title, description, value, annotation, setCu
         <Box display="flex">
           <Box display="flex" marginRight={space[3]}>
             <BehaviorTrend trend="down" text="" hasMarginRight />
-            <Text variant="label1" color="gray7">
+            <Text variant="label1" color={colors.gray7}>
               {text.basisregels.footer_trend_down_annotation}
             </Text>
           </Box>
 
           <Box display="flex">
             <BehaviorTrend trend="up" text="" hasMarginRight />
-            <Text variant="label1" color="gray7">
+            <Text variant="label1" color={colors.gray7}>
               {text.basisregels.footer_trend_up_annotation}
             </Text>
           </Box>
         </Box>
 
         <Box marginTop={space[2]}>
-          <Text variant="label1" color="gray7">
+          <Text variant="label1" color={colors.gray7}>
             {annotation}
           </Text>
         </Box>
