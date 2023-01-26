@@ -4,7 +4,7 @@ import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
-import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
+import { useGetPercentageData } from '~/components/tables/logic/use-get-percentage-data';
 import { NarrowTable } from '~/components/tables/narrow-table';
 import { TableData } from '~/components/tables/types';
 import { WideTable } from '~/components/tables/wide-table';
@@ -35,8 +35,7 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
   const behaviorsTableData: TableData[] = useBehaviorTableData(value as NlBehaviorValue, { scrollRef, setCurrentId });
   const titles = { first: text.basisregels.rules_followed, second: text.basisregels.rules_supported };
   const colorValues = { first: colors.blue6, second: colors.yellow3 };
-  const percentageFormattingRules = { first: { shouldFormat: false }, second: { shouldFormat: false } };
-  const percentageData = getPercentageData(behaviorsTableData, titles, colorValues, percentageFormattingRules);
+  const percentageData = useGetPercentageData(behaviorsTableData, titles, colorValues);
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>

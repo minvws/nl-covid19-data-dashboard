@@ -2,11 +2,10 @@ import { GmVaccineCoveragePerAgeGroupArchivedValue, NlVaccineCoveragePerAgeGroup
 import { AgeGroup } from '~/components/age-groups/age-group';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
-import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
+import { useGetPercentageData } from '~/components/tables/logic/use-get-percentage-data';
 import { NarrowTable } from '~/components/tables/narrow-table';
 import { TableData } from '~/components/tables/types';
 import { WideTable } from '~/components/tables/wide-table';
-import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { ARCHIVED_COLORS } from '../common';
@@ -23,7 +22,6 @@ interface VaccineCoveragePerAgeGroupProps {
 
 export function VaccineCoveragePerAgeGroup({ title, description, metadata, values, sortingOrder, text }: VaccineCoveragePerAgeGroupProps) {
   const breakpoints = useBreakpoints(true);
-  const { commonTexts, formatPercentage } = useIntl();
   const componentName = VaccineCoveragePerAgeGroup.name;
   const requiredData: TableData[] = values.map((value) => {
     return {
@@ -41,7 +39,7 @@ export function VaccineCoveragePerAgeGroup({ title, description, metadata, value
   const percentageTitles = { first: text.archived.vaccination_coverage.campaign_headers.first_shot, second: text.archived.vaccination_coverage.campaign_headers.coverage };
   const percentageColors = { first: ARCHIVED_COLORS.COLOR_HAS_ONE_SHOT, second: ARCHIVED_COLORS.COLOR_FULLY_VACCINATED };
   const percentageFormattingRules = { first: { shouldFormat: true }, second: { shouldFormat: true } };
-  const percentageData = getPercentageData(sortedData, percentageTitles, percentageColors, percentageFormattingRules, commonTexts.common.no_data, formatPercentage);
+  const percentageData = useGetPercentageData(sortedData, percentageTitles, percentageColors, percentageFormattingRules);
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>

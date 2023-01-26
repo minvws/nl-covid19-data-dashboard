@@ -2,12 +2,11 @@ import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { AgeGroup } from '~/components/age-groups/age-group';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
-import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
+import { useGetPercentageData } from '~/components/tables/logic/use-get-percentage-data';
 import { NarrowTable } from '~/components/tables/narrow-table';
 import { TableData } from '~/components/tables/types';
 import { WideTable } from '~/components/tables/wide-table';
 import { COLOR_AUTUMN_2022_SHOT, COLOR_FULLY_VACCINATED } from '~/domain/vaccine/common';
-import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { getSortingOrder } from '../logic/get-sorting-order';
@@ -23,7 +22,6 @@ interface Autumn2022ShotCoveragePerAgeGroupProps {
 
 export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata, values, sortingOrder, text }: Autumn2022ShotCoveragePerAgeGroupProps) => {
   const breakpoints = useBreakpoints(true);
-  const { commonTexts, formatPercentage } = useIntl();
   const componentName = Autumn2022ShotCoveragePerAgeGroup.name;
   const requiredData: TableData[] = values.map((value) => {
     return {
@@ -41,7 +39,7 @@ export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata
   const percentageTitles = { first: text.headers.autumn_2022_shot, second: text.headers.fully_vaccinated };
   const percentageColors = { first: COLOR_AUTUMN_2022_SHOT, second: COLOR_FULLY_VACCINATED };
   const percentageFormattingRules = { first: { shouldFormat: true }, second: { shouldFormat: true } };
-  const percentageData = getPercentageData(sortedData, percentageTitles, percentageColors, percentageFormattingRules, commonTexts.common.no_data, formatPercentage);
+  const percentageData = useGetPercentageData(sortedData, percentageTitles, percentageColors, percentageFormattingRules);
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>

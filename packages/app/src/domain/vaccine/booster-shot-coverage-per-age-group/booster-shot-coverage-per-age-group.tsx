@@ -6,11 +6,10 @@ import {
 import { AgeGroup } from '~/components/age-groups/age-group';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
-import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
+import { useGetPercentageData } from '~/components/tables/logic/use-get-percentage-data';
 import { NarrowTable } from '~/components/tables/narrow-table';
 import { TableData } from '~/components/tables/types';
 import { WideTable } from '~/components/tables/wide-table';
-import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { COLOR_FULLY_BOOSTERED, COLOR_FULLY_VACCINATED } from '../common';
@@ -27,7 +26,6 @@ interface BoosterCoveragePerAgeGroupProps {
 
 export function BoosterShotCoveragePerAgeGroup({ title, description, metadata, values, sortingOrder, text }: BoosterCoveragePerAgeGroupProps) {
   const breakpoints = useBreakpoints(true);
-  const { commonTexts, formatPercentage } = useIntl();
   const componentName = BoosterShotCoveragePerAgeGroup.name;
   const requiredData: TableData[] = values.map((value) => {
     return {
@@ -45,7 +43,7 @@ export function BoosterShotCoveragePerAgeGroup({ title, description, metadata, v
   const percentageTitles = { first: text.vaccination_coverage.headers.fully_vaccinated, second: text.archived.vaccination_coverage.campaign_headers.booster_shot };
   const percentageColors = { first: COLOR_FULLY_VACCINATED, second: COLOR_FULLY_BOOSTERED };
   const percentageFormattingRules = { first: { shouldFormat: true }, second: { shouldFormat: true } };
-  const percentageData = getPercentageData(sortedData, percentageTitles, percentageColors, percentageFormattingRules, commonTexts.common.no_data, formatPercentage);
+  const percentageData = useGetPercentageData(sortedData, percentageTitles, percentageColors, percentageFormattingRules);
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>

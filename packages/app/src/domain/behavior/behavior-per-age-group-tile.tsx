@@ -4,27 +4,21 @@ import { AgeGroup } from '~/components/age-groups/age-group';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
-import { getPercentageData } from '~/components/tables/logic/get-percentage-data';
+import { getBirthYearRange } from '~/components/tables/logic/get-birth-year-range';
+import { useGetPercentageData } from '~/components/tables/logic/use-get-percentage-data';
 import { NarrowTable } from '~/components/tables/narrow-table';
 import { TableData } from '~/components/tables/types';
 import { WideTable } from '~/components/tables/wide-table';
 import { Text } from '~/components/typography';
-import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { keys } from '~/utils';
 import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
 import { BehaviorIdentifier } from './logic/behavior-types';
 
-// The data for behaviour age groups does not include birth year ranges, so this has been added manually
-const AGE_KEYS_NEW = [
-  { ageGroup: '70_plus', birthYearRange: '-1952' },
-  { ageGroup: '55_69', birthYearRange: '1953-1967' },
-  { ageGroup: '40_54', birthYearRange: '1968-1983' },
-  { ageGroup: '25_39', birthYearRange: '1983-1998' },
-  { ageGroup: '16_24', birthYearRange: '1998-2007' },
-] as const;
+const AGE_GROUPS_KEYS = ['70_plus', '55_69', '40_54', '25_39', '16_24'] as const;
 
 interface BehaviorPerAgeGroupProps {
   title: string;
@@ -38,7 +32,6 @@ interface BehaviorPerAgeGroupProps {
 
 export function BehaviorPerAgeGroup({ title, description, data, currentId, setCurrentId, text, metadata }: BehaviorPerAgeGroupProps) {
   const breakpoints = useBreakpoints();
-  const { commonTexts, formatPercentage } = useIntl();
   const complianceValue = data[`${currentId}_compliance` as keyof typeof data];
   const supportValue = data[`${currentId}_support` as keyof typeof data];
 
@@ -48,7 +41,9 @@ export function BehaviorPerAgeGroup({ title, description, data, currentId, setCu
   const hasComplianceValues = complianceValue && keys(complianceValue).every((key) => complianceValue[key] === null) === false;
   const hasSupportValues = supportValue && keys(supportValue).every((key) => supportValue[key] === null) === false;
   const dataAvailable = hasComplianceValues || hasSupportValues;
-  const requiredData: TableData[] = AGE_KEYS_NEW.map((age, index) => {
+  const AGE_GROUPS_BIRTH_RANGES = AGE_GROUPS_KEYS.map((ageGroup) => ({ ageGroup, birthYearRange: getBirthYearRange(ageGroup) }));
+
+  const requiredData: TableData[] = AGE_GROUPS_BIRTH_RANGES.map((age, index) => {
     return {
       id: `${age.ageGroup}-${index}`,
       firstPercentage: complianceValue?.[age.ageGroup] ?? null,
@@ -60,12 +55,14 @@ export function BehaviorPerAgeGroup({ title, description, data, currentId, setCu
   const percentageTitles = { first: text.shared.basisregels.rules_followed, second: text.shared.basisregels.rules_supported };
   const percentageColors = { first: colors.blue6, second: colors.yellow3 };
   const percentageFormattingRules = { first: { shouldFormat: true }, second: { shouldFormat: true } };
-  const percentageData = getPercentageData(requiredData, percentageTitles, percentageColors, percentageFormattingRules, commonTexts.common.no_data, formatPercentage);
+  const percentageData = useGetPercentageData(requiredData, percentageTitles, percentageColors, percentageFormattingRules);
 
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
       <Box spacing={4} width="100%">
-        <SelectBehavior label={text.nl.select_behaviour_label} value={currentId} onChange={setCurrentId} />
+        <Box paddingRight={space[3]} width={breakpoints.lg ? '50%' : '100%'}>
+          <SelectBehavior label={text.nl.select_behaviour_label} value={currentId} onChange={setCurrentId} />
+        </Box>
 
         <Box overflow="auto">
           {dataAvailable ? (
