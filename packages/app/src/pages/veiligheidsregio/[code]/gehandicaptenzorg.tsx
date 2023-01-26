@@ -121,7 +121,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             warning={textVr.besmette_locaties.warning}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="emphasis" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile
