@@ -75,7 +75,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const { deceased_cbs: dataCbs, deceased_rivm_archived_20221231: dataRivm, difference } = data;
 
   const { commonTexts } = useIntl();
-  const { categoryTexts, textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textVr, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...commonTexts.veiligheidsregio_index.metadata,
@@ -113,7 +113,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.monitorArticles}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="emphasis" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="informational" />}
 
           <DeceasedMonitorSection text={textShared.section_sterftemonitor} data={dataCbs} />
 
@@ -129,7 +129,6 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
           {isArchivedContentShown && (
             <Box borderTop={`2px solid ${colors.gray2}`} spacing={5} paddingTop={space[4]}>
               <PageInformationBlock
-                category={categoryTexts}
                 title={replaceVariablesInText(textVr.section_deceased_rivm.title, {
                   safetyRegion: vrName,
                 })}
