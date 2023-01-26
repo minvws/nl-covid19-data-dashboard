@@ -58,7 +58,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   const [deceasedMunicipalTimeframe, setDeceasedMunicipalTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
-  const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textGm } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...commonTexts.gemeente_index.metadata,
@@ -70,7 +70,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
-  const hasActiveWarningTile = !!textShared.notification.message;
+  const hasActiveWarningTile = !!textGm.notification.message;
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
