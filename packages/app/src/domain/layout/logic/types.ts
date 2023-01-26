@@ -1,18 +1,10 @@
 export type Layout = 'nl' | 'vr' | 'gm';
 
-type SharedCategoryKeys =
-  | 'development_of_the_virus'
-  | 'consequences_for_healthcare'
-  | 'actions_to_take';
+type SharedCategoryKeys = 'development_of_the_virus' | 'consequences_for_healthcare' | 'actions_to_take';
 
-export type GmItemKeys =
-  | 'hospital_admissions'
-  | 'mortality'
-  | 'positive_tests'
-  | 'sewage_measurement'
-  | 'vaccinations';
+export type GmItemKeys = 'hospital_admissions' | 'mortality' | 'positive_tests' | 'sewage_measurement' | 'vaccinations';
 
-export type GmCategoryKeys = SharedCategoryKeys;
+export type GmCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 
 export type VrItemKeys =
   | 'compliance'
@@ -50,27 +42,16 @@ export type NlItemKeys =
 
 export type NlCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 
-export type CategoryKeys<T extends Layout> = T extends 'nl'
-  ? NlCategoryKeys
-  : T extends 'vr'
-  ? VrCategoryKeys
-  : GmCategoryKeys;
+export type CategoryKeys<T extends Layout> = T extends 'nl' ? NlCategoryKeys : T extends 'vr' ? VrCategoryKeys : GmCategoryKeys;
 
-export type ItemKeys<T extends Layout> = T extends 'nl'
-  ? NlItemKeys
-  : T extends 'vr'
-  ? VrItemKeys
-  : GmItemKeys;
+export type ItemKeys<T extends Layout> = T extends 'nl' ? NlItemKeys : T extends 'vr' ? VrItemKeys : GmItemKeys;
 
 /**
  * The following types are consumed by the useSidebar hook.
  */
 export type SidebarMap<T extends Layout> = (SidebarElement<T> | ItemKeys<T>)[];
 
-export type SidebarElement<T extends Layout> = [
-  category: CategoryKeys<T>,
-  items: ItemKeys<T>[]
-];
+export type SidebarElement<T extends Layout> = [category: CategoryKeys<T>, items: ItemKeys<T>[]];
 
 /**
  * The following types are returned by the useSidebar hook.
@@ -88,7 +69,4 @@ export type SidebarItem<T extends Layout> = {
   href: string | undefined;
 };
 
-export type ExpandedSidebarMap<T extends Layout> = (
-  | SidebarCategory<T>
-  | SidebarItem<T>
-)[];
+export type ExpandedSidebarMap<T extends Layout> = (SidebarCategory<T> | SidebarItem<T>)[];

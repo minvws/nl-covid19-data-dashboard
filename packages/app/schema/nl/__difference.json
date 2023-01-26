@@ -39,13 +39,19 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"
     },
-    "nursing_home__newly_infected_people": {
+    "vulnerable_nursing_home__infected_locations_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "nursing_home__infected_locations_total": {
+    "nursing_home__newly_infected_people_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
-    "nursing_home__deceased_daily": {
+    "nursing_home__deceased_daily_archived_20230126": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "vulnerable_tested_per_age_group": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "vulnerable_hospital_admissions": {
       "$ref": "#/definitions/diff_integer"
     },
     "reproduction__index_average": {
@@ -54,16 +60,16 @@
     "corona_melder_app_warning__count": {
       "$ref": "#/definitions/diff_integer"
     },
-    "disability_care__newly_infected_people": {
+    "disability_care__newly_infected_people_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
-    "disability_care__infected_locations_total": {
+    "disability_care__infected_locations_total_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
-    "elderly_at_home__positive_tested_daily": {
+    "elderly_at_home__positive_tested_daily_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
-    "deceased_rivm__covid_daily": {
+    "deceased_rivm__covid_daily_archived_20221231": {
       "$ref": "#/definitions/diff_integer"
     }
   },
@@ -81,14 +87,16 @@
     "doctor__covid_symptoms_per_100k",
     "doctor__covid_symptoms",
     "sewer__average",
-    "nursing_home__newly_infected_people",
-    "nursing_home__infected_locations_total",
-    "nursing_home__deceased_daily",
+    "nursing_home__newly_infected_people_archived_20230126",
+    "nursing_home__deceased_daily_archived_20230126",
+    "vulnerable_nursing_home__infected_locations_total",
+    "vulnerable_tested_per_age_group",
+    "vulnerable_hospital_admissions",
     "corona_melder_app_warning__count",
-    "disability_care__newly_infected_people",
-    "disability_care__infected_locations_total",
-    "elderly_at_home__positive_tested_daily",
-    "deceased_rivm__covid_daily"
+    "disability_care__newly_infected_people_archived_20230126",
+    "disability_care__infected_locations_total_archived_20230126",
+    "elderly_at_home__positive_tested_daily_archived_20230126",
+    "deceased_rivm__covid_daily_archived_20221231"
   ],
   "additionalProperties": false,
   "definitions": {

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "vr_deceased_rivm",
+  "title": "vr_disability_care_archived_20230126",
   "type": "object",
   "properties": {
     "values": {
@@ -17,17 +17,29 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "vr_deceased_rivm_value",
+      "title": "vr_disability_care_archived_20230126_value",
       "type": "object",
       "properties": {
-        "covid_daily": {
+        "newly_infected_people": {
           "type": "integer"
         },
-        "covid_daily_moving_average": {
+        "newly_infected_people_moving_average": {
           "type": ["number", "null"]
         },
-        "covid_total": {
+        "newly_infected_locations": {
           "type": "integer"
+        },
+        "infected_locations_total": {
+          "type": "integer"
+        },
+        "infected_locations_percentage": {
+          "type": "number"
+        },
+        "deceased_daily": {
+          "type": "integer"
+        },
+        "deceased_daily_moving_average": {
+          "type": ["number", "null"]
         },
         "date_unix": {
           "type": "integer"
@@ -41,9 +53,13 @@
         }
       },
       "required": [
-        "covid_daily", 
-        "covid_daily_moving_average",
-        "covid_total",
+        "newly_infected_people",
+        "newly_infected_people_moving_average",
+        "deceased_daily",
+        "deceased_daily_moving_average",
+        "newly_infected_locations",
+        "infected_locations_total",
+        "infected_locations_percentage",
         "date_unix",
         "date_of_insertion_unix",
         "vrcode"

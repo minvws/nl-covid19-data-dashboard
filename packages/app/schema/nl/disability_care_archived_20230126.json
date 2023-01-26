@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "vr_elderly_at_home",
+  "title": "nl_disability_care_archived_20230126",
   "type": "object",
   "properties": {
     "values": {
@@ -17,17 +17,14 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "vr_elderly_at_home_value",
+      "title": "nl_disability_care_archived_20230126_value",
       "type": "object",
       "properties": {
-        "positive_tested_daily": {
+        "newly_infected_people": {
           "type": "integer"
         },
-        "positive_tested_daily_moving_average": {
+        "newly_infected_people_moving_average": {
           "type": ["number", "null"]
-        },
-        "positive_tested_daily_per_100k": {
-          "type": "number"
         },
         "deceased_daily": {
           "type": "integer"
@@ -35,26 +32,32 @@
         "deceased_daily_moving_average": {
           "type": ["number", "null"]
         },
+        "newly_infected_locations": {
+          "type": "integer"
+        },
+        "infected_locations_total": {
+          "type": "integer"
+        },
+        "infected_locations_percentage": {
+          "type": "number"
+        },
         "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
-        },
-        "vrcode": {
-          "type": "string",
-          "equalsRootProperty": "code"
         }
       },
       "required": [
-        "positive_tested_daily",
-        "positive_tested_daily_moving_average",
-        "positive_tested_daily_per_100k",
+        "newly_infected_people",
+        "newly_infected_people_moving_average",
         "deceased_daily",
         "deceased_daily_moving_average",
+        "newly_infected_locations",
+        "infected_locations_total",
+        "infected_locations_percentage",
         "date_unix",
-        "date_of_insertion_unix",
-        "vrcode"
+        "date_of_insertion_unix"
       ],
       "additionalProperties": false
     }

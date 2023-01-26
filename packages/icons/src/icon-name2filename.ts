@@ -41,6 +41,7 @@ export type IconName =
   | 'Download'
   | 'EenPersoonDoorgestreept'
   | 'Elderly'
+  | 'ElderlyPeople'
   | 'Expand'
   | 'Experimenteel'
   | 'External'
@@ -123,6 +124,7 @@ export type IconName =
   | 'VervoerEnReizenBuitenland'
   | 'VervoerEnReizenOv'
   | 'Vliegen'
+  | 'VulnerableGroups'
   | 'Warn'
   | 'Warning'
   | 'WinkelenEnBoodschappenAlcohol'
@@ -174,6 +176,7 @@ export const iconName2filename: Record<IconName, string> = {
   Download: 'download.svg',
   EenPersoonDoorgestreept: 'een_persoon_doorgestreept.svg',
   Elderly: 'elderly.svg',
+  ElderlyPeople: 'elderly-people.svg',
   Expand: 'expand.svg',
   Experimenteel: 'experimenteel.svg',
   External: 'external.svg',
@@ -257,6 +260,7 @@ export const iconName2filename: Record<IconName, string> = {
   VervoerEnReizenBuitenland: 'vervoer_en_reizen_buitenland.svg',
   VervoerEnReizenOv: 'vervoer_en_reizen_ov.svg',
   Vliegen: 'vliegen.svg',
+  VulnerableGroups: 'vulnerable-groups.svg',
   Warn: 'warn.svg',
   Warning: 'warning.svg',
   WinkelenEnBoodschappenAlcohol: 'winkelen_en_boodschappen_alcohol.svg',
