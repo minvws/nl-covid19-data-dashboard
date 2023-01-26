@@ -8,7 +8,7 @@ interface PercentageBarWithNumberProps {
   formatValue: (value: number) => string;
 }
 
-export function PercentageBarWithNumber({ percentage, color, formatValue }: PercentageBarWithNumberProps) {
+export const PercentageBarWithNumber = ({ percentage, color, formatValue }: PercentageBarWithNumberProps) => {
   return (
     <Box display="flex" alignItems="center" pr={{ _: 0, sm: 2, lg: 4, xl: 5 }} spacingHorizontal={2}>
       <Box as="span" minWidth={40} textAlign="right">
@@ -19,4 +19,4 @@ export function PercentageBarWithNumber({ percentage, color, formatValue }: Perc
       </Box>
     </Box>
   );
-}
+};

@@ -11,9 +11,9 @@ interface PercentageProps {
   backgroundColor?: string;
 }
 
-export function PercentageBar({ percentage, height, color, backgroundColor = colors.gray2, backgroundStyle = 'normal' }: PercentageProps) {
+export const PercentageBar = ({ percentage, height, color, backgroundColor = colors.gray2, backgroundStyle = 'normal' }: PercentageProps) => {
   const minWidth = percentage > 0 ? '2px' : undefined;
-  backgroundColor = backgroundStyle === 'normal' ? backgroundColor ? backgroundColor : 'gray2' : backgroundColor;
+  backgroundColor = backgroundStyle === 'normal' ? (backgroundColor ? backgroundColor : colors.gray2) : backgroundColor;
 
   return (
     <Box display="flex" position="relative" width="100%">
@@ -21,7 +21,7 @@ export function PercentageBar({ percentage, height, color, backgroundColor = col
       <StyledDiv backgroundStyle={backgroundStyle} backgroundColor={backgroundColor} height={height} />
     </Box>
   );
-}
+};
 
 interface StyledDivProps {
   backgroundStyle: string;
@@ -31,11 +31,14 @@ interface StyledDivProps {
 
 const StyledDiv = styled.div<StyledDivProps>`
   /* Created by https://stripesgenerator.com/ */
-  background-color: ${({backgroundStyle, backgroundColor}) => backgroundStyle !== 'hatched' ? backgroundColor : undefined };
-  background-image: ${({backgroundStyle, backgroundColor}) => backgroundStyle === 'hatched' ? `linear-gradient(45deg, ${backgroundColor} 30%, #ffffff 30%, #ffffff 50%, ${backgroundColor} 50%, ${backgroundColor} 80%, #ffffff 80%, #ffffff 100%)` : undefined };
-  background-size: ${({backgroundStyle}) => backgroundStyle === 'hatched' ? '7.07px 7.07px' : undefined };
+  background-color: ${({ backgroundStyle, backgroundColor }) => (backgroundStyle !== 'hatched' ? backgroundColor : undefined)};
+  background-image: ${({ backgroundStyle, backgroundColor }) =>
+    backgroundStyle === 'hatched'
+      ? `linear-gradient(45deg, ${backgroundColor} 30%, #ffffff 30%, #ffffff 50%, ${backgroundColor} 50%, ${backgroundColor} 80%, #ffffff 80%, #ffffff 100%)`
+      : undefined};
+  background-size: ${({ backgroundStyle }) => (backgroundStyle === 'hatched' ? '7.07px 7.07px' : undefined)};
   flex: 1;
-  height: ${({height}) => height ? height : undefined};
+  height: ${({ height }) => (height ? height : undefined)};
   left: ${space[0]};
   top: ${space[0]};
 `;
@@ -47,9 +50,9 @@ interface BarProps {
 }
 
 const Bar = styled.div<BarProps>`
-  background-color: ${({color}) => color ? color : 'currentcolor'};
-  height: ${({height}) => height ??  '0.8em'};
-  min-width: ${({minWidth}) => minWidth};
-  transition: width .3s;
+  background-color: ${({ color }) => (color ? color : 'currentcolor')};
+  height: ${({ height }) => height ?? '0.8em'};
+  min-width: ${({ minWidth }) => minWidth};
+  transition: width 0.3s;
   z-index: 3;
-`
+`;

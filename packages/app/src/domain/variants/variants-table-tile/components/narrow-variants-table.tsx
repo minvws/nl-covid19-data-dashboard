@@ -18,7 +18,7 @@ interface NarrowVariantsTableProps {
   text: TableText;
 }
 
-export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
+export const NarrowVariantsTable = (props: NarrowVariantsTableProps) => {
   const intl = useIntl();
   const { rows, text } = props;
   const columnNames = text.kolommen;
@@ -47,7 +47,7 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
       </tbody>
     </StyledTable>
   );
-}
+};
 
 interface MobileVariantRowProps {
   row: VariantRow;

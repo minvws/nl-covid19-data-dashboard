@@ -16,7 +16,7 @@ interface WideVariantsTableProps {
   text: TableText;
 }
 
-export function WideVariantsTable(props: WideVariantsTableProps) {
+export const WideVariantsTable = (props: WideVariantsTableProps) => {
   const { rows, text } = props;
   const intl = useIntl();
 
@@ -65,4 +65,4 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
       </tbody>
     </StyledTable>
   );
-}
+};

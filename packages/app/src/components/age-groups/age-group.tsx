@@ -11,7 +11,7 @@ interface AgeGroupProps {
   birthYearRange: string;
 }
 
-export function AgeGroup({ range, peopleInAgeGroup, birthYearRange }: AgeGroupProps) {
+export const AgeGroup = ({ range, peopleInAgeGroup, birthYearRange }: AgeGroupProps) => {
   const { commonTexts, formatNumber } = useIntl();
   const ageRange = formatAgeGroupString(range, commonTexts.common.agegroup);
   const yearOfBirthRange = formatBirthyearRangeString(birthYearRange, commonTexts.common.birthyears);
@@ -26,4 +26,4 @@ export function AgeGroup({ range, peopleInAgeGroup, birthYearRange }: AgeGroupPr
       <InlineText variant="label1">{`${yearOfBirthRange}${peopleInAgeGroup ? `: ${totalText}` : ''}`}</InlineText>
     </Box>
   );
-}
+};

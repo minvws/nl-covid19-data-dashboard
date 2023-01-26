@@ -9,14 +9,14 @@ interface PercentageWideNumberProps {
   justifyContent: string;
 }
 
-export function WidePercentage({ value, color, justifyContent }: PercentageWideNumberProps) {
+export const WidePercentage = ({ value, color, justifyContent }: PercentageWideNumberProps) => {
   return (
     <StyledInlineText justifyContent={justifyContent}>
       <Box minWidth="10px" width="10px" height="10px" backgroundColor={color} borderRadius="50%" mr={2} />
       <span>{value}</span>
     </StyledInlineText>
   );
-}
+};
 
 interface StyledInlineTextProps {
   justifyContent: string;

@@ -30,7 +30,7 @@ interface BehaviorTableTileProps {
   metadata: MetadataProps;
 }
 
-export function BehaviorTableTile({ title, description, value, annotation, setCurrentId, scrollRef, text, metadata }: BehaviorTableTileProps) {
+export const BehaviorTableTile = ({ title, description, value, annotation, setCurrentId, scrollRef, text, metadata }: BehaviorTableTileProps) => {
   const breakpoints = useBreakpoints(true);
   const behaviorsTableData: TableData[] = useBehaviorTableData(value as NlBehaviorValue, { scrollRef, setCurrentId });
   const titles = { first: text.basisregels.rules_followed, second: text.basisregels.rules_supported };
@@ -79,7 +79,7 @@ export function BehaviorTableTile({ title, description, value, annotation, setCu
       </Box>
     </ChartTile>
   );
-}
+};
 
 function useBehaviorTableData(value: NlBehaviorValue, onClickConfig: OnClickConfig) {
   const behaviorLookupKeys = useBehaviorLookupKeys();

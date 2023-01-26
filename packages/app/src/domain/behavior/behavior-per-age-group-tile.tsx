@@ -30,7 +30,7 @@ interface BehaviorPerAgeGroupProps {
   metadata: MetadataProps;
 }
 
-export function BehaviorPerAgeGroup({ title, description, data, currentId, setCurrentId, text, metadata }: BehaviorPerAgeGroupProps) {
+export const BehaviorPerAgeGroup = ({ title, description, data, currentId, setCurrentId, text, metadata }: BehaviorPerAgeGroupProps) => {
   const breakpoints = useBreakpoints();
   const complianceValue = data[`${currentId}_compliance` as keyof typeof data];
   const supportValue = data[`${currentId}_support` as keyof typeof data];
@@ -89,4 +89,4 @@ export function BehaviorPerAgeGroup({ title, description, data, currentId, setCu
       </Box>
     </ChartTile>
   );
-}
+};

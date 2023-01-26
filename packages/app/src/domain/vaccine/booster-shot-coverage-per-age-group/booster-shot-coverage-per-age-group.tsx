@@ -24,7 +24,7 @@ interface BoosterCoveragePerAgeGroupProps {
   text: SiteText['pages']['vaccinations_page']['nl'];
 }
 
-export function BoosterShotCoveragePerAgeGroup({ title, description, metadata, values, sortingOrder, text }: BoosterCoveragePerAgeGroupProps) {
+export const BoosterShotCoveragePerAgeGroup = ({ title, description, metadata, values, sortingOrder, text }: BoosterCoveragePerAgeGroupProps) => {
   const breakpoints = useBreakpoints(true);
   const componentName = BoosterShotCoveragePerAgeGroup.name;
   const requiredData: TableData[] = values.map((value) => {
@@ -63,4 +63,4 @@ export function BoosterShotCoveragePerAgeGroup({ title, description, metadata, v
       )}
     </ChartTile>
   );
-}
+};

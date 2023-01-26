@@ -20,7 +20,7 @@ interface VaccineCoveragePerAgeGroupProps {
   text: SiteText['pages']['vaccinations_page']['nl'];
 }
 
-export function VaccineCoveragePerAgeGroup({ title, description, metadata, values, sortingOrder, text }: VaccineCoveragePerAgeGroupProps) {
+export const VaccineCoveragePerAgeGroup = ({ title, description, metadata, values, sortingOrder, text }: VaccineCoveragePerAgeGroupProps) => {
   const breakpoints = useBreakpoints(true);
   const componentName = VaccineCoveragePerAgeGroup.name;
   const requiredData: TableData[] = values.map((value) => {
@@ -59,4 +59,4 @@ export function VaccineCoveragePerAgeGroup({ title, description, metadata, value
       )}
     </ChartTile>
   );
-}
+};

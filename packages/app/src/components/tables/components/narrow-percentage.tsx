@@ -8,7 +8,7 @@ interface NarrowPercentageProps {
   textLabel: string;
 }
 
-export function NarrowPercentage({ value, color, textLabel }: NarrowPercentageProps) {
+export const NarrowPercentage = ({ value, color, textLabel }: NarrowPercentageProps) => {
   return (
     <Box display="grid" gridTemplateColumns="auto 2fr" width="100%">
       <Box paddingRight={space[3]} minWidth="190px" textAlign="left">
@@ -21,4 +21,4 @@ export function NarrowPercentage({ value, color, textLabel }: NarrowPercentagePr
       </Box>
     </Box>
   );
-}
+};

@@ -54,7 +54,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>) {
+const BehaviorPageVr = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, lastGenerated, content, selectedVrData: data, vrName, chartBehaviorOptions } = props;
   const { commonTexts, formatDateFromSeconds, formatNumber } = useIntl();
   const { text } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -148,4 +148,6 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
       </VrLayout>
     </Layout>
   );
-}
+};
+
+export default BehaviorPageVr;

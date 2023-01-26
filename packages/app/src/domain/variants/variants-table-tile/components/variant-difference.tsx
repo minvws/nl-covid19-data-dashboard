@@ -11,7 +11,7 @@ interface VariantDifferenceProps {
   value: DifferenceDecimal;
 }
 
-export function VariantDifference({ value, text, isWideTable }: VariantDifferenceProps) {
+export const VariantDifference = ({ value, text, isWideTable }: VariantDifferenceProps) => {
   const { formatPercentage } = useIntl();
 
   const options = {
@@ -58,7 +58,7 @@ export function VariantDifference({ value, text, isWideTable }: VariantDifferenc
   });
 
   return <>{returnValue}</>;
-}
+};
 
 interface DifferenceProps {
   color: string;

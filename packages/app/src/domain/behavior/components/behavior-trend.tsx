@@ -16,7 +16,7 @@ interface BehaviorTrendProps {
   hasMarginRight?: boolean;
 }
 
-export function BehaviorTrend({ trend, text, hasMarginRight }: BehaviorTrendProps) {
+export const BehaviorTrend = ({ trend, text, hasMarginRight }: BehaviorTrendProps) => {
   if (trend === 'up') {
     return (
       <Trend color={colors.black} hasMarginRight={hasMarginRight || false}>
@@ -40,7 +40,7 @@ export function BehaviorTrend({ trend, text, hasMarginRight }: BehaviorTrendProp
   }
 
   return <Box paddingLeft={`calc(12px + 0.25rem)`}>–</Box>;
-}
+};
 
 interface TrendProps {
   color: string;
