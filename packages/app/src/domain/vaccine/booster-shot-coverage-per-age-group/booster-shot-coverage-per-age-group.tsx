@@ -53,7 +53,7 @@ export const BoosterShotCoveragePerAgeGroup = ({ title, description, metadata, v
             firstColumn: text.vaccination_coverage.headers.agegroup,
             secondColumn: text.vaccination_coverage.headers.fully_vaccinated,
             thirdColumn: text.archived.vaccination_coverage.campaign_headers.booster_shot,
-            fourthColumn: '', // Intentionally left empty for spacing purposes.
+            fourthColumn: text.archived.vaccination_coverage.headers.difference_booster_shot_and_fully_vaccinated,
           }}
           tableData={sortedData}
           percentageData={percentageData}

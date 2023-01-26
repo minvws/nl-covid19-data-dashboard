@@ -20,8 +20,6 @@ import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
 interface BehaviorTableTileProps {
   title: string;
   description: string;
-  complianceExplanation: string;
-  supportExplanation: string;
   value: NlBehaviorValue | VrBehaviorArchived_20221019Value;
   annotation: string;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
@@ -45,7 +43,7 @@ export const BehaviorTableTile = ({ title, description, value, annotation, setCu
             firstColumn: text.basisregels.header_basisregel,
             secondColumn: text.basisregels.rules_followed,
             thirdColumn: text.basisregels.rules_supported,
-            fourthColumn: '', // Intentionally left empty for spacing purposes.
+            fourthColumn: text.basisregels.percentage_bar_column_header,
           }}
           tableData={behaviorsTableData}
           percentageData={percentageData}

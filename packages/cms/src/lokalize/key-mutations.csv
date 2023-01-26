@@ -14,3 +14,4 @@ timestamp,action,key,document_id,move_to
 2023-01-26T11:19:17.324Z,add,pages.behavior_page.nl.tabel_per_leeftijdsgroep.narrow_table_header,wvJta9ElXUYLPkPUArz3Ny,__
 2023-01-26T11:19:17.326Z,delete,pages.behavior_page.nl.tabel_per_leeftijdsgroep.explanation.compliance,cnFn4yM5oz3WY1CrntwS2v,__
 2023-01-26T11:19:17.328Z,delete,pages.behavior_page.nl.tabel_per_leeftijdsgroep.explanation.support,Ks5SlP9grM5GaBz68RNpjk,__
+2023-01-26T14:40:01.873Z,add,pages.behavior_page.shared.basisregels.percentage_bar_column_header,H51WXygmup367lqvWyhYni,__

@@ -167,8 +167,6 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
           <BehaviorTableTile
             title={text.shared.basisregels.title}
             description={textNl.basisregels.description}
-            complianceExplanation={textNl.basisregels.volgen_beschrijving}
-            supportExplanation={textNl.basisregels.steunen_beschrijving}
             value={behaviorLastValue}
             annotation={text.shared.basisregels.annotation}
             setCurrentId={setCurrentId}

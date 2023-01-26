@@ -72,7 +72,7 @@ export const BehaviorPerAgeGroup = ({ title, description, data, currentId, setCu
                   firstColumn: text.shared.leeftijden.tabel.age_group,
                   secondColumn: text.shared.basisregels.rules_followed,
                   thirdColumn: text.shared.basisregels.rules_supported,
-                  fourthColumn: '', // Intentionally left empty for spacing purposes.
+                  fourthColumn: text.shared.basisregels.percentage_bar_column_header,
                 }}
                 tableData={requiredData}
                 percentageData={percentageData}
