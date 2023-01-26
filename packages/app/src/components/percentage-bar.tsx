@@ -13,7 +13,6 @@ interface PercentageProps {
 
 export const PercentageBar = ({ percentage, height, color, backgroundColor = colors.gray2, backgroundStyle = 'normal' }: PercentageProps) => {
   const minWidth = percentage > 0 ? '2px' : undefined;
-  backgroundColor = backgroundStyle === 'normal' ? (backgroundColor ? backgroundColor : colors.gray2) : backgroundColor;
 
   return (
     <Box display="flex" position="relative" width="100%">
