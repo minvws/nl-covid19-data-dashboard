@@ -127,7 +127,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           {isArchivedContentShown && (
             <Box borderTop={`2px solid ${colors.gray2}`} spacing={5} paddingTop={space[4]}>
               <PageInformationBlock
-                category={commonTexts.sidebar.categories.development_of_the_virus.title}
                 title={textNl.section_deceased_rivm.title}
                 icon={<Coronavirus aria-hidden="true" />}
                 description={textNl.section_deceased_rivm.description}
