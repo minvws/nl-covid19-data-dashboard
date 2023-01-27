@@ -124,7 +124,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
           <TwoKpiSection>
             <KpiTile
               title={textNl.barscale_titel}
-              description={replaceVariablesInText(textNl.extra_uitleg, {
+              description={replaceVariablesInText(textNl.extra_description, {
                 dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
                 dateEnd: formatDateFromSeconds(sevenDayAverageDates[1]),
               })}
