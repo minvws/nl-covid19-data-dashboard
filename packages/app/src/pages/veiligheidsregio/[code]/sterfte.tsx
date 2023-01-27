@@ -97,7 +97,9 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.development_of_the_virus.title}
-            title={textVr.section_sterftemonitor.title}
+            title={replaceVariablesInText(textVr.section_sterftemonitor.title, {
+              safetyRegion: vrName,
+            })}
             icon={<Coronavirus aria-hidden="true" />}
             description={textVr.section_sterftemonitor.description}
             referenceLink={textVr.section_sterftemonitor.reference.href}
