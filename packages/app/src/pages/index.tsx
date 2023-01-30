@@ -112,9 +112,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             paddingX={{ _: space[3], sm: space[4] }}
             maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}
           >
-            <TopicalHeader title={topicalConfig.title} description={topicalConfig.description} />
+            <TopicalHeader title={topicalConfig.title} />
           </Box>
           <TopicalWeeklySummaryTile title={weeklySummary.title} summaryItems={weeklySummary.items} level={currentSeverityLevel} label={currentSeverityLevelTexts?.label} />
+          <Box paddingX={{ _: space[3], sm: space[4] }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
+            <TopicalHeader description={topicalConfig.description} />
+          </Box>
           {currentSeverityLevelTexts && (
             <Box marginY={space[5]} paddingX={{ _: space[3], sm: space[4] }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
               <TopicalThemeHeader title={thermometer.title} subtitle={thermometer.subTitle} icon={getFilenameToIconName(thermometer.icon) as TopicalIcon} />
