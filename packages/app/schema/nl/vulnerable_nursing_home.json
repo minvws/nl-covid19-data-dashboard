@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "gm_deceased_rivm",
+  "title": "nl_vulnerable_nursing_home",
   "type": "object",
   "properties": {
     "values": {
@@ -17,17 +17,17 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "gm_deceased_rivm_value",
+      "title": "nl_vulnerable_nursing_home_value",
       "type": "object",
       "properties": {
-        "covid_daily": {
+        "newly_infected_locations": {
           "type": "integer"
         },
-        "covid_daily_moving_average": {
-          "type": ["number", "null"]
-        },
-        "covid_total": {
+        "infected_locations_total": {
           "type": "integer"
+        },
+        "infected_locations_percentage": {
+          "type": "number"
         },
         "date_unix": {
           "type": "integer"
@@ -37,9 +37,9 @@
         }
       },
       "required": [
-        "covid_daily",
-        "covid_daily_moving_average",
-        "covid_total",
+        "newly_infected_locations",
+        "infected_locations_total",
+        "infected_locations_percentage",
         "date_unix",
         "date_of_insertion_unix"
       ],

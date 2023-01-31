@@ -251,3 +251,5 @@ timestamp,action,key,document_id,move_to
 2023-01-02T15:21:14.727Z,add,pages.hospitals_and_care_page.nl.icu.chart_patient_influx.legend_inaccurate_label,PKXdxxxKAnTg0F1ZCyB3ox,__
 2023-01-02T15:21:15.742Z,add,pages.hospitals_and_care_page.nl.icu.chart_patient_influx.title,0iJeil5hiqRr6jTKtf6IML,__
 2023-01-02T15:21:16.776Z,add,pages.hospitals_and_care_page.nl.icu.chart_patient_influx.toggle_label,0iJeil5hiqRr6jTKtf6IQ1,__
+2023-01-27T15:36:42.838Z,delete,pages.hospitalPage.nl.extra_uitleg,jF33EuwumlGuwav2FD3XXw,__
+2023-01-27T15:23:55.933Z,add,pages.hospital_page.nl.extra_description,HUrvkI3TfiQn7uqq7z2elF,__

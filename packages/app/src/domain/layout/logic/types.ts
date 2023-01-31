@@ -4,7 +4,7 @@ type SharedCategoryKeys = 'development_of_the_virus' | 'consequences_for_healthc
 
 export type GmItemKeys = 'hospital_admissions' | 'mortality' | 'positive_tests' | 'sewage_measurement' | 'vaccinations';
 
-export type GmCategoryKeys = SharedCategoryKeys;
+export type GmCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 
 export type VrItemKeys =
   | 'compliance'

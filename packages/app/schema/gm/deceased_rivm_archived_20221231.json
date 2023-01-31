@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_elderly_at_home",
+  "title": "gm_deceased_rivm_archived_20221231",
   "type": "object",
   "properties": {
     "values": {
@@ -17,23 +17,17 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_elderly_at_home_value",
+      "title": "gm_deceased_rivm_archived_20221231_value",
       "type": "object",
       "properties": {
-        "positive_tested_daily": {
+        "covid_daily": {
           "type": "integer"
         },
-        "positive_tested_daily_moving_average": {
+        "covid_daily_moving_average": {
           "type": ["number", "null"]
         },
-        "positive_tested_daily_per_100k": {
-          "type": "number"
-        },
-        "deceased_daily": {
+        "covid_total": {
           "type": "integer"
-        },
-        "deceased_daily_moving_average": {
-          "type": ["number", "null"]
         },
         "date_unix": {
           "type": "integer"
@@ -42,15 +36,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "positive_tested_daily",
-        "positive_tested_daily_moving_average",
-        "positive_tested_daily_per_100k",
-        "deceased_daily",
-        "deceased_daily_moving_average",
-        "date_unix",
-        "date_of_insertion_unix"
-      ],
+      "required": ["covid_daily", "covid_daily_moving_average", "covid_total", "date_unix", "date_of_insertion_unix"],
       "additionalProperties": false
     }
   }

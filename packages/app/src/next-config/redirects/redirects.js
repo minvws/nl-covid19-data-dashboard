@@ -78,6 +78,17 @@ async function redirects() {
       destination: '/veiligheidsregio/VR:nr',
       permanent: false,
     },
+    // Redirects for OSIRIS change
+    {
+      source: '/veiligheidsregio/:code/verpleeghuiszorg',
+      destination: '/veiligheidsregio/:code/kwetsbare-groepen-70-plussers',
+      permanent: true,
+    },
+    {
+      source: '/landelijk/verpleeghuiszorg',
+      destination: '/landelijk/kwetsbare-groepen-70-plussers',
+      permanent: true,
+    },
     // Redirects for municipal reorganizations
     ...gmRedirects.map(({ from, to }) => ({
       source: `/gemeente/:gm(gm|GM|gM|Gm):nr(${from.join('|')})/:page*`,

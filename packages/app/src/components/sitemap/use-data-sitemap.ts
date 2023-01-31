@@ -72,7 +72,7 @@ export function useDataSitemap(base: 'nl' | 'vr' | 'gm', code?: string, data?: P
         links: [
           {
             text: commonTexts.sidebar.metrics.nursing_home_care.title,
-            href: reverseRouter.vr.verpleeghuiszorg(code),
+            href: reverseRouter.vr.kwetsbareGroepen(code),
           },
           {
             text: commonTexts.sidebar.metrics.disabled_care.title,
@@ -168,7 +168,7 @@ export function useDataSitemap(base: 'nl' | 'vr' | 'gm', code?: string, data?: P
       links: [
         {
           text: commonTexts.sidebar.metrics.nursing_home_care.title,
-          href: reverseRouter.nl.verpleeghuiszorg(),
+          href: reverseRouter.nl.kwetsbareGroepen(),
         },
         {
           text: commonTexts.sidebar.metrics.disabled_care.title,

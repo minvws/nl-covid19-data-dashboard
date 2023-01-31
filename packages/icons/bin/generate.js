@@ -37,15 +37,37 @@ if (!fs.existsSync(dir)) {
 const initialTypeDefinitions = `/// <reference types="react" />
 import { FC, SVGAttributes } from 'react';
 
-export interface IconProps extends SVGAttributes<SVGElement> {}
+export type IconProps = SVGAttributes<SVGElement>;
 
 export type Icon = FC<IconProps>;
 `;
 
+/*
+ * initialize the icon type files. So it's cleared before appening.
+ * And added the proper type declarations on top of the file.
+ */
 fs.writeFileSync(
   path.join(rootDir, 'src', 'index.ts'),
-  `${initialTypeDefinitions}\nexport { iconName2filename } from './icon-name2filename';\n`,
-  'utf-8'
+  format({
+    text: `${initialTypeDefinitions}\nexport { iconName2filename } from './icon-name2filename';\n`,
+    eslintConfig,
+    prettierOptions: {
+      ...prettierOptions,
+    },
+  }),
+  { encoding: 'utf-8' }
+);
+
+fs.writeFileSync(
+  path.join(rootDir, 'src', 'index.d.ts'),
+  format({
+    text: `import { Icon } from './index';`,
+    eslintConfig,
+    prettierOptions: {
+      ...prettierOptions,
+    },
+  }),
+  { encoding: 'utf-8' }
 );
 
 // We want our icons to predictable in usage. That means we filter out properties that we think
@@ -106,29 +128,6 @@ fs.writeFileSync(
   }),
   { encoding: 'utf-8' }
 );
-
-/**
- * Generate schema entries of all the icons
- * Appends an enum to files in the filesToUpdate array.
- */
-const filesToUpdate = ['topical/icon.json'];
-const appBasePath = path.join(
-  rootDir,
-  '..', // packages
-  'app'
-);
-const schemaDirectory = path.join(appBasePath, 'schema');
-filesToUpdate.forEach((fileToUpdate) => {
-  const iconFile = fs.readFileSync(path.resolve(schemaDirectory, fileToUpdate));
-  const parsedIconFile = JSON.parse(iconFile);
-  const formattedIcons = icons.sort().map((icon) => pascalcase(icon));
-  parsedIconFile.enum = formattedIcons;
-  const updatedIconFile = JSON.stringify(parsedIconFile, null, 2);
-  fs.writeFileSync(
-    path.resolve(schemaDirectory, fileToUpdate),
-    updatedIconFile
-  );
-});
 
 /**
  * Generate documentation of all the icons

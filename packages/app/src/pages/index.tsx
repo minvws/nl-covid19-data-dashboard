@@ -34,7 +34,7 @@ import { TimelineMarker } from '~/components/time-series-chart/components/timeli
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 import { TopicalSanityData } from '~/queries/query-types';
-import { TopicalIcon } from '@corona-dashboard/common/src/types';
+import { IconName as TopicalIcon } from '@corona-dashboard/icons/src/icon-name2filename';
 import { SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 import { RichContent } from '~/components/cms/rich-content';
 import { space } from '~/style/theme';
@@ -108,9 +108,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             paddingX={{ _: space[3], sm: space[4] }}
             maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}
           >
-            <TopicalHeader title={topicalConfig.title} description={topicalConfig.description} />
+            <TopicalHeader title={topicalConfig.title} />
           </Box>
           <TopicalWeeklySummaryTile title={weeklySummary.title} summaryItems={weeklySummary.items} level={currentSeverityLevel} label={currentSeverityLevelTexts?.label} />
+          <Box paddingX={{ _: space[3], sm: space[4] }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
+            <TopicalHeader description={topicalConfig.description} />
+          </Box>
           {currentSeverityLevelTexts && (
             <Box marginY={space[5]} paddingX={{ _: space[3], sm: space[4] }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
               <TopicalThemeHeader title={thermometer.title} subtitle={thermometer.subTitle} icon={getFilenameToIconName(thermometer.icon) as TopicalIcon} />

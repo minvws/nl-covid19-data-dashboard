@@ -46,6 +46,7 @@ See below an overview of all the available icons in this package. This file is g
 | Download                               | <div style="background-color: white;"><img src="./src/svg/download.svg" alt="Download" /></div>                                                                |
 | EenPersoonDoorgestreept                | <div style="background-color: white;"><img src="./src/svg/een_persoon_doorgestreept.svg" alt="EenPersoonDoorgestreept" /></div>                                |
 | Elderly                                | <div style="background-color: white;"><img src="./src/svg/elderly.svg" alt="Elderly" /></div>                                                                  |
+| ElderlyPeople                          | <div style="background-color: white;"><img src="./src/svg/elderly-people.svg" alt="ElderlyPeople" /></div>                                                     |
 | Expand                                 | <div style="background-color: white;"><img src="./src/svg/expand.svg" alt="Expand" /></div>                                                                    |
 | Experimenteel                          | <div style="background-color: white;"><img src="./src/svg/experimenteel.svg" alt="Experimenteel" /></div>                                                      |
 | External                               | <div style="background-color: white;"><img src="./src/svg/external.svg" alt="External" /></div>                                                                |
@@ -128,6 +129,7 @@ See below an overview of all the available icons in this package. This file is g
 | VervoerEnReizenBuitenland              | <div style="background-color: white;"><img src="./src/svg/vervoer_en_reizen_buitenland.svg" alt="VervoerEnReizenBuitenland" /></div>                           |
 | VervoerEnReizenOv                      | <div style="background-color: white;"><img src="./src/svg/vervoer_en_reizen_ov.svg" alt="VervoerEnReizenOv" /></div>                                           |
 | Vliegen                                | <div style="background-color: white;"><img src="./src/svg/vliegen.svg" alt="Vliegen" /></div>                                                                  |
+| VulnerableGroups                       | <div style="background-color: white;"><img src="./src/svg/vulnerable-groups.svg" alt="VulnerableGroups" /></div>                                               |
 | Warn                                   | <div style="background-color: white;"><img src="./src/svg/warn.svg" alt="Warn" /></div>                                                                        |
 | Warning                                | <div style="background-color: white;"><img src="./src/svg/warning.svg" alt="Warning" /></div>                                                                  |
 | WinkelenEnBoodschappenAlcohol          | <div style="background-color: white;"><img src="./src/svg/winkelen_en_boodschappen_alcohol.svg" alt="WinkelenEnBoodschappenAlcohol" /></div>                   |

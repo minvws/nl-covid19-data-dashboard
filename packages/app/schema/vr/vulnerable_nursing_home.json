@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "vr_disability_care",
+  "title": "vr_vulnerable_nursing_home",
   "type": "object",
   "properties": {
     "values": {
@@ -17,15 +17,9 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "vr_disability_care_value",
+      "title": "vr_vulnerable_nursing_home_value",
       "type": "object",
       "properties": {
-        "newly_infected_people": {
-          "type": "integer"
-        },
-        "newly_infected_people_moving_average": {
-          "type": ["number", "null"]
-        },
         "newly_infected_locations": {
           "type": "integer"
         },
@@ -35,34 +29,19 @@
         "infected_locations_percentage": {
           "type": "number"
         },
-        "deceased_daily": {
-          "type": "integer"
-        },
-        "deceased_daily_moving_average": {
-          "type": ["number", "null"]
-        },
         "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
-        },
-        "vrcode": {
-          "type": "string",
-          "equalsRootProperty": "code"
         }
       },
       "required": [
-        "newly_infected_people",
-        "newly_infected_people_moving_average",
-        "deceased_daily",
-        "deceased_daily_moving_average",
         "newly_infected_locations",
         "infected_locations_total",
         "infected_locations_percentage",
         "date_unix",
-        "date_of_insertion_unix",
-        "vrcode"
+        "date_of_insertion_unix"
       ],
       "additionalProperties": false
     }

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_disability_care",
+  "title": "nl_nursing_home_archived_20230126",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_disability_care_value",
+      "title": "nl_nursing_home_archived_20230126_value",
       "type": "object",
       "properties": {
         "newly_infected_people": {
