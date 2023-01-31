@@ -1,7 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { fontWeights, space } from '~/style/theme';
 import styled from 'styled-components';
-import { space } from '~/style/theme';
 
 export const StyledTable = styled.table`
   border-collapse: collapse;
