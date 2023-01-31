@@ -129,7 +129,7 @@ const BehaviorPageVr = (props: StaticProps<typeof getStaticProps>) => {
             text={text.shared}
             metadata={{
               datumsText: text.vr.datums,
-              date: data.behavior_archived_20221019.values[0].date_end_unix,
+              date: data.behavior_archived_20221019.last_value.date_start_unix,
               source: text.vr.bronnen.rivm,
             }}
           />
