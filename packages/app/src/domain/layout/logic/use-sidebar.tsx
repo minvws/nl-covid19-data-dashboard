@@ -22,6 +22,7 @@ const mapKeysToReverseRouter = {
   hospitals_and_care: 'ziekenhuizenEnZorg',
   patients: 'patientenInBeeld',
   infectious_people: 'besmettelijkeMensen',
+  intensive_care_admissions: 'intensiveCareOpnames',
   current_advices: 'geldendeAdviezen',
   mortality: 'sterfte',
   // Still the nursing home care name is used because of legacy naming inside of sanity's lokalize texts.

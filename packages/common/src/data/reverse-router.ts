@@ -21,6 +21,8 @@ export function getReverseRouter(isMobile: boolean) {
       besmettelijkeMensen: () => `/landelijk/besmettelijke-mensen`,
       reproductiegetal: () => `/landelijk/reproductiegetal`,
       sterfte: () => `/landelijk/sterfte`,
+      ziekenhuisopnames: () => `/landelijk/ziekenhuis-opnames`,
+      intensiveCareOpnames: () => `/landelijk/intensive-care-opnames`,
       ziekenhuizenEnZorg: () => `/landelijk/ziekenhuizen-en-zorg`,
       patientenInBeeld: () => `/landelijk/patienten-in-beeld`,
       kwetsbareGroepen: () => `/landelijk/kwetsbare-groepen-70-plussers`,

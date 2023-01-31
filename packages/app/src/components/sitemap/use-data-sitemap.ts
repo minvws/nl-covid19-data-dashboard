@@ -125,15 +125,6 @@ export function useDataSitemap(base: 'nl' | 'vr' | 'gm', code?: string, data?: P
       ],
     },
     {
-      header: commonTexts.sidebar.categories.hospitals.title,
-      links: [
-        {
-          text: commonTexts.sidebar.metrics.hospital_admissions.title,
-          href: reverseRouter.nl.ziekenhuisopnames(),
-        },
-      ],
-    },
-    {
       header: commonTexts.sidebar.categories.infections.title,
       links: [
         {
