@@ -19,6 +19,8 @@ const mapKeysToReverseRouter = {
   elderly_at_home: 'thuiswonendeOuderen',
   general_practitioner_suspicions: 'verdenkingenHuisartsen',
   hospital_admissions: 'ziekenhuisopnames',
+  hospitals_and_care: 'ziekenhuizenEnZorg',
+  patients: 'patientenInBeeld',
   infectious_people: 'besmettelijkeMensen',
   intensive_care_admissions: 'intensiveCareOpnames',
   current_advices: 'geldendeAdviezen',

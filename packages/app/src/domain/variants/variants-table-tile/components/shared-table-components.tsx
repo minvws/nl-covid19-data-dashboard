@@ -1,36 +1,39 @@
-import css from '@styled-system/css';
+import { colors } from '@corona-dashboard/common';
+import { fontWeights, space } from '~/style/theme';
 import styled from 'styled-components';
 
-export const StyledTable = styled.table(
-  css({
-    borderCollapse: 'collapse',
-    width: '100%',
-  })
-);
+export const StyledTable = styled.table`
+  border-collapse: collapse;
+  width: 100%;
+`;
 
-export const HeaderCell = styled.th(
-  css({
-    textAlign: 'left',
-    fontWeight: 'normal',
-    borderBottom: '1px solid',
-    borderBottomColor: 'gray2',
-    verticalAlign: 'top',
-  })
-);
+interface HeaderCellProps {
+  isFirst?: boolean;
+  isLast?: boolean;
+}
 
-export const Cell = styled.td<{
+export const HeaderCell = styled.th<HeaderCellProps>`
+  border-bottom: 1px solid ${colors.gray2};
+  font-size: ${space[3]};
+  font-weight: ${fontWeights.bold};
+  padding-bottom: ${space[2]};
+  text-align: left;
+  vertical-align: top;
+  width: ${({ isFirst, isLast }) => (isFirst ? '30%' : isLast ? '25%' : undefined)};
+`;
+
+interface CellProps {
+  alignRight?: boolean;
+  border?: boolean;
+  hasPaddingRight?: boolean;
   mobile?: boolean;
   narrow?: boolean;
-  border?: boolean;
-  alignRight?: boolean;
-}>((x) =>
-  css({
-    p: 0,
-    py: 3,
-    float: x.alignRight ? 'right' : undefined,
-    maxWidth: x.narrow ? '2rem' : undefined,
-    borderBottom: x.border || !x.mobile ? '1px solid' : undefined,
-    borderBottomColor: x.border || !x.mobile ? 'gray2' : undefined,
-    verticalAlign: 'top',
-  })
-);
+}
+
+export const Cell = styled.td<CellProps>`
+  border-bottom: ${({ border, mobile }) => (border || !mobile ? `1px solid ${colors.gray2}` : undefined)};
+  float: ${({ alignRight }) => (alignRight ? 'right' : undefined)};
+  max-width: ${({ narrow }) => (narrow ? space[4] : undefined)};
+  padding: ${({ hasPaddingRight }) => (hasPaddingRight ? `${space[3]} ${space[3]} ${space[3]} 0` : `${space[3]} 0`)};
+  vertical-align: top;
+`;

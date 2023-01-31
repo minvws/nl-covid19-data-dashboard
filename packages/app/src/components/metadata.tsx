@@ -20,27 +20,18 @@ export interface MetadataProps extends MarginBottomProps {
   intervalCount?: string;
 }
 
-export function Metadata({
-  date,
-  source,
-  obtainedAt,
-  isTileFooter,
-  datumsText,
-  mb,
-  dataSources,
-  intervalCount,
-}: MetadataProps) {
+export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, mb, dataSources, intervalCount }: MetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
 
   const dateString =
     typeof date === 'number'
       ? replaceVariablesInText(commonTexts.common.metadata.date, {
-          date: formatDateFromSeconds(date, 'weekday-medium'),
+          date: formatDateFromSeconds(date, 'weekday-long'),
         })
       : Array.isArray(date)
       ? replaceVariablesInText(commonTexts.common.metadata.date_from_to, {
-          startDate: formatDateFromSeconds(date[0], 'weekday-medium'),
-          endDate: formatDateFromSeconds(date[1], 'weekday-medium'),
+          startDate: formatDateFromSeconds(date[0], 'weekday-long'),
+          endDate: formatDateFromSeconds(date[1], 'weekday-long'),
         })
       : typeof date === 'string'
       ? date
@@ -74,19 +65,16 @@ export function Metadata({
           <Text color="gray7" variant="label1">
             {datumsText && Array.isArray(date) ? (
               replaceVariablesInText(datumsText, {
-                weekStart: formatDateFromSeconds(date[0], 'weekday-medium'),
-                weekEnd: formatDateFromSeconds(date[1], 'weekday-medium'),
+                weekStart: formatDateFromSeconds(date[0], 'weekday-long'),
+                weekEnd: formatDateFromSeconds(date[1], 'weekday-long'),
               })
             ) : (
               <>
                 {dateString}
                 {obtainedAt &&
-                  ` ${replaceVariablesInText(
-                    commonTexts.common.metadata.obtained,
-                    {
-                      date: formatDateFromSeconds(obtainedAt, 'weekday-medium'),
-                    }
-                  )}`}
+                  ` ${replaceVariablesInText(commonTexts.common.metadata.obtained, {
+                    date: formatDateFromSeconds(obtainedAt, 'weekday-long'),
+                  })}`}
                 {intervalString && `. ${intervalString}`}
                 {dateString && source ? ' · ' : null}
 
@@ -97,8 +85,7 @@ export function Metadata({
                     {`${commonTexts.common.metadata.source}: `}
                     {dataSources.map((item, index) => (
                       <InlineText key={index}>
-                        {index > 0 &&
-                          (index !== dataSources.length - 1 ? ' , ' : ' & ')}
+                        {index > 0 && (index !== dataSources.length - 1 ? ' , ' : ' & ')}
                         {item.text}
                       </InlineText>
                     ))}

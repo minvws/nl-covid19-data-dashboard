@@ -56,9 +56,8 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>) {
+const BehaviorPageVr = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, lastGenerated, content, selectedVrData: data, vrName, chartBehaviorOptions } = props;
-
   const { commonTexts, formatDateFromSeconds, formatNumber } = useIntl();
   const { text, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -113,23 +112,26 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
               <Text>
                 {replaceComponentsInText(text.vr.kpi.deelgenomen_mensen, {
                   number_of_participants: <BoldText>{formatNumber(behaviorLastValue.number_of_participants)}</BoldText>,
-                  date_start: <InlineText>{formatDateFromSeconds(behaviorLastValue.date_start_unix)}</InlineText>,
-                  date_end: <InlineText>{formatDateFromSeconds(behaviorLastValue.date_end_unix)}</InlineText>,
+                  date_start: <InlineText>{formatDateFromSeconds(behaviorLastValue.date_start_unix, 'weekday-long')}</InlineText>,
+                  date_end: <InlineText>{formatDateFromSeconds(behaviorLastValue.date_end_unix, 'weekday-long')}</InlineText>,
                 })}
               </Text>
             </Tile>
           </TwoKpiSection>
 
           <BehaviorTableTile
-            title={text.vr.basisregels.title}
+            title={text.shared.basisregels.title}
             description={text.vr.basisregels.description}
-            complianceExplanation={text.vr.basisregels.volgen_beschrijving}
-            supportExplanation={text.vr.basisregels.steunen_beschrijving}
             value={behaviorLastValue}
-            annotation={text.vr.basisregels.annotatie}
+            annotation={text.shared.basisregels.annotation}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
             text={text.shared}
+            metadata={{
+              datumsText: text.vr.datums,
+              date: data.behavior_archived_20221019.last_value.date_start_unix,
+              source: text.vr.bronnen.rivm,
+            }}
           />
 
           <span ref={scrollToRef} />
@@ -150,4 +152,6 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
       </VrLayout>
     </Layout>
   );
-}
+};
+
+export default BehaviorPageVr;

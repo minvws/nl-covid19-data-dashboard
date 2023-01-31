@@ -27,7 +27,7 @@ interface TimelineTooltipContentProps {
 export const TimelineTooltipContent = ({ config, hasMultipleEvents, onNext, onPrev, onClose, currentEstimationLabel }: TimelineTooltipContentProps) => {
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const isTouch = useIsTouchDevice();
-  const dateStr = [formatDateFromSeconds(config.start, 'medium'), config.end && formatDateFromSeconds(config.end, 'medium')].filter(isDefined).join(' - ');
+  const dateStr = [formatDateFromSeconds(config.start, 'weekday-long'), config.end && formatDateFromSeconds(config.end, 'weekday-long')].filter(isDefined).join(' - ');
 
   return (
     <Box
