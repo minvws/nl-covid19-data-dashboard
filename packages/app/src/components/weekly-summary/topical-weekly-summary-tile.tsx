@@ -23,8 +23,8 @@ interface TopicalWeeklySummaryTileProps {
 
 export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems }: TopicalWeeklySummaryTileProps) => {
   return (
-    <Box paddingX={space[3]} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
-      <Box border={`1px solid ${colors.gray3}`} padding={space[4]} margin={asResponsiveArray({ sm: space[3] })}>
+    <Box paddingX={space[3]} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH} marginLeft={{ sm: space[3] }} marginBottom={space[3]}>
+      <Box border={`1px solid ${colors.gray3}`} padding={space[4]}>
         <BoldText css={css({ fontSize: [3] })}>
           <Markdown content={title} />
         </BoldText>
