@@ -10,6 +10,6 @@ export const ContentBlock = styled(Box)(
     maxWidth: 'contentWidth',
     paddingX: space[4],
     /** remove padding of nested ContentBlock instances */
-    [`& &`]: { paddingX: space[0] },
+    [`& &`]: { paddingX: '0' },
   })
 );

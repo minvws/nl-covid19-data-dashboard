@@ -105,14 +105,14 @@ const Container = styled(Box).attrs({ as: 'section' })<{
 }>((x) =>
   css({
     position: 'relative',
-    padding: space[0],
+    padding: '0',
     transitionProperty: 'height',
     transitionDuration: '0.4s',
     willChange: 'height',
 
     // Button
     '[data-reach-disclosure-button]': {
-      margin: space[0],
+      margin: '0',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -149,7 +149,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         display: 'block',
         transition: 'width 0.4s',
         position: 'absolute',
-        top: space[0],
+        top: '0',
         width: x.isOpen ? '100%' : x.buttonWidth,
         height: '100%',
         zIndex: -1,
@@ -210,7 +210,7 @@ const IconContainer = styled.div(
     svg: {
       transition: 'fill 0.2s ease-out',
       fill: 'black',
-      width: asResponsiveArray({ _: 20, md: undefined }),
+      width: asResponsiveArray({ _: '20px', md: undefined }),
     },
   })
 );

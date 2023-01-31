@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { spacingStyle } from '~/style/functions/spacing';
-import { space } from '~/style/theme';
+import { fontSizes, space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from '../base';
@@ -135,6 +135,6 @@ const ErrorReport = styled.pre(
     borderColor: 'gray3',
     overflow: 'auto',
     padding: space[2],
-    fontSize: 0,
+    fontSize: fontSizes[0],
   })
 );

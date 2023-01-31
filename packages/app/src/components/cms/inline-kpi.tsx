@@ -8,7 +8,7 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { metricNamesHoldingPartialData, PageKpi } from '~/components/page-kpi';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
+import { fontSizes, space } from '~/style/theme';
 import { Box } from '../base';
 import { Markdown } from '../markdown';
 import { Metadata, MetadataProps } from '../metadata';
@@ -135,14 +135,14 @@ function KpiTile({ title, description, children, metadata, iconName }: KpiTilePr
             })}
           />
 
-          <Heading level={3} as="h4" hyphens="auto" style={{ margin: space[0] }}>
+          <Heading level={3} as="h4" hyphens="auto" style={{ margin: '0' }}>
             {title}
           </Heading>
         </Box>
         {children && <Box spacing={3}>{children}</Box>}
 
         {description && (
-          <Box maxWidth="400px" fontSize={2} lineHeight={2}>
+          <Box maxWidth="400px" fontSize={fontSizes[2]} lineHeight={2}>
             <Markdown content={description} />
           </Box>
         )}
