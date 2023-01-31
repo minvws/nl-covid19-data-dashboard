@@ -3,11 +3,7 @@ import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LinkGroupProps } from './link-group';
 
-export function useDataSitemap(
-  base: 'nl' | 'vr' | 'gm',
-  code?: string,
-  data?: Pick<Nl, 'sewer'> | Pick<Vr, 'sewer'> | Pick<Gm, 'sewer'>
-): LinkGroupProps[] {
+export function useDataSitemap(base: 'nl' | 'vr' | 'gm', code?: string, data?: Pick<Nl, 'sewer'> | Pick<Vr, 'sewer'> | Pick<Gm, 'sewer'>): LinkGroupProps[] {
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
 
@@ -76,7 +72,7 @@ export function useDataSitemap(
         links: [
           {
             text: commonTexts.sidebar.metrics.nursing_home_care.title,
-            href: reverseRouter.vr.verpleeghuiszorg(code),
+            href: reverseRouter.vr.kwetsbareGroepen(code),
           },
           {
             text: commonTexts.sidebar.metrics.disabled_care.title,
@@ -176,7 +172,7 @@ export function useDataSitemap(
       links: [
         {
           text: commonTexts.sidebar.metrics.nursing_home_care.title,
-          href: reverseRouter.nl.verpleeghuiszorg(),
+          href: reverseRouter.nl.kwetsbareGroepen(),
         },
         {
           text: commonTexts.sidebar.metrics.disabled_care.title,
@@ -205,8 +201,7 @@ export function useDataSitemap(
           href: reverseRouter.nl.besmettelijkeMensen(),
         },
         {
-          text: commonTexts.sidebar.metrics.general_practitioner_suspicions
-            .title,
+          text: commonTexts.sidebar.metrics.general_practitioner_suspicions.title,
           href: reverseRouter.nl.verdenkingenHuisartsen(),
         },
         {

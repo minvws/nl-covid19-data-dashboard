@@ -6,7 +6,7 @@ context('Regionaal - Sterfte', () => {
   });
 
   it('Should show the correct KPI values', function (this: RegionalContext) {
-    const rivmLastValue = this.regionData.deceased_rivm.last_value;
+    const rivmLastValue = this.regionData.deceased_rivm_archived_20221231.last_value;
 
     const kpiTestInfo = {
       covid_daily: cy.formatters.formatNumber(rivmLastValue.covid_daily),

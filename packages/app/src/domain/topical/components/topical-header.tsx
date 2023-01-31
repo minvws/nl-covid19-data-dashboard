@@ -5,17 +5,22 @@ import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { fontSizes } from '~/style/theme';
 
 interface TopicalHeaderProps {
-  title: string;
-  description: PortableTextEntry[];
+  title?: string;
+  description?: PortableTextEntry[];
 }
 
 export const TopicalHeader = ({ title, description }: TopicalHeaderProps) => {
+  if (!title && !description) {
+    return null;
+  }
   return (
     <Box spacing={4}>
-      <Heading level={1}>{title}</Heading>
-      <Box spacing={3} fontSize={fontSizes[3]}>
-        <RichContent blocks={description} elementAlignment="start" />
-      </Box>
+      {title && <Heading level={1}>{title}</Heading>}
+      {description && (
+        <Box spacing={3} fontSize={fontSizes[2]}>
+          <RichContent blocks={description} elementAlignment="start" />
+        </Box>
+      )}
     </Box>
   );
 };

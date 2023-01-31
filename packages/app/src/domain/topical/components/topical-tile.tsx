@@ -9,7 +9,7 @@ import { colors } from '@corona-dashboard/common';
 import DynamicIcon from '~/components/get-icon-by-name';
 import { ChevronRight } from '@corona-dashboard/icons';
 import { RichContent } from '~/components/cms/rich-content';
-import { TopicalIcon } from '@corona-dashboard/common/src/types';
+import { IconName as TopicalIcon } from '@corona-dashboard/icons/src/icon-name2filename';
 import { KpiValue } from '~/components';
 import { useIntl } from '~/intl';
 import { TrendDirection, TrendIcon } from '~/components/trend-icon';
