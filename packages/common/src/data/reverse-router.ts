@@ -23,6 +23,8 @@ export function getReverseRouter(isMobile: boolean) {
       sterfte: () => `/landelijk/sterfte`,
       ziekenhuisopnames: () => `/landelijk/ziekenhuis-opnames`,
       intensiveCareOpnames: () => `/landelijk/intensive-care-opnames`,
+      ziekenhuizenEnZorg: () => `/landelijk/ziekenhuizen-en-zorg`,
+      patientenInBeeld: () => `/landelijk/patienten-in-beeld`,
       kwetsbareGroepen: () => `/landelijk/kwetsbare-groepen-70-plussers`,
       gehandicaptenzorg: () => `/landelijk/gehandicaptenzorg`,
       thuiswonendeOuderen: () => `/landelijk/thuiswonende-ouderen`,

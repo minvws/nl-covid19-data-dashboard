@@ -122,8 +122,8 @@ export const dataStructure = {
       'admissions_age_90_plus_per_million',
       'admissions_overall_per_million',
     ],
-    hospital_lcps: ['beds_occupied_covid'],
-    intensive_care_lcps: ['beds_occupied_covid', 'beds_occupied_non_covid', 'beds_occupied_covid_percentage'],
+    hospital_lcps: ['beds_occupied_covid', 'influx_covid_patients', 'influx_covid_patients_moving_average'],
+    intensive_care_lcps: ['beds_occupied_covid', 'beds_occupied_covid_percentage', 'influx_covid_patients', 'influx_covid_patients_moving_average'],
     tested_ggd: [
       'infected',
       'infected_moving_average',
