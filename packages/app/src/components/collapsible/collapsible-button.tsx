@@ -63,8 +63,8 @@ export const CollapsibleButton = ({ label, children, icon }: CollapsibleButtonPr
     >
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <ButtonContainer>
-          <Box position="absolute" top="50%" left="0" height="1px" width="100%" transform="translate(0, -50%)" bg={'gray3'} />
-          <Box ref={buttonRef} bg={colors.white} zIndex={1}>
+          <Box position="absolute" top="50%" left="0" height="1px" width="100%" transform="translate(0, -50%)" backgroundColor={colors.gray3} />
+          <Box ref={buttonRef} backgroundColor={colors.white} zIndex={1}>
             <DisclosureButton>
               {icon && <IconContainer>{icon}</IconContainer>}
               {label}
