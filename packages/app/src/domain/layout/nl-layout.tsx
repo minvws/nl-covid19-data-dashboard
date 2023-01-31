@@ -61,7 +61,7 @@ export function NlLayout(props: NlLayoutProps) {
             paddingTop={space[4]}
             backgroundColor="white"
             maxWidth={{ _: '38rem', md: undefined }}
-            mx="auto"
+            marginX="auto"
             spacing={1}
           >
             <VisuallyHidden as="h2" id="sidebar-title">

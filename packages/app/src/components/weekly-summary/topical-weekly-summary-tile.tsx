@@ -32,8 +32,8 @@ export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems }: 
         <Box as="ul">
           {summaryItems.map((summaryItem, index) => (
             <Box key={index} display="flex" paddingTop={space[2]} css={css({ gap: `0 ${space[3]}` })} alignItems={asResponsiveArray({ sm: 'center' })}>
-              <Box minWidth={'25px'} height={'25px'}>
-                <DynamicIcon width={'25px'} name={getFilenameToIconName(summaryItem.tileIcon) as TopicalIcon} />
+              <Box minWidth="25px" height="25px">
+                <DynamicIcon width="25px" name={getFilenameToIconName(summaryItem.tileIcon) as TopicalIcon} />
               </Box>
               <Box>
                 <InlineText>{summaryItem.description}</InlineText>
@@ -53,7 +53,7 @@ export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems }: 
 };
 
 const SeverityIndicatorLevel = styled.span`
-  margin: ${space[0]} ${space[1]};
+  margin: 0 ${space[1]};
   background-color: ${({ level }: { level: SeverityLevel }) => getSeverityColor(level as SeverityLevels)};
   border-radius: 50%;
   color: ${colors.white};

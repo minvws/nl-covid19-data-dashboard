@@ -6,7 +6,6 @@
 import css from '@styled-system/css';
 import { ComponentProps, ReactNode } from 'react';
 import styled from 'styled-components';
-import { space } from '~/style/theme';
 
 interface VisuallyHiddenProps {
   children: ReactNode;
@@ -28,7 +27,7 @@ const StyledVisuallyHidden = styled.div(
     overflow: 'hidden',
     width: '1px',
     height: '1px',
-    padding: space[0],
+    padding: '0',
     border: 0,
     margin: '-1px',
     clip: 'rect(0, 0, 0, 0)',

@@ -25,8 +25,8 @@ export function TwoKpiSection({ children, spacing, hasBorder = false, hasPadding
           flex: 1,
         },
         '& > *:not(:last-child)': {
-          marginRight: asResponsiveArray({ _: space[0], lg: spacing ?? space[5] }),
-          marginBottom: asResponsiveArray({ _: spacing ?? space[4], lg: space[0] }),
+          marginRight: asResponsiveArray({ _: '0', lg: spacing ?? space[5] }),
+          marginBottom: asResponsiveArray({ _: spacing ?? space[4], lg: '0' }),
         },
       })}
     >
