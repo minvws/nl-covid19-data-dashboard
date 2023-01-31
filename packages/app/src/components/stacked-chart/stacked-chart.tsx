@@ -337,7 +337,7 @@ export function StackedChart<T extends TimestampedValue>(props: StackedChartProp
       {valueAnnotation && (
         <>
           <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
-          <Spacer marginBottom={{ _: space[2], sm: space[0] }} />
+          <Spacer marginBottom={{ _: space[2], sm: '0' }} />
         </>
       )}
       <Box height="100%">
@@ -480,9 +480,9 @@ function getDate(x: SeriesValue) {
 
 function HatchedSquare() {
   return (
-    <svg height="15" width="15">
-      <rect height="15" width="15" fill={colors.gray5} />
-      <rect height="15" width="15" fill="url(#pattern-hatched-small)" />
+    <svg height="15px" width="15px">
+      <rect height="15px" width="15px" fill={colors.gray5} />
+      <rect height="15px" width="15px" fill="url(#pattern-hatched-small)" />
     </svg>
   );
 }

@@ -19,8 +19,8 @@ export function Sitemap({ quickLinksHeader, quickLinks, dataSitemapHeader, dataS
       <Box
         position="relative"
         flexBasis={{ _: '33%', lg: '25%' }}
-        paddingBottom={{ _: space[4], md: space[0] }}
-        paddingRight={{ _: space[0], md: space[3] }}
+        paddingBottom={{ _: space[4], md: '0' }}
+        paddingRight={{ _: '0', md: space[3] }}
         borderColor="gray3"
         borderStyle="solid"
         borderRightWidth={{ md: '1px' }}
@@ -30,7 +30,7 @@ export function Sitemap({ quickLinksHeader, quickLinks, dataSitemapHeader, dataS
         <LinkGroup links={quickLinks} />
       </Box>
 
-      <Box flexBasis={{ _: '66%', lg: '75%' }} paddingTop={{ _: space[4], md: space[0] }} paddingLeft={{ _: space[0], md: space[4] }} spacing={3}>
+      <Box flexBasis={{ _: '66%', lg: '75%' }} paddingTop={{ _: space[4], md: '0' }} paddingLeft={{ _: '0', md: space[4] }} spacing={3}>
         <Heading level={3}>{dataSitemapHeader}</Heading>
         <Box display="flex" flexWrap="wrap">
           {dataSitemap.map((group: LinkGroupProps) => (
@@ -52,11 +52,11 @@ const LinkGroupContainer = styled.div(
 
     // Remove margin bottom of the last 2 or 3 items depending on the breakpoints
     ':nth-last-child(-n+2)': {
-      marginBottom: asResponsiveArray({ sm: space[0], lg: space[3] }),
+      marginBottom: asResponsiveArray({ sm: '0', lg: space[3] }),
     },
 
     ':nth-last-child(-n+3)': {
-      marginBottom: asResponsiveArray({ lg: space[0] }),
+      marginBottom: asResponsiveArray({ lg: '0' }),
     },
   })
 );

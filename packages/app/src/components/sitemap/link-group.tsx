@@ -68,8 +68,8 @@ const StyledHeader = styled(InlineText)(
 
 const List = styled.ul(
   css({
-    margin: space[0],
-    padding: space[0],
+    margin: '0',
+    padding: '0',
   })
 );
 
@@ -79,7 +79,7 @@ const Item = styled.li(
     marginBottom: space[2],
 
     ':last-child': {
-      marginBottom: space[0],
+      marginBottom: '0',
     },
   })
 );
