@@ -12,13 +12,13 @@
     "corona_melder_app_download",
     "corona_melder_app_warning",
     "deceased_cbs",
-    "deceased_rivm",
-    "deceased_rivm_per_age_group",
+    "deceased_rivm_archived_20221231",
+    "deceased_rivm_per_age_group_archived_20221231",
     "difference",
     "named_difference",
-    "disability_care",
+    "disability_care_archived_20230126",
     "doctor",
-    "elderly_at_home",
+    "elderly_at_home_archived_20230126",
     "g_number",
     "hospital_lcps",
     "hospital_nice",
@@ -29,7 +29,10 @@
     "intensive_care_nice_per_age_group",
     "last_generated",
     "name",
-    "nursing_home",
+    "vulnerable_nursing_home",
+    "nursing_home_archived_20230126",
+    "vulnerable_tested_per_age_group",
+    "vulnerable_hospital_admissions",
     "proto_name",
     "reproduction",
     "self_test_overall",
@@ -135,11 +138,20 @@
     "tested_ggd_archived": {
       "$ref": "tested_ggd_archived.json"
     },
-    "nursing_home": {
-      "$ref": "nursing_home.json"
+    "nursing_home_archived_20230126": {
+      "$ref": "nursing_home_archived_20230126.json"
     },
-    "disability_care": {
-      "$ref": "disability_care.json"
+    "vulnerable_nursing_home": {
+      "$ref": "vulnerable_nursing_home.json"
+    },
+    "vulnerable_tested_per_age_group": {
+      "$ref": "vulnerable_tested_per_age_group.json"
+    },
+    "vulnerable_hospital_admissions": {
+      "$ref": "vulnerable_hospital_admissions.json"
+    },
+    "disability_care_archived_20230126": {
+      "$ref": "disability_care_archived_20230126.json"
     },
     "behavior": {
       "$ref": "behavior.json"
@@ -153,17 +165,17 @@
     "behavior_annotations": {
       "$ref": "behavior_annotations.json"
     },
-    "deceased_rivm": {
-      "$ref": "deceased_rivm.json"
+    "deceased_rivm_archived_20221231": {
+      "$ref": "deceased_rivm_archived_20221231.json"
     },
-    "deceased_rivm_per_age_group": {
-      "$ref": "deceased_rivm_per_age_group.json"
+    "deceased_rivm_per_age_group_archived_20221231": {
+      "$ref": "deceased_rivm_per_age_group_archived_20221231.json"
     },
     "deceased_cbs": {
       "$ref": "deceased_cbs.json"
     },
-    "elderly_at_home": {
-      "$ref": "elderly_at_home.json"
+    "elderly_at_home_archived_20230126": {
+      "$ref": "elderly_at_home_archived_20230126.json"
     },
     "vaccine_vaccinated_or_support": {
       "$ref": "vaccine_vaccinated_or_support.json"

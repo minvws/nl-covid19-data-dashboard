@@ -1,60 +1,62 @@
 import { colors } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { SiteText } from '~/locale';
 import { BehaviorTrendType } from '../logic/behavior-types';
 import { TrendDirection, TrendIcon } from '~/components/trend-icon';
+import { space } from '~/style/theme';
 
 type TrendIcon = {
   direction: 'UP' | 'DOWN' | ' NEUTRAL';
   color: string;
 };
+
 interface BehaviorTrendProps {
   trend: BehaviorTrendType | null;
-  color?: string;
-  text: SiteText['pages']['behavior_page']['shared'];
+  text: string;
+  hasMarginRight?: boolean;
 }
 
-const Trend = styled.span((a) =>
-  css({
-    whiteSpace: 'nowrap',
-    display: 'inline-block',
-
-    svg: {
-      color: a.color ?? colors.blue6,
-      mr: 1,
-      width: '12px',
-      height: '12px',
-      verticalAlign: 'middle',
-    },
-  })
-);
-
-export function BehaviorTrend({ trend, color, text }: BehaviorTrendProps) {
+export const BehaviorTrend = ({ trend, text, hasMarginRight = false }: BehaviorTrendProps) => {
   if (trend === 'up') {
     return (
-      <Trend color={color}>
+      <Trend color={colors.black} hasMarginRight={hasMarginRight}>
+        {text}
         <TrendIcon trendDirection={TrendDirection.UP} />
-        {text.basisregels.trend_hoger}
       </Trend>
     );
   }
+
   if (trend === 'down') {
     return (
-      <Trend color={color}>
+      <Trend color={colors.black} hasMarginRight={hasMarginRight}>
+        {text}
         <TrendIcon trendDirection={TrendDirection.DOWN} />
-        {text.basisregels.trend_lager}
       </Trend>
     );
   }
+
   if (trend === 'equal') {
-    return (
-      <Trend color={colors.neutral}>
-        <TrendIcon trendDirection={TrendDirection.NEUTRAL} />
-        {text.basisregels.trend_gelijk}
-      </Trend>
-    );
+    return <span>{text}</span>;
   }
+
   return <Box paddingLeft={`calc(12px + 0.25rem)`}>–</Box>;
+};
+
+interface TrendProps {
+  color: string;
+  hasMarginRight: boolean;
 }
+
+const Trend = styled.span<TrendProps>`
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  color: ${({ color }) => color};
+
+  svg {
+    margin-left: ${({ hasMarginRight }) => (hasMarginRight ? undefined : space[1])};
+    margin-right: ${({ hasMarginRight }) => (hasMarginRight ? space[1] : undefined)};
+    height: 12px;
+    width: 12px;
+  }
+`;

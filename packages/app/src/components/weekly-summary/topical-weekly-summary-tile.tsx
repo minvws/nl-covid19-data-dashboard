@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { colors, TopicalIcon } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
+import { IconName as TopicalIcon } from '@corona-dashboard/icons/src/icon-name2filename';
 import { fontWeights, space } from '~/style/theme';
 import { Markdown } from '~/components/markdown';
 import { Box } from '~/components/base';

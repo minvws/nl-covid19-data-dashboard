@@ -34,17 +34,13 @@ import { TimelineMarker } from '~/components/time-series-chart/components/timeli
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 import { TopicalSanityData } from '~/queries/query-types';
-import { TopicalIcon } from '@corona-dashboard/common/src/types';
+import { IconName as TopicalIcon } from '@corona-dashboard/icons/src/icon-name2filename';
 import { SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
 import { RichContent } from '~/components/cms/rich-content';
 import { space } from '~/style/theme';
 import { TopicalWeeklySummaryTile } from '~/components/weekly-summary/topical-weekly-summary-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  hospitalText: siteText.pages.hospital_page.nl,
-  intensiveCareText: siteText.pages.intensive_care_page.nl,
-  sewerText: siteText.pages.sewer_page.shared,
-  positiveTestsText: siteText.pages.positive_tests_page.shared,
   textNl: siteText.pages.topical_page.nl,
   textShared: siteText.pages.topical_page.shared,
 });
