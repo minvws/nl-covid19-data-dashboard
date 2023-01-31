@@ -17,7 +17,7 @@ type ArticleTeaserProps = {
   slug: string;
   summary: Block;
   cover: ImageBlock;
-  coverSizes: number[][];
+  coverSizes: string[][];
 };
 
 export function ArticleTeaser(props: ArticleTeaserProps) {
@@ -28,8 +28,8 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledArticleTeaser>
         {cover.asset && (
-          <ZoomContainer height={200}>
-            <BackgroundImage image={cover} height={'200px'} sizes={coverSizes} />
+          <ZoomContainer height="200px">
+            <BackgroundImage image={cover} height="200px" sizes={coverSizes} />
           </ZoomContainer>
         )}
 
@@ -49,7 +49,7 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
 
 const ZoomContainer = styled(ZoomContainerUnstyled)``;
 
-function ZoomContainerUnstyled({ children, height, className }: { height: number; children: ReactNode; className?: string }) {
+function ZoomContainerUnstyled({ children, height, className }: { height: string; children: ReactNode; className?: string }) {
   return (
     <Box overflow="hidden" height={height} position="relative">
       <Box className={className}>{children}</Box>
