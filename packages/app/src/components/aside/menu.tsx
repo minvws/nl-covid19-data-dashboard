@@ -158,8 +158,8 @@ const Icon = ({ children }: { children: ReactNode }) => {
       flexWrap="nowrap"
       justifyContent="center"
       alignItems="center"
-      padding={space[0]}
-      marginRight={space[0]}
+      padding="0"
+      marginRight="0"
       marginTop="-3px"
       css={css({
         width: '2.5rem',

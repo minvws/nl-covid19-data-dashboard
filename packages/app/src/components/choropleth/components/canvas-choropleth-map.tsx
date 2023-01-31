@@ -4,7 +4,6 @@ import Konva from 'konva';
 import { memo, FocusEvent, MouseEvent, MutableRefObject, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { Group, Layer, Line, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
-import { space } from '~/style/theme';
 import { isIOSDevice } from '~/utils/is-ios-device';
 import { AccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
@@ -164,8 +163,8 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
           style={{
             overflow: 'hidden',
             position: 'absolute',
-            left: space[0],
-            right: space[0],
+            left: '0',
+            right: '0',
           }}
         >
           <Outlines geoInfo={outlineGeoInfo} featureProps={featureProps} />
@@ -174,7 +173,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
           </Features>
           <HoveredFeature hoveredRef={hoveredRef} hover={hover} hoverCode={hoverCode} featureProps={featureProps} isKeyboardActive={isKeyboardActive} />
         </Stage>
-        <div style={{ position: 'absolute', left: space[0], right: space[0] }}>
+        <div style={{ position: 'absolute', left: '0', right: '0' }}>
           <img aria-hidden="true" src={oneTransparentPixelImage} width={width} height={height} useMap={`#${mapId}`} />
         </div>
       </div>

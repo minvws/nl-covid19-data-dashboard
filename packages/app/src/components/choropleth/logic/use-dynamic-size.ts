@@ -2,7 +2,6 @@ import { assert } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { BoundingBoxPadding, HeightAndPadding, OptionalBoundingBoxPadding, ResponsiveSizeConfiguration, ResponsiveSizeSettings } from '~/components/choropleth';
-import { space } from '~/style/theme';
 
 export function useResponsiveSize(
   containerWidth: number,
@@ -48,9 +47,9 @@ function isResponsiveConfiguration(value: ResponsiveSizeSettings | HeightAndPadd
 
 function addDefaultPaddingValues(optionalPadding: OptionalBoundingBoxPadding): BoundingBoxPadding {
   return {
-    left: optionalPadding.left ?? space[0],
-    right: optionalPadding.right ?? space[0],
-    top: optionalPadding.top ?? space[0],
-    bottom: optionalPadding.bottom ?? space[0],
+    left: optionalPadding.left ?? 0,
+    right: optionalPadding.right ?? 0,
+    top: optionalPadding.top ?? 0,
+    bottom: optionalPadding.bottom ?? 0,
   };
 }
