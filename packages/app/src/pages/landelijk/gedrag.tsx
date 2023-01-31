@@ -165,15 +165,18 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
           </TwoKpiSection>
 
           <BehaviorTableTile
-            title={textNl.basisregels.title}
+            title={text.shared.basisregels.title}
             description={textNl.basisregels.description}
-            complianceExplanation={textNl.basisregels.volgen_beschrijving}
-            supportExplanation={textNl.basisregels.steunen_beschrijving}
             value={behaviorLastValue}
-            annotation={textNl.basisregels.annotatie}
+            annotation={text.shared.basisregels.annotation}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
             text={textShared}
+            metadata={{
+              datumsText: textNl.datums,
+              date: data.behavior.values[0].date_end_unix,
+              source: textNl.bronnen.rivm,
+            }}
           />
 
           <span ref={scrollToRef} />
@@ -194,12 +197,15 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
             <BehaviorPerAgeGroup
               title={textNl.tabel_per_leeftijdsgroep.title}
               description={textNl.tabel_per_leeftijdsgroep.description}
-              complianceExplanation={textNl.tabel_per_leeftijdsgroep.explanation.compliance}
-              supportExplanation={textNl.tabel_per_leeftijdsgroep.explanation.support}
               data={data.behavior_per_age_group}
               currentId={currentId}
               setCurrentId={setCurrentId}
               text={text}
+              metadata={{
+                datumsText: textNl.datums,
+                date: data.behavior_per_age_group.date_end_unix,
+                source: textNl.bronnen.rivm,
+              }}
             />
           )}
 

@@ -1,7 +1,7 @@
-import { css } from '@styled-system/css';
-import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { colors } from '@corona-dashboard/common';
+import styled from 'styled-components';
+import { space } from '~/style/theme';
 
 interface PercentageProps {
   percentage: number;
@@ -11,69 +11,47 @@ interface PercentageProps {
   backgroundColor?: string;
 }
 
-export function PercentageBar({
-  percentage,
-  height,
-  color,
-  backgroundColor = colors.gray2,
-  backgroundStyle = 'normal',
-}: PercentageProps) {
+export const PercentageBar = ({ percentage, height, color, backgroundColor = colors.gray2, backgroundStyle = 'normal' }: PercentageProps) => {
   const minWidth = percentage > 0 ? '2px' : undefined;
 
-  backgroundColor =
-    backgroundStyle === 'normal'
-      ? backgroundColor
-        ? backgroundColor
-        : 'gray2'
-      : backgroundColor;
-
   return (
-    <Wrapper>
-      <Bar
-        style={{ width: `${percentage}%` }}
-        height={height}
-        minWidth={minWidth}
-        color={color}
-      />
-
-      <Box
-        // Created by https://stripesgenerator.com/
-        css={css(
-          backgroundStyle === 'hatched'
-            ? {
-                backgroundImage: `linear-gradient(45deg, ${backgroundColor} 30%, #ffffff 30%, #ffffff 50%, ${backgroundColor} 50%, ${backgroundColor} 80%, #ffffff 80%, #ffffff 100%)`,
-                backgroundSize: '7.07px 7.07px',
-              }
-            : {
-                backgroundColor,
-              }
-        )}
-        flex={1}
-        height={height}
-        top={0}
-        left={0}
-      />
-    </Wrapper>
+    <Box display="flex" position="relative" width="100%">
+      <Bar style={{ width: `${percentage}%` }} height={height} minWidth={minWidth} color={color} />
+      <StyledDiv backgroundStyle={backgroundStyle} backgroundColor={backgroundColor} height={height} />
+    </Box>
   );
+};
+
+interface StyledDivProps {
+  backgroundStyle: string;
+  backgroundColor: string;
+  height?: string | number;
 }
 
-const Wrapper = styled.div(
-  css({
-    display: 'flex',
-    position: 'relative',
-    width: '100%',
-  })
-);
+const StyledDiv = styled.div<StyledDivProps>`
+  /* Created by https://stripesgenerator.com/ */
+  background-color: ${({ backgroundStyle, backgroundColor }) => (backgroundStyle !== 'hatched' ? backgroundColor : undefined)};
+  background-image: ${({ backgroundStyle, backgroundColor }) =>
+    backgroundStyle === 'hatched'
+      ? `linear-gradient(45deg, ${backgroundColor} 30%, #ffffff 30%, #ffffff 50%, ${backgroundColor} 50%, ${backgroundColor} 80%, #ffffff 80%, #ffffff 100%)`
+      : undefined};
+  background-size: ${({ backgroundStyle }) => (backgroundStyle === 'hatched' ? '7.07px 7.07px' : undefined)};
+  flex: 1;
+  height: ${({ height }) => (height ? height : undefined)};
+  left: ${space[0]};
+  top: ${space[0]};
+`;
 
-const Bar = styled.div<{
+interface BarProps {
   height?: number | string;
   minWidth?: string;
   color?: string;
-}>((x) =>
-  css({
-    backgroundColor: x.color ? x.color : 'currentcolor',
-    height: x.height ?? '0.8em',
-    minWidth: x.minWidth,
-    zIndex: 3,
-  })
-);
+}
+
+const Bar = styled.div<BarProps>`
+  background-color: ${({ color }) => (color ? color : 'currentcolor')};
+  height: ${({ height }) => height ?? '0.8em'};
+  min-width: ${({ minWidth }) => minWidth};
+  transition: width 0.3s;
+  z-index: 3;
+`;
