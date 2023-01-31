@@ -32,7 +32,7 @@ export const BehaviorIconWithLabel = ({ id, description, onClickConfig }: Behavi
         <BehaviorIcon name={id} size={25} />
       </Box>
 
-      <BehaviorAnchor as="button" underline="hover" color="black" onClick={() => anchorButtonClickHandler(id, onClickConfig.scrollRef)}>
+      <BehaviorAnchor as="button" underline="hover" color={colors.black} onClick={() => anchorButtonClickHandler(id, onClickConfig.scrollRef)}>
         <Box as="span" display="flex" alignItems="center" textAlign="left" flexWrap="wrap">
           {description}
         </Box>
