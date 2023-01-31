@@ -72,14 +72,14 @@ interface Breakpoints extends Array<string> {
 }
 
 // @ts-expect-error ignore error, missing props are assigned after this line
-const breakpoints: Breakpoints = ['26em', '48em', '60em', '75em', '100em'];
+export const breakpoints: Breakpoints = ['26em', '48em', '60em', '75em', '100em'];
 breakpoints.xs = breakpoints[0]; // ~420px
 breakpoints.sm = breakpoints[1]; // ~768px
 breakpoints.md = breakpoints[2]; // ~960px
 breakpoints.lg = breakpoints[3]; // ~1200px
 breakpoints.xl = breakpoints[4]; // ~1600px
 
-const mediaQueries = {
+export const mediaQueries = {
   xs: `screen and (min-width: ${breakpoints[0]})`,
   sm: `screen and (min-width: ${breakpoints[1]})`,
   md: `screen and (min-width: ${breakpoints[2]})`,
