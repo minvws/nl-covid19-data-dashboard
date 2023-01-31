@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { External } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
@@ -24,8 +25,8 @@ export function AppFooter() {
           display="grid"
           gridTemplateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }}
           css={css({
-            columnGap: asResponsiveArray({ sm: '32px', md: '48px' }),
-            rowGap: asResponsiveArray({ _: 4, md: null }),
+            columnGap: asResponsiveArray({ sm: space[4], md: '48px' }),
+            rowGap: asResponsiveArray({ _: space[4], md: null }),
           })}
           paddingX={{ _: space[3], sm: space[4], md: space[3], lg: space[4] }}
         >
@@ -64,7 +65,7 @@ export function AppFooter() {
             <Heading as="div" level={3}>
               {text.nav.contact}
             </Heading>
-            <Box maxWidth={{ sm: '90%', md: 280 }} css={css({ a: { color: 'white' } })}>
+            <Box maxWidth={{ sm: '90%', md: '280px' }} css={css({ a: { color: colors.white } })}>
               <Markdown content={text.nav.contact_beschrijving} />
             </Box>
           </Box>
@@ -107,8 +108,8 @@ const ListItem = styled.li<{ isExternal?: boolean }>((x) =>
 
     '&:before': {
       position: 'absolute',
-      top: space[0],
-      left: space[0],
+      top: '0',
+      left: '0',
       content: x.isExternal ? null : '"›"',
     },
   })
@@ -118,7 +119,7 @@ const IconContainer = styled.div(
   css({
     position: 'absolute',
     left: '-3px',
-    top: space[0],
+    top: '0',
 
     svg: {
       width: '10px',

@@ -33,7 +33,7 @@ export function TopNavigation() {
       >
         {collapsible.button(
           <NavToggle>
-            {collapsible.isOpen ? <CloseThick heigth="24px" width="24px" /> : <Menu heigth="24px" width="24px" />}
+            {collapsible.isOpen ? <CloseThick height="24px" width="24px" /> : <Menu height="24px" width="24px" />}
             <VisuallyHidden>{collapsible.isOpen ? commonTexts.nav.menu.close_menu : commonTexts.nav.menu.open_menu}</VisuallyHidden>
           </NavToggle>
         )}
@@ -84,7 +84,7 @@ const NavToggle = styled.button(
     color: 'white',
     bg: 'transparent',
     padding: '6px',
-    margin: space[0],
+    margin: '0',
     border: 'none',
     '&:focus': {
       bg: 'rgba(0, 0, 0, 0.1)',
@@ -97,16 +97,16 @@ const NavWrapper = styled.nav(
     display: 'block',
     width: '100%',
     borderTopWidth: '1px',
-    padding: space[0],
+    padding: '0',
     overflow: 'hidden',
 
     [`@media ${wideNavBreakpoint}`]: {
       height: 'auto !important',
       display: 'inline',
       width: 'auto',
-      borderTopWidth: 0,
+      borderTopWidth: '0',
       marginLeft: 'auto',
-      marginTop: space[0],
+      marginTop: '0',
       paddingY: space[1],
       flex: '0 0 auto',
     },
@@ -117,14 +117,14 @@ const NavList = styled.ul(
   css({
     borderTop: '1px solid white',
     listStyle: 'none',
-    padding: space[0],
-    margin: space[0],
+    padding: '0',
+    margin: '0',
     marginTop: '1.25rem',
     display: 'block',
 
     [`@media ${wideNavBreakpoint}`]: {
       borderTop: 'none',
-      marginTop: space[0],
+      marginTop: '0',
       display: 'flex',
     },
   })
@@ -138,7 +138,7 @@ const StyledListItem = styled.li(
       borderTopWidth: '1px',
 
       [`@media ${wideNavBreakpoint}`]: {
-        borderTopWidth: 0,
+        borderTopWidth: '0',
       },
     },
   })
@@ -192,7 +192,7 @@ const NavLinkSpan = styled.span(
       fontWeight: 'bold',
       overflow: 'hidden',
       visibility: 'hidden',
-      height: '0px',
+      height: '0',
     },
 
     // Styled underline

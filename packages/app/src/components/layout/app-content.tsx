@@ -38,7 +38,7 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
   const backButtonText = currentPageScope ? (isMenuOpen ? (isNational ? commonTexts.nav.back_topical.nl : '') : commonTexts.nav.back_all_metrics[currentPageScope]) : '';
 
   return (
-    <MaxWidth paddingX={{ _: space[0], xs: space[0], sm: space[0], md: space[0], lg: space[3] }}>
+    <MaxWidth paddingX={{ _: '0', lg: space[3] }}>
       <AppContentContainer>
         {backButtonUrl && (
           <>
@@ -50,7 +50,7 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
                 paddingY: space[3],
                 position: 'relative',
                 borderBottom: 'solid 1px',
-                borderColor: 'gray3',
+                borderColor: colors.gray3,
               })}
             >
               <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
@@ -92,7 +92,7 @@ const BackButtonContainer = styled(Box)<{
   css({
     marginX: x.isMenuOpen ? asResponsiveArray({ _: space[1], xs: 'auto' }) : asResponsiveArray({ _: space[1], sm: space[5] }),
     display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
-    paddingX: asResponsiveArray({ _: space[1], sm: space[1] }),
+    paddingX: space[1],
     maxWidth: x.isMenuOpen ? '38rem' : undefined,
   })
 );
@@ -102,7 +102,7 @@ const AppContentContainer = styled.div(
     display: ['block', null, null, 'flex'],
     flexDirection: ['column', null, null, 'row'],
     marginBottom: space[4],
-    margin: `${space[0]} auto`,
+    margin: `0 auto`,
     paddingBottom: space[4],
     minHeight: '50vh',
   })
@@ -113,7 +113,7 @@ const StyledAppContent = styled.main(
     zIndex: 3,
     position: 'relative',
     width: '100%',
-    minWidth: 0,
+    minWidth: '0',
     flexGrow: 1,
     flexShrink: 1,
   })

@@ -12,7 +12,7 @@ export function LokalizeMetadata({ date, source }: MetadataProps) {
   const { commonTexts } = useIntl();
 
   return (
-    <Box as="footer" marginTop={space[3]} marginBottom={{ _: space[0], sm: '-3px' }} gridArea="metadata">
+    <Box as="footer" marginTop={space[3]} marginBottom={{ _: '0', sm: '-3px' }} gridArea="metadata">
       <Text color="gray7" variant="label1">
         {`${date} · ${commonTexts.common.metadata.source}: ${source}`}
       </Text>

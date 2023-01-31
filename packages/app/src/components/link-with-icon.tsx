@@ -107,8 +107,8 @@ const IconLarge = ({ icon, isSingleWord, width, height }: IconProps) => {
           marginLeft: space[2],
           position: isSingleWord ? 'absolute' : 'relative',
           minHeight: '100%',
-          right: space[0],
-          top: space[0],
+          right: '0',
+          top: '0',
         },
       })}
     >

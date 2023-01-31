@@ -29,7 +29,7 @@ export function AppHeader() {
           paddingLeft={{ _: space[3], sm: space[4] }}
           paddingRight={{ _: space[3], sm: space[4], md: space[3] }}
         >
-          <Box paddingY={{ _: space[2], xs: space[2], sm: space[2], md: space[3] }}>
+          <Box paddingY={{ _: space[2], md: space[3] }}>
             <Link href="/" passHref>
               <Anchor color="white" variant="h3">
                 {commonTexts.header.title}
