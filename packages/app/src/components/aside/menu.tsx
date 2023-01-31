@@ -9,6 +9,7 @@ import { Box } from '~/components/base';
 import { Anchor, Heading } from '~/components/typography';
 import { ExpandedSidebarMap, Layout } from '~/domain/layout/logic/types';
 import { space, SpaceValue } from '~/style/theme';
+import { colors } from '@corona-dashboard/common';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -102,7 +103,7 @@ const Unavailable = styled.span(
   css({
     display: 'block',
     padding: space[2],
-    color: 'gray5',
+    color: colors.gray5,
 
     svg: {
       fill: 'currentColor',
@@ -116,18 +117,18 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
     paddingLeft: '3rem',
     display: 'block',
     borderRight: '5px solid transparent',
-    color: anchorProps.isActive ? 'blue8' : 'black',
+    color: anchorProps.isActive ? colors.blue8 : 'black',
     fontWeight: anchorProps.isActive ? 'bold' : 'normal',
     position: 'relative',
     bg: anchorProps.isActive ? 'blue1' : 'transparent',
-    borderRightColor: anchorProps.isActive ? 'blue8' : 'transparent',
+    borderRightColor: anchorProps.isActive ? colors.blue8 : 'transparent',
 
     '&:hover, &:focus': {
       bg: 'blue8',
-      color: 'white',
+      color: colors.white,
       fontWeight: 'bold',
       svg: {
-        color: 'white',
+        color: colors.white,
       },
     },
 
@@ -159,7 +160,7 @@ const Icon = ({ children }: { children: ReactNode }) => {
       alignItems="center"
       padding={space[0]}
       marginRight={space[0]}
-      mt="-3px"
+      marginTop="-3px"
       css={css({
         width: '2.5rem',
         height: '2.5rem',
