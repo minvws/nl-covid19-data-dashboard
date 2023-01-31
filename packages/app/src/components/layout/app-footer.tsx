@@ -20,7 +20,7 @@ export function AppFooter() {
 
   return (
     <footer>
-      <Box bg="blue8" color="white" paddingY={space[5]} position="relative" id="footer-navigation">
+      <Box backgroundColor={colors.blue8} color={colors.white} paddingY={space[5]} position="relative" id="footer-navigation">
         <MaxWidth
           display="grid"
           gridTemplateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }}
