@@ -47,9 +47,9 @@ function isResponsiveConfiguration(value: ResponsiveSizeSettings | HeightAndPadd
 
 function addDefaultPaddingValues(optionalPadding: OptionalBoundingBoxPadding): BoundingBoxPadding {
   return {
-    left: optionalPadding.left ?? space[0],
-    right: optionalPadding.right ?? space[0],
-    top: optionalPadding.top ?? space[0],
-    bottom: optionalPadding.bottom ?? space[0],
+    left: optionalPadding.left ?? 0,
+    right: optionalPadding.right ?? 0,
+    top: optionalPadding.top ?? 0,
+    bottom: optionalPadding.bottom ?? 0,
   };
 }

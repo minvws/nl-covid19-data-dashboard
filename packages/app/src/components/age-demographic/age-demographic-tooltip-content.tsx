@@ -61,8 +61,8 @@ export function AgeDemographicTooltipContent<T extends AgeDemographicDefaultValu
 
 const Legend = styled.ul`
   border-top: 1px solid ${colors.gray2};
-  margin: ${space[0]};
-  padding: ${space[2]} ${space[0]};
+  margin: 0;
+  padding: ${space[2]} 0;
 `;
 
 interface LegendItemProps {
@@ -71,7 +71,7 @@ interface LegendItemProps {
 
 const LegendItem = styled.li<LegendItemProps>`
   list-style: none;
-  margin: ${space[0]};
+  margin: 0;
   padding: ${space[1]} ${space[3]} ${space[1]} 2.75rem;
   position: relative;
 

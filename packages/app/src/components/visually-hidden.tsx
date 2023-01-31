@@ -6,7 +6,6 @@
 import css from '@styled-system/css';
 import { ComponentProps, ReactNode } from 'react';
 import styled from 'styled-components';
-import { space } from '~/style/theme';
 
 interface VisuallyHiddenProps {
   children: ReactNode;
