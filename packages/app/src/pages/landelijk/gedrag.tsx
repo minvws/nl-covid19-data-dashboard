@@ -174,7 +174,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
             text={textShared}
             metadata={{
               datumsText: textNl.datums,
-              date: data.behavior.values[0].date_end_unix,
+              date: data.behavior.last_value.date_start_unix,
               source: textNl.bronnen.rivm,
             }}
           />
@@ -203,7 +203,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
               text={text}
               metadata={{
                 datumsText: textNl.datums,
-                date: data.behavior_per_age_group.date_end_unix,
+                date: data.behavior_per_age_group.date_start_unix,
                 source: textNl.bronnen.rivm,
               }}
             />
