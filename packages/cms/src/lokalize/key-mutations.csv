@@ -269,3 +269,9 @@ timestamp,action,key,document_id,move_to
 2023-01-26T14:40:01.873Z,add,pages.behavior_page.shared.basisregels.percentage_bar_column_header,H51WXygmup367lqvWyhYni,__
 2023-01-27T15:36:42.838Z,delete,pages.hospitalPage.nl.extra_uitleg,jF33EuwumlGuwav2FD3XXw,__
 2023-01-27T15:23:55.933Z,add,pages.hospital_page.nl.extra_description,HUrvkI3TfiQn7uqq7z2elF,__
+2023-01-31T13:47:09.959Z,delete,pages.hospitals_and_care_page.nl.sources.nice.download,PKXdxxxKAnTg0F1ZCrJHg3,__
+2023-01-31T13:47:09.966Z,delete,pages.hospitals_and_care_page.nl.sources.nice.href,0iJeil5hiqRr6jTKtaSVMX,__
+2023-01-31T13:47:09.979Z,delete,pages.hospitals_and_care_page.nl.sources.nice.text,PKXdxxxKAnTg0F1ZCrJHmN,__
+2023-01-31T13:47:09.980Z,delete,pages.patients_page.nl.sources.lnaz.download,KoLyCpXIGU95m7jfEOaid7,__
+2023-01-31T13:47:09.981Z,delete,pages.patients_page.nl.sources.lnaz.href,0iJeil5hiqRr6jTKtaSVTH,__
+2023-01-31T13:47:09.981Z,delete,pages.patients_page.nl.sources.lnaz.text,0iJeil5hiqRr6jTKtaSVWx,__

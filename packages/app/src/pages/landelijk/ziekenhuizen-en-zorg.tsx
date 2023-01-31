@@ -1,5 +1,5 @@
 import { colors, getLastFilledValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { Ziekenhuis } from '@corona-dashboard/icons';
+import { IntensiveCareOpnames } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { ChartTile } from '~/components/chart-tile';
@@ -124,13 +124,13 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
             screenReaderCategory={commonTexts.sidebar.metrics.hospitals_and_care.title}
             title={textNl.title}
-            icon={<Ziekenhuis aria-hidden="true" />}
+            icon={<IntensiveCareOpnames aria-hidden="true" />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: hospitalLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
-              dataSources: [textNl.sources.nice, textNl.sources.lnaz],
+              dataSources: [textNl.sources.lnaz],
             }}
             referenceLink={textNl.reference.href}
             pageLinks={content.links}
