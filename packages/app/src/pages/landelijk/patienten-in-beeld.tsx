@@ -135,7 +135,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               datumsText: textNl.datums,
               dateOrRange: lastValueNice.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
-              dataSources: [textNl.sources.nice, textNl.sources.lnaz],
+              dataSources: [textNl.sources.nice],
             }}
             referenceLink={textNl.reference.href}
             pageLinks={content.links}
