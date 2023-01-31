@@ -46,12 +46,12 @@ export function TimespanAnnotation({
   return (
     <>
       {fill === 'hatched' && (
-        <pattern id={patternId} width="8" height="8" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+        <pattern id={patternId} width="8px" height="8px" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
           <line x1="0" y1="0" x2="0" y2="8" style={{ stroke: 'white', strokeWidth: 4 }} />
         </pattern>
       )}
       {fill === 'dotted' && (
-        <pattern id={patternId} width="4" height="4" patternUnits="userSpaceOnUse">
+        <pattern id={patternId} width="4px" height="4px" patternUnits="userSpaceOnUse">
           <line x1="0" y1="4" x2="0" y2="0" style={{ stroke: 'white', strokeWidth: 4, strokeDasharray: 2 }} />
         </pattern>
       )}
@@ -105,7 +105,7 @@ export function HatchedTimespanAnnotationIcon({ width = 15, height = 15 }: Hatch
   return (
     <svg height={width} width={height} viewBox={`0 0 ${width} ${height}`}>
       <defs>
-        <pattern id="hatch" width="4" height="4" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+        <pattern id="hatch" width="4px" height="4px" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
           <line x1="0" y1="0" x2="0" y2="5" style={{ stroke: colors.gray5, strokeWidth: 3 }} />
         </pattern>
       </defs>

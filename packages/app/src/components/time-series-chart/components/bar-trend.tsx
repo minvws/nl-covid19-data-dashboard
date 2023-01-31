@@ -64,6 +64,8 @@ export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, ge
 
             return (
               <React.Fragment key={`out-of-bounds-${index}`}>
+                {/* magic-number-alert at the next line the component <PatternLines> receives a number as a height and width.
+                Those are related to the visX library and connot be changed to string/pixel values */}
                 <PatternLines id="diagonal-pattern" height={6} width={6} stroke={colors.neutral} strokeWidth={2} orientation={['diagonal']} />
                 <rect key={index} x={x} y={y} height={barHeight} width={barWidth} fill={'url(#diagonal-pattern)'} id={id} />
               </React.Fragment>

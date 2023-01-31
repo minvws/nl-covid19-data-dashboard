@@ -333,7 +333,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
           css={isYAxisCollapsed ? css({ float: 'left' }) : undefined}
         >
           <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
-          <Spacer marginBottom={{ _: space[2], sm: space[0] }} />
+          <Spacer marginBottom={{ _: space[2], sm: '0' }} />
         </Box>
       )}
 

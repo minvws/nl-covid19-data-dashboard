@@ -72,7 +72,7 @@ const Container = styled.div(
   css({
     position: 'absolute',
     pointerEvents: 'none',
-    top: space[0],
-    bottom: space[0],
+    top: '0',
+    bottom: '0',
   })
 );

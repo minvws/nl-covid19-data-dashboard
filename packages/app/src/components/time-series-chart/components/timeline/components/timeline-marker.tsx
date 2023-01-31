@@ -2,7 +2,6 @@ import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { m } from 'framer-motion';
 import styled from 'styled-components';
-import { space } from '~/style/theme';
 
 interface TimelineMarkerProps {
   color?: string;
@@ -17,7 +16,7 @@ export const TimelineMarker = ({ color = colors.primary, isHighlighted, hasPaddi
   const innerPointSize = size - 2 * borderWidth;
 
   return (
-    <div role="img" style={{ padding: hasPadding ? highlightBorderWidth : space[0] }} aria-hidden={true}>
+    <div role="img" style={{ padding: hasPadding ? highlightBorderWidth : '0' }} aria-hidden={true}>
       <div style={{ width: size, height: size }}>
         <StyledPointMarker
           size={innerPointSize}

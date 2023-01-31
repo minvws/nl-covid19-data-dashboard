@@ -78,7 +78,7 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
 }
 
 function AppearTransition(props: ComponentProps<typeof MotionBox>) {
-  return <MotionBox {...props} initial={{ height: '0px', opacity: 0 }} exit={{ height: '0px', opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} overflow="hidden" />;
+  return <MotionBox {...props} initial={{ height: '0', opacity: 0 }} exit={{ height: '0', opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} overflow="hidden" />;
 }
 
 function useInitialWidth<T extends HTMLElement>() {
