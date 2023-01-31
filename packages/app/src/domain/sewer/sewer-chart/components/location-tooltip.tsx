@@ -8,7 +8,7 @@ import { VisuallyHidden } from '~/components';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { MergedSewerType } from '../logic';
-import { space } from '~/style/theme';
+import { fontSizes, space } from '~/style/theme';
 
 /**
  * A specific tooltip for when you've selected a location. It contains an icon
@@ -26,7 +26,7 @@ export function LocationTooltip({ data }: { data: TooltipData<MergedSewerType> }
   return (
     <>
       <VisuallyHidden>{dateString}</VisuallyHidden>
-      <Box fontSize={1} display="flex" alignItems="center">
+      <Box fontSize={fontSizes[1]} display="flex" alignItems="center">
         <StyledLocationIcon>
           <Location />
         </StyledLocationIcon>

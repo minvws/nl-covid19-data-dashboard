@@ -136,7 +136,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
       onSelectTimeframe={setSewerTimeframe}
     >
       {dataPerInstallation && (
-        <Box alignSelf="flex-start" marginBottom={space[3]} minWidth={207}>
+        <Box alignSelf="flex-start" marginBottom={space[3]} minWidth="207px">
           <RichContentSelect
             label={text.selectPlaceholder}
             visuallyHiddenLabel

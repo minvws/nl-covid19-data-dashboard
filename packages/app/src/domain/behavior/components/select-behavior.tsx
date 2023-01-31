@@ -19,7 +19,7 @@ export function SelectBehavior({ label, value, onChange, options = behaviorIdent
   const selectOptions = options
     .map((id) => {
       const label = commonTexts.behavior.subjects[id];
-      const iconSize = 25;
+      const iconSize = '25px';
       return {
         value: id,
         label,
