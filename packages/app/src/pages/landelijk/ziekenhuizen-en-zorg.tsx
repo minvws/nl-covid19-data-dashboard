@@ -2,7 +2,13 @@ import { colors, getLastFilledValue, TimeframeOption, TimeframeOptionsList } fro
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { TimeSeriesChart, TileList, SEOHead, ChartTile, PageInformationBlock } from '~/components';
+import { ChartTile } from '~/components/chart-tile';
+import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { SEOHead } from '~/components/seo-head';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { HospitalsTile } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
@@ -11,11 +17,9 @@ import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { countTrailingNullValues, getBoundaryDateStartUnix } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
-import { HospitalsTile } from '~/domain/hospital';
-import { getBoundaryDateStartUnix, countTrailingNullValues } from '~/utils';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const pageMetrics = [
   'difference.hospital_lcps__beds_occupied_covid',
