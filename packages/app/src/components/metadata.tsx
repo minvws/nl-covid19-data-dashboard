@@ -21,7 +21,7 @@ export interface MetadataProps extends MarginBottomProps {
   intervalCount?: string;
 }
 
-export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, mb, dataSources, intervalCount }: MetadataProps) {
+export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, marginBottom, dataSources, intervalCount }: MetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
 
   const dateString =
@@ -62,7 +62,7 @@ export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, m
          * @TODO split up the `isTileFooter` vs non `isTileFooter` implementations,
          * should be separate components.
          */
-        <Box as="footer" marginTop={space[3]} marginBottom={mb || { _: space[0], sm: '-3px' }} gridArea="metadata">
+        <Box as="footer" marginTop={space[3]} marginBottom={marginBottom || { _: '0', sm: '-3px' }} gridArea="metadata">
           <Text color="gray7" variant="label1">
             {datumsText && Array.isArray(date) ? (
               replaceVariablesInText(datumsText, {

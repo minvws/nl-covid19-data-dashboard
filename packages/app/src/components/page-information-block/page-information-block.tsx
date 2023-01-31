@@ -97,7 +97,7 @@ export function PageInformationBlock({
                 md: 0,
               }}
               css={css({
-                columnGap: 5,
+                columnGap: space[5],
               })}
             >
               {articles && articles.length ? (
@@ -144,7 +144,7 @@ const Tile = styled.div<{ hasTitle?: boolean }>((x) =>
 const MetadataBox = styled.div(
   css({
     flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
-    marginBottom: asResponsiveArray({ _: space[3], md: space[0] }),
+    marginBottom: asResponsiveArray({ _: space[3], md: '0' }),
   })
 );
 

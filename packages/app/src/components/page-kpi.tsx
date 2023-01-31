@@ -57,7 +57,7 @@ export function PageKpi<T>({ data, metricName, metricProperty, differenceKey, di
   const hasDifference = isDefined(differenceKey) || isDefined(differenceValue);
 
   return (
-    <Box spacing={0} marginBottom={hasDifference ? space[3] : space[0]}>
+    <Box spacing={0} marginBottom={hasDifference ? space[3] : '0'}>
       <KpiValue absolute={propertyValue} />
 
       {isDefined(differenceKey) &&

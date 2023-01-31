@@ -42,15 +42,15 @@ const StyledMessage = styled.div<{
      * so we can use the styling from the second one.
      */
     position: 'relative',
-    paddingY: x.resetParentStyles ? space[0] : space[2],
-    paddingX: x.resetParentStyles ? space[0] : space[3],
+    paddingY: x.resetParentStyles ? '0' : space[2],
+    paddingX: x.resetParentStyles ? '0' : space[3],
     borderLeft: x.resetParentStyles ? 0 : '7px solid',
     backgroundColor: theme[x.variant].backgroundColor,
     borderLeftColor: theme[x.variant].borderColor,
     borderRadius: '5px',
 
     '& > *': {
-      margin: space[0],
+      margin: '0',
     },
     ...spacingStyle(2),
 
