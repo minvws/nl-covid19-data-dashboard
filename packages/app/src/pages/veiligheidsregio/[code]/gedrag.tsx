@@ -122,8 +122,6 @@ const BehaviorPageVr = (props: StaticProps<typeof getStaticProps>) => {
           <BehaviorTableTile
             title={text.shared.basisregels.title}
             description={text.vr.basisregels.description}
-            complianceExplanation={text.vr.basisregels.volgen_beschrijving}
-            supportExplanation={text.vr.basisregels.steunen_beschrijving}
             value={behaviorLastValue}
             annotation={text.shared.basisregels.annotation}
             setCurrentId={setCurrentId}
