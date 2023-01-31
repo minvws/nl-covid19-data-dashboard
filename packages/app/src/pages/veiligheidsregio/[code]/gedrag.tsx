@@ -112,8 +112,8 @@ const BehaviorPageVr = (props: StaticProps<typeof getStaticProps>) => {
               <Text>
                 {replaceComponentsInText(text.vr.kpi.deelgenomen_mensen, {
                   number_of_participants: <BoldText>{formatNumber(behaviorLastValue.number_of_participants)}</BoldText>,
-                  date_start: <InlineText>{formatDateFromSeconds(behaviorLastValue.date_start_unix)}</InlineText>,
-                  date_end: <InlineText>{formatDateFromSeconds(behaviorLastValue.date_end_unix)}</InlineText>,
+                  date_start: <InlineText>{formatDateFromSeconds(behaviorLastValue.date_start_unix, 'weekday-long')}</InlineText>,
+                  date_end: <InlineText>{formatDateFromSeconds(behaviorLastValue.date_end_unix, 'weekday-long')}</InlineText>,
                 })}
               </Text>
             </Tile>

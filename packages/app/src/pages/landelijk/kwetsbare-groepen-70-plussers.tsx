@@ -31,7 +31,17 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
-const pageMetrics = ['nursing_home'];
+const pageMetrics = [
+  'difference.nursing_home__deceased_daily_archived_20230126',
+  'difference.vulnerable_nursing_home__infected_locations_total',
+  'difference.nursing_home__newly_infected_people_archived_20230126',
+  'difference.vulnerable_tested_per_age_group',
+  'difference.vulnerable_hospital_admissions',
+  'vulnerable_nursing_home',
+  'nursing_home_archived_20230126',
+  'vulnerable_hospital_admissions',
+  'vulnerable_tested_per_age_group',
+];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,

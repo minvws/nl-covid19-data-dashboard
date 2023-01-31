@@ -1,10 +1,5 @@
 import { colors } from '@corona-dashboard/common';
-import {
-  ChevronRight,
-  Clock,
-  Database,
-  MeerInformatie,
-} from '@corona-dashboard/icons';
+import { ChevronRight, Clock, Database, MeerInformatie } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { Fragment } from 'react';
 import styled from 'styled-components';
@@ -53,11 +48,7 @@ export function Metadata({
   const { commonTexts } = useIntl();
   const text = commonTexts.common.metadata;
 
-  const dateText = useFormatDateText(
-    dateOrRange,
-    dateOfInsertionUnix,
-    datumsText
-  );
+  const dateText = useFormatDateText(dateOrRange, dateOfInsertionUnix, datumsText);
 
   return (
     <Box spacing={2}>
@@ -72,60 +63,34 @@ export function Metadata({
         <MetadataItem
           icon={<Database aria-hidden />}
           items={dataSources}
-          label={
-            referenceLink ? commonTexts.informatie_header.bron : text.source
-          }
+          label={referenceLink ? commonTexts.informatie_header.bron : text.source}
           accessibilityText={commonTexts.accessibility.text_source}
           accessibilitySubject={accessibilitySubject}
           referenceLink={referenceLink}
         />
       )}
 
-      {referenceLink && (
-        <MetadataReference
-          icon={<MeerInformatie aria-hidden />}
-          referenceLink={referenceLink}
-        />
-      )}
+      {referenceLink && <MetadataReference icon={<MeerInformatie aria-hidden />} referenceLink={referenceLink} />}
 
-      {moreInformationLabel && (
-        <MetadataItem
-          icon={<MeerInformatie aria-hidden />}
-          items={moreInformationLink ? [moreInformationLink] : []}
-          label={moreInformationLabel}
-        />
-      )}
+      {moreInformationLabel && <MetadataItem icon={<MeerInformatie aria-hidden />} items={moreInformationLink ? [moreInformationLink] : []} label={moreInformationLabel} />}
     </Box>
   );
 }
 
-function useFormatDateText(
-  dateOrRange: number | DateRange,
-  dateOfInsertionUnix: number,
-  datumsText: string
-) {
+function useFormatDateText(dateOrRange: number | DateRange, dateOfInsertionUnix: number, datumsText: string) {
   const { formatDateFromSeconds } = useIntl();
 
   if (typeof dateOrRange === 'number') {
-    const dateOfReport = formatDateFromSeconds(dateOrRange, 'weekday-medium');
-    const dateOfInsertion = formatDateFromSeconds(
-      dateOfInsertionUnix,
-      'weekday-medium'
-    );
+    const dateOfReport = formatDateFromSeconds(dateOrRange, 'weekday-long');
+    const dateOfInsertion = formatDateFromSeconds(dateOfInsertionUnix, 'weekday-long');
     return replaceVariablesInText(datumsText, {
       dateOfReport,
       dateOfInsertion,
     });
   } else {
-    const weekStart = formatDateFromSeconds(
-      dateOrRange.start,
-      'weekday-medium'
-    );
-    const weekEnd = formatDateFromSeconds(dateOrRange.end, 'weekday-medium');
-    const dateOfInsertion = formatDateFromSeconds(
-      dateOfInsertionUnix,
-      'weekday-medium'
-    );
+    const weekStart = formatDateFromSeconds(dateOrRange.start, 'weekday-long');
+    const weekEnd = formatDateFromSeconds(dateOrRange.end, 'weekday-long');
+    const dateOfInsertion = formatDateFromSeconds(dateOfInsertionUnix, 'weekday-long');
     return replaceVariablesInText(datumsText, {
       weekStart,
       weekEnd,
@@ -146,14 +111,7 @@ interface MetadataItemProps {
   referenceLink?: string;
 }
 
-function MetadataItem({
-  icon,
-  label,
-  items,
-  referenceLink,
-  accessibilityText,
-  accessibilitySubject,
-}: MetadataItemProps) {
+function MetadataItem({ icon, label, items, referenceLink, accessibilityText, accessibilitySubject }: MetadataItemProps) {
   const { commonTexts } = useIntl();
 
   return (

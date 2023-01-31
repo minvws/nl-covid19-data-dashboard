@@ -148,8 +148,8 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
                 <Markdown
                   content={replaceVariablesInText(textNl.kpi_recente_inzichten.tekst, {
                     number_of_participants: formatNumber(behaviorLastValue.number_of_participants),
-                    date_start: formatDateFromSeconds(behaviorLastValue.date_start_unix),
-                    date_end: formatDateFromSeconds(behaviorLastValue.date_end_unix),
+                    date_start: formatDateFromSeconds(behaviorLastValue.date_start_unix, 'weekday-long'),
+                    date_end: formatDateFromSeconds(behaviorLastValue.date_end_unix, 'weekday-long'),
 
                     highest_compliance_description: highestCompliance.description,
                     highest_compliance_compliance_percentage: formatPercentage(highestCompliance.compliancePercentage),

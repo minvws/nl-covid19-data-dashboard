@@ -65,7 +65,7 @@ export function TileDifference({
           `${content} ${showOldDateUnix ? (content === text.waarde_gelijk ? text.vorige_waarde_geljk_datum : text.vorige_waarde_datum) : text.vorige_waarde}`,
           {
             amount: `${formattedDifference}${isPercentage ? '%' : ''}`,
-            date: showOldDateUnix ? formatDateFromSeconds(value.old_date_unix) : '',
+            date: showOldDateUnix ? formatDateFromSeconds(value.old_date_unix, 'weekday-long') : '',
           }
         )}
       />

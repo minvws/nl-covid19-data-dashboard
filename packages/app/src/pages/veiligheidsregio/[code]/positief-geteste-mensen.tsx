@@ -154,7 +154,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
           <ChartTile
             title={textVr.linechart_titel}
             description={replaceVariablesInText(textVr.linechart_toelichting, {
-              date: formatDateFromSeconds(dataOverallLastValue.date_unix, 'weekday-medium'),
+              date: formatDateFromSeconds(dataOverallLastValue.date_unix, 'weekday-long'),
               administered_total: formatNumber(dataOverallLastValue.infected),
               infected_total: formatNumber(dataOverallLastValue.infected_moving_average_rounded),
             })}
@@ -198,7 +198,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 timeframeOptions={TimeframeOptionsList}
                 title={textVr.ggd.linechart_percentage_titel}
                 description={replaceVariablesInText(textVr.ggd.linechart_percentage_toelichting, {
-                  date: formatDateFromSeconds(dataGgdLastValue.date_unix, 'weekday-medium'),
+                  date: formatDateFromSeconds(dataGgdLastValue.date_unix, 'weekday-long'),
                   tested_total: formatNumber(dataGgdLastValue.tested_total),
                   infected_total: formatNumber(dataGgdLastValue.infected),
                 })}
@@ -238,7 +238,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 timeframeOptions={TimeframeOptionsList}
                 title={textVr.ggd.linechart_totaltests_titel}
                 description={replaceVariablesInText(textVr.ggd.linechart_totaltests_toelichting, {
-                  date: formatDateFromSeconds(dataGgdLastValue.date_unix, 'weekday-medium'),
+                  date: formatDateFromSeconds(dataGgdLastValue.date_unix, 'weekday-long'),
                   tested_total: formatNumber(dataGgdLastValue.tested_total),
                   infected_total: formatNumber(dataGgdLastValue.infected),
                 })}
@@ -293,7 +293,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   <BoldText variant="body2">
                     {replaceComponentsInText(textVr.map_last_value_text, {
                       infected_per_100k: <InlineText color="data.primary">{`${formatNumber(dataOverallLastValue.infected_per_100k)}`}</InlineText>,
-                      dateTo: formatDateFromSeconds(dataOverallLastValue.date_unix, 'weekday-medium'),
+                      dateTo: formatDateFromSeconds(dataOverallLastValue.date_unix, 'weekday-long'),
                       safetyRegion: vrName,
                     })}
                   </BoldText>
