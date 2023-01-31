@@ -21,8 +21,8 @@ interface LinkWithIconProps {
 interface IconProps {
   icon: ReactNode;
   isSingleWord?: boolean;
-  width: number;
-  height: number;
+  width: string;
+  height: string;
   marginRight?: number | string;
 }
 
@@ -48,13 +48,13 @@ export const LinkWithIcon = ({ href, icon, children, iconPlacement = 'left', fon
               {!words.length ? children : firstWords}
               <IconWrapper>
                 {words[words.length - 1]}
-                <IconSmall icon={icon} width={11} height={10} />
+                <IconSmall icon={icon} width={'11px'} height={'10px'} />
               </IconWrapper>
             </>
           )}
           {iconPlacement === 'left' && (
             <>
-              <IconSmall icon={icon} width={11} height={10} marginRight={space[1]} />
+              <IconSmall icon={icon} width={'11px'} height={'10px'} marginRight={space[1]} />
               {children}
             </>
           )}
@@ -84,7 +84,7 @@ export const HeadingLinkWithIcon = ({ href, icon, children, underline }: LinkWit
             {!words.length ? children : firstWords}
             <IconWrapper>
               {words[words.length - 1]}
-              <IconLarge icon={icon} isSingleWord={isSingleWord} width={16} height={13} />
+              <IconLarge icon={icon} isSingleWord={isSingleWord} width={space[3]} height={'13px'} />
             </IconWrapper>
           </Box>
         </Anchor>
@@ -102,8 +102,8 @@ const IconLarge = ({ icon, isSingleWord, width, height }: IconProps) => {
     <span
       css={css({
         svg: {
-          width,
-          height,
+          width: width,
+          height: height,
           marginLeft: space[2],
           position: isSingleWord ? 'absolute' : 'relative',
           minHeight: '100%',
