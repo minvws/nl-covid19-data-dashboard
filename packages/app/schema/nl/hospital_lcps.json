@@ -23,6 +23,12 @@
         "beds_occupied_covid": {
           "type": ["integer", "null"]
         },
+        "influx_covid_patients": {
+          "type": ["integer", "null"]
+        },
+        "influx_covid_patients_moving_average": {
+          "type": ["number", "null"]
+        },
         "date_unix": {
           "type": "integer"
         },
@@ -32,6 +38,8 @@
       },
       "required": [
         "beds_occupied_covid",
+        "influx_covid_patients",
+        "influx_covid_patients_moving_average",
         "date_unix",
         "date_of_insertion_unix"
       ],

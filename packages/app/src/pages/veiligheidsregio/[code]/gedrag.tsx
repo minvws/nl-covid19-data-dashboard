@@ -7,6 +7,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components/warning-tile';
 import { Heading, InlineText, Text, BoldText } from '~/components/typography';
 import { BehaviorLineChartTile, getBehaviorChartOptions } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
@@ -28,6 +29,7 @@ const pageMetrics = ['behavior'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   text: siteText.pages.behavior_page,
+  textShared: siteText.pages.behavior_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -54,11 +56,10 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>) {
+const BehaviorPageVr = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, lastGenerated, content, selectedVrData: data, vrName, chartBehaviorOptions } = props;
-
   const { commonTexts, formatDateFromSeconds, formatNumber } = useIntl();
-  const { text } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { text, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...commonTexts.veiligheidsregio_index.metadata,
@@ -72,6 +73,8 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
   const scrollToRef = useRef<HTMLDivElement>(null);
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -97,6 +100,8 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
             warning={text.vr.warning}
           />
 
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+
           <TwoKpiSection>
             <Tile>
               <Heading level={3}>{text.vr.onderzoek_uitleg.titel}</Heading>
@@ -115,15 +120,18 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
           </TwoKpiSection>
 
           <BehaviorTableTile
-            title={text.vr.basisregels.title}
+            title={text.shared.basisregels.title}
             description={text.vr.basisregels.description}
-            complianceExplanation={text.vr.basisregels.volgen_beschrijving}
-            supportExplanation={text.vr.basisregels.steunen_beschrijving}
             value={behaviorLastValue}
-            annotation={text.vr.basisregels.annotatie}
+            annotation={text.shared.basisregels.annotation}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
             text={text.shared}
+            metadata={{
+              datumsText: text.vr.datums,
+              date: data.behavior_archived_20221019.values[0].date_end_unix,
+              source: text.vr.bronnen.rivm,
+            }}
           />
 
           <span ref={scrollToRef} />
@@ -144,4 +152,6 @@ export default function BehaviorPageVr(props: StaticProps<typeof getStaticProps>
       </VrLayout>
     </Layout>
   );
-}
+};
+
+export default BehaviorPageVr;

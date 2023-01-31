@@ -1,39 +1,30 @@
 import { TimeframeOption } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { ReactNode, useEffect, useState } from 'react';
-import { asResponsiveArray } from '~/style/utils';
+import styled from 'styled-components';
+import theme, { space } from '~/style/theme';
 import { Box, Spacer } from './base';
+import { ChartTileToggle, ChartTileToggleProps } from './chart-tile-toggle';
 import { ChartTimeControls } from './chart-time-controls';
 import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
-import { Heading } from './typography';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
+import { Heading } from './typography';
 
 interface ChartTileProps {
-  title: string;
-  metadata?: MetadataProps;
-  description?: string;
-  timeframeInitialValue?: TimeframeOption;
-  disableFullscreen?: boolean;
-  timeframeOptions?: TimeframeOption[];
-  onSelectTimeframe?: (timeframe: TimeframeOption) => void;
   children: ReactNode;
+  title: string;
+  description?: string;
+  disableFullscreen?: boolean;
+  metadata?: MetadataProps;
+  timeframeInitialValue?: TimeframeOption;
+  timeframeOptions?: TimeframeOption[];
+  toggle?: ChartTileToggleProps;
+  onSelectTimeframe?: (timeframe: TimeframeOption) => void;
 }
 
-export function ChartTile({
-  title,
-  metadata,
-  description,
-  timeframeInitialValue,
-  disableFullscreen,
-  timeframeOptions,
-  onSelectTimeframe,
-  children,
-}: ChartTileProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>(
-    timeframeInitialValue || TimeframeOption.ALL
-  );
+export const ChartTile = ({ children, title, description, disableFullscreen, metadata, timeframeInitialValue, toggle, timeframeOptions, onSelectTimeframe }: ChartTileProps) => {
+  const [timeframe, setTimeframe] = useState<TimeframeOption>(timeframeInitialValue || TimeframeOption.ALL);
 
   useEffect(() => {
     if (onSelectTimeframe) {
@@ -43,22 +34,10 @@ export function ChartTile({
 
   return (
     <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
-      <ChartTileHeader title={title} description={description}>
+      <ChartTileHeader title={title} description={description} toggle={toggle}>
         {timeframeOptions && timeframe && (
-          <Box
-            css={css({
-              width: asResponsiveArray({
-                xl: '25%',
-                lg: '50%',
-                sm: '100%',
-              }),
-            })}
-          >
-            <ChartTimeControls
-              timeframeOptions={timeframeOptions}
-              timeframe={timeframe}
-              onChange={setTimeframe}
-            />
+          <Box width={{ sm: '100%', lg: '50%', xl: '25%' }}>
+            <ChartTimeControls timeframeOptions={timeframeOptions} timeframe={timeframe} onChange={setTimeframe} />
           </Box>
         )}
       </ChartTileHeader>
@@ -68,31 +47,28 @@ export function ChartTile({
       <ErrorBoundary>{children}</ErrorBoundary>
     </FullscreenChartTile>
   );
-}
+};
 
 interface ChartTileHeaderProps {
   title: string;
-  description?: string;
   children?: ReactNode;
+  description?: string;
+  toggle?: ChartTileToggleProps;
 }
 
-function ChartTileHeader({
-  title,
-  description,
-  children,
-}: ChartTileHeaderProps) {
+const ChartTileHeader = ({ title, description, children, toggle }: ChartTileHeaderProps) => {
   return (
     <Box spacing={3}>
-      {/* padding-right to make sure the title doesn't touch/overlap the full screen button */}
-      <Heading level={3} css={css({ pr: asResponsiveArray({ md: 5 }) })}>
-        {title}
-      </Heading>
+      <ChartTileHeading level={3}>{title}</ChartTileHeading>
+
+      {toggle && <ChartTileToggle initialValue={toggle.initialValue} items={toggle.items} onChange={toggle.onChange} />}
 
       {description && (
         <Box maxWidth="maxWidthText">
           <Markdown content={description} />
         </Box>
       )}
+
       {children && (
         <Box display="inline-table" alignSelf="flex-start" width="100%">
           {children}
@@ -100,4 +76,11 @@ function ChartTileHeader({
       )}
     </Box>
   );
-}
+};
+
+const ChartTileHeading = styled(Heading)`
+  // padding-right to make sure the title doesn't touch/overlap the full screen button
+  @media ${theme.mediaQueries.md} {
+    padding-right: ${space[5]};
+  }
+`;

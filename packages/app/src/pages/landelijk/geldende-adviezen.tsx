@@ -1,4 +1,4 @@
-import { TopicalIcon as PageIcon } from '@corona-dashboard/common/src/types';
+import { IconName as PageIcon } from '@corona-dashboard/icons/src/icon-name2filename';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
 import { TileList } from '~/components/tile-list';

@@ -1,6 +1,6 @@
 import { TrendIcon } from '@corona-dashboard/app/src/domain/topical/types';
 import { SeverityLevel } from '~/components/severity-indicator-tile/types';
-import { TopicalIcon } from '@corona-dashboard/common/src/types';
+import { IconName as TopicalIcon } from '@corona-dashboard/icons/src/icon-name2filename';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 export interface TopicalSanityData {
