@@ -14,7 +14,7 @@ interface StyledHeaderCellProps {
 
 export const StyledHeaderCell = styled.th<StyledHeaderCellProps>`
   font-size: ${fontSizes[1]};
-  fontweight: ${fontWeights.bold};
+  font-weight: ${fontWeights.bold};
   padding: ${({ isMobile }) => (isMobile ? space[3] : space[2])} ${space[3]};
   text-align: left;
   vertical-align: top;

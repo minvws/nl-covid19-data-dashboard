@@ -1,10 +1,4 @@
-import {
-  formatStyle,
-  getLastFilledValue,
-  isDateSpanValue,
-  KpiConfiguration,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { formatStyle, getLastFilledValue, isDateSpanValue, KpiConfiguration, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { get } from 'lodash';
 import { ReactNode } from 'react';
@@ -32,18 +26,13 @@ interface ServerData {
 function getDataUrl(configuration: KpiConfiguration, date?: string) {
   const { code, area, metricName, metricProperty } = configuration;
   const suffix = isDefined(date) ? `?end=${date}` : '';
-  return `/api/data/timeseries/${
-    code ?? area
-  }/${metricName}/${metricProperty}${suffix}`;
+  return `/api/data/timeseries/${code ?? area}/${metricName}/${metricProperty}${suffix}`;
 }
 
 export function InlineKpi({ configuration, date }: InlineKpiProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
 
-  const { data } = useSWRImmutable<ServerData>(
-    getDataUrl(configuration, date),
-    (url: string) => fetch(url).then((_) => _.json())
-  );
+  const { data } = useSWRImmutable<ServerData>(getDataUrl(configuration, date), (url: string) => fetch(url).then((_) => _.json()));
   const { data: differenceData } = useDifferenceData(configuration);
 
   if (!isDefined(data) || !isDefined(differenceData)) {
@@ -56,8 +45,7 @@ export function InlineKpi({ configuration, date }: InlineKpiProps) {
           ...data,
         },
         difference: {
-          [configuration.differenceKey]:
-            differenceData[configuration.differenceKey],
+          [configuration.differenceKey]: differenceData[configuration.differenceKey],
         },
       }
     : {
@@ -72,11 +60,7 @@ export function InlineKpi({ configuration, date }: InlineKpiProps) {
   const lastValue = getLastValue(data, configuration.metricName);
 
   const metadataDate = isDateSpanValue(lastValue)
-    ? formatDateSpanString(
-        lastValue.date_start_unix,
-        lastValue.date_end_unix,
-        formatDateFromSeconds
-      )
+    ? formatDateSpanString(lastValue.date_start_unix, lastValue.date_end_unix, formatDateFromSeconds)
     : formatDateValueString(lastValue.date_unix, formatDateFromSeconds);
 
   return (
@@ -96,19 +80,12 @@ export function InlineKpi({ configuration, date }: InlineKpiProps) {
               metricName={configuration.metricName}
               metricProperty={configuration.metricProperty}
               differenceKey={configuration.differenceKey}
-              isMovingAverageDifference={
-                configuration.isMovingAverageDifference
-              }
+              isMovingAverageDifference={configuration.isMovingAverageDifference}
               isAmount={configuration.isAmount}
             />
           )}
           {!isPresent(differenceData) && (
-            <PageKpi
-              data={allData}
-              metricName={configuration.metricName}
-              metricProperty={configuration.metricProperty}
-              isAmount={configuration.isAmount}
-            />
+            <PageKpi data={allData} metricName={configuration.metricName} metricProperty={configuration.metricProperty} isAmount={configuration.isAmount} />
           )}
         </KpiTile>
       </Box>
@@ -117,22 +94,16 @@ export function InlineKpi({ configuration, date }: InlineKpiProps) {
 }
 
 function useDifferenceData(configuration: KpiConfiguration) {
-  const differenceKey = configuration.differenceKey
-    ? configuration.differenceKey
-    : 'unknown';
-  return useSWRImmutable(
-    `/api/data/timeseries/${
-      configuration.code ?? configuration.area
-    }/difference/${differenceKey}`,
-    (url: string) =>
-      fetch(url)
-        .then((_) => {
-          if (!_.ok) {
-            return null;
-          }
-          return _.json();
-        })
-        .catch((_) => null)
+  const differenceKey = configuration.differenceKey ? configuration.differenceKey : 'unknown';
+  return useSWRImmutable(`/api/data/timeseries/${configuration.code ?? configuration.area}/difference/${differenceKey}`, (url: string) =>
+    fetch(url)
+      .then((_) => {
+        if (!_.ok) {
+          return null;
+        }
+        return _.json();
+      })
+      .catch((_) => null)
   );
 }
 
@@ -148,24 +119,11 @@ interface KpiTileProps {
  * A generic KPI tile which composes its value content using the children prop.
  * Description can be both plain text and html strings.
  */
-function KpiTile({
-  title,
-  description,
-  children,
-  metadata,
-  iconName,
-}: KpiTileProps) {
+function KpiTile({ title, description, children, metadata, iconName }: KpiTileProps) {
   return (
     <>
       <Box spacing={3}>
-        <Box
-          display="flex"
-          flexDirection="row"
-          flexWrap="nowrap"
-          alignItems="center"
-          spacingHorizontal={{ md: 2 }}
-          pr={{ md: 2 }}
-        >
+        <Box display="flex" flexDirection="row" flexWrap="nowrap" alignItems="center" spacingHorizontal={{ md: 2 }} pr={{ md: 2 }}>
           <div
             aria-hidden={true}
             css={css({
@@ -198,28 +156,14 @@ function KpiTile({
   );
 }
 
-function formatDateSpanString(
-  startDate: number,
-  endDate: number,
-  format: (v: number, s?: formatStyle) => string
-) {
-  return `${format(startDate, 'weekday-medium')}} - ${format(
-    endDate,
-    'weekday-medium'
-  )}`;
+function formatDateSpanString(startDate: number, endDate: number, format: (v: number, s?: formatStyle) => string) {
+  return `${format(startDate, 'weekday-long')}} - ${format(endDate, 'weekday-long')}`;
 }
 
-function formatDateValueString(
-  date: number,
-  format: (v: number, s?: formatStyle) => string
-) {
+function formatDateValueString(date: number, format: (v: number, s?: formatStyle) => string) {
   return format(date, 'medium');
 }
 
 function getLastValue(data: ServerData, metricName: string): TimestampedValue {
-  return (
-    metricNamesHoldingPartialData.includes(metricName)
-      ? getLastFilledValue(data as any)
-      : get(data, ['last_value'])
-  ) as TimestampedValue;
+  return (metricNamesHoldingPartialData.includes(metricName) ? getLastFilledValue(data as any) : get(data, ['last_value'])) as TimestampedValue;
 }

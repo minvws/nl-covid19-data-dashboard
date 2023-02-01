@@ -123,8 +123,8 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             <KpiTile
               title={textVr.barscale_titel}
               description={replaceVariablesInText(textVr.extra_uitleg, {
-                dateStart: formatDateFromSeconds(sevenDayAverageDates[0]),
-                dateEnd: formatDateFromSeconds(sevenDayAverageDates[1]),
+                dateStart: formatDateFromSeconds(sevenDayAverageDates[0], 'weekday-long'),
+                dateEnd: formatDateFromSeconds(sevenDayAverageDates[1], 'weekday-long'),
               })}
               metadata={{
                 date: sevenDayAverageDates,

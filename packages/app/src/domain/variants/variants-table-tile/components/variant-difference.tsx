@@ -1,11 +1,17 @@
 import { colors, DifferenceDecimal } from '@corona-dashboard/common';
-import css from '@styled-system/css';
-import styled from 'styled-components';
-import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { TableText } from '../types';
 import { TrendDirection, TrendIcon } from '~/components/trend-icon';
+import { useIntl } from '~/intl';
+import styled from 'styled-components';
 
-export function VariantDifference({ value, text }: { value: DifferenceDecimal; text: TableText }) {
+interface VariantDifferenceProps {
+  isWideTable?: boolean;
+  text: TableText;
+  value: DifferenceDecimal;
+}
+
+export const VariantDifference = ({ value, text, isWideTable }: VariantDifferenceProps) => {
   const { formatPercentage } = useIntl();
 
   const options = {
@@ -14,9 +20,8 @@ export function VariantDifference({ value, text }: { value: DifferenceDecimal; t
   };
 
   let returnValue: React.ReactNode = (
-    <Difference color={colors.neutral}>
-      <TrendIcon trendDirection={TrendDirection.NEUTRAL} />
-      {text.verschil.gelijk}
+    <Difference color={colors.neutral} hasDifference={false} isWideTable={isWideTable}>
+      <span>{text.verschil.gelijk}</span>
     </Difference>
   );
 
@@ -53,16 +58,25 @@ export function VariantDifference({ value, text }: { value: DifferenceDecimal; t
   });
 
   return <>{returnValue}</>;
+};
+
+interface DifferenceProps {
+  color: string;
+  hasDifference?: boolean;
+  isWideTable?: boolean;
 }
 
-const Difference = styled.div<{ color: string }>((x) =>
-  css({
-    svg: {
-      color: x.color,
-      mr: 1,
-      width: '12px',
-      height: '12px',
-      verticalAlign: 'middle',
-    },
-  })
-);
+const Difference = styled.div<DifferenceProps>`
+  span {
+    /* The value of space[3] is a combination of the icon width plus the icon's margin-right */
+    padding-left: ${({ hasDifference, isWideTable }) => (!hasDifference && isWideTable ? space[3] : undefined)};
+  }
+
+  svg {
+    color: ${({ color }) => color};
+    margin-right: ${space[1]};
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+  }
+`;
