@@ -5,7 +5,7 @@ import { Box } from '~/components/base';
 import { Anchor, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
+import { fontSizes, space } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSearchContext } from './context';
@@ -99,8 +99,8 @@ const StyledHitLink = styled(Anchor)(
     '&:before': {
       content: 'attr(data-text)',
       position: 'absolute',
-      left: space[0],
-      top: space[0],
+      left: '0',
+      top: '0',
       height: '100%',
       width: '5px',
       backgroundColor: 'blue8',
@@ -127,7 +127,7 @@ const HitListHeader = styled.span(
   css({
     display: 'block',
     textTransform: 'uppercase',
-    fontSize: 1,
+    fontSize: fontSizes[1],
     fontWeight: 'bold',
     ...paddedStyle,
   })
@@ -136,8 +136,8 @@ const HitListHeader = styled.span(
 const StyledHitList = styled.ol(
   css({
     listStyle: 'none',
-    padding: space[0],
-    margin: space[0],
+    padding: '0',
+    margin: '0',
     width: ['100%', null],
   })
 );
@@ -146,6 +146,6 @@ const NoResultMessage = styled.div(
   css({
     paddingLeft: ['50px', null, null, space[5]],
     paddingRight: space[4],
-    paddingY: space[0],
+    paddingY: '0',
   })
 );

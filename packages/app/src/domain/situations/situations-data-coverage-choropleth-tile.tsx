@@ -39,7 +39,7 @@ export function SituationsDataCoverageChoroplethTile({ data, text, tooltipText }
       }}
     >
       <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }} as="figure" height="100%">
-        <Box flex={{ lg: 1 }} as="figcaption">
+        <Box flex={{ lg: '1' }} as="figcaption">
           <Markdown content={replaceVariablesInText(text.situaties_kaarten_uitkomsten.beschrijving, { date_from, date_to })} />
           <Spacer marginBottom={space[4]} />
           <Box spacing={3}>
@@ -57,7 +57,7 @@ export function SituationsDataCoverageChoroplethTile({ data, text, tooltipText }
             />
           </Box>
         </Box>
-        <Box flex={{ lg: 1 }} marginLeft={[0, 0, 3]} display="flex" flexDirection="column" height="100%">
+        <Box flex={{ lg: 1 }} marginLeft={{ _: 0, sm: 3 }} display="flex" flexDirection="column" height="100%">
           <Box height="100%">
             <ErrorBoundary>
               <DynamicChoropleth

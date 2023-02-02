@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
+import { fontSizes, space } from '~/style/theme';
 import { useSearchContext } from './context';
 
 const ICON_SPACE = 50;
@@ -62,9 +62,9 @@ const StyledSearchInput = styled.input(
     border: `solid`,
     borderWidth: '1px',
     borderColor: 'gray3',
-    fontSize: 2,
+    fontSize: fontSizes[2],
     appearance: 'none',
-    margin: space[0],
+    margin: '0',
 
     '&::-webkit-search-cancel-button': {
       display: 'none',
@@ -106,14 +106,14 @@ const IconContainer = styled.div<{ align: 'left' | 'right' }>((x) =>
     width: [ICON_SPACE, null, null, ICON_SPACE_LARGE],
     pointerEvents: x.onClick ? 'all' : 'none',
 
-    top: space[0],
-    left: x.align === 'left' ? space[0] : undefined,
-    right: x.align === 'right' ? space[0] : undefined,
+    top: '0',
+    left: x.align === 'left' ? '0' : undefined,
+    right: x.align === 'right' ? '0' : undefined,
 
     background: 'none',
-    border: space[0],
-    padding: space[0],
-    margin: space[0],
+    border: '0',
+    padding: '0',
+    margin: '0',
     cursor: 'pointer',
 
     svg: {

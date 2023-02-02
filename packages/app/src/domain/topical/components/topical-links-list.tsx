@@ -49,11 +49,11 @@ const ListWrapper = styled.ul`
   flex-wrap: wrap;
   list-style: none;
   gap: ${space[3]};
-  margin: ${space[0]};
-  padding: ${space[0]};
+  margin: 0;
+  padding: 0;
 `;
 
 const TopicalLinkLabel = styled.p`
   flex: 0 0 auto;
-  margin-right: ${asResponsiveArray({ _: space[0], sm: space[4] })};
+  margin-right: ${asResponsiveArray({ _: '0', sm: space[4] })};
 `;

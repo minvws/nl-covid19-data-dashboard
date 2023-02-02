@@ -10,7 +10,7 @@ import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
+import { fontSizes, space } from '~/style/theme';
 
 interface SituationsDataCoverageTileProps {
   data: VrSituationsValue;
@@ -47,7 +47,7 @@ const CoverageIndicator = styled.div<{ hasSufficientData: boolean }>((x) =>
   css({
     display: 'flex',
     alignItems: 'center',
-    fontSize: 3,
+    fontSize: fontSizes[3],
     fontWeight: 600,
     lineHeight: 1,
     fontVariantNumeric: 'tabular-nums',

@@ -116,7 +116,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
         </Box>
         <Box>
           {sourceLabel && (
-            <Box padding={{ _: space[3], xs: space[4] }} paddingTop={{ _: space[0], xs: space[0] }}>
+            <Box padding={{ _: space[3], xs: space[4] }} paddingTop={{ _: '0', xs: '0' }}>
               <InlineText color="gray7">{sourceLabel}</InlineText>
             </Box>
           )}

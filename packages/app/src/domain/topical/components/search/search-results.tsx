@@ -19,11 +19,11 @@ export function SearchResults() {
 }
 
 const StyledSearchResults = styled.div`
-  padding: 1em ${space[0]};
+  padding: 1em 0;
   position: relative;
   display: flex;
   flex-direction: ${asResponsiveArray({ _: 'column', sm: 'row' })};
   & > :not(:last-child): {
-    margin-bottom: ${asResponsiveArray({ _: space[5], xs: space[0] })};
+    margin-bottom: ${asResponsiveArray({ _: space[5], xs: '0' })};
   }
 `;
