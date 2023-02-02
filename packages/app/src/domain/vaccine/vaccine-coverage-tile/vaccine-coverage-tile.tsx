@@ -61,7 +61,7 @@ export const VaccineCoverageTile = ({ title, description, source, descriptionFoo
         </KpiContent>
       </TwoKpiSection>
       <Metadata {...metadata} isTileFooter />
-      <Box maxWidth="maxWidthText" marginTop={36}>
+      <Box maxWidth="maxWidthText" marginTop="36px">
         <Markdown content={descriptionFooter} />
       </Box>
     </KpiTile>
