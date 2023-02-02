@@ -156,11 +156,11 @@ function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
             borderRight: values[i + 1] ? '1px solid' : undefined,
             borderColor: 'gray3',
             display: 'inline-block',
-            bg: x === value ? 'blue8' : 'white',
+            background: x === value ? 'blue8' : 'white',
             color: x === value ? 'white' : 'inherit',
             cursor: x === value ? 'default' : 'pointer',
             transition: 'background 100ms linear',
-            '&:hover': { bg: x === value ? 'blue8' : 'gray1' },
+            '&:hover': { background: x === value ? 'blue8' : 'gray1' },
           })}
         >
           <VisuallyHidden>
