@@ -1,5 +1,4 @@
 import { colors, DifferenceDecimal } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
@@ -76,7 +75,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
       <tr>
         <MobileCell colSpan={3}>
           {collapsible.content(
-            <Box spacing={2} css={css({ paddingBottom: space[3] })}>
+            <Box spacing={2} paddingBottom={space[3]}>
               <Box display="flex" flexDirection="row" spacingHorizontal={2}>
                 <InlineText>{columnNames.vorige_meting}:</InlineText>
                 {isPresent(row.difference) && isPresent(row.difference.difference) && isPresent(row.difference.old_value) ? (
