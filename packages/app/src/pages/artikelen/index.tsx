@@ -126,7 +126,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
             </OrderedList>
           ) : (
             <Box
-              marginTop={space[4]}
+              marginTop={space[3]}
               marginBottom={space[4]}
               width="100%"
               css={css({
