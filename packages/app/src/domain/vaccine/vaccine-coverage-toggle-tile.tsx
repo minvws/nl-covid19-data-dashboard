@@ -149,7 +149,7 @@ export function VaccineCoverageToggleTile({
           </>
         )}
       </TwoKpiSection>
-      <Box maxWidth="maxWidthText" marginTop={'36px'}>
+      <Box maxWidth="maxWidthText" marginTop="36px">
         <Markdown content={descriptionFooter} />
       </Box>
     </KpiTile>

@@ -30,7 +30,7 @@ export function VaccineDeliveryBarChart({ data, text }: { data: NlVaccineDeliver
       }}
     >
       <Box marginBottom={space[3]} display="flex" flexDirection="column" alignItems="flex-start" spacing={3}>
-        <Box maxWidth={560}>
+        <Box maxWidth="560px">
           <Markdown content={text.grafiek_leveringen.omschrijving} />
         </Box>
       </Box>
