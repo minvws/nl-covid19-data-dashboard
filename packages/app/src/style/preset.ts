@@ -96,7 +96,7 @@ export const preset = {
 
 export const nestedHtml = {
   ...spacingStyle(3),
-  /** padding: inherit p-styles from the container */
+  /** p: inherit p-styles from the container */
 
   h1: preset.typography.h1,
   h2: preset.typography.h2,
