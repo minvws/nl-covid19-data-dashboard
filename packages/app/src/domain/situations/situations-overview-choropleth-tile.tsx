@@ -13,7 +13,7 @@ import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
+import { fontSizes, fontWeights, space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SituationIcon } from './components/situation-icon';
@@ -135,7 +135,7 @@ function ChoroplethGridItem({ icon, title, description, children }: { icon: Reac
     >
       <Box display="flex" justifyContent="center" alignItems="center" spacingHorizontal={2} marginBottom={space[3]}>
         {icon}
-        <InlineTooltip content={description} css={css({ fontWeight: 'heavy', fontSize: 2 })}>
+        <InlineTooltip content={description} css={css({ fontWeight: fontWeights.heavy, fontSize: fontSizes[2] })}>
           {title}
         </InlineTooltip>
       </Box>
