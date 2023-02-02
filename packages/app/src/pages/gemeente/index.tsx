@@ -57,7 +57,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
           </Heading>
           <Markdown content={commonTexts.gemeente_index.selecteer_toelichting} />
 
-          <Box display="flex" flex="1" justifyContent="center" height="75vh" width="100%" maxHeight={960} flexDirection="column" spacing={3}>
+          <Box display="flex" flex="1" justifyContent="center" height="75vh" width="100%" minHeight="960px" flexDirection="column" spacing={3}>
             <ErrorBoundary>
               <DynamicChoropleth
                 accessibility={{

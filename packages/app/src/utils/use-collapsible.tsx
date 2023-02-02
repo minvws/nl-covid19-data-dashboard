@@ -86,7 +86,7 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
       }}
       initial={options.isOpen ? 'open' : undefined}
       css={css({
-        height: '0px',
+        height: '0',
         opacity: 0,
         '.has-no-js &': {
           height: 'auto !important',
@@ -108,7 +108,7 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
       variants={{
         rest: {
           opacity: 0,
-          height: '0px',
+          height: '0',
           transitionEnd: { display: 'none' },
         },
         open: {

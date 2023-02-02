@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { space } from '~/style/theme';
+import { fontSizes, space } from '~/style/theme';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 
 /**
@@ -68,7 +68,7 @@ export function useTabInteractiveButton(label: string) {
 const SkipButton = styled.button<{ isActive: boolean }>((x) =>
   css({
     position: 'absolute',
-    fontSize: 1,
+    fontSize: fontSizes[1],
     fontWeight: 'bold',
     width: 'auto',
     paddingX: space[3],
@@ -83,8 +83,8 @@ const SkipButton = styled.button<{ isActive: boolean }>((x) =>
      */
     opacity: 0,
     pointerEvents: 'none',
-    top: space[0],
-    left: space[0],
+    top: '0',
+    left: '0',
 
     border: '1px solid',
     borderColor: 'blue8',

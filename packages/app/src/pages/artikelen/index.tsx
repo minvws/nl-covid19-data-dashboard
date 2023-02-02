@@ -164,9 +164,9 @@ const OrderedList = styled.ol(
     borderTop: '1px solid',
     borderBottom: '1px solid',
     borderColor: 'gray3',
-    margin: space[0],
+    margin: '0',
     marginY: space[4],
-    padding: space[0],
+    padding: '0',
     listStyleType: 'none',
   })
 );
@@ -183,8 +183,8 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
       content: '""',
       display: 'block',
       position: 'absolute',
-      left: space[0],
-      bottom: space[0],
+      left: '0',
+      bottom: '0',
       height: '5px',
       width: `calc(100%)`,
       backgroundColor: 'blue8',
@@ -221,7 +221,7 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
 const BoldText = styled.span(
   css({
     position: 'absolute',
-    top: space[0],
+    top: '0',
     left: '50%',
     fontWeight: 'bold',
     opacity: 0,
