@@ -108,8 +108,8 @@ const AgeGroupWrapper = styled.div`
   overflow-wrap: 'break-word';
   word-wrap: 'break-word';
   hyphens: 'auto';
-  padding-left: ${asResponsiveArray({ _: '3', xs: '24' })}px;
-  padding-right: ${asResponsiveArray({ _: '3', xs: '24' })}px;
+  padding-left: ${asResponsiveArray({ _: '3px', xs: '24px' })};
+  padding-right: ${asResponsiveArray({ _: '3px', xs: '24px' })};
   padding-bottom: 24px;
   padding-top: 24px;
 `;
