@@ -223,7 +223,7 @@ const StyledToggleButton = styled.div<{ isActive: boolean; color?: string }>((x)
     cursor: 'pointer',
     borderRadius: 1,
     color: x.isActive ? 'white' : 'black',
-    bg: x.isActive ? 'blue8' : 'transparent',
+    background: x.isActive ? 'blue8' : 'transparent',
     transition: 'all 100ms linear',
     padding: space[1],
     display: 'inline-block',
