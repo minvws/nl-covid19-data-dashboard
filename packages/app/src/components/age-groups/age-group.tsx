@@ -25,7 +25,7 @@ export const AgeGroup = ({ range, peopleInAgeGroup, birthYearRange }: AgeGroupPr
   return (
     <Box display="flex" flexDirection="column">
       <BoldText>{ageRange}</BoldText>
-      <InlineText variant="label1">{`${yearOfBirthRange}: ${totalText}`}</InlineText>
+      <InlineText variant="label1">{`${yearOfBirthRange}${totalText ? ':' : ''} ${totalText}`}</InlineText>
     </Box>
   );
 };
