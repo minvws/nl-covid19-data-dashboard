@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'release/*'
+      - 'hotfix/*'
 
 jobs:
   trigger-acceptance-build:
