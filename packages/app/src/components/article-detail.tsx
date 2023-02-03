@@ -24,7 +24,7 @@ interface ArticleDetailProps {
 
 const imageSizes = [
   // viewport min-width 700px display images at max. 636px wide
-  [400, 700, 636],
+  ['400px', '700px', '636px'],
 ];
 
 export function ArticleDetail({ article, text }: ArticleDetailProps) {
@@ -90,8 +90,8 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
             spacingHorizontal={3}
             display="flex"
             flexWrap="wrap"
-            margin={space[0]}
-            padding={space[0]}
+            margin="0"
+            padding="0"
             css={css({
               listStyleType: 'none',
             })}

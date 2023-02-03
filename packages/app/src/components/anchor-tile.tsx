@@ -90,9 +90,9 @@ const LinkContainer = styled.div(
     }),
     borderLeft: asResponsiveArray({ lg: '1px solid' }),
     borderLeftColor: asResponsiveArray({ lg: colors.gray3 }),
-    paddingTop: asResponsiveArray({ _: space[3], lg: space[0] }),
+    paddingTop: asResponsiveArray({ _: space[3], lg: '0' }),
     paddingLeft: asResponsiveArray({ lg: space[4] }),
     marginLeft: asResponsiveArray({ lg: space[4] }),
-    marginTop: asResponsiveArray({ _: space[3], md: space[0] }),
+    marginTop: asResponsiveArray({ _: space[3], md: '0' }),
   })
 );
