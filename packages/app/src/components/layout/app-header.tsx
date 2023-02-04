@@ -13,7 +13,7 @@ export function AppHeader() {
   const { commonTexts } = useIntl();
 
   return (
-    <Box as="header" zIndex={4} position="relative" background="white">
+    <Box as="header" zIndex={4} position="relative" bg="white">
       <MaxWidth paddingX={{ _: space[1], sm: space[3] }}>
         <Logo />
         <Box paddingX={space[3]} zIndex={1} position="relative">
