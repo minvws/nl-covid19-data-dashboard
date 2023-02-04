@@ -24,7 +24,7 @@ interface ArticleDetailProps {
 
 const imageSizes = [
   // viewport min-width 700px display images at max. 636px wide
-  [400, 700, 636],
+  ['400px', '700px', '636px'],
 ];
 
 export function ArticleDetail({ article, text }: ArticleDetailProps) {
@@ -35,7 +35,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
   article.content = mergeAdjacentKpiBlocks(article.content);
 
   return (
-    <Box bg="white" py={{ _: 4, md: 5 }}>
+    <Box bg="white" paddingY={{ _: space[4], md: space[5] }}>
       <ContentBlock spacing={3}>
         <LinkWithIcon href="/artikelen" icon={<ArrowIconLeft />}>
           {commonTexts.article_detail.back_link.text}
@@ -56,12 +56,12 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
       </ContentBlock>
       {!breakpoints.xs
         ? article.imageMobile && (
-            <Box mt={4}>
+            <Box marginTop={space[4]}>
               <ContentImage node={article.imageMobile} contentWrapper={ContentBlock} sizes={imageSizes} />
             </Box>
           )
         : article.imageDesktop && (
-            <Box mt={4}>
+            <Box marginTop={space[4]}>
               <ContentImage node={article.imageDesktop} contentWrapper={ContentBlock} sizes={imageSizes} />
             </Box>
           )}
@@ -70,10 +70,10 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
           // Since you can't serialize unordered lists we have to position them here in the container
           css={css({
             ul: {
-              mx: 'auto',
+              marginX: 'auto',
               maxWidth: 'contentWidth',
-              pr: 4,
-              pl: 5,
+              paddingRight: space[4],
+              paddingLeft: space[5],
             },
           })}
         >
@@ -82,7 +82,7 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
       )}
       {article.categories && (
         <ContentBlock>
-          <Box pb={2} pt={4}>
+          <Box paddingBottom={space[2]} paddingTop={space[4]}>
             <InlineText color="gray7">{text.secties.artikelen.tags}</InlineText>
           </Box>
           <Box
@@ -90,8 +90,8 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
             spacingHorizontal={3}
             display="flex"
             flexWrap="wrap"
-            m={0}
-            p={0}
+            margin="0"
+            padding="0"
             css={css({
               listStyleType: 'none',
             })}

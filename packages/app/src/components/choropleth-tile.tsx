@@ -49,15 +49,15 @@ export function ChoroplethTile({
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints(true);
   const legendaComponent = legend && (
-    <Box maxWidth={300} width="100%">
+    <Box maxWidth="300px" width="100%">
       <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} valueAnnotation={valueAnnotation} pageType={pageType} outdatedDataLabel={legend.outdatedDataLabel} />
     </Box>
   );
 
   return (
     <FullscreenChartTile metadata={metadata}>
-      <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }} margin={space[0]} as="figure" {...dataProps} height="100%" spacing={3}>
-        <Box flex={{ lg: 1 }} as="figcaption" spacing={3}>
+      <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }} margin="0" as="figure" {...dataProps} height="100%" spacing={3}>
+        <Box flex={{ lg: '1' }} as="figcaption" spacing={3}>
           <Heading level={3}>{title}</Heading>
 
           {typeof description === 'string' ? <Text>{description}</Text> : description}
@@ -75,8 +75,8 @@ export function ChoroplethTile({
           )}
         </Box>
 
-        <Box flex={{ lg: 1 }} display="flex" flexDirection="column" height="100%" spacing={3}>
-          <Box height="100%" marginTop={space[4]} pl={hasPadding && breakpoints.lg ? 4 : undefined}>
+        <Box flex={{ lg: '1' }} display="flex" flexDirection="column" height="100%" spacing={3}>
+          <Box height="100%" marginTop={space[4]} paddingLeft={hasPadding && breakpoints.lg ? space[4] : undefined}>
             <ErrorBoundary>{children}</ErrorBoundary>
           </Box>
 

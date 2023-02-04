@@ -42,7 +42,7 @@ export const ChartTile = ({ children, title, description, disableFullscreen, met
         )}
       </ChartTileHeader>
 
-      <Spacer mb={description || timeframeOptions ? 4 : 3} />
+      <Spacer marginBottom={description || timeframeOptions ? space[4] : space[3]} />
 
       <ErrorBoundary>{children}</ErrorBoundary>
     </FullscreenChartTile>

@@ -15,7 +15,7 @@ export interface TopicalArticleTeaserProps {
 }
 
 export const TopicalArticleTeaser = ({ title, slug, cover, category }: TopicalArticleTeaserProps) => {
-  const imageWidth = 90;
+  const imageWidth = '90px';
 
   return (
     <Box display="flex" spacingHorizontal={3} width="100%" alignItems="center" paddingRight={space[3]}>
