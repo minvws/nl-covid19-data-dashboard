@@ -37,7 +37,7 @@ const StyledLabel = styled.label(
     padding: asResponsiveArray({ _: `${space[1]} ${space[2]}`, xs: `0.3rem ${space[3]}` }),
     borderRadius: '5px 0 0 5px',
     border: `1px solid ${colors.gray3}`,
-    borderRightWidth: 0,
+    borderRightWidth: '0',
     whiteSpace: 'nowrap',
     cursor: 'pointer',
     userSelect: 'none',
