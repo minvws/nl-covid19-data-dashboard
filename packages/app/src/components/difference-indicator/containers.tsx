@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Span } from '~/components/base';
+import { fontSizes } from '~/style/theme';
 
 export const IconContainer = styled(Span)(
   css({
@@ -15,6 +16,6 @@ export const IconContainer = styled(Span)(
 export const Container = styled.span(
   css({
     display: 'inline-block',
-    fontSize: 2,
+    fontSize: fontSizes[2],
   })
 );

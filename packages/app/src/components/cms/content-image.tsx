@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common/src/theme';
 import css from '@styled-system/css';
 import { Fragment, FunctionComponent } from 'react';
 import styled from 'styled-components';
@@ -34,7 +35,7 @@ export function ContentImage({ node, contentWrapper, sizes }: ContentImageProps)
   const ContentWrapper = contentWrapper ?? Fragment;
 
   return 'isFullWidth' in node && node.isFullWidth ? (
-    <Box bg="gray1" padding={space[4]} width="100%">
+    <Box backgroundColor={colors.gray1} padding={space[4]} width="100%">
       <Box as="figure" role="group" spacing={3} display="flex" maxWidth={IMAGE_MAX_WIDTH} textAlign="center" marginX="auto">
         <ContentBlock>
           {node.asset && (
