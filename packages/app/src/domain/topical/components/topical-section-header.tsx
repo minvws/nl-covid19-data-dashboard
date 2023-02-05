@@ -50,7 +50,7 @@ export const TopicalSectionHeader = ({ title, lastGenerated, showBackLink, link,
              * actually removes the link altogether
              */
             link && !isEmpty(link.text) && (
-              <Box marginBottom={'2px'}>
+              <Box marginBottom="2px">
                 <LinkWithIcon href={link.href} icon={<ChevronRight />} iconPlacement="right">
                   {link.text}
                 </LinkWithIcon>

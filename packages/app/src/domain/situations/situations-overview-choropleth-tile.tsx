@@ -49,7 +49,7 @@ export function SituationsOverviewChoroplethTile({ data, text }: SmallMultiplesC
           </Box>
           <Box display="flex" alignItems="flex-end">
             <Box display="flex" alignItems="baseline" height="42px">
-              <Box size={15} marginRight={space[2]} bg={colors.gray2} position="relative" top={'3px'} />
+              <Box size={15} marginRight={space[2]} backgroundColor={colors.gray2} position="relative" top={'3px'} />
               <InlineText variant="label1">{text.situaties_kaarten_overzicht.legenda.onvoldoende_data}</InlineText>
             </Box>
           </Box>

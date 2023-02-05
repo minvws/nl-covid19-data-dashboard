@@ -50,7 +50,7 @@ export function Search({ initialValue, title, activeResult }: { initialValue?: s
                     borderTopLeftRadius={0}
                     borderTopRightRadius={0}
                     // make sure the input and results bottom and top borders overlap
-                    marginY={`-1px`}
+                    marginY="-1px"
                   >
                     <SearchResults />
                   </Box>
