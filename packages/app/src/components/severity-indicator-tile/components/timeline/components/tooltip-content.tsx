@@ -37,13 +37,13 @@ export const TimelineTooltipContent = ({ config, hasMultipleEvents, onNext, onPr
       onMouseMove={stopEventPropagation}
       onTouchMove={stopEventPropagation}
       onTouchStart={stopEventPropagation}
-      px="18px"
-      py="15px"
+      paddingX="18px"
+      paddingY="15px"
       spacing={3}
       width={{ _: '100vw', sm: '100%' }}
     >
       {isTouch && (
-        <Box display="flex" justifyContent={hasMultipleEvents ? 'space-between' : 'center'} alignItems="center" mx={`-${space[2]}`}>
+        <Box display="flex" justifyContent={hasMultipleEvents ? 'space-between' : 'center'} alignItems="center" marginX={`-${space[2]}`}>
           {hasMultipleEvents && <ChevronButton rotate title={commonTexts.charts.timeline.prev} onClick={onPrev} />}
 
           <InlineText variant="label1" color={colors.gray6}>
@@ -91,7 +91,7 @@ export const TimelineTooltipContent = ({ config, hasMultipleEvents, onNext, onPr
       </Box>
 
       {isTouch && (
-        <Box borderTop={`1px solid ${colors.gray2}`} display="flex" justifyContent="center" mx="-27px" pt={space[3]} textVariant="label1">
+        <Box borderTop={`1px solid ${colors.gray2}`} display="flex" justifyContent="center" marginX="-27px" paddingTop={space[3]} textVariant="label1">
           <Anchor as="button" color={colors.blue8} underline onClick={onClose}>
             {commonTexts.common.sluiten}
           </Anchor>

@@ -13,13 +13,13 @@ interface SeverityIndicatorProps {
 
 const SeverityIndicatorArrow = () => (
   <Box left="50%" position="absolute" top="100%" transform="translateX(-50%)">
-    <Box borderBottom={`${space[2]} solid ${colors.black}`} borderLeft={`${space[2]} solid transparent`} borderRight={`${space[2]} solid transparent`} m={2} />
+    <Box borderBottom={`${space[2]} solid ${colors.black}`} borderLeft={`${space[2]} solid transparent`} borderRight={`${space[2]} solid transparent`} margin={space[2]} />
   </Box>
 );
 
 export const SeverityIndicator = ({ level }: SeverityIndicatorProps) => {
   return (
-    <Box alignItems="flex-end" css={css({ gap: `0 ${space[1]}` })} display="flex" height={space[4]} mb={space[4]} mt={space[3]}>
+    <Box alignItems="flex-end" css={css({ gap: `0 ${space[1]}` })} display="flex" height={space[4]} marginBottom={space[4]} marginTop={space[3]}>
       {SEVERITY_LEVELS_LIST.map((value, index) => (
         <Box
           key={index}
