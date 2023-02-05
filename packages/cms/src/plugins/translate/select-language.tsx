@@ -2,19 +2,10 @@
 
 import { useValidationStatus } from '@sanity/react-hooks';
 import { ValidationMarker } from '@sanity/types';
-import {
-  Inline,
-  studioTheme,
-  Tab as TabAlias,
-  TabList,
-  ThemeProvider,
-} from '@sanity/ui';
+import { Inline, studioTheme, Tab as TabAlias, TabList, ThemeProvider } from '@sanity/ui';
 import React from 'react';
 import Flag from 'react-world-flags';
-import {
-  SupportedLanguage,
-  SupportedLanguageId,
-} from '../../language/supported-languages';
+import { SupportedLanguage, SupportedLanguageId } from '../../language/supported-languages';
 
 const Tab: any = TabAlias;
 
@@ -30,10 +21,7 @@ export default function SelectLanguage(props: SelectLanguageProps) {
 
   const validation = useValidationStatus(document.id, document.type);
 
-  const validationErrors = extractValidationErrorsPerLanguage(
-    validation.markers,
-    languages
-  );
+  const validationErrors = extractValidationErrorsPerLanguage(validation.markers, languages);
 
   return (
     <ThemeProvider theme={studioTheme}>
@@ -45,13 +33,7 @@ export default function SelectLanguage(props: SelectLanguageProps) {
                 border: validationErrors[lang.id] ? '1px solid red' : undefined,
               }}
               key={lang.id}
-              icon={
-                <Flag
-                  code={lang.id === 'en' ? 'gb' : lang.id}
-                  width="24"
-                  height="12"
-                />
-              }
+              icon={<Flag code={lang.id === 'en' ? 'gb' : lang.id} width="24px" height="12px" />}
               onClick={() => onChange([lang.id])}
               selected={selected.includes(lang.id)}
               padding={2}
@@ -63,10 +45,7 @@ export default function SelectLanguage(props: SelectLanguageProps) {
   );
 }
 
-function extractValidationErrorsPerLanguage(
-  markers: ValidationMarker[],
-  languages: SupportedLanguage[]
-) {
+function extractValidationErrorsPerLanguage(markers: ValidationMarker[], languages: SupportedLanguage[]) {
   return languages.reduce<{ en: boolean; nl: boolean }>((errors, lang) => {
     errors[lang.id] = markers.some(checkForLanguage(lang.id));
     return errors;
@@ -74,6 +53,5 @@ function extractValidationErrorsPerLanguage(
 }
 
 function checkForLanguage(languageId: SupportedLanguageId) {
-  return (marker: ValidationMarker) =>
-    marker.path[marker.path.length - 1] === languageId;
+  return (marker: ValidationMarker) => marker.path[marker.path.length - 1] === languageId;
 }

@@ -23,17 +23,7 @@ type BarscaleProps = {
   showValue?: boolean;
 };
 
-export function BarScale({
-  min,
-  max,
-  value,
-  limit,
-  gradient,
-  id,
-  screenReaderText,
-  showAxis,
-  showValue,
-}: BarscaleProps) {
+export function BarScale({ min, max, value, limit, gradient, id, screenReaderText, showAxis, showValue }: BarscaleProps) {
   const scale = useDynamicScale(value, min, max);
   const { formatNumber } = useIntl();
 
@@ -68,61 +58,22 @@ export function BarScale({
         >
           <defs>
             <clipPath id={`${id}-cut-off`}>
-              <rect
-                x="0"
-                y={36}
-                rx="2"
-                ry="2"
-                width={`${scale(value)}%`}
-                height="10"
-                fill="black"
-              />
+              <rect x="0" y={36} rx="2" ry="2" width={`${scale(value)}%`} height="10px" fill="black" />
             </clipPath>
-            <linearGradient
-              id={`${id}-bar-color`}
-              gradientUnits="userSpaceOnUse"
-            >
+            <linearGradient id={`${id}-bar-color`} gradientUnits="userSpaceOnUse">
               {color.domain().map((value) => (
-                <stop
-                  key={`stop-${value}`}
-                  stopColor={color(value)}
-                  offset={`${scale(value)}%`}
-                />
+                <stop key={`stop-${value}`} stopColor={color(value)} offset={`${scale(value)}%`} />
               ))}
             </linearGradient>
           </defs>
 
           <g>
-            <rect
-              x="0"
-              y={36}
-              rx="2"
-              ry="2"
-              width="100%"
-              height="10"
-              clipPath={`url(#${id}-cut-off)`}
-              fill={`url(#${id}-bar-color)`}
-            />
-            <rect
-              x="0"
-              y={42}
-              rx="2"
-              ry="2"
-              width="100%"
-              height="4"
-              fill={`url(#${id}-bar-color)`}
-            />
+            <rect x="0" y={36} rx="2" ry="2" width="100%" height="10px" clipPath={`url(#${id}-cut-off)`} fill={`url(#${id}-bar-color)`} />
+            <rect x="0" y={42} rx="2" ry="2" width="100%" height="4px" fill={`url(#${id}-bar-color)`} />
           </g>
 
           <g>
-            <line
-              x1={`${scale(value)}%`}
-              x2={`${scale(value)}%`}
-              y1={46}
-              y2={26}
-              strokeWidth="3"
-              stroke="black"
-            />
+            <line x1={`${scale(value)}%`} x2={`${scale(value)}%`} y1={46} y2={26} strokeWidth="3" stroke="black" />
 
             {showValue && (
               <text
@@ -142,22 +93,8 @@ export function BarScale({
 
           {limit && showAxis && (
             <g>
-              {scale(limit) < 100 && (
-                <line
-                  x1={`${scale(limit)}%`}
-                  x2={`${scale(limit)}%`}
-                  y1={56}
-                  y2={46}
-                  strokeWidth="3"
-                  stroke="gray7"
-                />
-              )}
-              <text
-                x={`${scale(limit)}%`}
-                y={scale(limit) < 100 ? 72 : 64}
-                textAnchor={textAlign(scale(limit) ?? 0)}
-                css={css({ fill: 'gray7', fontSize: '0.875rem' })}
-              >
+              {scale(limit) < 100 && <line x1={`${scale(limit)}%`} x2={`${scale(limit)}%`} y1={56} y2={46} strokeWidth="3" stroke="gray7" />}
+              <text x={`${scale(limit)}%`} y={scale(limit) < 100 ? 72 : 64} textAnchor={textAlign(scale(limit) ?? 0)} css={css({ fill: 'gray7', fontSize: '0.875rem' })}>
                 {`${formatNumber(limit)}`}
               </text>
             </g>
@@ -165,11 +102,7 @@ export function BarScale({
 
           {showAxis && (
             <g>
-              <text
-                x={`${scale(xMin)}%`}
-                y={64}
-                css={css({ fill: 'gray7', fontSize: '0.875rem' })}
-              >
+              <text x={`${scale(xMin)}%`} y={64} css={css({ fill: 'gray7', fontSize: '0.875rem' })}>
                 {`${formatNumber(xMin)}`}
               </text>
             </g>
