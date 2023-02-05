@@ -1,4 +1,4 @@
-import { createFlatTexts } from '@corona-dashboard/common';
+import { colors, createFlatTexts } from '@corona-dashboard/common';
 import '@reach/combobox/styles.css';
 import { MutationEvent, SanityDocument } from '@sanity/client';
 import css from '@styled-system/css';
@@ -147,20 +147,20 @@ interface ToggleProps<T extends string> {
 
 function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
   return (
-    <Box border="1px solid" borderColor="gray3" marginX={space[2]} borderRadius={1} overflow="hidden">
+    <Box border="1px solid" borderColor={colors.gray3} marginX={space[2]} borderRadius={1} overflow="hidden">
       {values.map((x, i) => (
         <label
           key={x}
           css={css({
             paddingX: space[2],
             borderRight: values[i + 1] ? '1px solid' : undefined,
-            borderColor: 'gray3',
+            borderColor: colors.gray3,
             display: 'inline-block',
-            background: x === value ? 'blue8' : 'white',
-            color: x === value ? 'white' : 'inherit',
+            background: x === value ? colors.blue8 : colors.white,
+            color: x === value ? colors.white : 'inherit',
             cursor: x === value ? 'default' : 'pointer',
             transition: 'background 100ms linear',
-            '&:hover': { background: x === value ? 'blue8' : 'gray1' },
+            '&:hover': { background: x === value ? colors.blue8 : colors.gray1 },
           })}
         >
           <VisuallyHidden>
@@ -173,11 +173,11 @@ function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
   );
 }
 
-function ToggleButton({ isActive, onClick, color, children }: { isActive: boolean; onClick: () => void; children: ReactNode; color?: 'green1' | 'blue8' }) {
+function ToggleButton({ isActive, onClick, children }: { isActive: boolean; onClick: () => void; children: ReactNode }) {
   return (
     <Container isActive={isActive}>
       <DisplayOnHover>{isActive && children}</DisplayOnHover>
-      <StyledToggleButton isActive={isActive} color={color} onClick={onClick}>
+      <StyledToggleButton isActive={isActive} onClick={onClick}>
         <Database
           style={{
             width: '20px',
@@ -222,8 +222,8 @@ const StyledToggleButton = styled.div<{ isActive: boolean; color?: string }>((x)
   css({
     cursor: 'pointer',
     borderRadius: 1,
-    color: x.isActive ? 'white' : 'black',
-    background: x.isActive ? 'blue8' : 'transparent',
+    color: x.isActive ? colors.white : colors.black,
+    background: x.isActive ? colors.blue8 : colors.transparent,
     transition: 'all 100ms linear',
     padding: space[1],
     display: 'inline-block',

@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -83,13 +84,13 @@ const SkipButton = styled.button<{ isActive: boolean }>((x) =>
      */
     opacity: 0,
     pointerEvents: 'none',
-    top: '0',
-    left: '0',
+    top: 0,
+    left: 0,
 
     border: '1px solid',
-    borderColor: 'blue8',
-    background: x.isActive ? 'blue8' : 'white',
-    color: x.isActive ? 'white' : 'blue8',
+    borderColor: colors.blue8,
+    background: x.isActive ? colors.blue8 : colors.white,
+    color: x.isActive ? colors.white : colors.blue8,
 
     '&:focus': {
       opacity: 1,

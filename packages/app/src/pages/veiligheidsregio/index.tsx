@@ -63,7 +63,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
           </Heading>
           <Markdown content={commonTexts.veiligheidsregio_index.selecteer_toelichting} />
 
-          <Box display="flex" flex="1" justifyContent="center" height="75vh" minHeight="960px" width="100%" flexDirection="column" spacing={3}>
+          <Box display="flex" flex="1" justifyContent="center" height="75vh" maxHeight="960px" width="100%" flexDirection="column" spacing={3}>
             <ErrorBoundary>
               <DynamicChoropleth
                 accessibility={{
