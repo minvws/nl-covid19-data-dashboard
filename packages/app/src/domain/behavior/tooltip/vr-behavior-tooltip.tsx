@@ -93,7 +93,7 @@ const LegendaColorBox = styled.div<{ backgroundColor: string }>((x) =>
     height: '13px',
     width: '13px',
     borderRadius: '2px',
-    marginLeft: '1px',
+    marginLeft: space[1],
     backgroundColor: x.backgroundColor,
   })
 );
