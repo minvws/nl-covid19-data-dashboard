@@ -30,7 +30,7 @@ const StyledVisuallyHidden = styled.div(
     height: '1px',
     padding: '0',
     border: 0,
-    margin: -space[1],
+    margin: `-${space[1]}`,
     clip: 'rect(0, 0, 0, 0)',
   })
 );
