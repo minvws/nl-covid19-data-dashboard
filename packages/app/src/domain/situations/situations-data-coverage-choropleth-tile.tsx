@@ -57,7 +57,7 @@ export function SituationsDataCoverageChoroplethTile({ data, text, tooltipText }
             />
           </Box>
         </Box>
-        <Box flex={{ lg: 1 }} marginLeft={{ _: 0, sm: 3 }} display="flex" flexDirection="column" height="100%">
+        <Box flex={{ lg: 1 }} marginLeft={{ _: '0px', sm: space[3] }} display="flex" flexDirection="column" height="100%">
           <Box height="100%">
             <ErrorBoundary>
               <DynamicChoropleth
