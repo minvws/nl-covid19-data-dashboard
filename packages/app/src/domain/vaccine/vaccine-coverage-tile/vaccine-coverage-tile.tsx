@@ -1,4 +1,3 @@
-import { css } from '@styled-system/css';
 import { Box } from '~/components/base';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -14,6 +13,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Bar } from '../components/bar';
 import styled from 'styled-components';
 import { colors } from '@corona-dashboard/common';
+import { space } from '~/style/theme';
 
 type BarType = {
   value: number;
@@ -61,7 +61,7 @@ export const VaccineCoverageTile = ({ title, description, source, descriptionFoo
         </KpiContent>
       </TwoKpiSection>
       <Metadata {...metadata} isTileFooter />
-      <Box maxWidth="maxWidthText" mt={36}>
+      <Box maxWidth="maxWidthText" marginTop="36px">
         <Markdown content={descriptionFooter} />
       </Box>
     </KpiTile>
@@ -86,10 +86,10 @@ const AgeGroupBlock = ({ data, bar, children }: AgeGroupBlockProps) => {
   return (
     <Box>
       <BoldText>{data.title}</BoldText>
-      <Box pt={3} pb={1}>
+      <Box paddingTop={space[3]} paddingBottom={space[1]}>
         <KpiValue text={parsedAgePercentage} color={bar.color} />
       </Box>
-      <Box pt={2} pb={3}>
+      <Box paddingTop={space[2]} paddingBottom={space[3]}>
         <Bar value={bar.value} color={bar.color} height={12} />
       </Box>
       <Markdown
@@ -102,25 +102,23 @@ const AgeGroupBlock = ({ data, bar, children }: AgeGroupBlockProps) => {
   );
 };
 
-const AgeGroupWrapper = styled.div(
-  css({
-    display: 'flex',
-    justifyContent: 'start',
-    overflowWrap: 'break-word',
-    wordWrap: 'break-word',
-    hyphens: 'auto',
-    px: asResponsiveArray({ _: 3, xs: 24 }),
-    py: 24,
-  })
-);
+const AgeGroupWrapper = styled.div`
+  display: 'flex';
+  justify-content: 'start';
+  overflow-wrap: 'break-word';
+  word-wrap: 'break-word';
+  hyphens: 'auto';
+  padding-left: ${asResponsiveArray({ _: '3px', xs: '24px' })};
+  padding-right: ${asResponsiveArray({ _: '3px', xs: '24px' })};
+  padding-bottom: 24px;
+  padding-top: 24px;
+`;
 
-const KpiContent = styled.div(
-  css({
-    border: `1px solid ${colors.gray3}`,
-    position: 'relative',
-    display: 'flex',
-    flexDirection: asResponsiveArray({ _: 'column', sm: 'row' }),
-    justifyContent: 'space-between',
-    color: 'black',
-  })
-);
+const KpiContent = styled.button`
+  border: 1px solid ${colors.gray3};
+  position: 'relative';
+  display: 'flex';
+  flex-direction: ${asResponsiveArray({ _: 'column', sm: 'row' })};
+  justify-content: 'space-between';
+  color: 'black';
+`;
