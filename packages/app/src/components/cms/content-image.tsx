@@ -1,4 +1,4 @@
-import { colors } from '@corona-dashboard/common/src/theme';
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Fragment, FunctionComponent } from 'react';
 import styled from 'styled-components';
