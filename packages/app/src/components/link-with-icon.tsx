@@ -21,23 +21,16 @@ interface LinkWithIconProps {
 interface IconProps {
   icon: ReactNode;
   isSingleWord?: boolean;
-  width: number;
-  height: number;
-  mr?: number | string;
+  width: string;
+  height: string;
+  marginRight?: number | string;
 }
 
 interface LinkContainerProps {
   showAsButton: boolean;
 }
 
-export const LinkWithIcon = ({
-  href,
-  icon,
-  children,
-  iconPlacement = 'left',
-  fontWeight,
-  showAsButton = false,
-}: LinkWithIconProps) => {
+export const LinkWithIcon = ({ href, icon, children, iconPlacement = 'left', fontWeight, showAsButton = false }: LinkWithIconProps) => {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
 
@@ -55,13 +48,13 @@ export const LinkWithIcon = ({
               {!words.length ? children : firstWords}
               <IconWrapper>
                 {words[words.length - 1]}
-                <IconSmall icon={icon} width={11} height={10} />
+                <IconSmall icon={icon} width={'11px'} height={'10px'} />
               </IconWrapper>
             </>
           )}
           {iconPlacement === 'left' && (
             <>
-              <IconSmall icon={icon} width={11} height={10} mr={1} />
+              <IconSmall icon={icon} width={'11px'} height={'10px'} marginRight={space[1]} />
               {children}
             </>
           )}
@@ -71,12 +64,7 @@ export const LinkWithIcon = ({
   );
 };
 
-export const HeadingLinkWithIcon = ({
-  href,
-  icon,
-  children,
-  underline,
-}: LinkWithIconProps) => {
+export const HeadingLinkWithIcon = ({ href, icon, children, underline }: LinkWithIconProps) => {
   const words = children.split(' ');
   const firstWords = `${words.slice(0, -1).join(' ')} `;
   const isSingleWord = words.length === 1;
@@ -96,12 +84,7 @@ export const HeadingLinkWithIcon = ({
             {!words.length ? children : firstWords}
             <IconWrapper>
               {words[words.length - 1]}
-              <IconLarge
-                icon={icon}
-                isSingleWord={isSingleWord}
-                width={16}
-                height={13}
-              />
+              <IconLarge icon={icon} isSingleWord={isSingleWord} width={space[3]} height={'13px'} />
             </IconWrapper>
           </Box>
         </Anchor>
@@ -110,12 +93,8 @@ export const HeadingLinkWithIcon = ({
   );
 };
 
-const IconSmall = ({ icon, width, height, mr }: IconProps) => {
-  return (
-    <span css={css({ marginRight: mr, svg: { height, width, mx: '3px' } })}>
-      {icon}
-    </span>
-  );
+const IconSmall = ({ icon, width, height, marginRight }: IconProps) => {
+  return <span css={css({ marginRight: marginRight, svg: { height, width, marginX: '3px' } })}>{icon}</span>;
 };
 
 const IconLarge = ({ icon, isSingleWord, width, height }: IconProps) => {
@@ -123,13 +102,13 @@ const IconLarge = ({ icon, isSingleWord, width, height }: IconProps) => {
     <span
       css={css({
         svg: {
-          width,
-          height,
-          marginLeft: 2,
+          width: width,
+          height: height,
+          marginLeft: space[2],
           position: isSingleWord ? 'absolute' : 'relative',
           minHeight: '100%',
-          right: 0,
-          top: 0,
+          right: '0',
+          top: '0',
         },
       })}
     >

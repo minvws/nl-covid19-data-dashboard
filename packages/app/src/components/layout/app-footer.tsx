@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { External } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
@@ -7,6 +8,7 @@ import { ExternalLink } from '~/components/external-link';
 import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -18,21 +20,15 @@ export function AppFooter() {
 
   return (
     <footer>
-      <Box
-        bg="blue8"
-        color="white"
-        py={5}
-        position="relative"
-        id="footer-navigation"
-      >
+      <Box backgroundColor={colors.blue8} color={colors.white} paddingY={space[5]} position="relative" id="footer-navigation">
         <MaxWidth
           display="grid"
           gridTemplateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }}
           css={css({
-            columnGap: asResponsiveArray({ sm: '32px', md: '48px' }),
-            rowGap: asResponsiveArray({ _: 4, md: null }),
+            columnGap: asResponsiveArray({ sm: space[4], md: '48px' }),
+            rowGap: asResponsiveArray({ _: space[4], md: null }),
           })}
-          px={{ _: 3, sm: 4, md: 3, lg: 4 }}
+          paddingX={{ _: space[3], sm: space[4], md: space[3], lg: space[4] }}
         >
           <Box spacing={3}>
             <Heading as="div" level={3}>
@@ -41,15 +37,9 @@ export function AppFooter() {
             <nav aria-label={text.aria_labels.pagina_keuze} role="navigation">
               <Box as="ul" spacing={2}>
                 <Item href="/">{text.nav.links.samenvatting}</Item>
-                <Item href={reverseRouter.nl.index()}>
-                  {text.nav.links.index}
-                </Item>
-                <Item href={reverseRouter.vr.index()}>
-                  {text.nav.links.veiligheidsregio}
-                </Item>
-                <Item href={reverseRouter.gm.index()}>
-                  {text.nav.links.gemeente}
-                </Item>
+                <Item href={reverseRouter.nl.index()}>{text.nav.links.index}</Item>
+                <Item href={reverseRouter.vr.index()}>{text.nav.links.veiligheidsregio}</Item>
+                <Item href={reverseRouter.gm.index()}>{text.nav.links.gemeente}</Item>
               </Box>
             </nav>
           </Box>
@@ -59,21 +49,11 @@ export function AppFooter() {
             </Heading>
             <nav aria-label={text.aria_labels.footer_keuze} role="navigation">
               <Box as="ul" spacing={2}>
-                <Item href={reverseRouter.general.over()}>
-                  {text.nav.links.over}
-                </Item>
-                <Item href={reverseRouter.general.artikelen()}>
-                  {text.nav.links.artikelen}
-                </Item>
-                <Item href={reverseRouter.general.toegankelijkheid()}>
-                  {text.nav.links.toegankelijkheid}
-                </Item>
-                <Item href={reverseRouter.general.veelgesteldeVragen()}>
-                  {text.nav.links.veelgestelde_vragen}
-                </Item>
-                <Item href={reverseRouter.general.verantwoording()}>
-                  {text.nav.links.verantwoording}
-                </Item>
+                <Item href={reverseRouter.general.over()}>{text.nav.links.over}</Item>
+                <Item href={reverseRouter.general.artikelen()}>{text.nav.links.artikelen}</Item>
+                <Item href={reverseRouter.general.toegankelijkheid()}>{text.nav.links.toegankelijkheid}</Item>
+                <Item href={reverseRouter.general.veelgesteldeVragen()}>{text.nav.links.veelgestelde_vragen}</Item>
+                <Item href={reverseRouter.general.verantwoording()}>{text.nav.links.verantwoording}</Item>
                 <Item href={text.nav.links.meer_href} isExternal>
                   {text.nav.links.meer}
                 </Item>
@@ -85,10 +65,7 @@ export function AppFooter() {
             <Heading as="div" level={3}>
               {text.nav.contact}
             </Heading>
-            <Box
-              maxWidth={{ sm: '90%', md: 280 }}
-              css={css({ a: { color: 'white' } })}
-            >
+            <Box maxWidth={{ sm: '90%', md: '280px' }} css={css({ a: { color: colors.white } })}>
               <Markdown content={text.nav.contact_beschrijving} />
             </Box>
           </Box>
@@ -98,15 +75,7 @@ export function AppFooter() {
   );
 }
 
-function Item({
-  href,
-  isExternal,
-  children,
-}: {
-  href: string;
-  children: ReactNode;
-  isExternal?: boolean;
-}) {
+function Item({ href, isExternal, children }: { href: string; children: ReactNode; isExternal?: boolean }) {
   return (
     <ListItem isExternal={isExternal}>
       {isExternal ? (
@@ -135,12 +104,12 @@ const ListItem = styled.li<{ isExternal?: boolean }>((x) =>
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'baseline',
-    pl: 3,
+    paddingLeft: space[3],
 
     '&:before': {
       position: 'absolute',
-      top: 0,
-      left: 0,
+      top: '0',
+      left: '0',
       content: x.isExternal ? null : '"›"',
     },
   })
@@ -150,11 +119,11 @@ const IconContainer = styled.div(
   css({
     position: 'absolute',
     left: '-3px',
-    top: 0,
+    top: '0',
 
     svg: {
-      width: 10,
-      height: 10,
+      width: '10px',
+      height: '10px',
     },
   })
 );
