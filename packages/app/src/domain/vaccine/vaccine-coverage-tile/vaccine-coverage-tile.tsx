@@ -116,9 +116,9 @@ const AgeGroupWrapper = styled.div`
 
 const KpiContent = styled.button`
   border: 1px solid ${colors.gray3};
-  position: 'relative';
-  display: 'flex';
+  position: relative;
+  display: flex;
   flex-direction: ${asResponsiveArray({ _: 'column', sm: 'row' })};
-  justify-content: 'space-between';
-  color: 'black';
+  justify-content: space-between;
+  color: black;
 `;
