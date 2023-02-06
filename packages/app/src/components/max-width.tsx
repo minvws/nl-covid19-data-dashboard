@@ -6,6 +6,6 @@ import theme from '~/style/theme';
 export const MaxWidth = styled(Box)(
   css({
     maxWidth: theme.sizes.maxWidth,
-    margin: `0 auto`,
+    margin: '0 auto',
   })
 );
