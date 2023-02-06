@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
+import { space } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 /** We use the screenreaderCategory so when it reads the first H1 on the page.
@@ -18,12 +19,7 @@ type HeaderProps = {
   screenReaderCategory?: string;
 };
 
-export function Header({
-  icon,
-  title,
-  category,
-  screenReaderCategory,
-}: HeaderProps) {
+export function Header({ icon, title, category, screenReaderCategory }: HeaderProps) {
   const breakpoints = useBreakpoints();
   const isMediumScreen = breakpoints.md;
 
@@ -34,9 +30,7 @@ export function Header({
         <Box gridArea="category">
           <Heading level={2} variant="subtitle2">
             {category}
-            {screenReaderCategory && (
-              <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
-            )}
+            {screenReaderCategory && <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>}
           </Heading>
         </Box>
       )}
@@ -59,8 +53,8 @@ const GridLayout = styled(Box)`
 
 const Icon = styled.span<{ gridArea: 'topIcon' | 'sideIcon' }>((x) =>
   css({
-    mt: '-0.6rem',
-    mr: 3,
+    marginTop: '-0.6rem',
+    marginRight: space[3],
     gridArea: x.gridArea,
     height: '3.5rem',
 
