@@ -77,7 +77,20 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  getTopicalTileDate({ config: { isoWeekOffset: 1, startDayOfDate: 1, timeSpanInDays: 7 }, inputDate: new Date(1675162800 * 1000) });
+  const returnedTopicalDate = getTopicalTileDate({ config: { isoWeekOffset: 1, startDayOfDate: 1, timeSpanInDays: 7 }, inputDate: new Date(1675162800000) });
+
+  let useThisStartDate = 0;
+  let useThisEndDate = 0;
+
+  if (returnedTopicalDate?.date_unix) {
+    useThisStartDate = returnedTopicalDate.date_unix;
+  }
+  if (returnedTopicalDate?.date_start_unix && returnedTopicalDate?.date_end_unix) {
+    useThisStartDate = returnedTopicalDate.date_start_unix;
+    useThisEndDate = returnedTopicalDate.date_end_unix;
+  }
+
+  useThisStartDate + useThisEndDate;
 
   const metadata = {
     ...textNl.nationaal_metadata,
