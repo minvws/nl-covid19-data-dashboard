@@ -1,7 +1,6 @@
 import { Box } from '~/components/base';
 import { colors } from '@corona-dashboard/common';
 import styled from 'styled-components';
-import { space } from '~/style/theme';
 
 interface PercentageProps {
   percentage: number;
@@ -38,8 +37,8 @@ const StyledDiv = styled.div<StyledDivProps>`
   background-size: ${({ backgroundStyle }) => (backgroundStyle === 'hatched' ? '7.07px 7.07px' : undefined)};
   flex: 1;
   height: ${({ height }) => (height ? height : undefined)};
-  left: ${space[0]};
-  top: ${space[0]};
+  left: 0;
+  top: 0;
 `;
 
 interface BarProps {

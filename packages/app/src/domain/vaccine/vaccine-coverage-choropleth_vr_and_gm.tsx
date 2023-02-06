@@ -136,7 +136,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({ data, selecte
 
     return (
       <TooltipSubject thresholdValues={data.thresholdValues} filterBelow={ageGroupPercentage as number} noDataFillColor={colors.white} key={ageGroup}>
-        <Box spacingHorizontal={2} display="flex" alignItems="center" justifyContent="space-between" flexGrow={1} marginRight={'13px'} paddingRight={space[2]}>
+        <Box spacingHorizontal={2} display="flex" alignItems="center" justifyContent="space-between" flexGrow={1} marginRight="13px" paddingRight={space[2]}>
           <Box display="inline" minWidth={minWidthOfLabel} textAlign="left">
             <Markdown content={ageGroupsText[ageGroup]} />
           </Box>

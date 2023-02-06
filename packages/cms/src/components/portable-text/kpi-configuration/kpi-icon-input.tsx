@@ -47,7 +47,7 @@ export const KpiIconInput = forwardRef((props: any, ref: any) => {
             <Text>Er is geen icoon geselecteerd</Text>
           ) : (
             <Box style={{ width: '50px', height: '50px' }}>
-              <KpiIcon width="50" height="50" />
+              <KpiIcon width="50px" height="50px" />
             </Box>
           )}
           <Box>
@@ -60,7 +60,7 @@ export const KpiIconInput = forwardRef((props: any, ref: any) => {
               <Grid columns={[4, 6]} gap={[1, 1, 2, 3]}>
                 {iconInfoCollection.map(([id, GridIcon]) => (
                   <Flex key={id} direction="column" align="center" onClick={() => onChangeIcon(id)} title={id}>
-                    <GridIcon width="35" height="35" color="black" style={{ border: `2px solid ${selectedIcon === id ? colors.green1 : colors.transparent}` }} />
+                    <GridIcon width="35px" height="35px" color="black" style={{ border: `2px solid ${selectedIcon === id ? colors.green1 : colors.transparent}` }} />
                     <Radio checked={value === allIconsToFilename[id]} readOnly style={{ display: 'none' }} />
                   </Flex>
                 ))}
