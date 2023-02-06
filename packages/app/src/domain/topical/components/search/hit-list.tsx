@@ -144,7 +144,7 @@ const StyledHitList = styled.ol(
 
 const NoResultMessage = styled.div(
   css({
-    paddingLeft: ['50px', null, null, space[5]],
+    paddingLeft: paddedStyle.paddingLeft,
     paddingRight: space[4],
     paddingY: '0',
   })
