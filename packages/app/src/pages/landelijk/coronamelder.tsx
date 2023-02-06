@@ -25,6 +25,7 @@ import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-times
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { space } from '~/style/theme';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -101,15 +102,13 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               <Text>{corona_melder_app.rapport.description}</Text>
 
               <Link href={corona_melder_app.rapport.link.href} passHref>
-                <a target="_blank" css={css({ display: 'flex', mt: 2 })}>
+                <a target="_blank" css={css({ display: 'flex', marginTop: space[2] })}>
                   <Box display="flex" alignItems="center">
                     <IconWrapper>
                       <ExternalLinkIcon aria-hidden="true" />
                     </IconWrapper>
                   </Box>
-                  <Box as="span" maxWidth="200px">
-                    {corona_melder_app.rapport.link.text}
-                  </Box>
+                  <span css={css({ maxWidth: '200px' })}>{corona_melder_app.rapport.link.text}</span>
                 </a>
               </Link>
             </Tile>

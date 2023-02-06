@@ -1,6 +1,8 @@
+import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { fontSizes, space } from '~/style/theme';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 
 /**
@@ -67,11 +69,11 @@ export function useTabInteractiveButton(label: string) {
 const SkipButton = styled.button<{ isActive: boolean }>((x) =>
   css({
     position: 'absolute',
-    fontSize: 1,
+    fontSize: fontSizes[1],
     fontWeight: 'bold',
     width: 'auto',
-    px: 3,
-    py: 2,
+    paddingX: space[3],
+    paddingY: space[2],
     cursor: 'pointer',
     textDecoration: 'none',
     zIndex: 9,
@@ -86,9 +88,9 @@ const SkipButton = styled.button<{ isActive: boolean }>((x) =>
     left: 0,
 
     border: '1px solid',
-    borderColor: 'blue8',
-    bg: x.isActive ? 'blue8' : 'white',
-    color: x.isActive ? 'white' : 'blue8',
+    borderColor: colors.blue8,
+    background: x.isActive ? colors.blue8 : colors.white,
+    color: x.isActive ? colors.white : colors.blue8,
 
     '&:focus': {
       opacity: 1,
