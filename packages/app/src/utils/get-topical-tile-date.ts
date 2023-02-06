@@ -8,26 +8,30 @@ export type TopicalDateConfig = {
   inputDate?: Date;
 };
 
-const dayInSeconds = 86400;
-const weekInSeconds = 604800;
+const dayInMiliseconds = 86400000;
+const weekInMiliseconds = 604800000;
 
 export const getTopicalTileDate = ({ config, inputDate = new Date() }: TopicalDateConfig): DateSpanValue | DateValue => {
-  const currentDay = inputDate.getDay();
-  const weekOffset = config.startDayOfDate < currentDay ? (config.isoWeekOffset + 1) * weekInSeconds : config.isoWeekOffset * weekInSeconds;
-  const dayOffset = config.startDayOfDate * dayInSeconds;
-  const timespanLengthInSeconds = config.timeSpanInDays - 1 * dayInSeconds;
+  const inputDay = inputDate.getDay();
+  const inputDateInUnixTime = inputDate.getTime();
+  const weekOffset = config.startDayOfDate > inputDay ? (config.isoWeekOffset + 1) * weekInMiliseconds : config.isoWeekOffset * weekInMiliseconds;
+  const startOfTheWeekOffset = weekOffset + inputDay * dayInMiliseconds;
+  const dayOffset = config.startDayOfDate * dayInMiliseconds;
+  const timespanLengthInMiliseconds = (config.timeSpanInDays - 1) * dayInMiliseconds;
 
-  const startDate = inputDate.getTime() / 1000 - weekOffset + dayOffset;
-  const endDate = startDate + timespanLengthInSeconds;
+  const IsoWeekStart = inputDateInUnixTime - startOfTheWeekOffset;
+
+  const startDate = IsoWeekStart + dayOffset;
+  const endDate = startDate + timespanLengthInMiliseconds;
 
   const dateResult =
     config.timeSpanInDays === 1
       ? {
-          date_unix: startDate,
+          date_unix: startDate / 1000,
         }
       : {
-          date_start_unix: startDate,
-          date_end_unix: endDate,
+          date_start_unix: startDate / 1000,
+          date_end_unix: endDate / 1000,
         };
   return dateResult;
 };

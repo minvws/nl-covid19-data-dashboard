@@ -5,9 +5,9 @@ import { getTopicalTileDate, TopicalDateConfig } from '../get-topical-tile-date'
 const GetTopicalTileDate = suite('getThresholdValue');
 
 const dateConfigArray: TopicalDateConfig[] = [
-  { config: { isoWeekOffset: 1, startDayOfDate: 1, timeSpanInDays: 7 } },
-  { config: { isoWeekOffset: 0, startDayOfDate: 6, timeSpanInDays: 1 } },
-  { config: { isoWeekOffset: 2, startDayOfDate: 3, timeSpanInDays: 14 } },
+  { config: { isoWeekOffset: 1, startDayOfDate: 1, timeSpanInDays: 7 }, inputDate: new Date(1675162800000) },
+  { config: { isoWeekOffset: 0, startDayOfDate: 6, timeSpanInDays: 1 }, inputDate: new Date(1669978800000) },
+  { config: { isoWeekOffset: 2, startDayOfDate: 3, timeSpanInDays: 14 }, inputDate: new Date(1665568800000) },
 ];
 
 GetTopicalTileDate('Should retrieve the formated date for the 1st config', () => {
