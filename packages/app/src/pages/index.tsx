@@ -36,6 +36,7 @@ import { space } from '~/style/theme';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 import { getFilenameToIconName, replaceVariablesInText } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { getTopicalTileDate } from '~/utils/get-topical-tile-date';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.topical_page.nl,
@@ -75,6 +76,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { topicalConfig, measureTheme, thermometer, kpiThemes, weeklySummary } = topicalStructure;
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+
+  getTopicalTileDate({ config: { isoWeekOffset: 1, startDayOfDate: 1, timeSpanInDays: 7 }, inputDate: new Date(1675162800 * 1000) });
 
   const metadata = {
     ...textNl.nationaal_metadata,
