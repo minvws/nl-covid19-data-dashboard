@@ -1,11 +1,8 @@
-import {
-  colors,
-  isDateSpanValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { colors, isDateSpanValue, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { HoveredPoint } from '../logic';
 
 type LineProps = {
@@ -22,11 +19,7 @@ interface DateLineMarkerProps<T extends TimestampedValue> {
   value: T;
 }
 
-export function DateLineMarker<T extends TimestampedValue>({
-  lineColor = colors.primary,
-  point,
-  value,
-}: DateLineMarkerProps<T>) {
+export function DateLineMarker<T extends TimestampedValue>({ lineColor = colors.primary, point, value }: DateLineMarkerProps<T>) {
   const { formatDateFromSeconds } = useIntl();
   return (
     <Container style={{ transform: `translateX(${point.x}px)` }}>
@@ -53,13 +46,13 @@ const LabelContainer = styled.div({
   justifyContent: 'center',
   marginTop: '7px',
   transform: 'translate(-50%, 0)',
-  width: 100,
+  width: '100px',
 });
 
 const Label = styled.span(
   css({
     backgroundColor: 'white',
-    px: '0.5em',
+    paddingX: space[2],
     fontSize: 12,
     fontWeight: 'bold',
   })
@@ -79,7 +72,7 @@ const Container = styled.div(
   css({
     position: 'absolute',
     pointerEvents: 'none',
-    top: 0,
-    bottom: 0,
+    top: '0',
+    bottom: '0',
   })
 );

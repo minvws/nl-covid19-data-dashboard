@@ -16,7 +16,7 @@ export const TimelineMarker = ({ color = colors.primary, isHighlighted, hasPaddi
   const innerPointSize = size - 2 * borderWidth;
 
   return (
-    <div role="img" style={{ padding: hasPadding ? highlightBorderWidth : 0 }} aria-hidden={true}>
+    <div role="img" style={{ padding: hasPadding ? highlightBorderWidth : '0' }} aria-hidden={true}>
       <div style={{ width: size, height: size }}>
         <StyledPointMarker
           size={innerPointSize}

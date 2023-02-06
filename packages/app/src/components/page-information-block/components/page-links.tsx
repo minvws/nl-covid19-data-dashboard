@@ -78,17 +78,17 @@ const ListItem = styled.li(
     width: asResponsiveArray({ _: '100%', md: `calc(50% - ${space[4]})` }),
 
     '&:nth-child(2n+1)': {
-      mr: asResponsiveArray({ md: 5 }),
+      marginRight: asResponsiveArray({ md: space[5] }),
     },
   })
 );
 
 const IconWrapper = styled.span(
   css({
-    ml: 1,
+    marginLeft: space[1],
     svg: {
-      width: 11,
-      height: 11,
+      width: '11px',
+      height: '11px',
     },
   })
 );

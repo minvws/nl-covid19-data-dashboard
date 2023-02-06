@@ -5,6 +5,7 @@ import { Box, MotionBox } from '~/components/base';
 import { Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { TimelineMarker } from '../timeline';
 import { IconRow } from './tooltip-icon-row';
@@ -62,8 +63,8 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
               </AppearTransition>
             )}
             {timelineEvent && (
-              <AppearTransition mx={-3} key="2">
-                <Box fontWeight="bold" px={3} pb={2} mb={2} borderBottom="1px solid" borderBottomColor="gray2">
+              <AppearTransition marginX={`-${space[3]}`} key="2">
+                <Box fontWeight="bold" paddingX={space[3]} paddingBottom={space[2]} marginBottom={space[2]} borderBottom="1px solid" borderBottomColor="gray2">
                   <IconRow icon={<TimelineMarker isHighlighted size={10} />}>{timelineEvent.title}</IconRow>
                 </Box>
               </AppearTransition>
@@ -77,7 +78,7 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
 }
 
 function AppearTransition(props: ComponentProps<typeof MotionBox>) {
-  return <MotionBox {...props} initial={{ height: 0, opacity: 0 }} exit={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} overflow="hidden" />;
+  return <MotionBox {...props} initial={{ height: '0', opacity: 0 }} exit={{ height: '0', opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} overflow="hidden" />;
 }
 
 function useInitialWidth<T extends HTMLElement>() {

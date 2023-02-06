@@ -9,14 +9,9 @@ import { Heading } from '~/components/typography';
 import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-} from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate } from '~/static-props/get-data';
+import { space } from '~/style/theme';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skip-links';
 
@@ -63,28 +58,13 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts } = useIntl();
   const { content, lastGenerated } = props;
 
-  const groups = groupBy<CollapsibleList>(
-    content.collapsibleList,
-    (x) => x.group
-  );
+  const groups = groupBy<CollapsibleList>(content.collapsibleList, (x) => x.group);
 
   return (
-    <Layout
-      {...commonTexts.verantwoording_metadata}
-      lastGenerated={lastGenerated}
-    >
+    <Layout {...commonTexts.verantwoording_metadata} lastGenerated={lastGenerated}>
       <Head>
-        <link
-          key="dc-type"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/webpagina"
-        />
-        <link
-          key="dc-type-title"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/webpagina"
-          title="webpagina"
-        />
+        <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" />
+        <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
       </Head>
 
       <Content>
@@ -101,11 +81,8 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
                   const id = getSkipLinkId(item.title);
                   return item.content ? (
                     <CollapsibleSection key={id} id={id} summary={item.title}>
-                      <Box pt={2} pb={4}>
-                        <RichContent
-                          blocks={item.content}
-                          contentWrapper={RichContentWrapper}
-                        />
+                      <Box paddingTop={space[2]} paddingBottom={space[4]}>
+                        <RichContent blocks={item.content} contentWrapper={RichContentWrapper} />
                       </Box>
                     </CollapsibleSection>
                   ) : null;
