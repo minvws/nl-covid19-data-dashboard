@@ -59,7 +59,7 @@ export function Tooltip({ children, title, x, y, bounds }: TooltipProps) {
     <TooltipContainer
       ref={ref}
       style={{
-        top: 0,
+        top: '0',
         transform: `translate(${left}px,${top}px)`,
         maxWidth: bounds.right - bounds.left,
       }}
