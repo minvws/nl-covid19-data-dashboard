@@ -21,12 +21,12 @@ export const IndicatorLevelDescription = ({ level, label, description }: Indicat
         gridTemplateRows="auto"
         gridTemplateColumns={`${space[4]} auto`}
         alignItems="center"
-        marginBottom={4}
-        css={css({ columnGap: 3, rowGap: asResponsiveArray({ _: 3, sm: 1 }) })}
+        marginBottom={space[4]}
+        css={css({ columnGap: space[3], rowGap: asResponsiveArray({ _: space[3], sm: space[1] }) })}
       >
         <SeverityIndicatorLevel level={level}>{level}</SeverityIndicatorLevel>
         <BoldText>{label}</BoldText>
-        <Text css={css({ gridColumnStart: asResponsiveArray({ _: 1, sm: 2 }), gridColumnEnd: 3 })}>
+        <Text css={css({ gridColumnStart: asResponsiveArray({ _: '1', sm: '2' }), gridColumnEnd: '3' })}>
           {replaceVariablesInText(description.split('**').join(''), {
             label: label.toLowerCase(),
           })}

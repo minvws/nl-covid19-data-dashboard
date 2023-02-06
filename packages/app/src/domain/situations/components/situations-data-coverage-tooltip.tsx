@@ -23,17 +23,12 @@ export function SituationsDataCoverageTooltip({
 
   const Icon = has_sufficient_data ? Check : Cross;
   const color = has_sufficient_data ? 'primary' : 'gray5';
-  const label = has_sufficient_data
-    ? text.tooltip.voldoende_data
-    : text.tooltip.onvoldoende_data;
+  const label = has_sufficient_data ? text.tooltip.voldoende_data : text.tooltip.onvoldoende_data;
 
   return (
-    <TooltipContent
-      title={context.featureName}
-      link={reverseRouter.vr.brononderzoek(context.dataItem.vrcode)}
-    >
+    <TooltipContent title={context.featureName} link={reverseRouter.vr.brononderzoek(context.dataItem.vrcode)}>
       <Box
-        m={0}
+        margin="0"
         spacingHorizontal={2}
         css={css({
           display: 'flex',

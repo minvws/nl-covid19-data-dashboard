@@ -10,46 +10,32 @@ import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SiteText } from '~/locale';
+import { fontSizes, space } from '~/style/theme';
 
 interface SituationsDataCoverageTileProps {
   data: VrSituationsValue;
   text: SiteText['pages']['situations_page']['shared']['veiligheidsregio_dekking'];
 }
 
-export function SituationsDataCoverageTile({
-  data,
-  text,
-}: SituationsDataCoverageTileProps) {
+export function SituationsDataCoverageTile({ data, text }: SituationsDataCoverageTileProps) {
   const { formatDateSpan } = useIntl();
 
-  const [date_from, date_to] = formatDateSpan(
-    { seconds: data.date_start_unix },
-    { seconds: data.date_end_unix }
-  );
+  const [date_from, date_to] = formatDateSpan({ seconds: data.date_start_unix }, { seconds: data.date_end_unix });
 
   return (
     <Tile>
       <Box spacing={2}>
         <Heading level={3}>{text.titel}</Heading>
         <CoverageIndicator hasSufficientData={data.has_sufficient_data}>
-          <IndicatorCircle>
-            {data.has_sufficient_data ? <Check aria-hidden="true" /> : <Cross aria-hidden="true" />}
-          </IndicatorCircle>
-          {data.has_sufficient_data
-            ? text.titel_genoeg_dekking
-            : text.titel_niet_genoeg_dekking}
+          <IndicatorCircle>{data.has_sufficient_data ? <Check aria-hidden="true" /> : <Cross aria-hidden="true" />}</IndicatorCircle>
+          {data.has_sufficient_data ? text.titel_genoeg_dekking : text.titel_niet_genoeg_dekking}
         </CoverageIndicator>
         <Box maxWidth="maxWidthText">
           <Markdown
-            content={replaceVariablesInText(
-              data.has_sufficient_data
-                ? text.beschrijving_genoeg_dekking
-                : text.beschrijving_niet_genoeg_dekking,
-              {
-                date_from,
-                date_to,
-              }
-            )}
+            content={replaceVariablesInText(data.has_sufficient_data ? text.beschrijving_genoeg_dekking : text.beschrijving_niet_genoeg_dekking, {
+              date_from,
+              date_to,
+            })}
           />
         </Box>
       </Box>
@@ -61,7 +47,7 @@ const CoverageIndicator = styled.div<{ hasSufficientData: boolean }>((x) =>
   css({
     display: 'flex',
     alignItems: 'center',
-    fontSize: 3,
+    fontSize: fontSizes[3],
     fontWeight: 600,
     lineHeight: 1,
     fontVariantNumeric: 'tabular-nums',
@@ -71,10 +57,10 @@ const CoverageIndicator = styled.div<{ hasSufficientData: boolean }>((x) =>
 
 const IndicatorCircle = styled.div(
   css({
-    width: 24,
-    height: 24,
-    mr: 2,
-    mb: '3px',
+    width: '24px',
+    height: '24px',
+    marginRight: space[2],
+    marginBottom: '3px',
     borderRadius: '50%',
     backgroundColor: 'currentColor',
     display: 'flex',
