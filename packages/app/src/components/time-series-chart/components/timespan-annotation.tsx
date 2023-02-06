@@ -2,12 +2,7 @@ import { colors } from '@corona-dashboard/common';
 import { PatternLines } from '@visx/pattern';
 import { Bar } from '@visx/shape';
 import { useUniqueId } from '~/utils/use-unique-id';
-import {
-  GetX,
-  TimespanAnnotationConfig,
-  Bounds,
-  SeriesSingleValue,
-} from '../logic';
+import { GetX, TimespanAnnotationConfig, Bounds, SeriesSingleValue } from '../logic';
 
 const DEFAULT_COLOR = colors.gray2;
 
@@ -51,36 +46,13 @@ export function TimespanAnnotation({
   return (
     <>
       {fill === 'hatched' && (
-        <pattern
-          id={patternId}
-          width="8"
-          height="8"
-          patternTransform="rotate(-45 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="8"
-            style={{ stroke: 'white', strokeWidth: 4 }}
-          />
+        <pattern id={patternId} width="8px" height="8px" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="0" x2="0" y2="8" style={{ stroke: 'white', strokeWidth: 4 }} />
         </pattern>
       )}
       {fill === 'dotted' && (
-        <pattern
-          id={patternId}
-          width="4"
-          height="4"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="0"
-            y1="4"
-            x2="0"
-            y2="0"
-            style={{ stroke: 'white', strokeWidth: 4, strokeDasharray: 2 }}
-          />
+        <pattern id={patternId} width="4px" height="4px" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="4" x2="0" y2="0" style={{ stroke: 'white', strokeWidth: 4, strokeDasharray: 2 }} />
         </pattern>
       )}
 
@@ -89,9 +61,7 @@ export function TimespanAnnotation({
         height={height}
         x={x0}
         width={width}
-        fill={
-          fill === 'solid' ? colors.gray2 : `url(#${patternId})`
-        }
+        fill={fill === 'solid' ? colors.gray2 : `url(#${patternId})`}
         style={fill === 'solid' ? { mixBlendMode: 'multiply' } : undefined}
       />
     </>
@@ -104,22 +74,10 @@ interface SolidTimespanAnnotationIconProps {
   height?: number;
 }
 
-export function SolidTimespanAnnotationIcon({
-  width = 15,
-  height = 15,
-}: SolidTimespanAnnotationIconProps) {
+export function SolidTimespanAnnotationIcon({ width = 15, height = 15 }: SolidTimespanAnnotationIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <rect
-        x={0}
-        y={0}
-        width={width}
-        height={height}
-        fill={DEFAULT_COLOR}
-        opacity={1}
-        rx={2}
-        style={{ mixBlendMode: 'multiply' }}
-      />
+      <rect x={0} y={0} width={width} height={height} fill={DEFAULT_COLOR} opacity={1} rx={2} style={{ mixBlendMode: 'multiply' }} />
     </svg>
   );
 }
@@ -129,28 +87,11 @@ interface OutOfBoundsIconProps {
   height?: number;
 }
 
-export function OutOfBoundsIcon({
-  width = 15,
-  height = 15,
-}: OutOfBoundsIconProps) {
+export function OutOfBoundsIcon({ width = 15, height = 15 }: OutOfBoundsIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <PatternLines
-        id="diagonal-pattern"
-        height={6}
-        width={6}
-        stroke={colors.neutral}
-        strokeWidth={2}
-        orientation={['diagonal']}
-      />
-      <rect
-        rx={2}
-        x={0}
-        y={0}
-        width={width}
-        height={height}
-        fill="url(#diagonal-pattern)"
-      />
+      <PatternLines id="diagonal-pattern" height={6} width={6} stroke={colors.neutral} strokeWidth={2} orientation={['diagonal']} />
+      <rect rx={2} x={0} y={0} width={width} height={height} fill="url(#diagonal-pattern)" />
     </svg>
   );
 }
@@ -160,27 +101,12 @@ type HatchedTimespanAnnotationIconProps = {
   height?: number;
 };
 
-export function HatchedTimespanAnnotationIcon({
-  width = 15,
-  height = 15,
-}: HatchedTimespanAnnotationIconProps) {
+export function HatchedTimespanAnnotationIcon({ width = 15, height = 15 }: HatchedTimespanAnnotationIconProps) {
   return (
     <svg height={width} width={height} viewBox={`0 0 ${width} ${height}`}>
       <defs>
-        <pattern
-          id="hatch"
-          width="4"
-          height="4"
-          patternTransform="rotate(-45 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="5"
-            style={{ stroke: colors.gray5, strokeWidth: 3 }}
-          />
+        <pattern id="hatch" width="4px" height="4px" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="0" x2="0" y2="5" style={{ stroke: colors.gray5, strokeWidth: 3 }} />
         </pattern>
       </defs>
       <rect height={height} width={width} fill="white" />

@@ -24,22 +24,8 @@ type BarTrendProps = {
   seriesMax?: number;
 };
 
-export function BarTrend({
-  series,
-  fillOpacity = DEFAULT_FILL_OPACITY,
-  color,
-  getX,
-  getY,
-  bounds,
-  bandPadding = 0.2,
-  id,
-  yScale,
-  seriesMax,
-}: BarTrendProps) {
-  const nonNullSeries = useMemo(
-    () => series.filter((x) => isPresent(x.__value)),
-    [series]
-  );
+export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, getX, getY, bounds, bandPadding = 0.2, id, yScale, seriesMax }: BarTrendProps) {
+  const nonNullSeries = useMemo(() => series.filter((x) => isPresent(x.__value)), [series]);
 
   const xScale = useMemo(
     () =>
@@ -62,10 +48,7 @@ export function BarTrend({
   const outOfBoundsItems: SeriesSingleValue[] = [];
   const items: SeriesSingleValue[] = [];
   nonNullSeries.forEach((x) => {
-    const outOfBounds =
-      undefined !== seriesMax &&
-      undefined !== x.__value &&
-      x.__value > seriesMax;
+    const outOfBounds = undefined !== seriesMax && undefined !== x.__value && x.__value > seriesMax;
     outOfBounds ? outOfBoundsItems.push(x) : items.push(x);
   });
 
@@ -81,23 +64,10 @@ export function BarTrend({
 
             return (
               <React.Fragment key={`out-of-bounds-${index}`}>
-                <PatternLines
-                  id="diagonal-pattern"
-                  height={6}
-                  width={6}
-                  stroke={colors.neutral}
-                  strokeWidth={2}
-                  orientation={['diagonal']}
-                />
-                <rect
-                  key={index}
-                  x={x}
-                  y={y}
-                  height={barHeight}
-                  width={barWidth}
-                  fill={'url(#diagonal-pattern)'}
-                  id={id}
-                />
+                {/* magic-number-alert at the next line the component <PatternLines> receives a number as a height and width.
+                Those are related to the visX library and connot be changed to string/pixel values */}
+                <PatternLines id="diagonal-pattern" height={6} width={6} stroke={colors.neutral} strokeWidth={2} orientation={['diagonal']} />
+                <rect key={index} x={x} y={y} height={barHeight} width={barWidth} fill={'url(#diagonal-pattern)'} id={id} />
               </React.Fragment>
             );
           })}
@@ -111,28 +81,13 @@ export function BarTrend({
             const y = Math.min(zeroPosition, getY(item));
             const barHeight = Math.abs(zeroPosition - getY(item));
 
-            return (
-              <rect
-                key={index}
-                x={x}
-                y={y}
-                height={barHeight}
-                width={barWidth}
-                fill={transparentize(1 - fillOpacity, color)}
-                id={`${id}_${index}`}
-              />
-            );
+            return <rect key={index} x={x} y={y} height={barHeight} width={barWidth} fill={transparentize(1 - fillOpacity, color)} id={`${id}_${index}`} />;
           })}
         </>
       ) : (
         <>
           <AreaTrend
-            series={series.filter(
-              (x) =>
-                undefined !== seriesMax &&
-                undefined !== x.__value &&
-                x.__value < seriesMax
-            )}
+            series={series.filter((x) => undefined !== seriesMax && undefined !== x.__value && x.__value < seriesMax)}
             color={color}
             fillOpacity={fillOpacity}
             strokeWidth={0}
@@ -155,12 +110,7 @@ interface BarTrendIconProps {
   height?: number;
 }
 
-export function BarTrendIcon({
-  color,
-  fillOpacity = DEFAULT_FILL_OPACITY,
-  width = 15,
-  height = 15,
-}: BarTrendIconProps) {
+export function BarTrendIcon({ color, fillOpacity = DEFAULT_FILL_OPACITY, width = 15, height = 15 }: BarTrendIconProps) {
   const maskId = useUniqueId();
 
   return (
@@ -169,15 +119,7 @@ export function BarTrendIcon({
         <rect rx={2} x={0} y={0} width={width} height={height} fill={'white'} />
       </mask>
       <g mask={`url(#${maskId})`}>
-        <rect
-          rx={2}
-          x={0}
-          y={0}
-          width={width}
-          height={height}
-          fill={color}
-          opacity={fillOpacity}
-        />
+        <rect rx={2} x={0} y={0} width={width} height={height} fill={color} opacity={fillOpacity} />
       </g>
     </svg>
   );
