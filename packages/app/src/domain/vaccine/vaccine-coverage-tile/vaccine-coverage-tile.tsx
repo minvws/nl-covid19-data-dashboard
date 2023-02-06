@@ -103,11 +103,11 @@ const AgeGroupBlock = ({ data, bar, children }: AgeGroupBlockProps) => {
 };
 
 const AgeGroupWrapper = styled.div`
-  display: 'flex';
-  justify-content: 'start';
-  overflow-wrap: 'break-word';
-  word-wrap: 'break-word';
-  hyphens: 'auto';
+  display: flex;
+  justify-content: start;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
   padding-left: ${asResponsiveArray({ _: '3px', xs: '24px' })};
   padding-right: ${asResponsiveArray({ _: '3px', xs: '24px' })};
   padding-bottom: 24px;
