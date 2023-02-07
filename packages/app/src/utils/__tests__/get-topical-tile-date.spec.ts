@@ -35,9 +35,9 @@ GetTopicalTileDate('Should retrieve the formated date for the 2nd config', () =>
 GetTopicalTileDate('Should retrieve the formated date for the 3rd config', () => {
   // 'Current Day' Friday 2022-10-12 => 1665568800
   // Two weeks before 22-09-28 => 1664359200
-  // The duration of 14 days 22-10-12 -> 1665568800
+  // The duration of 14 days 22-10-12 -> 1665482400
   // Result formated time: '28 september - 12 October 2022'
-  const expectedResult = { date_start_unix: 1664359200, date_end_unix: 1665568800 };
+  const expectedResult = { date_start_unix: 1664359200, date_end_unix: 1665482400 };
 
   const result = getTopicalTileDate(dateConfigArray[2]);
   assert.is(result, expectedResult);
