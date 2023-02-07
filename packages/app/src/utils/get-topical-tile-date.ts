@@ -21,7 +21,7 @@ export const getTopicalTileDate = ({ config, inputDate = new Date() }: TopicalDa
   // Thursday = 4
   // Friday = 5
   // Saturday = 6
-  const inputDay = inputDate.getDay();
+  const inputDateWeekDay = inputDate.getDay();
 
   // Get the unix timestamp for the given input date.
   const inputDateInUnixTime = inputDate.getTime();
@@ -35,23 +35,23 @@ export const getTopicalTileDate = ({ config, inputDate = new Date() }: TopicalDa
   // If not, add 1 week to the offset and calculate the amount of milliseconds for that offset
   // This is done because: if the offset is from last wedsnesday too the one before last wednesday.
   // We need to check if wedsneday already happened. Otherwise we need to add another week
-  const weekOffset = config.startDayOfDate > inputDay ? (config.isoWeekOffset + 1) * weekInMiliseconds : config.isoWeekOffset * weekInMiliseconds;
+  const millisecondsPassedSinceIsoWeekOffset = config.startDayOfDate > inputDateWeekDay ? (config.isoWeekOffset + 1) * weekInMiliseconds : config.isoWeekOffset * weekInMiliseconds;
 
   // Now we set the start of the week by having the weekday of the given input added to the week offset.
   // Basicly this always sets the week offset in milliseconds to the sunday of that week in the past.
-  const startOfTheWeekOffset = weekOffset + inputDay * dayInMiliseconds;
+  const startOfTheWeekInMilliSecondsPassed = millisecondsPassedSinceIsoWeekOffset + inputDateWeekDay * dayInMiliseconds;
 
   // get the milliseconds offset from the given input date weekday to the previous sunday.
-  const dayOffset = config.startDayOfDate * dayInMiliseconds;
+  const millisecondsPassedSinceSunday = config.startDayOfDate * dayInMiliseconds;
 
   // Get the length of the timespan in milliseconds
   const timespanLengthInMiliseconds = (config.timeSpanInDays - 1) * dayInMiliseconds;
 
   // convert the weeks past in seconds to the actual date in milliseconds
-  const IsoWeekStart = inputDateInUnixTime - startOfTheWeekOffset;
+  const dateOfStartIsoWeek = inputDateInUnixTime - startOfTheWeekInMilliSecondsPassed;
 
   // get form the sunday from the week to start to the day of the week that needs to be dsiplayed.
-  const startDate = IsoWeekStart + dayOffset;
+  const startDate = dateOfStartIsoWeek + millisecondsPassedSinceSunday;
 
   // Get the end date by adding the millisecond of the timespan to the start date.
   const endDate = startDate + timespanLengthInMiliseconds;
