@@ -115,13 +115,13 @@ const AgeGroupWrapper = styled.div`
   }
 `;
 
-const KpiContent = styled.button`
+const KpiContent = styled.div`
   border: 1px solid ${colors.gray3};
   position: relative;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  color: black;
+  color: ${colors.black};
   @media ${mediaQueries.sm} {
     padding-left: 24px;
     padding-right: 24px;
