@@ -1,19 +1,16 @@
 import { Box } from '~/components/base';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
+import { Markdown, KpiValue, KpiTile, VisuallyHidden } from '~/components';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { BoldText, Text } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
 import { useIntl } from '~/intl';
-import { asResponsiveArray } from '~/style/utils';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Bar } from '../components/bar';
 import styled from 'styled-components';
 import { colors } from '@corona-dashboard/common';
-import { space } from '~/style/theme';
+import { mediaQueries, space } from '~/style/theme';
 
 type BarType = {
   value: number;
@@ -59,6 +56,7 @@ export const VaccineCoverageTile = ({ title, description, source, descriptionFoo
             );
           })}
         </KpiContent>
+        <VisuallyHidden />
       </TwoKpiSection>
       <Metadata {...metadata} isTileFooter />
       <Box maxWidth="maxWidthText" marginTop="36px">
@@ -108,17 +106,26 @@ const AgeGroupWrapper = styled.div`
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
-  padding-left: ${asResponsiveArray({ _: '3px', xs: '24px' })};
-  padding-right: ${asResponsiveArray({ _: '3px', xs: '24px' })};
-  padding-bottom: 24px;
-  padding-top: 24px;
+  padding: 24px;
+  padding-left: 3px;
+  padding-right: 3px;
+
+  @media ${mediaQueries.xs} {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 `;
 
 const KpiContent = styled.button`
   border: 1px solid ${colors.gray3};
   position: relative;
   display: flex;
-  flex-direction: ${asResponsiveArray({ _: 'column', sm: 'row' })};
   justify-content: space-between;
+  flex-direction: column;
   color: black;
+  @media ${mediaQueries.sm} {
+    padding-left: 24px;
+    padding-right: 24px;
+    flex-direction: row;
+  }
 `;
