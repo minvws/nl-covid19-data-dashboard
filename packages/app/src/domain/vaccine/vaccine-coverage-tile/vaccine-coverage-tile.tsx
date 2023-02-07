@@ -122,6 +122,7 @@ const KpiContent = styled.div`
   justify-content: space-between;
   flex-direction: column;
   color: ${colors.black};
+
   @media ${mediaQueries.sm} {
     padding-left: 24px;
     padding-right: 24px;
