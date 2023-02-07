@@ -1,5 +1,5 @@
 import { Box } from '~/components/base';
-import { Markdown, KpiValue, KpiTile, VisuallyHidden } from '~/components';
+import { Markdown, KpiValue, KpiTile } from '~/components';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { BoldText, Text } from '~/components/typography';
@@ -56,7 +56,6 @@ export const VaccineCoverageTile = ({ title, description, source, descriptionFoo
             );
           })}
         </KpiContent>
-        <VisuallyHidden />
       </TwoKpiSection>
       <Metadata {...metadata} isTileFooter />
       <Box maxWidth="maxWidthText" marginTop="36px">
