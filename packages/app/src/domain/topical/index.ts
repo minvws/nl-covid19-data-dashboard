@@ -4,7 +4,7 @@ export { TopicalLinksList } from './components/topical-links-list';
 export { TopicalMeasureTile } from './components/topical-measure-tile';
 export { TopicalSectionHeader } from './components/topical-section-header';
 export { TopicalThemeHeader } from './components/topical-theme-header';
-export { TopicalTile } from './components/topical-tile';
+export { TopicalTile } from './components/topical-kpi-tile/topical-tile';
 export { IndicatorLevelDescription } from './components/indicator-level-description';
 
 export * from './components/search';

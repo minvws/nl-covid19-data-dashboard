@@ -17,6 +17,7 @@ import { Cta } from '~/queries/query-types';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { TrendIcon as TrendIconType } from '@corona-dashboard/app/src/domain/topical/types';
 import { mapStringToColors } from '~/components/severity-indicator-tile/logic/map-string-to-colors';
+import { getLookUpValue } from './logic/trend-icon-lookup-table';
 
 interface TopicalTileProps {
   title: string;
@@ -32,7 +33,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
   const { formatNumber } = useIntl();
 
   const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
-
+  getLookUpValue(kpiValue);
   const getTrendDirection = (trendIcon: TrendIconType): TrendDirection => {
     return trendIcon.direction === 'DOWN' ? TrendDirection.DOWN : TrendDirection.UP;
   };
@@ -83,13 +84,18 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
                 })}
               >
                 {title}
-                {!formattedKpiValue && trendIcon.direction && trendIcon.color && (
+                {/* TODO: AP - Is this still required? */}
+                {/* When there isn't a KPI Value AND Trend icon is configured - It shows next to the title of the tile */}
+                {/* {!formattedKpiValue && trendIcon.direction && trendIcon.color && (
                   <TrendIcon trendDirection={getTrendDirection(trendIcon)} color={mapStringToColors(trendIcon.color)} intensity={trendIcon.intensity} />
-                )}
+                )} */}
               </Heading>
+
+              {/* When there is a KPI Value AND Trend icon is configured - It shows next to the KPI value */}
               {formattedKpiValue && (
                 <Box display="flex" justifyContent="start" alignItems="center" marginTop={space[2]}>
                   <KpiValue color={colors.black} text={formattedKpiValue} />
+
                   {trendIcon.direction && trendIcon.color && (
                     <TrendIcon trendDirection={getTrendDirection(trendIcon)} color={mapStringToColors(trendIcon.color)} intensity={trendIcon.intensity} />
                   )}
