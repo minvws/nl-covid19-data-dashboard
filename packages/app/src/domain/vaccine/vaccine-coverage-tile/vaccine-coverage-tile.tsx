@@ -123,7 +123,6 @@ const KpiContent = styled.div`
   color: ${colors.black};
 
   @media ${mediaQueries.sm} {
-    padding-inline: 24px;
     flex-direction: row;
   }
 `;
