@@ -107,7 +107,7 @@ const AgeGroupWrapper = styled.div`
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
-  padding: 24px 3px;
+  padding: 24px 16px;
 
   @media ${mediaQueries.xs} {
     padding-inline: 24px;
