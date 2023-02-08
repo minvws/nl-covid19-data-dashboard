@@ -1,5 +1,7 @@
 import { Box } from '~/components/base';
-import { Markdown, KpiValue, KpiTile } from '~/components';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { BoldText, Text } from '~/components/typography';
@@ -105,13 +107,10 @@ const AgeGroupWrapper = styled.div`
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
-  padding: 24px;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding: 24px 3px;
 
   @media ${mediaQueries.xs} {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-inline: 24px;
   }
 `;
 
@@ -124,8 +123,7 @@ const KpiContent = styled.div`
   color: ${colors.black};
 
   @media ${mediaQueries.sm} {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-inline: 24px;
     flex-direction: row;
   }
 `;
