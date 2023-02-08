@@ -1,6 +1,16 @@
 import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
 import { REQUIRED } from '../../validation';
 
+const DAYS_OF_THE_WEEK_LIST = {
+  0: 'Zondag',
+  1: 'Maandag',
+  2: 'Dinsdag',
+  3: 'Woensdag',
+  4: 'Donderdag',
+  5: 'Vrijdag',
+  6: 'Zaterdag',
+};
+
 export const themeTile = {
   type: 'document',
   title: 'Thema tegel',
@@ -47,6 +57,27 @@ export const themeTile = {
     },
     {
       title: 'Metadata label',
+      name: 'sourceLabel',
+      type: 'localeString',
+    },
+
+    {
+      title: 'Iso week offset',
+      name: 'isoWeekOffset',
+      type: 'number',
+    },
+    {
+      title: 'Dag van de week',
+      name: 'startDayOfTheWeek',
+      options: {
+        list: DAYS_OF_THE_WEEK_LIST,
+        layout: 'dropdown',
+      },
+      type: 'localeString',
+    },
+
+    {
+      title: 'Hoeveelheid dagen',
       name: 'sourceLabel',
       type: 'localeString',
     },
