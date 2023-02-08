@@ -1,9 +1,4 @@
-import {
-  colors,
-  NlGNumber,
-  TimeframeOption,
-  VrGNumber,
-} from '@corona-dashboard/common';
+import { colors, NlGNumber, TimeframeOption, TimeframeOptionsList, VrGNumber } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -17,20 +12,14 @@ interface GNumberBarChartTileProps {
   timeframeInitialValue?: TimeframeOption;
 }
 
-export function GNumberBarChartTile({
-  data: __data,
-  timeframeInitialValue = TimeframeOption.ALL,
-}: GNumberBarChartTileProps) {
-  const [gnumberTimeframe, setGnumberTimeframe] = useState<TimeframeOption>(
-    TimeframeOption.ALL
-  );
+export function GNumberBarChartTile({ data: __data, timeframeInitialValue = TimeframeOption.ALL }: GNumberBarChartTileProps) {
+  const [gnumberTimeframe, setGnumberTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { formatPercentage, commonTexts } = useIntl();
 
   const text = commonTexts.g_number.bar_chart;
 
-  const firstOfSeptember2020Unix =
-    new Date('1 September 2020').valueOf() / 1000;
+  const firstOfSeptember2020Unix = new Date('1 September 2020').valueOf() / 1000;
   const values = __data.values.filter((value) => {
     return value.date_unix >= firstOfSeptember2020Unix;
   });
@@ -42,14 +31,7 @@ export function GNumberBarChartTile({
       title={text.title}
       description={text.description}
       timeframeInitialValue={timeframeInitialValue}
-      timeframeOptions={[
-        TimeframeOption.ALL,
-        TimeframeOption.ONE_WEEK,
-        TimeframeOption.THIRTY_DAYS,
-        TimeframeOption.THREE_MONTHS,
-        TimeframeOption.SIX_MONTHS,
-        TimeframeOption.LAST_YEAR,
-      ]}
+      timeframeOptions={TimeframeOptionsList}
       metadata={{
         date: last_value.date_of_insertion_unix,
         source: text.bronnen,
@@ -89,12 +71,8 @@ export function GNumberBarChartTile({
         ]}
         formatTooltip={(data) => (
           <TooltipSeriesListContainer {...data}>
-            <BoldText>
-              {`${formatPercentage(Math.abs(data.value.g_number))}% `}
-            </BoldText>
-            {data.value.g_number > 0
-              ? text.positive_descriptor
-              : text.negative_descriptor}
+            <BoldText>{`${formatPercentage(Math.abs(data.value.g_number))}% `}</BoldText>
+            {data.value.g_number > 0 ? text.positive_descriptor : text.negative_descriptor}
           </TooltipSeriesListContainer>
         )}
       />
