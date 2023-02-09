@@ -20,6 +20,14 @@ const nextConfig = {
    */
   reactStrictMode: true,
 
+  /**
+   * This flag has been added for testing purposes as requested by BE.
+   * This disables compression as to prevent possible issues introduced by duplicate
+   * compression strategies (in both BE and FE).
+   * https://nextjs.org/docs/api-reference/next.config.js/compression
+   */
+  compress: false,
+
   i18n: {
     // These are all the locales you want to support in
     // your application
