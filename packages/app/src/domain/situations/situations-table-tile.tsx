@@ -11,6 +11,7 @@ import { Heading, InlineText } from '~/components/typography';
 import { useSituations } from '~/domain/situations/logic/situations';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SituationIcon } from './components/situation-icon';
@@ -20,48 +21,35 @@ interface SituationsTableTileProps {
   text: SiteText['pages']['situations_page']['shared'];
 }
 
-export function SituationsTableTile({
-  metadata,
-  data,
-  text,
-}: SituationsTableTileProps) {
+export function SituationsTableTile({ metadata, data, text }: SituationsTableTileProps) {
   const { formatDateSpan } = useIntl();
   const situations = useSituations(text.situaties);
 
-  const [date_from, date_to] = formatDateSpan(
-    { seconds: data.date_start_unix },
-    { seconds: data.date_end_unix }
-  );
+  const [date_from, date_to] = formatDateSpan({ seconds: data.date_start_unix }, { seconds: data.date_end_unix });
 
   return (
     <Tile>
       <Heading level={3}>{text.titel}</Heading>
       <Box maxWidth="maxWidthText">
         <Markdown
-          content={replaceVariablesInText(
-            text.veiligheidsregio_tabel.beschrijving,
-            {
-              date_from,
-              date_to,
-            }
-          )}
+          content={replaceVariablesInText(text.veiligheidsregio_tabel.beschrijving, {
+            date_from,
+            date_to,
+          })}
         />
       </Box>
 
-      <Box overflow="auto" mb={3}>
+      <Box overflow="auto" marginBottom={space[3]}>
         <StyledTable>
           <thead>
             <tr>
-              <HeaderCell>
-                {' '}
-                {text.veiligheidsregio_tabel.soort_situatie}
-              </HeaderCell>
+              <HeaderCell> {text.veiligheidsregio_tabel.soort_situatie}</HeaderCell>
               <HeaderCell
                 css={css({
                   width: asResponsiveArray({
-                    xs: 150,
-                    sm: 200,
-                    lg: 350,
+                    xs: '150px',
+                    sm: '200px',
+                    lg: '350px',
                   }),
                 })}
               >
@@ -72,7 +60,7 @@ export function SituationsTableTile({
           <tbody
             css={css({
               borderTop: '1px solid',
-              borderTopColor: 'gray2',
+              borderTopColor: colors.gray2,
             })}
           >
             {situations.map((situation, index) => (
@@ -88,15 +76,10 @@ export function SituationsTableTile({
 
                 <Cell>
                   {isPresent(data[situation.id]) ? (
-                    <PercentageBar
-                      amount={data[situation.id] as number}
-                      color={colors.primary}
-                    />
+                    <PercentageBar amount={data[situation.id] as number} color={colors.primary} />
                   ) : (
                     <Box display="flex" alignSelf="center">
-                      <InlineText color="gray6">
-                        {text.veiligheidsregio_tabel.niet_genoeg_gegevens}
-                      </InlineText>
+                      <InlineText color={colors.gray6}>{text.veiligheidsregio_tabel.niet_genoeg_gegevens}</InlineText>
                     </Box>
                   )}
                 </Cell>
@@ -114,14 +97,14 @@ const StyledTable = styled.table(
   css({
     borderCollapse: 'collapse',
     width: '100%',
-    pb: 3,
+    paddingBottom: space[3],
   })
 );
 
 const HeaderCell = styled.th(
   css({
     textAlign: 'left',
-    pb: '12px',
+    paddingBottom: '12px',
   })
 );
 
@@ -129,9 +112,9 @@ const Cell = styled.td((x) =>
   css({
     color: x.color,
     borderBottom: '1px solid',
-    borderBottomColor: 'gray2',
-    p: 0,
-    py: 2,
+    borderBottomColor: colors.gray2,
+    padding: '0',
+    paddingY: space[2],
   })
 );
 interface PercentageBarProps {
@@ -144,14 +127,11 @@ function PercentageBar({ amount, color }: PercentageBarProps) {
 
   return (
     <Box display="flex" alignItems="center" spacingHorizontal={2}>
-      <InlineText
-        textAlign="right"
-        css={css({ minWidth: 40 })}
-      >{`${formatPercentage(amount, {
+      <InlineText textAlign="right" css={css({ minWidth: '40px' })}>{`${formatPercentage(amount, {
         minimumFractionDigits: 1,
       })}%`}</InlineText>
-      <Box width="100%" pr={4}>
-        <Box width={`${amount}%`} height={12} backgroundColor={color} />
+      <Box width="100%" paddingRight={space[4]}>
+        <Box width={`${amount}%`} height="12px" backgroundColor={color} />
       </Box>
     </Box>
   );

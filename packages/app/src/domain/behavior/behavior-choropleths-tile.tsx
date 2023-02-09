@@ -101,7 +101,7 @@ function ChoroplethBlock({ data, keysWithoutData, behaviorType, currentId, title
 
       <Box position="relative">
         {keysWithoutData.includes(currentId) && (
-          <Box position="absolute" display="flex" alignItems="center" justifyContent="center" top={0} width="100%" height="100%" css={css({ zIndex: 9 })}>
+          <Box position="absolute" display="flex" alignItems="center" justifyContent="center" top="0" width="100%" height="100%" css={css({ zIndex: 9 })}>
             <Text textAlign="center" css={css({ maxWidth: '300px' })}>
               {text.nl.verdeling_in_nederland.geen_beschikbare_data}
             </Text>
@@ -147,7 +147,7 @@ function ChoroplethBlock({ data, keysWithoutData, behaviorType, currentId, title
           />
         </ErrorBoundary>
       </Box>
-      <Box display="flex" justifyContent={{ _: 'center', lg: 'flex-start' }} maxWidth={300}>
+      <Box display="flex" justifyContent={{ _: 'center', lg: 'flex-start' }} maxWidth="300px">
         <ChoroplethLegenda thresholds={thresholds.vr[metricProperty]} title={text.shared.basisregels.header_percentage} />
       </Box>
     </Box>

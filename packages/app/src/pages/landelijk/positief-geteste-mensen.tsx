@@ -15,8 +15,10 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { BoldText } from '~/components/typography';
-import { Layout, NlLayout } from '~/domain/layout';
-import { GNumberBarChartTile, InfectedPerAgeGroup } from '~/domain/tested';
+import { Layout } from '~/domain/layout/layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
+import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
+import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group/infected-per-age-group';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
@@ -24,9 +26,11 @@ import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-que
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 const pageMetrics = ['g_number', 'tested_ggd', 'tested_overall', 'tested_per_age_group'];
 

@@ -10,6 +10,7 @@ import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { BoldText } from '~/components/typography';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
 import { BehaviorIdentifier, behaviorIdentifiers } from './logic/behavior-types';
@@ -40,8 +41,8 @@ export function BehaviorLineChartTile({ values, metadata, currentId, setCurrentI
   return (
     <ChartTile title={text.shared.line_chart.title} metadata={metadata} description={text.shared.line_chart.description}>
       <Box spacing={4}>
-        <Box display="flex" alignItems={{ lg: 'center' }} spacing={{ _: 3, lg: 0 }} flexDirection={{ _: 'column', lg: 'row' }} pb={3}>
-          <Box pr={3} width={breakpoints.lg ? '50%' : '100%'}>
+        <Box display="flex" alignItems={{ lg: 'center' }} spacing={{ _: 3, lg: 0 }} flexDirection={{ _: 'column', lg: 'row' }} paddingBottom={space[3]}>
+          <Box paddingRight={space[3]} width={breakpoints.lg ? '50%' : '100%'}>
             <SelectBehavior label={text.nl.select_behaviour_label} value={currentId} onChange={setCurrentId} options={behaviorOptions} />
           </Box>
 
@@ -87,8 +88,7 @@ export function BehaviorLineChartTile({ values, metadata, currentId, setCurrentI
     </ChartTile>
   );
 }
-
-export function getBehaviorChartOptions<T>(value: T) {
+export function getBehaviorChartOptions<VrBehaviorArchived_20221019Value>(value: VrBehaviorArchived_20221019Value) {
   return behaviorIdentifiers
     .map((key) => {
       if (`${key}_compliance` in value || `${key}_support` in value) {

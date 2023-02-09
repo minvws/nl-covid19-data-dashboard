@@ -7,13 +7,12 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { BoldText, Text } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
 import { useIntl } from '~/intl';
-import { asResponsiveArray } from '~/style/utils';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Bar } from '../components/bar';
 import styled from 'styled-components';
 import { colors } from '@corona-dashboard/common';
-import { space } from '~/style/theme';
+import { mediaQueries, space } from '~/style/theme';
 
 type BarType = {
   value: number;
@@ -103,22 +102,27 @@ const AgeGroupBlock = ({ data, bar, children }: AgeGroupBlockProps) => {
 };
 
 const AgeGroupWrapper = styled.div`
-  display: 'flex';
-  justify-content: 'start';
-  overflow-wrap: 'break-word';
-  word-wrap: 'break-word';
-  hyphens: 'auto';
-  padding-left: ${asResponsiveArray({ _: '3px', xs: '24px' })};
-  padding-right: ${asResponsiveArray({ _: '3px', xs: '24px' })};
-  padding-bottom: 24px;
-  padding-top: 24px;
+  display: flex;
+  justify-content: start;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  padding: 24px 16px;
+
+  @media ${mediaQueries.xs} {
+    padding-inline: 24px;
+  }
 `;
 
-const KpiContent = styled.button`
+const KpiContent = styled.div`
   border: 1px solid ${colors.gray3};
-  position: 'relative';
-  display: 'flex';
-  flex-direction: ${asResponsiveArray({ _: 'column', sm: 'row' })};
-  justify-content: 'space-between';
-  color: 'black';
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  color: ${colors.black};
+
+  @media ${mediaQueries.sm} {
+    flex-direction: row;
+  }
 `;

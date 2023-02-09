@@ -70,7 +70,7 @@ export function KpiValue({
   const { formatPercentage, formatNumber } = useIntl();
 
   return (
-    <Box marginBottom={isDefined(difference) ? space[3] : space[0]}>
+    <Box marginBottom={isDefined(difference) ? space[3] : 0}>
       {isPresent(percentage) && isPresent(absolute) ? (
         <StyledValue color={color} {...otherProps}>
           {`${formatNumber(absolute)} (${formatPercentage(percentage, {
