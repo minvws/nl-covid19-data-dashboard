@@ -1,10 +1,11 @@
 import { DateSpanValue, DateValue } from '@corona-dashboard/common';
+import { themeTileDateConfig } from '~/queries/query-types';
 /**
  * Returns a object with the start and end date in seconds. Or a single unix date in seconds if it only contains one date.
  */
 
 export type TopicalDateConfig = {
-  config: { isoWeekOffset: number; startDayOfDate: 0 | 1 | 2 | 3 | 4 | 5 | 6; timeSpanInDays: number };
+  config: themeTileDateConfig;
   inputDate?: Date;
 };
 

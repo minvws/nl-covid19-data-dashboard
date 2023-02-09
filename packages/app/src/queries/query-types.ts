@@ -100,3 +100,9 @@ export interface Cta {
   title: string | null;
   href: string | null;
 }
+
+export interface themeTileDateConfig {
+  isoWeekOffset: number;
+  startDayOfDate: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  timeSpanInDays: number;
+}
