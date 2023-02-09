@@ -1,15 +1,36 @@
 import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
 import { REQUIRED } from '../../validation';
 
-const DAYS_OF_THE_WEEK_LIST = {
-  0: 'Zondag',
-  1: 'Maandag',
-  2: 'Dinsdag',
-  3: 'Woensdag',
-  4: 'Donderdag',
-  5: 'Vrijdag',
-  6: 'Zaterdag',
-};
+const DAYS_OF_THE_WEEK_LIST = [
+  {
+    title: 'Zondag',
+    value: 0,
+  },
+  {
+    title: 'Maandag',
+    value: 1,
+  },
+  {
+    title: 'Dinsdag',
+    value: 2,
+  },
+  {
+    title: 'Woensdag',
+    value: 3,
+  },
+  {
+    title: 'Donderdag',
+    value: 4,
+  },
+  {
+    title: 'Vrijdag',
+    value: 5,
+  },
+  {
+    title: 'Zaterdag',
+    value: 6,
+  },
+];
 
 export const themeTile = {
   type: 'document',
@@ -73,13 +94,13 @@ export const themeTile = {
         list: DAYS_OF_THE_WEEK_LIST,
         layout: 'dropdown',
       },
-      type: 'localeString',
+      type: 'number',
     },
 
     {
       title: 'Hoeveelheid dagen',
-      name: 'sourceLabel',
-      type: 'localeString',
+      name: 'timeSpanInDays',
+      type: 'number',
     },
     {
       title: 'Trend icon',
