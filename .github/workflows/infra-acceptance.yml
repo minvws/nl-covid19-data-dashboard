@@ -1,0 +1,20 @@
+name: CI-acceptance
+on:
+  push:
+    branches:
+      - 'release/*'
+      - 'hotfix/*'
+
+jobs:
+  trigger-acceptance-build:
+    environment: Acceptance
+    name: Call Azure Pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure Pipelines Action
+        uses: Azure/pipelines@v1.2
+        with:
+          azure-devops-project-url: https://dev.azure.com/${{ secrets.VWS_AZURE_ORGANIZATION_NAME }}/${{ secrets.VWS_AZURE_PROJECT_NAME }}
+          azure-pipeline-name: ${{ secrets.VWS_AZURE_PIPELINE_NAME_ACC }}
+          azure-devops-token: ${{ secrets.VWS_AZURE_DEVOPS_TOKEN }}
+          azure-pipeline-variables: '{"FRONTEND_BRANCH": "${{ github.ref_name }}"}'
