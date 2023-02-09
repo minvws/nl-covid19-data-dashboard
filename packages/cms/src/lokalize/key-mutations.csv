@@ -1,3 +1,7 @@
 timestamp,action,key,document_id,move_to
+2023-02-06T11:00:27.028Z,add,pages.positive_tests_page.nl.ggd.linechart_percentage_toggle_label,xjLKnlFrh2WM7l3Tdo94RD,__
+2023-02-06T11:00:27.981Z,add,pages.positive_tests_page.nl.ggd.linechart_totaltests_toggle_label,OxL833R6UYusMl9CmA5puv,__
+2023-02-06T11:00:29.070Z,add,pages.positive_tests_page.vr.ggd.linechart_percentage_toggle_label,xjLKnlFrh2WM7l3Tdo94x5,__
+2023-02-06T11:00:29.959Z,add,pages.positive_tests_page.vr.ggd.linechart_totaltests_toggle_label,PZq3D7oQCo96ts7zr9FF1F,__
 2023-02-08T09:35:46.400Z,delete,pages.hospitals_and_care_page.nl.icu.chart_patient_influx.legend_inaccurate_label,PKXdxxxKAnTg0F1ZCyB3ox,__
 2023-02-08T09:39:16.063Z,delete,pages.hospitals_and_care_page.nl.hospitals.chart_patient_influx.legend_inaccurate_label,PKXdxxxKAnTg0F1ZCyB3Vz,__

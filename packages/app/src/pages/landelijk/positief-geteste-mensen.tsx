@@ -1,27 +1,36 @@
 import { colors, NlTestedOverallValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { useState } from 'react';
 import { GgdTesten } from '@corona-dashboard/icons';
-import { css } from '@styled-system/css';
 import { GetStaticPropsContext } from 'next';
-import { Box } from '~/components/base';
-import { RadioGroup } from '~/components/radio-group';
-import { BoldText } from '~/components/typography';
+import { useState } from 'react';
 import { RegionControlOption } from '~/components/chart-region-controls';
-import { TimeSeriesChart, TileList, PageInformationBlock, ChartTile, DynamicChoropleth, ChoroplethTile, Divider, InView, Markdown } from '~/components';
+import { ChartTile } from '~/components/chart-tile';
+import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
+import { DynamicChoropleth } from '~/components/choropleth';
+import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { Layout, NlLayout } from '~/domain/layout';
-import { GNumberBarChartTile, InfectedPerAgeGroup } from '~/domain/tested';
+import { Divider } from '~/components/divider';
+import { InView } from '~/components/in-view';
+import { Markdown } from '~/components/markdown';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { BoldText } from '~/components/typography';
+import { Layout } from '~/domain/layout/layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
+import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
+import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group/infected-per-age-group';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { space } from '~/style/theme';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 const pageMetrics = ['g_number', 'tested_ggd', 'tested_overall', 'tested_per_age_group'];
 
@@ -72,27 +81,6 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const GgdGraphToggle = ({ selectedGgdGraph, onChange }: { selectedGgdGraph: string; onChange: (value: string) => void }) => {
-  return (
-    <Box css={css({ '& div': { justifyContent: 'flex-start' } })} marginBottom={space[3]}>
-      <RadioGroup
-        value={selectedGgdGraph}
-        onChange={onChange}
-        items={[
-          {
-            label: 'Percentage positieve GGD-testen',
-            value: 'GGD_infected_percentage_over_time_chart',
-          },
-          {
-            label: 'Aantal GGD-testen',
-            value: 'GGD_tested_over_time_chart',
-          },
-        ]}
-      />
-    </Box>
-  );
-};
-
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
 
@@ -114,6 +102,17 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedGgdGraph, setSelectedGgdGraph] = useState<string>('GGD_infected_percentage_over_time_chart');
+
+  const ggdGraphToggleItems: ChartTileToggleItem[] = [
+    {
+      label: textNl.ggd.linechart_percentage_toggle_label,
+      value: 'GGD_infected_percentage_over_time_chart',
+    },
+    {
+      label: textNl.ggd.linechart_totaltests_toggle_label,
+      value: 'GGD_tested_over_time_chart',
+    },
+  ];
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdLastValue = data.tested_ggd.last_value;
@@ -146,7 +145,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          {/* Infection radar */}
           <ChartTile
             title={textNl.linechart_self_test_titel}
             description={textNl.linechart_self_test_toelichting}
@@ -178,7 +176,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               forceLegend
             />
           </ChartTile>
-          {/* Infection radar end */}
 
           <ChartTile
             title={textNl.linechart_titel}
@@ -241,30 +238,32 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   source: textNl.ggd.bronnen.rivm,
                 }}
                 onSelectTimeframe={setConfirmedCasesInfectedPercentageTimeframe}
+                toggle={{
+                  initialValue: selectedGgdGraph,
+                  items: ggdGraphToggleItems,
+                  onChange: (value) => setSelectedGgdGraph(value),
+                }}
               >
-                <>
-                  <GgdGraphToggle selectedGgdGraph={selectedGgdGraph} onChange={(value) => setSelectedGgdGraph(value)} />
-                  <TimeSeriesChart
-                    accessibility={{
-                      key: 'confirmed_cases_infected_percentage_over_time_chart',
-                    }}
-                    timeframe={confirmedCasesInfectedPercentageTimeframe}
-                    values={data.tested_ggd.values}
-                    forceLegend
-                    seriesConfig={[
-                      {
-                        type: 'line',
-                        metricProperty: 'infected_percentage_moving_average',
-                        color: colors.primary,
-                        label: textNl.ggd.linechart_percentage_legend_label,
-                        shortLabel: textShared.tooltip_labels.ggd_infected_percentage_moving_average,
-                      },
-                    ]}
-                    dataOptions={{
-                      isPercentage: true,
-                    }}
-                  />
-                </>
+                <TimeSeriesChart
+                  accessibility={{
+                    key: 'confirmed_cases_infected_percentage_over_time_chart',
+                  }}
+                  timeframe={confirmedCasesInfectedPercentageTimeframe}
+                  values={data.tested_ggd.values}
+                  forceLegend
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'infected_percentage_moving_average',
+                      color: colors.primary,
+                      label: textNl.ggd.linechart_percentage_legend_label,
+                      shortLabel: textShared.tooltip_labels.ggd_infected_percentage_moving_average,
+                    },
+                  ]}
+                  dataOptions={{
+                    isPercentage: true,
+                  }}
+                />
               </ChartTile>
             )}
             {selectedGgdGraph === 'GGD_tested_over_time_chart' && (
@@ -281,33 +280,35 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   date: getLastInsertionDateOfPage(data, ['tested_ggd']),
                 }}
                 onSelectTimeframe={setConfirmedCasesTestedOverTimeTimeframe}
+                toggle={{
+                  initialValue: selectedGgdGraph,
+                  items: ggdGraphToggleItems,
+                  onChange: (value) => setSelectedGgdGraph(value),
+                }}
               >
-                <>
-                  <GgdGraphToggle selectedGgdGraph={selectedGgdGraph} onChange={(value) => setSelectedGgdGraph(value)} />
-                  <TimeSeriesChart
-                    accessibility={{
-                      key: 'confirmed_cases_tested_over_time_chart',
-                    }}
-                    timeframe={confirmedCasesTestedOverTimeTimeframe}
-                    values={data.tested_ggd.values}
-                    seriesConfig={[
-                      {
-                        type: 'line',
-                        metricProperty: 'tested_total_moving_average',
-                        color: colors.secondary,
-                        label: textNl.ggd.linechart_totaltests_legend_label_moving_average,
-                        shortLabel: textShared.tooltip_labels.ggd_tested_total_moving_average,
-                      },
-                      {
-                        type: 'line',
-                        metricProperty: 'infected_moving_average',
-                        color: colors.primary,
-                        label: textNl.ggd.linechart_positivetests_legend_label_moving_average,
-                        shortLabel: textShared.tooltip_labels.infected_moving_average,
-                      },
-                    ]}
-                  />
-                </>
+                <TimeSeriesChart
+                  accessibility={{
+                    key: 'confirmed_cases_tested_over_time_chart',
+                  }}
+                  timeframe={confirmedCasesTestedOverTimeTimeframe}
+                  values={data.tested_ggd.values}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'tested_total_moving_average',
+                      color: colors.secondary,
+                      label: textNl.ggd.linechart_totaltests_legend_label_moving_average,
+                      shortLabel: textShared.tooltip_labels.ggd_tested_total_moving_average,
+                    },
+                    {
+                      type: 'line',
+                      metricProperty: 'infected_moving_average',
+                      color: colors.primary,
+                      label: textNl.ggd.linechart_positivetests_legend_label_moving_average,
+                      shortLabel: textShared.tooltip_labels.infected_moving_average,
+                    },
+                  ]}
+                />
               </ChartTile>
             )}
           </InView>
