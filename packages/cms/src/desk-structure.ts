@@ -57,6 +57,7 @@ const hiddenDocTypes = [
   'topicalPage',
   'topicalPageConfig',
   'trendIcon',
+  'themeTileDateConfig',
   'veelgesteldeVragen',
   'veelgesteldeVragenGroups',
   'warning',
