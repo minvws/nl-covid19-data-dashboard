@@ -36,7 +36,7 @@ export function DeceasedMonitorSection({
               metricProperty: 'registered',
               label: text.deceased_monitor_chart_legenda_registered,
               shortLabel: text.deceased_monitor_chart_legenda_registered_short,
-              color: colors.yellow3,
+              color: colors.orange1,
             },
             {
               type: 'range',
