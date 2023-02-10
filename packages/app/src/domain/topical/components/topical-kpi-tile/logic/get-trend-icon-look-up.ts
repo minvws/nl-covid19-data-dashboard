@@ -30,7 +30,7 @@ export const trendIconLookUpTables = [
 
 const isValueInRange = (value: number, rangeStart: number, rangeEnd: number): boolean => value >= rangeStart && value <= rangeEnd;
 
-type UseTrendIconLookUpReturn = {
+export type GetTrendIconLookUp = {
   color: string;
   intensity: number;
   direction: TrendDirection;
@@ -41,9 +41,7 @@ type UseTrendIconLookUpReturn = {
  * are converted to positive integers, which are then used to retrieve the corresponding intensity level.
  * The color and the direction are determined using the original KPI value (positive or negative).
  */
-export const useTrendIconLookUp = (kpiValue: string | null): UseTrendIconLookUpReturn => {
-  if (!kpiValue) return null;
-
+export const getTrendIconLookUp = (kpiValue: string): GetTrendIconLookUp => {
   const parsedKpiValue = parseFloat(kpiValue.replace(',', '.'));
   const isPositiveInteger = Math.sign(parsedKpiValue) === 1; // Math.sign() returns -1 for negative and 1 for positive integers.
   const absoluteKpiValue = isPositiveInteger ? parsedKpiValue : Math.abs(parsedKpiValue);

@@ -15,9 +15,9 @@ import { useIntl } from '~/intl';
 import { TrendDirection, TrendIcon } from '~/components/trend-icon';
 import { Cta } from '~/queries/query-types';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
-import { TrendIcon as TrendIconType } from '@corona-dashboard/app/src/domain/topical/types';
+import { TrendIcon as TrendIconType, TrendIconColor, TrendIconDirection } from '@corona-dashboard/app/src/domain/topical/types';
 import { mapStringToColors } from '~/components/severity-indicator-tile/logic/map-string-to-colors';
-import { useTrendIconLookUp } from './logic/use-trend-icon-look-up';
+import { getTrendIconLookUp } from './logic/get-trend-icon-look-up';
 
 interface TopicalTileProps {
   title: string;
@@ -33,11 +33,14 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
   const { formatNumber } = useIntl();
 
   const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
-  const trendIconConfigFromLookup = useTrendIconLookUp(kpiValue); // TrendIconConfig will be null for values between -4.9 - 4.9.
-  const finalTrendIconConfig = {
-    color: trendIcon.color ? mapStringToColors(trendIcon.color) : trendIconConfigFromLookup?.color,
-    direction: trendIcon.direction ? TrendDirection[trendIcon.direction] : trendIconConfigFromLookup?.direction,
-    intensity: trendIcon.intensity ? trendIcon.intensity : trendIconConfigFromLookup?.intensity,
+  const hasManualTrendIconConfig = Object.values(trendIcon).every((trendIconValue) => trendIconValue !== null);
+  const trendIconConfig = {
+    ...(!hasManualTrendIconConfig && kpiValue && getTrendIconLookUp(kpiValue)),
+    ...(hasManualTrendIconConfig && {
+      ...trendIcon,
+      color: mapStringToColors(trendIcon.color as TrendIconColor),
+      direction: TrendDirection[trendIcon.direction as TrendIconDirection],
+    }),
   };
 
   return (
@@ -93,8 +96,8 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
                 <Box display="flex" justifyContent="start" alignItems="center" marginTop={space[2]}>
                   <KpiValue color={colors.black} text={formattedKpiValue} />
 
-                  {finalTrendIconConfig && finalTrendIconConfig.direction !== undefined && (
-                    <TrendIcon trendDirection={finalTrendIconConfig.direction} color={finalTrendIconConfig.color} intensity={finalTrendIconConfig.intensity} />
+                  {trendIconConfig && trendIconConfig.direction !== undefined && (
+                    <TrendIcon trendDirection={trendIconConfig.direction} color={trendIconConfig.color} intensity={trendIconConfig.intensity} />
                   )}
                 </Box>
               )}
