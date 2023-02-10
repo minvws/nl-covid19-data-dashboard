@@ -266,7 +266,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                       metricProperty: 'tested_total_moving_average',
                       color: colors.secondary,
                       label: textVr.ggd.linechart_totaltests_legend_label_moving_average,
-                      shortLabel: textShared.tooltip_labels.ggd_tested_total_moving_average,
+                      shortLabel: textShared.tooltip_labels.ggd_tested_total_moving_average__renamed,
                     },
                     {
                       type: 'line',
