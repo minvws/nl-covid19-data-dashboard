@@ -17,7 +17,7 @@ import { Cta } from '~/queries/query-types';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { TrendIcon as TrendIconType } from '@corona-dashboard/app/src/domain/topical/types';
 import { mapStringToColors } from '~/components/severity-indicator-tile/logic/map-string-to-colors';
-import { getLookUpValue } from './logic/trend-icon-lookup-table';
+import { useTrendIconLookUp } from './logic/use-trend-icon-look-up';
 
 interface TopicalTileProps {
   title: string;
@@ -33,9 +33,11 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
   const { formatNumber } = useIntl();
 
   const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
-  getLookUpValue(kpiValue);
-  const getTrendDirection = (trendIcon: TrendIconType): TrendDirection => {
-    return trendIcon.direction === 'DOWN' ? TrendDirection.DOWN : TrendDirection.UP;
+  const trendIconConfigFromLookup = useTrendIconLookUp(kpiValue); // TrendIconConfig will be null for values between -4.9 - 4.9.
+  const finalTrendIconConfig = {
+    color: trendIcon.color ? mapStringToColors(trendIcon.color) : trendIconConfigFromLookup?.color,
+    direction: trendIcon.direction ? TrendDirection[trendIcon.direction] : trendIconConfigFromLookup?.direction,
+    intensity: trendIcon.intensity ? trendIcon.intensity : trendIconConfigFromLookup?.intensity,
   };
 
   return (
@@ -84,11 +86,6 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
                 })}
               >
                 {title}
-                {/* TODO: AP - Is this still required? */}
-                {/* When there isn't a KPI Value AND Trend icon is configured - It shows next to the title of the tile */}
-                {/* {!formattedKpiValue && trendIcon.direction && trendIcon.color && (
-                  <TrendIcon trendDirection={getTrendDirection(trendIcon)} color={mapStringToColors(trendIcon.color)} intensity={trendIcon.intensity} />
-                )} */}
               </Heading>
 
               {/* When there is a KPI Value AND Trend icon is configured - It shows next to the KPI value */}
@@ -96,8 +93,8 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
                 <Box display="flex" justifyContent="start" alignItems="center" marginTop={space[2]}>
                   <KpiValue color={colors.black} text={formattedKpiValue} />
 
-                  {trendIcon.direction && trendIcon.color && (
-                    <TrendIcon trendDirection={getTrendDirection(trendIcon)} color={mapStringToColors(trendIcon.color)} intensity={trendIcon.intensity} />
+                  {finalTrendIconConfig && finalTrendIconConfig.direction !== undefined && (
+                    <TrendIcon trendDirection={finalTrendIconConfig.direction} color={finalTrendIconConfig.color} intensity={finalTrendIconConfig.intensity} />
                   )}
                 </Box>
               )}
@@ -107,6 +104,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
               <DynamicIcon name={tileIcon} aria-hidden="true" />
             </TileIcon>
           </Box>
+
           <Box
             display="flex"
             flexDirection="column"
@@ -120,12 +118,14 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
             </Box>
           </Box>
         </Box>
+
         <Box>
           {sourceLabel && (
             <Box padding={{ _: space[3], xs: space[4] }} paddingTop={{ _: '0', xs: '0' }}>
               <InlineText color="gray7">{sourceLabel}</InlineText>
             </Box>
           )}
+
           {cta.title && (
             <Box display="flex" justifyContent="center" alignItems="center" backgroundColor={colors.blue1} color={colors.blue8} padding={space[3]} className="topical-tile-cta">
               <TextWithIcon text={cta.title} icon={<ChevronRight />} />
