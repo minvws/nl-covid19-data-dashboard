@@ -84,11 +84,12 @@ export interface BaseTile {
 }
 
 interface TopicalTile extends BaseTile {
+  title: string;
+  sourceLabel: string | null;
+  themeTileDateConfig: ThemeTileDateConfig;
+  kpiValue: string | null;
   cta: Cta;
   hideTrendIcon: boolean;
-  kpiValue: string | null;
-  sourceLabel: string | null;
-  title: string;
   trendIcon: TrendIcon;
 }
 
@@ -101,7 +102,7 @@ export interface Cta {
   href: string | null;
 }
 
-export interface themeTileDateConfig {
+export interface ThemeTileDateConfig {
   isoWeekOffset: number;
   startDayOfDate: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   timeSpanInDays: number;

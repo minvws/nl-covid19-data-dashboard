@@ -1,18 +1,21 @@
-import { DateSpanValue, DateValue } from '@corona-dashboard/common';
-import { themeTileDateConfig } from '~/queries/query-types';
+export interface ThemeTileDateConfig {
+  isoWeekOffset: number;
+  startDayOfDate: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  timeSpanInDays: number;
+}
 /**
  * Returns a object with the start and end date in seconds. Or a single unix date in seconds if it only contains one date.
  */
 
 export type TopicalDateConfig = {
-  config: themeTileDateConfig;
+  config: ThemeTileDateConfig;
   inputDate?: Date;
 };
 
 const dayInMiliseconds = 86400000;
 const weekInMiliseconds = 604800000;
 
-export const getTopicalTileDate = ({ config, inputDate = new Date() }: TopicalDateConfig): DateSpanValue | DateValue => {
+export const useTopicalTileDateConfig = ({ config, inputDate = new Date() }: TopicalDateConfig): string => {
   // Get the current index of the day of the week for the given input date.
   // Startting with Sunday as index 0 and saturday as index 6
   // Sunday = 0
@@ -58,14 +61,6 @@ export const getTopicalTileDate = ({ config, inputDate = new Date() }: TopicalDa
   const endDate = startDate + timespanLengthInMiliseconds;
 
   // Check if timespan is greater than one day. Or it's just a single day. create the return object.
-  const dateResult =
-    config.timeSpanInDays === 1
-      ? {
-          date_unix: startDate / 1000,
-        }
-      : {
-          date_start_unix: startDate / 1000,
-          date_end_unix: endDate / 1000,
-        };
+  const dateResult = config.timeSpanInDays === 1 ? startDate : { dateStartUnix: startDate, dateEndUnix: endDate };
   return dateResult;
 };

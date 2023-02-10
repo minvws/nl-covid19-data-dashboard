@@ -1,3 +1,4 @@
+import { Rule } from '~/sanity';
 import { REQUIRED } from '../../validation';
 
 const DAYS_OF_THE_WEEK_LIST = [
@@ -37,10 +38,11 @@ export const themeTileDateConfig = {
   title: 'Trend icon',
   fields: [
     {
-      title: 'Iso week offset',
+      title: 'Iso week offset', // change to how many weeks ago is the start date? Instead of iso offset.
+      description: '',
       name: 'isoWeekOffset',
       type: 'number',
-      validation: REQUIRED,
+      validation: (rule: Rule) => rule.required().min(0),
     },
     {
       title: 'Dag van de week',

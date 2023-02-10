@@ -60,7 +60,13 @@ export const themeTile = {
       type: 'localeString',
     },
     {
-      title: 'Theme tegel datum configuratie',
+      title: 'Tegel datum',
+      name: 'tileDate',
+      type: 'localeString',
+    },
+    {
+      title: 'Configuratie velden',
+      description: 'Voor de start en eind datum van deze tegel op de samenvattingspagina.',
       name: 'themeTileDateConfig',
       type: 'themeTileDateConfig',
       fieldset: 'theme-tile-date-config',
