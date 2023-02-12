@@ -1,5 +1,6 @@
 import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
 import { REQUIRED } from '../../validation';
+import { TopicalTileDate } from '../../components/topical-tile-date';
 
 export const themeTile = {
   type: 'document',
@@ -56,11 +57,13 @@ export const themeTile = {
     },
     {
       title: 'Metadata label',
+      description: `Deze tekst wordt gebruikt inplaats van de variabele {{date}}:`,
       name: 'sourceLabel',
       type: 'localeString',
     },
     {
       title: 'Tegel datum',
+      inputComponent: TopicalTileDate,
       name: 'tileDate',
       type: 'localeString',
     },

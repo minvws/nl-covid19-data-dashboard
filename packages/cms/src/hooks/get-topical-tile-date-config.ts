@@ -1,3 +1,11 @@
+import { createFormatting } from '@corona-dashboard/common';
+
+const { formatDateFromMilliseconds } = createFormatting('nl-NL', {
+  date_day_before_yesterday: 'eergisteren',
+  date_today: 'vandaag',
+  date_yesterday: 'gisteren',
+});
+
 export interface ThemeTileDateConfig {
   isoWeekOffset: number;
   startDayOfDate: 0 | 1 | 2 | 3 | 4 | 5 | 6;
@@ -15,7 +23,7 @@ export type TopicalDateConfig = {
 const dayInMiliseconds = 86400000;
 const weekInMiliseconds = 604800000;
 
-export const useTopicalTileDateConfig = ({ config, inputDate = new Date() }: TopicalDateConfig): string => {
+export const getTopicalTileDateConfig = ({ config, inputDate = new Date() }: TopicalDateConfig): string => {
   // Get the current index of the day of the week for the given input date.
   // Startting with Sunday as index 0 and saturday as index 6
   // Sunday = 0
@@ -61,6 +69,6 @@ export const useTopicalTileDateConfig = ({ config, inputDate = new Date() }: Top
   const endDate = startDate + timespanLengthInMiliseconds;
 
   // Check if timespan is greater than one day. Or it's just a single day. create the return object.
-  const dateResult = config.timeSpanInDays === 1 ? startDate : { dateStartUnix: startDate, dateEndUnix: endDate };
+  const dateResult = config.timeSpanInDays === 1 ? formatDateFromMilliseconds(startDate) : `${formatDateFromMilliseconds(startDate)} - ${formatDateFromMilliseconds(endDate)}`;
   return dateResult;
 };

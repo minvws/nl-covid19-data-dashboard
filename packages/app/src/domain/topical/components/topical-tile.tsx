@@ -13,7 +13,7 @@ import { IconName as TopicalIcon } from '@corona-dashboard/icons/src/icon-name2f
 import { KpiValue } from '~/components';
 import { useIntl } from '~/intl';
 import { TrendDirection, TrendIcon } from '~/components/trend-icon';
-import { Cta, ThemeTileDateConfig } from '~/queries/query-types';
+import { Cta } from '~/queries/query-types';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { TrendIcon as TrendIconType } from '@corona-dashboard/app/src/domain/topical/types';
 import { mapStringToColors } from '~/components/severity-indicator-tile/logic/map-string-to-colors';
@@ -26,7 +26,6 @@ interface TopicalTileProps {
   kpiValue: string | null;
   cta: Cta;
   sourceLabel: string | null;
-  themeTileDateConfig: ThemeTileDateConfig;
 }
 
 export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue, cta, sourceLabel }: TopicalTileProps) {
