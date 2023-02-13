@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { space } from '~/style/theme';
+import { mediaQueries, space } from '~/style/theme';
 import { ChevronRight } from '@corona-dashboard/icons';
 import { useBreakpointsAsync } from '~/utils/use-breakpoints';
 import { LinkWithIcon } from '~/components/link-with-icon';
-import { asResponsiveArray } from '~/style/utils';
 import { v4 as uuidv4 } from 'uuid';
 import { ThemeLink } from '~/queries/query-types';
 interface TopicalLinksListProps {
@@ -45,15 +44,22 @@ export const TopicalLinksList = ({ labels, links }: TopicalLinksListProps) => {
 
 const ListWrapper = styled.ul`
   display: flex;
-  flex-direction: ${asResponsiveArray({ _: 'column', sm: 'row' })};
+  flex-direction: column;
   flex-wrap: wrap;
   list-style: none;
   gap: ${space[3]};
   margin: 0;
   padding: 0;
+
+  @media ${mediaQueries.sm} {
+    flex-direction: row;
+  }
 `;
 
 const TopicalLinkLabel = styled.p`
   flex: 0 0 auto;
-  margin-right: ${asResponsiveArray({ _: '0', sm: space[4] })};
+
+  @media ${mediaQueries.sm} {
+    margin-right: ${space[4]};
+  }
 `;
