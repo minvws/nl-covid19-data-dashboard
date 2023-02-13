@@ -1,13 +1,10 @@
 import { colors } from '@corona-dashboard/common';
 import { TrendDirection } from '~/components/trend-icon';
 
-const trendIconGreen = colors.green3;
-const trendIconRed = colors.red2;
-
 /**
  * The array below contains the logic for determining which trend icon to show on a KPI tile on the homepage.
  * Note that the tables within the array only reference positive ranges. Negative KPI values and their
- * associated trend icon color and direction are handled in the getLookUpValue() function. Values which have no trend icon
+ * associated trend icon color and direction are handled in the getTrendIconLookUp() function. Values which have no trend icon
  * i.e. -4.9 - 4.9 are ignored in this logic.
  */
 export const trendIconLookUpTables = [
@@ -50,7 +47,7 @@ export const getTrendIconLookUp = (kpiValue: string): GetTrendIconLookUp => {
   if (!trendIconLookUpTable) return null;
 
   return {
-    color: isPositiveInteger ? trendIconRed : trendIconGreen,
+    color: isPositiveInteger ? colors.red2 : colors.green3,
     intensity: trendIconLookUpTable.trendIconIntensity,
     direction: isPositiveInteger ? TrendDirection.UP : TrendDirection.DOWN,
   };

@@ -196,6 +196,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     {theme.tiles.map((themeTile) => {
                       return (
                         <TopicalTile
+                          hideTrendIcon={themeTile.hideTrendIcon}
                           trendIcon={themeTile.trendIcon}
                           title={themeTile.title}
                           tileIcon={getFilenameToIconName(themeTile.tileIcon) as TopicalIcon}

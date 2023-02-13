@@ -18,16 +18,17 @@ import { fontSizes, mediaQueries, space } from '~/style/theme';
 import { getTrendIconLookUp } from './logic/get-trend-icon-look-up';
 
 interface TopicalTileProps {
-  title: string;
-  tileIcon: TopicalIcon;
-  trendIcon: TrendIconType;
-  description: PortableTextEntry[];
-  kpiValue: string | null;
   cta: Cta;
+  description: PortableTextEntry[];
+  hideTrendIcon: boolean;
+  kpiValue: string | null;
   sourceLabel: string | null;
+  tileIcon: TopicalIcon;
+  title: string;
+  trendIcon: TrendIconType;
 }
 
-export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue, cta, sourceLabel }: TopicalTileProps) {
+export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue, cta, sourceLabel, hideTrendIcon }: TopicalTileProps) {
   const { formatNumber } = useIntl();
 
   const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
@@ -55,8 +56,7 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
                 <Box display="flex" justifyContent="start" alignItems="center" marginTop={space[2]}>
                   <KpiValue color={colors.black} text={formattedKpiValue} />
 
-                  {/* TODO:AP - After implementing the switch in sanity, add it as a condition here  */}
-                  {trendIconConfig && trendIconConfig.direction !== undefined && (
+                  {trendIconConfig && trendIconConfig.direction !== undefined && !hideTrendIcon && (
                     <TrendIcon trendDirection={trendIconConfig.direction} color={trendIconConfig.color} intensity={trendIconConfig.intensity} />
                   )}
                 </Box>
@@ -80,19 +80,17 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
           </Box>
         </Box>
 
-        <Box>
-          {sourceLabel && (
-            <Box padding={{ _: `0 ${space[3]} ${space[3]}`, xs: `0 ${space[4]} ${space[4]}` }}>
-              <InlineText color="gray7">{sourceLabel}</InlineText>
-            </Box>
-          )}
+        {sourceLabel && (
+          <Box padding={{ _: `0 ${space[3]} ${space[3]}`, xs: `0 ${space[4]} ${space[4]}` }}>
+            <InlineText color="gray7">{sourceLabel}</InlineText>
+          </Box>
+        )}
 
-          {cta.title && (
-            <Box display="flex" justifyContent="center" alignItems="center" backgroundColor={colors.blue1} color={colors.blue8} padding={space[3]} className="topical-tile-cta">
-              <TextWithIcon text={cta.title} icon={<ChevronRight />} />
-            </Box>
-          )}
-        </Box>
+        {cta.title && (
+          <Box display="flex" justifyContent="center" alignItems="center" backgroundColor={colors.blue1} color={colors.blue8} padding={space[3]} className="topical-tile-cta">
+            <TextWithIcon text={cta.title} icon={<ChevronRight />} />
+          </Box>
+        )}
       </>
     </Tile>
   );
