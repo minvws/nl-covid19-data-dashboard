@@ -58,7 +58,7 @@ export const themeTileDateConfig = {
       title: 'Hoeveelheid dagen',
       name: 'timeSpanInDays',
       type: 'number',
-      validation: REQUIRED,
+      validation: (rule: Rule) => rule.required().min(1),
     },
   ],
 };
