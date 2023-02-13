@@ -20,16 +20,7 @@ type LineTrendProps = {
   id: string;
 };
 
-export function LineTrend({
-  series,
-  style = DEFAULT_STYLE,
-  strokeWidth = DEFAULT_STROKE_WIDTH,
-  color,
-  getX,
-  getY,
-  curve = 'linear',
-  id,
-}: LineTrendProps) {
+export function LineTrend({ series, style = DEFAULT_STYLE, strokeWidth = DEFAULT_STROKE_WIDTH, color, getX, getY, curve = 'linear', id }: LineTrendProps) {
   const nonNullSeries = useMemo(() => {
     let nonNull = series.filter((x) => isPresent(x.__value));
     if (nonNull.length === 1) {
@@ -75,13 +66,7 @@ interface LineTrendIconProps {
   height?: number;
 }
 
-export function LineTrendIcon({
-  color,
-  strokeWidth = DEFAULT_STROKE_WIDTH,
-  style = DEFAULT_STYLE,
-  width = 15,
-  height = 15,
-}: LineTrendIconProps) {
+export function LineTrendIcon({ color, strokeWidth = DEFAULT_STROKE_WIDTH, style = DEFAULT_STYLE, width = 15, height = 15 }: LineTrendIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <line
