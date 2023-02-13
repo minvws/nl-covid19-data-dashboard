@@ -20,9 +20,8 @@ const datasets = ['development', 'production', 'keys'] as const;
 export type Dataset = typeof datasets[number];
 
 const query = `*[_type == 'lokalizeText']`;
-const enableHotReload = process.env.NEXT_PUBLIC_PHASE === 'develop';
-
-export const IS_STAGING_ENV = typeof window !== 'undefined' && window.location.host === process.env.NEXT_HOST_URL_STG;
+const isDevelopBuild = process.env.NEXT_PUBLIC_PHASE === 'develop';
+const isAcceptanceBuild = process.env.NEXT_PUBLIC_PHASE === 'acceptance';
 
 /**
  * This hook will return an object which contains all lokalize translations.
@@ -38,7 +37,7 @@ export function useLokalizeText(initialLocale: LanguageKey) {
   const [locale, setLocale] = useState(initialLocale);
   const [text, setText] = useState<SiteText>(languages[locale]);
   const lokalizeTextsRef = useRef<SanityDocument<LokalizeText>[]>([]);
-  const showSanityDebugToggle = enableHotReload || IS_STAGING_ENV;
+  const showSanityDebugToggle = isDevelopBuild || isAcceptanceBuild;
 
   const [dataset, setDataset] = useState<Dataset>((process.env.NEXT_PUBLIC_SANITY_DATASET as Dataset | undefined) ?? 'development');
 
