@@ -15,6 +15,7 @@ import { Heading, InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Cta } from '~/queries/query-types';
 import { fontSizes, mediaQueries, space } from '~/style/theme';
+import { Link } from '~/utils/link';
 import { getTrendIconLookUp } from './logic/get-trend-icon-look-up';
 
 interface TopicalTileProps {
@@ -28,7 +29,7 @@ interface TopicalTileProps {
   trendIcon: TrendIconType;
 }
 
-export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue, cta, sourceLabel, hideTrendIcon }: TopicalTileProps) {
+export const TopicalTile = ({ title, tileIcon, trendIcon, description, kpiValue, cta, sourceLabel, hideTrendIcon }: TopicalTileProps) => {
   const { formatNumber } = useIntl();
 
   const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
@@ -43,58 +44,71 @@ export function TopicalTile({ title, tileIcon, trendIcon, description, kpiValue,
   };
 
   return (
-    <Tile as={cta.href ? 'a' : 'div'} href={cta.href ?? undefined}>
-      <>
-        <Box display="flex" flexDirection="column" justifyContent="start">
-          <Box display="flex" justifyContent="space-between">
-            <Box fontSize={{ _: fontSizes[6], xs: fontSizes[7] }} paddingLeft={{ _: space[3], xs: space[4] }} paddingTop={{ _: space[3], xs: space[4] }}>
-              <StyledHeading level={3} color={colors.blue8}>
-                {title}
-              </StyledHeading>
+    <TopicalTileWrapper cta={cta}>
+      <Box display="flex" flexDirection="column" justifyContent="start">
+        <Box display="flex" justifyContent="space-between">
+          <Box fontSize={{ _: fontSizes[6], xs: fontSizes[7] }} paddingLeft={{ _: space[3], xs: space[4] }} paddingTop={{ _: space[3], xs: space[4] }}>
+            <StyledHeading level={3} color={colors.blue8}>
+              {title}
+            </StyledHeading>
 
-              {formattedKpiValue && (
-                <Box display="flex" justifyContent="start" alignItems="center" marginTop={space[2]}>
-                  <KpiValue color={colors.black} text={formattedKpiValue} />
+            {formattedKpiValue && (
+              <Box display="flex" justifyContent="start" alignItems="center" marginTop={space[2]}>
+                <KpiValue color={colors.black} text={formattedKpiValue} />
 
-                  {trendIconConfig && trendIconConfig.direction !== undefined && !hideTrendIcon && (
-                    <TrendIcon trendDirection={trendIconConfig.direction} color={trendIconConfig.color} intensity={trendIconConfig.intensity} />
-                  )}
-                </Box>
-              )}
-            </Box>
-
-            <TileIcon>
-              <DynamicIcon name={tileIcon} aria-hidden="true" />
-            </TileIcon>
+                {trendIconConfig && trendIconConfig.direction !== undefined && !hideTrendIcon && (
+                  <TrendIcon trendDirection={trendIconConfig.direction} color={trendIconConfig.color} intensity={trendIconConfig.intensity} />
+                )}
+              </Box>
+            )}
           </Box>
 
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="start"
-            textAlign="left"
-            padding={{ _: space[3], xs: space[4] }}
-            paddingTop={formattedKpiValue ? { _: space[2] } : undefined}
-          >
-            <RichContent blocks={description} elementAlignment="start" />
-          </Box>
+          <TileIcon>
+            <DynamicIcon name={tileIcon} aria-hidden="true" />
+          </TileIcon>
         </Box>
 
-        {sourceLabel && (
-          <Box padding={{ _: `0 ${space[3]} ${space[3]}`, xs: `0 ${space[4]} ${space[4]}` }}>
-            <InlineText color={colors.gray7}>{sourceLabel}</InlineText>
-          </Box>
-        )}
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="start"
+          textAlign="left"
+          padding={{ _: space[3], xs: space[4] }}
+          paddingTop={formattedKpiValue ? { _: space[2] } : undefined}
+        >
+          <RichContent blocks={description} elementAlignment="start" />
+        </Box>
+      </Box>
 
-        {cta.title && (
-          <Box display="flex" justifyContent="center" alignItems="center" backgroundColor={colors.blue1} color={colors.blue8} padding={space[3]} className="topical-tile-cta">
-            <TextWithIcon text={cta.title} icon={<ChevronRight />} />
-          </Box>
-        )}
-      </>
-    </Tile>
+      {sourceLabel && (
+        <Box padding={{ _: `0 ${space[3]} ${space[3]}`, xs: `0 ${space[4]} ${space[4]}` }}>
+          <InlineText color={colors.gray7}>{sourceLabel}</InlineText>
+        </Box>
+      )}
+
+      {cta.title && (
+        <Box display="flex" justifyContent="center" alignItems="center" backgroundColor={colors.blue1} color={colors.blue8} padding={space[3]} className="topical-tile-cta">
+          <TextWithIcon text={cta.title} icon={<ChevronRight />} />
+        </Box>
+      )}
+    </TopicalTileWrapper>
   );
+};
+
+interface TopicalTileWrapperProps {
+  children: React.ReactNode;
+  cta: Cta;
 }
+
+const TopicalTileWrapper = ({ cta, children }: TopicalTileWrapperProps) => {
+  return cta.href ? (
+    <Link href={cta.href} passHref>
+      <Tile as="a">{children}</Tile>
+    </Link>
+  ) : (
+    <Tile>{children}</Tile>
+  );
+};
 
 const TileIcon = styled.span`
   background-color: ${colors.blue8};
