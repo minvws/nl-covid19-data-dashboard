@@ -51,7 +51,7 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, isFirst }: Vaccine
 
   return (
     <StyledRow isFirst={isFirst} onClick={() => collapsible.toggle()}>
-      <StyledCell colSpan={4} padding={space[0]}>
+      <StyledCell colSpan={4} padding="0">
         <StyledTable>
           <tbody>
             <tr>
@@ -73,7 +73,7 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, isFirst }: Vaccine
             </tr>
 
             <tr>
-              <StyledCell colSpan={4} paddingBottom={isOpen ? space[4] : space[0]} paddingTop={space[0]}>
+              <StyledCell colSpan={4} paddingBottom={isOpen ? space[4] : '0'} paddingTop="0">
                 {collapsible.content(<Markdown content={campaignDescription} />)}
               </StyledCell>
             </tr>

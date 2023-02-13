@@ -31,9 +31,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
 }: TooltipListOfSeriesProps<T>) {
   const formatSeriesValue = useFormatSeriesValue(metricPropertyFormatters);
 
-  const seriesConfig: SeriesConfig<T> = markNearestPointOnly
-    ? [config[configIndex]]
-    : [...config];
+  const seriesConfig: SeriesConfig<T> = markNearestPointOnly ? [config[configIndex]] : [...config];
 
   return (
     <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
@@ -46,12 +44,9 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
          */
         const key = index + getDateUnixString(value);
         const metricProperty = serie.type !== 'range' && serie.metricProperty;
-        const metricPropertyValue = metricProperty
-          ? value[metricProperty]
-          : null;
+        const metricPropertyValue = metricProperty ? value[metricProperty] : null;
 
-        const tooltipValue =
-          typeof metricPropertyValue === 'number' ? metricPropertyValue : null;
+        const tooltipValue = typeof metricPropertyValue === 'number' ? metricPropertyValue : null;
 
         switch (serie.type) {
           case 'range':
@@ -64,26 +59,14 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                 displayTooltipValueOnly={displayTooltipValueOnly}
                 isVisuallyHidden={serie.nonInteractive}
               >
-                <span css={css({ whiteSpace: 'nowrap' })}>
-                  {formatSeriesValue(value, serie, options.isPercentage)}
-                </span>
+                <span css={css({ whiteSpace: 'nowrap' })}>{formatSeriesValue(value, serie, options.isPercentage)}</span>
               </TooltipListItem>
             );
 
           case 'invisible':
             return (
-              <TooltipListItem
-                key={key}
-                label={serie.label}
-                ariaLabel={serie.ariaLabel}
-                displayTooltipValueOnly={displayTooltipValueOnly}
-                isVisuallyHidden={serie.nonInteractive}
-              >
-                {formatSeriesValue(
-                  value,
-                  serie,
-                  serie.isPercentage ?? options.isPercentage
-                )}
+              <TooltipListItem key={key} label={serie.label} ariaLabel={serie.ariaLabel} displayTooltipValueOnly={displayTooltipValueOnly} isVisuallyHidden={serie.nonInteractive}>
+                {formatSeriesValue(value, serie, serie.isPercentage ?? options.isPercentage)}
               </TooltipListItem>
             );
 
@@ -106,15 +89,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
             return (
               <TooltipListItem
                 key={key}
-                icon={
-                  typeof tooltipValue === 'number' &&
-                  typeof seriesMax === 'number' &&
-                  seriesMax < tooltipValue ? (
-                    <OutOfBoundsIcon />
-                  ) : (
-                    <SeriesIcon config={serie} />
-                  )
-                }
+                icon={typeof tooltipValue === 'number' && typeof seriesMax === 'number' && seriesMax < tooltipValue ? <OutOfBoundsIcon /> : <SeriesIcon config={serie} />}
                 label={serie.shortLabel ?? serie.label}
                 ariaLabel={serie.ariaLabel}
                 displayTooltipValueOnly={displayTooltipValueOnly}
@@ -138,14 +113,7 @@ interface TooltipListItemProps {
   isVisuallyHidden?: boolean;
 }
 
-function TooltipListItem({
-  children,
-  icon,
-  label,
-  ariaLabel = label,
-  displayTooltipValueOnly,
-  isVisuallyHidden,
-}: TooltipListItemProps) {
+function TooltipListItem({ children, icon, label, ariaLabel = label, displayTooltipValueOnly, isVisuallyHidden }: TooltipListItemProps) {
   return isVisuallyHidden ? (
     <VisuallyHidden as="li">
       {ariaLabel}: {children}
@@ -158,9 +126,7 @@ function TooltipListItem({
             <VisuallyHidden>
               <InlineText>{ariaLabel}:</InlineText>
             </VisuallyHidden>
-            <TooltipEntryValue isCentered={displayTooltipValueOnly}>
-              {children}
-            </TooltipEntryValue>
+            <TooltipEntryValue isCentered={displayTooltipValueOnly}>{children}</TooltipEntryValue>
           </TooltipEntryContainer>
         </Box>
       ) : (
@@ -171,9 +137,7 @@ function TooltipListItem({
                 <InlineText>{ariaLabel}:</InlineText>
               </VisuallyHidden>
               <InlineText aria-hidden={true}>{label}:</InlineText>
-              <TooltipEntryValue isCentered={displayTooltipValueOnly}>
-                {children}
-              </TooltipEntryValue>
+              <TooltipEntryValue isCentered={displayTooltipValueOnly}>{children}</TooltipEntryValue>
             </TooltipEntryContainer>
           </Box>
         </IconRow>
@@ -212,8 +176,8 @@ const TooltipList = styled.ol<TooltipListProps>((x) =>
     columns: x.hasTwoColumns && useBreakpoints().md ? 2 : 1,
     columnRule: x.hasTwoColumns ? `1px solid ${colors.gray2}` : 'unset',
     columnGap: x.hasTwoColumns ? '2em' : 'unset',
-    m: 0,
-    p: 0,
+    margin: '0',
+    padding: '0',
     listStyle: 'none',
 
     [TooltipEntryValue]: {
@@ -223,7 +187,5 @@ const TooltipList = styled.ol<TooltipListProps>((x) =>
 );
 
 function getDateUnixString(value: TimestampedValue) {
-  return 'date_unix' in value
-    ? `${value.date_unix}`
-    : `${value.date_start_unix}-${value.date_end_unix}`;
+  return 'date_unix' in value ? `${value.date_unix}` : `${value.date_start_unix}-${value.date_end_unix}`;
 }

@@ -1,6 +1,7 @@
 import { Box } from '~/components/base';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Boosterprik as BoosterIcon } from '@corona-dashboard/icons';
+import { space } from '~/style/theme';
 
 type ReferenceType = {
   href: string;
@@ -26,13 +27,9 @@ interface VaccineKpiHeaderProps {
   dateOfInsertionUnix: number;
 }
 
-export function VaccinationsKpiHeader({
-  text,
-  dateUnix,
-  dateOfInsertionUnix,
-}: VaccineKpiHeaderProps) {
+export function VaccinationsKpiHeader({ text, dateUnix, dateOfInsertionUnix }: VaccineKpiHeaderProps) {
   return (
-    <Box pt={40} borderTopWidth={2} borderColor="gray3" borderStyle="solid">
+    <Box paddingTop="40px" borderTopWidth={space[2]} borderColor="gray3" borderStyle="solid">
       <PageInformationBlock
         icon={<BoosterIcon />}
         title={text.title}

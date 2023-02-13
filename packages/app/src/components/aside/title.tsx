@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import { ChevronRight } from '@corona-dashboard/icons';
 import { Box } from '../base';
 import { Text } from '../typography';
+import { space } from '~/style/theme';
 
 type TitleProps = {
   title: string;
@@ -21,13 +22,7 @@ export function AsideTitle(props: TitleProps) {
   const { title, subtitle, showArrow } = props;
 
   return (
-    <Box
-      width="100%"
-      display="flex"
-      flexDirection="row"
-      flexWrap="nowrap"
-      alignItems="center"
-    >
+    <Box width="100%" display="flex" flexDirection="row" flexWrap="nowrap" alignItems="center">
       <Box width="100%">
         <Text>
           <span
@@ -39,13 +34,7 @@ export function AsideTitle(props: TitleProps) {
             })}
           >
             {title}
-            {showArrow && (
-              <ChevronRight
-                width={16}
-                height={20}
-                css={css({ color: 'blue8' })}
-              />
-            )}
+            {showArrow && <ChevronRight width={space[3]} height="20px" css={css({ color: 'blue8' })} />}
           </span>
         </Text>
         <Text>{subtitle}</Text>

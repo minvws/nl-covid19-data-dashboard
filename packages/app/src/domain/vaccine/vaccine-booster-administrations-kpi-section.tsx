@@ -1,14 +1,7 @@
 import { Box } from '~/components/base';
 import { InlineText, Text, Heading, BoldText } from '~/components/typography';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import {
-  Metadata,
-  MetadataProps,
-  Message,
-  Tile,
-  TwoKpiSection,
-  KpiValue,
-} from '~/components';
+import { Metadata, MetadataProps, Message, Tile, TwoKpiSection, KpiValue } from '~/components';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 
@@ -33,7 +26,7 @@ export function VaccineBoosterAdministrationsKpiSection({
 }: VaccineBoosterAdministrationsKpiSectionProps) {
   return (
     <Tile>
-      <Box mb={20}>
+      <Box marginBottom="20px">
         <TwoKpiSection>
           <Heading level={3}>{text.title}</Heading>
           <Box />
@@ -43,24 +36,12 @@ export function VaccineBoosterAdministrationsKpiSection({
         <Box spacing={3}>
           <KpiValue absolute={totalBoosterShots} />
           <Text>{text.total_booster_shots.description}</Text>
-          {text.total_booster_shots.warning && (
-            <Message variant="warning">
-              {text.total_booster_shots.warning}
-            </Message>
-          )}
+          {text.total_booster_shots.warning && <Message variant="warning">{text.total_booster_shots.warning}</Message>}
           <Metadata {...metadateBoosterShots} isTileFooter />
         </Box>
         <Box spacing={4}>
-          <BoosterAdministeredItem
-            value={boosterGgdValue}
-            description={text.booster_ggd.title}
-            metadata={metadateBoosterGgd}
-          />
-          <BoosterAdministeredItem
-            value={boosterEstimatedValue}
-            description={text.booster_estimated.title}
-            metadata={metadateBoosterEstimated}
-          />
+          <BoosterAdministeredItem value={boosterGgdValue} description={text.booster_ggd.title} metadata={metadateBoosterGgd} />
+          <BoosterAdministeredItem value={boosterEstimatedValue} description={text.booster_estimated.title} metadata={metadateBoosterEstimated} />
         </Box>
       </TwoKpiSection>
     </Tile>
@@ -82,9 +63,7 @@ function BoosterAdministeredItem(props: BoosterAdministeredProps) {
     <Box spacing={1}>
       <BoldText>
         {replaceComponentsInText(description, {
-          value: (
-            <InlineText color="data.primary">{formatNumber(value)}</InlineText>
-          ),
+          value: <InlineText color="data.primary">{formatNumber(value)}</InlineText>,
         })}
       </BoldText>
 

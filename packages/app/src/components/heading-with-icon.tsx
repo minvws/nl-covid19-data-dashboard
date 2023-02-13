@@ -21,12 +21,7 @@ export function HeadingWithIcon(props: HeadingWithIconProps) {
   const { icon, title, headingLevel = 3 } = props;
 
   return (
-    <Box
-      display="flex"
-      flexDirection="row"
-      flexWrap="nowrap"
-      alignItems="center"
-    >
+    <Box display="flex" flexDirection="row" flexWrap="nowrap" alignItems="center">
       <Icon size={iconSizeForHeadingLevel[headingLevel]}>{icon}</Icon>
       <Heading level={headingLevel} hyphens="auto">
         {title}
@@ -44,8 +39,8 @@ function Icon({ children, size }: { children: React.ReactNode; size: string }) {
       flexWrap="nowrap"
       justifyContent="center"
       alignItems="center"
-      padding={0}
-      marginRight={0}
+      padding="0"
+      marginRight="0"
       css={css({
         width: size,
         height: size,

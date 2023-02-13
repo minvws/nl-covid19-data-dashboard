@@ -8,7 +8,8 @@ import chevronUrl from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { Anchor, Heading } from '~/components/typography';
 import { ExpandedSidebarMap, Layout } from '~/domain/layout/logic/types';
-import { SpaceValue } from '~/style/theme';
+import { space, SpaceValue } from '~/style/theme';
+import { colors } from '@corona-dashboard/common';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -36,13 +37,7 @@ export function MenuRenderer({ items }: { items: ExpandedSidebarMap<Layout> }) {
   );
 }
 
-export function Menu({
-  children,
-  spacing,
-}: {
-  children: ReactNode;
-  spacing?: SpaceValue;
-}) {
+export function Menu({ children, spacing }: { children: ReactNode; spacing?: SpaceValue }) {
   return (
     <Box as="ul" css={css({ listStyle: 'none' })} spacing={spacing}>
       {children}
@@ -50,19 +45,11 @@ export function Menu({
   );
 }
 
-export function CategoryMenu({
-  title,
-  children,
-  icon,
-}: {
-  children: ReactNode;
-  title?: string;
-  icon: ReactNode;
-}) {
+export function CategoryMenu({ title, children, icon }: { children: ReactNode; title?: string; icon: ReactNode }) {
   return (
     <Box as="li" spacing={2}>
       {title && icon && (
-        <Box px={2} pt={3} display="flex" alignItems="center">
+        <Box paddingX={space[2]} paddingTop={space[3]} display="flex" alignItems="center">
           <Icon>{icon}</Icon>
           <Heading level={5}>{title}</Heading>
         </Box>
@@ -98,10 +85,7 @@ export function MenuItemLink({ href, title }: MenuItemLinkProps) {
   return (
     <li>
       <Link href={href} passHref>
-        <StyledAnchor
-          isActive={breakpoints.md && isActive}
-          aria-current={isActive ? 'page' : undefined}
-        >
+        <StyledAnchor isActive={breakpoints.md && isActive} aria-current={isActive ? 'page' : undefined}>
           <AsideTitle title={title} showArrow={!breakpoints.md || !isActive} />
         </StyledAnchor>
       </Link>
@@ -118,8 +102,8 @@ function isActivePath(router: NextRouter, href: Url) {
 const Unavailable = styled.span(
   css({
     display: 'block',
-    padding: 2,
-    color: 'gray5',
+    padding: space[2],
+    color: colors.gray5,
 
     svg: {
       fill: 'currentColor',
@@ -129,31 +113,27 @@ const Unavailable = styled.span(
 
 const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
   css({
-    p: 2,
-    pl: '3rem',
+    padding: space[2],
+    paddingLeft: '3rem',
     display: 'block',
     borderRight: '5px solid transparent',
-    color: anchorProps.isActive ? 'blue8' : 'black',
+    color: anchorProps.isActive ? colors.blue8 : 'black',
     fontWeight: anchorProps.isActive ? 'bold' : 'normal',
     position: 'relative',
     bg: anchorProps.isActive ? 'blue1' : 'transparent',
-    borderRightColor: anchorProps.isActive
-      ? 'blue8'
-      : 'transparent',
+    borderRightColor: anchorProps.isActive ? colors.blue8 : 'transparent',
 
     '&:hover, &:focus': {
       bg: 'blue8',
-      color: 'white',
+      color: colors.white,
       fontWeight: 'bold',
       svg: {
-        color: 'white',
+        color: colors.white,
       },
     },
 
     '&::after': {
-      content: anchorProps.isActive
-        ? 'none'
-        : asResponsiveArray({ _: 'none', xs: undefined }),
+      content: anchorProps.isActive ? 'none' : asResponsiveArray({ _: 'none', xs: undefined }),
       backgroundImage: `url('${chevronUrl}')`,
       // match aspect ratio of chevron.svg
       backgroundSize: '0.6em 1.2em',
@@ -161,7 +141,7 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
       width: '0.6em',
       display: 'block',
       position: 'absolute',
-      right: 3,
+      right: space[3],
       top: '1.35em',
     },
   })
@@ -178,9 +158,9 @@ const Icon = ({ children }: { children: ReactNode }) => {
       flexWrap="nowrap"
       justifyContent="center"
       alignItems="center"
-      padding={0}
-      mr={0}
-      mt="-3px"
+      padding="0"
+      marginRight="0"
+      marginTop="-3px"
       css={css({
         width: '2.5rem',
         height: '2.5rem',

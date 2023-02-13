@@ -2,15 +2,7 @@ import { ChevronRight } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { m } from 'framer-motion';
 import { isBoolean } from 'lodash';
-import {
-  cloneElement,
-  MouseEvent,
-  ReactElement,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { cloneElement, MouseEvent, ReactElement, ReactNode, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Box, MotionBox } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
@@ -48,19 +40,10 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
 
   useEffect(() => setIsOpen(!!options.isOpen), [options.isOpen]);
 
-  const toggle = useCallback(
-    (value?: true | false | unknown) =>
-      setIsOpen((x) => (isBoolean(value) ? value : !x)),
-    []
-  );
+  const toggle = useCallback((value?: true | false | unknown) => setIsOpen((x) => (isBoolean(value) ? value : !x)), []);
 
   const chevron = (
-    <Box
-      as="span"
-      display="inline-block"
-      transform="rotate(90deg)"
-      css={css({ '.has-no-js &': { display: 'none' } })}
-    >
+    <Box as="span" display="inline-block" transform="rotate(90deg)" css={css({ '.has-no-js &': { display: 'none' } })}>
       <MotionChevron animate={{ rotateY: isOpen ? 180 : 0 }} />
     </Box>
   );

@@ -10,6 +10,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { InlineText, Text, BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export function VaccineAdministrationsKpiSection({
@@ -36,7 +37,7 @@ export function VaccineAdministrationsKpiSection({
           source: text.bronnen.all_left,
         }}
       >
-        <Box css={css({ '& div': { justifyContent: 'flex-start' } })} mb={3}>
+        <Box css={css({ '& div': { justifyContent: 'flex-start' } })} marginBottom={space[3]}>
           <RadioGroup
             value={selectedTab}
             onChange={(value) => setSelectedTab(value)}
@@ -56,10 +57,10 @@ export function VaccineAdministrationsKpiSection({
           <>
             <KpiValue absolute={data.vaccine_administered_total.last_value.estimated} />
             <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
-              <Box flex={{ lg: '1 1 50%' }} mb={3}>
+              <Box flex={{ lg: '1 1 50%' }} marginBottom={space[3]}>
                 <Markdown content={text.gezette_prikken.tab_first.description} />
               </Box>
-              <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }} spacing={3}>
+              <Box flex={{ lg: '1 1 50%' }} marginLeft={{ lg: space[4] }} spacing={3}>
                 <VaccineAdministeredItem
                   value={data.vaccine_administered_ggd.last_value.estimated}
                   description={text.gezette_prikken.estimated.ggd}
@@ -91,7 +92,7 @@ export function VaccineAdministrationsKpiSection({
               <Box flex={{ lg: '1 1 50%' }}>
                 <Markdown content={text.gezette_prikken.tab_second.description} />
               </Box>
-              <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
+              <Box flex={{ lg: '1 1 50%' }} marginLeft={{ lg: space[4] }}>
                 <VaccineAdministeredItem
                   value={data.vaccine_administered_ggd_ghor.last_value.reported}
                   description={text.gezette_prikken.reported.ggd_ghor}

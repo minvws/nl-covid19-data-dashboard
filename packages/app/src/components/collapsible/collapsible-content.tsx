@@ -2,6 +2,7 @@ import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box, BoxProps } from '~/components/base';
+import { space } from '~/style/theme';
 import { useCollapsible } from '~/utils/use-collapsible';
 
 interface CollapsibleContentProps extends BoxProps {
@@ -9,10 +10,7 @@ interface CollapsibleContentProps extends BoxProps {
   children: ReactNode;
 }
 
-export function CollapsibleContent({
-  label,
-  children,
-}: CollapsibleContentProps) {
+export function CollapsibleContent({ label, children }: CollapsibleContentProps) {
   const collapsible = useCollapsible();
 
   return (
@@ -33,9 +31,9 @@ const Label = styled.button(
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     overflow: 'visible',
-    m: 0,
-    px: 0,
-    py: 3,
+    margin: '0',
+    paddingX: '0',
+    paddingY: space[3],
     width: '100%',
     bg: 'transparent',
     border: 'none',

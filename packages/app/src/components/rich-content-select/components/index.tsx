@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { space } from '~/style/theme';
 
 export const SelectBoxRoot = styled(Box)(
   css({
@@ -18,11 +19,11 @@ export const SelectBox = styled(Box)(
     borderStyle: 'solid',
     borderRadius: (theme) => theme.radii[1],
     minHeight: '36px',
-    borderWidth: 1,
+    borderWidth: '1px',
     transition: '0.1s background-color',
     userSelect: 'none',
-    py: 2,
-    px: 3,
+    paddingY: space[2],
+    paddingX: space[3],
     '&[aria-expanded="true"]': {
       bg: 'white',
       color: 'black',
@@ -33,7 +34,7 @@ export const SelectBox = styled(Box)(
         position: 'absolute',
         left: '1px',
         right: '1px',
-        bottom: 0,
+        bottom: '0',
         borderBottom: '1px solid',
         borderColor: 'gray3',
       },
@@ -57,14 +58,14 @@ export const ListBox = styled(Box)(
     bg: 'white',
     position: 'absolute',
     top: '100%',
-    left: 0,
+    left: '0',
     width: '100%',
     overflowY: 'auto',
     maxHeight: '20rem',
     borderColor: 'blue8',
     borderStyle: 'solid',
-    borderWidth: 1,
-    borderTopWidth: 0,
+    borderWidth: '1px',
+    borderTopWidth: '0',
     display: 'none',
     zIndex: 10,
     [`${SelectBox}[aria-expanded="true"] + &`]: {
@@ -78,14 +79,14 @@ export const ListBox = styled(Box)(
 export const ListBoxOption = styled(Box)(
   css({
     cursor: 'default',
-    px: 3,
-    py: 2,
+    paddingX: space[3],
+    paddingY: space[2],
     position: 'relative',
     '&:before': {
       content: 'attr(data-text)',
       position: 'absolute',
-      left: 0,
-      top: 0,
+      left: '0',
+      top: '0',
       height: '100%',
       width: '5px',
       backgroundColor: 'blue8',

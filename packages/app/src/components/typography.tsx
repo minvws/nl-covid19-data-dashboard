@@ -17,8 +17,8 @@ export const textStyle = (props: TextProps & { as?: string }) => {
   return css({
     ...(props.as === 'button'
       ? {
-          m: 0,
-          p: 0,
+          margin: '0',
+          padding: '0',
           bg: 'transparent',
           border: 0,
           fontSize: 'inherit',

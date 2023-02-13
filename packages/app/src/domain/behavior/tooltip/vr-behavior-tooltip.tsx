@@ -9,6 +9,7 @@ import { BoldText } from '~/components/typography';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { getThresholdValue } from '~/utils/get-threshold-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -50,7 +51,7 @@ export function VrBehaviorTooltip({ context, currentMetric, currentComplianceVal
   return (
     <TooltipContent title={context.featureName} link={reverseRouter.vr.gedrag(context.dataItem.vrcode)}>
       <Box maxWidth="15rem" spacing={2}>
-        <BoldText css={css({ marginBottom: 2 })}>{commonTexts.behavior.subjects[currentMetric]}</BoldText>
+        <BoldText css={css({ marginBottom: space[2] })}>{commonTexts.behavior.subjects[currentMetric]}</BoldText>
 
         {/* Change order of the info based on the metric name */}
         {behaviorType === 'compliance' ? (
@@ -89,10 +90,10 @@ function TooltipInfo({ title, value, background }: TooltipInfoProps) {
 
 const LegendaColorBox = styled.div<{ backgroundColor: string }>((x) =>
   css({
-    height: 13,
-    width: 13,
+    height: '13px',
+    width: '13px',
     borderRadius: '2px',
-    ml: '1',
+    marginLeft: space[1],
     backgroundColor: x.backgroundColor,
   })
 );

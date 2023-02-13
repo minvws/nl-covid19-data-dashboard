@@ -7,6 +7,7 @@ import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Heading } from './typography';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
+import { space } from '~/style/theme';
 
 interface ChartTileDoubleColumnProps {
   title: string;
@@ -16,26 +17,15 @@ interface ChartTileDoubleColumnProps {
   children: ReactNode;
 }
 
-export const ChartTileDoubleColumn = ({
-  title,
-  description,
-  children,
-  metadata,
-  disableFullscreen,
-}: ChartTileDoubleColumnProps) => {
+export const ChartTileDoubleColumn = ({ title, description, children, metadata, disableFullscreen }: ChartTileDoubleColumnProps) => {
   return (
     <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
       {/* padding-right to make sure the title doesn't touch/overlap the full screen button */}
-      <Heading level={3} css={css({ pr: asResponsiveArray({ md: 5 }), mb: 3 })}>
+      <Heading level={3} css={css({ paddingRight: asResponsiveArray({ md: space[5] }), marginBottom: space[3] })}>
         {title}
       </Heading>
 
-      <Box
-        display="flex"
-        flexDirection={{ _: 'column', lg: 'row' }}
-        justifyContent={{ _: 'flex-start', lg: 'space-between' }}
-        alignItems={{ _: 'flex-start', lg: 'normal' }}
-      >
+      <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }} justifyContent={{ _: 'flex-start', lg: 'space-between' }} alignItems={{ _: 'flex-start', lg: 'normal' }}>
         {description && (
           <Box width={{ _: '100%', lg: '50%' }}>
             <Box maxWidth="maxWidthText">

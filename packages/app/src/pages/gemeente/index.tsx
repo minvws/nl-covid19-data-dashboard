@@ -1,8 +1,4 @@
-import {
-  colors,
-  GmCollectionHospitalNice,
-  gmData,
-} from '@corona-dashboard/common';
+import { colors, GmCollectionHospitalNice, gmData } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
@@ -14,11 +10,9 @@ import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
+import { space } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { DynamicChoropleth } from '../../components/choropleth';
@@ -57,24 +51,13 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
         )}
 
-        <Box as="article" p={4}>
+        <Box as="article" padding={space[4]}>
           <Heading level={2} as="h1">
             {commonTexts.gemeente_index.selecteer_titel}
           </Heading>
-          <Markdown
-            content={commonTexts.gemeente_index.selecteer_toelichting}
-          />
+          <Markdown content={commonTexts.gemeente_index.selecteer_toelichting} />
 
-          <Box
-            display="flex"
-            flex="1"
-            justifyContent="center"
-            height="75vh"
-            width="100%"
-            maxHeight={960}
-            flexDirection="column"
-            spacing={3}
-          >
+          <Box display="flex" flex="1" justifyContent="center" height="75vh" width="100%" maxHeight="960px" flexDirection="column" spacing={3}>
             <ErrorBoundary>
               <DynamicChoropleth
                 accessibility={{
@@ -96,12 +79,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   getLink: reverseRouter.gm.index,
                 }}
-                formatTooltip={(context) => (
-                  <TooltipContent
-                    title={context.featureName}
-                    link={reverseRouter.gm.index(context.dataItem.gmcode)}
-                  />
-                )}
+                formatTooltip={(context) => <TooltipContent title={context.featureName} link={reverseRouter.gm.index(context.dataItem.gmcode)} />}
               />
             </ErrorBoundary>
           </Box>

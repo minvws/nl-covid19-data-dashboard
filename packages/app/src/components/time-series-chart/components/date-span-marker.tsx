@@ -20,9 +20,7 @@ interface DateSpanMarkerProps<T extends TimestampedValue> {
   width: number;
 }
 
-export function DateSpanMarker<T extends TimestampedValue>(
-  props: DateSpanMarkerProps<T>
-) {
+export function DateSpanMarker<T extends TimestampedValue>(props: DateSpanMarkerProps<T>) {
   const { point, width } = props;
 
   return (

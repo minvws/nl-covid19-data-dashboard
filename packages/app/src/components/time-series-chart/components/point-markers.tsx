@@ -14,9 +14,7 @@ interface PointMarkerProps<T extends TimestampedValue> {
   points: HoveredPoint<T>[];
 }
 
-export function PointMarkers<T extends TimestampedValue>(
-  props: PointMarkerProps<T>
-) {
+export function PointMarkers<T extends TimestampedValue>(props: PointMarkerProps<T>) {
   const size = MARKER_POINT_SIZE;
   const { points } = props;
 
@@ -69,6 +67,5 @@ const PointMarker = styled.div<MarkerProps>`
   border: 1px solid white;
   background: ${(props) => props.color};
 
-  box-shadow: 0 0 0 ${(x) => x.size / 2}px
-    ${(x) => transparentize(0.6, x.color)};
+  box-shadow: 0 0 0 ${(x) => x.size / 2}px ${(x) => transparentize(0.6, x.color)};
 `;

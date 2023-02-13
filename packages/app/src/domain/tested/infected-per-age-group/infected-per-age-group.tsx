@@ -8,6 +8,7 @@ import { TooltipSeriesList } from '~/components/time-series-chart/components/too
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
@@ -68,7 +69,7 @@ export function InfectedPerAgeGroup({ values, timeframe, accessibility, timeline
   return (
     <ErrorBoundary>
       <InteractiveLegend helpText={text.infected_per_age_group.legend_help_text} selectOptions={interactiveLegendOptions} selection={list} onToggleItem={toggle} onReset={clear} />
-      <Spacer mb={2} />
+      <Spacer marginBottom={space[2]} />
       <TimeSeriesChart
         forceLegend
         accessibility={accessibility}

@@ -2,7 +2,7 @@ import { colors } from '@corona-dashboard/common';
 import css, { SystemStyleObject } from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { space } from '~/style/theme';
+import { fontSizes, space } from '~/style/theme';
 
 type LegendShape = 'line' | 'square' | 'circle' | 'dotted-square' | 'outlined-square';
 type LegendLineStyle = 'solid' | 'dashed';
@@ -54,9 +54,9 @@ export function Legend({ items, columns }: LegendProps) {
 const List = styled.ul<{ columns?: number }>(({ columns }) =>
   css({
     listStyle: 'none',
-    paddingX: 0,
-    margin: 0,
-    fontSize: 1,
+    paddingX: '0',
+    margin: '0',
+    fontSize: fontSizes[1],
     color: 'gray7',
     columns,
     ...(columns === 1 && { display: 'flex', flexDirection: 'column' }),
@@ -80,7 +80,7 @@ const CustomShape = styled.div(
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    left: 0,
+    left: '0',
     top: '3px',
     width: '15px',
     height: '15px',
@@ -91,7 +91,7 @@ const Shape = styled.div<{ color: string }>((x) =>
   css({
     display: 'block',
     position: 'absolute',
-    left: 0,
+    left: '0',
     backgroundColor: x.color,
   })
 );
@@ -99,14 +99,14 @@ const Shape = styled.div<{ color: string }>((x) =>
 function DottedSquare({ color }: { color: string }) {
   return (
     <Shape color="white" css={css({ top: '3px' })}>
-      <svg width={'16px'} height={'16px'} viewBox={`0 0 ${16} ${16}`}>
+      <svg width={space[3]} height={space[3]} viewBox={`0 0 ${16} ${16}`}>
         <defs>
-          <pattern id="dotted_legend" width="4" height="4" patternUnits="userSpaceOnUse">
+          <pattern id="dotted_legend" width="4px" height="4px" patternUnits="userSpaceOnUse">
             <line x1="0" y1="4" x2="0" y2="0" style={{ stroke: color, strokeWidth: 4, strokeDasharray: 2 }} />
           </pattern>
         </defs>
         <g>
-          <rect x={0} y={0} fill={`url(#dotted_legend)`} width={'16px'} height={'16px'} />
+          <rect x={0} y={0} fill={`url(#dotted_legend)`} width={space[3]} height={space[3]} />
         </g>
       </svg>
     </Shape>
@@ -150,7 +150,6 @@ const Line = styled(Shape)<{ color: string; lineStyle: LegendLineStyle }>(({ col
     borderTopWidth: '3px',
     top: '10px',
     width: '15px',
-    height: '0',
     borderRadius: '2px',
   })
 );

@@ -49,7 +49,7 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst }
 
   return (
     <StyledRow isFirst={isFirst} onClick={() => collapsible.toggle()}>
-      <StyledCell padding={space[0]}>
+      <StyledCell padding="0">
         <StyledTable>
           <tbody>
             <tr>
@@ -63,13 +63,13 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst }
             </tr>
 
             <tr>
-              <StyledCell paddingY={space[0]} isMobile>
+              <StyledCell paddingY="0" isMobile>
                 {headers.last_week}: {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_last_week)}</BoldText> : formatNumber(campaign.vaccine_administered_last_week)}
               </StyledCell>
             </tr>
 
             <tr>
-              <StyledCell paddingY={space[0]} isMobile>
+              <StyledCell paddingY="0" isMobile>
                 {headers.total}: {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_total)}</BoldText> : formatNumber(campaign.vaccine_administered_total)}
               </StyledCell>
             </tr>

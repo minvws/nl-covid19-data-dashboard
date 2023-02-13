@@ -50,7 +50,7 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
   if (!timelineEvents) return null;
 
   return (
-    <Box my={space[3]} position="relative">
+    <Box marginY={space[3]} position="relative">
       <TimelineHeading level={4}>{labels.heading}</TimelineHeading>
 
       <TimelineBar height={size}>
@@ -92,7 +92,7 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
         ))}
       </TimelineBar>
 
-      <Box display="flex" alignItems="center" justifyContent="space-between" my={space[3]}>
+      <Box display="flex" alignItems="center" justifyContent="space-between" marginY={space[3]}>
         <TimelineTimestamp dateTime={formatDate(startDate, 'iso')}>{formatDate(startDate, 'axis-with-year')}</TimelineTimestamp>
 
         <TimelineTimestamp dateTime={formatDate(endDate, 'iso')}>{formatDate(endDate, 'axis-with-year')}</TimelineTimestamp>

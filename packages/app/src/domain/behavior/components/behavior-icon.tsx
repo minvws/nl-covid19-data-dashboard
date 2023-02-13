@@ -11,6 +11,7 @@ import {
   MaxVisitors,
   OnderwijsEnKinderopvangOpAfstand,
 } from '@corona-dashboard/icons';
+import { space } from '~/style/theme';
 import { BehaviorIdentifier } from '../logic/behavior-types';
 
 const icons: Record<BehaviorIdentifier, typeof Avondklok> = {
@@ -32,10 +33,10 @@ const icons: Record<BehaviorIdentifier, typeof Avondklok> = {
 
 interface BehaviorIconProps {
   name: BehaviorIdentifier;
-  size?: number;
+  size?: string;
 }
 
-export function BehaviorIcon({ name, size = 32 }: BehaviorIconProps) {
+export function BehaviorIcon({ name, size = space[4] }: BehaviorIconProps) {
   const Icon = icons[name];
   return <Icon width={size} height={size} aria-hidden="true" />;
 }

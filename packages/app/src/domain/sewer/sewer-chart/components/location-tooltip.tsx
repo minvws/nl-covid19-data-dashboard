@@ -8,6 +8,7 @@ import { VisuallyHidden } from '~/components';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { MergedSewerType } from '../logic';
+import { fontSizes, space } from '~/style/theme';
 
 /**
  * A specific tooltip for when you've selected a location. It contains an icon
@@ -25,12 +26,12 @@ export function LocationTooltip({ data }: { data: TooltipData<MergedSewerType> }
   return (
     <>
       <VisuallyHidden>{dateString}</VisuallyHidden>
-      <Box fontSize={1} display="flex" alignItems="center">
+      <Box fontSize={fontSizes[1]} display="flex" alignItems="center">
         <StyledLocationIcon>
           <Location />
         </StyledLocationIcon>
         <BoldText>{config.label}</BoldText>
-        <Box mx={2}>{commonTexts.waarde_annotaties.per_100_000_inwoners}:</Box>
+        <Box marginX={space[2]}>{commonTexts.waarde_annotaties.per_100_000_inwoners}:</Box>
 
         <BoldText>{formatNumber(data.value.selected_installation_rna_normalized)}</BoldText>
       </Box>
@@ -42,10 +43,10 @@ const StyledLocationIcon = styled.span(
   css({
     whiteSpace: 'nowrap',
     display: 'inline-block',
-    mr: 2,
+    marginRight: space[2],
 
     svg: {
-      pt: '3px',
+      paddingTop: '3px',
       color: 'black',
       width: '1em',
     },

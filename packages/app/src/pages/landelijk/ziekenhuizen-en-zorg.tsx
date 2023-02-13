@@ -17,7 +17,6 @@ import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { countTrailingNullValues, getBoundaryDateStartUnix } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
@@ -101,13 +100,6 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
       value: 'patients_influx_icu',
     },
   ];
-
-  const hospitalPatientInfluxUnderReportedRange = getBoundaryDateStartUnix(data.hospital_lcps.values, countTrailingNullValues(data.hospital_lcps.values, 'influx_covid_patients'));
-
-  const intensiveCarePatientInfluxUnderReportedRange = getBoundaryDateStartUnix(
-    data.intensive_care_lcps.values,
-    countTrailingNullValues(data.intensive_care_lcps.values, 'influx_covid_patients')
-  );
 
   const hospitalLastValue = getLastFilledValue(data.hospital_lcps);
   const icuLastValue = getLastFilledValue(data.intensive_care_lcps);
@@ -316,15 +308,6 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: hospitalPatientInfluxUnderReportedRange,
-                      end: Infinity,
-                      label: textNl.hospitals.chart_patient_influx.legend_inaccurate_label,
-                      shortLabel: commonTexts.common.incomplete,
-                      cutValuesForMetricProperties: ['influx_covid_patients_moving_average'],
-                    },
-                  ],
                   timelineEvents: getTimelineEvents(content.elements.timeSeries, 'hospital_lcps'),
                 }}
               />
@@ -366,15 +349,6 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: intensiveCarePatientInfluxUnderReportedRange,
-                      end: Infinity,
-                      label: textNl.icu.chart_patient_influx.legend_inaccurate_label,
-                      shortLabel: commonTexts.common.incomplete,
-                      cutValuesForMetricProperties: ['influx_covid_patients_moving_average'],
-                    },
-                  ],
                   timelineEvents: getTimelineEvents(content.elements.timeSeries, 'intensive_care_lcps'),
                 }}
               />

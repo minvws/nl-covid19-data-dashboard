@@ -39,8 +39,8 @@ export const SeverityIndicatorTile = ({ description, label, level, title, datesL
       flexDirection="row"
       flexWrap="wrap"
       justifyContent="space-between"
-      p={4}
-      mt={4}
+      padding={space[4]}
+      marginTop={space[4]}
       as="figure"
     >
       <Box flexGrow={1} width={`min(${SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH}px, 50%)`}>
@@ -54,11 +54,11 @@ export const SeverityIndicatorTile = ({ description, label, level, title, datesL
 
       <Box flexGrow={1} width={`min(${SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH}px, 50%)`} as="figcaption">
         {description && <Markdown content={description} />}
-        <Box display={hasIconProps ? 'flex' : 'block'} alignItems="center" mt={3} css={css({ gap: 2 })}>
+        <Box display={hasIconProps ? 'flex' : 'block'} alignItems="center" marginTop={space[3]} css={css({ gap: space[2] })}>
           {trendIcon?.direction && iconColor && hasIconProps && <TrendIconWrapper color={mapStringToColors(iconColor)}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
           {levelDescription && <Markdown content={levelDescription} />}
         </Box>
-        <Box my={3}>
+        <Box marginY={space[3]}>
           <InlineText color="gray7">{sourceLabel}</InlineText>
         </Box>
       </Box>

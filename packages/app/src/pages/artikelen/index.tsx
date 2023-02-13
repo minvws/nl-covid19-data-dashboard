@@ -10,24 +10,15 @@ import { RichContentSelect } from '~/components/rich-content-select';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { ArticlesOverviewList } from '~/domain/articles/articles-overview-list';
 import { Layout } from '~/domain/layout/layout';
-import {
-  articleCategory,
-  ArticleCategoryType,
-} from '~/domain/topical/common/categories';
+import { articleCategory, ArticleCategoryType } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { space } from '~/style/theme';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textShared: siteText.pages.topical_page.shared,
@@ -36,8 +27,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   createGetContent<ArticleSummary[]>((context) => {
     const { locale } = context;
@@ -61,20 +51,14 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
-  const { textShared } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const articleCategories = useMemo(() => {
     /**
      * Find all the categories that are currently being used in articles,
      * to later check if we still need it for the menu items.
      */
-    const availableCategories: string[] = [
-      '__alles',
-      ...new Set(content.map((item) => item.categories).flat()),
-    ].filter(isPresent);
+    const availableCategories: string[] = ['__alles', ...new Set(content.map((item) => item.categories).flat())].filter(isPresent);
 
     return articleCategory
       .map((id) => {
@@ -93,7 +77,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
       articleCategories.map((category) => ({
         ...category,
         content: (
-          <Box pr={2}>
+          <Box paddingRight={space[2]}>
             <Text>{category.label}</Text>
           </Box>
         ),
@@ -115,17 +99,13 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
     [router]
   );
 
-  const currentCategory = (
-    articleCategory.includes(router.query.categorie as ArticleCategoryType)
-      ? router.query.categorie
-      : articleCategory[0]
-  ) as ArticleCategoryType;
+  const currentCategory = (articleCategory.includes(router.query.categorie as ArticleCategoryType) ? router.query.categorie : articleCategory[0]) as ArticleCategoryType;
 
   return (
     <Layout {...commonTexts.articles_metadata} lastGenerated={lastGenerated}>
-      <Box backgroundColor="white" py={{ _: 4, md: 5 }}>
-        <MaxWidth px={{ _: 3, lg: 4 }}>
-          <Box pb={2}>
+      <Box backgroundColor="white" paddingY={{ _: space[4], md: space[5] }}>
+        <MaxWidth paddingX={{ _: space[3], lg: space[4] }}>
+          <Box paddingBottom={space[2]}>
             <Heading level={2} as="h1">
               {textShared.secties.artikelen.titel}
             </Heading>
@@ -136,11 +116,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
           {breakpoints.lg ? (
             <OrderedList>
               {articleCategories.map((category, index) => (
-                <ListItem
-                  key={index}
-                  isActive={currentCategory === category.value}
-                  onClick={() => handleCategoryFilter(category.value)}
-                >
+                <ListItem key={index} isActive={currentCategory === category.value} onClick={() => handleCategoryFilter(category.value)}>
                   <StyledButton>
                     <InlineText>{category.label}</InlineText>
                     <BoldText aria-hidden="true">{category.label}</BoldText>
@@ -150,8 +126,8 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
             </OrderedList>
           ) : (
             <Box
-              mt={3}
-              mb={4}
+              marginTop={space[3]}
+              marginBottom={space[4]}
               width="100%"
               css={css({
                 select: {
@@ -161,9 +137,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
               })}
             >
               <RichContentSelect
-                label={
-                  textShared.secties.artikelen.categorie_select_placeholder
-                }
+                label={textShared.secties.artikelen.categorie_select_placeholder}
                 visuallyHiddenLabel
                 initialValue={currentCategory}
                 options={selectOptions}
@@ -172,11 +146,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
           )}
 
-          <ArticlesOverviewList
-            articleSummaries={content}
-            hideLink={true}
-            currentCategory={currentCategory}
-          />
+          <ArticlesOverviewList articleSummaries={content} hideLink={true} currentCategory={currentCategory} />
         </MaxWidth>
       </Box>
     </Layout>
@@ -194,9 +164,9 @@ const OrderedList = styled.ol(
     borderTop: '1px solid',
     borderBottom: '1px solid',
     borderColor: 'gray3',
-    m: 0,
-    my: 4,
-    p: 0,
+    margin: '0',
+    marginY: space[4],
+    padding: '0',
     listStyleType: 'none',
   })
 );
@@ -204,7 +174,7 @@ const OrderedList = styled.ol(
 const ListItem = styled.li<{ isActive: boolean }>((x) =>
   css({
     position: 'relative',
-    py: 3,
+    paddingY: space[3],
     height: '100%',
     transition: 'transform 0.2s',
     cursor: 'pointer',
@@ -213,8 +183,8 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
       content: '""',
       display: 'block',
       position: 'absolute',
-      left: 0,
-      bottom: 0,
+      left: '0',
+      bottom: '0',
       height: '5px',
       width: `calc(100%)`,
       backgroundColor: 'blue8',
@@ -251,7 +221,7 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
 const BoldText = styled.span(
   css({
     position: 'absolute',
-    top: 0,
+    top: '0',
     left: '50%',
     fontWeight: 'bold',
     opacity: 0,
@@ -264,7 +234,7 @@ const StyledButton = styled.button(
   css({
     all: 'unset',
     position: 'relative',
-    px: 3,
+    paddingX: space[3],
 
     '&:focus': {
       outlineWidth: '1px',

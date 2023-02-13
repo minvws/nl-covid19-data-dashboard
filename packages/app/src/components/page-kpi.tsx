@@ -1,11 +1,8 @@
-import {
-  getLastFilledValue,
-  Metric,
-  MetricKeys,
-} from '@corona-dashboard/common';
+import { getLastFilledValue, Metric, MetricKeys } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { KpiValue } from '~/components/kpi-value';
+import { space } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { Box } from './base';
 import { TileAverageDifference, TileDifference } from './difference-indicator';
@@ -32,21 +29,9 @@ type DifferenceProps =
 
 type PageKpiProps<T> = PageKpiBaseProps<T> & DifferenceProps;
 
-export const metricNamesHoldingPartialData = [
-  'infectious_people',
-  'reproduction',
-];
+export const metricNamesHoldingPartialData = ['infectious_people', 'reproduction'];
 
-export function PageKpi<T>({
-  data,
-  metricName,
-  metricProperty,
-  differenceKey,
-  differenceFractionDigits,
-  isMovingAverageDifference,
-  showOldDateUnix,
-  isAmount,
-}: PageKpiProps<T>) {
+export function PageKpi<T>({ data, metricName, metricProperty, differenceKey, differenceFractionDigits, isMovingAverageDifference, showOldDateUnix, isAmount }: PageKpiProps<T>) {
   /**
    * @TODO this is still a bit messy due to improper typing. Not sure how to
    * fix this easily. The getLastFilledValue function is now strongly typed on
@@ -58,55 +43,32 @@ export function PageKpi<T>({
 
   const propertyValue = lastValue[metricProperty];
 
-  assert(
-    isDefined(propertyValue),
-    `[${PageKpi.name}] Missing value for metric property ${[
-      metricName,
-      'last_value',
-      metricProperty,
-    ]
-      .filter(isDefined)
-      .join(':')}`
-  );
+  assert(isDefined(propertyValue), `[${PageKpi.name}] Missing value for metric property ${[metricName, 'last_value', metricProperty].filter(isDefined).join(':')}`);
 
-  const differenceValue = differenceKey
-    ? get(data, ['difference', differenceKey as unknown as string])
-    : undefined;
+  const differenceValue = differenceKey ? get(data, ['difference', differenceKey as unknown as string]) : undefined;
 
   if (differenceKey) {
     /**
      * If you pass in a difference key, it should exist
      */
-    assert(
-      isDefined(differenceValue),
-      `[${PageKpi.name}] Missing value for difference:${differenceKey}`
-    );
+    assert(isDefined(differenceValue), `[${PageKpi.name}] Missing value for difference:${differenceKey}`);
   }
 
   const hasDifference = isDefined(differenceKey) || isDefined(differenceValue);
 
   return (
-    <Box spacing={0} mb={hasDifference ? 3 : 0}>
+    <Box spacing={0} marginBottom={hasDifference ? space[3] : '0'}>
       <KpiValue absolute={propertyValue} />
 
       {isDefined(differenceKey) &&
         isDefined(isAmount) &&
         (isMovingAverageDifference ? (
-          <Box pt={2}>
-            <TileAverageDifference
-              value={differenceValue}
-              isAmount={isAmount}
-              maximumFractionDigits={differenceFractionDigits}
-            />
+          <Box paddingTop={space[2]}>
+            <TileAverageDifference value={differenceValue} isAmount={isAmount} maximumFractionDigits={differenceFractionDigits} />
           </Box>
         ) : isDefined(differenceValue) ? (
-          <Box pt={2}>
-            <TileDifference
-              value={differenceValue}
-              maximumFractionDigits={differenceFractionDigits}
-              showOldDateUnix={showOldDateUnix}
-              isAmount={isAmount}
-            />
+          <Box paddingTop={space[2]}>
+            <TileDifference value={differenceValue} maximumFractionDigits={differenceFractionDigits} showOldDateUnix={showOldDateUnix} isAmount={isAmount} />
           </Box>
         ) : null)}
     </Box>
