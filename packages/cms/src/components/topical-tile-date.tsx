@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
 import { withDocument } from 'part:@sanity/form-builder';
 import { getTopicalTileDateConfig } from '../hooks/get-topical-tile-date-config';
+import PatchEvent, { set } from '@sanity/form-builder/PatchEvent';
 import { FormField } from '@sanity/base/components';
 import { TextInput } from '@sanity/ui';
 
 const ShowDate = (props: any) => {
   const dateConfig = props.document.themeTileDateConfig;
+  const { type, markers, presence, onChange } = props;
   const formattedDate = !(dateConfig?.isoWeekOffset && dateConfig?.startDayOfDate && dateConfig?.timeSpanInDays)
     ? ''
-    : getTopicalTileDateConfig({ config: dateConfig, inputDate: new Date() });
-  const [value, setValue] = useState(formattedDate);
+    : getTopicalTileDateConfig({ config: dateConfig, inputDate: new Date(), language: type.title });
 
-  const { type, markers, presence } = props;
+  const initFormattedDateValue = set(formattedDate);
+  onChange(PatchEvent.from(initFormattedDateValue));
+  const [value, setValue] = useState('');
 
   const handleChange = (event: any) => {
-    const inputValue = event.currentTarget.value;
-    setValue(inputValue === '' ? formattedDate : inputValue);
+    const inputValue = event.target.value;
+    const newValue = inputValue === '' ? formattedDate : inputValue;
+    const patchEventValue = set(newValue);
+    setValue(newValue);
+    onChange(PatchEvent.from(patchEventValue));
   };
 
   return (
     <FormField description={formattedDate} title={type.title} __unstable_markers={markers} __unstable_presence={presence}>
-      <TextInput onChange={handleChange} value={value} />
+      <TextInput onChange={handleChange} value={value === '' ? formattedDate : value} />
     </FormField>
   );
 };

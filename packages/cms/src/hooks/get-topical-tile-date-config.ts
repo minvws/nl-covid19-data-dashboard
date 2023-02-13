@@ -1,11 +1,5 @@
 import { createFormatting } from '@corona-dashboard/common';
 
-const { formatDateFromMilliseconds } = createFormatting('nl-NL', {
-  date_day_before_yesterday: 'eergisteren',
-  date_today: 'vandaag',
-  date_yesterday: 'gisteren',
-});
-
 export interface ThemeTileDateConfig {
   isoWeekOffset: number;
   startDayOfDate: 0 | 1 | 2 | 3 | 4 | 5 | 6;
@@ -18,12 +12,21 @@ export interface ThemeTileDateConfig {
 export type TopicalDateConfig = {
   config: ThemeTileDateConfig;
   inputDate?: Date;
+  language: 'Nederlands' | 'Engels';
 };
+
+const languages = { Nederlands: 'nl-NL', Engels: 'en-US' };
 
 const dayInMiliseconds = 86400000;
 const weekInMiliseconds = 604800000;
 
-export const getTopicalTileDateConfig = ({ config, inputDate = new Date() }: TopicalDateConfig): string => {
+export const getTopicalTileDateConfig = ({ config, inputDate = new Date(), language }: TopicalDateConfig): string => {
+  const { formatDateFromMilliseconds } = createFormatting(languages[language], {
+    date_day_before_yesterday: 'eergisteren',
+    date_today: 'vandaag',
+    date_yesterday: 'gisteren',
+  });
+
   // Get the current index of the day of the week for the given input date.
   // Startting with Sunday as index 0 and saturday as index 6
   // Sunday = 0

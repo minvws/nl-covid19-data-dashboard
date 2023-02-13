@@ -1,6 +1,7 @@
 import { KpiIconInput } from '../../components/portable-text/kpi-configuration/kpi-icon-input';
 import { REQUIRED } from '../../validation';
 import { TopicalTileDate } from '../../components/topical-tile-date';
+import { supportedLanguages } from '../../language/supported-languages';
 
 export const themeTile = {
   type: 'document',
@@ -63,9 +64,14 @@ export const themeTile = {
     },
     {
       title: 'Tegel datum',
-      inputComponent: TopicalTileDate,
       name: 'tileDate',
-      type: 'localeString',
+      type: 'object',
+      fields: supportedLanguages.map((lang) => ({
+        title: lang.title,
+        name: lang.id,
+        type: 'string',
+        inputComponent: TopicalTileDate,
+      })),
     },
     {
       title: 'Configuratie velden',
