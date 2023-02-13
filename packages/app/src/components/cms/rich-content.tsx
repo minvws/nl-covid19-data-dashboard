@@ -25,7 +25,7 @@ import { assert } from '~/utils/assert';
 import { isInternalUrl } from '~/utils/is-internal-url';
 import { Link } from '~/utils/link';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
-import { Heading } from '../typography';
+import { Heading, InlineText } from '../typography';
 import { ContentImage } from './content-image';
 import { InlineAgeDemographic } from './inline-age-demographic';
 import { InlineChoropleth } from './inline-choropleth';
@@ -34,6 +34,7 @@ import { InlineKpi } from './inline-kpi';
 import { InlineTimeSeriesCharts } from './inline-time-series-charts';
 import { ChevronRight, Download, External as ExternalLinkIcon } from '@corona-dashboard/icons';
 import { space } from '~/style/theme';
+import { replaceVariablesInText } from '~/utils';
 
 type ElementAlignment = 'start' | 'center' | 'end' | 'stretch';
 
@@ -42,6 +43,7 @@ interface RichContentProps {
   contentWrapper?: FunctionComponent;
   imageSizes?: string[][];
   elementAlignment?: ElementAlignment;
+  variableValue?: string | false;
 }
 
 interface ChartConfigNode {
@@ -80,7 +82,7 @@ interface KpisConfigNode {
   kpis: KpiConfigNode[];
 }
 
-export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignment }: RichContentProps) {
+export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignment, variableValue }: RichContentProps) {
   const ContentWrapper = contentWrapper ?? Fragment;
   const serializers = {
     types: {
@@ -225,6 +227,19 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
     marks: {
       inlineAttachment: InlineAttachmentMark,
       link: InlineLinkMark,
+      richContentVariable: (props: { children: [] }) => {
+        const { children } = props;
+        if (!children) {
+          return <>{children}</>;
+        }
+        return children.map((child: string, index: number) => {
+          if (child === '' || !variableValue) {
+            return <>{child}</>;
+          }
+          const replacedText = replaceVariablesInText(child as string, { kpiValue: variableValue as string });
+          return <InlineText key={index}>{replacedText}</InlineText>;
+        });
+      },
     },
   };
 

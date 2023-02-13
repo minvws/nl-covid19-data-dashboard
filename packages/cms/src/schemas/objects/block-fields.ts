@@ -22,6 +22,19 @@ export const blockFields = [
         { title: 'Strong', value: 'strong' },
         { title: 'Emphasis', value: 'em' },
         { title: 'Underline', value: 'u' },
+        {
+          title: 'Sup',
+          value: 'sup',
+          blockEditor: {
+            icon: () => {
+              return 'Variable';
+            },
+            render: (val: any) => {
+              console.log(val.children.props.text.text);
+              return val.children.props.text.text;
+            },
+          },
+        },
       ],
       annotations: [
         {
@@ -47,6 +60,18 @@ export const blockFields = [
           type: 'file',
           title: 'Bestand uploaden',
           icon: MdAttachFile,
+        },
+        {
+          name: 'richContentVariable',
+          type: 'object',
+          title: 'Rich content variable',
+          fields: [
+            {
+              name: 'Variable naam',
+              type: 'string',
+              title: 'variableName',
+            },
+          ],
         },
       ],
     },
