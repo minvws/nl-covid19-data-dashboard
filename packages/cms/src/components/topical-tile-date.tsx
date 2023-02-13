@@ -8,9 +8,8 @@ import { TextInput } from '@sanity/ui';
 const ShowDate = (props: any) => {
   const dateConfig = props.document.themeTileDateConfig;
   const { type, markers, presence, onChange } = props;
-  const formattedDate = !(dateConfig?.isoWeekOffset && dateConfig?.startDayOfDate && dateConfig?.timeSpanInDays)
-    ? ''
-    : getTopicalTileDateConfig({ config: dateConfig, inputDate: new Date(), language: type.title });
+  const validConfig = (dateConfig?.isoWeekOffset && dateConfig?.startDayOfDate && dateConfig?.timeSpanInDays) || dateConfig?.startDayOfDate === 0;
+  const formattedDate = !validConfig ? '' : getTopicalTileDateConfig({ config: dateConfig, inputDate: new Date(), language: type.title });
 
   const initFormattedDateValue = set(formattedDate);
   onChange(PatchEvent.from(initFormattedDateValue));
