@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { space } from '~/style/theme';
-import { asResponsiveArray } from '~/style/utils';
+import { mediaQueries, space } from '~/style/theme';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { useSearchContext } from './context';
 import { HitList } from './hit-list';
@@ -22,8 +21,17 @@ const StyledSearchResults = styled.div`
   padding: 1em 0;
   position: relative;
   display: flex;
-  flex-direction: ${asResponsiveArray({ _: 'column', sm: 'row' })};
+  flex-direction: column;
+
+  @media ${mediaQueries.sm} {
+    flex-direction: row;
+  }
+
   & > :not(:last-child): {
-    margin-bottom: ${asResponsiveArray({ _: space[5], xs: '0' })};
+    margin-bottom: ${space[5]};
+
+    @media ${mediaQueries.xs} {
+      margin-bottom: 0;
+    }
   }
 `;

@@ -7,7 +7,7 @@ import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
-import { space } from '~/style/theme';
+import { mediaQueries, space } from '~/style/theme';
 
 interface AnchorTileProps {
   title: string;
@@ -56,11 +56,18 @@ export const IconWrapper = styled.span(
 );
 
 const Container = styled.article`
+  border-top: 2px solid ${colors.gray2};
   display: flex;
-  padding-top: ${asResponsiveArray({ _: space[2], sm: space[3] })};
-  padding-bottom: ${asResponsiveArray({ _: space[3], sm: space[4] })};
-  flex-direction: ${asResponsiveArray({ _: 'column', lg: 'row' })};
-  border-top: solid 2px ${colors.gray2};
+  flex-direction: column;
+  padding-block: ${space[2]} ${space[3]};
+
+  @media ${mediaQueries.sm} {
+    padding-block: ${space[3]} ${space[4]};
+  }
+
+  @media ${mediaQueries.lg} {
+    flex-direction: row;
+  }
 `;
 
 const Content = styled.div(
