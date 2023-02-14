@@ -1,11 +1,18 @@
 import React, { FormEvent, useState } from 'react';
 import { withDocument } from 'part:@sanity/form-builder';
-import { getTopicalTileDateConfig } from '../hooks/get-topical-tile-date-config';
+import { getTopicalTileDateConfig, ThemeTileDateConfig } from '../hooks/get-topical-tile-date-config';
 import PatchEvent, { set } from '@sanity/form-builder/PatchEvent';
-import { FormField } from '@sanity/base/components';
+import { FormField, FormFieldProps } from '@sanity/base/components';
 import { TextInput } from '@sanity/ui';
+import { ValidationMarker } from '@sanity/types/dist/dts';
 
-const ShowDate = (props: any) => {
+const ShowDate = (props: {
+  type: { title: 'Nederlands' | 'Engels' };
+  markers: ValidationMarker[];
+  presence: FormFieldProps['__unstable_presence'];
+  onChange: any;
+  document: { themeTileDateConfig: ThemeTileDateConfig };
+}) => {
   const {
     type,
     markers,
