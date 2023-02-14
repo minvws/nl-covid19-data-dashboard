@@ -58,7 +58,7 @@ export const themeTile = {
     },
     {
       title: 'Metadata label',
-      description: `Deze tekst wordt gebruikt inplaats van de variabele {{date}}:`,
+      description: 'Bij {{DATE}} wordt de tekst geplaatst van het tegeldatum veld. Deze kan handmatig overschreven worden.',
       name: 'sourceLabel',
       type: 'localeString',
     },

@@ -38,14 +38,14 @@ export const themeTileDateConfig = {
   title: 'Trend icon',
   fields: [
     {
-      title: 'Hoe veel weken geleden start de datum?',
+      title: 'Hoe veel weken geleden is de start van de datum?',
       description: '',
       name: 'weekOffset',
       type: 'number',
       validation: (rule: Rule) => rule.required().min(0),
     },
     {
-      title: 'Dag van de week',
+      title: 'Startdag van de week',
       name: 'startDayOfDate',
       options: {
         list: DAYS_OF_THE_WEEK_LIST,
@@ -56,6 +56,7 @@ export const themeTileDateConfig = {
     },
     {
       title: 'Hoeveelheid dagen',
+      description: '(1 dag of bereik van – tot)',
       name: 'timeSpanInDays',
       type: 'number',
       validation: (rule: Rule) => rule.required().min(1),
