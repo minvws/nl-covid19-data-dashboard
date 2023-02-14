@@ -43,6 +43,7 @@ export function getTopicalStructureQuery(locale: string) {
             'title':title.${locale},
             'sourceLabel':sourceLabel.${locale},
             'kpiValue': kpiValue.${locale},
+            'hideTrendIcon': hideTrendIcon,
             'trendIcon': {
               'color': trendIcon.color,
               'direction': trendIcon.direction,
