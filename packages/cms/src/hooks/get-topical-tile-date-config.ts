@@ -1,7 +1,7 @@
 import { createFormatting } from '@corona-dashboard/common';
 
 export interface ThemeTileDateConfig {
-  isoWeekOffset: number;
+  weekOffset: number;
   startDayOfDate: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   timeSpanInDays: number;
 }
@@ -50,11 +50,11 @@ export const getTopicalTileDateConfig = ({ config, inputDate = new Date(), langu
   // If not, add 1 week to the offset and calculate the amount of milliseconds for that offset
   // This is done because: if the offset is from last wedsnesday too the one before last wednesday.
   // We need to check if wedsneday already happened. Otherwise we need to add another week
-  const millisecondsPassedSinceIsoWeekOffset = config.startDayOfDate > inputDateWeekDay ? (config.isoWeekOffset + 1) * weekInMiliseconds : config.isoWeekOffset * weekInMiliseconds;
+  const millisecondsPassedSinceWeekOffset = config.startDayOfDate > inputDateWeekDay ? (config.weekOffset + 1) * weekInMiliseconds : config.weekOffset * weekInMiliseconds;
 
   // Now we set the start of the week by having the weekday of the given input added to the week offset.
   // Basicly this always sets the week offset in milliseconds to the sunday of that week in the past.
-  const startOfTheWeekInMilliSecondsPassed = millisecondsPassedSinceIsoWeekOffset + inputDateWeekDay * dayInMiliseconds;
+  const startOfTheWeekInMilliSecondsPassed = millisecondsPassedSinceWeekOffset + inputDateWeekDay * dayInMiliseconds;
 
   // get the milliseconds offset from the given input date weekday to the previous sunday.
   const millisecondsPassedSinceSunday = config.startDayOfDate * dayInMiliseconds;
@@ -63,10 +63,10 @@ export const getTopicalTileDateConfig = ({ config, inputDate = new Date(), langu
   const timespanLengthInMiliseconds = (config.timeSpanInDays - 1) * dayInMiliseconds;
 
   // convert the weeks past in seconds to the actual date in milliseconds
-  const dateOfStartIsoWeek = inputDateInUnixTime - startOfTheWeekInMilliSecondsPassed;
+  const dateOfStartWeek = inputDateInUnixTime - startOfTheWeekInMilliSecondsPassed;
 
   // get form the sunday from the week to start to the day of the week that needs to be dsiplayed.
-  const startDate = dateOfStartIsoWeek + millisecondsPassedSinceSunday;
+  const startDate = dateOfStartWeek + millisecondsPassedSinceSunday;
 
   // Get the end date by adding the millisecond of the timespan to the start date.
   const endDate = startDate + timespanLengthInMiliseconds;

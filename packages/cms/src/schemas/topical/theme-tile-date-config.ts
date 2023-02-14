@@ -38,9 +38,9 @@ export const themeTileDateConfig = {
   title: 'Trend icon',
   fields: [
     {
-      title: 'Iso week offset', // change to how many weeks ago is the start date? Instead of iso offset.
+      title: 'Hoe veel weken geleden start de datum?',
       description: '',
-      name: 'isoWeekOffset',
+      name: 'weekOffset',
       type: 'number',
       validation: (rule: Rule) => rule.required().min(0),
     },
