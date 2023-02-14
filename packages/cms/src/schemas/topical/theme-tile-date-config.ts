@@ -35,17 +35,15 @@ const DAYS_OF_THE_WEEK_LIST = [
 export const themeTileDateConfig = {
   name: 'themeTileDateConfig',
   type: 'document',
-  title: 'Trend icon',
   fields: [
     {
-      title: 'Hoe veel weken geleden is de start van de datum?',
-      description: '',
+      title: 'Hoeveel weken geleden was de startdatum?',
       name: 'weekOffset',
       type: 'number',
       validation: (rule: Rule) => rule.required().min(0),
     },
     {
-      title: 'Startdag van de week',
+      title: 'Op welke dat van week start de datum?',
       name: 'startDayOfDate',
       options: {
         list: DAYS_OF_THE_WEEK_LIST,

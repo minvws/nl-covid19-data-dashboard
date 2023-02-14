@@ -25,7 +25,7 @@ const ShowDate = (props: any) => {
   };
 
   return (
-    <FormField description={formattedDate} title={type.title} __unstable_markers={markers} __unstable_presence={presence}>
+    <FormField description={`Het resultaat van de tegeldatum-configuratie is: ${formattedDate}`} title={type.title} __unstable_markers={markers} __unstable_presence={presence}>
       <TextInput onChange={handleChange} value={value === '' ? formattedDate : value} />
     </FormField>
   );
