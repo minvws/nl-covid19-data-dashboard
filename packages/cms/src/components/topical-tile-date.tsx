@@ -6,11 +6,15 @@ import { FormField } from '@sanity/base/components';
 import { TextInput } from '@sanity/ui';
 
 const ShowDate = (props: any) => {
-  const dateConfig = props.document.themeTileDateConfig;
-  const { type, markers, presence, onChange } = props;
-  const validConfig = dateConfig?.startDayOfDate >= 0 && dateConfig?.weekOffset >= 0 && dateConfig?.timeSpanInDays >= 1;
-  console.log(validConfig);
-  const formattedDate = !validConfig ? '' : getTopicalTileDateConfig({ config: dateConfig, inputDate: new Date(), language: type.title });
+  const {
+    type,
+    markers,
+    presence,
+    onChange,
+    document: { themeTileDateConfig: dateConfig },
+  } = props;
+  const isConfigValid = dateConfig?.startDayOfDate >= 0 && dateConfig?.weekOffset >= 0 && dateConfig?.timeSpanInDays >= 1;
+  const formattedDate = !isConfigValid ? '' : getTopicalTileDateConfig({ config: dateConfig, inputDate: new Date(), language: type.title });
 
   const initFormattedDateValue = set(formattedDate);
   onChange(PatchEvent.from(initFormattedDateValue));
