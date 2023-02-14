@@ -15,13 +15,13 @@ export type TopicalDateConfig = {
   language: 'Nederlands' | 'Engels';
 };
 
-const languages = { Nederlands: 'nl-NL', Engels: 'en-US' };
+const languages = { Nederlands: 'nl-NL', Engels: 'en-GB' };
 
 const dayInMiliseconds = 86400000;
 const weekInMiliseconds = 604800000;
 
 export const getTopicalTileDateConfig = ({ config, inputDate = new Date(), language }: TopicalDateConfig): string => {
-  const { formatDateFromMilliseconds } = createFormatting(languages[language], {
+  const { formatDateFromMilliseconds, formatDateSpan } = createFormatting(languages[language], {
     date_day_before_yesterday: 'eergisteren',
     date_today: 'vandaag',
     date_yesterday: 'gisteren',
@@ -72,6 +72,6 @@ export const getTopicalTileDateConfig = ({ config, inputDate = new Date(), langu
   const endDate = startDate + timespanLengthInMiliseconds;
 
   // Check if timespan is greater than one day. Or it's just a single day. create the return object.
-  const dateResult = config.timeSpanInDays === 1 ? formatDateFromMilliseconds(startDate) : `${formatDateFromMilliseconds(startDate)} - ${formatDateFromMilliseconds(endDate)}`;
+  const dateResult = config.timeSpanInDays === 1 ? formatDateFromMilliseconds(startDate, 'medium') : formatDateSpan(new Date(startDate), new Date(endDate), 'medium').join(' - ');
   return dateResult;
 };
