@@ -27,29 +27,33 @@ export const getTopicalTileDateConfig = ({ config, inputDate = new Date(), langu
     date_yesterday: 'gisteren',
   });
 
-  // Get the current index of the day of the week for the given input date.
-  // Startting with Sunday as index 0 and saturday as index 6
-  // Sunday = 0
-  // Monday = 1
-  // Tuesday = 2
-  // Wednesday = 3
-  // Thursday = 4
-  // Friday = 5
-  // Saturday = 6
+  /**
+   * Get the current index of the day of the week for the given input date.
+   * Startting with Sunday as index 0 and saturday as index 6
+   * Sunday = 0
+   * Monday = 1
+   * Tuesday = 2
+   * Wednesday = 3
+   * Thursday = 4
+   * Friday = 5
+   * Saturday = 6
+   */
   const inputDateWeekDay = inputDate.getDay();
 
   // Get the unix timestamp for the given input date.
   const inputDateInUnixTime = inputDate.getTime();
 
-  // Calulate how many milliseconds ago a IsoIndex was.
-  // (This would not be the data of that week.
-  // But the milliseconds passed since that week until the given input date.)
-  //
-  // Check if the weekday of given input date already passed the start day in the config.
-  // If so, calculate how many milliseconds ago the
-  // If not, add 1 week to the offset and calculate the amount of milliseconds for that offset
-  // This is done because: if the offset is from last wedsnesday too the one before last wednesday.
-  // We need to check if wedsneday already happened. Otherwise we need to add another week
+  /**
+   * Calulate how many milliseconds ago a IsoIndex was.
+   * (This would not be the data of that week.
+   * But the milliseconds passed since that week until the given input date.)
+   *
+   * Check if the weekday of given input date already passed the start day in the config.
+   * If so, calculate how many milliseconds ago the
+   * If not, add 1 week to the offset and calculate the amount of milliseconds for that offset
+   * This is done because: if the offset is from last wedsnesday too the one before last wednesday.
+   * We need to check if wedsneday already happened. Otherwise we need to add another week
+   */
   const millisecondsPassedSinceWeekOffset = config.startDayOfDate > inputDateWeekDay ? (config.weekOffset + 1) * weekInMiliseconds : config.weekOffset * weekInMiliseconds;
 
   // Now we set the start of the week by having the weekday of the given input added to the week offset.
