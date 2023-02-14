@@ -29,7 +29,7 @@ export const getTopicalTileDateConfig = ({ config, inputDate = new Date(), langu
 
   /**
    * Get the current index of the day of the week for the given input date.
-   * Startting with Sunday as index 0 and saturday as index 6
+   * Starting with Sunday as index 0 and Saturday as index 6
    * Sunday = 0
    * Monday = 1
    * Tuesday = 2
