@@ -194,6 +194,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     marginBottom={{ _: space[4], sm: space[5] }}
                   >
                     {theme.tiles.map((themeTile) => {
+                      const sourceLabel = themeTile.sourceLabel ? replaceVariablesInText(themeTile.sourceLabel, { date: themeTile.tileDate }) : null;
                       return (
                         <TopicalTile
                           trendIcon={themeTile.trendIcon}
@@ -203,7 +204,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           cta={themeTile.cta}
                           key={themeTile.title}
                           kpiValue={themeTile.kpiValue}
-                          sourceLabel={themeTile.sourceLabel}
+                          sourceLabel={sourceLabel}
                         />
                       );
                     })}

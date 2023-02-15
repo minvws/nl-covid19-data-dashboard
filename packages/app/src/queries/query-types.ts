@@ -86,6 +86,7 @@ export interface BaseTile {
 interface TopicalTile extends BaseTile {
   title: string;
   sourceLabel: string | null;
+  tileDate: string;
   kpiValue: string | null;
   cta: Cta;
   trendIcon: TrendIcon;

@@ -4,6 +4,7 @@ export * from './theme-collection';
 export * from './theme-link';
 export * from './theme-link-collection';
 export * from './theme-tile';
+export * from './theme-tile-date-config';
 export * from './theme-tile-collection';
 export * from './measure-theme';
 export * from './measure-tile';
