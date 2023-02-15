@@ -66,8 +66,8 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-       "parts": ${getPagePartsQuery('positive_tests_page')},
-       "elements": ${getElementsQuery('gm', ['tested_overall'], locale)}
+        "parts": ${getPagePartsQuery('positive_tests_page')},
+        "elements": ${getElementsQuery('gm', ['tested_overall'], locale)}
       }`;
     })(context);
     return {
@@ -219,18 +219,18 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               description={
                 <>
                   <Markdown content={textGm.map_toelichting} />
-                  <BoldText variant="body2">
-                    {replaceComponentsInText(textGm.map_last_value_text, {
-                      infected_per_100k: <InlineText color="data.primary">{`${formatNumber(lastValue.infected_per_100k)}`}</InlineText>,
+                  <Markdown
+                    content={replaceVariablesInText(textGm.map_last_value_text__renamed, {
+                      infected_per_100k: formatNumber(lastValue.infected_per_100k),
                       municipality: municipalityName,
                     })}
-                  </BoldText>
-                  <BoldText variant="body2">
-                    {replaceComponentsInText(textGm.map_safety_region_last_value_text, {
-                      infected_per_100k: <InlineText color="data.primary">{`${formatNumber(vrData?.infected_per_100k)}`}</InlineText>,
+                  />
+                  <Markdown
+                    content={replaceVariablesInText(textGm.map_safety_region_last_value_text__renamed, {
+                      infected_per_100k: formatNumber(vrData?.infected_per_100k),
                       safetyRegion: vrForMunicipality?.name,
                     })}
-                  </BoldText>
+                  />
                 </>
               }
               legend={{
