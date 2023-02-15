@@ -43,7 +43,7 @@ export const themeTileDateConfig = {
       validation: (rule: Rule) => rule.required().min(0),
     },
     {
-      title: 'Op welke dat van week start de datum?',
+      title: 'Op welke dag van de week start de datum?',
       name: 'startDayOfDate',
       options: {
         list: DAYS_OF_THE_WEEK_LIST,

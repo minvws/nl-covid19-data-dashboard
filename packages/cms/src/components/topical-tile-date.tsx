@@ -6,13 +6,15 @@ import { FormField, FormFieldProps } from '@sanity/base/components';
 import { TextInput } from '@sanity/ui';
 import { ValidationMarker } from '@sanity/types/dist/dts';
 
-const ShowDate = (props: {
+type ShowDateProps = {
   type: { title: 'Nederlands' | 'Engels' };
   markers: ValidationMarker[];
   presence: FormFieldProps['__unstable_presence'];
-  onChange: any;
+  onChange: (event: PatchEvent) => void;
   document: { themeTileDateConfig: ThemeTileDateConfig };
-}) => {
+};
+
+const ShowDate = (props: ShowDateProps) => {
   const {
     type,
     markers,
