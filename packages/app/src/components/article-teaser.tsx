@@ -1,4 +1,3 @@
-/* eslint-disable */
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -10,7 +9,6 @@ import { Link } from '~/utils/link';
 import { BackgroundImage } from './background-image';
 import { Box } from './base';
 import { Anchor, Heading, Text, BoldText } from './typography';
-import { getImageProps } from '~/lib/sanity';
 
 export type ArticleSummary = Pick<Article, 'title' | 'slug' | 'summary' | 'cover' | 'category' | 'categories'>;
 
@@ -26,15 +24,12 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
   const { title, slug, summary, cover, coverSizes } = props;
   const { commonTexts } = useIntl();
 
-  const { src } = getImageProps(cover, {});
-
   return (
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledArticleTeaser>
         {cover.asset && (
           <ZoomContainer height="200px">
-            {/* <BackgroundImage image={cover} height="200px" sizes={coverSizes} /> */}
-            <img src={src} />
+            <BackgroundImage image={cover} height="200px" sizes={coverSizes} />
           </ZoomContainer>
         )}
 
