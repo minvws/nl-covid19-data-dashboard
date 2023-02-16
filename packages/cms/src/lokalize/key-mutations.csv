@@ -9,7 +9,5 @@ timestamp,action,key,document_id,move_to
 2023-02-10T14:27:20.288Z,add,pages.positive_tests_page.shared.tooltip_labels.ggd_tested_total_moving_average__renamed,xjLKnlFrh2WM7l3TeFR9rD,__
 2023-02-10T14:27:20.295Z,delete,pages.positive_tests_page.shared.tooltip_labels.ggd_infected_percentage,jF33EuwumlGuwav2FD3Zd6,__
 2023-02-10T14:27:20.301Z,delete,pages.positive_tests_page.shared.tooltip_labels.ggd_tested_total_moving_average,6s2ymgdY1hbg7zMfb8Z5wD,__
-2023-02-15T15:31:58.572Z,add,pages.positive_tests_page.gm.map_last_value_text__renamed,cQD0A3OGksV3pY6pYGz5LJ,__
-2023-02-15T15:31:59.442Z,add,pages.positive_tests_page.gm.map_safety_region_last_value_text__renamed,xjLKnlFrh2WM7l3TehfRNX,__
-2023-02-15T15:47:31.649Z,delete,pages.positive_tests_page.gm.map_last_value_text,Hpcrbv9k01wdsU0EheZaiI,__
-2023-02-15T15:47:31.651Z,delete,pages.positive_tests_page.gm.map_safety_region_last_value_text,0ztyMU2xVVOl2tFNiaUuSE,__
+2023-02-16T10:12:52.969Z,delete,pages.positive_tests_page.gm.map_last_value_text__renamed,cQD0A3OGksV3pY6pYGz5LJ,__
+2023-02-16T10:12:52.970Z,delete,pages.positive_tests_page.gm.map_safety_region_last_value_text__renamed,xjLKnlFrh2WM7l3TehfRNX,__

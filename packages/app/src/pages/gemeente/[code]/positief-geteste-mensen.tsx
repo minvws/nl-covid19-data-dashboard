@@ -220,13 +220,13 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 <>
                   <Markdown content={textGm.map_toelichting} />
                   <Markdown
-                    content={replaceVariablesInText(textGm.map_last_value_text__renamed, {
+                    content={replaceVariablesInText(textGm.map_last_value_text, {
                       infected_per_100k: formatNumber(lastValue.infected_per_100k),
                       municipality: municipalityName,
                     })}
                   />
                   <Markdown
-                    content={replaceVariablesInText(textGm.map_safety_region_last_value_text__renamed, {
+                    content={replaceVariablesInText(textGm.map_safety_region_last_value_text, {
                       infected_per_100k: formatNumber(vrData?.infected_per_100k),
                       safetyRegion: vrForMunicipality?.name,
                     })}
