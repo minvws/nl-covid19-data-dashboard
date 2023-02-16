@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { Box } from '~/components/base';
-import { Text, InlineText, BoldText } from '~/components/typography';
+import { Text } from '~/components/typography';
 import {
   ChartTile,
   DynamicChoropleth,
@@ -143,12 +143,12 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               <Markdown content={textGm.infected_kpi.description} />
 
               <Box spacing={3}>
-                <BoldText variant="body2">
-                  {replaceComponentsInText(textGm.infected_kpi.last_value_text, {
-                    infected: <InlineText color="data.primary">{`${formatNumber(lastValue.infected)}`}</InlineText>,
+                <Markdown
+                  content={replaceVariablesInText(textGm.infected_kpi.last_value_text, {
+                    infected: formatNumber(lastValue.infected),
                     dateTo: formatDateFromSeconds(lastValue.date_unix, 'weekday-long'),
                   })}
-                </BoldText>
+                />
                 {textGm.infected_kpi.link_cta && <Markdown content={textGm.infected_kpi.link_cta} />}
               </Box>
             </KpiTile>
