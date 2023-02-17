@@ -1,36 +1,34 @@
 import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { useState } from 'react';
 import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
+import { useState } from 'react';
 import { Box } from '~/components/base';
-import { Text } from '~/components/typography';
-import {
-  ChartTile,
-  DynamicChoropleth,
-  TwoKpiSection,
-  ChoroplethTile,
-  TimeSeriesChart,
-  TileList,
-  InView,
-  CollapsibleContent,
-  KpiTile,
-  KpiValue,
-  Markdown,
-  PageInformationBlock,
-} from '~/components';
+import { ChartTile } from '~/components/chart-tile';
+import { DynamicChoropleth } from '~/components/choropleth';
+import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { Layout, GmLayout } from '~/domain/layout';
+import { CollapsibleContent } from '~/components/collapsible/collapsible-content';
+import { InView } from '~/components/in-view';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
+import { GmLayout, Layout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectGmData, getLokalizeTexts } from '~/static-props/get-data';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceComponentsInText, replaceVariablesInText, getVrForMunicipalityCode, useReverseRouter } from '~/utils';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getVrForMunicipalityCode, replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
