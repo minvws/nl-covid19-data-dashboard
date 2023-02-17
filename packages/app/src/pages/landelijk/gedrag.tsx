@@ -14,7 +14,6 @@ import { BehaviorChoroplethsTile } from '~/domain/behavior/behavior-choropleths-
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
-import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { useBehaviorLookupKeys } from '~/domain/behavior/logic/use-behavior-lookup-keys';
 import { Layout } from '~/domain/layout/layout';
@@ -228,7 +227,6 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
               text={text}
             />
           )}
-          <MoreInformation text={textShared.meer_onderzoeksresultaten} />
         </TileList>
       </NlLayout>
     </Layout>
