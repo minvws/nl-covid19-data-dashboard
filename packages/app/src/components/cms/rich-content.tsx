@@ -95,7 +95,6 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
         return <ContentWrapper>{PortableText.defaultSerializers.types.block(props)}</ContentWrapper>;
       },
       image: (props: { node: ImageBlock | RichContentImageBlock }) => <ContentImage contentWrapper={contentWrapper} sizes={imageSizes} {...props} />,
-
       inlineCollapsible: (props: { node: InlineCollapsibleList }) => {
         if (!props.node.content.inlineBlockContent) return null;
 
@@ -227,18 +226,25 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
     marks: {
       inlineAttachment: InlineAttachmentMark,
       link: InlineLinkMark,
-      richContentVariable: (props: { children: [] }) => {
+      richContentVariable: (props: { children: string[] }) => {
         const { children } = props;
         if (!children) {
           return <>{children}</>;
         }
-        return children.map((child: string, index: number) => {
-          if (child === '' || !variableValue) {
-            return <>{child}</>;
-          }
-          const replacedText = replaceVariablesInText(child as string, { kpiValue: variableValue as string });
-          return <InlineText key={index}>{replacedText}</InlineText>;
-        });
+        if (children[0] === '' || !variableValue) {
+          return <>{children[0]}</>;
+        }
+        return (
+          <InlineText>
+            {children.map((child: string) => {
+              if (child === '' || !variableValue) {
+                return <>{child}</>;
+              }
+              const replacedText = replaceVariablesInText(child as string, { kpiValue: variableValue as string });
+              return replacedText;
+            })}
+          </InlineText>
+        );
       },
     },
   };
