@@ -22,19 +22,6 @@ export const blockFields = [
         { title: 'Strong', value: 'strong' },
         { title: 'Emphasis', value: 'em' },
         { title: 'Underline', value: 'u' },
-        {
-          title: 'Sup',
-          value: 'sup',
-          blockEditor: {
-            icon: () => {
-              return 'Variable';
-            },
-            render: (val: any) => {
-              console.log(val.children.props.text.text);
-              return val.children.props.text.text;
-            },
-          },
-        },
       ],
       annotations: [
         {
@@ -70,6 +57,7 @@ export const blockFields = [
               name: 'Variable naam',
               type: 'string',
               title: 'variableName',
+              hidden: true,
             },
           ],
         },
