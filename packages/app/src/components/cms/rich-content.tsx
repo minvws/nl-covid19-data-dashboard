@@ -228,20 +228,16 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
       link: InlineLinkMark,
       richContentVariable: (props: { children: string[] }) => {
         const { children } = props;
-        if (!children) {
+        if (!children || !variableValue) {
           return <>{children}</>;
-        }
-        if (children[0] === '' || !variableValue) {
-          return <>{children[0]}</>;
         }
         return (
           <InlineText>
             {children.map((child: string) => {
-              if (child === '' || !variableValue) {
+              if (child === '') {
                 return <>{child}</>;
               }
-              const replacedText = replaceVariablesInText(child as string, { kpiValue: variableValue as string });
-              return replacedText;
+              return replaceVariablesInText(child as string, { kpiValue: variableValue as string });
             })}
           </InlineText>
         );
