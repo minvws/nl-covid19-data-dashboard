@@ -25,7 +25,7 @@ import { assert } from '~/utils/assert';
 import { isInternalUrl } from '~/utils/is-internal-url';
 import { Link } from '~/utils/link';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
-import { Heading, InlineText } from '../typography';
+import { Heading } from '../typography';
 import { ContentImage } from './content-image';
 import { InlineAgeDemographic } from './inline-age-demographic';
 import { InlineChoropleth } from './inline-choropleth';
@@ -35,6 +35,7 @@ import { InlineTimeSeriesCharts } from './inline-time-series-charts';
 import { ChevronRight, Download, External as ExternalLinkIcon } from '@corona-dashboard/icons';
 import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils';
+import React from 'react';
 
 type ElementAlignment = 'start' | 'center' | 'end' | 'stretch';
 
@@ -228,18 +229,12 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
       link: InlineLinkMark,
       richContentVariable: (props: { children: string[] }) => {
         const { children } = props;
-        if (!children || !variableValue) {
-          return <>{children}</>;
-        }
         return (
-          <InlineText>
-            {children.map((child: string) => {
-              if (child === '') {
-                return <>{child}</>;
-              }
-              return replaceVariablesInText(child as string, { kpiValue: variableValue as string });
-            })}
-          </InlineText>
+          <>
+            {children.map((child, index) => (
+              <React.Fragment key={index}>{child.includes('{{kpiValue}}') && variableValue ? replaceVariablesInText(child, { kpiValue: variableValue }) : child}</React.Fragment>
+            ))}
+          </>
         );
       },
     },
