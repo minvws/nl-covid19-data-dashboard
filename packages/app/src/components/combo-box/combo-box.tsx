@@ -7,6 +7,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import searchUrl from '~/assets/search.svg';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useThrottle } from '~/utils/use-throttle';
@@ -104,7 +105,7 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
   }, [isLargeScreen, hasRegionSelected]);
 
   return (
-    <Box role="search" css={css({ '[data-reach-combobox]': { px: 3, py: 4 } })}>
+    <Box role="search" css={css({ '[data-reach-combobox]': { paddingX: space[3], paddingY: space[4] } })}>
       <Combobox openOnFocus onSelect={handleSelect}>
         <ComboboxInput ref={inputRef} onChange={handleInputChange} onKeyDown={handleKeyDown} placeholder={placeholder} />
         <ComboboxPopover>

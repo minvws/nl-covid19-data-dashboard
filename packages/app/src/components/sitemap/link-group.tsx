@@ -4,6 +4,7 @@ import { ArrowIconThinRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { InlineText } from '~/components/typography';
+import { space } from '~/style/theme';
 
 export type LinkGroupProps = {
   header?: string;
@@ -18,11 +19,7 @@ export function LinkGroup(props: LinkGroupProps) {
       {header && <StyledHeader>{header}</StyledHeader>}
       <List>
         {links.map((link) => (
-          <LinkItem
-            key={`${header}-${link.text}-link`}
-            href={link.href}
-            text={link.text}
-          />
+          <LinkItem key={`${header}-${link.text}-link`} href={link.href} text={link.text} />
         ))}
       </List>
     </Box>
@@ -42,7 +39,7 @@ function LinkItem(props: LinkItemProps) {
       <Item>
         <InlineText color="gray5">
           {text}
-          <span css={css({ svg: { height: 10, width: 11, mx: '3px' } })}>
+          <span css={css({ svg: { height: '10px', width: '11px', marginX: '3px' } })}>
             <ArrowIconThinRight />
           </span>
         </InlineText>
@@ -53,11 +50,7 @@ function LinkItem(props: LinkItemProps) {
   return (
     <Item>
       <InlineText>
-        <LinkWithIcon
-          href={href}
-          icon={<ArrowIconThinRight />}
-          iconPlacement="right"
-        >
+        <LinkWithIcon href={href} icon={<ArrowIconThinRight />} iconPlacement="right">
           {text}
         </LinkWithIcon>
       </InlineText>
@@ -69,24 +62,24 @@ const StyledHeader = styled(InlineText)(
   css({
     fontWeight: 'bold',
     display: 'block',
-    mb: 2,
+    marginBottom: space[2],
   })
 );
 
 const List = styled.ul(
   css({
-    m: 0,
-    p: 0,
+    margin: '0',
+    padding: '0',
   })
 );
 
 const Item = styled.li(
   css({
     listStyle: 'none',
-    mb: 2,
+    marginBottom: space[2],
 
     ':last-child': {
-      mb: 0,
+      marginBottom: '0',
     },
   })
 );

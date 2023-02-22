@@ -2,12 +2,7 @@
  * Code loosely based on
  * https://codesandbox.io/s/github/airbnb/visx/tree/master/packages/visx-demo/src/sandboxes/visx-barstack
  */
-import {
-  colors,
-  getValuesInTimeframe,
-  TimeframeOption,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { colors, getValuesInTimeframe, TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -27,29 +22,16 @@ import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
-import {
-  AccessibilityDefinition,
-  useAccessibilityAnnotations,
-} from '~/utils/use-accessibility-annotations';
+import { AccessibilityDefinition, useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
-import {
-  DateSpanMarker,
-  Overlay,
-  Tooltip,
-  TooltipData,
-  TooltipFormatter,
-} from '../time-series-chart/components';
+import { DateSpanMarker, Overlay, Tooltip, TooltipData, TooltipFormatter } from '../time-series-chart/components';
 import { TooltipSeriesList } from '../time-series-chart/components/tooltip/tooltip-series-list';
-import {
-  calculateSeriesMaximum,
-  getSeriesData,
-  getWeekInfo,
-  SeriesValue,
-} from './logic';
+import { calculateSeriesMaximum, getSeriesData, getWeekInfo, SeriesValue } from './logic';
 
 type AnyTickFormatter = (value: any) => string;
 
@@ -63,9 +45,7 @@ let hoverTimeout: number;
 
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
-type Config<T extends TimestampedValue> =
-  | VisibleBarConfig<T>
-  | InvisibleBarConfig<T>;
+type Config<T extends TimestampedValue> = VisibleBarConfig<T> | InvisibleBarConfig<T>;
 
 type VisibleBarConfig<T extends TimestampedValue> = {
   metricProperty: keyof T;
@@ -113,9 +93,7 @@ export type StackedBarTooltipData = {
  * chart so it should probably be refactored once we start re-using this
  * chart for other things.
  */
-export function StackedChart<T extends TimestampedValue>(
-  props: StackedChartProps<T>
-) {
+export function StackedChart<T extends TimestampedValue>(props: StackedChartProps<T>) {
   /**
    * Destructuring here and not above, so we can easily switch between optional
    * passed-in formatter functions or their default counterparts that have the
@@ -138,38 +116,21 @@ export function StackedChart<T extends TimestampedValue>(
   const isExtraSmallScreen = !breakpoints.sm;
   const isTinyScreen = !breakpoints.xs;
 
-  const isVisible = useCallback(function (
-    configValue: Config<T>
-  ): configValue is VisibleBarConfig<T> {
+  const isVisible = useCallback(function (configValue: Config<T>): configValue is VisibleBarConfig<T> {
     return !('type' in configValue);
-  },
-  []);
+  }, []);
 
-  const chartConfig = useMemo(
-    () => config.filter(isVisible),
-    [config, isVisible]
-  );
+  const chartConfig = useMemo(() => config.filter(isVisible), [config, isVisible]);
 
   const minHeight = isExtraSmallScreen ? 200 : 400;
 
-  const { ResponsiveContainer, width, height } = useResponsiveContainer(
-    initialWidth,
-    minHeight
-  );
+  const { ResponsiveContainer, width, height } = useResponsiveContainer(initialWidth, minHeight);
 
-  const { formatNumber, formatDate, formatPercentage, formatDateSpan } =
-    useIntl();
+  const { formatNumber, formatDate, formatPercentage, formatDateSpan } = useIntl();
 
   const annotations = useAccessibilityAnnotations(accessibility);
 
-  const {
-    tooltipData,
-    tooltipLeft = 0,
-    tooltipTop = 0,
-    showTooltip,
-    hideTooltip,
-    tooltipOpen,
-  } = useTooltip<TooltipData<T & StackedBarTooltipData>>();
+  const { tooltipData, tooltipLeft = 0, tooltipTop = 0, showTooltip, hideTooltip, tooltipOpen } = useTooltip<TooltipData<T & StackedBarTooltipData>>();
 
   const isMountedRef = useIsMountedRef();
 
@@ -186,22 +147,13 @@ export function StackedChart<T extends TimestampedValue>(
     [isExtraSmallScreen, yAxisSize.width]
   );
 
-  const metricProperties = useMemo(
-    () => chartConfig.map((x) => x.metricProperty),
-    [chartConfig]
-  );
+  const metricProperties = useMemo(() => chartConfig.map((x) => x.metricProperty), [chartConfig]);
 
   const today = useCurrentDate();
 
-  const valuesInTimeframe = useMemo(
-    () => getValuesInTimeframe(values, timeframe, today),
-    [values, timeframe, today]
-  );
+  const valuesInTimeframe = useMemo(() => getValuesInTimeframe(values, timeframe, today), [values, timeframe, today]);
 
-  const series = useMemo(
-    () => getSeriesData(valuesInTimeframe, metricProperties),
-    [valuesInTimeframe, metricProperties]
-  );
+  const series = useMemo(() => getSeriesData(valuesInTimeframe, metricProperties), [valuesInTimeframe, metricProperties]);
 
   const seriesMax = useMemo(() => calculateSeriesMaximum(series), [series]);
 
@@ -217,9 +169,7 @@ export function StackedChart<T extends TimestampedValue>(
    * something more standardized anyway. We could introduce a special property
    * like is_estimate to trigger the hatched pattern in all charts.
    */
-  let hatchedFromIndex = valuesInTimeframe.findIndex(
-    (v) => (v as unknown as { is_estimate?: boolean }).is_estimate === true
-  );
+  let hatchedFromIndex = valuesInTimeframe.findIndex((v) => (v as unknown as { is_estimate?: boolean }).is_estimate === true);
   if (hatchedFromIndex < 0) {
     hatchedFromIndex = Infinity;
   }
@@ -278,11 +228,7 @@ export function StackedChart<T extends TimestampedValue>(
       const isLast = index === all.length - 1;
 
       if (isNarrowChart) {
-        return isFirst
-          ? formatDate(weekStartDate, 'axis')
-          : isLast
-          ? formatDate(weekEndDate, 'axis')
-          : undefined;
+        return isFirst ? formatDate(weekStartDate, 'axis') : isLast ? formatDate(weekEndDate, 'axis') : undefined;
       }
 
       const modulo = Math.ceil(all.length / numOfFittingLabels);
@@ -295,10 +241,9 @@ export function StackedChart<T extends TimestampedValue>(
     [formatDate, formatDateSpan, isNarrowChart, numOfFittingLabels]
   );
 
-  const defaultFormatTooltip: TooltipFormatter<T & StackedBarTooltipData> =
-    useCallback((context: TooltipData<T & StackedBarTooltipData>) => {
-      return <TooltipSeriesList data={context} />;
-    }, []);
+  const defaultFormatTooltip: TooltipFormatter<T & StackedBarTooltipData> = useCallback((context: TooltipData<T & StackedBarTooltipData>) => {
+    return <TooltipSeriesList data={context} />;
+  }, []);
 
   const formatYAxis = useCallback(
     (y: number) => {
@@ -361,15 +306,7 @@ export function StackedChart<T extends TimestampedValue>(
         },
       });
     },
-    [
-      hideTooltip,
-      showTooltip,
-      isMountedRef,
-      config,
-      series,
-      hatchedFromIndex,
-      valuesInTimeframe,
-    ]
+    [hideTooltip, showTooltip, isMountedRef, config, series, hatchedFromIndex, valuesInTimeframe]
   );
 
   if (isEmpty(series)) {
@@ -400,28 +337,18 @@ export function StackedChart<T extends TimestampedValue>(
       {valueAnnotation && (
         <>
           <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
-          <Spacer mb={{ _: 2, sm: 0 }} />
+          <Spacer marginBottom={{ _: space[2], sm: '0' }} />
         </>
       )}
       <Box height="100%">
         <ResponsiveContainer>
           <Box position="relative">
             {annotations.descriptionElement}
-            <svg
-              {...annotations.props}
-              width={width}
-              viewBox={`0 0 ${width} ${height}`}
-              css={css({ width: '100%' })}
-              role="img"
-            >
+            <svg {...annotations.props} width={width} viewBox={`0 0 ${width} ${height}`} css={css({ width: '100%' })} role="img">
               <HatchedPattern />
 
               <Group left={padding.left} top={padding.top}>
-                <GridRows
-                  scale={yScale}
-                  width={bounds.width}
-                  stroke={colors.gray3}
-                />
+                <GridRows scale={yScale} width={bounds.width} stroke={colors.gray3} />
                 <AxisBottom
                   scale={xScale}
                   tickValues={xScale.domain()}
@@ -438,13 +365,7 @@ export function StackedChart<T extends TimestampedValue>(
                   tickComponent={({ x, y, formattedValue, ...props }) =>
                     formattedValue && (
                       <>
-                        <Line
-                          from={{ x, y: y - 20 }}
-                          to={{ x, y: y - 13 }}
-                          stroke={colors.gray3}
-                          strokeWidth={1}
-                          strokeLinecap="square"
-                        />
+                        <Line from={{ x, y: y - 20 }} to={{ x, y: y - 13 }} stroke={colors.gray3} strokeWidth={1} strokeLinecap="square" />
                         <Text x={x} y={y} {...props}>
                           {formattedValue}
                         </Text>
@@ -460,11 +381,7 @@ export function StackedChart<T extends TimestampedValue>(
                     hideAxisLine
                     stroke={colors.gray3}
                     tickFormat={
-                      formatYTickValue
-                        ? (formatYTickValue as AnyTickFormatter)
-                        : isPercentage
-                        ? (formatYAxisPercentage as AnyTickFormatter)
-                        : (formatYAxis as AnyTickFormatter)
+                      formatYTickValue ? (formatYTickValue as AnyTickFormatter) : isPercentage ? (formatYAxisPercentage as AnyTickFormatter) : (formatYAxis as AnyTickFormatter)
                     }
                     tickLabelProps={() => ({
                       fill: colors.gray6,
@@ -475,14 +392,7 @@ export function StackedChart<T extends TimestampedValue>(
                     })}
                   />
                 </g>
-                <BarStack<SeriesValue, string>
-                  data={series}
-                  keys={metricProperties as string[]}
-                  x={getDate}
-                  xScale={xScale}
-                  yScale={yScale}
-                  color={colorScale}
-                >
+                <BarStack<SeriesValue, string> data={series} keys={metricProperties as string[]} x={getDate} xScale={xScale} yScale={yScale} color={colorScale}>
                   {(barStacks) =>
                     barStacks.map((barStack) =>
                       barStack.bars.map((bar) => {
@@ -493,8 +403,7 @@ export function StackedChart<T extends TimestampedValue>(
                          * Capture the bar data for the hover handler using a
                          * closure for each bar.
                          */
-                        const handleHoverWithBar = (event: HoverEvent) =>
-                          handleHover(event, bar);
+                        const handleHoverWithBar = (event: HoverEvent) => handleHover(event, bar);
 
                         return (
                           <Group key={barId}>
@@ -508,10 +417,7 @@ export function StackedChart<T extends TimestampedValue>(
                                * negative height is not allowed.
                                */
                               y={bar.y + (isTinyScreen ? 1 : 2)}
-                              height={Math.max(
-                                0,
-                                bar.height - (isTinyScreen ? 1 : 2)
-                              )}
+                              height={Math.max(0, bar.height - (isTinyScreen ? 1 : 2))}
                               width={bar.width}
                               fill={fillColor}
                               onMouseLeave={handleHoverWithBar}
@@ -528,16 +434,9 @@ export function StackedChart<T extends TimestampedValue>(
                                  * negative height is not allowed.
                                  */
                                 y={bar.y + (isTinyScreen ? 1 : 2)}
-                                height={Math.max(
-                                  0,
-                                  bar.height - (isTinyScreen ? 1 : 2)
-                                )}
+                                height={Math.max(0, bar.height - (isTinyScreen ? 1 : 2))}
                                 width={bar.width}
-                                fill={
-                                  breakpoints.lg
-                                    ? 'url(#pattern-hatched)'
-                                    : 'url(#pattern-hatched-small)'
-                                }
+                                fill={breakpoints.lg ? 'url(#pattern-hatched)' : 'url(#pattern-hatched-small)'}
                                 onMouseLeave={handleHoverWithBar}
                                 onMouseMove={handleHoverWithBar}
                                 onTouchStart={handleHoverWithBar}
@@ -554,25 +453,15 @@ export function StackedChart<T extends TimestampedValue>(
           </Box>
           {tooltipOpen && tooltipData && (
             <>
-              <Tooltip
-                data={tooltipData}
-                left={tooltipLeft}
-                top={tooltipTop}
-                formatTooltip={formatTooltip ?? defaultFormatTooltip}
-                bounds={bounds}
-                padding={padding}
-              />
+              <Tooltip data={tooltipData} left={tooltipLeft} top={tooltipTop} formatTooltip={formatTooltip ?? defaultFormatTooltip} bounds={bounds} padding={padding} />
               <Overlay bounds={bounds} padding={padding}>
-                <DateSpanMarker
-                  width={tooltipData.value.bar.width}
-                  point={{ x: tooltipLeft }}
-                />
+                <DateSpanMarker width={tooltipData.value.bar.width} point={{ x: tooltipLeft }} />
               </Overlay>
             </>
           )}
         </ResponsiveContainer>
       </Box>
-      <Box pl={`${padding.left}px`}>
+      <Box paddingLeft={`${padding.left}px`}>
         <Legend items={legendItems} />
       </Box>
     </>
@@ -591,9 +480,9 @@ function getDate(x: SeriesValue) {
 
 function HatchedSquare() {
   return (
-    <svg height="15" width="15">
-      <rect height="15" width="15" fill={colors.gray5} />
-      <rect height="15" width="15" fill="url(#pattern-hatched-small)" />
+    <svg height="15px" width="15px">
+      <rect height="15px" width="15px" fill={colors.gray5} />
+      <rect height="15px" width="15px" fill="url(#pattern-hatched-small)" />
     </svg>
   );
 }
@@ -604,35 +493,11 @@ function HatchedPattern() {
 
   return (
     <defs>
-      <pattern
-        id="pattern-hatched"
-        width={SIZE_LARGE}
-        height={SIZE_LARGE}
-        patternTransform="rotate(-45 0 0)"
-        patternUnits="userSpaceOnUse"
-      >
-        <line
-          x1="0"
-          y1="0"
-          x2="0"
-          y2={SIZE_LARGE}
-          style={{ stroke: 'white', strokeWidth: 4 }}
-        />
+      <pattern id="pattern-hatched" width={SIZE_LARGE} height={SIZE_LARGE} patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="0" y2={SIZE_LARGE} style={{ stroke: 'white', strokeWidth: 4 }} />
       </pattern>
-      <pattern
-        id="pattern-hatched-small"
-        width={SIZE_SMALL}
-        height={SIZE_SMALL}
-        patternTransform="rotate(-45 0 0)"
-        patternUnits="userSpaceOnUse"
-      >
-        <line
-          x1="0"
-          y1="0"
-          x2="0"
-          y2={SIZE_SMALL}
-          style={{ stroke: 'white', strokeWidth: 3 }}
-        />
+      <pattern id="pattern-hatched-small" width={SIZE_SMALL} height={SIZE_SMALL} patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="0" y2={SIZE_SMALL} style={{ stroke: 'white', strokeWidth: 3 }} />
       </pattern>
     </defs>
   );

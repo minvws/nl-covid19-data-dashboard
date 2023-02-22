@@ -1,44 +1,41 @@
-import { Box, Spacer } from '~/components/base';
-import styled from 'styled-components';
-import { css } from '@styled-system/css';
-import { MaxWidth } from '~/components';
-import { Layout } from '~/domain/layout';
-import {
-  Search,
-  TopicalArticlesList,
-  TopicalHeader,
-  TopicalLinksList,
-  TopicalMeasureTile,
-  TopicalSectionHeader,
-  TopicalThemeHeader,
-  TopicalTile,
-  IndicatorLevelDescription,
-} from '~/domain/topical';
-import { isPresent } from 'ts-is-present';
-import { Languages, SiteText } from '~/locale';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { getTopicalStructureQuery, getThermometerEvents } from '~/queries/get-topical-structure-query';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
-import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { colors } from '@corona-dashboard/common';
-import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
-import { replaceVariablesInText, getFilenameToIconName } from '~/utils';
-import { SeverityLevel, SeverityLevels } from '~/components/severity-indicator-tile/types';
-import { TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '~/components/severity-indicator-tile/constants';
-import { TrendIcon } from '~/domain/topical/types';
-import { CollapsibleSection } from '~/components/collapsible';
-import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
-import { GetStaticPropsContext } from 'next';
-import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic/get-timeline-range-dates';
-import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
-import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
-import { TopicalSanityData } from '~/queries/query-types';
 import { IconName as TopicalIcon } from '@corona-dashboard/icons/src/icon-name2filename';
-import { SEVERITY_LEVELS_LIST } from '~/components/severity-indicator-tile/constants';
+import { css } from '@styled-system/css';
+import { GetStaticPropsContext } from 'next';
+import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
+import { MaxWidth } from '~/components';
+import { Box, Spacer } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
-import { space } from '~/style/theme';
+import { CollapsibleSection } from '~/components/collapsible';
+import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic/get-timeline-range-dates';
+import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
+import { SEVERITY_LEVELS_LIST, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '~/components/severity-indicator-tile/constants';
+import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
+import { SeverityLevel, SeverityLevels } from '~/components/severity-indicator-tile/types';
+import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
 import { TopicalWeeklySummaryTile } from '~/components/weekly-summary/topical-weekly-summary-tile';
+import { Layout } from '~/domain/layout';
+import { IndicatorLevelDescription } from '~/domain/topical/components/indicator-level-description';
+import { Search } from '~/domain/topical/components/search/search';
+import { TopicalArticlesList } from '~/domain/topical/components/topical-article-list';
+import { TopicalHeader } from '~/domain/topical/components/topical-header';
+import { TopicalTile } from '~/domain/topical/components/topical-kpi-tile/topical-tile';
+import { TopicalLinksList } from '~/domain/topical/components/topical-links-list';
+import { TopicalMeasureTile } from '~/domain/topical/components/topical-measure-tile';
+import { TopicalSectionHeader } from '~/domain/topical/components/topical-section-header';
+import { TopicalThemeHeader } from '~/domain/topical/components/topical-theme-header';
+import { TrendIcon } from '~/domain/topical/types';
+import { Languages, SiteText } from '~/locale';
+import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getThermometerEvents, getTopicalStructureQuery } from '~/queries/get-topical-structure-query';
+import { TopicalSanityData } from '~/queries/query-types';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
+import { space } from '~/style/theme';
+import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
+import { getFilenameToIconName, replaceVariablesInText } from '~/utils';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.topical_page.nl,
@@ -183,7 +180,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             {kpiThemes.themes.map((theme) => {
               return (
                 <Box key={theme.title}>
-                  <Box marginBottom={4}>
+                  <Box marginBottom={space[4]}>
                     <TopicalThemeHeader title={theme.title} subtitle={theme.subTitle} icon={getFilenameToIconName(theme.themeIcon) as TopicalIcon} />
                   </Box>
                   <Box
@@ -194,8 +191,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     marginBottom={{ _: space[4], sm: space[5] }}
                   >
                     {theme.tiles.map((themeTile) => {
+                      const sourceLabel = themeTile.sourceLabel ? replaceVariablesInText(themeTile.sourceLabel, { date: themeTile.tileDate }) : null;
                       return (
                         <TopicalTile
+                          hideTrendIcon={themeTile.hideTrendIcon}
                           trendIcon={themeTile.trendIcon}
                           title={themeTile.title}
                           tileIcon={getFilenameToIconName(themeTile.tileIcon) as TopicalIcon}
@@ -203,7 +202,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                           cta={themeTile.cta}
                           key={themeTile.title}
                           kpiValue={themeTile.kpiValue}
-                          sourceLabel={themeTile.sourceLabel}
+                          sourceLabel={sourceLabel}
                         />
                       );
                     })}
@@ -222,10 +221,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             })}
 
             <Box>
-              <Box marginBottom={4}>
+              <Box marginBottom={space[4]}>
                 <TopicalThemeHeader title={measureTheme.title} subtitle={measureTheme.subTitle} icon={getFilenameToIconName(measureTheme.themeIcon) as TopicalIcon} />
               </Box>
-              <Box display="grid" gridTemplateColumns={tileGridTemplate} gridColumnGap={{ _: space[4], md: space[5] }} gridRowGap={{ _: space[4], md: space[5] }} marginBottom={5}>
+              <Box
+                display="grid"
+                gridTemplateColumns={tileGridTemplate}
+                gridColumnGap={{ _: space[4], md: space[5] }}
+                gridRowGap={{ _: space[4], md: space[5] }}
+                marginBottom={space[5]}
+              >
                 {measureTheme.tiles.map((measureTile, index) => {
                   return <TopicalMeasureTile icon={getFilenameToIconName(measureTile.tileIcon) as TopicalIcon} title={measureTile.description} key={index} />;
                 })}
@@ -237,14 +242,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
         <Spacer marginBottom={space[5]} />
 
         <Box width="100%" backgroundColor="gray1" paddingY={space[5]}>
-          <Box paddingY={4} paddingX={{ _: space[3], sm: space[4] }}>
+          <Box paddingY={space[4]} paddingX={{ _: space[3], sm: space[4] }}>
             <Search title={textShared.secties.search.title.nl} />
           </Box>
         </Box>
 
-        <Spacer marginBottom={5} />
+        <Spacer marginBottom={space[5]} />
 
-        <Box width="100%" paddingBottom={5}>
+        <Box width="100%" paddingBottom={space[5]}>
           <MaxWidth spacing={4} paddingTop={{ _: space[3], md: space[5] }} paddingX={{ _: space[3], sm: space[4], md: space[3], lg: space[4] }}>
             <TopicalSectionHeader
               title={textShared.secties.meer_lezen.titel}
@@ -265,8 +270,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 const OrderedList = styled.ol(
   css({
     listStyleType: 'none',
-    margin: 0,
-    padding: 0,
+    margin: '0',
+    padding: '0',
   })
 );
 

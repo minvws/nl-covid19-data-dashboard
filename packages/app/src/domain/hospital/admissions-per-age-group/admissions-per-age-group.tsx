@@ -7,6 +7,7 @@ import { TimelineEventConfig } from '~/components/time-series-chart/components/t
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
@@ -70,7 +71,7 @@ export function AdmissionsPerAgeGroup({ values, timeframe, accessibility, timeli
   return (
     <ErrorBoundary>
       <InteractiveLegend helpText={text.legend_help_text} selectOptions={interactiveLegendOptions} selection={list} onToggleItem={toggle} onReset={clear} />
-      <Spacer mb={2} />
+      <Spacer marginBottom={space[2]} />
       <TimeSeriesChart
         forceLegend
         accessibility={accessibility}

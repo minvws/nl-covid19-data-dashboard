@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
+import { fontSizes, space } from '~/style/theme';
 import { Box } from './base';
 
 export interface SelectOption<T = string> {
@@ -82,8 +82,8 @@ const Legend = styled.div(
 const List = styled.ul(
   css({
     listStyle: 'none',
-    paddingX: 0,
-    margin: 0,
+    paddingX: '0',
+    margin: '0',
     marginTop: space[2],
   })
 );
@@ -120,7 +120,7 @@ const StyledLabel = styled.label<{
     boxShadow: `inset 0px 0px 0px ${isActive ? `3px ${borderColor}` : `1px ${colors.gray4}`}`,
     fontWeight: 'normal',
     fontFamily: 'inherit',
-    fontSize: 1,
+    fontSize: fontSizes[1],
     color: isActive ? 'transparent' : 'black',
     flexDirection: 'column',
     alignItems: 'center',
@@ -143,16 +143,16 @@ const StyledLabel = styled.label<{
       opacity: '.1',
       content: 'attr(data-color)',
       position: 'absolute',
-      left: 0,
-      right: 0,
-      top: 0,
-      bottom: 0,
+      left: '0',
+      right: '0',
+      top: '0',
+      bottom: '0',
       borderRadius: '5px',
     },
     '&:after': {
       content: isActive ? 'attr(data-text)' : '',
       position: 'absolute',
-      height: 0,
+      height: '0',
       userSelect: 'none',
       pointerEvents: 'none',
       fontWeight: 'bold',
@@ -166,10 +166,10 @@ const StyledInput = styled.input(
     appearance: 'none',
     '&:focus:focus-visible': {
       position: 'absolute',
-      top: 0,
-      left: 0,
-      bottom: 0,
-      right: 0,
+      top: '0',
+      left: '0',
+      bottom: '0',
+      right: '0',
       width: '100%',
     },
   })

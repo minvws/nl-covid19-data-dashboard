@@ -48,7 +48,7 @@ const MobileMeasuresTable = (props: MeasuresTableProps) => {
                   <Box display="flex" flexDirection="column">
                     {collection.measuresItems.map((measuresItem, index) => {
                       return (
-                        <Box key={index} display="flex" flexDirection="row" alignItems="flex-start" marginBottom={2}>
+                        <Box key={index} display="flex" flexDirection="row" alignItems="flex-start" marginBottom={space[2]}>
                           <StyledIconWrapper>{measuresItem.icon ? <DynamicIcon name={getFilenameToIconName(measuresItem.icon) as MeasuresIcon} /> : <Dot />}</StyledIconWrapper>
 
                           <Box marginTop={space[2]}>{measuresItem.title}</Box>

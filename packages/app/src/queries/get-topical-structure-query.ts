@@ -42,7 +42,9 @@ export function getTopicalStructureQuery(locale: string) {
             tileIcon,
             'title':title.${locale},
             'sourceLabel':sourceLabel.${locale},
+            'tileDate': tileDate.${locale},
             'kpiValue': kpiValue.${locale},
+            'hideTrendIcon': hideTrendIcon,
             'trendIcon': {
               'color': trendIcon.color,
               'direction': trendIcon.direction,

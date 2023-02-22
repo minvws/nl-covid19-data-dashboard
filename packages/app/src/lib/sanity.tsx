@@ -30,9 +30,7 @@ const config: ClientConfig = {
 export const PortableText = BlockContent;
 
 // Set up the client for fetching data
-export async function getClient(
-  dataset = config.dataset as 'production' | 'development'
-) {
+export async function getClient(dataset = config.dataset as 'production' | 'development') {
   return (await import('@sanity/client')).default({
     ...config,
     dataset,
@@ -97,24 +95,31 @@ export function localize<T>(value: T | T[], languages: string[]): T {
  * Usage:
  *
  *     <img {...getImageProps(node)} />
- *     <img {...getImageProps(node, {defaultWidth: 450})} />
- *     <img {...getImageProps(node, {defaultWidth: 450, sizes: [[320, 320], [1024, 512]]})} />
+ *     <img {...getImageProps(node, {defaultWidth: '450'})} />
+ *     <img {...getImageProps(node, {defaultWidth: '450', sizes: [['320', '320'], ['1024', '512']]})} />
  */
 
 type ImageProps = {
-  defaultWidth?: number;
-  sizes?: number[][];
+  defaultWidth?: string;
+  sizes?: string[][];
 };
 
-export function getImageProps<T extends ImageBlock>(
-  node: T,
-  options: ImageProps
-) {
+export function getImageProps<T extends ImageBlock>(node: T, options: ImageProps) {
   const { asset, alt = '' } = node;
   const { metadata } = asset;
 
-  const { defaultWidth = metadata.dimensions.width, sizes: sizesOption } =
-    options;
+  const { sizes: sizesOption } = options;
+
+  // This regex part on the following lines,
+  // gets the first part of the string and gets alle the numbers and a '.' (if it exists).
+  // that would mean that it rmoves the unit from the value.
+  // For example:
+  // If the input is 100px; It would extraxt the 100 and returns it. without the 'px'.
+  // And if it receives a input of 10.5% it would extract the 10.5 and return that value without the '%' character.
+  // If the input is non existing or the value is not valid it falls back to its metadata fallback value.
+  const regexForFindingValue = /(^[\d]+.[\d]+)/g;
+  const extractedWidthValue = (options.defaultWidth && options.defaultWidth.match(regexForFindingValue)) || metadata.dimensions.width;
+  const defaultWidth = typeof extractedWidthValue !== 'number' ? parseInt(`${extractedWidthValue}`) : extractedWidthValue;
 
   const width = findClosestSize(defaultWidth, imageResizeTargets);
   const height = width / metadata.dimensions.aspectRatio;
@@ -129,22 +134,14 @@ export function getImageProps<T extends ImageBlock>(
      * The following srcset attribute will tell the browser which image-widths
      * are available.
      */
-    srcSet = imageResizeTargets
-      .map((size) => `${getImageSrc(asset, size)} ${size}w`)
-      .join(', ');
+    srcSet = imageResizeTargets.map((size) => `${getImageSrc(asset, size)} ${size}w`).join(', ');
   }
 
   /**
    * The sizes attribute will tell the browser which image-width to use on given
    * viewport-widths.
    */
-  const sizes = sizesOption
-    ?.map(([viewportOrSize, size]) =>
-      isPresent(size)
-        ? `(min-width: ${viewportOrSize}px) ${size}px`
-        : `${viewportOrSize}px`
-    )
-    .join(', ');
+  const sizes = sizesOption?.map(([viewportOrSize, size]) => (isPresent(size) ? `(min-width: ${viewportOrSize}px) ${size}` : `${viewportOrSize}`)).join(', ');
 
   return {
     src,
@@ -161,10 +158,7 @@ export function getFileSrc(asset: SanityFileProps) {
   return `/cms-files/${asset.assetId}.${asset.extension}`;
 }
 
-export function getImageSrc(
-  asset: SanityImageProps,
-  defaultWidth = asset.metadata.dimensions.width
-) {
+export function getImageSrc(asset: SanityImageProps, defaultWidth = asset.metadata.dimensions.width) {
   const filename = `${asset.assetId}-${asset.metadata.dimensions.width}x${asset.metadata.dimensions.height}.${asset.extension}`;
   if (asset.extension === 'svg') {
     return `/cms-images/${filename}`;

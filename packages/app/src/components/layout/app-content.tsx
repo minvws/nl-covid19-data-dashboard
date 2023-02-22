@@ -6,6 +6,7 @@ import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { getCurrentPageScope } from '~/utils/get-current-page-scope';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -18,21 +19,12 @@ interface AppContentProps {
   hideBackButton?: boolean;
 }
 
-export function AppContent({
-  children,
-  sidebarComponent,
-  searchComponent,
-  hideBackButton,
-}: AppContentProps) {
+export function AppContent({ children, sidebarComponent, searchComponent, hideBackButton }: AppContentProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { commonTexts } = useIntl();
 
-  const isMenuOpen =
-    router.pathname == '/landelijk' ||
-    router.pathname == '/veiligheidsregio/[code]' ||
-    router.pathname == '/gemeente/[code]' ||
-    router.query.menu === '1';
+  const isMenuOpen = router.pathname == '/landelijk' || router.pathname == '/veiligheidsregio/[code]' || router.pathname == '/gemeente/[code]' || router.query.menu === '1';
 
   const currentPageScope = getCurrentPageScope(router);
   const currentCode = router.query.code as string | undefined;
@@ -41,24 +33,12 @@ export function AppContent({
   /**
    * @TODO Open the menu purely client side without loading a new page
    */
-  const backButtonUrl = currentPageScope
-    ? isMenuOpen
-      ? isNational
-        ? reverseRouter.topical.nl
-        : undefined
-      : reverseRouter[currentPageScope].index(currentCode)
-    : undefined;
+  const backButtonUrl = currentPageScope ? (isMenuOpen ? (isNational ? reverseRouter.topical.nl : undefined) : reverseRouter[currentPageScope].index(currentCode)) : undefined;
 
-  const backButtonText = currentPageScope
-    ? isMenuOpen
-      ? isNational
-        ? commonTexts.nav.back_topical.nl
-        : ''
-      : commonTexts.nav.back_all_metrics[currentPageScope]
-    : '';
+  const backButtonText = currentPageScope ? (isMenuOpen ? (isNational ? commonTexts.nav.back_topical.nl : '') : commonTexts.nav.back_all_metrics[currentPageScope]) : '';
 
   return (
-    <MaxWidth px={[0, 0, 0, 0, 3]}>
+    <MaxWidth paddingX={{ _: '0', lg: space[3] }}>
       <AppContentContainer>
         {backButtonUrl && (
           <>
@@ -67,10 +47,10 @@ export function AppContent({
               isVisible={!hideBackButton}
               css={css({
                 background: 'white',
-                py: 3,
+                paddingY: space[3],
                 position: 'relative',
                 borderBottom: 'solid 1px',
-                borderColor: 'gray3',
+                borderColor: colors.gray3,
               })}
             >
               <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
@@ -91,15 +71,9 @@ export function AppContent({
           /** id is for hash navigation */
           id="content"
         >
-          <ResponsiveVisible isVisible={!isMenuOpen}>
-            {children}
-          </ResponsiveVisible>
+          <ResponsiveVisible isVisible={!isMenuOpen}>{children}</ResponsiveVisible>
           {backButtonUrl && (
-            <BackButtonContainer
-              isVisible={!hideBackButton}
-              mt={4}
-              isMenuOpen={isMenuOpen}
-            >
+            <BackButtonContainer isVisible={!hideBackButton} marginTop={space[4]} isMenuOpen={isMenuOpen}>
               <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
                 {backButtonText}
               </LinkWithIcon>
@@ -116,11 +90,9 @@ const BackButtonContainer = styled(Box)<{
   isMenuOpen: boolean;
 }>((x) =>
   css({
-    mx: x.isMenuOpen
-      ? asResponsiveArray({ _: 1, xs: 'auto' })
-      : asResponsiveArray({ _: 1, sm: 5 }),
+    marginX: x.isMenuOpen ? asResponsiveArray({ _: space[1], xs: 'auto' }) : asResponsiveArray({ _: space[1], sm: space[5] }),
     display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
-    px: asResponsiveArray({ _: 1, sm: 1 }),
+    paddingX: space[1],
     maxWidth: x.isMenuOpen ? '38rem' : undefined,
   })
 );
@@ -129,9 +101,9 @@ const AppContentContainer = styled.div(
   css({
     display: ['block', null, null, 'flex'],
     flexDirection: ['column', null, null, 'row'],
-    marginBottom: '2rem',
-    margin: '0 auto',
-    pb: 4,
+    marginBottom: space[4],
+    margin: `0 auto`,
+    paddingBottom: space[4],
     minHeight: '50vh',
   })
 );
@@ -141,7 +113,7 @@ const StyledAppContent = styled.main(
     zIndex: 3,
     position: 'relative',
     width: '100%',
-    minWidth: 0,
+    minWidth: '0',
     flexGrow: 1,
     flexShrink: 1,
   })

@@ -26,13 +26,13 @@ const renderers = {
     isInternalUrl(props.href) ? (
       <Link href={props.href} passHref>
         <Anchor underline display="inline-block">
-          {props.children} <ChevronRight width={10} height={10} />
+          {props.children} <ChevronRight width="10px" height="10px" />
         </Anchor>
       </Link>
     ) : (
       <ExternalLink href={props.href} display="inline-block">
         {props.children}
-        <ExternalLinkIcon width={20} height={11} />
+        <ExternalLinkIcon width="20px" height="11px" />
       </ExternalLink>
     ),
   /**

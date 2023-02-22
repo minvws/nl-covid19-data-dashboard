@@ -123,11 +123,9 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
     [options]
   );
 
-  const timeframeOptions = TimeframeOptionsList.filter((timeframeOption) => timeframeOption !== TimeframeOption.ONE_WEEK);
-
   return (
     <ChartTile
-      timeframeOptions={timeframeOptions}
+      timeframeOptions={TimeframeOptionsList}
       title={text.title}
       metadata={{
         source: text.source,
@@ -136,7 +134,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
       onSelectTimeframe={setSewerTimeframe}
     >
       {dataPerInstallation && (
-        <Box alignSelf="flex-start" marginBottom={space[3]} minWidth={207}>
+        <Box alignSelf="flex-start" marginBottom={space[3]} minWidth="207px">
           <RichContentSelect
             label={text.selectPlaceholder}
             visuallyHiddenLabel

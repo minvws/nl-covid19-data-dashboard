@@ -1,42 +1,23 @@
-import {
-  colors,
-  NlVaccineDeliveryPerSupplier,
-  NlVaccineDeliveryPerSupplierValue,
-} from '@corona-dashboard/common';
+import { colors, NlVaccineDeliveryPerSupplier, NlVaccineDeliveryPerSupplierValue } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Markdown } from '~/components/markdown';
-import {
-  StackedBarTooltipData,
-  StackedChart,
-} from '~/components/stacked-chart';
-import {
-  TooltipData,
-  TooltipFormatter,
-} from '~/components/time-series-chart/components';
+import { StackedBarTooltipData, StackedChart } from '~/components/stacked-chart';
+import { TooltipData, TooltipFormatter } from '~/components/time-series-chart/components';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 
-export function VaccineDeliveryBarChart({
-  data,
-  text,
-}: {
-  data: NlVaccineDeliveryPerSupplier;
-  text: SiteText['pages']['vaccinations_page']['nl'];
-}) {
+export function VaccineDeliveryBarChart({ data, text }: { data: NlVaccineDeliveryPerSupplier; text: SiteText['pages']['vaccinations_page']['nl'] }) {
   const { commonTexts } = useIntl();
   data.values = data.values.filter((x) => !x.is_estimate);
 
   const productNames = text.data.vaccination_chart.product_names;
 
-  const formatTooltip: TooltipFormatter<
-    NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData
-  > = (
-    context: TooltipData<
-      NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData
-    >
+  const formatTooltip: TooltipFormatter<NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData> = (
+    context: TooltipData<NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData>
   ) => {
     return <TooltipSeriesList data={context} />;
   };
@@ -48,14 +29,8 @@ export function VaccineDeliveryBarChart({
         source: text.bronnen.rivm,
       }}
     >
-      <Box
-        mb={3}
-        display="flex"
-        flexDirection="column"
-        alignItems="flex-start"
-        spacing={3}
-      >
-        <Box maxWidth={560}>
+      <Box marginBottom={space[3]} display="flex" flexDirection="column" alignItems="flex-start" spacing={3}>
+        <Box maxWidth="560px">
           <Markdown content={text.grafiek_leveringen.omschrijving} />
         </Box>
       </Box>

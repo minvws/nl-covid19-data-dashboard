@@ -7,6 +7,7 @@ import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
+import { mediaQueries, space } from '~/style/theme';
 
 interface AnchorTileProps {
   title: string;
@@ -17,13 +18,7 @@ interface AnchorTileProps {
   shadow?: boolean;
 }
 
-export function AnchorTile({
-  title,
-  href,
-  label,
-  children,
-  external = false,
-}: AnchorTileProps) {
+export function AnchorTile({ title, href, label, children, external = false }: AnchorTileProps) {
   return (
     <Container>
       <Content>
@@ -55,20 +50,25 @@ export function AnchorTile({
 
 export const IconWrapper = styled.span(
   css({
-    mr: 2,
-    svg: { width: 24, height: 11, display: 'block', maxWidth: 'initial' },
+    marginRight: space[2],
+    svg: { width: '24px', height: '11px', display: 'block', maxWidth: 'initial' },
   })
 );
 
-const Container = styled.article(
-  css({
-    display: 'flex',
-    pt: asResponsiveArray({ _: 2, sm: 3 }),
-    pb: asResponsiveArray({ _: 3, sm: 4 }),
-    flexDirection: asResponsiveArray({ _: 'column', lg: 'row' }),
-    borderTop: `solid 2px ${colors.gray2}`,
-  })
-);
+const Container = styled.article`
+  border-top: 2px solid ${colors.gray2};
+  display: flex;
+  flex-direction: column;
+  padding-block: ${space[2]} ${space[3]};
+
+  @media ${mediaQueries.sm} {
+    padding-block: ${space[3]} ${space[4]};
+  }
+
+  @media ${mediaQueries.lg} {
+    flex-direction: row;
+  }
+`;
 
 const Content = styled.div(
   css({
@@ -97,9 +97,9 @@ const LinkContainer = styled.div(
     }),
     borderLeft: asResponsiveArray({ lg: '1px solid' }),
     borderLeftColor: asResponsiveArray({ lg: colors.gray3 }),
-    pt: asResponsiveArray({ _: 3, lg: 0 }),
-    pl: asResponsiveArray({ lg: 4 }),
-    ml: asResponsiveArray({ lg: 4 }),
-    mt: asResponsiveArray({ _: 3, md: 0 }),
+    paddingTop: asResponsiveArray({ _: space[3], lg: '0' }),
+    paddingLeft: asResponsiveArray({ lg: space[4] }),
+    marginLeft: asResponsiveArray({ lg: space[4] }),
+    marginTop: asResponsiveArray({ _: space[3], md: '0' }),
   })
 );

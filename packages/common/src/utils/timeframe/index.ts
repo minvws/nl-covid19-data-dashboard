@@ -1,11 +1,4 @@
-import {
-  DateSpanValue,
-  DateValue,
-  isDateSeries,
-  isDateSpanSeries,
-  startOfDayInSeconds,
-  TimestampedValue,
-} from '../../data-sorting';
+import { DateSpanValue, DateValue, isDateSeries, isDateSpanSeries, startOfDayInSeconds, TimestampedValue } from '../../data-sorting';
 import { DAY_IN_SECONDS } from '../../time';
 
 export enum TimeframeOption {
@@ -18,14 +11,7 @@ export enum TimeframeOption {
   ALL = 'all',
 }
 
-export const TimeframeOptionsList = [
-  TimeframeOption.ALL,
-  TimeframeOption.ONE_WEEK,
-  TimeframeOption.THIRTY_DAYS,
-  TimeframeOption.THREE_MONTHS,
-  TimeframeOption.SIX_MONTHS,
-  TimeframeOption.LAST_YEAR,
-];
+export const TimeframeOptionsList = [TimeframeOption.ALL, TimeframeOption.THIRTY_DAYS, TimeframeOption.THREE_MONTHS, TimeframeOption.SIX_MONTHS, TimeframeOption.LAST_YEAR];
 
 export function getDaysForTimeframe(timeframe: TimeframeOption): number {
   switch (timeframe) {
@@ -53,10 +39,7 @@ export function getDaysForTimeframe(timeframe: TimeframeOption): number {
 
 const oneDayInMilliseconds = DAY_IN_SECONDS * 1000;
 
-export const getMinimumUnixForTimeframe = (
-  timeframe: TimeframeOption,
-  endDate: Date
-): number => {
+export const getMinimumUnixForTimeframe = (timeframe: TimeframeOption, endDate: Date): number => {
   if (timeframe === TimeframeOption.ALL) {
     return 0;
   }
@@ -74,12 +57,7 @@ type CompareCallbackFunction<T> = (value: T) => number;
  * @param endDate
  * @param compareCallback
  */
-export const getFilteredValues = <T>(
-  values: T[],
-  timeframe: TimeframeOption,
-  endDate: Date,
-  compareCallback: CompareCallbackFunction<T>
-): T[] => {
+export const getFilteredValues = <T>(values: T[], timeframe: TimeframeOption, endDate: Date, compareCallback: CompareCallbackFunction<T>): T[] => {
   const minimumUnix = getMinimumUnixForTimeframe(timeframe, endDate);
   return values.filter((value: T): boolean => {
     return compareCallback(value) >= minimumUnix;
@@ -93,11 +71,7 @@ export const getFilteredValues = <T>(
  * in as-is from the data, and we detect what type of timestamp we should filter
  * on.
  */
-export function getValuesInTimeframe<T extends TimestampedValue>(
-  values: T[],
-  timeframe: TimeframeOption,
-  endDate: Date
-): T[] {
+export function getValuesInTimeframe<T extends TimestampedValue>(values: T[], timeframe: TimeframeOption, endDate: Date): T[] {
   const start = getTimeframeBoundaryUnix(timeframe, endDate);
   const end = Math.ceil(endDate.getTime() / 1000);
 
@@ -118,10 +92,7 @@ export function getValuesInTimeframe<T extends TimestampedValue>(
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
 }
 
-function getTimeframeBoundaryUnix(
-  timeframe: TimeframeOption,
-  endDate: Date
-): number {
+function getTimeframeBoundaryUnix(timeframe: TimeframeOption, endDate: Date): number {
   if (timeframe === TimeframeOption.ALL) {
     return 0;
   }

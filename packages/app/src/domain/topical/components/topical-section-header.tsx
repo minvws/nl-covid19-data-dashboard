@@ -5,14 +5,10 @@ import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { RelativeDate } from '~/components/relative-date';
-import {
-  Heading,
-  HeadingLevel,
-  InlineText,
-  Text,
-} from '~/components/typography';
+import { Heading, HeadingLevel, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 interface TopicalSectionHeaderProps {
@@ -29,22 +25,13 @@ interface TopicalSectionHeaderProps {
   };
 }
 
-export const TopicalSectionHeader = ({
-  title,
-  lastGenerated,
-  showBackLink,
-  link,
-  description,
-  headingLevel = 2,
-  headerVariant = 'h1',
-  text,
-}: TopicalSectionHeaderProps) => {
+export const TopicalSectionHeader = ({ title, lastGenerated, showBackLink, link, description, headingLevel = 2, headerVariant = 'h1', text }: TopicalSectionHeaderProps) => {
   const { formatDateFromSeconds } = useIntl();
 
   return (
     <Box spacing={3}>
       {showBackLink && (
-        <Box py={3} borderBottom={'solid 1px'} borderColor={'gray3'}>
+        <Box paddingY={space[3]} borderBottom={'solid 1px'} borderColor={'gray3'}>
           <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
             {text.terug_naar_landelijk}
           </LinkWithIcon>
@@ -52,14 +39,7 @@ export const TopicalSectionHeader = ({
       )}
 
       <Box spacing={{ _: 1, lg: 2 }}>
-        <Box
-          display="flex"
-          flexDirection={{ _: 'column', lg: 'row' }}
-          alignItems="baseline"
-          spacing={2}
-          spacingHorizontal={{ _: 0, lg: 4 }}
-          flexWrap="wrap"
-        >
+        <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }} alignItems="baseline" spacing={2} spacingHorizontal={{ _: 0, lg: 4 }} flexWrap="wrap">
           <Heading level={headingLevel} variant={headerVariant}>
             {title}
           </Heading>
@@ -70,12 +50,8 @@ export const TopicalSectionHeader = ({
              * actually removes the link altogether
              */
             link && !isEmpty(link.text) && (
-              <Box mb={'2px'}>
-                <LinkWithIcon
-                  href={link.href}
-                  icon={<ChevronRight />}
-                  iconPlacement="right"
-                >
+              <Box marginBottom="2px">
+                <LinkWithIcon href={link.href} icon={<ChevronRight />} iconPlacement="right">
                   {link.text}
                 </LinkWithIcon>
               </Box>

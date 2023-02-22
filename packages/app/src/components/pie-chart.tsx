@@ -11,6 +11,7 @@ import { Markdown } from '~/components/markdown';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { WithTooltip } from '~/lib/tooltip';
+import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 const ICON_SIZE = 55;
 
@@ -57,15 +58,7 @@ export function PieChart<T>({
   link,
   hasHoverState,
 }: PieChartProps<T>) {
-  const {
-    formatNumber,
-    formatPercentage,
-    formatDate,
-    formatDateFromSeconds,
-    formatDateFromMilliseconds,
-    formatRelativeDate,
-    formatDateSpan,
-  } = useIntl();
+  const { formatNumber, formatPercentage, formatDate, formatDateFromSeconds, formatDateFromMilliseconds, formatRelativeDate, formatDateSpan } = useIntl();
 
   const formatters = {
     formatNumber,
@@ -79,10 +72,7 @@ export function PieChart<T>({
 
   const totalValue = dataConfig.reduce((previousValue, currentValue) => {
     const metricPropertyValue = data[currentValue.metricProperty];
-    return (
-      previousValue +
-      (typeof metricPropertyValue === 'number' ? metricPropertyValue : 0)
-    );
+    return previousValue + (typeof metricPropertyValue === 'number' ? metricPropertyValue : 0);
   }, 0);
 
   const mappedDataWithValues = useMemo(
@@ -91,10 +81,7 @@ export function PieChart<T>({
         const currentProperty = data[config.metricProperty];
 
         return {
-          __value: Math.max(
-            typeof currentProperty === 'number' ? currentProperty : 0,
-            totalValue * (minimumPercentage / 100) * 2
-          ),
+          __value: Math.max(typeof currentProperty === 'number' ? currentProperty : 0, totalValue * (minimumPercentage / 100) * 2),
           ...config,
         };
       }),
@@ -113,15 +100,9 @@ export function PieChart<T>({
           alignItems={verticalLayout ? 'flex-start' : { xs: 'center' }}
           flexDirection={verticalLayout ? 'column' : { _: 'column', xs: 'row' }}
           justifyContent={{ _: 'flex-start', xl: 'flex-end' }}
-          marginTop={{ _: 3, lg: 0 }}
+          marginTop={{ _: space[3], lg: '0' }}
         >
-          <Box
-            alignSelf={{ _: 'center', md: 'self-start' }}
-            height={innerSize}
-            position="relative"
-            css={css({ marginLeft, marginRight })}
-            spacingHorizontal={2}
-          >
+          <Box alignSelf={{ _: 'center', md: 'self-start' }} height={innerSize} position="relative" css={css({ marginLeft, marginRight })} spacingHorizontal={2}>
             {icon && (
               <Box
                 width={ICON_SIZE}
@@ -172,23 +153,12 @@ export function PieChart<T>({
                   {(pie) => {
                     return pie.arcs.map((arc, index) => {
                       const arcPath = pie.path(arc);
-                      const side =
-                        (arc.startAngle + arc.endAngle) / 2 > Math.PI
-                          ? 'left'
-                          : 'right';
+                      const side = (arc.startAngle + arc.endAngle) / 2 > Math.PI ? 'left' : 'right';
                       const alternativeSide = side === 'left' ? 'end' : 'start';
 
                       return hasHoverState ? (
                         <WithTooltip
-                          content={
-                            <Markdown
-                              content={replaceVariablesInText(
-                                dataConfig[index].tooltipLabel,
-                                data as any,
-                                formatters
-                              )}
-                            />
-                          }
+                          content={<Markdown content={replaceVariablesInText(dataConfig[index].tooltipLabel, data as any, formatters)} />}
                           key={`arc-${index}`}
                           placement={side}
                           popperOptions={{
@@ -196,10 +166,7 @@ export function PieChart<T>({
                               {
                                 name: 'flip',
                                 options: {
-                                  fallbackPlacements: [
-                                    `top-${alternativeSide}`,
-                                    `bottom-${alternativeSide}`,
-                                  ],
+                                  fallbackPlacements: [`top-${alternativeSide}`, `bottom-${alternativeSide}`],
                                 },
                               },
                             ],
@@ -212,18 +179,11 @@ export function PieChart<T>({
                             tabIndex={0}
                             pointerEvents="all"
                             // Prevents paths from keeping 0.4 opacity when clicked
-                            onMouseLeave={(e) =>
-                              (e.target as SVGPathElement).blur()
-                            }
+                            onMouseLeave={(e) => (e.target as SVGPathElement).blur()}
                           />
                         </WithTooltip>
                       ) : (
-                        <path
-                          d={arcPath as string}
-                          fill={arc.data.color}
-                          tabIndex={0}
-                          pointerEvents="all"
-                        />
+                        <path d={arcPath as string} fill={arc.data.color} tabIndex={0} pointerEvents="all" />
                       );
                     });
                   }}
@@ -251,26 +211,9 @@ export function PieChart<T>({
               })}
             >
               {dataConfig.map((item, index) => (
-                <Box
-                  as="li"
-                  key={`${item.color}-${index}`}
-                  display="flex"
-                  alignItems="center"
-                  spacingHorizontal={2}
-                >
-                  <Box
-                    width={12}
-                    height={12}
-                    backgroundColor={item.color}
-                    borderRadius="50%"
-                  />
-                  <Markdown
-                    content={replaceVariablesInText(
-                      item.label,
-                      data as any,
-                      formatters
-                    )}
-                  />
+                <Box as="li" key={`${item.color}-${index}`} display="flex" alignItems="center" spacingHorizontal={2}>
+                  <Box width="12px" height="12px" backgroundColor={item.color} borderRadius="50%" />
+                  <Markdown content={replaceVariablesInText(item.label, data as any, formatters)} />
                 </Box>
               ))}
             </Box>
@@ -280,11 +223,7 @@ export function PieChart<T>({
                * actually removes the link altogether
                */
               link && !isEmpty(link.text) && (
-                <LinkWithIcon
-                  href={link.href}
-                  icon={<ChevronRight />}
-                  iconPlacement="right"
-                >
+                <LinkWithIcon href={link.href} icon={<ChevronRight />} iconPlacement="right">
                   {link.text}
                 </LinkWithIcon>
               )

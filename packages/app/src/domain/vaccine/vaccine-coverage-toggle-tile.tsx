@@ -11,6 +11,7 @@ import { BoldText } from '~/components/typography';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { KeyWithLabel, useVaccineCoveragePercentageFormatter } from './logic/use-vaccine-coverage-percentage-formatter';
@@ -74,7 +75,7 @@ export function VaccineCoverageToggleTile({
 
   return (
     <KpiTile title={title}>
-      <Box css={css({ '& div': { justifyContent: 'flex-start' } })} mb={3}>
+      <Box css={css({ '& div': { justifyContent: 'flex-start' } })} marginBottom={space[3]}>
         <RadioGroup
           value={selectedTab}
           onChange={(value) => setSelectedTab(value)}
@@ -148,7 +149,7 @@ export function VaccineCoverageToggleTile({
           </>
         )}
       </TwoKpiSection>
-      <Box maxWidth="maxWidthText" mt={36}>
+      <Box maxWidth="maxWidthText" marginTop="36px">
         <Markdown content={descriptionFooter} />
       </Box>
     </KpiTile>

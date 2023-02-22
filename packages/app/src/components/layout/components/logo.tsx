@@ -16,8 +16,8 @@ export function Logo() {
         <Box
           as="a"
           display="block"
-          width={{ _: 40, xs: 314 }}
-          height={{ _: 76, xs: 125 }}
+          width={{ _: '40px', xs: '314px' }}
+          height={{ _: '76px', xs: '125px' }}
           marginLeft={{ xs: '-50px' }}
           transform={{ xs: 'translateX(50%)' }}
           position="relative"

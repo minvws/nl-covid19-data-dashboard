@@ -7,6 +7,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { VrComboBox } from './components/vr-combo-box';
 import { useSidebar } from './logic/use-sidebar';
 
@@ -77,7 +78,7 @@ export function VrLayout(props: VrLayoutProps) {
       <AppContent
         hideBackButton={isMainRoute}
         searchComponent={
-          <Box backgroundColor="white" maxWidth={{ _: '38rem', md: undefined }} mx="auto">
+          <Box backgroundColor="white" maxWidth={{ _: '38rem', md: undefined }} marginX="auto">
             <VrComboBox getLink={getLink} selectedVrCode={code} />
           </Box>
         }
@@ -91,10 +92,10 @@ export function VrLayout(props: VrLayoutProps) {
                 role="navigation"
                 backgroundColor="white"
                 maxWidth={{ _: '38rem', md: undefined }}
-                mx="auto"
+                marginX="auto"
                 spacing={1}
               >
-                <Box px={3}>
+                <Box paddingX={space[3]}>
                   <Heading id="sidebar-title" level={2} variant="h3">
                     <VisuallyHidden as="span">{commonTexts.veiligheidsregio_layout.headings.sidebar}</VisuallyHidden>
                     {vrName}

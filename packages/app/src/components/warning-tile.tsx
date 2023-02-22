@@ -27,7 +27,7 @@ const WarningVariantStylingConfig = {
     textBackgroundColor: colors.yellow1,
     paddingLeft: space[3],
   },
-  default: { fontWeight: fontWeights.normal, iconBackgroundColor: colors.white, textBackgroundColor: colors.white, paddingLeft: space[0] },
+  default: { fontWeight: fontWeights.normal, iconBackgroundColor: colors.white, textBackgroundColor: colors.white, paddingLeft: '0' },
   informational: {
     fontWeight: fontWeights.bold,
     iconBackgroundColor: colors.gray4,
@@ -114,10 +114,10 @@ const Content = styled.div<{ variant: WarningMessageVariant; hasTooltip: boolean
   border-top-right-radius: ${radii[1]}px;
   padding-right: ${space[4]};
   > * {
-    margin-top: ${space[0]};
+    margin-top: 0;
     margin-bottom: ${space[3]};
     &:last-child {
-      margin-bottom: ${space[0]};
+      margin-bottom: 0;
     }
   }
   & * {

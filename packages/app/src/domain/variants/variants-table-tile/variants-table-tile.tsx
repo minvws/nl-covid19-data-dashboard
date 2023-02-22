@@ -10,6 +10,7 @@ import { MetadataProps } from '~/components/metadata';
 import { Heading } from '~/components/typography';
 import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { VariantsTable } from './components/variants-table';
 import { TableText } from './types';
@@ -47,7 +48,7 @@ export function VariantsTableTile({
 
         {children}
 
-        <Box overflow="auto" mb={3} mt={4}>
+        <Box overflow="auto" marginBottom={space[3]} marginTop={space[4]}>
           <NoDataBox>{noDataMessage}</NoDataBox>
         </Box>
       </FullscreenChartTile>
@@ -55,12 +56,7 @@ export function VariantsTableTile({
   }
 
   return (
-    <VariantsTableTileWithData
-      text={text}
-      source={source}
-      data={data}
-      dates={dates}
-    >
+    <VariantsTableTileWithData text={text} source={source} data={data} dates={dates}>
       {children}
     </VariantsTableTileWithData>
   );
@@ -95,10 +91,7 @@ function VariantsTableTileWithData({
     obtainedAt: dates.date_of_report_unix,
   };
 
-  const [date_start, date_end] = formatDateSpan(
-    { seconds: dates.date_start_unix },
-    { seconds: dates.date_end_unix }
-  );
+  const [date_start, date_end] = formatDateSpan({ seconds: dates.date_start_unix }, { seconds: dates.date_end_unix });
 
   const descriptionText = replaceVariablesInText(text.omschrijving, {
     date_start,
@@ -106,13 +99,9 @@ function VariantsTableTileWithData({
   });
 
   return (
-    <ChartTile
-      metadata={metadata}
-      title={text.titel}
-      description={descriptionText}
-    >
+    <ChartTile metadata={metadata} title={text.titel} description={descriptionText}>
       {children}
-      <Box overflow="auto" mb={3} mt={4}>
+      <Box overflow="auto" marginBottom={space[3]} marginTop={space[4]}>
         <VariantsTable rows={data} text={text} />
       </Box>
     </ChartTile>

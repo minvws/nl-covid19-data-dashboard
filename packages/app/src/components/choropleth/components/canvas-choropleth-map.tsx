@@ -163,8 +163,8 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
           style={{
             overflow: 'hidden',
             position: 'absolute',
-            left: 0,
-            right: 0,
+            left: '0',
+            right: '0',
           }}
         >
           <Outlines geoInfo={outlineGeoInfo} featureProps={featureProps} />
@@ -173,7 +173,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
           </Features>
           <HoveredFeature hoveredRef={hoveredRef} hover={hover} hoverCode={hoverCode} featureProps={featureProps} isKeyboardActive={isKeyboardActive} />
         </Stage>
-        <div style={{ position: 'absolute', left: 0, right: 0 }}>
+        <div style={{ position: 'absolute', left: '0', right: '0' }}>
           <img aria-hidden="true" src={oneTransparentPixelImage} width={width} height={height} useMap={`#${mapId}`} />
         </div>
       </div>
