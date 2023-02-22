@@ -17,6 +17,10 @@ export const themeTile = {
         collapsed: true,
       },
     },
+    {
+      title: 'KPI Waarde',
+      name: 'kpiValue',
+    },
   ],
   fields: [
     {
@@ -42,6 +46,15 @@ export const themeTile = {
       title: 'KPI waarde',
       name: 'kpiValue',
       type: 'localeString',
+      fieldset: 'kpiValue',
+    },
+    {
+      title: 'Verberg trend icoon',
+      name: 'hideTrendIcon',
+      type: 'boolean',
+      description: 'Wanneer aangevinkt, wordt het trend icoon niet getoond bij de KPI waarde.',
+      fieldset: 'kpiValue',
+      initialValue: false,
     },
     {
       title: 'Metadata label',

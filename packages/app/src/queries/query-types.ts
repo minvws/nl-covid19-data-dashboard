@@ -89,6 +89,7 @@ interface TopicalTile extends BaseTile {
   tileDate: string;
   kpiValue: string | null;
   cta: Cta;
+  hideTrendIcon: boolean;
   trendIcon: TrendIcon;
 }
 
