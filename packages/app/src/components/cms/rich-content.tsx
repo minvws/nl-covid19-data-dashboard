@@ -34,6 +34,8 @@ import { InlineKpi } from './inline-kpi';
 import { InlineTimeSeriesCharts } from './inline-time-series-charts';
 import { ChevronRight, Download, External as ExternalLinkIcon } from '@corona-dashboard/icons';
 import { space } from '~/style/theme';
+import { replaceVariablesInText } from '~/utils';
+import React from 'react';
 
 type ElementAlignment = 'start' | 'center' | 'end' | 'stretch';
 
@@ -42,6 +44,7 @@ interface RichContentProps {
   contentWrapper?: FunctionComponent;
   imageSizes?: string[][];
   elementAlignment?: ElementAlignment;
+  variableValue?: string | false;
 }
 
 interface ChartConfigNode {
@@ -80,7 +83,7 @@ interface KpisConfigNode {
   kpis: KpiConfigNode[];
 }
 
-export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignment }: RichContentProps) {
+export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignment, variableValue }: RichContentProps) {
   const ContentWrapper = contentWrapper ?? Fragment;
   const serializers = {
     types: {
@@ -93,7 +96,6 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
         return <ContentWrapper>{PortableText.defaultSerializers.types.block(props)}</ContentWrapper>;
       },
       image: (props: { node: ImageBlock | RichContentImageBlock }) => <ContentImage contentWrapper={contentWrapper} sizes={imageSizes} {...props} />,
-
       inlineCollapsible: (props: { node: InlineCollapsibleList }) => {
         if (!props.node.content.inlineBlockContent) return null;
 
@@ -225,6 +227,16 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
     marks: {
       inlineAttachment: InlineAttachmentMark,
       link: InlineLinkMark,
+      richContentVariable: (props: { children: string[] }) => {
+        const { children } = props;
+        return (
+          <>
+            {children.map((child, index) => (
+              <React.Fragment key={index}>{child.includes('{{kpiValue}}') && variableValue ? replaceVariablesInText(child, { kpiValue: variableValue }) : child}</React.Fragment>
+            ))}
+          </>
+        );
+      },
     },
   };
 
