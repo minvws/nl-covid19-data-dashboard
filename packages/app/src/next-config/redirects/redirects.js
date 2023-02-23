@@ -111,6 +111,22 @@ async function redirects() {
       destination: `/landelijk/ziekenhuizen-en-zorg`,
       permanent: true,
     },
+    // Redirects for unpublished articles - COR-1232
+    {
+      source: '/artikelen/wat-betekent-de-britse-variant-voor-nederland',
+      destination: '/artikelen',
+      permanent: true,
+    },
+    {
+      source: '/artikelen/hoe-weten-we-hoeveel-besmettelijke-mensen-er-zijn',
+      destination: '/artikelen',
+      permanent: true,
+    },
+    {
+      source: '/artikelen/waarom-mogelijke-situaties-van-besmetting-niet-altijd-te-zien-zijn-op-het-dashboard',
+      destination: '/artikelen',
+      permanent: true,
+    },
   ];
 }
 
