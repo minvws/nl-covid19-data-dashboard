@@ -38,3 +38,9 @@ exports
 
 # custom json folders
 /packages/app/public/json*
+
+# custom json files
+packages/cms/src/data/data-structure.ts
+packages/common/src/types/data.ts
+packages/app/src/components/choropleth/logic/vr-bounding-box-gm-codes.ts
+packages/app/src/locale/site-text.d.ts
