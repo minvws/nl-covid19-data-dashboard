@@ -13,7 +13,7 @@
     "lint": "echo 'Starting lint...' && yarn workspaces foreach run lint",
     "lint:fix": "yarn workspaces foreach run lint --fix",
     "format": "yarn workspaces foreach run format",
-    "dev": "yarn workspace @corona-dashboard/app dev",
+    "dev": "yarn bootstrap && yarn workspace @corona-dashboard/app dev",
     "download": "yarn workspace @corona-dashboard/app download",
     "start": "yarn workspace @corona-dashboard/app start",
     "check-all": "yarn lint && yarn typecheck && yarn validate-json-all && yarn test",
