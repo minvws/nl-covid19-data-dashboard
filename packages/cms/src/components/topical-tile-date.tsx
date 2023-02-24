@@ -10,6 +10,7 @@ type ShowDateProps = {
   type: { title: 'Nederlands' | 'Engels' };
   markers: ValidationMarker[];
   presence: FormFieldProps['__unstable_presence'];
+  value: string;
   onChange: (event: PatchEvent) => void;
   document: { themeTileDateConfig: ThemeTileDateConfig };
 };
@@ -26,9 +27,7 @@ const ShowDate = (props: ShowDateProps) => {
   const formattedDate = !isConfigValid ? '' : getTopicalTileDateConfig({ config: dateConfig, inputDate: new Date(), language: type.title });
 
   // The following line makes it possible to do realtime updates on this field with the new date configurations
-  const initFormattedDateValue = set(formattedDate);
-  onChange(PatchEvent.from(initFormattedDateValue));
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(props.value);
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
     const inputValue = event.currentTarget.value;
@@ -39,7 +38,7 @@ const ShowDate = (props: ShowDateProps) => {
   };
 
   return (
-    <FormField description={`Het resultaat van de tegeldatum-configuratie is: ${formattedDate}`} title={type.title} __unstable_markers={markers} __unstable_presence={presence}>
+    <FormField description={`Het resultaat van de tegeldatum-configuratie is: ${formattedDate}.`} title={type.title} __unstable_markers={markers} __unstable_presence={presence}>
       <TextInput onChange={handleChange} value={value === '' ? formattedDate : value} />
     </FormField>
   );
