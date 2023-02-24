@@ -1,2 +1,5 @@
 *.tsbuildinfo
 /dist
+
+# Auto generated files
+src/types/data.ts

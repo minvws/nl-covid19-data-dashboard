@@ -37,8 +37,10 @@ yarn-error.log*
 /*.code-workspace
 /debug.log
 
+# auto-generated files
 src/locale/*_export.json
 src/locale/site-text.d.ts
+src/data/data-structure.ts
 
 # Typescript compiler traces
 trace*
