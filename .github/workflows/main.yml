@@ -65,6 +65,9 @@ jobs:
       - name: Install packages
         run: yarn install
 
+      - name: Generate data types
+        run: yarn workspace @corona-dashboard/cli generate-data-types 
+
       - name: Build icon package
         run: yarn build:icons
 
@@ -78,9 +81,6 @@ jobs:
       - name: Import texts (production)
         if: ${{ env.BRANCH_NAME == 'master' }}
         run: yarn cms:lokalize-import:prd --clean-json
-
-      - name: Generate data types
-        run: yarn workspace @corona-dashboard/cli generate-data-types 
       
       - name: Bootstrap
         run: yarn bootstrap
