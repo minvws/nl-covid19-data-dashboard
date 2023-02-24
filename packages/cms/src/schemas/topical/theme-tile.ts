@@ -64,8 +64,7 @@ export const themeTile = {
     },
     {
       title: 'Tegeldatum',
-      description:
-        'Deze velden krijgen hun input van de tegeldatum-configuratie. Maar kunnen handmatig overschreven worden door een eigen tekst in te vullen. Om terug te gaan naar het gebruik van de configuratie kunnen deze velden leeg gemaakt worden.',
+      description: 'Deze velden krijgen hun input van de tegeldatum-configuratie. Om de configuratie te resetten kunnen deze velden leeg gemaakt worden.',
       name: 'tileDate',
       type: 'object',
       fields: supportedLanguages.map((lang) => ({
