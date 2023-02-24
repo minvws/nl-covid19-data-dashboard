@@ -7,7 +7,7 @@ import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
-import { mediaQueries, space } from '~/style/theme';
+import theme, { mediaQueries, space } from '~/style/theme';
 
 interface AnchorTileProps {
   title: string;
@@ -76,6 +76,7 @@ const Content = styled.div(
   css({
     flexGrow: 1,
     flex: '1 1 70%',
+    maxWidth: theme.sizes.maxWidthText,
   })
 );
 
