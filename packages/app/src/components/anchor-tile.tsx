@@ -97,7 +97,7 @@ const LinkContainer = styled.div`
 
   @media ${mediaQueries.md} {
     margin-top: 0;
-    justify-content: auto;
+    justify-content: normal;
   }
 
   @media ${mediaQueries.lg} {
