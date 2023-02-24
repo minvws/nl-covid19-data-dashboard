@@ -41,6 +41,7 @@ yarn-error.log*
 src/locale/*_export.json
 src/locale/site-text.d.ts
 src/data/data-structure.ts
+src/data/data-types.ts
 
 # Typescript compiler traces
 trace*

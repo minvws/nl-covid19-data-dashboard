@@ -57,6 +57,7 @@ function writeDefinitionsToFile(typeDefinitions: string[]) {
 
   fs.writeFileSync(outputFile, `${bannerComment}${typeDefinitions.join('\n')}`.replaceAll('"', "'"), {
     encoding: 'utf8',
+    flag: 'w',
   });
 
   console.info(`Written typescript definitions output to file '${outputFile}'`);
