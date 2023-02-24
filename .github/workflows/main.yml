@@ -66,7 +66,7 @@ jobs:
         run: yarn install
 
       - name: Auto generate files
-        run: yarn workspace @corona-dashboard/cli generate-data-structures;
+        run: yarn workspace @corona-dashboard/cli generate-data-types  ;
         
       - name: Build icon package
         run: yarn build:icons
@@ -83,7 +83,7 @@ jobs:
         run: yarn cms:lokalize-import:prd --clean-json
 
       - name: Bootstrap
-        run: yarn bootstrap
+        run: yarn bootstrap && yarn workspace @corona-dashboard/cli generate-data-structures
 
       - name: Typecheck all code
         run: yarn typecheck
