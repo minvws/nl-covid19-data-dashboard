@@ -65,6 +65,9 @@ jobs:
       - name: Install packages
         run: yarn install
 
+      - name: Auto generate files
+        run: yarn bootstrap && yarn cms:typecheck
+        
       - name: Build icon package
         run: yarn build:icons
 
@@ -78,9 +81,6 @@ jobs:
       - name: Import texts (production)
         if: ${{ env.BRANCH_NAME == 'master' }}
         run: yarn cms:lokalize-import:prd --clean-json
-
-      - name: Auto generate files
-        run: yarn bootstrap && yarn cms:typecheck
 
       - name: Typecheck all code
         run: yarn typecheck
