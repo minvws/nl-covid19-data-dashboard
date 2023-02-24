@@ -6,7 +6,7 @@ import { MaxWidth } from '~/components/max-width';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { InlineText, BoldText } from './typography';
 import { colors } from '@corona-dashboard/common';
-import theme, { space } from '~/style/theme';
+import { space, sizes } from '~/style/theme';
 
 interface NotificationBannerProps {
   title: string;
@@ -23,7 +23,7 @@ export function NotificationBanner({ title, description }: NotificationBannerPro
   return (
     <Box width="100%" backgroundColor={colors.gray2}>
       <MaxWidth paddingY={space[3]}>
-        <Box paddingX={{ _: space[3], sm: space[4] }} maxWidth={theme.sizes.maxWidthSiteWarning} display="flex" alignItems="flex-start" spacingHorizontal={3}>
+        <Box paddingX={{ _: space[3], sm: space[4] }} maxWidth={sizes.maxWidthSiteWarning} display="flex" alignItems="flex-start" spacingHorizontal={3}>
           <Box display="flex" minWidth="1.6rem" minHeight="1.6rem">
             <Warning />
           </Box>

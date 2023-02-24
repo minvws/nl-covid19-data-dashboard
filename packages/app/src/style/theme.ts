@@ -94,7 +94,7 @@ export const shadows = {
   tooltip: '0px 2px 12px rgba(0, 0, 0, 0.1)',
 } as const;
 
-const sizes = {
+export const sizes = {
   maxWidth: 1400,
   infoWidth: 1000,
   maxWidthSiteWarning: 930,
@@ -113,7 +113,6 @@ const theme = {
   colors,
   radii,
   shadows,
-  sizes,
 } as const;
 
 type Theme = typeof theme;

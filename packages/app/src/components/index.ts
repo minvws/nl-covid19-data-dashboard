@@ -22,7 +22,6 @@ export { KpiTile } from './kpi-tile';
 export { KpiValue } from './kpi-value';
 export { TwoKpiSection } from './two-kpi-section';
 export { LinkWithIcon } from './link-with-icon';
-export { MaxWidth } from './max-width';
 export { ChoroplethLegenda } from './choropleth-legenda';
 export { SEOHead } from './seo-head';
 export { PageKpi } from './page-kpi';
