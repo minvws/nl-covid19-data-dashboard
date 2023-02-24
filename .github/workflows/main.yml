@@ -79,6 +79,9 @@ jobs:
         if: ${{ env.BRANCH_NAME == 'master' }}
         run: yarn cms:lokalize-import:prd --clean-json
 
+      - name: Auto generate files
+        run: yarn build:common
+
       - name: Typecheck all code
         run: yarn typecheck
 
