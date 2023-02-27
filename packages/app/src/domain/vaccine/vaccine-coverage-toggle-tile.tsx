@@ -33,7 +33,6 @@ type VaccinationGradeToggleTypes = {
   description_booster_grade: string;
   description_booster_grade_not_available: string;
   description_vaccination_grade: string;
-  description_vaccination_one_shot: string;
   description_vaccination_one_shot_with_percentage: string;
   label: string;
 };
