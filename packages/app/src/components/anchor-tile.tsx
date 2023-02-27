@@ -1,7 +1,7 @@
 import { colors } from '@corona-dashboard/common';
 import { External as ExternalLinkIcon } from '@corona-dashboard/icons';
 import styled from 'styled-components';
-import { AnchorProps, Heading } from '~/components/typography';
+import { Anchor, AnchorProps, Heading } from '~/components/typography';
 import { Box } from '~/components/base';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
@@ -80,7 +80,7 @@ const Content = styled.div`
   max-width: ${sizes.maxWidthText}px;
 `;
 
-const StyledAnchor = styled.a<AnchorProps>`
+const StyledAnchor = styled(Anchor)<AnchorProps>`
   display: flex;
 `;
 
