@@ -37,9 +37,7 @@ export function AnchorTile({ title, href, label, children, external = false }: A
             </ExternalLink>
           ) : (
             <Link href={href} passHref>
-              <Anchor display="flex">
-                <span>{label}</span>
-              </Anchor>
+              <Anchor>{label}</Anchor>
             </Link>
           )}
         </LinkContainer>
