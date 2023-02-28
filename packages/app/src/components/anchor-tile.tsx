@@ -1,7 +1,7 @@
 import { colors } from '@corona-dashboard/common';
 import { External as ExternalLinkIcon } from '@corona-dashboard/icons';
 import styled from 'styled-components';
-import { AnchorProps, Heading } from '~/components/typography';
+import { Anchor, Heading } from '~/components/typography';
 import { Box } from '~/components/base';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
@@ -37,9 +37,7 @@ export function AnchorTile({ title, href, label, children, external = false }: A
             </ExternalLink>
           ) : (
             <Link href={href} passHref>
-              <StyledAnchor>
-                <span>{label}</span>
-              </StyledAnchor>
+              <Anchor>{label}</Anchor>
             </Link>
           )}
         </LinkContainer>
@@ -78,10 +76,6 @@ const Content = styled.div`
   flex-grow: 1;
   flex: 1 1 70%;
   max-width: ${sizes.maxWidthText}px;
-`;
-
-const StyledAnchor = styled.a<AnchorProps>`
-  display: flex;
 `;
 
 const LinkContainer = styled.div`
