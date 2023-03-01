@@ -10,7 +10,7 @@
    - Delete the JSON schema if the proto data is not used elsewhere.
    - Delete the Sanity schema/structure if the imported sanity content is not used elsewhere.
 
-3. ### delete the whole page file.
+3. ### delete the page file.
    - solve typescript errors
 
 4. ### follow up search for the page
@@ -24,6 +24,5 @@
    - ```yarn bootstrap```
    - ```yarn build:app```
    - ```yarn start```
-
 
 [Back to index](index.md)
