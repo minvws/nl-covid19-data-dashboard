@@ -5,8 +5,8 @@ import { countTrailingNullValues } from './count-trailing-null-values';
  * When the property parameter is defined, this property will be
  * checked for null on each item.
  *
- * @param values The given array
- * @param property Optional property to check
+ * @param values - The given array
+ * @param property - Optional property to check
  * @returns A new array without the trailing null values
  */
 export const trimTrailingNullValues = <T>(values: T[], property?: keyof T) => {
