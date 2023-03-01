@@ -11,6 +11,7 @@ import { countTrailingNullValues } from './count-trailing-null-values';
  */
 export const trimTrailingNullValues = <T>(values: T[], property?: keyof T) => {
   const numberOfTrailingNulls = countTrailingNullValues(values, property);
+  if (!numberOfTrailingNulls) return values;
 
   return values.slice(0, -numberOfTrailingNulls);
 };

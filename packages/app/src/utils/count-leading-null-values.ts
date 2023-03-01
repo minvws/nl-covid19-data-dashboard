@@ -10,7 +10,7 @@ import { isFilled, isPresent } from 'ts-is-present';
  * @returns The index of the last element in the array meeting the predicate
  */
 export const countLeadingNullValues = <T>(values: T[], property?: keyof T) => {
-  const predicate = isPresent(property) ? (value: T) => isFilled(value[property]) : (value: T) => isFilled(value);
+  const predicate = (value: T) => isFilled(isPresent(property) ? value[property] : value);
 
   return values.findIndex((value) => predicate(value));
 };
