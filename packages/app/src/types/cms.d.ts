@@ -151,33 +151,6 @@ interface RichContentImageBlock extends ImageBlock {
   caption?: string;
 }
 
-type MeasuresItems = {
-  icon?: string;
-  _key: string;
-  _type: 'measuresItems';
-  title: string;
-};
-
-type MeasuresCollection = {
-  icon?: string;
-  title: string;
-  measuresItems: MeasuresItems[];
-  _key: string;
-  _type: 'measuresCollection';
-};
-
-export type Measures = {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: 'measures';
-  _updatedAt: string;
-  icon: string;
-  title: string;
-  description: RichContentBlock[] | null;
-  collectionTitle: string;
-  measuresCollection: MeasuresCollection[];
-};
 declare module 'picosanity' {
   type QueryParams = { [key: string]: unknown };
 

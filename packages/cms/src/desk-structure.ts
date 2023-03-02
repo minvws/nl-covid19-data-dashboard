@@ -1,5 +1,5 @@
 import { StructureBuilder as S } from '@sanity/structure';
-import { BsCardChecklist, BsCardList, BsFillFileBarGraphFill, BsFillPuzzleFill, BsMap, BsHouseFill, BsThermometer, BsGearFill } from 'react-icons/bs';
+import { BsCardList, BsFillFileBarGraphFill, BsFillPuzzleFill, BsMap, BsHouseFill, BsThermometer, BsGearFill } from 'react-icons/bs';
 import { GrCircleInformation } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
@@ -25,13 +25,9 @@ const hiddenDocTypes = [
   'faqQuestion',
   'kpi',
   'kpiConfiguration',
-  'measures',
   'lokalizeString',
   'lokalizeSubject',
   'lokalizeText',
-  'measureTheme',
-  'measureTile',
-  'measureTileCollection',
   'overDitDashboard',
   'overRisicoNiveaus',
   'overRisicoNiveausNew',
@@ -71,7 +67,6 @@ export default () =>
       pagePartListItem(),
       lokalizeListItem(),
       elementsListItem(),
-      addListItem(BsCardChecklist, 'Maatregelen', 'measures'),
       addListItem(GrCircleInformation, 'Over dit dashboard', 'overDitDashboard'),
       addListItem(BsMap, 'Over de risiconiveaus', 'overRisicoNiveausNew'),
       S.listItem()
