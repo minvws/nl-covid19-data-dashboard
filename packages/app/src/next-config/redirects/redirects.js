@@ -43,11 +43,6 @@ async function redirects() {
       permanent: false,
     },
     {
-      source: '/veiligheidsregio/:code/maatregelen',
-      destination: '/veiligheidsregio/:code/geldende-adviezen',
-      permanent: true,
-    },
-    {
       source: '/regio',
       destination: '/veiligheidsregio',
       permanent: false,
@@ -97,11 +92,6 @@ async function redirects() {
     })),
     // Redirects for the NL pages
     {
-      source: '/landelijk/maatregelen',
-      destination: '/landelijk/geldende-adviezen',
-      permanent: true,
-    },
-    {
       source: '/landelijk/ziekenhuis-opnames',
       destination: `/landelijk/ziekenhuizen-en-zorg`,
       permanent: true,
@@ -125,6 +115,27 @@ async function redirects() {
     {
       source: '/artikelen/waarom-mogelijke-situaties-van-besmetting-niet-altijd-te-zien-zijn-op-het-dashboard',
       destination: '/artikelen',
+      permanent: true,
+    },
+    // Redirects for removal of recommanded advices page - COR-1431
+    {
+      source: '/veiligheidsregio/:code/maatregelen',
+      destination: '/',
+      permanent: true,
+    },
+    {
+      source: '/landelijk/maatregelen',
+      destination: '/',
+      permanent: true,
+    },
+    {
+      source: '/veiligheidsregio/:code/geldende-adviezen',
+      destination: '/',
+      permanent: true,
+    },
+    {
+      source: '/landelijk/geldende-adviezen',
+      destination: '/',
       permanent: true,
     },
   ];

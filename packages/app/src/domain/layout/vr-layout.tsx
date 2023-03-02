@@ -63,7 +63,7 @@ export function VrLayout(props: VrLayoutProps) {
     map: [
       ['development_of_the_virus', ['sewage_measurement', 'positive_tests', 'mortality']],
       ['consequences_for_healthcare', ['hospital_admissions', 'nursing_home_care']],
-      ['actions_to_take', ['vaccinations', 'current_advices']],
+      ['actions_to_take', ['vaccinations']],
       ['archived_metrics', ['disabled_care', 'elderly_at_home', 'compliance', 'source_investigation']],
     ],
   });
