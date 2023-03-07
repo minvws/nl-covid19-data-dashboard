@@ -22,7 +22,6 @@ import { TopicalArticlesList } from '~/domain/topical/components/topical-article
 import { TopicalHeader } from '~/domain/topical/components/topical-header';
 import { TopicalTile } from '~/domain/topical/components/topical-kpi-tile/topical-tile';
 import { TopicalLinksList } from '~/domain/topical/components/topical-links-list';
-import { TopicalMeasureTile } from '~/domain/topical/components/topical-measure-tile';
 import { TopicalSectionHeader } from '~/domain/topical/components/topical-section-header';
 import { TopicalThemeHeader } from '~/domain/topical/components/topical-theme-header';
 import { TrendIcon } from '~/domain/topical/types';
@@ -72,7 +71,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { topicalStructure } = content;
 
-  const { topicalConfig, measureTheme, thermometer, kpiThemes, weeklySummary } = topicalStructure;
+  const { topicalConfig, thermometer, kpiThemes, weeklySummary } = topicalStructure;
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -190,7 +189,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     gridRowGap={{ _: space[4], md: space[5] }}
                     marginBottom={{ _: space[4], sm: space[5] }}
                   >
-                    {theme.tiles.map((themeTile) => {
+                    {theme.tiles?.map((themeTile) => {
                       const sourceLabel = themeTile.sourceLabel ? replaceVariablesInText(themeTile.sourceLabel, { date: themeTile.tileDate }) : null;
                       return (
                         <TopicalTile
@@ -219,23 +218,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 </Box>
               );
             })}
-
-            <Box>
-              <Box marginBottom={space[4]}>
-                <TopicalThemeHeader title={measureTheme.title} subtitle={measureTheme.subTitle} icon={getFilenameToIconName(measureTheme.themeIcon) as TopicalIcon} />
-              </Box>
-              <Box
-                display="grid"
-                gridTemplateColumns={tileGridTemplate}
-                gridColumnGap={{ _: space[4], md: space[5] }}
-                gridRowGap={{ _: space[4], md: space[5] }}
-                marginBottom={space[5]}
-              >
-                {measureTheme.tiles.map((measureTile, index) => {
-                  return <TopicalMeasureTile icon={getFilenameToIconName(measureTile.tileIcon) as TopicalIcon} title={measureTile.description} key={index} />;
-                })}
-              </Box>
-            </Box>
           </Box>
         </MaxWidth>
 
