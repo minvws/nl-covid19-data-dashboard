@@ -182,30 +182,32 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   <Box marginBottom={space[4]}>
                     <TopicalThemeHeader title={theme.title} subtitle={theme.subTitle} icon={getFilenameToIconName(theme.themeIcon) as TopicalIcon} />
                   </Box>
-                  <Box
-                    display="grid"
-                    gridTemplateColumns={tileGridTemplate}
-                    gridColumnGap={{ _: space[4], md: space[5] }}
-                    gridRowGap={{ _: space[4], md: space[5] }}
-                    marginBottom={{ _: space[4], sm: space[5] }}
-                  >
-                    {theme.tiles?.map((themeTile) => {
-                      const sourceLabel = themeTile.sourceLabel ? replaceVariablesInText(themeTile.sourceLabel, { date: themeTile.tileDate }) : null;
-                      return (
-                        <TopicalTile
-                          hideTrendIcon={themeTile.hideTrendIcon}
-                          trendIcon={themeTile.trendIcon}
-                          title={themeTile.title}
-                          tileIcon={getFilenameToIconName(themeTile.tileIcon) as TopicalIcon}
-                          description={themeTile.description}
-                          cta={themeTile.cta}
-                          key={themeTile.title}
-                          kpiValue={themeTile.kpiValue}
-                          sourceLabel={sourceLabel}
-                        />
-                      );
-                    })}
-                  </Box>
+                  {theme.tiles && (
+                    <Box
+                      display="grid"
+                      gridTemplateColumns={tileGridTemplate}
+                      gridColumnGap={{ _: space[4], md: space[5] }}
+                      gridRowGap={{ _: space[4], md: space[5] }}
+                      marginBottom={{ _: space[4], sm: space[5] }}
+                    >
+                      {theme.tiles.map((themeTile) => {
+                        const sourceLabel = themeTile.sourceLabel ? replaceVariablesInText(themeTile.sourceLabel, { date: themeTile.tileDate }) : null;
+                        return (
+                          <TopicalTile
+                            hideTrendIcon={themeTile.hideTrendIcon}
+                            trendIcon={themeTile.trendIcon}
+                            title={themeTile.title}
+                            tileIcon={getFilenameToIconName(themeTile.tileIcon) as TopicalIcon}
+                            description={themeTile.description}
+                            cta={themeTile.cta}
+                            key={themeTile.title}
+                            kpiValue={themeTile.kpiValue}
+                            sourceLabel={sourceLabel}
+                          />
+                        );
+                      })}
+                    </Box>
+                  )}
                   {theme.links && (
                     <TopicalLinksList
                       labels={{
