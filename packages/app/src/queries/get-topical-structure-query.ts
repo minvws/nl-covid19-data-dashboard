@@ -57,17 +57,6 @@ export function getTopicalStructureQuery(locale: string) {
           },
         },
       },
-      'measureTheme': *[
-        _type == 'measureTheme' && !(_id in path('drafts.**'))
-      ][0]{
-        'title': title.${locale},
-        themeIcon,
-        'subTitle': subTitle.${locale},
-        'tiles': tiles[]->{
-          tileIcon,
-          'description': description.${locale}
-        },
-      },
       'thermometer': *[
         _type == 'thermometer' && !(_id in path('drafts.**'))
       ][0]{

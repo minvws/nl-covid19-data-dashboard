@@ -7,7 +7,6 @@ export interface TopicalSanityData {
   topicalConfig: TopicalConfig;
   weeklySummary: WeeklySummary;
   kpiThemes: KpiThemes;
-  measureTheme: MeasureTheme;
   thermometer: ThermometerConfig;
 }
 
@@ -65,9 +64,6 @@ interface Theme {
 
 interface WeeklySummary extends Theme {
   items: BaseTile[];
-}
-interface MeasureTheme extends Theme {
-  tiles: BaseTile[];
 }
 
 interface TopicalTheme extends Theme {

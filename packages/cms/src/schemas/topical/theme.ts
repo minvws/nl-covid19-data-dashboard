@@ -41,19 +41,16 @@ export const theme = {
       name: 'tiles',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'themeTile' } }],
-      validation: REQUIRED,
     },
     {
       title: 'Label voor mobiel',
       name: 'labelMobile',
       type: 'localeString',
-      validation: REQUIRED,
     },
     {
       title: 'Label voor desktop',
       name: 'labelDesktop',
       type: 'localeString',
-      validation: REQUIRED,
     },
     {
       title: 'Links',

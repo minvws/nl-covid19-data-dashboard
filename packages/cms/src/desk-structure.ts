@@ -142,7 +142,6 @@ export default () =>
               addListItem(BsGearFill, 'Weeksamenvatting', 'weeklySummary'),
               addListItem(BsThermometer, 'Thermometer', 'thermometer'),
               addListItem(BsGearFill, "KPI thema's", 'themeCollection'),
-              addListItem(BsGearFill, 'Advies thema', 'measureTheme'),
             ])
         ),
 
