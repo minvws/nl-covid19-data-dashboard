@@ -113,6 +113,7 @@ const theme = {
   colors,
   radii,
   shadows,
+  sizes,
 } as const;
 
 type Theme = typeof theme;
