@@ -117,27 +117,6 @@ async function redirects() {
       destination: '/artikelen',
       permanent: true,
     },
-    // Redirects for removal of recommanded advices page - COR-1431
-    {
-      source: '/veiligheidsregio/:code/maatregelen',
-      destination: '/',
-      permanent: true,
-    },
-    {
-      source: '/landelijk/maatregelen',
-      destination: '/',
-      permanent: true,
-    },
-    {
-      source: '/veiligheidsregio/:code/geldende-adviezen',
-      destination: '/',
-      permanent: true,
-    },
-    {
-      source: '/landelijk/geldende-adviezen',
-      destination: '/',
-      permanent: true,
-    },
   ];
 }
 
