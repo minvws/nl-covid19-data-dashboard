@@ -43,11 +43,6 @@ async function redirects() {
       permanent: false,
     },
     {
-      source: '/veiligheidsregio/:code/maatregelen',
-      destination: '/veiligheidsregio/:code/geldende-adviezen',
-      permanent: true,
-    },
-    {
       source: '/regio',
       destination: '/veiligheidsregio',
       permanent: false,
@@ -96,11 +91,6 @@ async function redirects() {
       permanent: true,
     })),
     // Redirects for the NL pages
-    {
-      source: '/landelijk/maatregelen',
-      destination: '/landelijk/geldende-adviezen',
-      permanent: true,
-    },
     {
       source: '/landelijk/ziekenhuis-opnames',
       destination: `/landelijk/ziekenhuizen-en-zorg`,
