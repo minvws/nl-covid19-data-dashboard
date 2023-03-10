@@ -1,5 +1,5 @@
 export type Option<T extends string> = {
-  value: T;
+  value: T | undefined;
   content?: React.ReactNode;
   label: string;
 };

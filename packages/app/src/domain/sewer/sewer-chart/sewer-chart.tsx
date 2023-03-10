@@ -9,7 +9,6 @@ import { ChartTile } from '~/components/chart-tile';
 import { RichContentSelect } from '~/components/rich-content-select';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
-import { LocationTooltip } from './components/location-tooltip';
 import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
 import { useIntl } from '~/intl';
@@ -72,7 +71,8 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
             rwzi_awzi_name: '__no_installations',
           },
         ],
-      } as SewerPerInstallationData)
+      } as SewerPerInstallationData),
+    'Deselecteren'
   );
 
   const router = useRouter();
@@ -164,8 +164,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
                 type: 'line',
                 metricProperty: 'selected_installation_rna_normalized',
                 label: selectedInstallation,
-                color: 'black',
-                style: 'dashed',
+                color: colors.orange1,
               },
               {
                 type: 'line',
@@ -173,18 +172,10 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
                 label: text.averagesLegendLabel,
                 shortLabel: text.averagesTooltipLabel,
                 color: colors.scale.blue[3],
-                nonInteractive: true,
               },
             ]}
-            formatTooltip={(data) => {
-              /**
-               * Silently fail when unable to find line configuration in location tooltip
-               */
-              if (data.config.find((x) => x.type === 'line')) {
-                return <LocationTooltip data={data} />;
-              }
-            }}
             dataOptions={dataOptions}
+            forceLegend
           />
         ) : (
           <TimeSeriesChart

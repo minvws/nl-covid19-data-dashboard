@@ -4,13 +4,7 @@
  * new-sewer-chart here later and rename it to logic.
  */
 
-import {
-  assert,
-  GmSewer,
-  NlSewer,
-  SewerPerInstallationData,
-  VrSewer,
-} from '@corona-dashboard/common';
+import { assert, GmSewer, NlSewer, SewerPerInstallationData, VrSewer } from '@corona-dashboard/common';
 import { set } from 'lodash';
 import { useMemo, useState } from 'react';
 
@@ -28,29 +22,19 @@ export type MergedSewerType = ReturnType<typeof mergeData>[number];
  * with different formats. In order to display them in the chart together we
  * need to convert them to format with the same type of timestamps.
  */
-export function mergeData(
-  dataAverages: VrSewer | GmSewer | NlSewer,
-  dataPerInstallation: SewerPerInstallationData,
-  selectedInstallation: string
-) {
-  const valuesForInstallation = dataPerInstallation.values.find(
-    (x) => x.rwzi_awzi_name === selectedInstallation
-  )?.values;
+export function mergeData(dataAverages: VrSewer | GmSewer | NlSewer, dataPerInstallation: SewerPerInstallationData, selectedInstallation: string) {
+  const valuesForInstallation = dataPerInstallation.values.find((x) => x.rwzi_awzi_name === selectedInstallation)?.values;
 
-  assert(
-    valuesForInstallation,
-    `[${mergeData.name}] Failed to find data for rwzi_awzi_name ${selectedInstallation}`
+  assert(valuesForInstallation, `[${mergeData.name}] Failed to find data for rwzi_awzi_name ${selectedInstallation}`);
+
+  const mergedValuesByTimestamp = valuesForInstallation.reduce<MergedValuesByTimestamp>(
+    (acc, v) =>
+      set(acc, v.date_unix, {
+        selected_installation_rna_normalized: v.rna_normalized,
+        average: null,
+      }),
+    {}
   );
-
-  const mergedValuesByTimestamp =
-    valuesForInstallation.reduce<MergedValuesByTimestamp>(
-      (acc, v) =>
-        set(acc, v.date_unix, {
-          selected_installation_rna_normalized: v.rna_normalized,
-          average: null,
-        }),
-      {}
-    );
 
   for (const value of dataAverages.values) {
     /**
@@ -58,15 +42,9 @@ export function mergeData(
      * the values are displayed when just viewing averages, and for this merged
      * set we'll need to use single dates.
      */
-    const date_unix =
-      'date_unix' in value
-        ? value.date_unix
-        : value.date_start_unix +
-          (value.date_end_unix - value.date_start_unix) / 2;
+    const date_unix = 'date_unix' in value ? value.date_unix : value.date_start_unix + (value.date_end_unix - value.date_start_unix) / 2;
 
-    const existingValue = mergedValuesByTimestamp[date_unix] as
-      | MergedValue
-      | undefined;
+    const existingValue = mergedValuesByTimestamp[date_unix] as MergedValue | undefined;
 
     /**
      * If we happen to fall exactly on an existing installation timestamp we
@@ -75,8 +53,7 @@ export function mergeData(
     if (existingValue) {
       mergedValuesByTimestamp[date_unix] = {
         average: value.average,
-        selected_installation_rna_normalized:
-          existingValue.selected_installation_rna_normalized,
+        selected_installation_rna_normalized: existingValue.selected_installation_rna_normalized,
       };
     } else {
       mergedValuesByTimestamp[date_unix] = {
@@ -102,16 +79,14 @@ export function mergeData(
  * processed format. This is used the by the new sewer water chart based on
  * TimeSeriesChart
  */
-export function useSewerStationSelectPropsSimplified(
-  data: SewerPerInstallationData
-) {
+export function useSewerStationSelectPropsSimplified(data: SewerPerInstallationData, deselectLabel: string) {
   const [value, setValue] = useState<string>();
   const options = useMemo(
-    () =>
-      data.values
-        .map((x) => ({ label: x.rwzi_awzi_name, value: x.rwzi_awzi_name }))
-        .sort((a, b) => a.label.localeCompare(b.label)),
-    [data.values]
+    () => [
+      { label: deselectLabel, value: undefined },
+      ...data.values.map((x) => ({ label: x.rwzi_awzi_name, value: x.rwzi_awzi_name })).sort((a, b) => a.label.localeCompare(b.label)),
+    ],
+    [data.values, deselectLabel]
   );
 
   const props = {
