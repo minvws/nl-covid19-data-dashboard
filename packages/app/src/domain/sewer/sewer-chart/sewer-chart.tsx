@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Warning } from '@corona-dashboard/icons';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { Text } from '~/components/typography';
 import { ChartTile } from '~/components/chart-tile';
 import { RichContentSelect } from '~/components/rich-content-select';
@@ -12,9 +12,11 @@ import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
+import { mediaQueries, space } from '~/style/theme';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
+import { ChartTimeControls } from '~/components/chart-time-controls';
+import styled from 'styled-components';
 
 interface SewerChartProps {
   /**
@@ -41,6 +43,11 @@ interface SewerChartProps {
     averagesLegendLabel: string;
     averagesTooltipLabel: string;
     valueAnnotation: string;
+    rwziSelectDropdown: {
+      dropdown_label_rwzi: string;
+      dropdown_label_timeselection: string;
+      select_none_label: string;
+    };
   };
   vrNameOrGmName?: string;
   incompleteDatesAndTexts?: {
@@ -72,7 +79,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
           },
         ],
       } as SewerPerInstallationData),
-    'Deselecteren'
+    text.rwziSelectDropdown.select_none_label
   );
 
   const router = useRouter();
@@ -89,6 +96,14 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
   const scopedGmName = commonTexts.gemeente_index.municipality_warning;
 
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
+
+  const [timeframe, setTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+
+  useEffect(() => {
+    if (setSewerTimeframe) {
+      setSewerTimeframe(timeframe);
+    }
+  }, [timeframe, setSewerTimeframe]);
 
   const dataOptions =
     incompleteDatesAndTexts && selectedInstallation === 'ZEEWOLDE'
@@ -125,25 +140,33 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
 
   return (
     <ChartTile
-      timeframeOptions={TimeframeOptionsList}
       title={text.title}
       metadata={{
         source: text.source,
       }}
       description={text.description}
-      onSelectTimeframe={setSewerTimeframe}
     >
-      {dataPerInstallation && (
-        <Box alignSelf="flex-start" marginBottom={space[3]} minWidth="207px">
-          <RichContentSelect
-            label={text.selectPlaceholder}
-            visuallyHiddenLabel
-            initialValue={selectedInstallation}
-            options={optionsWithContent}
-            onChange={(option) => onChange(option.value)}
-          />
-        </Box>
-      )}
+      <Spacer marginBottom={space[5]} />
+      <SelectBoxes display="flex" justifyContent="flex-start" marginBottom={space[5]}>
+        {TimeframeOptionsList && (
+          <Box>
+            <strong>{text.rwziSelectDropdown.dropdown_label_timeselection}</strong>
+            <ChartTimeControls timeframeOptions={TimeframeOptionsList} timeframe={timeframe} onChange={setTimeframe} />
+          </Box>
+        )}
+        {dataPerInstallation && (
+          <Box flexBasis={{ sm: '100%', lg: '50%', xl: '25%' }} minWidth="207px">
+            <strong>{text.rwziSelectDropdown.dropdown_label_rwzi}</strong>
+            <RichContentSelect
+              label={text.selectPlaceholder}
+              visuallyHiddenLabel
+              initialValue={selectedInstallation}
+              options={optionsWithContent}
+              onChange={(option) => onChange(option.value)}
+            />
+          </Box>
+        )}
+      </SelectBoxes>
       {scopedWarning && scopedGmName.toUpperCase() === selectedInstallation && (
         <Box marginTop={space[2]} marginBottom={space[4]}>
           <WarningTile variant="emphasis" message={scopedWarning} icon={Warning} isFullWidth />
@@ -199,3 +222,19 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
     </ChartTile>
   );
 };
+
+const SelectBoxes = styled(Box)`
+  gap: ${space[5]};
+
+  div {
+    min-width: 207px;
+    flex-basis: 25%;
+  }
+
+  @media ${mediaQueries.lg} {
+    flex-basis: 50%;
+  }
+  @media ${mediaQueries.sm} {
+    flex-basis: 100%;
+  }
+`;
