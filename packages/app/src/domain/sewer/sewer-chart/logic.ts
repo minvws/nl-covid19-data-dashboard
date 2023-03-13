@@ -80,12 +80,12 @@ export const mergeData = (dataAverages: VrSewer | GmSewer | NlSewer, dataPerInst
  * processed format. This is used the by the new sewer water chart based on
  * TimeSeriesChart
  */
-export function useSewerStationSelectPropsSimplified(data: SewerPerInstallationData, deselectLabel: string) {
+export const useSewerStationSelectPropsSimplified = (data: SewerPerInstallationData, deselectLabel: string) => {
   const [value, setValue] = useState<string>();
   const options = useMemo(
     () => [
-      { label: deselectLabel, value: undefined },
-      ...data.values.map((x) => ({ label: x.rwzi_awzi_name, value: x.rwzi_awzi_name })).sort((a, b) => a.label.localeCompare(b.label)),
+      { label: deselectLabel, value: 'average' },
+      ...data.values.map((selectValue) => ({ label: selectValue.rwzi_awzi_name, value: selectValue.rwzi_awzi_name })).sort((a, b) => a.label.localeCompare(b.label)),
     ],
     [data.values, deselectLabel]
   );
@@ -97,4 +97,4 @@ export function useSewerStationSelectPropsSimplified(data: SewerPerInstallationD
   };
 
   return props;
-}
+};

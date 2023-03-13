@@ -43,7 +43,7 @@ interface SewerChartProps {
     averagesLegendLabel: string;
     averagesTooltipLabel: string;
     valueAnnotation: string;
-    rwziSelectDropdown: {
+    rwziSelectDropdown?: {
       dropdown_label_rwzi: string;
       dropdown_label_timeselection: string;
       select_none_label: string;
@@ -79,7 +79,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
           },
         ],
       } as SewerPerInstallationData),
-    text.rwziSelectDropdown.select_none_label
+    text.rwziSelectDropdown?.select_none_label || ''
   );
 
   const router = useRouter();
@@ -150,13 +150,13 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
       <SelectBoxes display="flex" justifyContent="flex-start" marginBottom={space[5]}>
         {TimeframeOptionsList && (
           <Box>
-            <strong>{text.rwziSelectDropdown.dropdown_label_timeselection}</strong>
+            <strong>{text.rwziSelectDropdown?.dropdown_label_timeselection}</strong>
             <ChartTimeControls timeframeOptions={TimeframeOptionsList} timeframe={timeframe} onChange={setTimeframe} />
           </Box>
         )}
         {dataPerInstallation && (
           <Box>
-            <strong>{text.rwziSelectDropdown.dropdown_label_rwzi}</strong>
+            <strong>{text.rwziSelectDropdown?.dropdown_label_rwzi}</strong>
             <RichContentSelect
               label={text.selectPlaceholder}
               visuallyHiddenLabel
@@ -177,7 +177,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
          * If there is installation data, and an installation was selected we need to
          * convert the data to combine the two.
          */
-        dataPerInstallation && selectedInstallation ? (
+        dataPerInstallation && selectedInstallation && selectedInstallation !== 'average' ? (
           <TimeSeriesChart
             accessibility={accessibility}
             values={mergeData(dataAverages, dataPerInstallation, selectedInstallation)}

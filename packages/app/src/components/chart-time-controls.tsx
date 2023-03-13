@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
-import {
-  TimeframeOption,
-  TimeframeOptionsList,
-} from '@corona-dashboard/common';
+import { TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
 import { RichContentSelect } from '~/components/rich-content-select';
@@ -15,11 +12,7 @@ interface ChartTimeControlsProps {
 }
 
 export function ChartTimeControls(props: ChartTimeControlsProps) {
-  const {
-    onChange,
-    timeframe,
-    timeframeOptions = TimeframeOptionsList,
-  } = props;
+  const { onChange, timeframe, timeframeOptions = TimeframeOptionsList } = props;
   const { commonTexts } = useIntl();
 
   const selectOptions = useMemo(
