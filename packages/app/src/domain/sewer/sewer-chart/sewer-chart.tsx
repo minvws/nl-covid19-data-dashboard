@@ -224,17 +224,19 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
 };
 
 const SelectBoxes = styled(Box)`
-  gap: ${space[5]};
+  column-gap: ${space[5]};
+  row-gap: ${space[4]};
+  flex-wrap: wrap;
 
-  div {
+  > div {
     min-width: 207px;
-    flex-basis: 25%;
-  }
+    flex: 1 0;
 
-  @media ${mediaQueries.lg} {
-    flex-basis: 50%;
-  }
-  @media ${mediaQueries.sm} {
-    flex-basis: 100%;
+    @media ${mediaQueries.lg} {
+      flex: 0 33%;
+    }
+    @media ${mediaQueries.xl} {
+      flex: 0 25%;
+    }
   }
 `;
