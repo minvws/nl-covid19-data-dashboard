@@ -5,7 +5,6 @@
  */
 
 import { assert, GmSewer, NlSewer, SewerPerInstallationData, VrSewer } from '@corona-dashboard/common';
-import { set } from 'lodash';
 import { useMemo, useState } from 'react';
 
 type MergedValue = {
@@ -28,11 +27,13 @@ export function mergeData(dataAverages: VrSewer | GmSewer | NlSewer, dataPerInst
   assert(valuesForInstallation, `[${mergeData.name}] Failed to find data for rwzi_awzi_name ${selectedInstallation}`);
 
   const mergedValuesByTimestamp = valuesForInstallation.reduce<MergedValuesByTimestamp>(
-    (acc, v) =>
-      set(acc, v.date_unix, {
-        selected_installation_rna_normalized: v.rna_normalized,
+    (acc, installation) => ({
+      ...acc,
+      [installation.date_unix]: {
+        selected_installation_rna_normalized: installation.rna_normalized,
         average: null,
-      }),
+      },
+    }),
     {}
   );
 
