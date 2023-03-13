@@ -78,7 +78,7 @@ export function RichContentSelect<T extends string>(props: RichContentSelectProp
         <ListBox {...getListBoxProps()}>
           {options &&
             options.map((option, index) => (
-              <ListBoxOption key={option.value} {...getListBoxOptionsProps(index)}>
+              <ListBoxOption key={option.value || index} {...getListBoxOptionsProps(index)}>
                 <VisuallyHidden>
                   {
                     <InlineText>
