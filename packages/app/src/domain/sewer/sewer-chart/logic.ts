@@ -21,7 +21,7 @@ export type MergedSewerType = ReturnType<typeof mergeData>[number];
  * with different formats. In order to display them in the chart together we
  * need to convert them to format with the same type of timestamps.
  */
-export function mergeData(dataAverages: VrSewer | GmSewer | NlSewer, dataPerInstallation: SewerPerInstallationData, selectedInstallation: string) {
+export const mergeData = (dataAverages: VrSewer | GmSewer | NlSewer, dataPerInstallation: SewerPerInstallationData, selectedInstallation: string) => {
   const valuesForInstallation = dataPerInstallation.values.find((x) => x.rwzi_awzi_name === selectedInstallation)?.values;
 
   assert(valuesForInstallation, `[${mergeData.name}] Failed to find data for rwzi_awzi_name ${selectedInstallation}`);
@@ -73,7 +73,7 @@ export function mergeData(dataAverages: VrSewer | GmSewer | NlSewer, dataPerInst
       ...obj,
     }))
     .sort((a, b) => a.date_unix - b.date_unix);
-}
+};
 
 /**
  * Using the original data as input instead of the specific scatter plot
