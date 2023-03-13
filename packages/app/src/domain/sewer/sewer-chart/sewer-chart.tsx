@@ -155,7 +155,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
           </Box>
         )}
         {dataPerInstallation && (
-          <Box flexBasis={{ sm: '100%', lg: '50%', xl: '25%' }} minWidth="207px">
+          <Box>
             <strong>{text.rwziSelectDropdown.dropdown_label_rwzi}</strong>
             <RichContentSelect
               label={text.selectPlaceholder}
