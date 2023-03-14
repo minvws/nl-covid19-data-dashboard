@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Warning } from '@corona-dashboard/icons';
-import { Box, Spacer } from '~/components/base';
+import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
 import { ChartTile } from '~/components/chart-tile';
 import { RichContentSelect } from '~/components/rich-content-select';
@@ -144,8 +144,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
       }}
       description={text.description}
     >
-      <Spacer marginBottom={space[4]} />
-      <SelectBoxes display="flex" justifyContent="flex-start" marginBottom={space[5]}>
+      <SelectBoxes display="flex" justifyContent="flex-start" marginBottom={space[3]}>
         {TimeframeOptionsList && (
           <Box>
             <strong>{text.rwziSelectDropdown?.dropdown_label_timeselection}</strong>
