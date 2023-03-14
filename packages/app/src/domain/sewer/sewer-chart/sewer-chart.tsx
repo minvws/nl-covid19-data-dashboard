@@ -146,7 +146,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
       }}
       description={text.description}
     >
-      <Spacer marginBottom={space[5]} />
+      <Spacer marginBottom={space[4]} />
       <SelectBoxes display="flex" justifyContent="flex-start" marginBottom={space[5]}>
         {TimeframeOptionsList && (
           <Box>
