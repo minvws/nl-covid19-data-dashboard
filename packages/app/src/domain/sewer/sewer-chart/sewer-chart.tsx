@@ -97,12 +97,10 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
 
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
 
-  const [timeframe, setTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [timeframe, setTimeframe] = useState(TimeframeOption.ALL);
 
   useEffect(() => {
-    if (setSewerTimeframe) {
-      setSewerTimeframe(timeframe);
-    }
+    setSewerTimeframe(timeframe);
   }, [timeframe, setSewerTimeframe]);
 
   const dataOptions =
