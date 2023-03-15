@@ -48,6 +48,7 @@ interface SewerChartProps {
       dropdown_label_timeselection: string;
       select_none_label: string;
     };
+    rwziLabel?: string;
   };
   vrNameOrGmName?: string;
   incompleteDatesAndTexts?: {
@@ -183,7 +184,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
               {
                 type: 'line',
                 metricProperty: 'selected_installation_rna_normalized',
-                label: selectedInstallation,
+                label: text.rwziLabel ? `${text.rwziLabel} ${selectedInstallation}` : selectedInstallation,
                 color: colors.orange1,
               },
               {
