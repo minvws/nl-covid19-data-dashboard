@@ -174,6 +174,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               averagesLegendLabel: commonTexts.common.charts.averages_legend_label,
               averagesTooltipLabel: commonTexts.common.charts.weekly_averages_label,
               valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
+              rwziSelectDropdown: textGm.linechart_select,
             }}
             vrNameOrGmName={municipalityName}
             incompleteDatesAndTexts={textShared.zeewolde_incomplete_manualy_override}

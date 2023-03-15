@@ -9,13 +9,14 @@ import { ChartTile } from '~/components/chart-tile';
 import { RichContentSelect } from '~/components/rich-content-select';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
-import { LocationTooltip } from './components/location-tooltip';
 import { WarningTile } from '~/components/warning-tile';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
+import { mediaQueries, space } from '~/style/theme';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
+import { ChartTimeControls } from '~/components/chart-time-controls';
+import styled from 'styled-components';
 
 interface SewerChartProps {
   /**
@@ -42,6 +43,11 @@ interface SewerChartProps {
     averagesLegendLabel: string;
     averagesTooltipLabel: string;
     valueAnnotation: string;
+    rwziSelectDropdown?: {
+      dropdown_label_rwzi: string;
+      dropdown_label_timeselection: string;
+      select_none_label: string;
+    };
   };
   vrNameOrGmName?: string;
   incompleteDatesAndTexts?: {
@@ -72,7 +78,8 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
             rwzi_awzi_name: '__no_installations',
           },
         ],
-      } as SewerPerInstallationData)
+      } as SewerPerInstallationData),
+    text.rwziSelectDropdown?.select_none_label || ''
   );
 
   const router = useRouter();
@@ -89,6 +96,12 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
   const scopedGmName = commonTexts.gemeente_index.municipality_warning;
 
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
+
+  const [timeframe, setTimeframe] = useState(TimeframeOption.ALL);
+
+  useEffect(() => {
+    setSewerTimeframe(timeframe);
+  }, [timeframe, setSewerTimeframe]);
 
   const dataOptions =
     incompleteDatesAndTexts && selectedInstallation === 'ZEEWOLDE'
@@ -125,25 +138,32 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
 
   return (
     <ChartTile
-      timeframeOptions={TimeframeOptionsList}
       title={text.title}
       metadata={{
         source: text.source,
       }}
       description={text.description}
-      onSelectTimeframe={setSewerTimeframe}
     >
-      {dataPerInstallation && (
-        <Box alignSelf="flex-start" marginBottom={space[3]} minWidth="207px">
-          <RichContentSelect
-            label={text.selectPlaceholder}
-            visuallyHiddenLabel
-            initialValue={selectedInstallation}
-            options={optionsWithContent}
-            onChange={(option) => onChange(option.value)}
-          />
-        </Box>
-      )}
+      <SelectBoxes display="flex" justifyContent="flex-start" marginBottom={space[3]}>
+        {TimeframeOptionsList && (
+          <Box>
+            <strong>{text.rwziSelectDropdown?.dropdown_label_timeselection}</strong>
+            <ChartTimeControls timeframeOptions={TimeframeOptionsList} timeframe={timeframe} onChange={setTimeframe} />
+          </Box>
+        )}
+        {dataPerInstallation && (
+          <Box>
+            <strong>{text.rwziSelectDropdown?.dropdown_label_rwzi}</strong>
+            <RichContentSelect
+              label={text.selectPlaceholder}
+              visuallyHiddenLabel
+              initialValue={selectedInstallation}
+              options={optionsWithContent}
+              onChange={(option) => onChange(option.value)}
+            />
+          </Box>
+        )}
+      </SelectBoxes>
       {scopedWarning && scopedGmName.toUpperCase() === selectedInstallation && (
         <Box marginTop={space[2]} marginBottom={space[4]}>
           <WarningTile variant="emphasis" message={scopedWarning} icon={Warning} isFullWidth />
@@ -154,7 +174,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
          * If there is installation data, and an installation was selected we need to
          * convert the data to combine the two.
          */
-        dataPerInstallation && selectedInstallation ? (
+        dataPerInstallation && selectedInstallation && selectedInstallation !== 'average' ? (
           <TimeSeriesChart
             accessibility={accessibility}
             values={mergeData(dataAverages, dataPerInstallation, selectedInstallation)}
@@ -164,8 +184,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
                 type: 'line',
                 metricProperty: 'selected_installation_rna_normalized',
                 label: selectedInstallation,
-                color: 'black',
-                style: 'dashed',
+                color: colors.orange1,
               },
               {
                 type: 'line',
@@ -173,18 +192,10 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
                 label: text.averagesLegendLabel,
                 shortLabel: text.averagesTooltipLabel,
                 color: colors.scale.blue[3],
-                nonInteractive: true,
               },
             ]}
-            formatTooltip={(data) => {
-              /**
-               * Silently fail when unable to find line configuration in location tooltip
-               */
-              if (data.config.find((x) => x.type === 'line')) {
-                return <LocationTooltip data={data} />;
-              }
-            }}
             dataOptions={dataOptions}
+            forceLegend
           />
         ) : (
           <TimeSeriesChart
@@ -208,3 +219,21 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
     </ChartTile>
   );
 };
+
+const SelectBoxes = styled(Box)`
+  column-gap: ${space[5]};
+  row-gap: ${space[4]};
+  flex-wrap: wrap;
+
+  > div {
+    min-width: 207px;
+    flex: 1 0;
+
+    @media ${mediaQueries.lg} {
+      flex: 0 33%;
+    }
+    @media ${mediaQueries.xl} {
+      flex: 0 25%;
+    }
+  }
+`;

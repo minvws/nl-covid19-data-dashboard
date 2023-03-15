@@ -45,3 +45,12 @@ timestamp,action,key,document_id,move_to
 2023-03-08T14:22:45.816Z,delete,positief_geteste_personen.tooltip_labels.infected_per_100k,drafts.jF33EuwumlGuwav2FD3ZbQ,__
 2023-03-08T14:22:45.819Z,delete,regionaal_index.belangrijk_bericht,drafts.jF33EuwumlGuwav2FD3g7g,__
 2023-03-08T14:22:45.821Z,delete,veiligheidsregio_index.selecteer_toelichting,drafts.jF33EuwumlGuwav2FD3nGW,__
+2023-03-13T07:42:37.721Z,add,pages.sewer_page.gm.linechart_select_rwzi.dropdown_label,XwwkMu8B8bd2jFtuxdHHPe,__
+2023-03-13T07:42:38.743Z,add,pages.sewer_page.gm.linechart_select_rwzi.select_none_label,SIWTfLRtzTv41yDNBWGVLm,__
+2023-03-13T09:41:44.493Z,add,pages.sewer_page.gm.linechart_select.dropdown_label_rwzi,z1B5btfwJAFXTOIW9q7H8r,__
+2023-03-13T09:41:45.618Z,add,pages.sewer_page.gm.linechart_select.dropdown_label_timeselection,z1B5btfwJAFXTOIW9q7HwP,__
+2023-03-13T09:41:46.521Z,add,pages.sewer_page.gm.linechart_select.select_none_label,SIWTfLRtzTv41yDNBWqalW,__
+2023-03-13T09:41:46.521Z,delete,pages.sewer_page.gm.linechart_select_rwzi.dropdown_label,XwwkMu8B8bd2jFtuxdHHPe,__
+2023-03-13T09:41:46.521Z,delete,pages.sewer_page.gm.linechart_select_rwzi.select_none_label,SIWTfLRtzTv41yDNBWGVLm,__
+2023-03-13T17:06:59.479Z,add,common.accessibility.charts.hospital_admissions_region_choropleth.description,YzrXb3vQYHnZxtu61Xgzap,__
+2023-03-13T17:06:59.480Z,delete,accessibility.charts.hospital_admissions_region_choropleth.description,G1DXw0RdifOml06twMjbPq,__
