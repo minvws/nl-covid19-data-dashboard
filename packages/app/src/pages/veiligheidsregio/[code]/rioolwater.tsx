@@ -65,7 +65,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout vrName={vrName}>
+      <VrLayout>
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.development_of_the_virus.title}

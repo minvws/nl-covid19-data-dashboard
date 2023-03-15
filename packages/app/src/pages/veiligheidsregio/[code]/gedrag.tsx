@@ -78,7 +78,7 @@ const BehaviorPageVr = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout vrName={vrName}>
+      <VrLayout>
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.archived_metrics.title}
