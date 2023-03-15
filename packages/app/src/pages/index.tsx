@@ -4,7 +4,7 @@ import { css } from '@styled-system/css';
 import { GetStaticPropsContext } from 'next';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import { MaxWidth } from '~/components';
+import { MaxWidth } from '~/components/max-width';
 import { Box, Spacer } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { CollapsibleSection } from '~/components/collapsible';
@@ -22,7 +22,6 @@ import { TopicalArticlesList } from '~/domain/topical/components/topical-article
 import { TopicalHeader } from '~/domain/topical/components/topical-header';
 import { TopicalTile } from '~/domain/topical/components/topical-kpi-tile/topical-tile';
 import { TopicalLinksList } from '~/domain/topical/components/topical-links-list';
-import { TopicalMeasureTile } from '~/domain/topical/components/topical-measure-tile';
 import { TopicalSectionHeader } from '~/domain/topical/components/topical-section-header';
 import { TopicalThemeHeader } from '~/domain/topical/components/topical-theme-header';
 import { TrendIcon } from '~/domain/topical/types';
@@ -72,7 +71,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { topicalStructure } = content;
 
-  const { topicalConfig, measureTheme, thermometer, kpiThemes, weeklySummary } = topicalStructure;
+  const { topicalConfig, thermometer, kpiThemes, weeklySummary } = topicalStructure;
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -183,30 +182,32 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   <Box marginBottom={space[4]}>
                     <TopicalThemeHeader title={theme.title} subtitle={theme.subTitle} icon={getFilenameToIconName(theme.themeIcon) as TopicalIcon} />
                   </Box>
-                  <Box
-                    display="grid"
-                    gridTemplateColumns={tileGridTemplate}
-                    gridColumnGap={{ _: space[4], md: space[5] }}
-                    gridRowGap={{ _: space[4], md: space[5] }}
-                    marginBottom={{ _: space[4], sm: space[5] }}
-                  >
-                    {theme.tiles.map((themeTile) => {
-                      const sourceLabel = themeTile.sourceLabel ? replaceVariablesInText(themeTile.sourceLabel, { date: themeTile.tileDate }) : null;
-                      return (
-                        <TopicalTile
-                          hideTrendIcon={themeTile.hideTrendIcon}
-                          trendIcon={themeTile.trendIcon}
-                          title={themeTile.title}
-                          tileIcon={getFilenameToIconName(themeTile.tileIcon) as TopicalIcon}
-                          description={themeTile.description}
-                          cta={themeTile.cta}
-                          key={themeTile.title}
-                          kpiValue={themeTile.kpiValue}
-                          sourceLabel={sourceLabel}
-                        />
-                      );
-                    })}
-                  </Box>
+                  {theme.tiles && (
+                    <Box
+                      display="grid"
+                      gridTemplateColumns={tileGridTemplate}
+                      gridColumnGap={{ _: space[4], md: space[5] }}
+                      gridRowGap={{ _: space[4], md: space[5] }}
+                      marginBottom={{ _: space[4], sm: space[5] }}
+                    >
+                      {theme.tiles.map((themeTile) => {
+                        const sourceLabel = themeTile.sourceLabel ? replaceVariablesInText(themeTile.sourceLabel, { date: themeTile.tileDate }) : null;
+                        return (
+                          <TopicalTile
+                            hideTrendIcon={themeTile.hideTrendIcon}
+                            trendIcon={themeTile.trendIcon}
+                            title={themeTile.title}
+                            tileIcon={getFilenameToIconName(themeTile.tileIcon) as TopicalIcon}
+                            description={themeTile.description}
+                            cta={themeTile.cta}
+                            key={themeTile.title}
+                            kpiValue={themeTile.kpiValue}
+                            sourceLabel={sourceLabel}
+                          />
+                        );
+                      })}
+                    </Box>
+                  )}
                   {theme.links && (
                     <TopicalLinksList
                       labels={{
@@ -219,23 +220,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 </Box>
               );
             })}
-
-            <Box>
-              <Box marginBottom={space[4]}>
-                <TopicalThemeHeader title={measureTheme.title} subtitle={measureTheme.subTitle} icon={getFilenameToIconName(measureTheme.themeIcon) as TopicalIcon} />
-              </Box>
-              <Box
-                display="grid"
-                gridTemplateColumns={tileGridTemplate}
-                gridColumnGap={{ _: space[4], md: space[5] }}
-                gridRowGap={{ _: space[4], md: space[5] }}
-                marginBottom={space[5]}
-              >
-                {measureTheme.tiles.map((measureTile, index) => {
-                  return <TopicalMeasureTile icon={getFilenameToIconName(measureTile.tileIcon) as TopicalIcon} title={measureTile.description} key={index} />;
-                })}
-              </Box>
-            </Box>
           </Box>
         </MaxWidth>
 

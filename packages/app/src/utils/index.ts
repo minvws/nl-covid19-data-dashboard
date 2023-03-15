@@ -8,7 +8,6 @@ export { getVrForMunicipalityCode } from './get-vr-for-municipality-code';
 export { countTrailingNullValues } from './count-trailing-null-values';
 export { cutValuesFromTimeframe } from './cut-values-from-timeframe';
 export { getBoundaryDateStartUnix } from './get-boundary-date-start-unix';
-export { trimNullValues } from './trim-null-values';
 export { getAverageSplitPoints } from './get-avarage-split-points';
 export { keys } from './keys';
 export { getFilenameToIconName } from './get-filename-to-icon-name';

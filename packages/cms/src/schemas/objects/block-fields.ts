@@ -48,6 +48,19 @@ export const blockFields = [
           title: 'Bestand uploaden',
           icon: MdAttachFile,
         },
+        {
+          name: 'richContentVariable',
+          type: 'object',
+          title: 'Rich content variable',
+          fields: [
+            {
+              name: 'Variable naam',
+              type: 'string',
+              title: 'variableName',
+              hidden: true,
+            },
+          ],
+        },
       ],
     },
   },
