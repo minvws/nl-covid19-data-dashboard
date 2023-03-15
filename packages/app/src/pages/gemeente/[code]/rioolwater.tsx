@@ -2,7 +2,6 @@ import { NlSewer } from '@corona-dashboard/common';
 import { Experimenteel, Rioolvirus } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
-import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -132,15 +131,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               </Text>
 
               <Markdown content={textGm.extra_uitleg} />
-
-              <CollapsibleContent label={commonTexts.gemeente_index.population_count_explanation_title}>
-                <Text>
-                  {replaceComponentsInText(textGm.population_count_explanation, {
-                    municipalityName: <strong>{municipalityName}</strong>,
-                    value: <strong>{formatNumber(sewerAverages.last_value.average)}</strong>,
-                  })}
-                </Text>
-              </CollapsibleContent>
             </KpiTile>
 
             <KpiTile
@@ -175,6 +165,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               averagesTooltipLabel: commonTexts.common.charts.weekly_averages_label,
               valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
               rwziSelectDropdown: textGm.linechart_select,
+              rwziLabel: textShared.RWZI_label,
             }}
             vrNameOrGmName={municipalityName}
             incompleteDatesAndTexts={textShared.zeewolde_incomplete_manualy_override}
