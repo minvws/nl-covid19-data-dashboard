@@ -21,6 +21,15 @@ export const themeTile = {
       title: 'KPI Waarde',
       name: 'kpiValue',
     },
+    {
+      title: 'Thema tegeldatum-configuratie',
+      name: 'theme-tile-date-config',
+      description: 'Klik op het label om de velden te tonen.',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
   ],
   fields: [
     {
@@ -58,14 +67,13 @@ export const themeTile = {
     },
     {
       title: 'Metadata label',
-      description: 'Bij {{DATE}} wordt de tekst geplaatst van het tegeldatumveld. Deze kan handmatig overschreven worden.',
+      description: 'Bij {{date}} wordt de tekst geplaatst van het tegeldatumveld. Deze kan handmatig overschreven worden.',
       name: 'sourceLabel',
       type: 'localeString',
     },
     {
       title: 'Tegeldatum',
-      description:
-        'Deze velden krijgen hun input van de tegeldatum-configuratie. Maar kunnen handmatig overschreven worden door een eigen tekst in te vullen. Om terug te gaan naar het gebruik van de configuratie kunnen deze velden leeg gemaakt worden.',
+      description: 'Deze velden krijgen hun input van de tegeldatum-configuratie. Om de configuratie te resetten kunnen deze velden leeg gemaakt worden.',
       name: 'tileDate',
       type: 'object',
       fields: supportedLanguages.map((lang) => ({

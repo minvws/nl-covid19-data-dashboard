@@ -28,7 +28,7 @@ type RichContentSelectProps<T extends string> = {
  * Implementation adapted from:
  * https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html
  */
-export function RichContentSelect<T extends string>(props: RichContentSelectProps<T>) {
+export const RichContentSelect = <T extends string>(props: RichContentSelectProps<T>) => {
   const { label, options, onChange, initialValue, visuallyHiddenLabel, useContentForSelectedOption: richContentForSelectedValue } = props;
 
   const { labelId, selectedOption, getComboboxProps, getListBoxProps, getListBoxOptionsProps } = useRichContentSelect(options, onChange, initialValue);
@@ -95,4 +95,4 @@ export function RichContentSelect<T extends string>(props: RichContentSelectProp
       </SelectBoxRoot>
     </Box>
   );
-}
+};

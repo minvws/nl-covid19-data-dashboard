@@ -76,7 +76,7 @@ export const TopicalTile = ({ title, tileIcon, trendIcon, description, kpiValue,
           padding={{ _: space[3], xs: space[4] }}
           paddingTop={formattedKpiValue ? { _: space[2] } : undefined}
         >
-          <RichContent blocks={description} elementAlignment="start" />
+          <RichContent blocks={description} elementAlignment="start" variableValue={formattedKpiValue} />
         </Box>
       </Box>
 

@@ -4,7 +4,7 @@ import { css } from '@styled-system/css';
 import { GetStaticPropsContext } from 'next';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import { MaxWidth } from '~/components';
+import { MaxWidth } from '~/components/max-width';
 import { Box, Spacer } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { CollapsibleSection } from '~/components/collapsible';

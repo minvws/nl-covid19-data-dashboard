@@ -19,6 +19,7 @@ import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLok
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { trimLeadingNullValues } from '~/utils/trim-leading-null-values';
 
 const pageMetrics = [
   'difference.hospital_lcps__beds_occupied_covid',
@@ -156,7 +157,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               title={textNl.hospitals.chart_beds_occupied.title}
               description={textNl.hospitals.chart_beds_occupied.description}
               metadata={{ source: textNl.sources.lnaz }}
-              timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+              timeframeInitialValue={hospitalBedsOccupiedOverTimeTimeframe}
               onSelectTimeframe={setHospitalBedsOccupiedOverTimeTimeframe}
               toggle={{
                 initialValue: selectedBedsOccupiedOverTimeChart,
@@ -208,7 +209,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               description={textNl.icu.chart_beds_occupied.description}
               metadata={{ source: textNl.sources.lnaz }}
               timeframeOptions={TimeframeOptionsList}
-              timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+              timeframeInitialValue={intensiveCareBedsTimeframe}
               onSelectTimeframe={setIntensiveCareBedsTimeframe}
               toggle={{
                 initialValue: selectedBedsOccupiedOverTimeChart,
@@ -279,7 +280,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               title={textNl.hospitals.chart_patient_influx.title}
               description={textNl.hospitals.chart_patient_influx.description}
               metadata={{ source: textNl.sources.lnaz }}
-              timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+              timeframeInitialValue={hospitalPatientInfluxOverTimeTimeframe}
               onSelectTimeframe={setHospitalPatientInfluxOverTimeTimeframe}
               toggle={{
                 initialValue: selectedPatientInfluxOverTimeChart,
@@ -291,7 +292,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{
                   key: 'hospital_patient_influx_over_time_chart',
                 }}
-                values={data.hospital_lcps.values}
+                values={trimLeadingNullValues(data.hospital_lcps.values, 'influx_covid_patients')}
                 timeframe={hospitalPatientInfluxOverTimeTimeframe}
                 seriesConfig={[
                   {
@@ -320,7 +321,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               title={textNl.icu.chart_patient_influx.title}
               description={textNl.icu.chart_patient_influx.description}
               metadata={{ source: textNl.sources.lnaz }}
-              timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+              timeframeInitialValue={intensiveCarePatientInfluxOverTimeTimeframe}
               onSelectTimeframe={setIntensiveCarePatientInfluxOverTimeTimeframe}
               toggle={{
                 initialValue: selectedPatientInfluxOverTimeChart,
@@ -332,7 +333,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{
                   key: 'intensive_care_patient_influx_over_time_chart',
                 }}
-                values={data.intensive_care_lcps.values}
+                values={trimLeadingNullValues(data.intensive_care_lcps.values, 'influx_covid_patients')}
                 timeframe={intensiveCarePatientInfluxOverTimeTimeframe}
                 seriesConfig={[
                   {
