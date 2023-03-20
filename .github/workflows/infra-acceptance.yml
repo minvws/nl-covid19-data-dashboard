@@ -4,6 +4,7 @@ on:
     branches:
       - 'release/*'
       - 'hotfix/*'
+      - 'epic/*'
 
 jobs:
   trigger-acceptance-build:
