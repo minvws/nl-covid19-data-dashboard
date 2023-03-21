@@ -166,7 +166,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               datumsText: textNl.dates,
               dateOrRange: data.vaccine_administered_total.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
-              dataSources: [],
+              dataSources: [textNl.bronnen.rivm],
             }}
             pageLinks={content.links}
             referenceLink={textNl.information_block.reference.href}
