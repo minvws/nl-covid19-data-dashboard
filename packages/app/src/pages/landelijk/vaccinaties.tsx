@@ -176,7 +176,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             title={textShared.vaccination_grade_tile.autumn_labels.title}
             description={textShared.vaccination_grade_tile.autumn_labels.description}
             source={textShared.vaccination_grade_tile.autumn_labels.source}
-            descriptionFooter={textShared.vaccination_grade_tile.autumn_labels.description_footer}
             coverageData={[
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_60_plus_vaccinated,
@@ -205,7 +204,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
             description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
             source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
-            descriptionFooter={textShared.vaccination_grade_tile.fully_vaccinated_labels.description_footer}
             coverageData={[
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_vaccinated,
@@ -236,7 +234,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             description={replaceVariablesInText(textNl.vaccine_campaigns.description, {
               vaccinePlanned: formatNumber(data.vaccine_planned.doses),
             })}
-            descriptionFooter={textNl.vaccine_campaigns.description_footer}
             headers={textNl.vaccine_campaigns.headers}
             campaigns={data.vaccine_campaigns.vaccine_campaigns}
             campaignDescriptions={textNl.vaccine_campaigns.campaigns}
@@ -296,7 +293,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
                 title={textNl.vaccination_grade_toggle_tile.title}
                 source={textNl.vaccination_grade_toggle_tile.source}
-                descriptionFooter={textNl.vaccination_grade_toggle_tile.description_footer}
                 dateUnix={vaccineCoverageEstimatedArchivedLastValue.date_unix}
                 age18Plus={{
                   fully_vaccinated: vaccineCoverageEstimatedArchivedLastValue.age_18_plus_fully_vaccinated,
@@ -321,7 +317,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 description={replaceVariablesInText(textNl.vaccine_campaigns.description_archived, {
                   vaccinePlanned: formatNumber(data.vaccine_planned_archived_20220908.doses),
                 })}
-                descriptionFooter={textNl.vaccine_campaigns.description_footer}
                 headers={textNl.vaccine_campaigns.headers}
                 campaigns={data.vaccine_campaigns_archived_20220908.vaccine_campaigns}
                 campaignDescriptions={textNl.vaccine_campaigns.campaigns}
