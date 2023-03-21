@@ -7,7 +7,7 @@ give a broad perspective on the subject.
 ## Contact
 
 If you want to contact the dashboard team, feel free to open an issue for
-technical questions, bug reports or security findings. If you have a generic question or remark about the
+technical questions, bug reports, or security findings. If you have a generic question or remark about the
 corona policy of the Dutch government, please consult the [frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) or [contact page](https://coronadashboard.rijksoverheid.nl/contact) on the dashboard.
 
 ## Development & Contribution process
@@ -45,7 +45,7 @@ $ yarn dev
 
 ## Usage
 
-In this project we use Yarn instead of NPM, so the documentation assumes you
+In this project, we use Yarn instead of NPM, so the documentation assumes you
 have the `yarn` executable installed on your system.
 
 If you would like to run the code on your local machine check out the readme
@@ -57,15 +57,15 @@ documentation of the [app](/packages/app/README.md) and (optionally the)
 Without describing in detail all the rules we tend to follow here are some worth
 noting:
 
-#### General
+### General
 
 - All filenames are written in kebab-case.
-- We use named exports where possible. They improve typing and help refactoring.
+- We use named exports where possible. They improve typing and help with refactoring.
 - We aim to stop using barrel files (using an index file in a folder to bundle exports for the consuming code).
   Barrel files require manual maintenance and are therefore prone to neglect if forgotten.
-  Also, imports are auto-generated and collapsable by the IDE thus gives us no advantage.
+  Also, imports are auto-generated and collapsable by the IDE thus barrel files give us no advantage.
 - When writing complex components, we like them to have their own folder with
-  sub-folders for `logic` and `components` that contain code which is only used
+  sub-folders for `logic` and `components` containing code which is only used
   internally by the component. In the case of logic it can also be a file
   `logic.ts` if there is not a lot of business logic.
   When a component and sub-components share some
@@ -83,7 +83,7 @@ noting:
 - Data schema properties and locale keys for the CMS are all snake_cased. These could be
   viewed as external data sources / APIs.
 - Event props follow a pattern of `onEventName` for the component props API.
-  For handling the event we aim to use a name that describes what the function does as opposed to use `handleEventNameSubject`.
+  For handling the event we aim to use a name that describes what the function does as opposed to using `handleEventNameSubject`.
   Specifically, if the function is not specifically created to handle an event
   or if the function doings can comfortably be described in a function name.
 - We prefer to use function expressions over named function declarations.
@@ -92,23 +92,23 @@ noting:
 - Short if-statements are okay to put on a single line, especially if it only calls a single command: `if (isGoingToHappening()) doSomething();`
 - We avoid using `boolean && doSomething();` inside the component's JavaScript logic, but do use it inside the component's JSX (`{boolean && ( ... )}`) to conditionally render (parts of) the component.
 - We avoid unnecessary short-hand variable names like
-  `arr` for array or `i` for index or `acc` for a `reduce` accumulator.
-
-- Completely separate Javascript logic from HTML/JSX. This means also remove maps from the JSX. Additionally, if you have nested maps extract them into components passing the required data to map to the component.
+  `arr` for arrays, or `i` for index, or `acc` for a `reduce` accumulator.
+- Completely separate Javascript logic from HTML/JSX. This also means removing maps from the JSX. Additionally, if you have nested maps extract them into components passing the required data to map to the component.
 - We prefer early returns. If statements should be on multiple lines, so no single line if statements.
 
-#### Styling
-- We write Styled Components using its OOTB tagged template literal functions instead of using an additional layer of the Styled System's `css()` method. This method improves readability, makes code easier to understand and sticks to the fundamentals of CSS. This method still allows for usage of Styled System's theme definitions, yet removes a dependency on the actual package.
-- We included a `Styled`-prefix when creating Styled Components. This makes them easily distinguishable from other components. Examples would be `StyledInput` or `StyledTile`.
-- We avoid using magic numbers in code, be it logic, JSX or styles. Magic numbers are often derived from the theme defined by Styled System and resolve to properties such as spacing and font-sizes, but are unclear on its own. Instead, we import the desired property and refer to the index in that properties array. An example would be `padding: 3` (undesired) vs `padding: space[3]` (desired).
+### Styling
 
-#### GIT
+- We write Styled Components using its OOTB tagged template literal functions instead of using an additional layer of the Styled System's `css()` method. This method improves readability, makes code easier to understand, and sticks to the fundamentals of CSS. This method still allows for usage of Styled System's theme definitions, yet removes a dependency on the actual package.
+- We avoid using magic numbers in code, be it logic, JSX, or styles. Magic numbers are often derived from the theme defined by Styled System and resolve to properties such as spacing and font-sizes, but are unclear on their own. Instead, we import the desired property and refer to the index in that properties array. An example would be `padding: 3` (undesired) vs `padding: space[3]` (desired).
+
+### GIT
 
 - We do not have a hard preference or requirement for using `git rebase` or `git merge`. Developers should follow what works best for them, but it should be noted that both methods are allowed and actively used in this project.
-- We do not have a hard preference or requirement for squashing a multitude of git commits, but it can be useful to apply this when creating a pull request. This action should be used on an 'as-needed basis': if a pull request grows large due to a large amount of commits, it might improve reviewability when multiple commits are squashed. It should be noted that pull requests are squashed when merged, aside from pull requests to `master`. This is to keep a clear view of features and fixes that were merged as part of a release.
+- We do not have a hard preference or requirement for squashing a large number of git commits, but it can be useful to apply this when creating a pull request. This action should be used on an 'as-needed basis': if a pull request grows large due to a large amount of commits, it might improve reviewability when multiple commits are squashed. It should be noted that pull requests are squashed when merged, aside from pull requests to `master`. This is to keep a clear view of features and fixes that were merged as part of a release.
 - Continuing on the above: we should write a comprehensive commit message when squash merging a pull request. This message should be a (filtered) summary of the commits on the branch.
-
+- It sometimes happens that features, or more so epics, need to be released as a whole because of dependencies within the different chunks of that feature or epic. In this case, it is wise to create an `epic/` branch which serves as a base for the different features to be implemented as part of the epic. Branching strategies for this branch are the same as `develop`: features (`feature/`) are branched off of and merged back to the `epic/` branch. The `epic/` branch, as a whole, is merged into `develop` once it is ready. If the implementation of an epic spans multiple releases, individual releases should also be merged into the `epic/` branch in order to keep it up to date. In other words: it also helps to regularly sync `develop` with the `epic/` branch as to prevent conflicts in the end.
 - We use the following branch names:
+  - `epic/COR-XXXX-descriptive-name-of-epic-branch` for epics
   - `feature/COR-XXX-descriptive-name-of-ticket-branch` for features
   - `bugfix/COR-XXX-descriptive-name-of-ticket-branch` for bug fixes
   - `hotfix/COR-XXX-descriptive-name-of-ticket-branch` for hotfixes
