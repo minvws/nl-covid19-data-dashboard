@@ -1,4 +1,5 @@
 timestamp,action,key,document_id,move_to
+2023-03-21T10:10:15.918Z,delete,common.common.veiligheidsregio_label,jF33EuwumlGuwav2FD3gOS,__
 2023-03-21T10:20:24.789Z,add,common.variant_codes.XBB_1_9,RyCRpDTGPDLYu6gaddCWdr,__
 2023-03-21T10:20:26.048Z,add,common.variant_codes.XBB_1_5_1,ps9F7aH5kHk3YIueyBw9hz,__
 2023-03-21T10:20:27.093Z,add,common.variant_codes.XBB_2_3,ps9F7aH5kHk3YIueyBwAHn,__
@@ -7,3 +8,5 @@ timestamp,action,key,document_id,move_to
 2023-03-21T10:20:30.147Z,add,common.variant_codes.XBF,ps9F7aH5kHk3YIueyBwB9V,__
 2023-03-21T12:32:29.754Z,delete,common.variant_codes.XBB_1_6,ps9F7aH5kHk3YIueyBwAgr,__
 2023-03-21T12:35:01.148Z,add,common.variant_codes.XBB_1_16,qAiz52vTEAxO2GlVGsTNF8,__
+
+
