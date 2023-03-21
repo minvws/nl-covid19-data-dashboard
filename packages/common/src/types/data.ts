@@ -350,6 +350,12 @@ export interface NamedDifferenceDecimal {
     | 'XBB'
     | 'XBB_1_5'
     | 'CH_1_1'
+    | 'XBB_1_9'
+    | 'XBB_1_5_1'
+    | 'XBB_2_3'
+    | 'XBB_1_9_1'
+    | 'XBB_1_16'
+    | 'XBF'
     | 'other_table'
     | 'other_graph';
   old_value: number;
@@ -1152,6 +1158,12 @@ export interface NlVariantsVariant {
     | 'XBB'
     | 'XBB_1_5'
     | 'CH_1_1'
+    | 'XBB_1_9'
+    | 'XBB_1_5_1'
+    | 'XBB_2_3'
+    | 'XBB_1_9_1'
+    | 'XBB_1_16'
+    | 'XBF'
     | 'other_table'
     | 'other_graph';
   values: NlVariantsVariantValue[];
