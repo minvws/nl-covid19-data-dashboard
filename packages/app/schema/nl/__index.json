@@ -43,7 +43,6 @@
     "tested_per_age_group",
     "vaccine_campaigns",
     "vaccine_campaigns_archived_20220908",
-    "vaccine_planned",
     "vaccine_planned_archived_20220908",
     "vaccine_vaccinated_or_support",
     "vaccine_delivery_estimate",
@@ -224,9 +223,6 @@
     },
     "vaccine_campaigns_archived_20220908": {
       "$ref": "vaccine_campaigns_archived_20220908.json"
-    },
-    "vaccine_planned": {
-      "$ref": "vaccine_planned.json"
     },
     "vaccine_planned_archived_20220908": {
       "$ref": "vaccine_planned_archived_20220908.json"
