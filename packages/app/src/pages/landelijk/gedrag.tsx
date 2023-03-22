@@ -3,14 +3,12 @@ import { GetStaticPropsContext } from 'next';
 import { middleOfDayInSeconds } from '@corona-dashboard/common';
 import { useMemo, useRef, useState } from 'react';
 import { Box } from '~/components/base';
-import { Divider } from '~/components/divider';
 import { Heading } from '~/components/typography';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { BehaviorChoroplethsTile } from '~/domain/behavior/behavior-choropleths-tile';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
@@ -59,7 +57,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
+  const { pageText, selectedNlData: data, content, lastGenerated } = props;
   const behaviorLastValue = data.behavior.last_value;
 
   const { formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
@@ -76,7 +74,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
 
   const behaviorLookupKeys = useBehaviorLookupKeys();
 
-  const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
+  // const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
 
   const { highestCompliance, highestSupport } = useMemo(() => {
     const list = behaviorLookupKeys.map((x) => ({
@@ -205,26 +203,6 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
                 date: data.behavior_per_age_group.date_start_unix,
                 source: textNl.bronnen.rivm,
               }}
-            />
-          )}
-
-          <Divider />
-
-          <PageInformationBlock
-            title={textNl.section_archived.title}
-            description={textNl.section_archived.description}
-            isArchivedHidden={hasHideArchivedCharts}
-            onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
-          />
-
-          {hasHideArchivedCharts && (
-            <BehaviorChoroplethsTile
-              title={textNl.verdeling_in_nederland.titel}
-              description={textNl.verdeling_in_nederland.description}
-              data={choropleth.vr}
-              currentId={currentId}
-              setCurrentId={setCurrentId}
-              text={text}
             />
           )}
         </TileList>
