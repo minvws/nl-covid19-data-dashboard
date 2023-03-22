@@ -20,7 +20,7 @@ import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
@@ -42,9 +42,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData('behavior', 'behavior_annotations', 'behavior_per_age_group'),
-  createGetChoroplethData({
-    vr: ({ behavior_archived_20221019 }) => ({ behavior_archived_20221019 }),
-  }),
+
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('behavior_page'))(context);
 
@@ -73,8 +71,6 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
   const scrollToRef = useRef<HTMLDivElement>(null);
 
   const behaviorLookupKeys = useBehaviorLookupKeys();
-
-  // const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
 
   const { highestCompliance, highestSupport } = useMemo(() => {
     const list = behaviorLookupKeys.map((x) => ({
