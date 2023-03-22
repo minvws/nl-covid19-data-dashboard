@@ -76,7 +76,6 @@ async function getAllPathsWithPriorities() {
   const priorities = [
     { path: 'landelijk', value: 0.8 },
     { path: 'gemeente', value: 0.8 },
-    { path: 'regio', value: 0.8 },
   ];
 
   const pathsWithPriorities = pathsFromPages.map((path: string) => {
