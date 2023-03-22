@@ -1,4 +1,13 @@
 timestamp,action,key,document_id,move_to
+2023-03-21T13:32:36.900Z,add,pages.vaccinations_page.gm.bronnen.rivm.download,qAiz52vTEAxO2GlVGsZghw,__
+2023-03-21T13:32:37.948Z,add,pages.vaccinations_page.gm.bronnen.rivm.href,0l2RiEJzGzK1fkzwXwH0RT,__
+2023-03-21T13:32:39.016Z,add,pages.vaccinations_page.gm.bronnen.rivm.text,rjdXTk1G5FCmwrjr0m0WX6,__
+2023-03-22T07:55:22.183Z,add,pages.vaccinations_page.shared.bronnen.rivm.download,21Pj6HJGA3EcTfimnqclgX,__
+2023-03-22T07:55:23.102Z,add,pages.vaccinations_page.shared.bronnen.rivm.href,21Pj6HJGA3EcTfimnqclqn,__
+2023-03-22T07:55:24.229Z,add,pages.vaccinations_page.shared.bronnen.rivm.text,qAiz52vTEAxO2GlVGttAI0,__
+2023-03-22T07:55:24.230Z,delete,pages.vaccinations_page.gm.bronnen.rivm.download,qAiz52vTEAxO2GlVGsZghw,__
+2023-03-22T07:55:24.230Z,delete,pages.vaccinations_page.gm.bronnen.rivm.href,0l2RiEJzGzK1fkzwXwH0RT,__
+2023-03-22T07:55:24.231Z,delete,pages.vaccinations_page.gm.bronnen.rivm.text,rjdXTk1G5FCmwrjr0m0WX6,__
 2023-03-21T10:20:24.789Z,add,common.variant_codes.XBB_1_9,RyCRpDTGPDLYu6gaddCWdr,__
 2023-03-21T10:20:26.048Z,add,common.variant_codes.XBB_1_5_1,ps9F7aH5kHk3YIueyBw9hz,__
 2023-03-21T10:20:27.093Z,add,common.variant_codes.XBB_2_3,ps9F7aH5kHk3YIueyBwAHn,__

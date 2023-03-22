@@ -178,7 +178,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               datumsText: textGm.vaccination_coverage.top_level_information_block.dates,
               dateOrRange: filteredVaccination.primarySeries.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
-              dataSources: [],
+              dataSources: [textShared.bronnen.rivm],
             }}
             pageLinks={content.links}
             referenceLink={textGm.vaccination_coverage.top_level_information_block.reference.href}

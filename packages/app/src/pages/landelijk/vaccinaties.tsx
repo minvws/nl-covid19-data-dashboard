@@ -166,7 +166,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               datumsText: textNl.dates,
               dateOrRange: data.vaccine_administered_total.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
-              dataSources: [],
+              dataSources: [textShared.bronnen.rivm],
             }}
             pageLinks={content.links}
             referenceLink={textNl.information_block.reference.href}
@@ -252,7 +252,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             description={textNl.vaccinations_per_supplier_over_last_week.description}
             data={data.vaccine_administered_last_week.vaccine_types}
             metadata={{
-              source: textNl.bronnen.rivm,
+              source: textShared.bronnen.rivm,
               date: [data.vaccine_administered_last_week.date_start_unix, data.vaccine_administered_last_week.date_end_unix],
               obtainedAt: data.vaccine_administered_last_week.date_of_insertion_unix,
             }}
