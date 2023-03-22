@@ -234,6 +234,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             description={replaceVariablesInText(textNl.vaccine_campaigns.description, {
               vaccinePlanned: formatNumber(data.vaccine_planned.doses),
             })}
+            descriptionFooter={textNl.vaccine_campaigns.description_footer}
             headers={textNl.vaccine_campaigns.headers}
             campaigns={data.vaccine_campaigns.vaccine_campaigns}
             campaignDescriptions={textNl.vaccine_campaigns.campaigns}
@@ -317,6 +318,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 description={replaceVariablesInText(textNl.vaccine_campaigns.description_archived, {
                   vaccinePlanned: formatNumber(data.vaccine_planned_archived_20220908.doses),
                 })}
+                descriptionFooter={textNl.vaccine_campaigns.description_footer}
                 headers={textNl.vaccine_campaigns.headers}
                 campaigns={data.vaccine_campaigns_archived_20220908.vaccine_campaigns}
                 campaignDescriptions={textNl.vaccine_campaigns.campaigns}
