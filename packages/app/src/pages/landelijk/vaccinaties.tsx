@@ -176,7 +176,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             title={textShared.vaccination_grade_tile.autumn_labels.title}
             description={textShared.vaccination_grade_tile.autumn_labels.description}
             source={textShared.vaccination_grade_tile.autumn_labels.source}
-            descriptionFooter={textShared.vaccination_grade_tile.autumn_labels.description_footer}
             coverageData={[
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_60_plus_vaccinated,
@@ -205,7 +204,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
             description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
             source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
-            descriptionFooter={textShared.vaccination_grade_tile.fully_vaccinated_labels.description_footer}
             coverageData={[
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_vaccinated,
@@ -296,7 +294,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
                 title={textNl.vaccination_grade_toggle_tile.title}
                 source={textNl.vaccination_grade_toggle_tile.source}
-                descriptionFooter={textNl.vaccination_grade_toggle_tile.description_footer}
                 dateUnix={vaccineCoverageEstimatedArchivedLastValue.date_unix}
                 age18Plus={{
                   fully_vaccinated: vaccineCoverageEstimatedArchivedLastValue.age_18_plus_fully_vaccinated,

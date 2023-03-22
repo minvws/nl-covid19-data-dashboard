@@ -16,3 +16,8 @@ timestamp,action,key,document_id,move_to
 2023-03-21T10:20:30.147Z,add,common.variant_codes.XBF,ps9F7aH5kHk3YIueyBwB9V,__
 2023-03-21T12:32:29.754Z,delete,common.variant_codes.XBB_1_6,ps9F7aH5kHk3YIueyBwAgr,__
 2023-03-21T12:35:01.148Z,add,common.variant_codes.XBB_1_16,qAiz52vTEAxO2GlVGsTNF8,__
+2023-03-21T10:35:31.652Z,delete,pages.vaccinations_page.gm.vaccination_grade_toggle_tile.description_footer,4Hn4MB4VRci1fnngMVhx1g,__
+2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.nl.vaccination_grade_toggle_tile.description_footer,qjZwg5QUJcN8JoCoxxDDJy,__
+2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.shared.vaccination_grade_tile.autumn_labels.description_footer,u6z14vWwH5lzTVbDpRg06r,__
+2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.shared.vaccination_grade_tile.fully_vaccinated_labels.description_footer,772MCeNIooHnNdtyUIs7TE,__
+2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.vr.vaccination_grade_toggle_tile.description_footer,qjZwg5QUJcN8JoCoxxDHxs,__
