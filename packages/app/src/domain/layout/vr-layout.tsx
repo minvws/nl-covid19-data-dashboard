@@ -5,6 +5,8 @@ import { AppContent } from '~/components/layout/app-content';
 
 type VrLayoutProps = {
   children?: React.ReactNode;
+  vrName?: string;
+  isLandingPage?: boolean;
 };
 
 /**

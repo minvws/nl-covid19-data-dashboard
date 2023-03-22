@@ -163,7 +163,7 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.actions_to_take.title}

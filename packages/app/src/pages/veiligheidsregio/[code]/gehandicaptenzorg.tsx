@@ -97,7 +97,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.archived_metrics.title}

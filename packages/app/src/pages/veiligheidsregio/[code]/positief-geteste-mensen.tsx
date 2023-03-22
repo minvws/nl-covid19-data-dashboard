@@ -128,7 +128,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <VrLayout>
+      <VrLayout vrName={vrName}>
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.development_of_the_virus.title}
