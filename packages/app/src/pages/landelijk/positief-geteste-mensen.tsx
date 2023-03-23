@@ -337,7 +337,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
           <InView rootMargin="400px">
             <ChoroplethTile
-              data-cy="choropleths"
               title={textNl.map_titel}
               metadata={{
                 date: dataOverallLastValue.date_unix,
