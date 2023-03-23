@@ -23,7 +23,5 @@ timestamp,action,key,document_id,move_to
 2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.shared.vaccination_grade_tile.fully_vaccinated_labels.description_footer,772MCeNIooHnNdtyUIs7TE,__
 2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.vr.vaccination_grade_toggle_tile.description_footer,qjZwg5QUJcN8JoCoxxDHxs,__
 2023-03-23T07:13:41.639Z,delete,common.common.zoekveld_placeholder_regio,jF33EuwumlGuwav2FD3gL6,__
-2023-03-23T07:13:41.641Z,delete,common.veiligheidsregio_index.metadata.description,jF33EuwumlGuwav2FD3nJs,__
-2023-03-23T07:13:41.642Z,delete,common.veiligheidsregio_index.metadata.title,jF33EuwumlGuwav2FD3nIC,__
 2023-03-23T07:13:41.643Z,delete,common.veiligheidsregio_index.selecteer_titel,jF33EuwumlGuwav2FD3nEq,__
 2023-03-23T07:13:41.644Z,delete,common.veiligheidsregio_index.selecteer_toelichting,jF33EuwumlGuwav2FD3nGW,__
