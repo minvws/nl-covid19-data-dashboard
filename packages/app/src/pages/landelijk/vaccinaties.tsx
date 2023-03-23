@@ -166,7 +166,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               datumsText: textNl.dates,
               dateOrRange: data.vaccine_administered_total.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
-              dataSources: [],
+              dataSources: [textShared.bronnen.rivm],
             }}
             pageLinks={content.links}
             referenceLink={textNl.information_block.reference.href}
@@ -176,7 +176,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             title={textShared.vaccination_grade_tile.autumn_labels.title}
             description={textShared.vaccination_grade_tile.autumn_labels.description}
             source={textShared.vaccination_grade_tile.autumn_labels.source}
-            descriptionFooter={textShared.vaccination_grade_tile.autumn_labels.description_footer}
             coverageData={[
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_60_plus_vaccinated,
@@ -205,7 +204,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
             description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
             source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
-            descriptionFooter={textShared.vaccination_grade_tile.fully_vaccinated_labels.description_footer}
             coverageData={[
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_vaccinated,
@@ -252,7 +250,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             description={textNl.vaccinations_per_supplier_over_last_week.description}
             data={data.vaccine_administered_last_week.vaccine_types}
             metadata={{
-              source: textNl.bronnen.rivm,
+              source: textShared.bronnen.rivm,
               date: [data.vaccine_administered_last_week.date_start_unix, data.vaccine_administered_last_week.date_end_unix],
               obtainedAt: data.vaccine_administered_last_week.date_of_insertion_unix,
             }}
@@ -296,7 +294,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
                 title={textNl.vaccination_grade_toggle_tile.title}
                 source={textNl.vaccination_grade_toggle_tile.source}
-                descriptionFooter={textNl.vaccination_grade_toggle_tile.description_footer}
                 dateUnix={vaccineCoverageEstimatedArchivedLastValue.date_unix}
                 age18Plus={{
                   fully_vaccinated: vaccineCoverageEstimatedArchivedLastValue.age_18_plus_fully_vaccinated,

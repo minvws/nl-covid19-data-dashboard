@@ -43,7 +43,6 @@ interface VaccineCoverageToggleTileProps {
     text: string;
     href: string;
   };
-  descriptionFooter: string;
   age18Plus: AgeTypes;
   age12Plus: AgeTypes;
   dateUnix: number | null;
@@ -56,7 +55,6 @@ interface VaccineCoverageToggleTileProps {
 export function VaccineCoverageToggleTile({
   title,
   source,
-  descriptionFooter,
   dateUnix,
   age18Plus,
   age12Plus,
@@ -148,9 +146,6 @@ export function VaccineCoverageToggleTile({
           </>
         )}
       </TwoKpiSection>
-      <Box maxWidth="maxWidthText" marginTop="36px">
-        <Markdown content={descriptionFooter} />
-      </Box>
     </KpiTile>
   );
 }
