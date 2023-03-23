@@ -52,7 +52,6 @@ export function TopNavigation() {
               <NavItem href={reverseRouter.nl.index()} isActive={router.pathname.startsWith('/landelijk')}>
                 {commonTexts.nav.links.index}
               </NavItem>
-              <NavItem href={reverseRouter.vr.index()}>{commonTexts.nav.links.veiligheidsregio}</NavItem>
               <NavItem href={reverseRouter.gm.index()}>{commonTexts.nav.links.gemeente}</NavItem>
 
               <NavItem href={reverseRouter.general.over()}>{commonTexts.nav.links.over}</NavItem>

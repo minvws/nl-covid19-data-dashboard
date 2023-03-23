@@ -189,7 +189,6 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
               title={textShared.vaccination_grade_tile.autumn_labels.title}
               description={textShared.vaccination_grade_tile.autumn_labels.description}
               source={textShared.vaccination_grade_tile.autumn_labels.source}
-              descriptionFooter={textShared.vaccination_grade_tile.autumn_labels.description_footer}
               coverageData={parsedVaccineCoverageData.autumn2022}
               dateUnix={filteredVaccination.autumn2022.date_unix}
             />
@@ -199,7 +198,6 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
             description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
             source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
-            descriptionFooter={textShared.vaccination_grade_tile.fully_vaccinated_labels.description_footer}
             coverageData={parsedVaccineCoverageData.primarySeries}
             dateUnix={filteredVaccination.primarySeries.date_unix}
           />
@@ -229,7 +227,6 @@ export const VaccinationsVrPage = (props: StaticProps<typeof getStaticProps>) =>
               <VaccineCoverageToggleTile
                 title={textVr.vaccination_grade_toggle_tile.title}
                 source={textVr.vaccination_grade_toggle_tile.source}
-                descriptionFooter={textVr.vaccination_grade_toggle_tile.description_footer}
                 dateUnix={filteredAgeGroup18PlusArchived.date_unix}
                 age18Plus={{
                   fully_vaccinated: filteredAgeGroup18PlusArchived.fully_vaccinated_percentage,
