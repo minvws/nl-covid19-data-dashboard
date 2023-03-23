@@ -178,7 +178,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               datumsText: textGm.vaccination_coverage.top_level_information_block.dates,
               dateOrRange: filteredVaccination.primarySeries.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
-              dataSources: [],
+              dataSources: [textShared.bronnen.rivm],
             }}
             pageLinks={content.links}
             referenceLink={textGm.vaccination_coverage.top_level_information_block.reference.href}
@@ -191,7 +191,6 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               title={textShared.vaccination_grade_tile.autumn_labels.title}
               description={textShared.vaccination_grade_tile.autumn_labels.description}
               source={textShared.vaccination_grade_tile.autumn_labels.source}
-              descriptionFooter={textShared.vaccination_grade_tile.autumn_labels.description_footer}
               coverageData={parsedVaccineCoverageData.autumn2022}
               dateUnix={filteredVaccination.autumn2022.date_unix}
             />
@@ -200,7 +199,6 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
             description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
             source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
-            descriptionFooter={textShared.vaccination_grade_tile.fully_vaccinated_labels.description_footer}
             coverageData={parsedVaccineCoverageData.primarySeries}
             dateUnix={filteredVaccination.primarySeries.date_unix}
           />
@@ -226,7 +224,6 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               <VaccineCoverageToggleTile
                 title={textGm.vaccination_grade_toggle_tile.title}
                 source={textGm.vaccination_grade_toggle_tile.source}
-                descriptionFooter={textGm.vaccination_grade_toggle_tile.description_footer}
                 dateUnix={filteredArchivedAgeGroup18Plus.date_unix}
                 age18Plus={{
                   fully_vaccinated: filteredArchivedAgeGroup18Plus.fully_vaccinated_percentage,
