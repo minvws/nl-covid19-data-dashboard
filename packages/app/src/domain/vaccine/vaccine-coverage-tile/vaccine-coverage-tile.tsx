@@ -34,12 +34,11 @@ interface VaccineCoverageTileProps {
     text: string;
     href: string;
   };
-  descriptionFooter: string;
   coverageData: [AgeDataType, AgeDataType];
   dateUnix: number;
 }
 
-export const VaccineCoverageTile = ({ title, description, source, descriptionFooter, dateUnix, coverageData }: VaccineCoverageTileProps) => {
+export const VaccineCoverageTile = ({ title, description, source, dateUnix, coverageData }: VaccineCoverageTileProps) => {
   const metadata: MetadataProps = {
     date: dateUnix,
     source: source,
@@ -60,9 +59,6 @@ export const VaccineCoverageTile = ({ title, description, source, descriptionFoo
         </KpiContent>
       </TwoKpiSection>
       <Metadata {...metadata} isTileFooter />
-      <Box maxWidth="maxWidthText" marginTop="36px">
-        <Markdown content={descriptionFooter} />
-      </Box>
     </KpiTile>
   );
 };
