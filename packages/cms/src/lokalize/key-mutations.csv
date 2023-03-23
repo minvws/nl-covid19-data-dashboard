@@ -7,3 +7,8 @@ timestamp,action,key,document_id,move_to
 2023-03-21T10:20:30.147Z,add,common.variant_codes.XBF,ps9F7aH5kHk3YIueyBwB9V,__
 2023-03-21T12:32:29.754Z,delete,common.variant_codes.XBB_1_6,ps9F7aH5kHk3YIueyBwAgr,__
 2023-03-21T12:35:01.148Z,add,common.variant_codes.XBB_1_16,qAiz52vTEAxO2GlVGsTNF8,__
+2023-03-23T07:13:41.639Z,delete,common.common.zoekveld_placeholder_regio,jF33EuwumlGuwav2FD3gL6,__
+2023-03-23T07:13:41.641Z,delete,common.veiligheidsregio_index.metadata.description,jF33EuwumlGuwav2FD3nJs,__
+2023-03-23T07:13:41.642Z,delete,common.veiligheidsregio_index.metadata.title,jF33EuwumlGuwav2FD3nIC,__
+2023-03-23T07:13:41.643Z,delete,common.veiligheidsregio_index.selecteer_titel,jF33EuwumlGuwav2FD3nEq,__
+2023-03-23T07:13:41.644Z,delete,common.veiligheidsregio_index.selecteer_toelichting,jF33EuwumlGuwav2FD3nGW,__

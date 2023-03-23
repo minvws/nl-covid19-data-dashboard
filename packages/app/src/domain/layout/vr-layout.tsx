@@ -8,7 +8,6 @@ import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
-import { VrComboBox } from './components/vr-combo-box';
 import { useSidebar } from './logic/use-sidebar';
 
 type VrLayoutProps = {
@@ -46,7 +45,7 @@ type VrLayoutProps = {
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 export function VrLayout(props: VrLayoutProps) {
-  const { children, vrName, isLandingPage, getLink } = props;
+  const { children, vrName, isLandingPage } = props;
 
   const router = useRouter();
   const { commonTexts } = useIntl();
@@ -77,11 +76,6 @@ export function VrLayout(props: VrLayoutProps) {
 
       <AppContent
         hideBackButton={isMainRoute}
-        searchComponent={
-          <Box backgroundColor="white" maxWidth={{ _: '38rem', md: undefined }} marginX="auto">
-            <VrComboBox getLink={getLink} selectedVrCode={code} />
-          </Box>
-        }
         sidebarComponent={
           <>
             {!isLandingPage && showMetricLinks && (
