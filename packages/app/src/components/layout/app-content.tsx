@@ -24,7 +24,7 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
   const reverseRouter = useReverseRouter();
   const { commonTexts } = useIntl();
 
-  const isMenuOpen = router.pathname == '/landelijk' || router.pathname == '/veiligheidsregio/[code]' || router.pathname == '/gemeente/[code]' || router.query.menu === '1';
+  const isMenuOpen = router.pathname == '/landelijk' || router.pathname == '/gemeente/[code]' || router.query.menu === '1';
 
   const currentPageScope = getCurrentPageScope(router);
   const currentCode = router.query.code as string | undefined;

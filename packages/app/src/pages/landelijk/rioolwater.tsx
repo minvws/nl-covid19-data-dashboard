@@ -194,9 +194,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                     average: formatNumber,
                   },
                 }}
-                dataOptions={{
-                  getLink: reverseRouter.vr.rioolwater,
-                }}
+                dataOptions={{}}
               />
             )}
           </ChoroplethTile>

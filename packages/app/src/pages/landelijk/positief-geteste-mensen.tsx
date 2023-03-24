@@ -404,9 +404,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                       infected_per_100k: formatNumber,
                     },
                   }}
-                  dataOptions={{
-                    getLink: reverseRouter.vr.positiefGetesteMensen,
-                  }}
+                  dataOptions={{}}
                 />
               )}
             </ChoroplethTile>

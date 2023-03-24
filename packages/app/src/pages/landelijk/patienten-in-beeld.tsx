@@ -188,7 +188,6 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   metricProperty: 'admissions_on_date_of_admission_per_100000',
                 }}
                 dataOptions={{
-                  getLink: reverseRouter.vr.ziekenhuisopnames,
                   tooltipVariables: {
                     patients: commonTexts.choropleth_tooltip.patients,
                   },

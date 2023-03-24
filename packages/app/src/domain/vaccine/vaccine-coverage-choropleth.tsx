@@ -123,7 +123,6 @@ export const VaccineCoverageChoropleth = ({ data }: VaccineCoverageChoroplethPro
           }}
           dataOptions={{
             isPercentage: true,
-            getLink: (vrcode) => reverseRouter.vr.vaccinaties(vrcode),
           }}
           formatTooltip={(context) => <ChoroplethTooltip data={context} ageGroups={matchingAgeGroups[selectedCoverageKind]} selectedCoverageKind={selectedCoverageKind} />}
         />

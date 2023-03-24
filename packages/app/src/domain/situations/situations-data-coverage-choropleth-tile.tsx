@@ -11,7 +11,6 @@ import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './components/legend-icon';
 import { SituationsDataCoverageTooltip } from './components/situations-data-coverage-tooltip';
 
@@ -25,7 +24,6 @@ interface SituationsDataCoverageChoroplethTileProps {
 
 export function SituationsDataCoverageChoroplethTile({ data, text, tooltipText }: SituationsDataCoverageChoroplethTileProps) {
   const { formatDateSpan } = useIntl();
-  const reverseRouter = useReverseRouter();
   const { date_start_unix, date_end_unix } = data.situations[0];
 
   const [date_from, date_to] = formatDateSpan({ seconds: date_start_unix }, { seconds: date_end_unix });
@@ -71,7 +69,6 @@ export function SituationsDataCoverageChoroplethTile({ data, text, tooltipText }
                   metricProperty: 'has_sufficient_data',
                 }}
                 dataOptions={{
-                  getLink: reverseRouter.vr.brononderzoek,
                   tooltipVariables: {
                     patients: tooltipText,
                   },
