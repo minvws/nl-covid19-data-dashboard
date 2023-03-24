@@ -22,4 +22,16 @@ timestamp,action,key,document_id,move_to
 2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.shared.vaccination_grade_tile.autumn_labels.description_footer,u6z14vWwH5lzTVbDpRg06r,__
 2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.shared.vaccination_grade_tile.fully_vaccinated_labels.description_footer,772MCeNIooHnNdtyUIs7TE,__
 2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.vr.vaccination_grade_toggle_tile.description_footer,qjZwg5QUJcN8JoCoxxDHxs,__
+2023-03-22T14:16:09.203Z,delete,common.common.gm_plural,jF33EuwumlGuwav2FD3gfE,__
+2023-03-22T14:16:09.204Z,delete,common.common.gm_singular,jF33EuwumlGuwav2FD3gdY,__
+2023-03-22T14:16:09.204Z,delete,common.common.vr_plural,jF33EuwumlGuwav2FD3gia,__
+2023-03-22T14:16:09.204Z,delete,common.common.vr_singular,jF33EuwumlGuwav2FD3ggu,__
+2023-03-22T14:16:09.204Z,delete,common.common.zoekveld_placeholder_regio,jF33EuwumlGuwav2FD3gL6,__
+2023-03-22T14:16:09.204Z,delete,common.search.aria_label,m5cl7ciD7CmTUWm5d7zP2O,__
+2023-03-22T14:16:09.204Z,delete,common.search.clear,jF33EuwumlGuwav2FD4DVc,__
+2023-03-22T14:16:09.204Z,delete,common.search.no_hits,jF33EuwumlGuwav2FD4DXI,__
+2023-03-22T14:16:09.204Z,delete,common.search.placeholder,jF33EuwumlGuwav2FD4DTw,__
+2023-03-24T07:45:03.889Z,delete,pages.topical_page.shared.secties.search.title.gm,PGwiP4IwXrA0GfLCLD9UBA,__
+2023-03-24T07:45:03.890Z,delete,pages.topical_page.shared.secties.search.title.nl,PGwiP4IwXrA0GfLCLD9Tth,__
+2023-03-24T07:45:03.890Z,delete,pages.topical_page.shared.secties.search.title.vr,7nClfXqPlyZyEU7PO2TAAw,__
 2023-03-23T08:50:33.174Z,delete,common.nav.links.veiligheidsregio,jF33EuwumlGuwav2FD3VW8,__
