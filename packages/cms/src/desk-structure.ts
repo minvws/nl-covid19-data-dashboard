@@ -6,6 +6,7 @@ import { RiPagesFill } from 'react-icons/ri';
 import 'sanity-mobile-preview/dist/index.css?raw';
 import { elementsListItem } from './elements/elements-list-item';
 import { lokalizeListItem } from './lokalize/lokalize-list-item';
+import { notFoundPageStrcuture } from './page/not-found-page-structure';
 import { pagePartListItem } from './page/page-part-list-item';
 
 /**
@@ -97,6 +98,9 @@ export default () =>
         ),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
       addListItem(RiPagesFill, 'Contact', 'contact'),
+
+      // 404 Page structure
+      notFoundPageStrcuture(),
 
       S.divider(),
 
