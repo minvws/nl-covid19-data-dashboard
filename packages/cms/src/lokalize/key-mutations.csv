@@ -31,3 +31,6 @@ timestamp,action,key,document_id,move_to
 2023-03-22T14:16:09.204Z,delete,common.search.clear,jF33EuwumlGuwav2FD4DVc,__
 2023-03-22T14:16:09.204Z,delete,common.search.no_hits,jF33EuwumlGuwav2FD4DXI,__
 2023-03-22T14:16:09.204Z,delete,common.search.placeholder,jF33EuwumlGuwav2FD4DTw,__
+2023-03-24T07:45:03.889Z,delete,pages.topical_page.shared.secties.search.title.gm,PGwiP4IwXrA0GfLCLD9UBA,__
+2023-03-24T07:45:03.890Z,delete,pages.topical_page.shared.secties.search.title.nl,PGwiP4IwXrA0GfLCLD9Tth,__
+2023-03-24T07:45:03.890Z,delete,pages.topical_page.shared.secties.search.title.vr,7nClfXqPlyZyEU7PO2TAAw,__
