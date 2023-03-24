@@ -1,4 +1,5 @@
 timestamp,action,key,document_id,move_to
+2023-03-21T10:10:15.918Z,delete,common.common.veiligheidsregio_label,jF33EuwumlGuwav2FD3gOS,__
 2023-03-21T13:32:36.900Z,add,pages.vaccinations_page.gm.bronnen.rivm.download,qAiz52vTEAxO2GlVGsZghw,__
 2023-03-21T13:32:37.948Z,add,pages.vaccinations_page.gm.bronnen.rivm.href,0l2RiEJzGzK1fkzwXwH0RT,__
 2023-03-21T13:32:39.016Z,add,pages.vaccinations_page.gm.bronnen.rivm.text,rjdXTk1G5FCmwrjr0m0WX6,__
@@ -235,3 +236,16 @@ timestamp,action,key,document_id,move_to
 2023-03-24T10:25:28.284Z,delete,common.accessibility.charts.confirmed_cases_tested_total_over_time_chart.label,cl0A2qFve1QxscrDIqJIGP,__
 2023-03-24T10:25:28.290Z,delete,common.accessibility.charts.situations_over_time_chart.description,Z3v1SKYekK4CLDpzUPc9za,__
 2023-03-24T10:25:28.298Z,delete,common.accessibility.charts.situations_over_time_chart.label,cl0A2qFve1QxscrDIqKQEt,__
+2023-03-22T14:16:09.203Z,delete,common.common.gm_plural,jF33EuwumlGuwav2FD3gfE,__
+2023-03-22T14:16:09.204Z,delete,common.common.gm_singular,jF33EuwumlGuwav2FD3gdY,__
+2023-03-22T14:16:09.204Z,delete,common.common.vr_plural,jF33EuwumlGuwav2FD3gia,__
+2023-03-22T14:16:09.204Z,delete,common.common.vr_singular,jF33EuwumlGuwav2FD3ggu,__
+2023-03-22T14:16:09.204Z,delete,common.common.zoekveld_placeholder_regio,jF33EuwumlGuwav2FD3gL6,__
+2023-03-22T14:16:09.204Z,delete,common.search.aria_label,m5cl7ciD7CmTUWm5d7zP2O,__
+2023-03-22T14:16:09.204Z,delete,common.search.clear,jF33EuwumlGuwav2FD4DVc,__
+2023-03-22T14:16:09.204Z,delete,common.search.no_hits,jF33EuwumlGuwav2FD4DXI,__
+2023-03-22T14:16:09.204Z,delete,common.search.placeholder,jF33EuwumlGuwav2FD4DTw,__
+2023-03-24T07:45:03.889Z,delete,pages.topical_page.shared.secties.search.title.gm,PGwiP4IwXrA0GfLCLD9UBA,__
+2023-03-24T07:45:03.890Z,delete,pages.topical_page.shared.secties.search.title.nl,PGwiP4IwXrA0GfLCLD9Tth,__
+2023-03-24T07:45:03.890Z,delete,pages.topical_page.shared.secties.search.title.vr,7nClfXqPlyZyEU7PO2TAAw,__
+2023-03-23T08:50:33.174Z,delete,common.nav.links.veiligheidsregio,jF33EuwumlGuwav2FD3VW8,__
