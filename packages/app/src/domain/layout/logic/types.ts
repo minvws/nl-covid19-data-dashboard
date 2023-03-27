@@ -20,7 +20,6 @@ export type NlItemKeys =
   | 'positive_tests'
   | 'reproduction_number'
   | 'sewage_measurement'
-  | 'source_investigation'
   | 'vaccinations'
   | 'variants';
 

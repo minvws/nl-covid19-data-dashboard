@@ -90,3 +90,4 @@ timestamp,action,key,document_id,move_to
 2023-03-27T10:31:37.216Z,delete,pages.situations_page.shared.situaties_kaarten_uitkomsten.tooltip.voldoende_data,pUh1Ah0fhZhgu4kAL9l6DL,__
 2023-03-27T10:31:37.218Z,delete,pages.situations_page.shared.titel,6dTIFBydK0C6dL2sJemSDT,__
 2023-03-27T10:31:37.219Z,delete,pages.situations_page.shared.warning,grBB1wMeP3licxsoUoRq0R,__
+2023-03-27T11:57:30.539Z,delete,common.sidebar.metrics.source_investigation.title,c0OY0u3YEyF1oawiVvkMa6,__
