@@ -27,7 +27,6 @@ import { createGetStaticProps, StaticProps } from '~/static-props/create-get-sta
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
@@ -104,7 +103,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
   const nusingHomeArchivedUnderReportedDateStart = getBoundaryDateStartUnix(data.nursing_home_archived_20230126.values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
-  const reverseRouter = useReverseRouter();
   const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const infectedLocationsText = textShared.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText = textNl.verpleeghuis_positief_geteste_personen;
@@ -259,7 +257,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               }}
               dataOptions={{
                 isPercentage: true,
-                getLink: reverseRouter.vr.kwetsbareGroepen,
               }}
             />
           </ChoroplethTile>
