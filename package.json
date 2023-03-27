@@ -21,8 +21,6 @@
     "validate-json-single": "yarn workspace @corona-dashboard/cli validate-json-single",
     "validate-last-values": "yarn workspace @corona-dashboard/cli validate-last-values",
     "generate-data-types": "yarn workspace @corona-dashboard/cli generate-data-types",
-    "e2e": "yarn workspace @corona-dashboard/e2e e2e",
-    "e2e:ci": "yarn workspace @corona-dashboard/e2e e2e:ci",
     "cms": "yarn workspace @corona-dashboard/cms dev",
     "cms:lokalize-import": "yarn workspace @corona-dashboard/cms lokalize:import",
     "cms:lokalize-import:prd": "yarn workspace @corona-dashboard/cms lokalize:import --dataset=production",
@@ -40,7 +38,6 @@
       "packages/app",
       "packages/cli",
       "packages/common",
-      "packages/e2e",
       "packages/icons",
       "packages/cms"
     ]
