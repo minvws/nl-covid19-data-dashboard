@@ -133,12 +133,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.positief_geteste_personen.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="newly_infected_people"
-                absolute={lastValue.newly_infected_people}
-                difference={data.difference.disability_care__newly_infected_people_archived_20230126}
-                isAmount
-              />
+              <KpiValue absolute={lastValue.newly_infected_people} difference={data.difference.disability_care__newly_infected_people_archived_20230126} isAmount />
             </KpiTile>
           </TwoKpiSection>
 
@@ -210,7 +205,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               }}
             >
               <KpiValue
-                data-cy="infected_locations_total"
                 absolute={lastValue.infected_locations_total}
                 percentage={lastValue.infected_locations_percentage}
                 difference={data.difference.disability_care__infected_locations_total_archived_20230126}
@@ -225,7 +219,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.besmette_locaties.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="newly_infected_locations" absolute={lastValue.newly_infected_locations} />
+              <KpiValue absolute={lastValue.newly_infected_locations} />
               <Text>{textNl.besmette_locaties.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
@@ -314,7 +308,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.oversterfte.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="deceased_daily" absolute={lastValue.deceased_daily} />
+              <KpiValue absolute={lastValue.deceased_daily} />
             </KpiTile>
           </TwoKpiSection>
 

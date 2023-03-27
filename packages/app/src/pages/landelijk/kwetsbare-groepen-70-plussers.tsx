@@ -212,7 +212,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               }}
             >
               <KpiValue
-                data-cy="infected_locations_total"
                 absolute={nursinghomeDataLastValue.infected_locations_total}
                 percentage={nursinghomeDataLastValue.infected_locations_percentage}
                 difference={data.difference.vulnerable_nursing_home__infected_locations_total}
@@ -228,7 +227,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                 source: infectedLocationsText.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="newly_infected_locations" absolute={nursinghomeDataLastValue.newly_infected_locations} />
+              <KpiValue absolute={nursinghomeDataLastValue.newly_infected_locations} />
               <Text>{infectedLocationsText.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
@@ -310,12 +309,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                     source: positiveTestedPeopleText.bronnen.rivm,
                   }}
                 >
-                  <KpiValue
-                    data-cy="newly_infected_people"
-                    absolute={nursinghomeDataLastValue.newly_infected_people}
-                    difference={data.difference.nursing_home__newly_infected_people_archived_20230126}
-                    isAmount
-                  />
+                  <KpiValue absolute={nursinghomeDataLastValue.newly_infected_people} difference={data.difference.nursing_home__newly_infected_people_archived_20230126} isAmount />
                 </KpiTile>
               </TwoKpiSection>
 
@@ -388,7 +382,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                     source: textNl.bronnen.rivm,
                   }}
                 >
-                  <KpiValue data-cy="deceased_daily" absolute={nursinghomeDataLastValue.deceased_daily} />
+                  <KpiValue absolute={nursinghomeDataLastValue.deceased_daily} />
                 </KpiTile>
               </TwoKpiSection>
 
