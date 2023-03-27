@@ -131,7 +131,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="infected_moving_average" absolute={lastValue.infected_moving_average_rounded} isAmount />
+              <KpiValue absolute={lastValue.infected_moving_average_rounded} isAmount />
               <Text>
                 {replaceComponentsInText(commonTexts.gemeente_index.population_count, {
                   municipalityName,
@@ -158,7 +158,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="infected_per_100k_moving_average" absolute={lastValue.infected_per_100k_moving_average} isAmount />
+              <KpiValue absolute={lastValue.infected_per_100k_moving_average} isAmount />
               <Text>{textGm.barscale_toelichting}</Text>
 
               <CollapsibleContent label={commonTexts.gemeente_index.population_count_explanation_title}>

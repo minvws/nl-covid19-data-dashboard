@@ -56,10 +56,6 @@ export function useSidebar<T extends Layout>({ layout, map, code }: UseSidebarAr
         return reverseRouter.nl[route]();
       }
 
-      if (layout === 'vr' && isPresent(code)) {
-        return reverseRouter.vr[route as keyof ReverseRouter['vr']](code);
-      }
-
       if (layout === 'gm' && isPresent(code)) {
         return reverseRouter.gm[route as keyof ReverseRouter['gm']](code);
       }
