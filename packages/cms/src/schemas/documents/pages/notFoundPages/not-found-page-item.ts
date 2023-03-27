@@ -6,8 +6,8 @@ export const notFoundPageItem = {
   type: 'document',
   fields: [
     {
-      name: 'paginaType',
-      title: 'Paginatype',
+      name: 'pageType',
+      title: 'Pagina Type',
       description:
         'Select the page type. This determines the level (NL, GM, Artciles, General) for which you want this configuration to be used. Attention: This value for each 404 Page should be unique.',
       type: 'string',
@@ -26,7 +26,7 @@ export const notFoundPageItem = {
       name: 'title',
       title: 'Titel',
       description: 'Configure the header that will be shown on the page.',
-      type: 'localeRichContentBlock',
+      type: 'localeString',
       validation: REQUIRED,
     },
     {
@@ -39,7 +39,7 @@ export const notFoundPageItem = {
     {
       name: 'links',
       title: 'Links',
-      description: 'Configure a list of links. On the general page, this will be displayed below the descripton. On all other pages, this will be below the CTA.',
+      description: 'Configure a list of links. On the general page, this will be displayed below the description. On all other pages, this will be below the CTA.',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'notFoundPageLinks' } }],
     },
