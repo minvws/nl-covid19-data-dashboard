@@ -42,6 +42,11 @@ async function redirects() {
       destination: '/images/touch-icon.png',
       permanent: false,
     },
+    {
+      source: '/veiligheidsregio/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
+      destination: '/gemeente/GM:nr',
+      permanent: false,
+    },
     // Redirects for former topical pages GM -> dedicated GM page
     {
       source: '/actueel/gemeente/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
