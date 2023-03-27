@@ -17,6 +17,16 @@ timestamp,action,key,document_id,move_to
 2023-03-21T10:20:30.147Z,add,common.variant_codes.XBF,ps9F7aH5kHk3YIueyBwB9V,__
 2023-03-21T12:32:29.754Z,delete,common.variant_codes.XBB_1_6,ps9F7aH5kHk3YIueyBwAgr,__
 2023-03-21T12:35:01.148Z,add,common.variant_codes.XBB_1_16,qAiz52vTEAxO2GlVGsTNF8,__
+2023-03-22T11:31:11.144Z,delete,pages.behavior_page.nl.section_archived.description,ibZWLQHfYl2AyCZBOq5lUb,__
+2023-03-22T11:31:11.146Z,delete,pages.behavior_page.nl.section_archived.title,rSoN2URF0rxEHQvXsrmWoN,__
+2023-03-22T11:31:11.154Z,delete,pages.behavior_page.nl.verdeling_in_nederland.compliance_title,jwZCGJpB6f5MPNxDruqUQy,__
+2023-03-22T11:31:11.159Z,delete,pages.behavior_page.nl.verdeling_in_nederland.description,2HjSiE19Y3xp0kLX6T6JA7,__
+2023-03-22T11:31:11.162Z,delete,pages.behavior_page.nl.verdeling_in_nederland.geen_beschikbare_data,2HjSiE19Y3xp0kLX6T6aOP,__
+2023-03-22T11:31:11.164Z,delete,pages.behavior_page.nl.verdeling_in_nederland.intro,jF33EuwumlGuwav2FD3sv6,__
+2023-03-22T11:31:11.166Z,delete,pages.behavior_page.nl.verdeling_in_nederland.legenda_titel,jF33EuwumlGuwav2FD3syS,__
+2023-03-22T11:31:11.168Z,delete,pages.behavior_page.nl.verdeling_in_nederland.onbekend,jF33EuwumlGuwav2FD3swm,__
+2023-03-22T11:31:11.171Z,delete,pages.behavior_page.nl.verdeling_in_nederland.support_title,jwZCGJpB6f5MPNxDrurJfa,__
+2023-03-22T11:31:11.175Z,delete,pages.behavior_page.nl.verdeling_in_nederland.titel,jF33EuwumlGuwav2FD3stQ,__
 2023-03-21T10:35:31.652Z,delete,pages.vaccinations_page.gm.vaccination_grade_toggle_tile.description_footer,4Hn4MB4VRci1fnngMVhx1g,__
 2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.nl.vaccination_grade_toggle_tile.description_footer,qjZwg5QUJcN8JoCoxxDDJy,__
 2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.shared.vaccination_grade_tile.autumn_labels.description_footer,u6z14vWwH5lzTVbDpRg06r,__
