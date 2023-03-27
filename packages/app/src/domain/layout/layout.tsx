@@ -17,31 +17,14 @@ interface LayoutProps {
   breadcrumbsData?: Record<string, string>;
 }
 
-export function Layout(
-  props: LayoutProps & { lastGenerated: string; children: React.ReactNode }
-) {
-  const {
-    breadcrumbsData,
-    children,
-    title,
-    description,
-    openGraphImage,
-    twitterImage,
-    url,
-    lastGenerated,
-  } = props;
+export function Layout(props: LayoutProps & { lastGenerated: string; children: React.ReactNode }) {
+  const { breadcrumbsData, children, title, description, openGraphImage, twitterImage, url, lastGenerated } = props;
 
   const { commonTexts } = useIntl();
 
   return (
     <div>
-      <SEOHead
-        title={title}
-        description={description}
-        openGraphImage={openGraphImage}
-        twitterImage={twitterImage}
-        url={url}
-      />
+      <SEOHead title={title} description={description} openGraphImage={openGraphImage} twitterImage={twitterImage} url={url} />
       <SkipLinkMenu
         ariaLabel={commonTexts.aria_labels.skip_links}
         links={[
@@ -60,15 +43,14 @@ export function Layout(
       <AppHeader />
 
       {commonTexts.dashboard_wide_notification.title.length !== 0 && (
-        <NotificationBanner
-          title={commonTexts.dashboard_wide_notification.title}
-          description={commonTexts.dashboard_wide_notification.description}
-        />
+        <NotificationBanner title={commonTexts.dashboard_wide_notification.title} description={commonTexts.dashboard_wide_notification.description} />
       )}
 
-      <BreadcrumbsDataProvider value={breadcrumbsData}>
-        <Breadcrumbs />
-      </BreadcrumbsDataProvider>
+      {breadcrumbsData && (
+        <BreadcrumbsDataProvider value={breadcrumbsData}>
+          <Breadcrumbs />
+        </BreadcrumbsDataProvider>
+      )}
 
       <CurrentDateProvider dateInSeconds={Number(lastGenerated)}>
         <div>{children}</div>
