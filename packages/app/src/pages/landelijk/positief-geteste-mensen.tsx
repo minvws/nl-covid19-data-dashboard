@@ -2,7 +2,6 @@ import { colors, NlTestedOverallValue, TimeframeOption, TimeframeOptionsList } f
 import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -58,7 +57,6 @@ export const getStaticProps = createGetStaticProps(
   ),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
-    vr: ({ tested_overall }) => ({ tested_overall }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -100,7 +98,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
   const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedGgdGraph, setSelectedGgdGraph] = useState<string>('GGD_infected_percentage_over_time_chart');
 
   const ggdGraphToggleItems: ChartTileToggleItem[] = [
@@ -351,64 +348,29 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   })}
                 </>
               }
-              onChartRegionChange={setSelectedMap}
-              chartRegion={selectedMap}
               legend={{
                 title: textShared.chloropleth_legenda.titel,
-                thresholds: thresholds.vr.infected_per_100k,
+                thresholds: thresholds.gm.infected_per_100k,
               }}
             >
-              {/**
-               * It's probably a good idea to abstract this even further, so that
-               * the switching of charts, and the state involved, are all handled by
-               * the component. The page does not have to be bothered with this.
-               *
-               * Ideally the ChoroplethTile would receive some props with the data
-               * it needs to render either Choropleth without it caring about
-               * MunicipalityChloropleth or VrChloropleth, that data would
-               * make the chart and define the tooltip layout for each, but maybe for
-               * now that is a bridge too far. Let's take it one step at a time.
-               */}
-              {selectedMap === 'gm' && (
-                <DynamicChoropleth
-                  map="gm"
-                  accessibility={{
-                    key: 'confirmed_cases_municipal_choropleth',
-                  }}
-                  data={choropleth.gm.tested_overall}
-                  dataConfig={{
-                    metricName: 'tested_overall',
-                    metricProperty: 'infected_per_100k',
-                    dataFormatters: {
-                      infected: formatNumber,
-                      infected_per_100k: formatNumber,
-                    },
-                  }}
-                  dataOptions={{
-                    getLink: reverseRouter.gm.positiefGetesteMensen,
-                  }}
-                />
-              )}
-              {selectedMap === 'vr' && (
-                <DynamicChoropleth
-                  map="vr"
-                  accessibility={{
-                    key: 'confirmed_cases_region_choropleth',
-                  }}
-                  data={choropleth.vr.tested_overall}
-                  dataConfig={{
-                    metricName: 'tested_overall',
-                    metricProperty: 'infected_per_100k',
-                    dataFormatters: {
-                      infected: formatNumber,
-                      infected_per_100k: formatNumber,
-                    },
-                  }}
-                  dataOptions={{
-                    getLink: reverseRouter.vr.positiefGetesteMensen,
-                  }}
-                />
-              )}
+              <DynamicChoropleth
+                map="gm"
+                accessibility={{
+                  key: 'confirmed_cases_municipal_choropleth',
+                }}
+                data={choropleth.gm.tested_overall}
+                dataConfig={{
+                  metricName: 'tested_overall',
+                  metricProperty: 'infected_per_100k',
+                  dataFormatters: {
+                    infected: formatNumber,
+                    infected_per_100k: formatNumber,
+                  },
+                }}
+                dataOptions={{
+                  getLink: reverseRouter.gm.positiefGetesteMensen,
+                }}
+              />
             </ChoroplethTile>
           </InView>
 
