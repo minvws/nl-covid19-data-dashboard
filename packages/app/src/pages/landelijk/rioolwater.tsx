@@ -149,7 +149,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
             legend={{
               title: textNl.legenda_titel,
-              thresholds: thresholds.vr.average,
+              thresholds: thresholds.gm.average,
               outdatedDataLabel: textNl.choropleth_legend_outdated_data_label,
             }}
             pageType="sewer"
