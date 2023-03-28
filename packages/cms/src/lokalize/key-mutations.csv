@@ -49,3 +49,5 @@ timestamp,action,key,document_id,move_to
 2023-03-24T07:45:03.890Z,delete,pages.topical_page.shared.secties.search.title.nl,PGwiP4IwXrA0GfLCLD9Tth,__
 2023-03-24T07:45:03.890Z,delete,pages.topical_page.shared.secties.search.title.vr,7nClfXqPlyZyEU7PO2TAAw,__
 2023-03-23T08:50:33.174Z,delete,common.nav.links.veiligheidsregio,jF33EuwumlGuwav2FD3VW8,__
+2023-03-28T13:00:33.765Z,delete,common.accessibility.charts.sewer_region_choropleth.description,cl0A2qFve1QxscrDIqKL1F,__
+2023-03-28T13:00:33.766Z,delete,common.accessibility.charts.sewer_region_choropleth.label,Z3v1SKYekK4CLDpzUPc5x5,__
