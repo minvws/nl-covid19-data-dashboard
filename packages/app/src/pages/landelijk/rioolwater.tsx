@@ -142,6 +142,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
           <ChoroplethTile
             title={textNl.map_titel}
             description={textNl.map_toelichting}
+            metadata={{
+              date: [choropleth.gm.sewer[0].date_start_unix, choropleth.gm.sewer[0].date_end_unix],
+              source: textNl.bronnen.rivm,
+            }}
             valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
             legend={{
               title: textNl.legenda_titel,
