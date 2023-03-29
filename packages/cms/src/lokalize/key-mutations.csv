@@ -203,6 +203,8 @@ timestamp,action,key,document_id,move_to
 2023-03-24T07:45:03.890Z,delete,pages.topical_page.shared.secties.search.title.nl,PGwiP4IwXrA0GfLCLD9Tth,__
 2023-03-24T07:45:03.890Z,delete,pages.topical_page.shared.secties.search.title.vr,7nClfXqPlyZyEU7PO2TAAw,__
 2023-03-23T08:50:33.174Z,delete,common.nav.links.veiligheidsregio,jF33EuwumlGuwav2FD3VW8,__
+2023-03-28T12:52:25.750Z,delete,common.accessibility.charts.hospital_admissions_region_choropleth.description,YzrXb3vQYHnZxtu61Xgzap,__
+2023-03-28T12:52:25.751Z,delete,common.accessibility.charts.hospital_admissions_region_choropleth.label,Z3v1SKYekK4CLDpzUPbgJt,__
 2023-03-27T13:01:45.444Z,delete,common.accessibility.charts.elderly_at_home_deceased_over_time_chart.description,G1DXw0RdifOml06twMjSTZ,__
 2023-03-27T13:01:45.445Z,delete,common.accessibility.charts.elderly_at_home_deceased_over_time_chart.label,G1DXw0RdifOml06twMjRl8,__
 2023-03-28T13:00:33.765Z,delete,common.accessibility.charts.sewer_region_choropleth.description,cl0A2qFve1QxscrDIqKL1F,__
