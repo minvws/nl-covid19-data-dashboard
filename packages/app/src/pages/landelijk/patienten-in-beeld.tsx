@@ -39,7 +39,6 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlData('hospital_nice_per_age_group', 'intensive_care_nice_per_age_group', 'hospital_nice', 'intensive_care_nice'),
   createGetChoroplethData({
-    vr: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
     gm: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
   }),
   async (context: GetStaticPropsContext) => {
@@ -145,7 +144,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               title: textNl.choropleth.legend_title,
             }}
             metadata={{
-              date: lastValueNice.date_unix,
+              date: choropleth.gm.hospital_nice_choropleth[choropleth.gm.hospital_nice_choropleth.length - 1].date_unix,
               source: textNl.sources.nice,
             }}
           >
