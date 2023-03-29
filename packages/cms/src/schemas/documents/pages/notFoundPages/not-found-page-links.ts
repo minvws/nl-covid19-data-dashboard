@@ -8,21 +8,21 @@ export const themeLink = {
   fields: [
     {
       title: 'Link Label',
-      description: 'The text to show for the link.',
+      description: 'If a link is configured, then a label must be provided.',
       name: 'linkLabel',
       type: 'localeString',
       validation: REQUIRED,
     },
     {
       title: 'Link URL',
-      description: 'The destination URL for this link.',
+      description: 'If a link is configured, then a destination URL must be provided.',
       name: 'linkUrl',
       type: 'url',
       validation: REQUIRED,
     },
     {
       title: 'Icon',
-      description: 'The icon to use for this link. It will be shown to the left of this link.',
+      description: 'If a link is configured, you can choose to display an icon to the left of the link label.',
       name: 'linkIcon',
       type: 'string',
       inputComponent: KpiIconInput,

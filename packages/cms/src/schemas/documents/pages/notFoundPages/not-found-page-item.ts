@@ -1,3 +1,4 @@
+import { KpiIconInput } from '~/components/portable-text/kpi-configuration/kpi-icon-input';
 import { REQUIRED } from '../../../../validation';
 
 export const notFoundPageItem = {
@@ -46,16 +47,18 @@ export const notFoundPageItem = {
     {
       name: 'image',
       title: 'Image',
-      description: 'Select an image to show on this page.',
+      description: 'Select an image to show on this page. If selected, and alt text must be provided for accessibility.',
       type: 'image',
       options: {
         hotspot: true,
       },
       fields: [
         {
-          title: 'Alt Text',
           name: 'altText',
+          title: 'Alt Text',
+          description: 'This text will be used by screen readers for accessibility.',
           type: 'localeString',
+          validation: REQUIRED,
         },
       ],
       validation: REQUIRED,
@@ -63,18 +66,29 @@ export const notFoundPageItem = {
     {
       name: 'cta',
       title: 'Call To Action (CTA)',
-      description: 'This CTA will be displayed as a button on the page',
+      description: 'This CTA will be displayed as a button on the page.',
       type: 'object',
       fields: [
         {
-          title: 'CTA Label',
           name: 'ctaLabel',
+          title: 'CTA Label',
+          description: 'If a CTA is configured, then a label must be provided.',
           type: 'localeString',
+          validation: REQUIRED,
         },
         {
-          title: 'CTA Link',
           name: 'ctaLink',
+          title: 'CTA Link',
+          description: "If a CTA is configured, then a URL for the CTA's destination must be provided",
           type: 'url',
+          validation: REQUIRED,
+        },
+        {
+          name: 'ctaIcon',
+          title: 'CTA Icon',
+          description: 'If a CTA is configured, you can choose to show an icon to the left of the CTA label',
+          type: 'string',
+          inputComponent: KpiIconInput,
         },
       ],
     },
