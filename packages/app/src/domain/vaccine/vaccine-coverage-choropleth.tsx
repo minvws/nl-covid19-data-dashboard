@@ -5,7 +5,6 @@ import css from '@styled-system/css';
 import { useState } from 'react';
 import { space } from '~/style/theme';
 import { Box } from '~/components/base';
-import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
@@ -23,13 +22,11 @@ import { parseVaccinatedPercentageLabel } from './logic/parse-vaccinated-percent
 interface VaccineCoverageChoroplethProps {
   data: {
     gm: GmCollectionVaccineCoveragePerAgeGroup[];
-    vr: VrCollectionVaccineCoveragePerAgeGroup[];
   };
 }
 
 export const VaccineCoverageChoropleth = ({ data }: VaccineCoverageChoroplethProps) => {
   const { commonTexts } = useIntl();
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18');
   const [selectedCoverageKind, setSelectedCoverageKind] = useState<CoverageKindProperty>('primary_series');
   const reverseRouter = useReverseRouter();
@@ -47,10 +44,9 @@ export const VaccineCoverageChoropleth = ({ data }: VaccineCoverageChoroplethPro
   };
 
   const variables = {
-    regio: commonTexts.choropleth.choropleth_vaccination_coverage.shared[selectedMap],
+    regio: commonTexts.choropleth.choropleth_vaccination_coverage.shared.gm,
   };
 
-  const choroplethDataVr: VrCollectionVaccineCoveragePerAgeGroup[] = data.vr.filter((choroplethDataSingleVR) => choroplethDataSingleVR.vaccination_type === selectedCoverageKind);
   const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] = data.gm.filter((choroplethDataSingleGM) => choroplethDataSingleGM.vaccination_type === selectedCoverageKind);
 
   return (
@@ -82,52 +78,28 @@ export const VaccineCoverageChoropleth = ({ data }: VaccineCoverageChoroplethPro
         </>
       }
       legend={{
-        thresholds: selectedMap === 'gm' ? thresholds.gm.primary_series_percentage : thresholds.vr.primary_series_percentage,
+        thresholds: thresholds.gm.primary_series_percentage,
         title: commonTexts.choropleth.choropleth_vaccination_coverage.shared.legend_title,
       }}
       metadata={{
         source: commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
-        date:
-          selectedMap === 'gm'
-            ? data.gm.find((item: GmCollectionVaccineCoveragePerAgeGroup | VrCollectionVaccineCoveragePerAgeGroup) => item.vaccination_type === selectedCoverageKind)?.date_unix
-            : data.vr.find((item: GmCollectionVaccineCoveragePerAgeGroup | VrCollectionVaccineCoveragePerAgeGroup) => item.vaccination_type === selectedCoverageKind)?.date_unix,
+        date: data.gm.find((item: GmCollectionVaccineCoveragePerAgeGroup | VrCollectionVaccineCoveragePerAgeGroup) => item.vaccination_type === selectedCoverageKind)?.date_unix,
       }}
-      chartRegion={selectedMap}
-      onChartRegionChange={setSelectedMap}
     >
-      {selectedMap === 'gm' && (
-        <DynamicChoropleth
-          map={'gm'}
-          accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
-          data={choroplethDataGm}
-          dataConfig={{
-            metricName: 'vaccine_coverage_per_age_group',
-            metricProperty: `vaccinated_percentage_${selectedAgeGroup}_plus`,
-          }}
-          dataOptions={{
-            isPercentage: true,
-            getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode),
-          }}
-          formatTooltip={(context) => <ChoroplethTooltip data={context} ageGroups={matchingAgeGroups[selectedCoverageKind]} selectedCoverageKind={selectedCoverageKind} />}
-        />
-      )}
-
-      {selectedMap === 'vr' && (
-        <DynamicChoropleth
-          map={'vr'}
-          accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
-          data={choroplethDataVr}
-          dataConfig={{
-            metricName: 'vaccine_coverage_per_age_group',
-            metricProperty: `vaccinated_percentage_${selectedAgeGroup}_plus`,
-          }}
-          dataOptions={{
-            isPercentage: true,
-            getLink: (vrcode) => reverseRouter.vr.vaccinaties(vrcode),
-          }}
-          formatTooltip={(context) => <ChoroplethTooltip data={context} ageGroups={matchingAgeGroups[selectedCoverageKind]} selectedCoverageKind={selectedCoverageKind} />}
-        />
-      )}
+      <DynamicChoropleth
+        map={'gm'}
+        accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
+        data={choroplethDataGm}
+        dataConfig={{
+          metricName: 'vaccine_coverage_per_age_group',
+          metricProperty: `vaccinated_percentage_${selectedAgeGroup}_plus`,
+        }}
+        dataOptions={{
+          isPercentage: true,
+          getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode),
+        }}
+        formatTooltip={(context) => <ChoroplethTooltip data={context} ageGroups={matchingAgeGroups[selectedCoverageKind]} selectedCoverageKind={selectedCoverageKind} />}
+      />
     </ChoroplethTile>
   );
 };
