@@ -1,4 +1,4 @@
-import { KpiIconInput } from '~/components/portable-text/kpi-configuration/kpi-icon-input';
+import { KpiIconInput } from '../../../../components/portable-text/kpi-configuration/kpi-icon-input';
 import { REQUIRED } from '../../../../validation';
 
 export const notFoundPageItem = {
