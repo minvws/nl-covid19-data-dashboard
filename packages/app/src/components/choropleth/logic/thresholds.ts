@@ -388,7 +388,6 @@ export const thresholds: Thresholds = {
     admissions_on_date_of_admission: vrHospitalAdmissionsThresholds,
     admissions_on_date_of_admission_per_100000: hospitalAdmissionsPer100000Thresholds,
     infected_locations_percentage: infectedLocationsPercentageThresholds,
-    average: sewerThresholds,
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
     coverage_percentage: vaccineCoverageThresholds,
     has_sufficient_data: hasSufficientDataThresholds,
