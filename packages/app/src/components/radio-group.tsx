@@ -27,7 +27,7 @@ export const RadioGroup = <T extends string>(props: RadioGroupProps<T>) => {
   const id = useUniqueId();
 
   return (
-    <Box backgroundColor={colors.white} display="flex" justifyContent="center" data-cy="radiogroup">
+    <Box backgroundColor={colors.white} display="flex" justifyContent="center">
       {items.map((item, index) => (
         <Fragment key={`radiogroup-${id}-input-${index}`}>
           <Input

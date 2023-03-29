@@ -27,7 +27,6 @@ import { createGetStaticProps, StaticProps } from '~/static-props/create-get-sta
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
@@ -104,7 +103,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
   const nusingHomeArchivedUnderReportedDateStart = getBoundaryDateStartUnix(data.nursing_home_archived_20230126.values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
-  const reverseRouter = useReverseRouter();
   const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const infectedLocationsText = textShared.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText = textNl.verpleeghuis_positief_geteste_personen;
@@ -212,7 +210,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               }}
             >
               <KpiValue
-                data-cy="infected_locations_total"
                 absolute={nursinghomeDataLastValue.infected_locations_total}
                 percentage={nursinghomeDataLastValue.infected_locations_percentage}
                 difference={data.difference.vulnerable_nursing_home__infected_locations_total}
@@ -228,7 +225,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                 source: infectedLocationsText.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="newly_infected_locations" absolute={nursinghomeDataLastValue.newly_infected_locations} />
+              <KpiValue absolute={nursinghomeDataLastValue.newly_infected_locations} />
               <Text>{infectedLocationsText.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
@@ -260,7 +257,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               }}
               dataOptions={{
                 isPercentage: true,
-                getLink: reverseRouter.vr.kwetsbareGroepen,
               }}
             />
           </ChoroplethTile>
@@ -310,12 +306,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                     source: positiveTestedPeopleText.bronnen.rivm,
                   }}
                 >
-                  <KpiValue
-                    data-cy="newly_infected_people"
-                    absolute={nursinghomeDataLastValue.newly_infected_people}
-                    difference={data.difference.nursing_home__newly_infected_people_archived_20230126}
-                    isAmount
-                  />
+                  <KpiValue absolute={nursinghomeDataLastValue.newly_infected_people} difference={data.difference.nursing_home__newly_infected_people_archived_20230126} isAmount />
                 </KpiTile>
               </TwoKpiSection>
 
@@ -388,7 +379,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                     source: textNl.bronnen.rivm,
                   }}
                 >
-                  <KpiValue data-cy="deceased_daily" absolute={nursinghomeDataLastValue.deceased_daily} />
+                  <KpiValue absolute={nursinghomeDataLastValue.deceased_daily} />
                 </KpiTile>
               </TwoKpiSection>
 
