@@ -471,3 +471,4 @@ timestamp,action,key,document_id,move_to
 2023-03-27T13:01:45.445Z,delete,common.accessibility.charts.elderly_at_home_deceased_over_time_chart.label,G1DXw0RdifOml06twMjRl8,__
 2023-03-28T13:00:33.765Z,delete,common.accessibility.charts.sewer_region_choropleth.description,cl0A2qFve1QxscrDIqKL1F,__
 2023-03-28T13:00:33.766Z,delete,common.accessibility.charts.sewer_region_choropleth.label,Z3v1SKYekK4CLDpzUPc5x5,__
+2023-03-29T10:43:54.266Z,delete,common.choropleth.choropleth_vaccination_coverage.shared.vr,G6M7GhzH8XbtdKiRrez14Y,__
