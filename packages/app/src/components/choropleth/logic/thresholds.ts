@@ -385,7 +385,6 @@ export const thresholds: Thresholds = {
     vaccinated_percentage_60_plus: vaccineCoveragePercentageThresholds,
   },
   vr: {
-    infected_per_100k: positiveTestedThresholds,
     admissions_on_date_of_admission: vrHospitalAdmissionsThresholds,
     infected_locations_percentage: infectedLocationsPercentageThresholds,
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
