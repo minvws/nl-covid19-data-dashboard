@@ -29,7 +29,6 @@ const mapKeysToReverseRouter = {
   nursing_home_care: 'kwetsbareGroepen',
   positive_tests: 'positiefGetesteMensen',
   sewage_measurement: 'rioolwater',
-  source_investigation: 'brononderzoek',
   vaccinations: 'vaccinaties',
   variants: 'varianten',
   reproduction_number: 'reproductiegetal',

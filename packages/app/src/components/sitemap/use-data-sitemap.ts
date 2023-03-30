@@ -124,10 +124,6 @@ export function useDataSitemap(base: 'nl' | 'gm', code?: string, data?: Pick<Nl,
           text: commonTexts.sidebar.metrics.coronamelder_app.title,
           href: reverseRouter.nl.coronamelder(),
         },
-        {
-          text: commonTexts.sidebar.metrics.source_investigation.title,
-          href: reverseRouter.nl.brononderzoek(),
-        },
       ],
     },
   ];

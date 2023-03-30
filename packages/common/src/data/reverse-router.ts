@@ -32,7 +32,6 @@ export function getReverseRouter(isMobile: boolean) {
       verdenkingenHuisartsen: () => `/landelijk/verdenkingen-huisartsen`,
       gedrag: () => `/landelijk/gedrag`,
       coronamelder: () => `/landelijk/coronamelder`,
-      brononderzoek: () => `/landelijk/brononderzoek`,
       varianten: () => `/landelijk/varianten`,
     },
 
