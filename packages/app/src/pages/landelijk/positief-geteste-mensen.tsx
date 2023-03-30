@@ -2,6 +2,7 @@ import { colors, NlTestedOverallValue, TimeframeOption, TimeframeOptionsList } f
 import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
+import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -24,6 +25,7 @@ import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/quer
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { space } from '~/style/theme';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
@@ -342,10 +344,12 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               description={
                 <>
                   <Markdown content={textNl.map_toelichting} />
-                  {replaceComponentsInText(textNl.map_last_value_text, {
-                    infected_per_100k: <BoldText>{`${formatNumber(dataOverallLastValue.infected_per_100k)}`}</BoldText>,
-                    dateTo: formatDateFromSeconds(dataOverallLastValue.date_unix, 'weekday-long'),
-                  })}
+                  <Box marginBottom={space[3]}>
+                    {replaceComponentsInText(textNl.map_last_value_text, {
+                      infected_per_100k: <BoldText>{`${formatNumber(dataOverallLastValue.infected_per_100k)}`}</BoldText>,
+                      dateTo: formatDateFromSeconds(dataOverallLastValue.date_unix, 'weekday-long'),
+                    })}
+                  </Box>
                 </>
               }
               legend={{
