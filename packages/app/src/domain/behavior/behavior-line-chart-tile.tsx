@@ -1,7 +1,7 @@
 import { colors, NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
 import { dropRightWhile, dropWhile } from 'lodash';
 import { useMemo } from 'react';
-import { isDefined, isPresent } from 'ts-is-present';
+import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { InlineTooltip } from '~/components/inline-tooltip';
@@ -13,7 +13,7 @@ import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
-import { BehaviorIdentifier, behaviorIdentifiers } from './logic/behavior-types';
+import { BehaviorIdentifier } from './logic/behavior-types';
 
 type ValueType = NlBehaviorValue | VrBehaviorArchived_20221019Value;
 type ValueKey = keyof ValueType;
@@ -87,15 +87,6 @@ export function BehaviorLineChartTile({ values, metadata, currentId, setCurrentI
       </Box>
     </ChartTile>
   );
-}
-export function getBehaviorChartOptions<VrBehaviorArchived_20221019Value>(value: VrBehaviorArchived_20221019Value) {
-  return behaviorIdentifiers
-    .map((key) => {
-      if (`${key}_compliance` in value || `${key}_support` in value) {
-        return key;
-      }
-    })
-    .filter(isDefined);
 }
 
 /**
