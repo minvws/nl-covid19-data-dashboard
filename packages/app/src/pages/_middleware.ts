@@ -12,22 +12,22 @@ export const middleware = async (request: NextRequest) => {
   const showGenericNotFoundPage = !(isLevel('landelijk') || isLevel('gemeente') || isLevel('artikelen'));
 
   if (showGenericNotFoundPage) {
-    clonedURL.pathname = '/404/general';
+    clonedURL.pathname = '/not-found/general';
     return NextResponse.rewrite(clonedURL);
   }
 
   if (isLevel('landelijk')) {
-    clonedURL.pathname = '/404/nl';
+    clonedURL.pathname = '/not-found/nl';
     return NextResponse.rewrite(clonedURL);
   }
 
   if (isLevel('gemeente')) {
-    clonedURL.pathname = '/404/gm';
+    clonedURL.pathname = '/not-found/gm';
     return NextResponse.rewrite(clonedURL);
   }
 
   if (isLevel('artikelen')) {
-    clonedURL.pathname = '/404/article';
+    clonedURL.pathname = '/not-found/article';
     return NextResponse.rewrite(clonedURL);
   }
 };
