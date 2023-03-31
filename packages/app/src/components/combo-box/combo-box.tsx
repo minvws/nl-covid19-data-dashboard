@@ -22,6 +22,7 @@ type TProps<Option extends TOption> = {
   placeholder: string;
   onSelect: (option: Option) => void;
   selectedOption?: Option;
+  shouldFocusInput?: boolean;
 };
 
 /**
@@ -40,7 +41,7 @@ type TProps<Option extends TOption> = {
  * ```
  */
 export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
-  const { options, placeholder, selectedOption } = props;
+  const { options, placeholder, selectedOption, shouldFocusInput = true } = props;
 
   const { commonTexts } = useIntl();
 
@@ -98,10 +99,10 @@ export const ComboBox = <Option extends TOption>(props: TProps<Option>) => {
   };
 
   useEffect(() => {
-    if (!inputRef.current?.value && isLargeScreen && !hasRegionSelected) {
+    if (!inputRef.current?.value && isLargeScreen && !hasRegionSelected && shouldFocusInput) {
       inputRef.current?.focus();
     }
-  }, [isLargeScreen, hasRegionSelected]);
+  }, [isLargeScreen, hasRegionSelected, shouldFocusInput]);
 
   return (
     <Box role="search" css={css({ '[data-reach-combobox]': { paddingX: space[3], paddingY: space[4] } })}>
@@ -183,7 +184,7 @@ const ComboBoxStyles = createGlobalStyle`
 }
 
 [data-reach-combobox-list] {
-  height: 30em;
+  height: 25em;
   overflow-y: scroll;
   border: none;
   border-top: none;

@@ -10,8 +10,9 @@ export const getNotFoundPageQuery = (locale: string, pageType: string) => {
         'linkIcon': linkIcon,
       },
       'cta': {
-        ...cta,
+        'ctaLink': cta.ctaLink,
         'ctaLabel': cta.ctaLabel.${locale},
+        'ctaIcon': cta.ctaIcon
       },
       "image": {
         ...image,

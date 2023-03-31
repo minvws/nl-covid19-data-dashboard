@@ -57,6 +57,7 @@ export type IconName =
   | 'GgdTesten'
   | 'Groepen'
   | 'HealthCare'
+  | 'Home'
   | 'HomeAndVisits'
   | 'HorecaEnEvenementenBestellen'
   | 'HorecaEnEvenementenEtendrinken'
@@ -195,6 +196,7 @@ export const iconName2filename: Record<IconName, string> = {
   GgdTesten: 'ggd_testen.svg',
   Groepen: 'groepen.svg',
   HealthCare: 'health_care.svg',
+  Home: 'home.svg',
   HomeAndVisits: 'home_and_visits.svg',
   HorecaEnEvenementenBestellen: 'horeca_en_evenementen_bestellen.svg',
   HorecaEnEvenementenEtendrinken: 'horeca_en_evenementen_etendrinken.svg',

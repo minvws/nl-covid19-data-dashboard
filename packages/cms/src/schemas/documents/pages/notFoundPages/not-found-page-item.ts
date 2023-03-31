@@ -40,7 +40,8 @@ export const notFoundPageItem = {
     {
       name: 'links',
       title: 'Links',
-      description: 'Configure a list of links. On the general page, this will be displayed below the description. On all other pages, this will be below the CTA.',
+      description:
+        'Configure a list of links. On the general page, this will be displayed below the description. On all other pages, this will be below the CTA or the search box.',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'notFoundPageLinks' } }],
     },
