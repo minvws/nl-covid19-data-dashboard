@@ -21,7 +21,9 @@
 
 ## Schema
 
-- [Schema docs]Miscellaneous
+- [Schema docs](schema.md)
+
+## Miscellaneous
 
 - [Developer notes](developers.md)
 - [Choropleth data](choropleth-data.md)
