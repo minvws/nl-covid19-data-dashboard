@@ -5,6 +5,7 @@ import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { ChartTile, PageInformationBlock, TileList, TimeSeriesChart, WarningTile, Divider } from '~/components';
 import { Layout, NlLayout } from '~/domain/layout';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import {
   selectAdministrationData,
   VaccinationsOverTimeTile,
@@ -122,6 +123,7 @@ export const getStaticProps = createGetStaticProps(
 function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const { content, choropleth, selectedNlData: data, lastGenerated, administrationData } = props;
   const { commonTexts, formatNumber } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(props.pageText, selectLokalizeTexts);
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
@@ -151,6 +153,10 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const hasActiveWarningTile = textNl.belangrijk_bericht && !isEmpty(textNl.belangrijk_bericht);
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
+  const variables = {
+    regio: commonTexts.choropleth.choropleth_vaccination_coverage.shared.gm,
+  };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -256,7 +262,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }}
           />
 
-          <VaccineCoverageChoropleth data={choropleth} />
+          <VaccineCoverageChoropleth
+            data={choropleth.gm}
+            dataOptions={{ getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode), isPercentage: true }}
+            text={{
+              title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.title, variables),
+              description: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.description, variables),
+            }}
+          />
           <Autumn2022ShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}

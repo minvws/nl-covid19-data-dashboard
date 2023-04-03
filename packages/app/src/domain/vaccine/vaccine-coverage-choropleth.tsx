@@ -5,7 +5,7 @@ import css from '@styled-system/css';
 import { useState } from 'react';
 import { space } from '~/style/theme';
 import { Box } from '~/components/base';
-import { DynamicChoropleth } from '~/components/choropleth';
+import { DataOptions, DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
 import { TooltipContent, TooltipSubject } from '~/components/choropleth/tooltips';
@@ -14,23 +14,23 @@ import { Markdown } from '~/components/markdown';
 import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { AgeGroup, AgeGroupSelect } from './components/age-group-select';
 import { CoverageKindProperty, VaccinationCoverageKindSelect } from './components/vaccination-coverage-kind-select';
 import { parseVaccinatedPercentageLabel } from './logic/parse-vaccinated-percentage-label';
 
 interface VaccineCoverageChoroplethProps {
-  data: {
-    gm: GmCollectionVaccineCoveragePerAgeGroup[];
+  data: GmCollectionVaccineCoveragePerAgeGroup[];
+  dataOptions: DataOptions;
+  text: {
+    title: string;
+    description: string;
   };
 }
 
-export const VaccineCoverageChoropleth = ({ data }: VaccineCoverageChoroplethProps) => {
+export const VaccineCoverageChoropleth = ({ data, dataOptions, text }: VaccineCoverageChoroplethProps) => {
   const { commonTexts } = useIntl();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18');
   const [selectedCoverageKind, setSelectedCoverageKind] = useState<CoverageKindProperty>('primary_series');
-  const reverseRouter = useReverseRouter();
-
   /**
    * When changing between coverage kinds where the selected age group isn't available,
    * the other coverage kind set the non-matching age group to a default one.
@@ -43,18 +43,14 @@ export const VaccineCoverageChoropleth = ({ data }: VaccineCoverageChoroplethPro
     setSelectedCoverageKind(coverageKind);
   };
 
-  const variables = {
-    regio: commonTexts.choropleth.choropleth_vaccination_coverage.shared.gm,
-  };
-
-  const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] = data.gm.filter((choroplethDataSingleGM) => choroplethDataSingleGM.vaccination_type === selectedCoverageKind);
+  const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] = data.filter((choroplethDataSingleGM) => choroplethDataSingleGM.vaccination_type === selectedCoverageKind);
 
   return (
     <ChoroplethTile
-      title={replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.title, variables)}
+      title={text.title}
       description={
         <>
-          <Markdown content={replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.description, variables)} />
+          <Markdown content={text.description} />
           <Box display="flex" flexDirection="row" justifyContent="flex-start" spacingHorizontal={2} as={'fieldset'}>
             <BoldText
               as="legend"
@@ -83,8 +79,9 @@ export const VaccineCoverageChoropleth = ({ data }: VaccineCoverageChoroplethPro
       }}
       metadata={{
         source: commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
-        date: data.gm.find((item: GmCollectionVaccineCoveragePerAgeGroup) => item.vaccination_type === selectedCoverageKind)?.date_unix,
+        date: data.find((item: GmCollectionVaccineCoveragePerAgeGroup) => item.vaccination_type === selectedCoverageKind)?.date_unix,
       }}
+      hasPadding
     >
       <DynamicChoropleth
         map={'gm'}
@@ -94,10 +91,7 @@ export const VaccineCoverageChoropleth = ({ data }: VaccineCoverageChoroplethPro
           metricName: 'vaccine_coverage_per_age_group',
           metricProperty: `vaccinated_percentage_${selectedAgeGroup}_plus`,
         }}
-        dataOptions={{
-          isPercentage: true,
-          getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode),
-        }}
+        dataOptions={dataOptions}
         formatTooltip={(context) => <ChoroplethTooltip data={context} ageGroups={matchingAgeGroups[selectedCoverageKind]} selectedCoverageKind={selectedCoverageKind} />}
       />
     </ChoroplethTile>
