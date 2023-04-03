@@ -1,4 +1,4 @@
-import { Gm, Nl } from '.';
+import { Gm, Nl, Vr } from '.';
 
 /**
  * All possible datascopes. Can be used to access the types of a scope based on
@@ -7,6 +7,7 @@ import { Gm, Nl } from '.';
 export type ScopedData = {
   gm: Gm;
   nl: Nl;
+  vr: Vr;
 };
 
 export type DataScopeKey = keyof ScopedData;
@@ -15,7 +16,7 @@ export type DataScope = ScopedData[DataScopeKey];
 
 export type MetricKeys<T> = keyof Omit<T, 'last_generated' | 'proto_name' | 'name' | 'code'>;
 
-export type MetricName = MetricKeys<Nl & Gm>;
+export type MetricName = MetricKeys<Nl & Vr & Gm>;
 
 type ValuesMetric<T> = {
   values: T[];
@@ -29,6 +30,6 @@ type ValuesMetric<T> = {
 type ValueKeys<T> = T extends ValuesMetric<infer V> ? ValueKeys<V> : keyof T;
 
 /**
- * The metric properties of metric M in data scope S (scope being In/Nl/Gm)
+ * The metric properties of metric M in data scope S (scope being In/Nl/Vr/Gm)
  */
 export type MetricProperty<S extends DataScope, M extends MetricKeys<S>> = ValueKeys<S[M]>;
