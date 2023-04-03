@@ -51,7 +51,6 @@ See below an overview of all the available icons in this package. This file is g
 | Experimenteel                          | <div style="background-color: white;"><img src="./src/svg/experimenteel.svg" alt="Experimenteel" /></div>                                                      |
 | External                               | <div style="background-color: white;"><img src="./src/svg/external.svg" alt="External" /></div>                                                                |
 | Eye                                    | <div style="background-color: white;"><img src="./src/svg/eye.svg" alt="Eye" /></div>                                                                          |
-| Form                                   | <div style="background-color: white;"><img src="./src/svg/form.svg" alt="Form" /></div>                                                                        |
 | FrisseLucht                            | <div style="background-color: white;"><img src="./src/svg/frisse_lucht.svg" alt="FrisseLucht" /></div>                                                         |
 | GedeeltelijkOpenRugzak                 | <div style="background-color: white;"><img src="./src/svg/gedeeltelijk_open_rugzak.svg" alt="GedeeltelijkOpenRugzak" /></div>                                  |
 | GeenEntertainment                      | <div style="background-color: white;"><img src="./src/svg/geen_entertainment.svg" alt="GeenEntertainment" /></div>                                             |

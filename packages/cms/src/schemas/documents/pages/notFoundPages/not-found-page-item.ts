@@ -10,7 +10,7 @@ export const notFoundPageItem = {
       name: 'pageType',
       title: 'Pagina Type',
       description:
-        'Select the page type. This determines the level (NL, GM, Artciles, General) for which you want this configuration to be used. Attention: This value for each 404 Page should be unique.',
+        'Select the page type. This determines the level (NL, GM, Articles, General) for which you want this configuration to be used. Attention: This value for each 404 Page should be unique.',
       type: 'string',
       options: {
         list: [
@@ -48,7 +48,7 @@ export const notFoundPageItem = {
     {
       name: 'image',
       title: 'Image',
-      description: 'Select an image to show on this page. If selected, and alt text must be provided for accessibility.',
+      description: 'Select an image to show on this page. If selected, an alt text must be provided for accessibility.',
       type: 'image',
       options: {
         hotspot: true,

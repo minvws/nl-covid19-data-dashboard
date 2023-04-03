@@ -1,7 +1,6 @@
 export const getNotFoundPageQuery = (locale: string, pageType: string) => {
   return `// groq
     *[_type == 'notFoundPageItem' && pageType == '${pageType}' && !(_id in path('drafts.**'))]{
-      ...,
       'title': title.${locale},
       'description': description.${locale},
       'links': links[]->{
