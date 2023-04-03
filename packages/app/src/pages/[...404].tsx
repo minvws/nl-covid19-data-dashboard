@@ -1,8 +1,7 @@
 import { colors } from '@corona-dashboard/common';
 import { ChevronRight } from '@corona-dashboard/icons';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
-import { GetStaticProps } from 'next';
-import { GetStaticPaths } from 'next/types';
+import { GetServerSideProps } from 'next';
 import styled from 'styled-components';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
@@ -19,16 +18,32 @@ import { mediaQueries, radii, sizes, space } from '~/style/theme';
 import { ImageBlock } from '~/types/cms';
 import { getFilenameToIconName } from '~/utils/get-filename-to-icon-name';
 
-export const getStaticPaths: GetStaticPaths = () => {
-  return { paths: [], fallback: 'blocking' };
+const LevelsToPageTypeMapping: { [key: string]: string } = {
+  landelijk: 'nl',
+  gemeente: 'gm',
+  artikelen: 'article',
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { lastGenerated } = getLastGeneratedDate();
-  const { params: notFoundParams, locale = 'nl' } = context;
+const determinePageType = (url: string) => {
+  const isLevel = (level: string) => url.includes(`/${level}`);
 
-  const pageType = notFoundParams && notFoundParams['404'] ? notFoundParams['404'].at(0) : undefined; // The pageType param is always the first param as it is the only one passed in.
-  const query = getNotFoundPageQuery(locale, pageType ?? 'general');
+  let pageType = 'general';
+  Object.keys(LevelsToPageTypeMapping).forEach((key) => {
+    if (isLevel(key)) {
+      pageType = LevelsToPageTypeMapping[key];
+    }
+  });
+
+  return pageType;
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  res.statusCode = 404;
+  const { lastGenerated } = getLastGeneratedDate();
+
+  const pageType = req.url ? determinePageType(req.url) : 'general';
+
+  const query = getNotFoundPageQuery('nl', pageType);
 
   const client = await getClient();
   const notFoundPageConfiguration = await client.fetch(query);
