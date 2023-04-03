@@ -16,7 +16,7 @@ export const notFoundPageItem = {
         list: [
           { value: 'general', title: 'Algemeen' },
           { value: 'nl', title: 'Landelijk' },
-          { value: 'gm', title: 'Geemente' },
+          { value: 'gm', title: 'Gemeente' },
           { value: 'article', title: 'Artikelen' },
         ],
         layout: 'dropdown',
@@ -50,9 +50,6 @@ export const notFoundPageItem = {
       title: 'Image',
       description: 'Select an image to show on this page. If selected, an alt text must be provided for accessibility.',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
       fields: [
         {
           name: 'altText',

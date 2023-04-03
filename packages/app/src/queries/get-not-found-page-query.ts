@@ -4,6 +4,7 @@ export const getNotFoundPageQuery = (locale: string, pageType: string) => {
       'title': title.${locale},
       'description': description.${locale},
       'links': links[]->{
+        'id': _id,
         'linkUrl': linkUrl,
         'linkLabel': linkLabel.${locale},
         'linkIcon': linkIcon,

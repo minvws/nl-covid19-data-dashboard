@@ -8,7 +8,7 @@ export const middleware = async (request: NextRequest) => {
   const response = await fetch(request.nextUrl.href);
   if (response.status !== 404) return NextResponse.next();
 
-  const isLevel = (level: string): boolean => request.nextUrl.pathname.startsWith(`/${level}`);
+  const isLevel = (level: string) => request.nextUrl.pathname.startsWith(`/${level}`);
   const showGenericNotFoundPage = !(isLevel('landelijk') || isLevel('gemeente') || isLevel('artikelen'));
 
   if (showGenericNotFoundPage) {

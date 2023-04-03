@@ -91,7 +91,7 @@ const NotFound = ({ lastGenerated, notFoundPageConfiguration }: NotFoundProps) =
                   alignItems="center"
                   display="flex"
                   hasChevron
-                  key={`${index}-${link.id}`}
+                  key={link.id}
                   link={link}
                   marginBottom={isGeneralPage ? (index === links.length - 1 ? space[4] : space[2]) : undefined}
                 />
@@ -135,7 +135,7 @@ interface NotFoundLinkProps {
   className?: string;
   hasChevron?: boolean;
   isCTA?: boolean;
-  marginBottom?: string | undefined;
+  marginBottom?: string;
   maxWidth?: string;
   order?: number;
   padding?: string;

@@ -1,7 +1,7 @@
 import { RiErrorWarningFill } from 'react-icons/ri';
 import { StructureBuilder as S } from '@sanity/structure';
 
-export const notFoundPageStrcuture = () => {
+export const notFoundPageStructure = () => {
   return S.listItem()
     .id('notFoundPages')
     .title('404 Paginas')
