@@ -1,14 +1,16 @@
 import { colors } from '@corona-dashboard/common';
 import { ChevronRight } from '@corona-dashboard/icons';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
 import { SanityImage } from '~/components/cms/sanity-image';
 import DynamicIcon, { IconName } from '~/components/get-icon-by-name';
-import { Anchor, Heading } from '~/components/typography';
+import { Anchor, Heading, Text } from '~/components/typography';
 import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
+import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { getClient, getImageProps } from '~/lib/sanity';
@@ -18,40 +20,27 @@ import { mediaQueries, radii, sizes, space } from '~/style/theme';
 import { ImageBlock } from '~/types/cms';
 import { getFilenameToIconName } from '~/utils/get-filename-to-icon-name';
 
-const LevelsToPageTypeMapping: { [key: string]: string } = {
-  landelijk: 'nl',
-  gemeente: 'gm',
-  artikelen: 'article',
-};
-
-const determinePageType = (url: string) => {
-  const isLevel = (level: string) => url.includes(`/${level}`);
+const determinePageType = (path: string) => {
+  const levelsToPageTypes: { [key: string]: string } = { landelijk: 'nl', gemeente: 'gm', artikelen: 'article' };
 
   let pageType = 'general';
-  Object.keys(LevelsToPageTypeMapping).forEach((key) => {
-    if (isLevel(key)) {
-      pageType = LevelsToPageTypeMapping[key];
+  Object.keys(levelsToPageTypes).forEach((key) => {
+    if (path.startsWith(`/${key}`)) {
+      pageType = levelsToPageTypes[key];
     }
   });
 
   return pageType;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  res.statusCode = 404;
+export const getStaticProps: GetStaticProps = async ({ locale = 'nl' }) => {
   const { lastGenerated } = getLastGeneratedDate();
-
-  const pageType = req.url ? determinePageType(req.url) : 'general';
-
-  const query = getNotFoundPageQuery('nl', pageType);
-
+  const query = getNotFoundPageQuery(locale);
   const client = await getClient();
-  const notFoundPageConfiguration = await client.fetch(query);
-  notFoundPageConfiguration.isGmPage = pageType === 'gm';
-  notFoundPageConfiguration.isGeneralPage = pageType === 'general';
+  const notFoundPagesConfiguration = await client.fetch(query);
 
   return {
-    props: { lastGenerated, notFoundPageConfiguration },
+    props: { lastGenerated, notFoundPagesConfiguration },
   };
 };
 
@@ -62,26 +51,44 @@ type Link = {
   linkUrl: string;
 };
 
+type NotFoundPageConfiguration = {
+  description: PortableTextEntry[];
+  image: ImageBlock;
+  isGeneralPage: boolean;
+  isGmPage: boolean;
+  pageType: string;
+  title: string;
+  cta?: {
+    ctaIcon?: string;
+    ctaLabel: string;
+    ctaLink: string;
+  };
+  links?: Link[];
+};
+
 interface NotFoundProps {
   lastGenerated: string;
-  notFoundPageConfiguration: {
-    description: PortableTextEntry[];
-    image: ImageBlock;
-    isGeneralPage: boolean;
-    isGmPage: boolean;
-    title: string;
-    cta?: {
-      ctaIcon?: string;
-      ctaLabel: string;
-      ctaLink: string;
-    };
-    links?: Link[];
-  };
+  notFoundPagesConfiguration: NotFoundPageConfiguration[];
 }
 
-const NotFound = ({ lastGenerated, notFoundPageConfiguration }: NotFoundProps) => {
+const NotFound = ({ lastGenerated, notFoundPagesConfiguration }: NotFoundProps) => {
   const { commonTexts } = useIntl();
-  const { title, description, isGmPage, isGeneralPage, image, links = undefined, cta = undefined } = notFoundPageConfiguration;
+  const { asPath } = useRouter();
+  const pageType = determinePageType(asPath);
+  const pageConfig = notFoundPagesConfiguration.find((page) => page.pageType === pageType);
+
+  if (!pageConfig) {
+    return (
+      <Layout {...commonTexts.notfound_metadata} lastGenerated={lastGenerated}>
+        <Content>
+          <Heading level={1}>{commonTexts.notfound_titel.text}</Heading>
+          <Text>{commonTexts.notfound_beschrijving.text}</Text>
+        </Content>
+      </Layout>
+    );
+  }
+
+  const { title, description, isGmPage, isGeneralPage, image, links = undefined, cta = undefined } = pageConfig;
 
   return (
     <Layout {...commonTexts.notfound_metadata} lastGenerated={lastGenerated}>
