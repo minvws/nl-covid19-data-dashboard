@@ -26,7 +26,6 @@ import { createGetStaticProps, StaticProps } from '~/static-props/create-get-sta
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
@@ -82,8 +81,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
 
   const { commonTexts, formatNumber } = useIntl();
   const { metadataTexts, textShared, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
-
-  const reverseRouter = useReverseRouter();
 
   const metadata = {
     ...metadataTexts,
@@ -210,9 +207,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                   positive_tested_daily_per_100k: formatNumber,
                 },
               }}
-              dataOptions={{
-                getLink: reverseRouter.vr.thuiswonendeOuderen,
-              }}
+              dataOptions={{}}
             />
           </ChoroplethTile>
           <Divider />
