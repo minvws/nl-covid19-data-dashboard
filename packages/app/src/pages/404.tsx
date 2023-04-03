@@ -2,7 +2,6 @@ import { colors } from '@corona-dashboard/common';
 import { ChevronRight } from '@corona-dashboard/icons';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { GetStaticProps } from 'next';
-import { GetStaticPaths } from 'next/types';
 import styled from 'styled-components';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
@@ -18,22 +17,16 @@ import { getLastGeneratedDate } from '~/static-props/get-data';
 import { mediaQueries, radii, sizes, space } from '~/style/theme';
 import { ImageBlock } from '~/types/cms';
 import { getFilenameToIconName } from '~/utils/get-filename-to-icon-name';
-
-export const getStaticPaths: GetStaticPaths = () => {
-  return { paths: [], fallback: 'blocking' };
-};
+import { useRouter } from 'next/router';
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { lastGenerated } = getLastGeneratedDate();
-  const { params: notFoundParams, locale = 'nl' } = context;
+  const { locale = 'nl' } = context;
 
-  const pageType = notFoundParams && notFoundParams['404'] ? notFoundParams['404'].at(0) : undefined; // The pageType param is always the first param as it is the only one passed in.
-  const query = getNotFoundPageQuery(locale, pageType ?? 'general');
+  const query = getNotFoundPageQuery(locale);
 
   const client = await getClient();
   const notFoundPageConfiguration = await client.fetch(query);
-  notFoundPageConfiguration.isGmPage = pageType === 'gm';
-  notFoundPageConfiguration.isGeneralPage = pageType === 'general';
 
   return {
     props: { lastGenerated, notFoundPageConfiguration },
@@ -50,6 +43,7 @@ type Link = {
 interface NotFoundProps {
   lastGenerated: string;
   notFoundPageConfiguration: {
+    pageType: string;
     description: PortableTextEntry[];
     image: ImageBlock;
     isGeneralPage: boolean;
@@ -61,12 +55,24 @@ interface NotFoundProps {
       ctaLink: string;
     };
     links?: Link[];
-  };
+  }[];
 }
 
 const NotFound = ({ lastGenerated, notFoundPageConfiguration }: NotFoundProps) => {
   const { commonTexts } = useIntl();
-  const { title, description, isGmPage, isGeneralPage, image, links = undefined, cta = undefined } = notFoundPageConfiguration;
+  const router = useRouter();
+
+  const pageSlug = router.asPath;
+
+  const pageType = pageSlug.startsWith('/artikelen/') ? 'article' : pageSlug.startsWith('/gemeente/') ? 'gm' : pageSlug.startsWith('/landelijk/') ? 'nl' : 'general';
+
+  const selectPageconfiguration = notFoundPageConfiguration.find((pageConfig) => pageConfig.pageType === pageType);
+
+  if (!selectPageconfiguration) {
+    return <></>;
+  }
+
+  const { title, description, isGmPage, isGeneralPage, image, links = undefined, cta = undefined } = selectPageconfiguration;
 
   return (
     <Layout {...commonTexts.notfound_metadata} lastGenerated={lastGenerated}>

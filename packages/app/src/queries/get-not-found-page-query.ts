@@ -1,6 +1,7 @@
-export const getNotFoundPageQuery = (locale: string, pageType: string) => {
+export const getNotFoundPageQuery = (locale: string) => {
   return `// groq
-    *[_type == 'notFoundPageItem' && pageType == '${pageType}' && !(_id in path('drafts.**'))]{
+    *[_type == 'notFoundPageItem' && !(_id in path('drafts.**'))]{
+      'pageType': pageType,
       'title': title.${locale},
       'description': description.${locale},
       'links': links[]->{
@@ -21,6 +22,6 @@ export const getNotFoundPageQuery = (locale: string, pageType: string) => {
           ...image.asset->,
         }
       }
-    }[0]
+    }
   `;
 };
