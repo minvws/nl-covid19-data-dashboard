@@ -47,7 +47,7 @@ const pageMetrics = [
   'vaccine_coverage_per_age_group_estimated_fully_vaccinated',
   'vaccine_coverage_per_age_group_estimated_autumn_2022',
   'vaccine_campaigns',
-  'vaccine_planned',
+  'vaccine_planned_archived_20220908',
   'booster_coverage_archived_20220904',
   'booster_shot_administered_archived_20220904',
   'repeating_shot_administered',
@@ -82,7 +82,6 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group_estimated_autumn_2022',
     'vaccine_campaigns',
     'vaccine_campaigns_archived_20220908',
-    'vaccine_planned',
     'vaccine_planned_archived_20220908',
     'booster_coverage_archived_20220904',
     'booster_shot_administered_archived_20220904',
@@ -231,9 +230,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
           <VaccineCampaignsTile
             title={textNl.vaccine_campaigns.title}
-            description={replaceVariablesInText(textNl.vaccine_campaigns.description, {
-              vaccinePlanned: formatNumber(data.vaccine_planned.doses),
-            })}
+            description={textNl.vaccine_campaigns.description}
             descriptionFooter={textNl.vaccine_campaigns.description_footer}
             headers={textNl.vaccine_campaigns.headers}
             campaigns={data.vaccine_campaigns.vaccine_campaigns}
