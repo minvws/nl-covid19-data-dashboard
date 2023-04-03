@@ -11,7 +11,6 @@ import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
 import { getThresholdValue } from '~/utils/get-threshold-value';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface VrBehaviorTooltipProps {
   context: TooltipData<VrCollectionBehaviorArchived_20221019>;
@@ -24,7 +23,6 @@ interface VrBehaviorTooltipProps {
 
 export function VrBehaviorTooltip({ context, currentMetric, currentComplianceValue, currentSupportValue, behaviorType, text }: VrBehaviorTooltipProps) {
   const { commonTexts, formatPercentage } = useIntl();
-  const reverseRouter = useReverseRouter();
   const complianceThresholdKey = `${currentMetric}_compliance` as const;
   const supportThresholdKey = `${currentMetric}_support` as const;
 
@@ -49,7 +47,7 @@ export function VrBehaviorTooltip({ context, currentMetric, currentComplianceVal
   );
 
   return (
-    <TooltipContent title={context.featureName} link={reverseRouter.vr.gedrag(context.dataItem.vrcode)}>
+    <TooltipContent title={context.featureName}>
       <Box maxWidth="15rem" spacing={2}>
         <BoldText css={css({ marginBottom: space[2] })}>{commonTexts.behavior.subjects[currentMetric]}</BoldText>
 
