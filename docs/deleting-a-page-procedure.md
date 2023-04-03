@@ -1,4 +1,4 @@
-# Deleting a page Procedure
+# Deleting a page procedure
 
 ## For every file you delete do the following:
 1. ### imports (if there are any)
