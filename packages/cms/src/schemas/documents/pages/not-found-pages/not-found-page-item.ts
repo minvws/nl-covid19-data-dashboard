@@ -1,5 +1,9 @@
+import sanityClient from 'part:@sanity/base/client';
+import { Rule } from '~/sanity';
 import { KpiIconInput } from '../../../../components/portable-text/kpi-configuration/kpi-icon-input';
 import { REQUIRED } from '../../../../validation';
+
+const client = sanityClient.withConfig({ apiVersion: '2021-10-21' });
 
 export const notFoundPageItem = {
   name: 'notFoundPageItem',
@@ -21,7 +25,20 @@ export const notFoundPageItem = {
         ],
         layout: 'dropdown',
       },
-      validation: REQUIRED,
+      validation: (rule: Rule) => [
+        rule.required(),
+
+        // This will populate error messages if there already is an item with this title.
+        rule.custom(async (pageType: string, context: any) => {
+          const query = `*[_type == 'notFoundPageItem' && pageType == '${pageType}' && !(_id in path('drafts.**')) && !(_id match "*${context.document._id.replace(
+            'drafts.',
+            ''
+          )}")]{...,}`;
+
+          const count = await client.fetch(query);
+          return count.length > 0 ? 'The page type needs to be unique.' : true;
+        }),
+      ],
     },
     {
       name: 'title',
