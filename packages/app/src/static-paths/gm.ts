@@ -11,6 +11,6 @@ export function getStaticPaths() {
   return {
     paths,
     // other routes should 404
-    fallback: false,
+    fallback: 'blocking',
   };
 }
