@@ -88,7 +88,7 @@ const NotFound = ({ lastGenerated, notFoundPagesConfiguration }: NotFoundProps) 
     );
   }
 
-  const { title, description, isGmPage, isGeneralPage, image, links = undefined, cta = undefined } = pageConfig;
+  const { title, description, isGmPage = pageType === 'gm', isGeneralPage = pageType === 'general', image, links = undefined, cta = undefined } = pageConfig;
 
   return (
     <Layout {...commonTexts.notfound_metadata} lastGenerated={lastGenerated}>
