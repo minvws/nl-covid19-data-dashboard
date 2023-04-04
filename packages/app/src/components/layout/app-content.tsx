@@ -24,15 +24,16 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
   const reverseRouter = useReverseRouter();
   const { commonTexts } = useIntl();
 
-  const isMenuOpen = router.pathname == '/landelijk' || router.pathname == '/gemeente/[code]' || router.query.menu === '1';
+  const isMenuOpen = router.pathname == '/landelijk' || router.pathname == '/veiligheidsregio/[code]' || router.pathname == '/gemeente/[code]' || router.query.menu === '1';
 
   const currentPageScope = getCurrentPageScope(router);
+  const currentCode = router.query.code as string | undefined;
   const isNational = currentPageScope === 'nl';
 
   /**
    * @TODO Open the menu purely client side without loading a new page
    */
-  const backButtonUrl = currentPageScope ? isMenuOpen && (isNational ? reverseRouter.topical.nl : undefined) : undefined;
+  const backButtonUrl = currentPageScope ? (isMenuOpen ? (isNational ? reverseRouter.topical.nl : undefined) : reverseRouter[currentPageScope].index(currentCode)) : undefined;
 
   const backButtonText = currentPageScope ? (isMenuOpen ? (isNational ? commonTexts.nav.back_topical.nl : '') : commonTexts.nav.back_all_metrics[currentPageScope]) : '';
 
