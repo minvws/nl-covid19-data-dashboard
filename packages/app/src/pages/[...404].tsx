@@ -7,8 +7,9 @@ import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
 import { SanityImage } from '~/components/cms/sanity-image';
 import DynamicIcon, { IconName } from '~/components/get-icon-by-name';
-import { Anchor, Heading } from '~/components/typography';
+import { Anchor, Heading, Text } from '~/components/typography';
 import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
+import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { getClient, getImageProps } from '~/lib/sanity';
@@ -39,6 +40,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, locale 
   const query = getNotFoundPageQuery(locale, pageType);
   const client = await getClient();
   const notFoundPageConfiguration = await client.fetch(query);
+
+  if (notFoundPageConfiguration === null) {
+    return { props: { lastGenerated } };
+  }
+
   notFoundPageConfiguration.isGmPage = pageType === 'gm';
   notFoundPageConfiguration.isGeneralPage = pageType === 'general';
 
@@ -73,6 +79,18 @@ interface NotFoundProps {
 
 const NotFound = ({ lastGenerated, notFoundPageConfiguration }: NotFoundProps) => {
   const { commonTexts } = useIntl();
+
+  if (!notFoundPageConfiguration || !Object.keys(notFoundPageConfiguration).length) {
+    return (
+      <Layout {...commonTexts.notfound_metadata} lastGenerated={lastGenerated}>
+        <Content>
+          <Heading level={1}>{commonTexts.notfound_titel.text}</Heading>
+          <Text>{commonTexts.notfound_beschrijving.text}</Text>
+        </Content>
+      </Layout>
+    );
+  }
+
   const { title, description, isGmPage, isGeneralPage, image, links = undefined, cta = undefined } = notFoundPageConfiguration;
 
   return (
