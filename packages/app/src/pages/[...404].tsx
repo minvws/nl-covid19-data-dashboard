@@ -18,18 +18,12 @@ import { mediaQueries, radii, sizes, space } from '~/style/theme';
 import { ImageBlock } from '~/types/cms';
 import { getFilenameToIconName } from '~/utils/get-filename-to-icon-name';
 
-const LevelsToPageTypeMapping: { [key: string]: string } = {
-  landelijk: 'nl',
-  gemeente: 'gm',
-  artikelen: 'article',
-};
-
 const determinePageType = (url: string) => {
-  const isLevel = (level: string) => url.includes(`/${level}`);
+  const LevelsToPageTypeMapping: { [key: string]: string } = { landelijk: 'nl', gemeente: 'gm', artikelen: 'article' };
 
   let pageType = 'general';
   Object.keys(LevelsToPageTypeMapping).forEach((key) => {
-    if (isLevel(key)) {
+    if (url.includes(`/${key}`)) {
       pageType = LevelsToPageTypeMapping[key];
     }
   });
@@ -37,14 +31,12 @@ const determinePageType = (url: string) => {
   return pageType;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res, locale = 'nl' }) => {
   res.statusCode = 404;
   const { lastGenerated } = getLastGeneratedDate();
 
   const pageType = req.url ? determinePageType(req.url) : 'general';
-
-  const query = getNotFoundPageQuery('nl', pageType);
-
+  const query = getNotFoundPageQuery(locale, pageType);
   const client = await getClient();
   const notFoundPageConfiguration = await client.fetch(query);
   notFoundPageConfiguration.isGmPage = pageType === 'gm';
