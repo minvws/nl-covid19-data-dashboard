@@ -7,13 +7,13 @@ import { MaxWidth } from '~/components/max-width';
 import { Anchor } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
+import { sizes, space } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { useMediaQuery } from '~/utils/use-media-query';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-const wideNavBreakpoint = 'screen and (min-width: 1024px)';
+const wideNavBreakpoint = `screen and (min-width: ${sizes.wideNavWidth}px)`;
 
 export function TopNavigation() {
   const isWideNav = useMediaQuery(wideNavBreakpoint);
