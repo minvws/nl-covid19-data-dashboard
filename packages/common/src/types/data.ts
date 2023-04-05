@@ -273,7 +273,6 @@ export interface Nl {
   vaccine_administered_last_week: NlVaccineAdministeredLastWeek;
   vaccine_campaigns: NlVaccineCampaigns;
   vaccine_campaigns_archived_20220908: NlVaccineCampaignsArchived_20220908;
-  vaccine_planned: NlVaccinePlanned;
   vaccine_planned_archived_20220908: NlVaccinePlannedArchived_20220908;
   vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: NlVaccineCoveragePerAgeGroupArchived;
@@ -350,6 +349,12 @@ export interface NamedDifferenceDecimal {
     | 'XBB'
     | 'XBB_1_5'
     | 'CH_1_1'
+    | 'XBB_1_9'
+    | 'XBB_1_5_1'
+    | 'XBB_2_3'
+    | 'XBB_1_9_1'
+    | 'XBB_1_16'
+    | 'XBF'
     | 'other_table'
     | 'other_graph';
   old_value: number;
@@ -1000,13 +1005,6 @@ export interface NlVaccineCampaignsArchived_202209081 {
   vaccine_administered_total: number;
   vaccine_administered_last_week: number;
 }
-export interface NlVaccinePlanned {
-  doses: number;
-  date_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface NlVaccinePlannedArchived_20220908 {
   doses: number;
   date_unix: number;
@@ -1152,6 +1150,12 @@ export interface NlVariantsVariant {
     | 'XBB'
     | 'XBB_1_5'
     | 'CH_1_1'
+    | 'XBB_1_9'
+    | 'XBB_1_5_1'
+    | 'XBB_2_3'
+    | 'XBB_1_9_1'
+    | 'XBB_1_16'
+    | 'XBF'
     | 'other_table'
     | 'other_graph';
   values: NlVariantsVariantValue[];

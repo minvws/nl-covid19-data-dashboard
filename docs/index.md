@@ -23,7 +23,8 @@
 
 - [Schema docs](schema.md)
 
-## Miscelaneous
+## Miscellaneous
 
 - [Developer notes](developers.md)
 - [Choropleth data](choropleth-data.md)
+- [Deleting a page procedure](deleting-a-page-procedure.md)
