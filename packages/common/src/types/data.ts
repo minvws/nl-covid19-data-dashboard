@@ -273,7 +273,6 @@ export interface Nl {
   vaccine_administered_last_week: NlVaccineAdministeredLastWeek;
   vaccine_campaigns: NlVaccineCampaigns;
   vaccine_campaigns_archived_20220908: NlVaccineCampaignsArchived_20220908;
-  vaccine_planned: NlVaccinePlanned;
   vaccine_planned_archived_20220908: NlVaccinePlannedArchived_20220908;
   vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: NlVaccineCoveragePerAgeGroupArchived;
@@ -1005,13 +1004,6 @@ export interface NlVaccineCampaignsArchived_202209081 {
   vaccine_campaign_name_en: string;
   vaccine_administered_total: number;
   vaccine_administered_last_week: number;
-}
-export interface NlVaccinePlanned {
-  doses: number;
-  date_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
 }
 export interface NlVaccinePlannedArchived_20220908 {
   doses: number;

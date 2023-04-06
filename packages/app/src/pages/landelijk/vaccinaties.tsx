@@ -47,7 +47,7 @@ const pageMetrics = [
   'vaccine_coverage_per_age_group_estimated_fully_vaccinated',
   'vaccine_coverage_per_age_group_estimated_autumn_2022',
   'vaccine_campaigns',
-  'vaccine_planned',
+  'vaccine_planned_archived_20220908',
   'booster_coverage_archived_20220904',
   'booster_shot_administered_archived_20220904',
   'repeating_shot_administered',
@@ -82,7 +82,6 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group_estimated_autumn_2022',
     'vaccine_campaigns',
     'vaccine_campaigns_archived_20220908',
-    'vaccine_planned',
     'vaccine_planned_archived_20220908',
     'booster_coverage_archived_20220904',
     'booster_shot_administered_archived_20220904',
@@ -166,7 +165,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               datumsText: textNl.dates,
               dateOrRange: data.vaccine_administered_total.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
-              dataSources: [],
+              dataSources: [textShared.bronnen.rivm],
             }}
             pageLinks={content.links}
             referenceLink={textNl.information_block.reference.href}
@@ -176,7 +175,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             title={textShared.vaccination_grade_tile.autumn_labels.title}
             description={textShared.vaccination_grade_tile.autumn_labels.description}
             source={textShared.vaccination_grade_tile.autumn_labels.source}
-            descriptionFooter={textShared.vaccination_grade_tile.autumn_labels.description_footer}
             coverageData={[
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_60_plus_vaccinated,
@@ -205,7 +203,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
             description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
             source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
-            descriptionFooter={textShared.vaccination_grade_tile.fully_vaccinated_labels.description_footer}
             coverageData={[
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_vaccinated,
@@ -233,9 +230,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
           <VaccineCampaignsTile
             title={textNl.vaccine_campaigns.title}
-            description={replaceVariablesInText(textNl.vaccine_campaigns.description, {
-              vaccinePlanned: formatNumber(data.vaccine_planned.doses),
-            })}
+            description={textNl.vaccine_campaigns.description}
             descriptionFooter={textNl.vaccine_campaigns.description_footer}
             headers={textNl.vaccine_campaigns.headers}
             campaigns={data.vaccine_campaigns.vaccine_campaigns}
@@ -252,7 +247,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             description={textNl.vaccinations_per_supplier_over_last_week.description}
             data={data.vaccine_administered_last_week.vaccine_types}
             metadata={{
-              source: textNl.bronnen.rivm,
+              source: textShared.bronnen.rivm,
               date: [data.vaccine_administered_last_week.date_start_unix, data.vaccine_administered_last_week.date_end_unix],
               obtainedAt: data.vaccine_administered_last_week.date_of_insertion_unix,
             }}
@@ -296,7 +291,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
                 title={textNl.vaccination_grade_toggle_tile.title}
                 source={textNl.vaccination_grade_toggle_tile.source}
-                descriptionFooter={textNl.vaccination_grade_toggle_tile.description_footer}
                 dateUnix={vaccineCoverageEstimatedArchivedLastValue.date_unix}
                 age18Plus={{
                   fully_vaccinated: vaccineCoverageEstimatedArchivedLastValue.age_18_plus_fully_vaccinated,
