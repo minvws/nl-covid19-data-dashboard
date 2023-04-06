@@ -32,7 +32,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-const pageMetrics = ['g_number', 'tested_ggd', 'tested_overall', 'tested_per_age_group'];
+const pageMetrics = ['g_number', 'self_test_overall', 'tested_ggd', 'tested_overall', 'tested_per_age_group'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
