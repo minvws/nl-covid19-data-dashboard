@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { Box } from '~/components/base';
+import { Box, BoxProps } from '~/components/base';
 import { RichContentSelect } from '~/components/rich-content-select';
 import { Option } from '~/components/rich-content-select/types';
 import { Text } from '~/components/typography';
@@ -29,10 +29,10 @@ type AgeGroupSelectProps = {
   onChange: (value: AgeGroup) => void;
   initialValue?: AgeGroup;
   shownAgeGroups?: AgeGroup[];
-};
+} & BoxProps;
 
 export function AgeGroupSelect(props: AgeGroupSelectProps) {
-  const { onChange, initialValue = '18', shownAgeGroups } = props;
+  const { onChange, initialValue = '18', shownAgeGroups, ...rest } = props;
 
   const { commonTexts } = useIntl();
 
@@ -65,6 +65,7 @@ export function AgeGroupSelect(props: AgeGroupSelectProps) {
       initialValue={initialValue}
       options={options}
       onChange={(option) => onChange(option.value)}
+      {...rest}
     />
   );
 }

@@ -75,14 +75,14 @@ export const VaccineCoverageChoropleth = ({ data, text }: VaccineCoverageChoropl
               {commonTexts.choropleth.vaccination_coverage.shared.dropdowns_title}
             </BoldText>
 
-            <SelectBoxes display="flex" justifyContent="flex-start">
+            <SelectBoxes display="flex" justifyContent="flex-start" marginTop={space[2]} marginBottom={space[4]}>
               <Box flex="1">
-                <strong>{text?.vaccinationKindLabel}</strong>
-                <VaccinationCoverageKindSelect onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
+                <BoldText>{text?.vaccinationKindLabel}</BoldText>
+                <VaccinationCoverageKindSelect marginTop={space[3]} onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
               </Box>
               <Box flex="1">
-                <strong>{text?.ageGroupLabel}</strong>
-                <AgeGroupSelect onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
+                <BoldText>{text?.ageGroupLabel}</BoldText>
+                <AgeGroupSelect marginTop={space[3]} onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
               </Box>
             </SelectBoxes>
           </Box>
@@ -150,11 +150,11 @@ const SelectBoxes = styled(Box)`
 
     @media ${mediaQueries.lg} {
       flex: 0 33%;
-      margin-bottom: ${space[2]};
+      margin-top: ${space[2]};
     }
     @media ${mediaQueries.xl} {
       flex: 0 25%;
-      margin-bottom: ${space[2]};
+      margin-top: ${space[2]};
     }
   }
 `;
