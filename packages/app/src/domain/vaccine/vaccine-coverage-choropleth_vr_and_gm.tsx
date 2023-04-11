@@ -3,7 +3,6 @@ import { SiteText } from '~/locale';
 import { matchingAgeGroups, VaccineCoverageData, DataPerAgeGroup, BirthyearRangeKeysOfAgeGroups, PercentageKeysOfAgeGroups, PercentageLabelKeysOfAgeGroups } from './common';
 import css from '@styled-system/css';
 import { useState } from 'react';
-import { space } from '~/style/theme';
 import { Box } from '~/components/base';
 import { DataOptions, DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -17,6 +16,8 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AgeGroup, AgeGroupSelect } from './components/age-group-select';
 import { CoverageKindProperty, VaccinationCoverageKindSelect } from './components/vaccination-coverage-kind-select';
 import { parseVaccinatedPercentageLabel } from './logic/parse-vaccinated-percentage-label';
+import { mediaQueries, space } from '~/style/theme';
+import styled from 'styled-components';
 
 interface VaccineCoverageChoroplethProps {
   data: GmCollectionVaccineCoveragePerAgeGroup[];
@@ -27,9 +28,13 @@ interface VaccineCoverageChoroplethProps {
       description: string;
     };
   };
+  text: {
+    vaccinationKindLabel?: string;
+    ageGroupLabel?: string;
+  };
 }
 
-export const VaccineCoverageChoroplethVrAndGm = ({ data, vrOrGmOptions }: VaccineCoverageChoroplethProps) => {
+export const VaccineCoverageChoroplethVrAndGm = ({ data, vrOrGmOptions, text }: VaccineCoverageChoroplethProps) => {
   const { commonTexts } = useIntl();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18');
   const [selectedCoverageKind, setSelectedCoverageKind] = useState<CoverageKindProperty>('primary_series');
@@ -61,16 +66,16 @@ export const VaccineCoverageChoroplethVrAndGm = ({ data, vrOrGmOptions }: Vaccin
               {commonTexts.choropleth.vaccination_coverage.shared.dropdowns_title}
             </BoldText>
 
-            <Box display="flex" width="100%" spacingHorizontal={{ xs: 2 }} flexWrap="wrap" flexDirection={{ _: 'column', xs: 'row' }}>
+            <SelectBoxes display="flex" justifyContent="flex-start" marginTop={space[2]} marginBottom={space[4]}>
               <Box flex="1">
-                <VaccinationCoverageKindSelect onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
+                <BoldText>{text?.vaccinationKindLabel}</BoldText>
+                <VaccinationCoverageKindSelect marginTop={space[3]} onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
               </Box>
               <Box flex="1">
-                <Box maxWidth="20rem">
-                  <AgeGroupSelect onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
-                </Box>
+                <BoldText>{text?.ageGroupLabel}</BoldText>
+                <AgeGroupSelect marginTop={space[3]} onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
               </Box>
-            </Box>
+            </SelectBoxes>
           </Box>
         </>
       }
@@ -98,6 +103,28 @@ export const VaccineCoverageChoroplethVrAndGm = ({ data, vrOrGmOptions }: Vaccin
     </ChoroplethTile>
   );
 };
+
+const SelectBoxes = styled(Box)`
+  column-gap: ${space[3]};
+  row-gap: ${space[4]};
+  flex-wrap: wrap;
+
+  > div {
+    min-width: 207px;
+    flex: 1 0;
+
+    @media ${mediaQueries.lg} {
+      flex: 0 33%;
+      margin-top: ${space[2]};
+      row-gap: ${space[3]};
+    }
+    @media ${mediaQueries.xl} {
+      flex: 0 25%;
+      margin-top: ${space[2]};
+      row-gap: ${space[3]};
+    }
+  }
+`;
 
 type ChoroplethTooltipProps<T extends VaccineCoverageData> = {
   data: TooltipData<T>;

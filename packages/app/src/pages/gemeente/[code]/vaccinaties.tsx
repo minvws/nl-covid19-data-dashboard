@@ -204,6 +204,10 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
           />
           <VaccineCoverageChoroplethVrAndGm
             data={choropleth.gm.vaccine_coverage_per_age_group}
+            text={{
+              vaccinationKindLabel: textShared.dropdown_label_vaccination_coverage_kind_select,
+              ageGroupLabel: textShared.dropdown_label_age_group_select,
+            }}
             vrOrGmOptions={{
               dataOptions: { getLink: reverseRouter.gm.vaccinaties, selectedCode: data.code, isPercentage: true },
               text: {

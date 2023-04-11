@@ -151,10 +151,12 @@ const SelectBoxes = styled(Box)`
     @media ${mediaQueries.lg} {
       flex: 0 33%;
       margin-top: ${space[2]};
+      row-gap: ${space[3]};
     }
     @media ${mediaQueries.xl} {
       flex: 0 25%;
       margin-top: ${space[2]};
+      row-gap: ${space[3]};
     }
   }
 `;
