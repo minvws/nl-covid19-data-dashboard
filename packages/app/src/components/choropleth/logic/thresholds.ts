@@ -335,7 +335,6 @@ export const thresholds: Thresholds = {
     travel: situationsThreshold,
     hospitality: situationsThreshold,
     fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
-    primary_series_percentage: vaccineCoveragePercentageThresholds,
     autumn_2022_vaccinated_percentage: vaccineCoveragePercentageThresholds,
     vaccinated_percentage_12_plus: vaccineCoveragePercentageThresholds,
     vaccinated_percentage_18_plus: vaccineCoveragePercentageThresholds,

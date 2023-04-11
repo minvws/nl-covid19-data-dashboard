@@ -473,3 +473,4 @@ timestamp,action,key,document_id,move_to
 2023-03-28T13:00:33.766Z,delete,common.accessibility.charts.sewer_region_choropleth.label,Z3v1SKYekK4CLDpzUPc5x5,__
 2023-04-03T15:45:47.784Z,delete,pages.behavior_page.nl.tooltip_labels.compliance,uFGMarfssEPhdNlk3s6Avk,__
 2023-04-03T15:45:47.785Z,delete,pages.behavior_page.nl.tooltip_labels.support,EaUS1FZKh46VBcUuh47mI4,__
+2023-03-29T10:43:54.266Z,delete,common.choropleth.choropleth_vaccination_coverage.shared.vr,G6M7GhzH8XbtdKiRrez14Y,__
