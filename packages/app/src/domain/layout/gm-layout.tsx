@@ -94,7 +94,7 @@ export function GmLayout(props: GmLayoutProps) {
                 marginX="auto"
                 spacing={1}
               >
-                <Box paddingX={space[3]} paddingBottom={space[4]} spacing={1}>
+                <Box paddingX={space[3]}>
                   <Heading id="sidebar-title" level={2} variant="h3">
                     <VisuallyHidden as="span">{commonTexts.gemeente_layout.headings.sidebar}</VisuallyHidden>
                     {municipalityName}
