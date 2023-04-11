@@ -253,7 +253,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }}
           />
 
-          <VaccineCoverageChoropleth data={choropleth} />
+          <VaccineCoverageChoropleth
+            data={choropleth}
+            text={{
+              vaccinationKindLabel: textShared.dropdown_label_vaccination_coverage_kind_select,
+              ageGroupLabel: textShared.dropdown_label_age_group_select,
+            }}
+          />
+
           <Autumn2022ShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}

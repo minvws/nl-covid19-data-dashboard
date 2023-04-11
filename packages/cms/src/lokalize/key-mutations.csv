@@ -21,3 +21,5 @@ timestamp,action,key,document_id,move_to
 2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.shared.vaccination_grade_tile.autumn_labels.description_footer,u6z14vWwH5lzTVbDpRg06r,__
 2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.shared.vaccination_grade_tile.fully_vaccinated_labels.description_footer,772MCeNIooHnNdtyUIs7TE,__
 2023-03-21T10:35:31.653Z,delete,pages.vaccinations_page.vr.vaccination_grade_toggle_tile.description_footer,qjZwg5QUJcN8JoCoxxDHxs,__
+2023-04-11T13:15:58.090Z,add,pages.vaccinations_page.shared.dropdown_label_vaccination_coverage_kind_select,sV6BHv8iu7DuHPF8JwgZBj,__
+2023-04-11T13:15:59.187Z,add,pages.vaccinations_page.shared.dropdown_label_age_group_select,sV6BHv8iu7DuHPF8JwgaN7,__
