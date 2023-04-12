@@ -70,7 +70,7 @@ export const VaccineCoverageChoropleth = ({ data, dataOptions, text }: VaccineCo
                 <VaccinationCoverageKindSelect marginTop={space[2]} onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
               </Box>
               <Box>
-                <BoldText>{text?.ageGroupLabel}</BoldText>
+                {text.ageGroupLabel && <BoldText>{text.ageGroupLabel}</BoldText>}
                 <AgeGroupSelect marginTop={space[2]} onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
               </Box>
             </Box>
