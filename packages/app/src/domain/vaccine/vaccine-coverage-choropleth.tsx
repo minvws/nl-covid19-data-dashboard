@@ -75,7 +75,7 @@ export const VaccineCoverageChoropleth = ({ data, text }: VaccineCoverageChoropl
               {commonTexts.choropleth.vaccination_coverage.shared.dropdowns_title}
             </BoldText>
 
-            <SelectBoxes display="flex" justifyContent="flex-start" marginTop={space[2]} marginBottom={space[4]}>
+            <SelectBoxes display="flex" justifyContent="flex-start" marginTop={space[4]} marginBottom={space[4]}>
               <Box flex="1">
                 <BoldText>{text?.vaccinationKindLabel}</BoldText>
                 <VaccinationCoverageKindSelect marginTop={space[3]} onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
@@ -150,12 +150,10 @@ const SelectBoxes = styled(Box)`
 
     @media ${mediaQueries.lg} {
       flex: 0 33%;
-      margin-top: ${space[2]};
       row-gap: ${space[3]};
     }
     @media ${mediaQueries.xl} {
       flex: 0 25%;
-      margin-top: ${space[2]};
       row-gap: ${space[3]};
     }
   }
