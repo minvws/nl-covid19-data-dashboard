@@ -474,3 +474,5 @@ timestamp,action,key,document_id,move_to
 2023-04-03T15:45:47.784Z,delete,pages.behavior_page.nl.tooltip_labels.compliance,uFGMarfssEPhdNlk3s6Avk,__
 2023-04-03T15:45:47.785Z,delete,pages.behavior_page.nl.tooltip_labels.support,EaUS1FZKh46VBcUuh47mI4,__
 2023-03-29T10:43:54.266Z,delete,common.choropleth.choropleth_vaccination_coverage.shared.vr,G6M7GhzH8XbtdKiRrez14Y,__
+2023-04-12T10:11:37.825Z,add,common.choropleth.vaccination_coverage.shared.dropdown_label_vaccination_coverage_kind_select,mt9hMqvnezW3fDtFvUjLNr,__
+2023-04-12T10:11:38.807Z,add,common.choropleth.vaccination_coverage.shared.dropdown_label_age_group_select,eamHKzD43YGGBYDBd2rfcD,__
