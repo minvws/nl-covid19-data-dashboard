@@ -27,14 +27,15 @@ export type NlItemKeys =
   | 'elderly_at_home'
   | 'general_practitioner_suspicions'
   | 'hospitals_and_care'
-  | 'patients'
   | 'infectious_people'
   | 'mortality'
   | 'nursing_home_care'
+  | 'patients'
   | 'positive_tests'
   | 'reproduction_number'
   | 'sewage_measurement'
   | 'source_investigation'
+  | 'tests'
   | 'vaccinations'
   | 'variants';
 
