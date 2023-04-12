@@ -75,14 +75,14 @@ export const VaccineCoverageChoropleth = ({ data, text }: VaccineCoverageChoropl
               {commonTexts.choropleth.vaccination_coverage.shared.dropdowns_title}
             </BoldText>
 
-            <SelectBoxes display="flex" justifyContent="flex-start" marginTop={space[4]} marginBottom={space[4]}>
+            <SelectBoxes>
               <Box flex="1">
                 <BoldText>{text?.vaccinationKindLabel}</BoldText>
-                <VaccinationCoverageKindSelect marginTop={space[3]} onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
+                <VaccinationCoverageKindSelect marginTop={space[2]} onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
               </Box>
               <Box flex="1">
                 <BoldText>{text?.ageGroupLabel}</BoldText>
-                <AgeGroupSelect marginTop={space[3]} onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
+                <AgeGroupSelect marginTop={space[2]} onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
               </Box>
             </SelectBoxes>
           </Box>
@@ -141,20 +141,28 @@ export const VaccineCoverageChoropleth = ({ data, text }: VaccineCoverageChoropl
 
 const SelectBoxes = styled(Box)`
   column-gap: ${space[3]};
-  row-gap: ${space[4]};
+  display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+  margin-top: 24px;
+  row-gap: ${space[4]};
 
-  > div {
+  @media ${mediaQueries.lg} {
+    flex-direction: row;
+    row-gap: ${space[3]};
+  }
+
+  > ${Box} {
     min-width: 207px;
     flex: 1 0;
 
     @media ${mediaQueries.lg} {
       flex: 0 33%;
-      row-gap: ${space[3]};
     }
     @media ${mediaQueries.xl} {
       flex: 0 25%;
-      row-gap: ${space[3]};
     }
   }
 `;
