@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { Box } from '~/components/base';
+import { Box, BoxProps } from '~/components/base';
 import { RichContentSelect } from '~/components/rich-content-select';
 import { Option } from '~/components/rich-content-select/types';
 import { Text } from '~/components/typography';
@@ -14,10 +14,10 @@ const COVERAGE_KINDS: CoverageKindProperty[] = ['autumn_2022', 'primary_series']
 type VaccinationCoverageKindSelectProps = {
   onChange: (value: CoverageKindProperty) => void;
   initialValue?: CoverageKindProperty;
-};
+} & BoxProps;
 
 export function VaccinationCoverageKindSelect(props: VaccinationCoverageKindSelectProps) {
-  const { onChange, initialValue = 'primary_series' } = props;
+  const { onChange, initialValue = 'primary_series', ...rest } = props;
 
   const { commonTexts } = useIntl();
 
@@ -44,6 +44,7 @@ export function VaccinationCoverageKindSelect(props: VaccinationCoverageKindSele
       initialValue={initialValue}
       options={options}
       onChange={(option) => onChange(option.value)}
+      {...rest}
     />
   );
 }

@@ -24,6 +24,8 @@ interface VaccineCoverageChoroplethProps {
   text: {
     title: string;
     description: string;
+    vaccinationKindLabel?: string;
+    ageGroupLabel?: string;
   };
 }
 
@@ -62,12 +64,14 @@ export const VaccineCoverageChoropleth = ({ data, dataOptions, text }: VaccineCo
               {commonTexts.choropleth.vaccination_coverage.shared.dropdowns_title}
             </BoldText>
 
-            <Box display="flex" width="100%" spacingHorizontal={{ xs: 2 }} flexWrap="wrap" flexDirection={{ _: 'column', xs: 'row' }}>
-              <Box flex="1">
-                <VaccinationCoverageKindSelect onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
+            <Box display="grid" gridTemplateColumns={{ _: '1 fr', lg: 'repeat(2, 1fr)' }} gridGap={{ _: '24px', lg: space[2] }} margin="24px 0" minWidth="100%">
+              <Box>
+                {text.vaccinationKindLabel && <BoldText>{text.vaccinationKindLabel}</BoldText>}
+                <VaccinationCoverageKindSelect marginTop={space[2]} onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
               </Box>
-              <Box flex="1">
-                <AgeGroupSelect onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
+              <Box>
+                {text.ageGroupLabel && <BoldText>{text.ageGroupLabel}</BoldText>}
+                <AgeGroupSelect marginTop={space[2]} onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
               </Box>
             </Box>
           </Box>

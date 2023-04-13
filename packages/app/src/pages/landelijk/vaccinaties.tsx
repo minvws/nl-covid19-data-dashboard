@@ -265,6 +265,8 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             text={{
               title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.title, variables),
               description: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.description, variables),
+              vaccinationKindLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_vaccination_coverage_kind_select,
+              ageGroupLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_age_group_select,
             }}
           />
           <Autumn2022ShotCoveragePerAgeGroup
