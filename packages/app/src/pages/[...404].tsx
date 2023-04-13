@@ -10,7 +10,6 @@ import { getLastGeneratedDate } from '~/static-props/get-data';
  * This means that this route is rendered for 404's which happen on the landelijk, articles,
  * and 'general' level.
  */
-
 export const getServerSideProps: GetServerSideProps = async ({ req, res, locale = 'nl' }) => {
   res.statusCode = 404;
   const { lastGenerated } = getLastGeneratedDate();
