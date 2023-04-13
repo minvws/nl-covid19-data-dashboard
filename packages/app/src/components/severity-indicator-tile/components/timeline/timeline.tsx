@@ -1,20 +1,22 @@
 import { colors, middleOfDayInSeconds } from '@corona-dashboard/common';
 import { ReactNode, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
-import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Box } from '~/components/base';
-import { LegendItem, Legend } from '~/components/legend';
+import { Legend, LegendItem } from '~/components/legend';
 import { TimelineEvent } from '~/components/time-series-chart/components/timeline/components/timeline-event';
 import { Heading } from '~/components/typography';
+import { useIntl } from '~/intl';
+import { space } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
+import { useResizeObserver } from '~/utils/use-resize-observer';
+import { getSeverityColor } from '../../logic/get-severity-color';
+import { SeverityLevels } from '../../types';
 import { TimelineBar } from './components/timeline-bar';
 import { TimelineBarPart } from './components/timeline-bar-part';
 import { TimelineTooltipContent } from './components/tooltip-content';
-import { getSeverityColor } from '../../logic/get-severity-color';
 import { getTimelineBarArrowOffset } from './logic/get-timeline-bar-arrow-offset';
-import { SeverityLevels } from '../../types';
+import { getTimelineBarPartDays } from './logic/get-timeline-bar-part-days';
+import { getTimelineBarPartWidth } from './logic/get-timeline-bar-part-width';
 
 export interface SeverityIndicatorTimelineEventConfig {
   title: string;
@@ -49,6 +51,8 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
 
   if (!timelineEvents) return null;
 
+  const totalDays = (endDate - startDate) / (1000 * 3600 * 24);
+
   return (
     <Box marginY={space[3]} position="relative">
       <TimelineHeading level={4}>{labels.heading}</TimelineHeading>
@@ -61,7 +65,7 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
             isFirst={i === 0}
             isLast={i + 1 === timelineEvents.length}
             size={size}
-            width={`${100 / timelineEvents.length}%`}
+            width={`${getTimelineBarPartWidth(getTimelineBarPartDays(timelineEvent.start * 1000, timelineEvent.end * 1000), totalDays)}%`}
           >
             {i + 1 === timelineEvents.length && (
               <TimelineBarArrow startDate={timelineEvents[timelineEvents.length - 1].start} endDate={timelineEvents[timelineEvents.length - 1].end}>
