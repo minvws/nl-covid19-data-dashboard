@@ -6,21 +6,41 @@ async function rewrites() {
         destination: '/gemeente/GM:nr/:page*',
       },
       /**
-       * The gemeente rewrite below will match everything after /gemeente/ except for gm or GM.
+       * The rewrite below will match everything after /gemeente/ except for g/m or G/M or gm/GM.
        * When matched, the destination is rewritten to /gemeente/code/404 so that it lands in the
-       * [...404].tsx catch-all route within packages/app/src/pages/gemeente/[code]/.
+       * [...404].tsx catch-all route within packages/app/src/pages/gemeente/[code]/ The same applies
+       * to the two other gemeente rewrites below. This is a workaround for making sure all gemeente routes
+       * go to the correct 404 page ([...404].tsx).
+       *
+       * The regex states that if /gemeente/ is not followed by gm/GM/gM/Gm, then it should go to the 404 page.
+       * For example:
+       * 1. /gemeente/somethingWrong
+       * 2. /gemeente/blahblah
+       * 3. /gemeente/gblah
        */
       {
-        source: '/gemeente/((?!g|G).*)((?!m|M).*):slug*',
+        source: '/gemeente/((?!gm|GM|gM|Gm).*):slug*',
         destination: '/gemeente/code/404',
       },
       /**
-       * The rewrite will be triggered when the source url does not contain a valid GM code. For example:
-       * /gemeente/GM/rioolwater or /gemeente/GM168/rioolwater. The regex (using negative look ahead) states
-       * that /gemeente/ must be followed by gm/GM which must be followed by 4 digits.
+       * The regex below states that if the URL contains GM after /gemeente/, it must be followed by 4 digits.
+       * This will catch:
+       * 1. /gemeente/GM123
+       * 2. /gemeente/GM
+       * 3. /gemeente/GM123/rioolwater
        */
       {
         source: '/gemeente/(g|G)(m|M)((?!\\d{4}).*):slug*',
+        destination: '/gemeente/code/404',
+      },
+      /**
+       * The regex below matches URLs which contain g|G m|M followed by more than 4 digits, optionally
+       * followed by a forward slash, optionally followed by a string. This will catch:
+       * 1. /gemeente/GM12345
+       * 2. /gemeente/GM123456/rioolwater
+       */
+      {
+        source: '/gemeente/(g|G)(m|M)(\\d{5,})(\\/?)(\\S*):slug*',
         destination: '/gemeente/code/404',
       },
       {
