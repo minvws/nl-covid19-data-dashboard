@@ -14,7 +14,7 @@ export const NotFoundLink = ({ link: { linkUrl, linkLabel, linkIcon }, hasChevro
 
   return (
     <Box {...restProps}>
-      {icon && icon}
+      {icon}
 
       <StyledAnchor hasIcon={!!icon} href={linkUrl} isCTA={isCTA} underline={!isCTA}>
         {linkLabel}

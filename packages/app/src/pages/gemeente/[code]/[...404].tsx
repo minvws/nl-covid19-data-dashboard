@@ -5,12 +5,6 @@ import { NotFoundFallback } from '~/components/not-found-pages/not-found-page-fa
 import { NotFoundProps } from '~/components/not-found-pages/types';
 import { getLastGeneratedDate } from '~/static-props/get-data';
 
-/**
- * This is a catch-all route which is used as the 404 page for all /gemeente/* routes.
- * There is some logic in rewrites.js which ensures that any 404's for /gemeente/* routes
- * end up rendering this route.
- */
-
 export const getServerSideProps: GetServerSideProps = async ({ req, res, locale = 'nl' }) => {
   res.statusCode = 404;
   const { lastGenerated } = getLastGeneratedDate();
@@ -25,6 +19,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, locale 
   };
 };
 
+/**
+ * This is a catch-all route which is used as the 404 page for all /gemeente/* routes.
+ * There is some logic in rewrites.js which ensures that any 404's for /gemeente/* routes
+ * end up rendering this route.
+ */
 const NotFoundGM = ({ lastGenerated, notFoundPageConfiguration }: NotFoundProps) => {
   if (!notFoundPageConfiguration || !Object.keys(notFoundPageConfiguration).length) {
     return <NotFoundFallback lastGenerated={lastGenerated} />;
