@@ -8,21 +8,23 @@ type Link = {
   linkUrl: string;
 };
 
+export type NotFoundPageConfiguration = {
+  description: PortableTextEntry[];
+  image: ImageBlock;
+  isGeneralPage: boolean;
+  isGmPage: boolean;
+  title: string;
+  cta?: {
+    ctaIcon?: string;
+    ctaLabel: string;
+    ctaLink: string;
+  };
+  links?: Link[];
+};
+
 export interface NotFoundProps {
   lastGenerated: string;
-  notFoundPageConfiguration: {
-    description: PortableTextEntry[];
-    image: ImageBlock;
-    isGeneralPage: boolean;
-    isGmPage: boolean;
-    title: string;
-    cta?: {
-      ctaIcon?: string;
-      ctaLabel: string;
-      ctaLink: string;
-    };
-    links?: Link[];
-  };
+  notFoundPageConfiguration: NotFoundPageConfiguration;
 }
 
 export interface NotFoundLinkProps {
