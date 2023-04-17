@@ -3,22 +3,23 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { CategoriesTypes } from '~/domain/topical/common/categories';
 
 export type PageIdentifier =
+  | 'behavior_page'
+  | 'deceased_page'
+  | 'disability_care_page'
+  | 'elderly_at_home_page'
   | 'hospital_page'
   | 'hospitals_and_care_page'
-  | 'behavior_page'
-  | 'situations_page'
-  | 'reproduction_page'
   | 'infectious_people_page'
-  | 'topical_page'
-  | 'elderly_at_home_page'
-  | 'disability_care_page'
-  | 'positive_tests_page'
-  | 'variants_page'
-  | 'sewer_page'
-  | 'patients_page'
-  | 'vaccinations_page'
   | 'nursing_home_page'
-  | 'deceased_page';
+  | 'patients_page'
+  | 'positive_tests_page'
+  | 'reproduction_page'
+  | 'sewer_page'
+  | 'situations_page'
+  | 'tests_page'
+  | 'topical_page'
+  | 'vaccinations_page'
+  | 'variants_page';
 
 export type PageBasePart = {
   pageDataKind: string;
