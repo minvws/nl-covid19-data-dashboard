@@ -32,22 +32,7 @@ export function getReverseRouter(isMobile: boolean) {
       verdenkingenHuisartsen: () => `/landelijk/verdenkingen-huisartsen`,
       gedrag: () => `/landelijk/gedrag`,
       coronamelder: () => `/landelijk/coronamelder`,
-      brononderzoek: () => `/landelijk/brononderzoek`,
       varianten: () => `/landelijk/varianten`,
-    },
-
-    vr: {
-      index: (code?: string) => (code ? (isMobile ? `/veiligheidsregio/${code}` : reverseRouter.vr.rioolwater(code)) : '/veiligheidsregio'),
-      vaccinaties: (code: string) => `/veiligheidsregio/${code}/vaccinaties`,
-      positiefGetesteMensen: (code: string) => `/veiligheidsregio/${code}/positief-geteste-mensen`,
-      sterfte: (code: string) => `/veiligheidsregio/${code}/sterfte`,
-      ziekenhuisopnames: (code: string) => `/veiligheidsregio/${code}/ziekenhuis-opnames`,
-      kwetsbareGroepen: (code: string) => `/veiligheidsregio/${code}/kwetsbare-groepen-70-plussers`,
-      gehandicaptenzorg: (code: string) => `/veiligheidsregio/${code}/gehandicaptenzorg`,
-      thuiswonendeOuderen: (code: string) => `/veiligheidsregio/${code}/thuiswonende-ouderen`,
-      rioolwater: (code: string) => `/veiligheidsregio/${code}/rioolwater`,
-      gedrag: (code: string) => `/veiligheidsregio/${code}/gedrag`,
-      brononderzoek: (code: string) => `/veiligheidsregio/${code}/brononderzoek`,
     },
 
     gm: {

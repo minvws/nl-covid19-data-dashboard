@@ -2,12 +2,6 @@ import { Feature } from '..';
 
 export const features: Feature[] = [
   {
-    name: 'archivedBehavior',
-    isEnabled: false,
-    metricName: 'behavior_archived_20221019',
-    dataScopes: ['vr'],
-  },
-  {
     name: 'nlVaccinationCoveragePerAgeGroupAutumn2022',
     isEnabled: false,
     metricName: 'vaccine_coverage_per_age_group_estimated_autumn_2022',

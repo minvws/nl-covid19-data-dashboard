@@ -127,7 +127,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="admissions_on_date_of_reporting" absolute={lastValue.admissions_on_date_of_admission_moving_average_rounded} isAmount isMovingAverageDifference />
+              <KpiValue absolute={lastValue.admissions_on_date_of_admission_moving_average_rounded} isAmount isMovingAverageDifference />
             </KpiTile>
           </TwoKpiSection>
 
