@@ -3,4 +3,3 @@
 **/.next/*
 **/*.spec.*
 **/testhelpers/*
-**/cypress/*

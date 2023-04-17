@@ -30,7 +30,6 @@ const mapKeysToReverseRouter = {
   positive_tests: 'positiefGetesteMensen',
   reproduction_number: 'reproductiegetal',
   sewage_measurement: 'rioolwater',
-  source_investigation: 'brononderzoek',
   tests: 'testen',
   vaccinations: 'vaccinaties',
   variants: 'varianten',
@@ -55,10 +54,6 @@ export function useSidebar<T extends Layout>({ layout, map, code }: UseSidebarAr
       const route = mapKeysToReverseRouter[key];
       if (layout === 'nl') {
         return reverseRouter.nl[route]();
-      }
-
-      if (layout === 'vr' && isPresent(code)) {
-        return reverseRouter.vr[route as keyof ReverseRouter['vr']](code);
       }
 
       if (layout === 'gm' && isPresent(code)) {

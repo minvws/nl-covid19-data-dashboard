@@ -43,42 +43,17 @@ async function redirects() {
       permanent: false,
     },
     {
-      source: '/regio',
-      destination: '/veiligheidsregio',
-      permanent: false,
-    },
-    {
-      source: '/gemeente/:vr(vr|VR|vR|Vr):nr(\\d{2}):slash(/{0,1}):page*',
-      destination: '/veiligheidsregio/VR:nr',
-      permanent: false,
-    },
-    {
       source: '/veiligheidsregio/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
       destination: '/gemeente/GM:nr',
       permanent: false,
     },
-    {
-      source: '/veiligheidsregio/:code/risiconiveau',
-      destination: '/veiligheidsregio/:code',
-      permanent: true,
-    },
-    // Redirects for former topical pages GM/VR -> dedicated GM/VR page
+    // Redirects for former topical pages GM -> dedicated GM page
     {
       source: '/actueel/gemeente/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
       destination: '/gemeente/GM:nr',
       permanent: false,
     },
-    {
-      source: '/actueel/veiligheidsregio/:vr(vr|VR|vR|Vr):nr(\\d{2}):slash(/{0,1}):page*',
-      destination: '/veiligheidsregio/VR:nr',
-      permanent: false,
-    },
     // Redirects for OSIRIS change
-    {
-      source: '/veiligheidsregio/:code/verpleeghuiszorg',
-      destination: '/veiligheidsregio/:code/kwetsbare-groepen-70-plussers',
-      permanent: true,
-    },
     {
       source: '/landelijk/verpleeghuiszorg',
       destination: '/landelijk/kwetsbare-groepen-70-plussers',

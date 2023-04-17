@@ -107,12 +107,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                 source: textGm.section_deceased_rivm.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="covid_daily"
-                absolute={data.deceased_rivm_archived_20221231.last_value.covid_daily}
-                difference={data.difference.deceased_rivm__covid_daily_archived_20221231}
-                isAmount
-              />
+              <KpiValue absolute={data.deceased_rivm_archived_20221231.last_value.covid_daily} difference={data.difference.deceased_rivm__covid_daily_archived_20221231} isAmount />
               <Markdown content={textGm.section_deceased_rivm.kpi_covid_daily_description} />
             </KpiTile>
 
@@ -123,7 +118,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                 source: textGm.section_deceased_rivm.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="covid_total" absolute={data.deceased_rivm_archived_20221231.last_value.covid_total} />
+              <KpiValue absolute={data.deceased_rivm_archived_20221231.last_value.covid_total} />
               <Text>{textGm.section_deceased_rivm.kpi_covid_total_description}</Text>
             </KpiTile>
           </TwoKpiSection>
