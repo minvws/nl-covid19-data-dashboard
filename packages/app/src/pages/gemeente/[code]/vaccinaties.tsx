@@ -17,7 +17,7 @@ import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { assert, replaceVariablesInText, useReverseRouter, useFormatLokalizePercentage } from '~/utils';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { VaccineCoverageChoroplethVrAndGm } from '~/domain/vaccine/vaccine-coverage-choropleth_vr_and_gm';
+import { VaccineCoverageChoropleth } from '~/domain/vaccine/vaccine-coverage-choropleth';
 import { emptyCoverageData } from '~/data/gm/vaccinations/empty-coverage-data';
 
 const pageMetrics = ['vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'booster_coverage_archived_20220904'];
@@ -202,14 +202,14 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             coverageData={parsedVaccineCoverageData.primarySeries}
             dateUnix={filteredVaccination.primarySeries.date_unix}
           />
-          <VaccineCoverageChoroplethVrAndGm
+          <VaccineCoverageChoropleth
             data={choropleth.gm.vaccine_coverage_per_age_group}
-            vrOrGmOptions={{
-              dataOptions: { getLink: reverseRouter.gm.vaccinaties, selectedCode: data.code, isPercentage: true },
-              text: {
-                title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.title, { municipalityName: municipalityName }),
-                description: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.description, { municipalityName: municipalityName }),
-              },
+            dataOptions={{ getLink: reverseRouter.gm.vaccinaties, selectedCode: data.code, isPercentage: true }}
+            text={{
+              title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.title, { municipalityName: municipalityName }),
+              description: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.description, { municipalityName: municipalityName }),
+              vaccinationKindLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_vaccination_coverage_kind_select,
+              ageGroupLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_age_group_select,
             }}
           />
           <Divider />

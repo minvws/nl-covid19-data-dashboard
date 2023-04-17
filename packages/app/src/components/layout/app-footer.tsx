@@ -38,7 +38,6 @@ export function AppFooter() {
               <Box as="ul" spacing={2}>
                 <Item href="/">{text.nav.links.samenvatting}</Item>
                 <Item href={reverseRouter.nl.index()}>{text.nav.links.index}</Item>
-                <Item href={reverseRouter.vr.index()}>{text.nav.links.veiligheidsregio}</Item>
                 <Item href={reverseRouter.gm.index()}>{text.nav.links.gemeente}</Item>
               </Box>
             </nav>

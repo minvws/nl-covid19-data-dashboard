@@ -29,7 +29,6 @@ const mapKeysToReverseRouter = {
   nursing_home_care: 'kwetsbareGroepen',
   positive_tests: 'positiefGetesteMensen',
   sewage_measurement: 'rioolwater',
-  source_investigation: 'brononderzoek',
   vaccinations: 'vaccinaties',
   variants: 'varianten',
   reproduction_number: 'reproductiegetal',
@@ -54,10 +53,6 @@ export function useSidebar<T extends Layout>({ layout, map, code }: UseSidebarAr
       const route = mapKeysToReverseRouter[key];
       if (layout === 'nl') {
         return reverseRouter.nl[route]();
-      }
-
-      if (layout === 'vr' && isPresent(code)) {
-        return reverseRouter.vr[route as keyof ReverseRouter['vr']](code);
       }
 
       if (layout === 'gm' && isPresent(code)) {

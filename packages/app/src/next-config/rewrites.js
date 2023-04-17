@@ -43,10 +43,6 @@ async function rewrites() {
         source: '/gemeente/(g|G)(m|M)(\\d{5,})(\\/?)(\\S*):slug*',
         destination: '/gemeente/code/404',
       },
-      {
-        source: '/veiligheidsregio/(v|V)(r|R):nr(\\d{2})/:page*',
-        destination: '/veiligheidsregio/VR:nr/:page*',
-      },
     ],
   };
 }

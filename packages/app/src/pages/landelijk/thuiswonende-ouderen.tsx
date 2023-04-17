@@ -26,7 +26,6 @@ import { createGetStaticProps, StaticProps } from '~/static-props/create-get-sta
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
@@ -83,8 +82,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
   const { commonTexts, formatNumber } = useIntl();
   const { metadataTexts, textShared, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const reverseRouter = useReverseRouter();
-
   const metadata = {
     ...metadataTexts,
     title: textNl.metadata.title,
@@ -126,7 +123,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               }}
             >
               <KpiValue
-                data-cy="positive_tested_daily"
                 absolute={elderlyAtHomeData.last_value.positive_tested_daily}
                 difference={data.difference.elderly_at_home__positive_tested_daily_archived_20230126}
                 isAmount
@@ -140,7 +136,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.section_positive_tested.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="positive_tested_daily_per_100k" absolute={elderlyAtHomeData.last_value.positive_tested_daily_per_100k} />
+              <KpiValue absolute={elderlyAtHomeData.last_value.positive_tested_daily_per_100k} />
               <Text>{textNl.section_positive_tested.kpi_daily_per_100k_description}</Text>
             </KpiTile>
           </TwoKpiSection>
@@ -211,9 +207,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                   positive_tested_daily_per_100k: formatNumber,
                 },
               }}
-              dataOptions={{
-                getLink: reverseRouter.vr.thuiswonendeOuderen,
-              }}
+              dataOptions={{}}
             />
           </ChoroplethTile>
           <Divider />
@@ -238,7 +232,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.section_deceased.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="deceased_daily" absolute={elderlyAtHomeData.last_value.deceased_daily} />
+              <KpiValue absolute={elderlyAtHomeData.last_value.deceased_daily} />
             </KpiTile>
           </TwoKpiSection>
           <ChartTile

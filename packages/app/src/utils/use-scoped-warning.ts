@@ -8,11 +8,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export function useScopedWarning(current: string, warning: string) {
   const { commonTexts } = useIntl();
   const scopedGmName = commonTexts.gemeente_index.municipality_warning;
-  const scopedGm = gmData.find(
-    (gm) =>
-      gm.name === scopedGmName ||
-      (gm.searchTerms && gm.searchTerms.includes(scopedGmName))
-  );
+  const scopedGm = gmData.find((gm) => gm.name === scopedGmName || (gm.searchTerms && gm.searchTerms.includes(scopedGmName)));
   const scopedVr = vrData.find((vr) => vr.code === scopedGm?.vrCode);
 
   // Check if defined GM is the same as current

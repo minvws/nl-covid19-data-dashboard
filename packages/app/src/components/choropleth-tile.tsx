@@ -1,7 +1,6 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { space } from '~/style/theme';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { DataProps } from '~/types/attributes';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Box } from './base';
 import { ChartRegionControls, RegionControlOption } from './chart-region-controls';
@@ -10,7 +9,7 @@ import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
 
-type ChoroplethTileProps = DataProps & {
+type ChoroplethTileProps = {
   title: string;
   description?: string | React.ReactNode;
   children: React.ReactNode;
@@ -24,15 +23,15 @@ type ChoroplethTileProps = DataProps & {
   hasPadding?: boolean;
   pageType?: string;
 } & (
-    | {
-        onChartRegionChange: (v: RegionControlOption) => void;
-        chartRegion: 'gm' | 'vr';
-      }
-    | {
-        onChartRegionChange?: undefined;
-        chartRegion?: undefined;
-      }
-  );
+  | {
+      onChartRegionChange: (v: RegionControlOption) => void;
+      chartRegion: 'gm' | 'vr';
+    }
+  | {
+      onChartRegionChange?: undefined;
+      chartRegion?: undefined;
+    }
+);
 
 export function ChoroplethTile({
   title,

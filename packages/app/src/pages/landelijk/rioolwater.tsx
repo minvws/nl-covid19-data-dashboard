@@ -1,8 +1,6 @@
 import { Experimenteel, Rioolvirus } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
-import { RegionControlOption } from '~/components/chart-region-controls';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
@@ -45,7 +43,6 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlData('sewer', 'difference.sewer__average'),
   createGetChoroplethData({
-    vr: ({ sewer }) => ({ sewer }),
     gm: ({ sewer }) => ({ sewer }),
   }),
   async (context: GetStaticPropsContext) => {
@@ -75,7 +72,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   const { caterogyTexts, metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const sewerAverages = data.sewer;
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
   const metadata = {
     ...metadataTexts,
@@ -117,7 +113,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               }}
             >
               <KpiValue
-                data-cy="average"
                 absolute={sewerAverages.last_value.average}
                 valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
@@ -148,58 +143,34 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.map_titel}
             description={textNl.map_toelichting}
             metadata={{
-              date: selectedMap === 'gm' ? [choropleth.gm.sewer[0].date_start_unix, choropleth.gm.sewer[0].date_end_unix] : choropleth.vr.sewer[0].date_unix,
+              date: [choropleth.gm.sewer[0].date_start_unix, choropleth.gm.sewer[0].date_end_unix],
               source: textNl.bronnen.rivm,
             }}
-            onChartRegionChange={setSelectedMap}
-            chartRegion={selectedMap}
             valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
             legend={{
               title: textNl.legenda_titel,
-              thresholds: thresholds.vr.average,
+              thresholds: thresholds.gm.average,
               outdatedDataLabel: textNl.choropleth_legend_outdated_data_label,
             }}
             pageType="sewer"
           >
-            {selectedMap === 'gm' && (
-              <DynamicChoropleth
-                map="gm"
-                accessibility={{
-                  key: 'sewer_municipal_choropleth',
-                }}
-                data={choropleth.gm.sewer}
-                dataConfig={{
-                  metricName: 'sewer',
-                  metricProperty: 'average',
-                  dataFormatters: {
-                    average: formatNumber,
-                  },
-                }}
-                dataOptions={{
-                  getLink: reverseRouter.gm.rioolwater,
-                }}
-              />
-            )}
-
-            {selectedMap === 'vr' && (
-              <DynamicChoropleth
-                map="vr"
-                accessibility={{
-                  key: 'sewer_region_choropleth',
-                }}
-                data={choropleth.vr.sewer}
-                dataConfig={{
-                  metricName: 'sewer',
-                  metricProperty: 'average',
-                  dataFormatters: {
-                    average: formatNumber,
-                  },
-                }}
-                dataOptions={{
-                  getLink: reverseRouter.vr.rioolwater,
-                }}
-              />
-            )}
+            <DynamicChoropleth
+              map="gm"
+              accessibility={{
+                key: 'sewer_municipal_choropleth',
+              }}
+              data={choropleth.gm.sewer}
+              dataConfig={{
+                metricName: 'sewer',
+                metricProperty: 'average',
+                dataFormatters: {
+                  average: formatNumber,
+                },
+              }}
+              dataOptions={{
+                getLink: reverseRouter.gm.rioolwater,
+              }}
+            />
           </ChoroplethTile>
         </TileList>
       </NlLayout>
