@@ -13,19 +13,21 @@ export const getDifferenceInDays = (start: Date, end: Date): number => {
 };
 
 /**
- * Calculates the date representing the middle of the day for passed in dates.
+ * Calculates the middle of the day for each passed in date (either today or the start and end date for a given range).
  * @param today - today's Date object
  * @param startDate - the start date of a given range
  * @param endDate - the end date of a given range
  * @returns the date representing the middle of the day for the passed in dates
  */
-export const getMiddleOfDayDates = (today: Date, startDate: number, endDate: number): Record<string, Date> => {
-  const todayMiddleOfDaySeconds = middleOfDayInSeconds(today.getTime() / 1000);
+const getMiddleOfDayDates = (today: Date, startDate: number, endDate: number): Record<string, Date> => {
+  const todayMiddleOfDayDate = createDateFromUnixTimestamp(middleOfDayInSeconds(today.getTime() / 1000));
+  const startOfIntervalDate = createDateFromUnixTimestamp(middleOfDayInSeconds(startDate));
+  const endOfIntervalDate = createDateFromUnixTimestamp(middleOfDayInSeconds(endDate));
 
   return {
-    startOfIntervalDate: createDateFromUnixTimestamp(middleOfDayInSeconds(startDate)),
-    endOfIntervalDate: createDateFromUnixTimestamp(middleOfDayInSeconds(endDate)),
-    todayMiddleOfDayDate: createDateFromUnixTimestamp(todayMiddleOfDaySeconds),
+    startOfIntervalDate,
+    endOfIntervalDate,
+    todayMiddleOfDayDate,
   };
 };
 
