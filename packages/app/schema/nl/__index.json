@@ -215,8 +215,8 @@
     "vaccine_administered_planned": {
       "$ref": "vaccine_administered_planned.json"
     },
-    "vaccine_administered_last_week": {
-      "$ref": "vaccine_administered_last_week.json"
+    "vaccine_administered_last_timeframe": {
+      "$ref": "vaccine_administered_last_timeframe.json"
     },
     "vaccine_campaigns": {
       "$ref": "vaccine_campaigns.json"
