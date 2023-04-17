@@ -20,7 +20,7 @@ import {
   BoosterShotCoveragePerAgeGroup,
   Autumn2022ShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
-import { VaccinationsPerSupplierOverLastWeekTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-week-tile';
+import { VaccinationsPerSupplierOverLastTimeframeTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-timeframe-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
@@ -242,14 +242,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }}
           />
 
-          <VaccinationsPerSupplierOverLastWeekTile
-            title={textNl.vaccinations_per_supplier_over_last_week.title}
-            description={textNl.vaccinations_per_supplier_over_last_week.description}
-            data={data.vaccine_administered_last_week.vaccine_types}
+          <VaccinationsPerSupplierOverLastTimeframeTile
+            title={textNl.vaccinations_per_supplier_over_last_timeframe.title}
+            description={textNl.vaccinations_per_supplier_over_last_timeframe.description}
+            data={data.vaccine_administered_last_timeframe.vaccine_types}
             metadata={{
               source: textShared.bronnen.rivm,
-              date: [data.vaccine_administered_last_week.date_start_unix, data.vaccine_administered_last_week.date_end_unix],
-              obtainedAt: data.vaccine_administered_last_week.date_of_insertion_unix,
+              date: [data.vaccine_administered_last_timeframe.date_start_unix, data.vaccine_administered_last_week.date_end_unix],
+              obtainedAt: data.vaccine_administered_last_timeframe.date_of_insertion_unix,
             }}
           />
 

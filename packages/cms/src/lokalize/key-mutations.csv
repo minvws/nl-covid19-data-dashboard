@@ -53,3 +53,7 @@ timestamp,action,key,document_id,move_to
 2023-04-17T09:54:59.852Z,add,pages.positive_tests_page.nl.linechart_self_test_titel,oB32MHoi5k0LjWD2RooPFy,__
 2023-04-17T09:55:01.863Z,add,pages.positive_tests_page.nl.linechart_self_test_toelichting,eamHKzD43YGGBYDBdLwkvz,__
 2023-04-17T09:55:02.863Z,add,pages.positive_tests_page.nl.linechart_self_test_tooltip_label,eamHKzD43YGGBYDBdLwl5B,__
+2023-04-17T11:39:14.287Z,add,pages.vaccinations_page.nl.vaccinations_per_supplier_over_last_timeframe.description,vT2u7JhXu0KuYOhpuSV4HE,__
+2023-04-17T11:39:15.260Z,add,pages.vaccinations_page.nl.vaccinations_per_supplier_over_last_timeframe.title,Gk7s0A0yBbznnZPvYIP31F,__
+2023-04-17T11:39:15.261Z,delete,pages.vaccinations_page.nl.vaccinations_per_supplier_over_last_week.description,An4w9epLkFHDxSkpYzYKl1,__
+2023-04-17T11:39:15.262Z,delete,pages.vaccinations_page.nl.vaccinations_per_supplier_over_last_week.title,An4w9epLkFHDxSkpYzYK3T,__
