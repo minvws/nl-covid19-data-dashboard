@@ -46,3 +46,10 @@ timestamp,action,key,document_id,move_to
 2023-04-11T15:39:52.717Z,delete,pages.positive_tests_page.nl.linechart_self_test_titel,PKXdxxxKAnTg0F1ZCghMkN,__
 2023-04-11T15:39:52.725Z,delete,pages.positive_tests_page.nl.linechart_self_test_toelichting,PKXdxxxKAnTg0F1ZCghMnz,__
 2023-04-11T15:39:52.730Z,delete,pages.positive_tests_page.nl.linechart_self_test_tooltip_label,KoLyCpXIGU95m7jfEHZKIf,__
+2023-04-17T09:54:53.417Z,add,pages.positive_tests_page.nl.bronnen.self_test.aria_text,eamHKzD43YGGBYDBdLwkJN,__
+2023-04-17T09:54:55.806Z,add,pages.positive_tests_page.nl.bronnen.self_test.download,eamHKzD43YGGBYDBdLwkSZ,__
+2023-04-17T09:54:57.376Z,add,pages.positive_tests_page.nl.bronnen.self_test.href,oB32MHoi5k0LjWD2RooOOv,__
+2023-04-17T09:54:58.827Z,add,pages.positive_tests_page.nl.bronnen.self_test.text,oB32MHoi5k0LjWD2RooOrr,__
+2023-04-17T09:54:59.852Z,add,pages.positive_tests_page.nl.linechart_self_test_titel,oB32MHoi5k0LjWD2RooPFy,__
+2023-04-17T09:55:01.863Z,add,pages.positive_tests_page.nl.linechart_self_test_toelichting,eamHKzD43YGGBYDBdLwkvz,__
+2023-04-17T09:55:02.863Z,add,pages.positive_tests_page.nl.linechart_self_test_tooltip_label,eamHKzD43YGGBYDBdLwl5B,__

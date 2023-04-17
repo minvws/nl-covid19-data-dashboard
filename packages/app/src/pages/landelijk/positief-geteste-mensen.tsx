@@ -84,6 +84,8 @@ export const getStaticProps = createGetStaticProps(
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
 
+  const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
+
   const [confirmedCasesInfectedTimeframe, setConfirmedCasesInfectedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
 
   const [confirmedCasesInfectedPercentageTimeframe, setConfirmedCasesInfectedPercentageTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -142,6 +144,38 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             referenceLink={textNl.reference.href}
             articles={content.articles}
           />
+
+          <ChartTile
+            title={textNl.linechart_self_test_titel}
+            description={textNl.linechart_self_test_toelichting}
+            metadata={{
+              source: textNl.bronnen.self_test,
+            }}
+            timeframeOptions={TimeframeOptionsList}
+            timeframeInitialValue={confirmedCasesSelfTestedTimeframe}
+            onSelectTimeframe={setConfirmedCasesSelfTestedTimeframe}
+          >
+            <TimeSeriesChart
+              accessibility={{
+                key: 'confirmed_cases_self_tested_over_time_chart',
+              }}
+              values={data.self_test_overall.values}
+              timeframe={confirmedCasesSelfTestedTimeframe}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'infected_percentage',
+                  label: textNl.linechart_self_test_tooltip_label,
+                  color: colors.primary,
+                },
+              ]}
+              dataOptions={{
+                isPercentage: true,
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'self_test_overall'),
+              }}
+              forceLegend
+            />
+          </ChartTile>
 
           <ChartTile
             title={textNl.linechart_titel}
