@@ -36,6 +36,7 @@ export const KpiIconInput = forwardRef((props: any, ref: any) => {
     const setValue = isDefined(value) ? set(allIconsToFilename[value]) : unset();
     setSelectedIcon(value);
     onChange(PatchEvent.from(setValue));
+    onClose();
   };
 
   return (

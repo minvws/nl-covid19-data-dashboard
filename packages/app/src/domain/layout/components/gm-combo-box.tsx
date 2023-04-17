@@ -6,11 +6,12 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface GmComboBoxProps {
   getLink?: (gmcode: string) => string;
+  shouldFocusInput?: boolean;
   selectedGmCode: string;
 }
 
 export function GmComboBox(props: GmComboBoxProps) {
-  const { getLink, selectedGmCode } = props;
+  const { getLink, selectedGmCode, shouldFocusInput } = props;
 
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -24,6 +25,7 @@ export function GmComboBox(props: GmComboBoxProps) {
         router.push(typeof getLink === 'function' ? getLink(gemcode) : reverseRouter.gm.index(gemcode));
       }}
       selectedOption={gmData.find((gm) => gm.gemcode === selectedGmCode)}
+      shouldFocusInput={shouldFocusInput}
     />
   );
 }
