@@ -14,9 +14,8 @@ import { SeverityLevels } from '../../types';
 import { TimelineBar } from './components/timeline-bar';
 import { TimelineBarPart } from './components/timeline-bar-part';
 import { TimelineTooltipContent } from './components/tooltip-content';
-import { getTimelineBarArrowOffset } from './logic/get-timeline-bar-arrow-offset';
-import { getTimelineBarPartDays } from './logic/get-timeline-bar-part-days';
-import { getTimelineBarPartWidth } from './logic/get-timeline-bar-part-width';
+import { getDifferenceInDays, getTimelineBarArrowOffset, getTimelineBarPartWidth } from './logic';
+import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 
 export interface SeverityIndicatorTimelineEventConfig {
   title: string;
@@ -53,6 +52,9 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
 
   const totalDays = (endDate - startDate) / (1000 * 3600 * 24);
 
+  const timelineBarPartDays = (timelineEvent: SeverityIndicatorTimelineEventConfig) =>
+    getDifferenceInDays(createDateFromUnixTimestamp(timelineEvent.start), createDateFromUnixTimestamp(timelineEvent.end));
+
   return (
     <Box marginY={space[3]} position="relative">
       <TimelineHeading level={4}>{labels.heading}</TimelineHeading>
@@ -65,7 +67,7 @@ export const Timeline = ({ labels, startDate, endDate, legendItems, size = 10, t
             isFirst={i === 0}
             isLast={i + 1 === timelineEvents.length}
             size={size}
-            width={`${getTimelineBarPartWidth(getTimelineBarPartDays(timelineEvent.start * 1000, timelineEvent.end * 1000), totalDays)}%`}
+            width={`${getTimelineBarPartWidth(timelineBarPartDays(timelineEvent), totalDays)}%`}
           >
             {i + 1 === timelineEvents.length && (
               <TimelineBarArrow startDate={timelineEvents[timelineEvents.length - 1].start} endDate={timelineEvents[timelineEvents.length - 1].end}>
