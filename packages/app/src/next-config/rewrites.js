@@ -49,7 +49,7 @@ async function rewrites() {
        */
       {
         source: '/(404):slug*',
-        destination: '/landelijk/404',
+        destination: '/not-found/404',
       },
     ],
   };
