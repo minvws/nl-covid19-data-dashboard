@@ -78,9 +78,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedNlData: data, choropleth, lastGenerated, content } = props;
 
   const [disabilityCareConfirmedCasesTimeframe, setDisabilityCareConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
   const [disabilityCareInfectedLocationsTimeframe, setDisabilityCareInfectedLocationsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
   const [disabilityCareDeceasedTimeframe, setDisabilityCareDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const lastValue = data.disability_care_archived_20230126.last_value;
@@ -89,7 +87,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
 
   const { commonTexts, formatNumber } = useIntl();
   const { categoryTexts, metadataTexts, textShared, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
-
   const metadata = {
     ...metadataTexts,
     title: textNl.besmette_locaties.metadata.title,
@@ -97,7 +94,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
-
   const hasActiveWarningTile = !!textShared.belangrijk_bericht;
 
   return (
