@@ -46,7 +46,6 @@ See below an overview of all the available icons in this package. This file is g
 | Download                               | <div style="background-color: white;"><img src="./src/svg/download.svg" alt="Download" /></div>                                                                |
 | EenPersoonDoorgestreept                | <div style="background-color: white;"><img src="./src/svg/een_persoon_doorgestreept.svg" alt="EenPersoonDoorgestreept" /></div>                                |
 | Elderly                                | <div style="background-color: white;"><img src="./src/svg/elderly.svg" alt="Elderly" /></div>                                                                  |
-| ElderlyPeople                          | <div style="background-color: white;"><img src="./src/svg/elderly-people.svg" alt="ElderlyPeople" /></div>                                                     |
 | Expand                                 | <div style="background-color: white;"><img src="./src/svg/expand.svg" alt="Expand" /></div>                                                                    |
 | Experimenteel                          | <div style="background-color: white;"><img src="./src/svg/experimenteel.svg" alt="Experimenteel" /></div>                                                      |
 | External                               | <div style="background-color: white;"><img src="./src/svg/external.svg" alt="External" /></div>                                                                |
