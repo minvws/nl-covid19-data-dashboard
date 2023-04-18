@@ -30,7 +30,6 @@ multiple packages.
   [README](/packages/cms/README.md)
 - `common`: Commonly shared code that multiple packages are using, like types
   and utils.
-- `e2e`: End-to-end tests using Cypress
 - `icons`: A React icon component library, used by the CMS and by app. [README](/packages/icons/README.md)
 
 ## Getting started (quickly)

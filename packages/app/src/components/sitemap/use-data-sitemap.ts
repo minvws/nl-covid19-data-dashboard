@@ -1,9 +1,9 @@
-import { Gm, Nl, Vr } from '@corona-dashboard/common';
+import { Gm, Nl } from '@corona-dashboard/common';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LinkGroupProps } from './link-group';
 
-export function useDataSitemap(base: 'nl' | 'vr' | 'gm', code?: string, data?: Pick<Nl, 'sewer'> | Pick<Vr, 'sewer'> | Pick<Gm, 'sewer'>): LinkGroupProps[] {
+export function useDataSitemap(base: 'nl' | 'gm', code?: string, data?: Pick<Nl, 'sewer'> | Pick<Gm, 'sewer'>): LinkGroupProps[] {
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
 
@@ -37,77 +37,6 @@ export function useDataSitemap(base: 'nl' | 'vr' | 'gm', code?: string, data?: P
           {
             text: commonTexts.sidebar.metrics.sewage_measurement.title,
             href: data?.sewer ? reverseRouter.gm.rioolwater(code) : undefined,
-          },
-        ],
-      },
-    ];
-  }
-
-  if (base === 'vr' && code) {
-    return [
-      {
-        header: commonTexts.sidebar.categories.infections.title,
-        links: [
-          {
-            text: commonTexts.sidebar.metrics.positive_tests.title,
-            href: reverseRouter.vr.positiefGetesteMensen(code),
-          },
-          {
-            text: commonTexts.sidebar.metrics.mortality.title,
-            href: reverseRouter.vr.sterfte(code),
-          },
-        ],
-      },
-      {
-        header: commonTexts.sidebar.categories.hospitals.title,
-        links: [
-          {
-            text: commonTexts.sidebar.metrics.hospital_admissions.title,
-            href: reverseRouter.vr.ziekenhuisopnames(code),
-          },
-        ],
-      },
-      {
-        header: commonTexts.sidebar.categories.vulnerable_groups.title,
-        links: [
-          {
-            text: commonTexts.sidebar.metrics.nursing_home_care.title,
-            href: reverseRouter.vr.kwetsbareGroepen(code),
-          },
-          {
-            text: commonTexts.sidebar.metrics.disabled_care.title,
-            href: reverseRouter.vr.gehandicaptenzorg(code),
-          },
-          {
-            text: commonTexts.sidebar.metrics.disabled_care.title,
-            href: reverseRouter.vr.thuiswonendeOuderen(code),
-          },
-        ],
-      },
-      {
-        header: commonTexts.sidebar.categories.early_indicators.title,
-        links: [
-          {
-            text: commonTexts.sidebar.metrics.sewage_measurement.title,
-            href: reverseRouter.vr.rioolwater(code),
-          },
-        ],
-      },
-      {
-        header: commonTexts.sidebar.categories.behaviour.title,
-        links: [
-          {
-            text: commonTexts.sidebar.metrics.compliance.title,
-            href: reverseRouter.vr.gedrag(code),
-          },
-        ],
-      },
-      {
-        header: commonTexts.sidebar.categories.archived_metrics.title,
-        links: [
-          {
-            text: commonTexts.sidebar.metrics.source_investigation.title,
-            href: reverseRouter.vr.brononderzoek(code),
           },
         ],
       },
@@ -194,10 +123,6 @@ export function useDataSitemap(base: 'nl' | 'vr' | 'gm', code?: string, data?: P
         {
           text: commonTexts.sidebar.metrics.coronamelder_app.title,
           href: reverseRouter.nl.coronamelder(),
-        },
-        {
-          text: commonTexts.sidebar.metrics.source_investigation.title,
-          href: reverseRouter.nl.brononderzoek(),
         },
       ],
     },

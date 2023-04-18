@@ -7,13 +7,13 @@ import { MaxWidth } from '~/components/max-width';
 import { Anchor } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
+import { sizes, space } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { useCollapsible } from '~/utils/use-collapsible';
 import { useMediaQuery } from '~/utils/use-media-query';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-const wideNavBreakpoint = 'screen and (min-width: 1024px)';
+const wideNavBreakpoint = `screen and (min-width: ${sizes.wideNavWidth}px)`;
 
 export function TopNavigation() {
   const isWideNav = useMediaQuery(wideNavBreakpoint);
@@ -52,7 +52,6 @@ export function TopNavigation() {
               <NavItem href={reverseRouter.nl.index()} isActive={router.pathname.startsWith('/landelijk')}>
                 {commonTexts.nav.links.index}
               </NavItem>
-              <NavItem href={reverseRouter.vr.index()}>{commonTexts.nav.links.veiligheidsregio}</NavItem>
               <NavItem href={reverseRouter.gm.index()}>{commonTexts.nav.links.gemeente}</NavItem>
 
               <NavItem href={reverseRouter.general.over()}>{commonTexts.nav.links.over}</NavItem>

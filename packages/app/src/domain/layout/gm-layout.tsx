@@ -4,13 +4,10 @@ import { Menu, MenuRenderer } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
-import { Anchor, Heading, Text } from '~/components/typography';
+import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
-import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
-import { Link } from '~/utils/link';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { GmComboBox } from './components/gm-combo-box';
 import { useSidebar } from './logic/use-sidebar';
 
@@ -53,13 +50,10 @@ export function GmLayout(props: GmLayoutProps) {
 
   const { commonTexts } = useIntl();
   const router = useRouter();
-  const reverseRouter = useReverseRouter();
 
   const showMetricLinks = router.route !== '/gemeente';
 
   const isMainRoute = router.route === '/gemeente';
-
-  const vr = getVrForMunicipalityCode(code);
 
   const items = useSidebar({
     layout: 'gm',
@@ -100,19 +94,11 @@ export function GmLayout(props: GmLayoutProps) {
                 marginX="auto"
                 spacing={1}
               >
-                <Box paddingX={space[3]} paddingBottom={space[4]} spacing={1}>
+                <Box paddingX={space[3]}>
                   <Heading id="sidebar-title" level={2} variant="h3">
                     <VisuallyHidden as="span">{commonTexts.gemeente_layout.headings.sidebar}</VisuallyHidden>
                     {municipalityName}
                   </Heading>
-                  {vr && (
-                    <Text>
-                      {commonTexts.common.veiligheidsregio_label}{' '}
-                      <Link href={reverseRouter.vr.index(vr.code)}>
-                        <Anchor underline="hover">{vr.name}</Anchor>
-                      </Link>
-                    </Text>
-                  )}
                 </Box>
 
                 <Menu spacing={2}>

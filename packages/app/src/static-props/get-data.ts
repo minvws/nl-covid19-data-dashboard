@@ -1,4 +1,4 @@
-import { assert, Gm, GmCollection, gmData, Nl, sortTimeSeriesInDataInPlace, Vr, VrCollection, vrData } from '@corona-dashboard/common';
+import { assert, Gm, GmCollection, gmData, Nl, sortTimeSeriesInDataInPlace, VrCollection } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import { get } from 'lodash';
 import set from 'lodash/set';
@@ -28,14 +28,14 @@ type UnionDeepMerge<T extends Record<string, unknown>> = {
  * 3. Merge picked data object union into a single object
  * 4. Merge nested properties unions
  */
-type DataShape<T extends string, D extends Nl | Vr | Gm> = UnionDeepMerge<U.Merge<O.P.Pick<D, S.Split<T, '.'>>>>;
+type DataShape<T extends string, D extends Nl | Gm> = UnionDeepMerge<U.Merge<O.P.Pick<D, S.Split<T, '.'>>>>;
 
 /**
  * Usage:
  *
  *     export const getStaticProps = createGetStaticProps(
  *       getLastGeneratedDate,
- *       selectVrPageMetricData('metric_name1', 'metric_name2'),
+ *       selectGmData('metric_name1', 'metric_name2'),
  *       createGetChoroplethData({
  *         gm: x => ({ y: x.hospital_nice})
  *       })
@@ -155,52 +155,6 @@ export function getNlData() {
   sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 
   return { data };
-}
-
-/**
- * This method selects the specified metric properties from the region data
- *
- */
-export function selectVrData<T extends keyof Vr | F.AutoPath<Vr, keyof Vr, '.'>>(...metrics: T[]) {
-  return (context: GetStaticPropsContext) => {
-    const { data, vrName } = getVrData(context);
-
-    const selectedVrData = metrics.reduce((acc, p) => set(acc, p, get(data, p) ?? null), {} as DataShape<T, Vr>);
-
-    replaceInaccurateLastValue(selectedVrData);
-
-    return { selectedVrData, vrName };
-  };
-}
-
-function getVrData(context: GetStaticPropsContext) {
-  const code = context.params?.code as string | undefined;
-
-  if (!code) {
-    throw Error('No valid vrcode found in context');
-  }
-
-  const data = loadAndSortVrData(code);
-
-  const vrName = getVrName(code);
-
-  return {
-    data,
-    vrName,
-  };
-}
-
-export function getVrName(code: string) {
-  const vr = vrData.find((x) => x.code === code);
-  return vr?.name || '';
-}
-
-export function loadAndSortVrData(vrcode: string) {
-  const data = initializeFeatureFlaggedData<Vr>(loadJsonFromDataFile<Vr>(`${vrcode}.json`), 'vr');
-
-  sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
-
-  return data;
 }
 
 /**
