@@ -147,28 +147,13 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
 
           {/* <PageInformationBlock
             id="elderly-people"
-            title={ElderlyPeopleText.titel}
             icon={<ElderlyPeople />}
-            description={ElderlyPeopleText.pagina_toelichting}
-            metadata={{
-              datumsText: ElderlyPeopleText.datums,
-              dateOrRange: vulnerableTestedPerAgeGroupData.date_unix,
-              dateOfInsertionUnix: vulnerableHospitalAdmissionsData.date_of_insertion_unix,
-              dataSources: [ElderlyPeopleText.bronnen.rivm],
-            }}
-            referenceLink={ElderlyPeopleText.reference.href}
           /> */}
 
           <TwoKpiSection>
             {/* <KpiTile
-              title={ElderlyPeopleText.positive_tested.kpi_titel}
-              metadata={{
-                date: vulnerableTestedPerAgeGroupData.date_unix,
-                source: ElderlyPeopleText.bronnen.rivm,
-              }}
             >
               <KpiValue absolute={vulnerableTestedPerAgeGroupData.infected_age_70_plus} difference={data.difference.vulnerable_tested_per_age_group} isAmount />
-              <Text>{ElderlyPeopleText.positive_tested.kpi_toelichting}</Text>
             </KpiTile> */}
 
             <KpiTile
@@ -185,46 +170,8 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
 
           {/* <PageInformationBlock
             id="besmette-locaties"
-            title={infectedLocationsText.titel}
             icon={<Location />}
-            description={infectedLocationsText.pagina_toelichting}
-            metadata={{
-              datumsText: infectedLocationsText.datums,
-              dateOrRange: nursinghomeDataLastValue.date_unix,
-              dateOfInsertionUnix: nursinghomeDataLastValue.date_of_insertion_unix,
-              dataSources: [infectedLocationsText.bronnen.rivm],
-            }}
-            referenceLink={infectedLocationsText.reference.href}
           /> */}
-
-          {/* <TwoKpiSection>
-            <KpiTile
-              title={infectedLocationsText.kpi_titel}
-              metadata={{
-                date: nursinghomeDataLastValue.date_unix,
-                source: infectedLocationsText.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                absolute={nursinghomeDataLastValue.infected_locations_total}
-                percentage={nursinghomeDataLastValue.infected_locations_percentage}
-                difference={data.difference.vulnerable_nursing_home__infected_locations_total}
-                isAmount
-              />
-              <Text>{infectedLocationsText.kpi_toelichting}</Text>
-            </KpiTile>
-
-            <KpiTile
-              title={infectedLocationsText.barscale_titel}
-              metadata={{
-                date: nursinghomeDataLastValue.date_unix,
-                source: infectedLocationsText.bronnen.rivm,
-              }}
-            >
-              <KpiValue absolute={nursinghomeDataLastValue.newly_infected_locations} />
-              <Text>{infectedLocationsText.barscale_toelichting}</Text>
-            </KpiTile>
-          </TwoKpiSection> */}
 
           <InfectedLocationsTile
             title={textNl.kpi_tiles.infected_locations.title}
