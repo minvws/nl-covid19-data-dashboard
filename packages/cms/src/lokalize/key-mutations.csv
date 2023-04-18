@@ -508,3 +508,5 @@ timestamp,action,key,document_id,move_to
 2023-04-17T09:54:59.852Z,add,pages.positive_tests_page.nl.linechart_self_test_titel,oB32MHoi5k0LjWD2RooPFy,__
 2023-04-17T09:55:01.863Z,add,pages.positive_tests_page.nl.linechart_self_test_toelichting,eamHKzD43YGGBYDBdLwkvz,__
 2023-04-17T09:55:02.863Z,add,pages.positive_tests_page.nl.linechart_self_test_tooltip_label,eamHKzD43YGGBYDBdLwl5B,__
+2023-04-18T12:24:12.257Z,add,pages.nursing_home_page.nl.kpi_tiles.infected_locations.description,7vN07KKSG21T7lMrXMAnxF,__
+2023-04-18T12:24:13.480Z,add,pages.nursing_home_page.nl.kpi_tiles.infected_locations.title,7vN07KKSG21T7lMrXMAoen,__
