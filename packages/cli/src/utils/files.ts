@@ -27,11 +27,7 @@ export function getFilesWithTimeSeries(directory: string) {
 
   const fileList = fs.readdirSync(directory);
 
-  const timeSeriesFiles = [
-    ...getFileNames(fileList, /^NL.json$/),
-    ...getFileNames(fileList, /^VR[0-9]+.json$/),
-    ...getFileNames(fileList, /^GM[0-9]+.json$/),
-  ];
+  const timeSeriesFiles = [...getFileNames(fileList, /^NL.json$/), ...getFileNames(fileList, /^GM[0-9]+.json$/)];
 
   return timeSeriesFiles;
 }
