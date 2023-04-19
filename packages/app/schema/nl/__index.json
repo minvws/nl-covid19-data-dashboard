@@ -31,7 +31,7 @@
     "name",
     "vulnerable_nursing_home",
     "nursing_home_archived_20230126",
-    "vulnerable_tested_per_age_group",
+    "vulnerable_tested_per_age_group_archived_20220425",
     "vulnerable_hospital_admissions",
     "proto_name",
     "reproduction",
@@ -143,8 +143,8 @@
     "vulnerable_nursing_home": {
       "$ref": "vulnerable_nursing_home.json"
     },
-    "vulnerable_tested_per_age_group": {
-      "$ref": "vulnerable_tested_per_age_group.json"
+    "vulnerable_tested_per_age_group_archived_20220425": {
+      "$ref": "vulnerable_tested_per_age_group_archived_20220425.json"
     },
     "vulnerable_hospital_admissions": {
       "$ref": "vulnerable_hospital_admissions.json"

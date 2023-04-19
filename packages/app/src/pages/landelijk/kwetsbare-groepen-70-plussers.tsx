@@ -34,12 +34,10 @@ const pageMetrics = [
   'difference.nursing_home__deceased_daily_archived_20230126',
   'difference.vulnerable_nursing_home__infected_locations_total',
   'difference.nursing_home__newly_infected_people_archived_20230126',
-  'difference.vulnerable_tested_per_age_group',
   'difference.vulnerable_hospital_admissions',
   'vulnerable_nursing_home',
   'nursing_home_archived_20230126',
   'vulnerable_hospital_admissions',
-  'vulnerable_tested_per_age_group',
 ];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
@@ -57,12 +55,10 @@ export const getStaticProps = createGetStaticProps(
     'difference.nursing_home__deceased_daily_archived_20230126',
     'difference.vulnerable_nursing_home__infected_locations_total',
     'difference.nursing_home__newly_infected_people_archived_20230126',
-    'difference.vulnerable_tested_per_age_group',
     'difference.vulnerable_hospital_admissions',
     'vulnerable_nursing_home',
     'nursing_home_archived_20230126',
-    'vulnerable_hospital_admissions',
-    'vulnerable_tested_per_age_group'
+    'vulnerable_hospital_admissions'
   ),
   createGetChoroplethData({
     vr: ({ nursing_home_archived_20230126 }) => ({ nursing_home_archived_20230126 }),
@@ -109,7 +105,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
 
   const vulnerableNursingHomeDataLastValue = data.vulnerable_nursing_home.last_value;
   const vulnerableHospitalAdmissionsData = data.vulnerable_hospital_admissions;
-  // const vulnerableTestedPerAgeGroupData = data.vulnerable_tested_per_age_group;
 
   const ElderlyPeopleText = textShared['70_plussers'];
 
@@ -146,11 +141,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
           {hasActiveWarningTile && <WarningTile isFullWidth message={hasActiveWarningTile} variant="informational" />}
 
           <TwoKpiSection>
-            {/* <KpiTile
-            >
-              <KpiValue absolute={vulnerableTestedPerAgeGroupData.infected_age_70_plus} difference={data.difference.vulnerable_tested_per_age_group} isAmount />
-            </KpiTile> */}
-
             <KpiTile
               title={ElderlyPeopleText.hospital_admissions.kpi_titel}
               description={ElderlyPeopleText.hospital_admissions.kpi_toelichting}

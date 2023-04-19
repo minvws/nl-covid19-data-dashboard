@@ -246,7 +246,7 @@ export interface Nl {
   tested_ggd_archived: NlTestedGgdArchived;
   nursing_home_archived_20230126: NlNursingHomeArchived_20230126;
   vulnerable_nursing_home: NlVulnerableNursingHome;
-  vulnerable_tested_per_age_group: NlVulnerableTestedPerAgeGroup;
+  vulnerable_tested_per_age_group_archived_20220425: NlVulnerableTestedPerAgeGroupArchived_20220425;
   vulnerable_hospital_admissions: NlVulnerableHospitalAdmissions;
   disability_care_archived_20230126: NlDisabilityCareArchived_20230126;
   behavior: NlBehavior;
@@ -610,7 +610,7 @@ export interface NlVulnerableNursingHomeValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVulnerableTestedPerAgeGroup {
+export interface NlVulnerableTestedPerAgeGroupArchived_20220425 {
   infected_age_70_plus: number;
   date_unix: number;
   date_of_insertion_unix: number;
