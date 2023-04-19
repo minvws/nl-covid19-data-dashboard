@@ -34,9 +34,9 @@ type TProps<Option extends TOption> = {
  * ComboBox accept a generic type which extends `TOption` ({name: string}).
  *
  * ```ts
- * <Combobox<TVr> // generic passed here
+ * <Combobox<Gm> // generic passed here
  *   handleSelect={handleSafeRegionSelect}
- *   options={vr_collection
+ *   options={gm_collection}
  * />
  * ```
  */

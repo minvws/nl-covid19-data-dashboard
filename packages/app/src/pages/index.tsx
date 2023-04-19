@@ -17,7 +17,6 @@ import { TimelineMarker } from '~/components/time-series-chart/components/timeli
 import { TopicalWeeklySummaryTile } from '~/components/weekly-summary/topical-weekly-summary-tile';
 import { Layout } from '~/domain/layout';
 import { IndicatorLevelDescription } from '~/domain/topical/components/indicator-level-description';
-import { Search } from '~/domain/topical/components/search/search';
 import { TopicalArticlesList } from '~/domain/topical/components/topical-article-list';
 import { TopicalHeader } from '~/domain/topical/components/topical-header';
 import { TopicalTile } from '~/domain/topical/components/topical-kpi-tile/topical-tile';
@@ -222,14 +221,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             })}
           </Box>
         </MaxWidth>
-
-        <Spacer marginBottom={space[5]} />
-
-        <Box width="100%" backgroundColor="gray1" paddingY={space[5]}>
-          <Box paddingY={space[4]} paddingX={{ _: space[3], sm: space[4] }}>
-            <Search title={textShared.secties.search.title.nl} />
-          </Box>
-        </Box>
 
         <Spacer marginBottom={space[5]} />
 

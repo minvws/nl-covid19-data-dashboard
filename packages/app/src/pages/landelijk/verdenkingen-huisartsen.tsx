@@ -74,7 +74,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.nivel,
               }}
             >
-              <KpiValue absolute={lastValue.covid_symptoms} data-cy="covid_symptoms" difference={data.difference.doctor__covid_symptoms} isAmount />
+              <KpiValue absolute={lastValue.covid_symptoms} difference={data.difference.doctor__covid_symptoms} isAmount />
               <Markdown content={text.barscale_toelichting} />
             </KpiTile>
             <KpiTile
@@ -84,7 +84,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.nivel,
               }}
             >
-              <KpiValue absolute={lastValue.covid_symptoms_per_100k} data-cy="covid_symptoms_per_100k" difference={data.difference.doctor__covid_symptoms_per_100k} isAmount />
+              <KpiValue absolute={lastValue.covid_symptoms_per_100k} difference={data.difference.doctor__covid_symptoms_per_100k} isAmount />
               <Text>{text.normalized_kpi_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
