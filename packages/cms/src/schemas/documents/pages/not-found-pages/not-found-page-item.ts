@@ -14,7 +14,7 @@ export const notFoundPageItem = {
       name: 'pageType',
       title: 'Pagina Type',
       description:
-        'Select the page type. This determines the level (NL, GM, Articles, General) for which you want this configuration to be used. Attention: This value for each 404 Page should be unique.',
+        "Selecteer het type pagina. Dit bepaald het niveau van de pagina ('Landelijk', 'Gemeente', 'Artikelen' of 'Algemeen') waarvoor de pagina gebruikt kan worden. Let op: het type van elke 404 pagina moet uniek zijn.",
       type: 'string',
       options: {
         list: [
@@ -36,21 +36,21 @@ export const notFoundPageItem = {
           )}")]{...,}`;
 
           const count = await client.fetch(query);
-          return count.length > 0 ? 'The page type needs to be unique.' : true;
+          return count.length > 0 ? 'Het pagina type moet uniek zijn.' : true;
         }),
       ],
     },
     {
       name: 'title',
       title: 'Titel',
-      description: 'Configure the header that will be shown on the page.',
+      description: 'Configureer een titel. Wordt bovenaan de pagina getoond.',
       type: 'localeString',
       validation: REQUIRED,
     },
     {
       name: 'description',
       title: 'Beschrijving',
-      description: 'Configure a description. This text will be shown below the header.',
+      description: 'Configureer een beschrijving. Wordt onder de header getoond.',
       type: 'localeRichContentBlock',
       validation: REQUIRED,
     },
@@ -58,20 +58,20 @@ export const notFoundPageItem = {
       name: 'links',
       title: 'Links',
       description:
-        'Configure a list of links. On the general page, this will be displayed below the description. On all other pages, this will be below the CTA or the search box.',
+        "Configureer een lijst van een of meer links. Wordt onder de beschrijving getoond op de 'Algemeen' pagina. Wordt onder de CTA of zoekveld getoond op de overige pagina's.",
       type: 'array',
       of: [{ type: 'reference', to: { type: 'notFoundPageLinks' } }],
     },
     {
       name: 'image',
       title: 'Image',
-      description: 'Select an image to show on this page. If selected, an alt text must be provided for accessibility.',
+      description: 'Configureer een afbeelding. Voorzie de afbeelding van een alt-tekst voor toegankelijkheidsdoeleinden.',
       type: 'image',
       fields: [
         {
           name: 'altText',
           title: 'Alt Text',
-          description: 'This text will be used by screen readers for accessibility.',
+          description: 'De alt-tekst voor de afbeelding. Wordt voorgelezen door screen readers.',
           type: 'localeString',
           validation: REQUIRED,
         },
@@ -81,27 +81,27 @@ export const notFoundPageItem = {
     {
       name: 'cta',
       title: 'Call To Action (CTA)',
-      description: 'This CTA will be displayed as a button on the page.',
+      description: 'Deze CTA wordt als button getoond.',
       type: 'object',
       fields: [
         {
           name: 'ctaLabel',
           title: 'CTA Label',
-          description: 'If a CTA is configured, then a label must be provided.',
+          description: 'Het label voor de CTA.',
           type: 'localeString',
           validation: REQUIRED,
         },
         {
           name: 'ctaLink',
           title: 'CTA Link',
-          description: "If a CTA is configured, then a URL for the CTA's destination must be provided",
-          type: 'url',
+          description: 'De bestemming van de CTA. Gebruik altijd relatieve URLs.',
+          type: 'string',
           validation: REQUIRED,
         },
         {
           name: 'ctaIcon',
           title: 'CTA Icon',
-          description: 'If a CTA is configured, you can choose to show an icon to the left of the CTA label',
+          description: 'Optioneel icoon voor de CTA. Wordt links van de tekst getoond.',
           type: 'string',
           inputComponent: KpiIconInput,
         },
