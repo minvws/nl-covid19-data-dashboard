@@ -1,14 +1,14 @@
-import { colors, NlTestedOverallValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors, NlTestedOverallArchived_20230417Value, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { RegionControlOption } from '~/components/chart-region-controls';
+import { WarningTile } from '~/components';
+import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { Divider } from '~/components/divider';
 import { InView } from '~/components/in-view';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -25,6 +25,7 @@ import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/quer
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { space } from '~/style/theme';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
@@ -32,7 +33,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-const pageMetrics = ['g_number', 'self_test_overall', 'tested_ggd', 'tested_overall', 'tested_per_age_group'];
+const pageMetrics = ['g_number_archived_20230417', 'tested_ggd_archived_20230417', 'tested_overall_archived_20230417', 'tested_per_age_group_archived_20230417'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -46,19 +47,17 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData(
-    'difference.tested_ggd__infected_percentage_moving_average',
-    'difference.tested_ggd__tested_total_moving_average',
-    'difference.tested_overall__infected_moving_average',
-    'difference.tested_overall__infected_per_100k_moving_average',
-    'g_number',
-    'self_test_overall',
-    'tested_ggd',
-    'tested_overall',
-    'tested_per_age_group'
+    'difference.tested_ggd__infected_percentage_moving_average_archived_20230417',
+    'difference.tested_ggd__tested_total_moving_average_archived_20230417',
+    'difference.tested_overall__infected_moving_average_archived_20230417',
+    'difference.tested_overall__infected_per_100k_moving_average_archived_20230417',
+    'g_number_archived_20230417',
+    'tested_ggd_archived_20230417',
+    'tested_overall_archived_20230417',
+    'tested_per_age_group_archived_20230417'
   ),
   createGetChoroplethData({
-    gm: ({ tested_overall }) => ({ tested_overall }),
-    vr: ({ tested_overall }) => ({ tested_overall }),
+    gm: ({ tested_overall_archived_20230417 }) => ({ tested_overall_archived_20230417 }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -68,7 +67,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('positive_tests_page')},
-        "elements": ${getElementsQuery('nl', ['tested_overall', 'tested_ggd', 'tested_per_age_group', 'self_test_overall'], locale)}
+        "elements": ${getElementsQuery('nl', ['tested_overall_archived_20230417', 'tested_ggd_archived_20230417', 'tested_per_age_group_archived_20230417'], locale)}
       }`;
     })(context);
     return {
@@ -84,8 +83,6 @@ export const getStaticProps = createGetStaticProps(
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
 
-  const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
-
   const [confirmedCasesInfectedTimeframe, setConfirmedCasesInfectedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
 
   const [confirmedCasesInfectedPercentageTimeframe, setConfirmedCasesInfectedPercentageTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -95,12 +92,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const [confirmedCasesInfectedPerAgeTimeframe, setConfirmedCasesInfectedPerAgeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
+
   const reverseRouter = useReverseRouter();
-  const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
 
   const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedGgdGraph, setSelectedGgdGraph] = useState<string>('GGD_infected_percentage_over_time_chart');
 
   const ggdGraphToggleItems: ChartTileToggleItem[] = [
@@ -114,8 +110,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
     },
   ];
 
-  const dataOverallLastValue = data.tested_overall.last_value;
-  const dataGgdLastValue = data.tested_ggd.last_value;
+  const dataOverallLastValue = data.tested_overall_archived_20230417.last_value;
+  const dataGgdLastValue = data.tested_ggd_archived_20230417.last_value;
 
   const metadata = {
     ...metadataTexts,
@@ -125,12 +121,14 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
+  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.development_of_the_virus.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={commonTexts.sidebar.metrics.positive_tests.title}
             title={textNl.titel}
             icon={<GgdTesten aria-hidden="true" />}
@@ -145,37 +143,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          <ChartTile
-            title={textNl.linechart_self_test_titel}
-            description={textNl.linechart_self_test_toelichting}
-            metadata={{
-              source: textNl.bronnen.self_test,
-            }}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={confirmedCasesSelfTestedTimeframe}
-            onSelectTimeframe={setConfirmedCasesSelfTestedTimeframe}
-          >
-            <TimeSeriesChart
-              accessibility={{
-                key: 'confirmed_cases_self_tested_over_time_chart',
-              }}
-              values={data.self_test_overall.values}
-              timeframe={confirmedCasesSelfTestedTimeframe}
-              seriesConfig={[
-                {
-                  type: 'line',
-                  metricProperty: 'infected_percentage',
-                  label: textNl.linechart_self_test_tooltip_label,
-                  color: colors.primary,
-                },
-              ]}
-              dataOptions={{
-                isPercentage: true,
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'self_test_overall'),
-              }}
-              forceLegend
-            />
-          </ChartTile>
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
 
           <ChartTile
             title={textNl.linechart_titel}
@@ -195,7 +163,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'confirmed_cases_infected_over_time_chart',
               }}
-              values={data.tested_overall.values}
+              values={data.tested_overall_archived_20230417.values}
               timeframe={confirmedCasesInfectedTimeframe}
               seriesConfig={[
                 {
@@ -216,9 +184,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 outOfBoundsConfig: {
                   label: textShared.labels.infected_out_of_bounds,
                   tooltipLabel: textShared.tooltip_labels.annotations,
-                  checkIsOutofBounds: (x: NlTestedOverallValue, max: number) => x.infected > max,
+                  checkIsOutofBounds: (x: NlTestedOverallArchived_20230417Value, max: number) => x.infected > max,
                 },
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'tested_overall'),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'tested_overall_archived_20230417'),
               }}
             />
           </ChartTile>
@@ -234,7 +202,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   infected_total: formatNumber(dataGgdLastValue.infected),
                 })}
                 metadata={{
-                  date: getLastInsertionDateOfPage(data, ['tested_ggd']),
+                  date: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230417']),
                   source: textNl.ggd.bronnen.rivm,
                 }}
                 onSelectTimeframe={setConfirmedCasesInfectedPercentageTimeframe}
@@ -249,7 +217,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                     key: 'confirmed_cases_infected_percentage_over_time_chart',
                   }}
                   timeframe={confirmedCasesInfectedPercentageTimeframe}
-                  values={data.tested_ggd.values}
+                  values={data.tested_ggd_archived_20230417.values}
                   forceLegend
                   seriesConfig={[
                     {
@@ -277,7 +245,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 })}
                 metadata={{
                   source: textNl.ggd.bronnen.rivm,
-                  date: getLastInsertionDateOfPage(data, ['tested_ggd']),
+                  date: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230417']),
                 }}
                 onSelectTimeframe={setConfirmedCasesTestedOverTimeTimeframe}
                 toggle={{
@@ -291,7 +259,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                     key: 'confirmed_cases_tested_over_time_chart',
                   }}
                   timeframe={confirmedCasesTestedOverTimeTimeframe}
-                  values={data.tested_ggd.values}
+                  values={data.tested_ggd_archived_20230417.values}
                   seriesConfig={[
                     {
                       type: 'line',
@@ -327,9 +295,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 accessibility={{
                   key: 'confirmed_cases_infected_per_age_group_over_time_chart',
                 }}
-                values={data.tested_per_age_group.values}
+                values={data.tested_per_age_group_archived_20230417.values}
                 timeframe={confirmedCasesInfectedPerAgeTimeframe}
-                timelineEvents={getTimelineEvents(content.elements.timeSeries, 'tested_per_age_group')}
+                timelineEvents={getTimelineEvents(content.elements.timeSeries, 'tested_per_age_group_archived_20230417')}
                 text={textShared}
               />
             </ChartTile>
@@ -346,87 +314,43 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               description={
                 <>
                   <Markdown content={textNl.map_toelichting} />
-                  {replaceComponentsInText(textNl.map_last_value_text, {
-                    infected_per_100k: <BoldText>{`${formatNumber(dataOverallLastValue.infected_per_100k)}`}</BoldText>,
-                    dateTo: formatDateFromSeconds(dataOverallLastValue.date_unix, 'weekday-long'),
-                  })}
+                  <Box marginBottom={space[3]}>
+                    {replaceComponentsInText(textNl.map_last_value_text, {
+                      infected_per_100k: <BoldText>{`${formatNumber(dataOverallLastValue.infected_per_100k)}`}</BoldText>,
+                      dateTo: formatDateFromSeconds(dataOverallLastValue.date_unix, 'weekday-long'),
+                    })}
+                  </Box>
                 </>
               }
-              onChartRegionChange={setSelectedMap}
-              chartRegion={selectedMap}
               legend={{
                 title: textShared.chloropleth_legenda.titel,
-                thresholds: thresholds.vr.infected_per_100k,
+                thresholds: thresholds.gm.infected_per_100k,
               }}
             >
-              {/**
-               * It's probably a good idea to abstract this even further, so that
-               * the switching of charts, and the state involved, are all handled by
-               * the component. The page does not have to be bothered with this.
-               *
-               * Ideally the ChoroplethTile would receive some props with the data
-               * it needs to render either Choropleth without it caring about
-               * MunicipalityChloropleth or VrChloropleth, that data would
-               * make the chart and define the tooltip layout for each, but maybe for
-               * now that is a bridge too far. Let's take it one step at a time.
-               */}
-              {selectedMap === 'gm' && (
-                <DynamicChoropleth
-                  map="gm"
-                  accessibility={{
-                    key: 'confirmed_cases_municipal_choropleth',
-                  }}
-                  data={choropleth.gm.tested_overall}
-                  dataConfig={{
-                    metricName: 'tested_overall',
-                    metricProperty: 'infected_per_100k',
-                    dataFormatters: {
-                      infected: formatNumber,
-                      infected_per_100k: formatNumber,
-                    },
-                  }}
-                  dataOptions={{
-                    getLink: reverseRouter.gm.positiefGetesteMensen,
-                  }}
-                />
-              )}
-              {selectedMap === 'vr' && (
-                <DynamicChoropleth
-                  map="vr"
-                  accessibility={{
-                    key: 'confirmed_cases_region_choropleth',
-                  }}
-                  data={choropleth.vr.tested_overall}
-                  dataConfig={{
-                    metricName: 'tested_overall',
-                    metricProperty: 'infected_per_100k',
-                    dataFormatters: {
-                      infected: formatNumber,
-                      infected_per_100k: formatNumber,
-                    },
-                  }}
-                  dataOptions={{
-                    getLink: reverseRouter.vr.positiefGetesteMensen,
-                  }}
-                />
-              )}
+              <DynamicChoropleth
+                map="gm"
+                accessibility={{
+                  key: 'confirmed_cases_municipal_choropleth',
+                }}
+                data={choropleth.gm.tested_overall_archived_20230417}
+                dataConfig={{
+                  metricName: 'tested_overall_archived_20230417',
+                  metricProperty: 'infected_per_100k',
+                  dataFormatters: {
+                    infected: formatNumber,
+                    infected_per_100k: formatNumber,
+                  },
+                }}
+                dataOptions={{
+                  getLink: reverseRouter.gm.positiefGetesteMensen,
+                }}
+              />
             </ChoroplethTile>
           </InView>
 
-          <Divider />
-
-          <PageInformationBlock
-            title={textNl.section_archived.title}
-            description={textNl.section_archived.description}
-            isArchivedHidden={hasHideArchivedCharts}
-            onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
-          />
-
-          {hasHideArchivedCharts && (
-            <InView rootMargin="400px">
-              <GNumberBarChartTile data={data.g_number} />
-            </InView>
-          )}
+          <InView rootMargin="400px">
+            <GNumberBarChartTile data={data.g_number_archived_20230417} />
+          </InView>
         </TileList>
       </NlLayout>
     </Layout>

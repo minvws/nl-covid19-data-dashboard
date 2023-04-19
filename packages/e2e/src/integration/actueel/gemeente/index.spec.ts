@@ -6,13 +6,11 @@ context('Gemeente - Actueel', () => {
   });
 
   it('Should show the correct mini trend tile values', function (this: GmContext) {
-    const testedOverallLastValue = this.municipalData.tested_overall.last_value;
+    const testedOverallLastValue = this.municipalData.tested_overall_archived_20230417.last_value;
     const hospitalNiceLastValue = this.municipalData.hospital_nice.last_value;
 
     const kpiTestInfo = {
-      admissions_on_date_of_reporting: cy.formatters.formatNumber(
-        hospitalNiceLastValue.admissions_on_date_of_reporting
-      ),
+      admissions_on_date_of_reporting: cy.formatters.formatNumber(hospitalNiceLastValue.admissions_on_date_of_reporting),
       infected: cy.formatters.formatNumber(testedOverallLastValue.infected),
     };
 

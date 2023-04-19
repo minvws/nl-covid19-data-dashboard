@@ -8,11 +8,11 @@
     "proto_name",
     "name",
     "code",
-    "tested_overall",
+    "tested_overall_archived_20230417",
     "hospital_nice",
     "deceased_rivm_archived_20221231",
     "difference",
-    "static_values",
+    "static_values_archived_20230417",
     "sewer",
     "vaccine_coverage_per_age_group",
     "vaccine_coverage_per_age_group_archived",
@@ -32,8 +32,8 @@
     "code": {
       "$ref": "#/$defs/gm_code"
     },
-    "static_values": {
-      "$ref": "__static_values.json"
+    "static_values_archived_20230417": {
+      "$ref": "__static_values_archived_20230417.json"
     },
     "deceased_rivm_archived_20221231": {
       "$ref": "deceased_rivm_archived_20221231.json"
@@ -44,8 +44,8 @@
     "hospital_nice": {
       "$ref": "hospital_nice.json"
     },
-    "tested_overall": {
-      "$ref": "tested_overall.json"
+    "tested_overall_archived_20230417": {
+      "$ref": "tested_overall_archived_20230417.json"
     },
     "sewer": {
       "$ref": "sewer.json"

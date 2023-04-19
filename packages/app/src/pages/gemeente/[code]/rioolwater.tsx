@@ -38,7 +38,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData('difference.sewer__average', 'sewer_per_installation', 'static_values.population_count', 'sewer', 'code'),
+  selectGmData('difference.sewer__average', 'sewer_per_installation', 'static_values_archived_20230417.population_count', 'sewer', 'code'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('sewer_page'))(context);
 
@@ -57,7 +57,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const sewerAverages = data.sewer;
-  const populationCount = data.static_values.population_count;
+  const populationCount = data.static_values_archived_20230417.population_count;
 
   if (!sewerAverages) {
     /**

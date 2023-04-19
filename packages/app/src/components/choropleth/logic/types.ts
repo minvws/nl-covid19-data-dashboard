@@ -2,7 +2,7 @@ import type {
   GmCollection,
   GmCollectionHospitalNice,
   GmCollectionSewer,
-  GmCollectionTestedOverall,
+  GmCollectionTestedOverallArchived_20230417,
   GmCollectionVaccineCoveragePerAgeGroup,
   VrCollection,
   VrCollectionBehaviorArchived_20221019,
@@ -69,7 +69,7 @@ export type VrDataCollection =
   | VrCollectionVaccineCoveragePerAgeGroup[];
 export type VrDataItem = VrDataCollection[number];
 
-export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionTestedOverall[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
+export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionTestedOverallArchived_20230417[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
 export type GmDataItem = GmDataCollection[number];
 
 /**

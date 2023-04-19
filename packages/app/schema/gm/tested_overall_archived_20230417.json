@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "gm_tested_overall_value",
+      "title": "gm_tested_overall_archived_20230417_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -39,8 +39,8 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "tested_overall.json",
-  "title": "gm_tested_overall",
+  "$id": "tested_overall_archived_20230417.json",
+  "title": "gm_tested_overall_archived_20230417",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

@@ -16,13 +16,11 @@ context('Index (Actueel)', () => {
   });
 
   it('Should show the correct mini trend tile values', function (this: NlContext) {
-    const testedOverallLastValue = this.nationalData.tested_overall.last_value;
+    const testedOverallLastValue = this.nationalData.tested_overall_archived_20230417.last_value;
     const hospitalNiceLastValue = this.nationalData.hospital_nice.last_value;
 
     const kpiTestInfo = {
-      admissions_on_date_of_reporting: cy.formatters.formatNumber(
-        hospitalNiceLastValue.admissions_on_date_of_reporting
-      ),
+      admissions_on_date_of_reporting: cy.formatters.formatNumber(hospitalNiceLastValue.admissions_on_date_of_reporting),
       infected: cy.formatters.formatNumber(testedOverallLastValue.infected),
     };
 

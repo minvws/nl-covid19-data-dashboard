@@ -10,7 +10,7 @@
     "code",
     "hospital_nice",
     "hospital_nice_choropleth",
-    "tested_overall",
+    "tested_overall_archived_20230417",
     "sewer",
     "vaccine_coverage_per_age_group"
   ],
@@ -43,12 +43,12 @@
         "$ref": "hospital_nice.json"
       }
     },
-    "tested_overall": {
+    "tested_overall_archived_20230417": {
       "type": "array",
       "minItems": 342,
       "maxItems": 342,
       "items": {
-        "$ref": "tested_overall.json"
+        "$ref": "tested_overall_archived_20230417.json"
       }
     },
     "sewer": {

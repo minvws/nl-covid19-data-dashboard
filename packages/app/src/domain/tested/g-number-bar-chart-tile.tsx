@@ -1,4 +1,4 @@
-import { colors, NlGNumber, TimeframeOption, TimeframeOptionsList, VrGNumber } from '@corona-dashboard/common';
+import { colors, NlGNumberArchived_20230417, TimeframeOption, TimeframeOptionsList, VrGNumber } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -8,7 +8,7 @@ import { useIntl } from '~/intl';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 
 interface GNumberBarChartTileProps {
-  data: NlGNumber | VrGNumber;
+  data: NlGNumberArchived_20230417 | VrGNumber;
   timeframeInitialValue?: TimeframeOption;
 }
 
@@ -16,7 +16,6 @@ export function GNumberBarChartTile({ data: __data, timeframeInitialValue = Time
   const [gnumberTimeframe, setGnumberTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { formatPercentage, commonTexts } = useIntl();
-
   const text = commonTexts.g_number.bar_chart;
 
   const firstOfSeptember2020Unix = new Date('1 September 2020').valueOf() / 1000;

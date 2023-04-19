@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "gm_static_values",
+  "title": "gm_static_values_archived_20230417",
   "type": "object",
   "properties": {
     "population_count": {

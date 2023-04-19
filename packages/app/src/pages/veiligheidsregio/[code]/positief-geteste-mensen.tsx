@@ -56,7 +56,7 @@ export const getStaticProps = createGetStaticProps(
     'tested_overall'
   ),
   createGetChoroplethData({
-    gm: ({ tested_overall }) => ({ tested_overall }),
+    gm: ({ tested_overall_archived_20230417 }) => ({ tested_overall_archived_20230417 }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -312,9 +312,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 accessibility={{
                   key: 'confirmed_cases_infected_people_choropleth',
                 }}
-                data={choropleth.gm.tested_overall}
+                data={choropleth.gm.tested_overall_archived_20230417}
                 dataConfig={{
-                  metricName: 'tested_overall',
+                  metricName: 'tested_overall_archived_20230417',
                   metricProperty: 'infected_per_100k',
                   dataFormatters: {
                     infected: formatNumber,
