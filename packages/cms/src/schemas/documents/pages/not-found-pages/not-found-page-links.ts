@@ -1,5 +1,5 @@
-import { REQUIRED } from '../../../../validation';
 import { KpiIconInput } from '../../../../components/portable-text/kpi-configuration/kpi-icon-input';
+import { REQUIRED } from '../../../../validation';
 
 export const themeLink = {
   name: 'notFoundPageLinks',
@@ -8,21 +8,21 @@ export const themeLink = {
   fields: [
     {
       title: 'Link Label',
-      description: 'If a link is configured, then a label must be provided.',
+      description: 'Het label voor de link.',
       name: 'linkLabel',
       type: 'localeString',
       validation: REQUIRED,
     },
     {
       title: 'Link URL',
-      description: 'If a link is configured, then a destination URL must be provided.',
+      description: 'De bestemming van de link. Gebruik altijd relatieve URLs.',
       name: 'linkUrl',
-      type: 'url',
+      type: 'string',
       validation: REQUIRED,
     },
     {
       title: 'Icon',
-      description: 'If a link is configured, you can choose to display an icon to the left of the link label.',
+      description: 'Optioneel icoon voor de link. Wordt links van de tekst getoond.',
       name: 'linkIcon',
       type: 'string',
       inputComponent: KpiIconInput,
