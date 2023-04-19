@@ -1194,9 +1194,6 @@ export interface VrCollection {
   disability_care_archived_20230126: VrCollectionDisabilityCareArchived_20230126[];
   elderly_at_home_archived_20230126: VrCollectionElderlyAtHomeArchived_20230126[];
   nursing_home_archived_20230126: VrCollectionNursingHomeArchived_20230126[];
-  tested_overall: VrCollectionTestedOverall[];
-  vaccine_coverage_per_age_group: VrCollectionVaccineCoveragePerAgeGroup[];
-  vulnerable_nursing_home: VrCollectionVulnerableNursingHome[];
 }
 export interface VrCollectionDisabilityCareArchived_20230126 {
   newly_infected_people: number;
@@ -1224,35 +1221,5 @@ export interface VrCollectionNursingHomeArchived_20230126 {
   deceased_daily: number;
   date_unix: number;
   date_of_insertion_unix: number;
-  vrcode: string;
-}
-export interface VrCollectionTestedOverall {
-  date_unix: number;
-  vrcode: string;
-  infected_per_100k: number;
-  infected: number;
-  date_of_insertion_unix: number;
-}
-export interface VrCollectionVaccineCoveragePerAgeGroup {
-  vrcode: string;
-  vaccination_type: string;
-  birthyear_range_12_plus: string;
-  birthyear_range_18_plus: string;
-  birthyear_range_60_plus: string | null;
-  vaccinated_percentage_12_plus: number | null;
-  vaccinated_percentage_12_plus_label: string | null;
-  vaccinated_percentage_18_plus: number | null;
-  vaccinated_percentage_18_plus_label: string | null;
-  vaccinated_percentage_60_plus: number | null;
-  vaccinated_percentage_60_plus_label: string | null;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface VrCollectionVulnerableNursingHome {
-  newly_infected_locations: number;
-  infected_locations_total: number;
-  infected_locations_percentage: number;
-  date_of_insertion_unix: number;
-  date_unix: number;
   vrcode: string;
 }

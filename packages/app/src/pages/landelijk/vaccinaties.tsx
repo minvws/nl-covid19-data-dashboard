@@ -115,7 +115,6 @@ export const getStaticProps = createGetStaticProps(
   },
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }) => vaccine_coverage_per_age_group ?? null,
-    vr: ({ vaccine_coverage_per_age_group }) => vaccine_coverage_per_age_group ?? null,
   })
 );
 

@@ -3,18 +3,7 @@
   "type": "object",
   "title": "vr_collection",
   "additionalProperties": false,
-  "required": [
-    "last_generated",
-    "proto_name",
-    "name",
-    "code",
-    "disability_care_archived_20230126",
-    "elderly_at_home_archived_20230126",
-    "nursing_home_archived_20230126",
-    "tested_overall",
-    "vaccine_coverage_per_age_group",
-    "vulnerable_nursing_home"
-  ],
+  "required": ["last_generated", "proto_name", "name", "code", "disability_care_archived_20230126", "elderly_at_home_archived_20230126", "nursing_home_archived_20230126"],
   "properties": {
     "last_generated": {
       "type": "string"
@@ -50,29 +39,6 @@
       "maxItems": 25,
       "items": {
         "$ref": "nursing_home_archived_20230126.json"
-      }
-    },
-    "tested_overall": {
-      "type": "array",
-      "maxItems": 25,
-      "items": {
-        "$ref": "tested_overall.json"
-      }
-    },
-    "vaccine_coverage_per_age_group": {
-      "type": "array",
-      "minItems": 50,
-      "maxItems": 50,
-      "items": {
-        "$ref": "vaccine_coverage_per_age_group.json"
-      }
-    },
-    "vulnerable_nursing_home": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "vulnerable_nursing_home.json"
       }
     }
   },
