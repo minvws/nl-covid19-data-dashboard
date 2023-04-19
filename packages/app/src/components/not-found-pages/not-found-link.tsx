@@ -3,9 +3,9 @@ import { ChevronRight } from '@corona-dashboard/icons';
 import styled from 'styled-components';
 import { space } from '~/style/theme';
 import { getFilenameToIconName } from '~/utils/get-filename-to-icon-name';
+import { Link } from '~/utils/link';
 import { Box } from '../base/box';
 import DynamicIcon, { IconName } from '../get-icon-by-name';
-import { Anchor } from '../typography';
 import { NotFoundLinkProps } from './types';
 
 export const NotFoundLink = ({ link: { linkUrl, linkLabel, linkIcon }, hasChevron, isCTA, ...restProps }: NotFoundLinkProps) => {
@@ -16,24 +16,27 @@ export const NotFoundLink = ({ link: { linkUrl, linkLabel, linkIcon }, hasChevro
     <Box {...restProps}>
       {icon}
 
-      <StyledAnchor hasIcon={!!icon} href={linkUrl} isCTA={isCTA} underline={!isCTA}>
-        {linkLabel}
-      </StyledAnchor>
+      <StyledLink hasIcon={!!icon} isCTA={isCTA}>
+        <Link href={linkUrl}>{linkLabel}</Link>
+      </StyledLink>
 
       {hasChevron && <ChevronRight color={colors.blue8} height="10px" />}
     </Box>
   );
 };
 
-interface StyledAnchorProps {
+interface StyledLinkProps {
   hasIcon: boolean;
   isCTA: boolean | undefined;
 }
 
-const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
-  margin-inline: ${({ hasIcon, isCTA }) => (hasIcon || isCTA ? space[2] : !hasIcon ? `0 ${space[2]}` : 0)};
+const StyledLink = styled.div<StyledLinkProps>`
+  a {
+    margin-inline: ${({ hasIcon, isCTA }) => (hasIcon || isCTA ? space[2] : !hasIcon ? `0 ${space[2]}` : 0)};
+    text-decoration: ${({ isCTA }) => (isCTA ? undefined : 'underline')};
 
-  &:hover {
-    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
   }
 `;
