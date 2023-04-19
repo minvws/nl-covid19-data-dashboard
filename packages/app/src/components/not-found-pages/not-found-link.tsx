@@ -16,8 +16,8 @@ export const NotFoundLink = ({ link: { linkUrl, linkLabel, linkIcon }, hasChevro
     <Box {...restProps}>
       {icon}
 
-      <StyledLink hasIcon={!!icon} href={linkUrl} isCTA={isCTA}>
-        {linkLabel}
+      <StyledLink hasIcon={!!icon} isCTA={isCTA}>
+        <Link href={linkUrl}>{linkLabel}</Link>
       </StyledLink>
 
       {hasChevron && <ChevronRight color={colors.blue8} height="10px" />}
@@ -30,11 +30,13 @@ interface StyledLinkProps {
   isCTA: boolean | undefined;
 }
 
-const StyledLink = styled(Link)<StyledLinkProps>`
-  margin-inline: ${({ hasIcon, isCTA }) => (hasIcon || isCTA ? space[2] : !hasIcon ? `0 ${space[2]}` : 0)};
-  text-decoration: ${({ isCTA }) => (isCTA ? undefined : 'underline')};
+const StyledLink = styled.div<StyledLinkProps>`
+  a {
+    margin-inline: ${({ hasIcon, isCTA }) => (hasIcon || isCTA ? space[2] : !hasIcon ? `0 ${space[2]}` : 0)};
+    text-decoration: ${({ isCTA }) => (isCTA ? undefined : 'underline')};
 
-  &:hover {
-    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
   }
 `;
