@@ -49,7 +49,7 @@ export const getStaticProps = createGetStaticProps(
     'code',
     'difference.tested_overall__infected_moving_average_archived_20230417',
     'difference.tested_overall__infected_per_100k_moving_average_archived_20230417',
-    'static_values_archived_20230417.population_count',
+    'static_values.population_count',
     'tested_overall_archived_20230417'
   ),
   createGetChoroplethData({
@@ -86,7 +86,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const lastValue = data.tested_overall_archived_20230417.last_value;
-  const populationCount = data.static_values_archived_20230417.population_count;
+  const populationCount = data.static_values.population_count;
   const vrForMunicipality = getVrForMunicipalityCode(data.code);
   const vrData = choropleth.vr.tested_overall.find((v) => v.vrcode === vrForMunicipality?.code);
   const metadata = {

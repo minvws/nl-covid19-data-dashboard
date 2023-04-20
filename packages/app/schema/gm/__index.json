@@ -12,7 +12,7 @@
     "hospital_nice",
     "deceased_rivm_archived_20221231",
     "difference",
-    "static_values_archived_20230417",
+    "static_values",
     "sewer",
     "vaccine_coverage_per_age_group",
     "vaccine_coverage_per_age_group_archived",
@@ -32,8 +32,8 @@
     "code": {
       "$ref": "#/$defs/gm_code"
     },
-    "static_values_archived_20230417": {
-      "$ref": "__static_values_archived_20230417.json"
+    "static_values": {
+      "$ref": "__static_values.json"
     },
     "deceased_rivm_archived_20221231": {
       "$ref": "deceased_rivm_archived_20221231.json"

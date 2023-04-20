@@ -11,7 +11,7 @@ export interface Gm {
   proto_name: GmCode;
   name: GmCode;
   code: GmCode;
-  static_values_archived_20230417: GmStaticValuesArchived_20230417;
+  static_values: GmStaticValues;
   deceased_rivm_archived_20221231: GmDeceasedRivmArchived_20221231;
   difference: GmDifference;
   hospital_nice: GmHospitalNice;
@@ -23,7 +23,7 @@ export interface Gm {
   vaccine_coverage_per_age_group_archived_20220908: GmVaccineCoveragePerAgeGroupArchived_20220908;
   booster_coverage_archived_20220904: GmBoosterCoverageArchived_20220904;
 }
-export interface GmStaticValuesArchived_20230417 {
+export interface GmStaticValues {
   population_count: number;
 }
 export interface GmDeceasedRivmArchived_20221231 {
