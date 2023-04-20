@@ -25,7 +25,6 @@ import { createGetStaticProps, StaticProps } from '~/static-props/create-get-sta
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
@@ -79,9 +78,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedNlData: data, choropleth, lastGenerated, content } = props;
 
   const [disabilityCareConfirmedCasesTimeframe, setDisabilityCareConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
   const [disabilityCareInfectedLocationsTimeframe, setDisabilityCareInfectedLocationsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
   const [disabilityCareDeceasedTimeframe, setDisabilityCareDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const lastValue = data.disability_care_archived_20230126.last_value;
@@ -89,9 +86,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
-  const reverseRouter = useReverseRouter();
   const { categoryTexts, metadataTexts, textShared, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
-
   const metadata = {
     ...metadataTexts,
     title: textNl.besmette_locaties.metadata.title,
@@ -99,7 +94,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
-
   const hasActiveWarningTile = !!textShared.belangrijk_bericht;
 
   return (
@@ -133,12 +127,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.positief_geteste_personen.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="newly_infected_people"
-                absolute={lastValue.newly_infected_people}
-                difference={data.difference.disability_care__newly_infected_people_archived_20230126}
-                isAmount
-              />
+              <KpiValue absolute={lastValue.newly_infected_people} difference={data.difference.disability_care__newly_infected_people_archived_20230126} isAmount />
             </KpiTile>
           </TwoKpiSection>
 
@@ -210,7 +199,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               }}
             >
               <KpiValue
-                data-cy="infected_locations_total"
                 absolute={lastValue.infected_locations_total}
                 percentage={lastValue.infected_locations_percentage}
                 difference={data.difference.disability_care__infected_locations_total_archived_20230126}
@@ -225,7 +213,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.besmette_locaties.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="newly_infected_locations" absolute={lastValue.newly_infected_locations} />
+              <KpiValue absolute={lastValue.newly_infected_locations} />
               <Text>{textNl.besmette_locaties.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
@@ -256,7 +244,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 },
               }}
               dataOptions={{
-                getLink: reverseRouter.vr.gehandicaptenzorg,
+                isPercentage: true,
               }}
             />
           </ChoroplethTile>
@@ -314,7 +302,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.oversterfte.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="deceased_daily" absolute={lastValue.deceased_daily} />
+              <KpiValue absolute={lastValue.deceased_daily} />
             </KpiTile>
           </TwoKpiSection>
 

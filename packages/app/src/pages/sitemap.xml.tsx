@@ -1,4 +1,4 @@
-import { assert, gmData, vrData } from '@corona-dashboard/common';
+import { assert, gmData } from '@corona-dashboard/common';
 import sanityClient from '@sanity/client';
 import { globby } from 'globby';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -7,13 +7,7 @@ export default function SitemapIndex() {
   return null;
 }
 
-function Sitemap({
-  pages,
-  origin,
-}: {
-  pages: { path: string; priority: number }[];
-  origin: string;
-}) {
+function Sitemap({ pages, origin }: { pages: { path: string; priority: number }[]; origin: string }) {
   return (
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       {pages?.map((page, index) => {
@@ -28,13 +22,7 @@ function Sitemap({
   );
 }
 
-export async function getServerSideProps({
-  res,
-  locale,
-}: {
-  res: any;
-  locale: string;
-}) {
+export async function getServerSideProps({ res, locale }: { res: any; locale: string }) {
   const domain = locale === 'en' ? 'government.nl' : 'rijksoverheid.nl';
   const origin = `https://coronadashboard.${domain}`;
 
@@ -49,14 +37,10 @@ export async function getServerSideProps({
   };
 }
 
-const vrCodes = vrData.map((x) => x.code);
 const gmCodes = gmData.map((x) => x.gemcode);
 
 async function getAllPathsWithPriorities() {
-  assert(
-    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    `[${getAllPathsWithPriorities.name}] Missing NEXT_PUBLIC_SANITY_PROJECT_ID env var`
-  );
+  assert(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID, `[${getAllPathsWithPriorities.name}] Missing NEXT_PUBLIC_SANITY_PROJECT_ID env var`);
 
   const config = {
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production',
@@ -87,24 +71,15 @@ async function getAllPathsWithPriorities() {
     '!../app/src/pages/api',
   ]);
 
-  const pathsFromPages = pages.map((x) =>
-    x
-      .replace('../app/src/pages', '')
-      .replace('.tsx', '')
-      .replace('/index.tsx', '')
-      .replace('/index', '')
-  );
+  const pathsFromPages = pages.map((x) => x.replace('../app/src/pages', '').replace('.tsx', '').replace('/index.tsx', '').replace('/index', ''));
 
   const priorities = [
     { path: 'landelijk', value: 0.8 },
     { path: 'gemeente', value: 0.8 },
-    { path: 'regio', value: 0.8 },
   ];
 
   const pathsWithPriorities = pathsFromPages.map((path: string) => {
-    const priority = priorities.find((priority) =>
-      path.includes(priority.path)
-    );
+    const priority = priorities.find((priority) => path.includes(priority.path));
 
     return {
       path: path,
@@ -112,21 +87,10 @@ async function getAllPathsWithPriorities() {
     };
   });
 
-  const allPathsWithPriorities = pathsWithPriorities.filter(
-    (p) => p.path !== '' && !isParameterizedPath(p.path)
-  );
-  const regioPaths = pathsWithPriorities.filter(
-    (p) => isParameterizedPath(p.path) && p.path.includes('veiligheidsregio')
-  );
-  const gemeentePaths = pathsWithPriorities.filter(
-    (p) => isParameterizedPath(p.path) && p.path.includes('gemeente')
-  );
-  const articlePaths = pathsWithPriorities.filter(
-    (p) => isParameterizedPath(p.path) && p.path.includes('artikelen')
-  );
-  const editorialPaths = pathsWithPriorities.filter(
-    (p) => isParameterizedPath(p.path) && p.path.includes('weekberichten')
-  );
+  const allPathsWithPriorities = pathsWithPriorities.filter((p) => p.path !== '' && !isParameterizedPath(p.path));
+  const gemeentePaths = pathsWithPriorities.filter((p) => isParameterizedPath(p.path) && p.path.includes('gemeente'));
+  const articlePaths = pathsWithPriorities.filter((p) => isParameterizedPath(p.path) && p.path.includes('artikelen'));
+  const editorialPaths = pathsWithPriorities.filter((p) => isParameterizedPath(p.path) && p.path.includes('weekberichten'));
 
   articlePaths.forEach((p) => {
     slugsData.articles.forEach((article) => {
@@ -138,13 +102,6 @@ async function getAllPathsWithPriorities() {
   editorialPaths.forEach((p) => {
     slugsData.editorials.forEach((editorial) => {
       const pathWithCode = p.path.replace('[slug]', editorial.slug);
-      allPathsWithPriorities.push({ path: pathWithCode, priority: p.priority });
-    });
-  });
-
-  regioPaths.forEach((p) => {
-    vrCodes.forEach((code) => {
-      const pathWithCode = p.path.replace('[code]', code);
       allPathsWithPriorities.push({ path: pathWithCode, priority: p.priority });
     });
   });

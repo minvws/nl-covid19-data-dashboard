@@ -61,6 +61,7 @@ See below an overview of all the available icons in this package. This file is g
 | GgdTesten                              | <div style="background-color: white;"><img src="./src/svg/ggd_testen.svg" alt="GgdTesten" /></div>                                                             |
 | Groepen                                | <div style="background-color: white;"><img src="./src/svg/groepen.svg" alt="Groepen" /></div>                                                                  |
 | HealthCare                             | <div style="background-color: white;"><img src="./src/svg/health_care.svg" alt="HealthCare" /></div>                                                           |
+| Home                                   | <div style="background-color: white;"><img src="./src/svg/home.svg" alt="Home" /></div>                                                                        |
 | HomeAndVisits                          | <div style="background-color: white;"><img src="./src/svg/home_and_visits.svg" alt="HomeAndVisits" /></div>                                                    |
 | HorecaEnEvenementenBestellen           | <div style="background-color: white;"><img src="./src/svg/horeca_en_evenementen_bestellen.svg" alt="HorecaEnEvenementenBestellen" /></div>                     |
 | HorecaEnEvenementenEtendrinken         | <div style="background-color: white;"><img src="./src/svg/horeca_en_evenementen_etendrinken.svg" alt="HorecaEnEvenementenEtendrinken" /></div>                 |
@@ -120,6 +121,7 @@ See below an overview of all the available icons in this package. This file is g
 | Taxi                                   | <div style="background-color: white;"><img src="./src/svg/taxi.svg" alt="Taxi" /></div>                                                                        |
 | Testbewijs                             | <div style="background-color: white;"><img src="./src/svg/testbewijs.svg" alt="Testbewijs" /></div>                                                            |
 | Toegangsbewijzen                       | <div style="background-color: white;"><img src="./src/svg/toegangsbewijzen.svg" alt="Toegangsbewijzen" /></div>                                                |
+| Town                                   | <div style="background-color: white;"><img src="./src/svg/town.svg" alt="Town" /></div>                                                                        |
 | Travel                                 | <div style="background-color: white;"><img src="./src/svg/travel.svg" alt="Travel" /></div>                                                                    |
 | Unchecked                              | <div style="background-color: white;"><img src="./src/svg/unchecked.svg" alt="Unchecked" /></div>                                                              |
 | Up                                     | <div style="background-color: white;"><img src="./src/svg/up.svg" alt="Up" /></div>                                                                            |

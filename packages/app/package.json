@@ -143,7 +143,6 @@
     "dev:common": "yarn workspace @corona-dashboard/common build:watch",
     "build": "cross-env NEXT_TELEMETRY_DISABLED=1 && next build",
     "start": "cross-env NODE_ENV=production node next-server.js",
-    "start-e2e": "next start -H 0.0.0.0 -p 3000",
     "test": "cross-env TS_NODE_PROJECT=tsconfig.test.json uvu -r ts-node/register",
     "test:coverage": "c8 --include=src --all yarn test",
     "test:watch": "chokidar \"./src/**/__tests__/*.{ts,tsx}\" -c \"cross-env TS_NODE_PROJECT=tsconfig.test.json node -r ts-node/register {path}\"",

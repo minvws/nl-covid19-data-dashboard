@@ -100,6 +100,7 @@ export const sizes = {
   maxWidthSiteWarning: 930,
   contentWidth: 700,
   maxWidthText: 600,
+  wideNavWidth: 1024,
 } as const;
 
 const theme = {

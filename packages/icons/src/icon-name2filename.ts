@@ -56,6 +56,7 @@ export type IconName =
   | 'GgdTesten'
   | 'Groepen'
   | 'HealthCare'
+  | 'Home'
   | 'HomeAndVisits'
   | 'HorecaEnEvenementenBestellen'
   | 'HorecaEnEvenementenEtendrinken'
@@ -115,6 +116,7 @@ export type IconName =
   | 'Taxi'
   | 'Testbewijs'
   | 'Toegangsbewijzen'
+  | 'Town'
   | 'Travel'
   | 'Unchecked'
   | 'Up'
@@ -192,6 +194,7 @@ export const iconName2filename: Record<IconName, string> = {
   GgdTesten: 'ggd_testen.svg',
   Groepen: 'groepen.svg',
   HealthCare: 'health_care.svg',
+  Home: 'home.svg',
   HomeAndVisits: 'home_and_visits.svg',
   HorecaEnEvenementenBestellen: 'horeca_en_evenementen_bestellen.svg',
   HorecaEnEvenementenEtendrinken: 'horeca_en_evenementen_etendrinken.svg',
@@ -251,6 +254,7 @@ export const iconName2filename: Record<IconName, string> = {
   Taxi: 'taxi.svg',
   Testbewijs: 'testbewijs.svg',
   Toegangsbewijzen: 'toegangsbewijzen.svg',
+  Town: 'town.svg',
   Travel: 'travel.svg',
   Unchecked: 'unchecked.svg',
   Up: 'up.svg',
