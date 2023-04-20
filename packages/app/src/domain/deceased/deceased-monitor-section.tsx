@@ -11,7 +11,7 @@ export function DeceasedMonitorSection({
   showCauseMessage,
 }: {
   data: NlDeceasedCbs | VrDeceasedCbs;
-  text: SiteText['pages']['deceased_page']['shared']['section_sterftemonitor'];
+  text: SiteText['pages']['deceased_page']['nl']['section_sterftemonitor'];
   showCauseMessage?: boolean;
 }) {
   return (
