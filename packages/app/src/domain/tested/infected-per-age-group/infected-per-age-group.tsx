@@ -25,7 +25,7 @@ interface InfectedPerAgeGroup {
   values: NlTestedPerAgeGroupValue[];
   timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
-  text: SiteText['pages']['positive_tests_page']['shared'];
+  text: SiteText['pages']['positive_tests_page']['nl'];
 }
 
 export function InfectedPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text }: InfectedPerAgeGroup) {

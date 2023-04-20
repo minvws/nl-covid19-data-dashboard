@@ -36,7 +36,6 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
     screenReaderCategory: siteText.common.sidebar.metrics.disabled_care.title,
   },
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-  textShared: siteText.pages.disability_care_page.shared,
   textNl: siteText.pages.disability_care_page.nl,
 });
 
@@ -86,7 +85,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
-  const { categoryTexts, metadataTexts, textShared, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { categoryTexts, metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const metadata = {
     ...metadataTexts,
     title: textNl.besmette_locaties.metadata.title,
@@ -94,7 +93,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
-  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+  const hasActiveWarningTile = !!textNl.belangrijk_bericht;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -116,7 +115,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile

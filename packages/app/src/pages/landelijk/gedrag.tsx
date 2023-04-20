@@ -33,7 +33,6 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   text: siteText.pages.behavior_page,
   textNl: siteText.pages.behavior_page.nl,
-  textShared: siteText.pages.behavior_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -59,7 +58,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
   const behaviorLastValue = data.behavior.last_value;
 
   const { formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
-  const { caterogyTexts, metadataTexts, text, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { caterogyTexts, metadataTexts, text, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -158,13 +157,13 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
           </TwoKpiSection>
 
           <BehaviorTableTile
-            title={text.shared.basisregels.title}
+            title={textNl.basisregels.title}
             description={textNl.basisregels.description}
             value={behaviorLastValue}
-            annotation={text.shared.basisregels.annotation}
+            annotation={textNl.basisregels.annotation}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
-            text={textShared}
+            text={textNl}
             metadata={{
               datumsText: textNl.datums,
               date: data.behavior.last_value.date_start_unix,
@@ -183,7 +182,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
             {...timelineProp}
             currentId={currentId}
             setCurrentId={setCurrentId}
-            text={text}
+            text={textNl}
           />
 
           {data.behavior_per_age_group && (
@@ -193,7 +192,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
               data={data.behavior_per_age_group}
               currentId={currentId}
               setCurrentId={setCurrentId}
-              text={text}
+              text={textNl}
               metadata={{
                 datumsText: textNl.datums,
                 date: data.behavior_per_age_group.date_start_unix,
