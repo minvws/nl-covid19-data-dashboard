@@ -28,7 +28,7 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { InfectedLocationsTile } from '~/domain/vulnerable-groups';
+import { InfectedLocationsTile } from '~/domain/vulnerable-groups/infected-locations-tile';
 
 const pageMetrics = [
   'difference.nursing_home__deceased_daily_archived_20230126',
@@ -140,11 +140,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={hasActiveWarningTile} variant="informational" />}
 
-          {/* <PageInformationBlock
-            id="elderly-people"
-            icon={<ElderlyPeople />}
-          /> */}
-
           <TwoKpiSection>
             <KpiTile
               title={ElderlyPeopleText.hospital_admissions.kpi_titel}
@@ -157,11 +152,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               <KpiValue absolute={vulnerableHospitalAdmissionsData.admissions_age_70_plus} difference={data.difference.vulnerable_hospital_admissions} isAmount />
             </KpiTile>
           </TwoKpiSection>
-
-          {/* <PageInformationBlock
-            id="besmette-locaties"
-            icon={<Location />}
-          /> */}
 
           <InfectedLocationsTile
             title={textNl.kpi_tiles.infected_locations.title}

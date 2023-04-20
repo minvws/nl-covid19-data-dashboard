@@ -9,6 +9,13 @@ import theme, { space } from '~/style/theme';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 
+type TileData = {
+  title: string;
+  description: string;
+  absoluteValue: number | null;
+  differenceValue?: DifferenceInteger;
+};
+
 interface InfectedLocationsTileProps {
   title: string;
   description: string;
@@ -19,13 +26,6 @@ interface InfectedLocationsTileProps {
   dateUnix: number;
   tilesData: [TileData, TileData];
 }
-
-export type TileData = {
-  title: string;
-  description: string;
-  absoluteValue: number | null;
-  differenceValue?: DifferenceInteger;
-};
 
 export const InfectedLocationsTile = ({ title, description, source, dateUnix, tilesData }: InfectedLocationsTileProps) => {
   const metadata: MetadataProps = {
