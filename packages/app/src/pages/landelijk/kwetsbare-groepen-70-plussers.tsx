@@ -140,6 +140,11 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={hasActiveWarningTile} variant="informational" />}
 
+          {/* <PageInformationBlock
+            id="elderly-people"
+            icon={<ElderlyPeople />}
+          /> */}
+
           <TwoKpiSection>
             <KpiTile
               title={ElderlyPeopleText.hospital_admissions.kpi_titel}
@@ -152,6 +157,11 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               <KpiValue absolute={vulnerableHospitalAdmissionsData.admissions_age_70_plus} difference={data.difference.vulnerable_hospital_admissions} isAmount />
             </KpiTile>
           </TwoKpiSection>
+
+          {/* <PageInformationBlock
+            id="besmette-locaties"
+            icon={<Location />}
+          /> */}
 
           <InfectedLocationsTile
             title={textNl.kpi_tiles.infected_locations.title}
