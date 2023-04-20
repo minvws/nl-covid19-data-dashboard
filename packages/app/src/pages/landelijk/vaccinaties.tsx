@@ -62,6 +62,19 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
+export type BarType = {
+  value: number;
+  color: string;
+};
+
+export type AgeDataType = {
+  value: number | null;
+  birthyear: string | null;
+  title: string;
+  description: string;
+  bar: BarType;
+};
+
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,

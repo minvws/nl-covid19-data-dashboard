@@ -13,19 +13,7 @@ import { Bar } from '../components/bar';
 import styled from 'styled-components';
 import { colors } from '@corona-dashboard/common';
 import { mediaQueries, space } from '~/style/theme';
-
-type BarType = {
-  value: number;
-  color: string;
-};
-
-export type AgeDataType = {
-  value: number | null;
-  birthyear: string | null;
-  title: string;
-  description: string;
-  bar: BarType;
-};
+import { AgeDataType, BarType } from '~/pages/landelijk/vaccinaties';
 
 interface VaccineCoverageTileProps {
   title: string;
