@@ -426,7 +426,7 @@ function AreaMap(props: AreaMapProps) {
             coords={geoInfoCoordinates.flat().join(',')}
             href={!isTouch && isDefined(getLink) ? getLink(geoInfoGroup.code) : undefined}
             onClick={(event) => (isTouch ? handleAreaInteraction(event, geoInfoGroup) : undefined)}
-            onFocus={(event) => handleAreaInteraction(event, geoInfoGroup)}
+            onFocus={(event) => (isTouch ? handleAreaInteraction(event, geoInfoGroup) : undefined)}
             onBlur={(event) => {
               anchorEventHandlers.onBlur(event);
               selectFeature(undefined, true);

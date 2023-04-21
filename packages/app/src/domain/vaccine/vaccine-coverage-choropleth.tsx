@@ -64,7 +64,7 @@ export const VaccineCoverageChoropleth = ({ data, dataOptions, text }: VaccineCo
               {commonTexts.choropleth.vaccination_coverage.shared.dropdowns_title}
             </BoldText>
 
-            <Box display="grid" gridTemplateColumns={{ _: '1 fr', lg: 'repeat(2, 1fr)' }} gridGap={{ _: '24px', lg: space[2] }} margin="24px 0" minWidth="100%">
+            <Box display="grid" gridTemplateColumns={{ _: '1 fr', lg: 'repeat(2, 1fr)' }} gridGap={{ _: '24px', lg: space[2] }} margin={`${space[2]} 0`} minWidth="100%">
               <Box>
                 {text.vaccinationKindLabel && <BoldText>{text.vaccinationKindLabel}</BoldText>}
                 <VaccinationCoverageKindSelect marginTop={space[2]} onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
