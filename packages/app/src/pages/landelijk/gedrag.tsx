@@ -29,7 +29,6 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 const pageMetrics = ['behavior', 'behavior_annotations', 'behavior_per_age_group'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  caterogyTexts: siteText.common.sidebar.categories.actions_to_take.title,
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   text: siteText.pages.behavior_page,
   textNl: siteText.pages.behavior_page.nl,
@@ -57,8 +56,8 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
   const behaviorLastValue = data.behavior.last_value;
 
-  const { formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
-  const { caterogyTexts, metadataTexts, text, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { commonTexts, formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
+  const { metadataTexts, text, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -108,7 +107,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={caterogyTexts}
+            category={commonTexts.sidebar.categories.actions_to_take.title}
             title={text.nl.pagina.titel}
             icon={<Bevolking aria-hidden="true" />}
             description={text.nl.pagina.toelichting}
