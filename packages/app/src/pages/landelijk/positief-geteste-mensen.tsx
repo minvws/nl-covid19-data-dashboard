@@ -120,7 +120,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
-  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+  const hasActiveWarningTile = !!textShared.warning;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -142,7 +142,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.warning} variant="informational" />}
 
           <ChartTile
             title={textNl.linechart_titel}
