@@ -14,7 +14,7 @@ export interface ChartTileToggleProps {
 
 export const ChartTileToggle = ({ initialValue, items, onChange }: ChartTileToggleProps) => {
   return (
-    <Box display="flex" style={{ marginBlock: '24px' }}>
+    <Box display="flex">
       <RadioGroup value={initialValue} items={items} onChange={onChange} />
     </Box>
   );
