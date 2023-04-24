@@ -20,9 +20,9 @@ export const BorderedKpiSection = ({ title, description, source, dateUnix, tiles
       <Text>{description}</Text>
       <TwoKpiSection spacing={5}>
         <KpiContentContainer>
-          {tilesData.map((tile, index) => {
-            <KpiContent key={index} tile={tile} />;
-          })}
+          {tilesData.map((tile, index) => (
+            <KpiContent key={index} tile={tile} />
+          ))}
         </KpiContentContainer>
       </TwoKpiSection>
       <Metadata {...metadata} isTileFooter />
