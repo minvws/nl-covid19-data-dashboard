@@ -1,6 +1,6 @@
 import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
-import { Coronavirus, Location, ElderlyPeople, VulnerableGroups as VulnerableGroupsIcon } from '@corona-dashboard/icons';
+import { Coronavirus, VulnerableGroups as VulnerableGroupsIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -11,7 +11,6 @@ import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Text } from '~/components/typography';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -29,17 +28,16 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 
 const pageMetrics = [
   'difference.nursing_home__deceased_daily_archived_20230126',
   'difference.vulnerable_nursing_home__infected_locations_total',
   'difference.nursing_home__newly_infected_people_archived_20230126',
-  'difference.vulnerable_tested_per_age_group',
   'difference.vulnerable_hospital_admissions',
   'vulnerable_nursing_home',
   'nursing_home_archived_20230126',
   'vulnerable_hospital_admissions',
-  'vulnerable_tested_per_age_group',
 ];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
@@ -57,12 +55,10 @@ export const getStaticProps = createGetStaticProps(
     'difference.nursing_home__deceased_daily_archived_20230126',
     'difference.vulnerable_nursing_home__infected_locations_total',
     'difference.nursing_home__newly_infected_people_archived_20230126',
-    'difference.vulnerable_tested_per_age_group',
     'difference.vulnerable_hospital_admissions',
     'vulnerable_nursing_home',
     'nursing_home_archived_20230126',
-    'vulnerable_hospital_admissions',
-    'vulnerable_tested_per_age_group'
+    'vulnerable_hospital_admissions'
   ),
   createGetChoroplethData({
     vr: ({ nursing_home_archived_20230126 }) => ({ nursing_home_archived_20230126 }),
@@ -109,7 +105,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
 
   const vulnerableNursingHomeDataLastValue = data.vulnerable_nursing_home.last_value;
   const vulnerableHospitalAdmissionsData = data.vulnerable_hospital_admissions;
-  const vulnerableTestedPerAgeGroupData = data.vulnerable_tested_per_age_group;
 
   const ElderlyPeopleText = textShared['70_plussers'];
 
@@ -145,90 +140,38 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={hasActiveWarningTile} variant="informational" />}
 
-          <Divider />
-
-          <PageInformationBlock
-            id="elderly-people"
-            title={ElderlyPeopleText.titel}
-            icon={<ElderlyPeople />}
-            description={ElderlyPeopleText.pagina_toelichting}
-            metadata={{
-              datumsText: ElderlyPeopleText.datums,
-              dateOrRange: vulnerableTestedPerAgeGroupData.date_unix,
-              dateOfInsertionUnix: vulnerableHospitalAdmissionsData.date_of_insertion_unix,
-              dataSources: [ElderlyPeopleText.bronnen.rivm],
-            }}
-            referenceLink={ElderlyPeopleText.reference.href}
-          />
-
           <TwoKpiSection>
             <KpiTile
-              title={ElderlyPeopleText.positive_tested.kpi_titel}
-              metadata={{
-                date: vulnerableTestedPerAgeGroupData.date_unix,
-                source: ElderlyPeopleText.bronnen.rivm,
-              }}
-            >
-              <KpiValue absolute={vulnerableTestedPerAgeGroupData.infected_age_70_plus} difference={data.difference.vulnerable_tested_per_age_group} isAmount />
-              <Text>{ElderlyPeopleText.positive_tested.kpi_toelichting}</Text>
-            </KpiTile>
-
-            <KpiTile
               title={ElderlyPeopleText.hospital_admissions.kpi_titel}
+              description={ElderlyPeopleText.hospital_admissions.kpi_toelichting}
               metadata={{
                 date: [vulnerableHospitalAdmissionsData.date_start_unix, vulnerableHospitalAdmissionsData.date_end_unix],
                 source: ElderlyPeopleText.bronnen.rivm,
               }}
             >
               <KpiValue absolute={vulnerableHospitalAdmissionsData.admissions_age_70_plus} difference={data.difference.vulnerable_hospital_admissions} isAmount />
-              <Text>{ElderlyPeopleText.hospital_admissions.kpi_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
 
-          <Divider />
-
-          <PageInformationBlock
-            id="besmette-locaties"
-            title={infectedLocationsText.titel}
-            icon={<Location />}
-            description={infectedLocationsText.pagina_toelichting}
-            metadata={{
-              datumsText: infectedLocationsText.datums,
-              dateOrRange: nursinghomeDataLastValue.date_unix,
-              dateOfInsertionUnix: nursinghomeDataLastValue.date_of_insertion_unix,
-              dataSources: [infectedLocationsText.bronnen.rivm],
-            }}
-            referenceLink={infectedLocationsText.reference.href}
+          <BorderedKpiSection
+            title={textNl.kpi_tiles.infected_locations.title}
+            description={textNl.kpi_tiles.infected_locations.description}
+            source={infectedLocationsText.bronnen.rivm}
+            dateUnix={nursinghomeDataLastValue.date_unix}
+            tilesData={[
+              {
+                value: nursinghomeDataLastValue.infected_locations_total,
+                differenceValue: data.difference.vulnerable_nursing_home__infected_locations_total,
+                title: infectedLocationsText.kpi_titel,
+                description: infectedLocationsText.kpi_toelichting,
+              },
+              {
+                value: nursinghomeDataLastValue.newly_infected_locations,
+                title: infectedLocationsText.barscale_titel,
+                description: infectedLocationsText.barscale_toelichting,
+              },
+            ]}
           />
-
-          <TwoKpiSection>
-            <KpiTile
-              title={infectedLocationsText.kpi_titel}
-              metadata={{
-                date: nursinghomeDataLastValue.date_unix,
-                source: infectedLocationsText.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                absolute={nursinghomeDataLastValue.infected_locations_total}
-                percentage={nursinghomeDataLastValue.infected_locations_percentage}
-                difference={data.difference.vulnerable_nursing_home__infected_locations_total}
-                isAmount
-              />
-              <Text>{infectedLocationsText.kpi_toelichting}</Text>
-            </KpiTile>
-
-            <KpiTile
-              title={infectedLocationsText.barscale_titel}
-              metadata={{
-                date: nursinghomeDataLastValue.date_unix,
-                source: infectedLocationsText.bronnen.rivm,
-              }}
-            >
-              <KpiValue absolute={nursinghomeDataLastValue.newly_infected_locations} />
-              <Text>{infectedLocationsText.barscale_toelichting}</Text>
-            </KpiTile>
-          </TwoKpiSection>
 
           <ChoroplethTile
             title={infectedLocationsText.map_titel}
