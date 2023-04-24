@@ -15,7 +15,7 @@ export const PercentageBar = ({ percentage, height, color, backgroundColor = col
 
   return (
     <Box display="flex" position="relative" width="100%">
-      <Bar style={{ width: `${percentage}%` }} height={height} minWidth={minWidth} color={color} />
+      <Bar style={{ width: `${percentage}%` }} height={typeof height === 'number' ? `${height}px` : height} minWidth={minWidth} color={color} />
       <StyledDiv backgroundStyle={backgroundStyle} backgroundColor={backgroundColor} height={height} />
     </Box>
   );
