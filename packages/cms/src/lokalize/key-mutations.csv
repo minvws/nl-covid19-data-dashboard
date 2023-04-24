@@ -11,3 +11,5 @@ timestamp,action,key,document_id,move_to
 2023-04-18T14:26:50.250Z,delete,pages.nursing_home_page.shared.verpleeghuis_besmette_locaties.pagina_toelichting,jF33EuwumlGuwav2FD3bxM,__
 2023-04-18T14:26:50.252Z,delete,pages.nursing_home_page.shared.verpleeghuis_besmette_locaties.reference.href,jF33EuwumlGuwav2FD3cMW,__
 2023-04-18T14:26:50.254Z,delete,pages.nursing_home_page.shared.verpleeghuis_besmette_locaties.titel,jF33EuwumlGuwav2FD3bvg,__
+2023-04-24T11:17:35.869Z,delete,pages.positive_tests_page.shared.belangrijk_bericht,mt9hMqvnezW3fDtFvfvcu2,__
+2023-04-24T11:33:18.199Z,add,pages.positive_tests_page.shared.warning,AjemcWg1mce4pN4WDfY5e3,__

@@ -16,7 +16,6 @@ export function GNumberBarChartTile({ data: __data, timeframeInitialValue = Time
   const [gnumberTimeframe, setGnumberTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { formatPercentage, commonTexts } = useIntl();
-
   const text = commonTexts.g_number.bar_chart;
 
   const firstOfSeptember2020Unix = new Date('1 September 2020').valueOf() / 1000;
