@@ -11,7 +11,7 @@ export const dataStructure = {
       'admissions_on_date_of_admission_moving_average_rounded',
       'admissions_on_date_of_reporting',
     ],
-    tested_overall_archived_20230417: ['infected', 'infected_moving_average', 'infected_moving_average_rounded', 'infected_per_100k', 'infected_per_100k_moving_average'],
+    tested_overall: ['infected', 'infected_moving_average', 'infected_moving_average_rounded', 'infected_per_100k', 'infected_per_100k_moving_average'],
     sewer: ['average', 'total_number_of_samples', 'sampled_installation_count', 'total_installation_count', 'data_is_outdated'],
     vaccine_coverage_per_age_group: [
       'vaccination_type',
@@ -48,7 +48,7 @@ export const dataStructure = {
   gm_collection: {
     hospital_nice: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
     hospital_nice_choropleth: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
-    tested_overall_archived_20230417: ['infected_per_100k', 'infected'],
+    tested_overall: ['infected_per_100k', 'infected'],
     sewer: ['average', 'total_installation_count', 'data_is_outdated'],
     vaccine_coverage_per_age_group: [
       'vaccination_type',
@@ -68,7 +68,7 @@ export const dataStructure = {
     repeating_shot_administered: ['ggd_administered_total'],
     booster_coverage_archived_20220904: ['age_group', 'percentage'],
     doctor: ['covid_symptoms_per_100k', 'covid_symptoms'],
-    g_number_archived_20230417: ['g_number'],
+    g_number: ['g_number'],
     infectious_people: ['margin_low', 'estimate', 'margin_high'],
     intensive_care_nice: [
       'admissions_on_date_of_admission',
@@ -88,8 +88,8 @@ export const dataStructure = {
       'admissions_age_90_plus_per_million',
       'admissions_overall_per_million',
     ],
-    tested_overall_archived_20230417: ['infected', 'infected_moving_average', 'infected_moving_average_rounded', 'infected_per_100k', 'infected_per_100k_moving_average'],
-    tested_per_age_group_archived_20230417: [
+    tested_overall: ['infected', 'infected_moving_average', 'infected_moving_average_rounded', 'infected_per_100k', 'infected_per_100k_moving_average'],
+    tested_per_age_group: [
       'infected_age_0_9_per_100k',
       'infected_age_10_19_per_100k',
       'infected_age_20_29_per_100k',
@@ -124,7 +124,7 @@ export const dataStructure = {
     ],
     hospital_lcps: ['beds_occupied_covid', 'influx_covid_patients', 'influx_covid_patients_moving_average'],
     intensive_care_lcps: ['beds_occupied_covid', 'beds_occupied_covid_percentage', 'influx_covid_patients', 'influx_covid_patients_moving_average'],
-    tested_ggd_archived_20230417: [
+    tested_ggd: [
       'infected',
       'infected_moving_average',
       'infected_percentage',

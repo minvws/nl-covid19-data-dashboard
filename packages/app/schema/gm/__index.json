@@ -8,7 +8,7 @@
     "proto_name",
     "name",
     "code",
-    "tested_overall_archived_20230417",
+    "tested_overall",
     "hospital_nice",
     "deceased_rivm_archived_20221231",
     "difference",
@@ -44,8 +44,8 @@
     "hospital_nice": {
       "$ref": "hospital_nice.json"
     },
-    "tested_overall_archived_20230417": {
-      "$ref": "tested_overall_archived_20230417.json"
+    "tested_overall": {
+      "$ref": "tested_overall.json"
     },
     "sewer": {
       "$ref": "sewer.json"

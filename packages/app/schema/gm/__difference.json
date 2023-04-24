@@ -3,10 +3,10 @@
   "title": "gm_difference",
   "type": "object",
   "properties": {
-    "tested_overall__infected_per_100k_moving_average_archived_20230417": {
+    "tested_overall__infected_per_100k_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "tested_overall__infected_moving_average_archived_20230417": {
+    "tested_overall__infected_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "hospital_nice__admissions_on_date_of_reporting_moving_average": {
@@ -20,8 +20,8 @@
     }
   },
   "required": [
-    "tested_overall__infected_per_100k_moving_average_archived_20230417",
-    "tested_overall__infected_moving_average_archived_20230417",
+    "tested_overall__infected_per_100k_moving_average",
+    "tested_overall__infected_moving_average",
     "hospital_nice__admissions_on_date_of_reporting_moving_average",
     "deceased_rivm__covid_daily_archived_20221231"
   ],

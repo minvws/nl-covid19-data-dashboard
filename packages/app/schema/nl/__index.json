@@ -19,7 +19,7 @@
     "disability_care_archived_20230126",
     "doctor",
     "elderly_at_home_archived_20230126",
-    "g_number_archived_20230417",
+    "g_number",
     "hospital_lcps",
     "hospital_nice",
     "hospital_nice_per_age_group",
@@ -37,10 +37,10 @@
     "reproduction",
     "self_test_overall",
     "sewer",
-    "tested_ggd_archived_20230417",
+    "tested_ggd",
     "tested_ggd_archived",
-    "tested_overall_archived_20230417",
-    "tested_per_age_group_archived_20230417",
+    "tested_overall",
+    "tested_per_age_group",
     "vaccine_campaigns",
     "vaccine_campaigns_archived_20220908",
     "vaccine_planned_archived_20220908",
@@ -95,8 +95,8 @@
     "doctor": {
       "$ref": "doctor.json"
     },
-    "g_number_archived_20230417": {
-      "$ref": "g_number_archived_20230417.json"
+    "g_number": {
+      "$ref": "g_number.json"
     },
     "infectious_people": {
       "$ref": "infectious_people.json"
@@ -107,11 +107,11 @@
     "intensive_care_nice_per_age_group": {
       "$ref": "intensive_care_nice_per_age_group.json"
     },
-    "tested_overall_archived_20230417": {
-      "$ref": "tested_overall_archived_20230417.json"
+    "tested_overall": {
+      "$ref": "tested_overall.json"
     },
-    "tested_per_age_group_archived_20230417": {
-      "$ref": "tested_per_age_group_archived_20230417.json"
+    "tested_per_age_group": {
+      "$ref": "tested_per_age_group.json"
     },
     "reproduction": {
       "$ref": "reproduction.json"
@@ -131,8 +131,8 @@
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
     },
-    "tested_ggd_archived_20230417": {
-      "$ref": "tested_ggd_archived_20230417.json"
+    "tested_ggd": {
+      "$ref": "tested_ggd.json"
     },
     "tested_ggd_archived": {
       "$ref": "tested_ggd_archived.json"

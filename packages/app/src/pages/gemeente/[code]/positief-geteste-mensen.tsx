@@ -40,21 +40,21 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
-const pageMetrics = ['tested_overall_archived_20230417'];
+const pageMetrics = ['tested_overall'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectGmData(
     'code',
-    'difference.tested_overall__infected_moving_average_archived_20230417',
-    'difference.tested_overall__infected_per_100k_moving_average_archived_20230417',
+    'difference.tested_overall__infected_moving_average',
+    'difference.tested_overall__infected_per_100k_moving_average',
     'static_values.population_count',
-    'tested_overall_archived_20230417'
+    'tested_overall'
   ),
   createGetChoroplethData({
-    gm: ({ tested_overall_archived_20230417 }, context) => ({
-      tested_overall_archived_20230417: filterByRegionMunicipalities(tested_overall_archived_20230417, context),
+    gm: ({ tested_overall }, context) => ({
+      tested_overall: filterByRegionMunicipalities(tested_overall, context),
     }),
     vr: ({ tested_overall }) => ({ tested_overall }),
   }),
@@ -66,7 +66,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('positive_tests_page')},
-        "elements": ${getElementsQuery('gm', ['tested_overall_archived_20230417'], locale)}
+        "elements": ${getElementsQuery('gm', ['tested_overall'], locale)}
       }`;
     })(context);
     return {
@@ -85,7 +85,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const reverseRouter = useReverseRouter();
   const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const lastValue = data.tested_overall_archived_20230417.last_value;
+  const lastValue = data.tested_overall.last_value;
   const populationCount = data.static_values.population_count;
   const vrForMunicipality = getVrForMunicipalityCode(data.code);
   const vrData = choropleth.vr.tested_overall.find((v) => v.vrcode === vrForMunicipality?.code);
@@ -190,7 +190,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'confirmed_cases_infected_over_time_chart',
               }}
-              values={data.tested_overall_archived_20230417.values}
+              values={data.tested_overall.values}
               timeframe={positivelyTestedPeopleTimeframe}
               seriesConfig={[
                 {
@@ -208,7 +208,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 },
               ]}
               dataOptions={{
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'tested_overall_archived_20230417'),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'tested_overall'),
               }}
             />
           </ChartTile>
@@ -249,9 +249,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 accessibility={{
                   key: 'confirmed_cases_choropleth',
                 }}
-                data={choropleth.gm.tested_overall_archived_20230417}
+                data={choropleth.gm.tested_overall}
                 dataConfig={{
-                  metricName: 'tested_overall_archived_20230417',
+                  metricName: 'tested_overall',
                   metricProperty: 'infected_per_100k',
                   dataFormatters: {
                     infected: formatNumber,

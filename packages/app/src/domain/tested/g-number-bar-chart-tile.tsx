@@ -1,4 +1,4 @@
-import { colors, NlGNumberArchived_20230417, TimeframeOption, TimeframeOptionsList, VrGNumber } from '@corona-dashboard/common';
+import { colors, NlGNumber, TimeframeOption, TimeframeOptionsList, VrGNumber } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -8,7 +8,7 @@ import { useIntl } from '~/intl';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 
 interface GNumberBarChartTileProps {
-  data: NlGNumberArchived_20230417 | VrGNumber;
+  data: NlGNumber | VrGNumber;
   timeframeInitialValue?: TimeframeOption;
 }
 

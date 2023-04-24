@@ -1,22 +1,19 @@
 {
   "definitions": {
     "value": {
-      "title": "gm_tested_overall_archived_20230417_value",
+      "title": "nl_tested_overall_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "date_unix",
         "infected",
         "infected_moving_average",
         "infected_moving_average_rounded",
         "infected_per_100k",
         "infected_per_100k_moving_average",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "date_unix": {
-          "type": "integer"
-        },
         "infected": {
           "type": "integer"
         },
@@ -32,6 +29,9 @@
         "infected_per_100k_moving_average": {
           "type": ["number", "null"]
         },
+        "date_unix": {
+          "type": "integer"
+        },
         "date_of_insertion_unix": {
           "type": "integer"
         }
@@ -39,8 +39,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "tested_overall_archived_20230417.json",
-  "title": "gm_tested_overall_archived_20230417",
+  "title": "nl_tested_overall",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

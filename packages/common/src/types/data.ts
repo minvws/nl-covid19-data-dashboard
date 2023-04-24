@@ -15,7 +15,7 @@ export interface Gm {
   deceased_rivm_archived_20221231: GmDeceasedRivmArchived_20221231;
   difference: GmDifference;
   hospital_nice: GmHospitalNice;
-  tested_overall_archived_20230417: GmTestedOverallArchived_20230417;
+  tested_overall: NlTestedOverall;
   sewer: GmSewer;
   sewer_per_installation?: GmSewerPerInstallation;
   vaccine_coverage_per_age_group: GmVaccineCoveragePerAgeGroup;
@@ -38,8 +38,8 @@ export interface GmDeceasedRivmArchived_20221231Value {
   date_of_insertion_unix: number;
 }
 export interface GmDifference {
-  tested_overall__infected_per_100k_moving_average_archived_20230417: DifferenceDecimal;
-  tested_overall__infected_moving_average_archived_20230417: DifferenceDecimal;
+  tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
+  tested_overall__infected_moving_average: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average?: DifferenceInteger;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
@@ -68,11 +68,11 @@ export interface GmHospitalNiceValue {
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
-export interface GmTestedOverallArchived_20230417 {
-  values: GmTestedOverallArchived_20230417Value[];
-  last_value: GmTestedOverallArchived_20230417Value;
+export interface NlTestedOverall {
+  values: NlTestedOverallValue[];
+  last_value: NlTestedOverallValue;
 }
-export interface GmTestedOverallArchived_20230417Value {
+export interface NlTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_moving_average: number | null;
@@ -173,7 +173,7 @@ export interface GmCollection {
   code: GmCollectionId;
   hospital_nice: GmCollectionHospitalNice[];
   hospital_nice_choropleth: GmCollectionHospitalNice[];
-  tested_overall_archived_20230417: GmCollectionTestedOverallArchived_20230417[];
+  tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
   vaccine_coverage_per_age_group: GmCollectionVaccineCoveragePerAgeGroup[];
 }
@@ -185,7 +185,7 @@ export interface GmCollectionHospitalNice {
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
-export interface GmCollectionTestedOverallArchived_20230417 {
+export interface GmCollectionTestedOverall {
   date_unix: number;
   gmcode: string;
   infected_per_100k: number;
@@ -230,19 +230,19 @@ export interface Nl {
   repeating_shot_administered: NlRepeatingShotAdministered;
   booster_coverage_archived_20220904: NlBoosterCoverageArchived_20220904;
   doctor: NlDoctor;
-  g_number_archived_20230417: NlGNumberArchived_20230417;
+  g_number: NlGNumber;
   infectious_people: NlInfectiousPeople;
   intensive_care_nice: NlIntensiveCareNice;
   intensive_care_nice_per_age_group: NlIntensiveCareNicePerAgeGroup;
-  tested_overall_archived_20230417: NlTestedOverallArchived_20230417;
-  tested_per_age_group_archived_20230417: NlTestedPerAgeGroupArchived_20230417;
+  tested_overall: NlTestedOverall;
+  tested_per_age_group: NlTestedPerAgeGroup;
   reproduction: NlReproduction;
   sewer: NlSewer;
   hospital_nice: NlHospitalNice;
   hospital_nice_per_age_group: NlHospitalNicePerAgeGroup;
   hospital_lcps: NlHospitalLcps;
   intensive_care_lcps: NlIntensiveCareLcps;
-  tested_ggd_archived_20230417: NlTestedGgdArchived_20230417;
+  tested_ggd: NlTestedGgd;
   tested_ggd_archived: NlTestedGgdArchived;
   nursing_home_archived_20230126: NlNursingHomeArchived_20230126;
   vulnerable_nursing_home: NlVulnerableNursingHome;
@@ -285,10 +285,10 @@ export interface Nl {
   self_test_overall: NlSelfTestOverall;
 }
 export interface NlDifference {
-  tested_overall__infected_per_100k_moving_average_archived_20230417: DifferenceDecimal;
-  tested_overall__infected_moving_average_archived_20230417: DifferenceDecimal;
-  tested_ggd__tested_total_moving_average_archived_20230417: DifferenceDecimal;
-  tested_ggd__infected_percentage_moving_average_archived_20230417: DifferenceDecimal;
+  tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
+  tested_overall__infected_moving_average: DifferenceDecimal;
+  tested_ggd__tested_total_moving_average: DifferenceDecimal;
+  tested_ggd__infected_percentage_moving_average: DifferenceDecimal;
   infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
@@ -402,11 +402,11 @@ export interface NlDoctorValue {
   covid_symptoms: number;
   date_of_insertion_unix: number;
 }
-export interface NlGNumberArchived_20230417 {
-  values: NlGNumberArchived_20230417Value[];
-  last_value: NlGNumberArchived_20230417Value;
+export interface NlGNumber {
+  values: NlGNumberValue[];
+  last_value: NlGNumberValue;
 }
-export interface NlGNumberArchived_20230417Value {
+export interface NlGNumberValue {
   g_number: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -453,11 +453,11 @@ export interface NlIntensiveCareNicePerAgeGroupValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlTestedOverallArchived_20230417 {
-  values: NlTestedOverallArchived_20230417Value[];
-  last_value: NlTestedOverallArchived_20230417Value;
+export interface NlTestedOverall {
+  values: NlTestedOverallValue[];
+  last_value: NlTestedOverallValue;
 }
-export interface NlTestedOverallArchived_20230417Value {
+export interface NlTestedOverallValue {
   infected: number;
   infected_moving_average: number | null;
   infected_moving_average_rounded: number | null;
@@ -466,11 +466,11 @@ export interface NlTestedOverallArchived_20230417Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlTestedPerAgeGroupArchived_20230417 {
-  values: NlTestedPerAgeGroupArchived_20230417Value[];
-  last_value: NlTestedPerAgeGroupArchived_20230417Value;
+export interface NlTestedPerAgeGroup {
+  values: NlTestedPerAgeGroupValue[];
+  last_value: NlTestedPerAgeGroupValue;
 }
-export interface NlTestedPerAgeGroupArchived_20230417Value {
+export interface NlTestedPerAgeGroupValue {
   infected_age_0_9_per_100k: number;
   infected_age_10_19_per_100k: number;
   infected_age_20_29_per_100k: number;
@@ -559,11 +559,11 @@ export interface NlIntensiveCareLcpsValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlTestedGgdArchived_20230417 {
-  values: NlTestedGgdArchived_20230417Value[];
-  last_value: NlTestedGgdArchived_20230417Value;
+export interface NlTestedGgd {
+  values: NlTestedGgdValue[];
+  last_value: NlTestedGgdValue;
 }
-export interface NlTestedGgdArchived_20230417Value {
+export interface NlTestedGgdValue {
   infected: number;
   infected_moving_average: number | null;
   infected_percentage: number;
