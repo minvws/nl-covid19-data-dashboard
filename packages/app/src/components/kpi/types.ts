@@ -20,7 +20,7 @@ export interface BorderedKpiSectionProps {
   title: string;
 }
 
-export interface MappedKpiContentProps {
+export interface KpiContentProps {
   tile: TileData;
 }
 

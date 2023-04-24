@@ -7,9 +7,9 @@ import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-rang
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils';
-import { MappedKpiContentProps } from '../types';
+import { KpiContentProps } from '../types';
 
-export const MappedKpiContent = ({ tile }: MappedKpiContentProps) => {
+export const KpiContent = ({ tile }: KpiContentProps) => {
   const { commonTexts, formatPercentage } = useIntl();
   const parsedAgePercentage = tile.value ? `${formatPercentage(tile.value)}%` : '-';
   const parsedBirthyearRange = tile.birthyear ? parseBirthyearRange(tile.birthyear) : null;

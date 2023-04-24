@@ -6,7 +6,7 @@ import { KpiTile } from '../kpi-tile';
 import { Metadata, MetadataProps } from '../metadata';
 import { TwoKpiSection } from '../two-kpi-section';
 import { Text } from '../typography';
-import { MappedKpiContent } from './components/mapped-kpi-content';
+import { KpiContent } from './components/kpi-content';
 import { BorderedKpiSectionProps } from './types';
 
 export const BorderedKpiSection = ({ title, description, source, dateUnix, tilesData }: BorderedKpiSectionProps) => {
@@ -19,18 +19,18 @@ export const BorderedKpiSection = ({ title, description, source, dateUnix, tiles
     <KpiTile title={title} hasNoPaddingBottom>
       <Text>{description}</Text>
       <TwoKpiSection spacing={5}>
-        <KpiContent>
+        <KpiContentContainer>
           {tilesData.map((tile, index) => {
-            return <MappedKpiContent key={index} tile={tile} />;
+            <KpiContent key={index} tile={tile} />;
           })}
-        </KpiContent>
+        </KpiContentContainer>
       </TwoKpiSection>
       <Metadata {...metadata} isTileFooter />
     </KpiTile>
   );
 };
 
-const KpiContent = styled(Box)`
+const KpiContentContainer = styled(Box)`
   border: 1px solid ${colors.gray3};
   display: flex;
   flex-direction: column;
