@@ -1,5 +1,4 @@
 import { DifferenceInteger } from '@corona-dashboard/common';
-import { BarType } from '~/pages/landelijk/vaccinaties';
 
 type TileData = {
   description: string;
@@ -24,3 +23,8 @@ export interface BorderedKpiSectionProps {
 export interface MappedKpiContentProps {
   tile: TileData;
 }
+
+export type BarType = {
+  value: number;
+  color: string;
+};

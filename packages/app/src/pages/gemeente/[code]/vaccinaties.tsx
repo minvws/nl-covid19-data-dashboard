@@ -3,23 +3,23 @@ import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { PageInformationBlock, TileList, Divider } from '~/components';
+import { Divider, PageInformationBlock, TileList } from '~/components';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { BarType } from '~/components/kpi/types';
 import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
-import { Layout, GmLayout } from '~/domain/layout';
-import { Languages, SiteText } from '~/locale';
-import { VaccineCoverageToggleTile, VaccineCoveragePerAgeGroup } from '~/domain/vaccine';
+import { emptyCoverageData } from '~/data/gm/vaccinations/empty-coverage-data';
+import { GmLayout, Layout } from '~/domain/layout';
+import { VaccineCoveragePerAgeGroup, VaccineCoverageToggleTile } from '~/domain/vaccine';
+import { VaccineCoverageChoropleth } from '~/domain/vaccine/vaccine-coverage-choropleth';
 import { useIntl } from '~/intl';
+import { Languages, SiteText } from '~/locale';
 import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectGmData, getLokalizeTexts } from '~/static-props/get-data';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { assert, replaceVariablesInText, useReverseRouter, useFormatLokalizePercentage } from '~/utils';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { assert, replaceVariablesInText, useFormatLokalizePercentage, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { VaccineCoverageChoropleth } from '~/domain/vaccine/vaccine-coverage-choropleth';
-import { emptyCoverageData } from '~/data/gm/vaccinations/empty-coverage-data';
-import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
-import { AgeDataType } from '~/pages/landelijk/vaccinaties';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const pageMetrics = ['vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'booster_coverage_archived_20220904'];
 
@@ -30,6 +30,14 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
+
+type AgeDataType = {
+  value: number | null;
+  birthyear: string | null;
+  title: string;
+  description: string;
+  bar: BarType;
+};
 
 type ParsedCoverageData = {
   autumn2022: [AgeDataType, AgeDataType];
