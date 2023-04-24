@@ -3,13 +3,7 @@
   "type": "object",
   "title": "gm_collection_tested_overall",
   "additionalProperties": false,
-  "required": [
-    "date_unix",
-    "gmcode",
-    "infected",
-    "infected_per_100k",
-    "date_of_insertion_unix"
-  ],
+  "required": ["date_unix", "gmcode", "infected", "infected_per_100k", "date_of_insertion_unix"],
   "properties": {
     "date_unix": {
       "type": "integer"
