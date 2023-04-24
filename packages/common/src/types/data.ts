@@ -15,7 +15,7 @@ export interface Gm {
   deceased_rivm_archived_20221231: GmDeceasedRivmArchived_20221231;
   difference: GmDifference;
   hospital_nice: GmHospitalNice;
-  tested_overall: NlTestedOverall;
+  tested_overall: GmTestedOverall;
   sewer: GmSewer;
   sewer_per_installation?: GmSewerPerInstallation;
   vaccine_coverage_per_age_group: GmVaccineCoveragePerAgeGroup;
@@ -68,11 +68,11 @@ export interface GmHospitalNiceValue {
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
-export interface NlTestedOverall {
-  values: NlTestedOverallValue[];
-  last_value: NlTestedOverallValue;
+export interface GmTestedOverall {
+  values: GmTestedOverallValue[];
+  last_value: GmTestedOverallValue;
 }
-export interface NlTestedOverallValue {
+export interface GmTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_moving_average: number | null;
