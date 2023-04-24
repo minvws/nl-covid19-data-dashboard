@@ -832,3 +832,5 @@ timestamp,action,key,document_id,move_to
 2023-04-20T10:43:54.501Z,move,pages.variants_page.shared.varianten_tabel.verschil.gelijk,JtApmkyAs5Fi3aTDSuAEoV,pages.variants_page.nl.varianten_tabel.verschil.gelijk
 2023-04-20T10:43:54.501Z,move,pages.variants_page.shared.varianten_tabel.verschil.meer,4AqTI8FFRhehh0HHQUZG6W,pages.variants_page.nl.varianten_tabel.verschil.meer
 2023-04-20T10:43:54.502Z,move,pages.variants_page.shared.varianten_tabel.verschil.minder,4AqTI8FFRhehh0HHQUZH3S,pages.variants_page.nl.varianten_tabel.verschil.minder
+2023-04-24T11:17:35.869Z,delete,pages.positive_tests_page.shared.belangrijk_bericht,mt9hMqvnezW3fDtFvfvcu2,__
+2023-04-24T11:33:18.199Z,add,pages.positive_tests_page.shared.warning,AjemcWg1mce4pN4WDfY5e3,__

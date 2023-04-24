@@ -2,13 +2,13 @@ import { colors, NlTestedOverallValue, TimeframeOption, TimeframeOptionsList } f
 import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
+import { WarningTile } from '~/components';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { Divider } from '~/components/divider';
 import { InView } from '~/components/in-view';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -33,7 +33,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-const pageMetrics = ['g_number', 'self_test_overall', 'tested_ggd', 'tested_overall', 'tested_per_age_group'];
+const pageMetrics = ['g_number', 'tested_ggd', 'tested_overall', 'tested_per_age_group'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -52,7 +52,6 @@ export const getStaticProps = createGetStaticProps(
     'difference.tested_overall__infected_moving_average',
     'difference.tested_overall__infected_per_100k_moving_average',
     'g_number',
-    'self_test_overall',
     'tested_ggd',
     'tested_overall',
     'tested_per_age_group'
@@ -68,7 +67,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('positive_tests_page')},
-        "elements": ${getElementsQuery('nl', ['tested_overall', 'tested_ggd', 'tested_per_age_group', 'self_test_overall'], locale)}
+        "elements": ${getElementsQuery('nl', ['tested_overall', 'tested_ggd', 'tested_per_age_group'], locale)}
       }`;
     })(context);
     return {
@@ -94,7 +93,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
-  const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
 
   const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -127,7 +125,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.development_of_the_virus.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={commonTexts.sidebar.metrics.positive_tests.title}
             title={textNl.titel}
             icon={<GgdTesten aria-hidden="true" />}
@@ -141,6 +139,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             referenceLink={textNl.reference.href}
             articles={content.articles}
           />
+
+          {!!textShared.warning && <WarningTile isFullWidth message={textShared.warning} variant="informational" />}
 
           <ChartTile
             title={textNl.linechart_titel}
@@ -344,20 +344,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             </ChoroplethTile>
           </InView>
 
-          <Divider />
-
-          <PageInformationBlock
-            title={textNl.section_archived.title}
-            description={textNl.section_archived.description}
-            isArchivedHidden={hasHideArchivedCharts}
-            onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
-          />
-
-          {hasHideArchivedCharts && (
-            <InView rootMargin="400px">
-              <GNumberBarChartTile data={data.g_number} />
-            </InView>
-          )}
+          <InView rootMargin="400px">
+            <GNumberBarChartTile data={data.g_number} />
+          </InView>
         </TileList>
       </NlLayout>
     </Layout>
