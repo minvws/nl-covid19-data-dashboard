@@ -28,7 +28,7 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { InfectedLocationsTile } from '~/domain/vulnerable-groups/infected-locations-tile';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 
 const pageMetrics = [
   'difference.nursing_home__deceased_daily_archived_20230126',
@@ -153,7 +153,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             </KpiTile>
           </TwoKpiSection>
 
-          <InfectedLocationsTile
+          <BorderedKpiSection
             title={textNl.kpi_tiles.infected_locations.title}
             description={textNl.kpi_tiles.infected_locations.description}
             source={infectedLocationsText.bronnen.rivm}

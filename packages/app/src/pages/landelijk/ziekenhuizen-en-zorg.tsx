@@ -4,11 +4,11 @@ import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { HospitalsTile } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
@@ -130,7 +130,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <HospitalsTile
+          <BorderedKpiSection
             title={textNl.kpi_tiles.occupancies.title}
             description={textNl.kpi_tiles.occupancies.description}
             source={textNl.sources.lnaz}
@@ -255,7 +255,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          <HospitalsTile
+          <BorderedKpiSection
             title={textNl.kpi_tiles.influxes.title}
             description={textNl.kpi_tiles.influxes.description}
             source={textNl.sources.lnaz}

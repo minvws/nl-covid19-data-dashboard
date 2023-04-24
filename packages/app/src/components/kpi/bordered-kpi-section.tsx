@@ -1,10 +1,25 @@
-import { AgeDataType, BarType } from '~/pages/landelijk/vaccinaties';
-import { DifferenceInteger } from '@corona-dashboard/common';
+import { BarType } from '~/pages/landelijk/vaccinaties';
+import { colors, DifferenceInteger } from '@corona-dashboard/common';
 import { Metadata, MetadataProps } from '../metadata';
 import { KpiTile } from '../kpi-tile';
 import { Text } from '../typography';
-import { KpiContent } from '~/domain/vulnerable-groups/infected-locations-tile';
 import { TwoKpiSection } from '../two-kpi-section';
+import { Box } from '~/components/base';
+import { BoldText } from '~/components/typography';
+import { mediaQueries, space } from '~/style/theme';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
+import styled from 'styled-components';
+
+type TileData = {
+  title: string;
+  description: string;
+  absoluteValue: number | null;
+  differenceValue?: DifferenceInteger;
+  value?: number | null;
+  birthyear?: string | null;
+  bar?: BarType;
+};
 
 interface BorderedKpiSectionProps {
   title: string;
@@ -14,17 +29,10 @@ interface BorderedKpiSectionProps {
     href: string;
   };
   dateUnix: number;
-  tilesData: [TileData, TileData] | [AgeDataType, AgeDataType];
+  tilesData: [TileData, TileData];
 }
 
-type TileData = {
-  title: string;
-  description: string;
-  absoluteValue: number | null;
-  differenceValue?: DifferenceInteger;
-};
-
-export const BorderKpiSection = ({ title, description, source, dateUnix, tilesData }: BorderKpiSectionProps) => {
+export const BorderedKpiSection = ({ title, description, source, dateUnix, tilesData }: BorderedKpiSectionProps) => {
   const metadata: MetadataProps = {
     date: dateUnix,
     source: source,
@@ -36,7 +44,7 @@ export const BorderKpiSection = ({ title, description, source, dateUnix, tilesDa
       <TwoKpiSection spacing={5}>
         <KpiContent>
           {tilesData.map((tile, index) => {
-            return <MappedContent key={index} />;
+            return <MappedContent key={index} tile={tile} />;
           })}
         </KpiContent>
       </TwoKpiSection>
@@ -46,9 +54,33 @@ export const BorderKpiSection = ({ title, description, source, dateUnix, tilesDa
 };
 
 interface MappedContentProps {
-  tile: TileData | AgeDataType;
+  tile: TileData;
 }
 
-const MappedContent = ({ tile }) => {
-  return <div>test</div>;
+// check if we can use something more specific than key index
+
+const MappedContent = ({ tile }: MappedContentProps) => {
+  return (
+    <Box>
+      <BoldText>{tile.title}</BoldText>
+      <Box paddingTop={space[3]} paddingBottom={tile?.differenceValue ? space[1] : space[3]}>
+        <KpiValue absolute={tile.absoluteValue} difference={tile.differenceValue} isAmount />
+      </Box>
+      <Markdown content={tile.description} />
+    </Box>
+  );
 };
+
+const KpiContent = styled(Box)`
+  border: 1px solid ${colors.gray3};
+  display: flex;
+  flex-direction: column;
+  gap: ${space[5]};
+  justify-content: space-between;
+  padding: 24px ${space[3]};
+
+  @media ${mediaQueries.sm} {
+    flex-direction: row;
+    padding: 24px;
+  }
+`;
