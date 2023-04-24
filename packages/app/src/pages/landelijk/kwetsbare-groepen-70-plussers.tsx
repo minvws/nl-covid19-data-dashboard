@@ -160,13 +160,13 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             dateUnix={nursinghomeDataLastValue.date_unix}
             tilesData={[
               {
-                absoluteValue: nursinghomeDataLastValue.infected_locations_total,
+                value: nursinghomeDataLastValue.infected_locations_total,
                 differenceValue: data.difference.vulnerable_nursing_home__infected_locations_total,
                 title: infectedLocationsText.kpi_titel,
                 description: infectedLocationsText.kpi_toelichting,
               },
               {
-                absoluteValue: nursinghomeDataLastValue.newly_infected_locations,
+                value: nursinghomeDataLastValue.newly_infected_locations,
                 title: infectedLocationsText.barscale_titel,
                 description: infectedLocationsText.barscale_toelichting,
               },

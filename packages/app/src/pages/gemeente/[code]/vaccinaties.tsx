@@ -7,8 +7,7 @@ import { PageInformationBlock, TileList, Divider } from '~/components';
 import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
 import { Layout, GmLayout } from '~/domain/layout';
 import { Languages, SiteText } from '~/locale';
-import { VaccineCoverageToggleTile, VaccineCoveragePerAgeGroup, VaccineCoverageTile } from '~/domain/vaccine';
-import { AgeDataType } from '~/domain/vaccine/vaccine-coverage-tile/vaccine-coverage-tile';
+import { VaccineCoverageToggleTile, VaccineCoveragePerAgeGroup } from '~/domain/vaccine';
 import { useIntl } from '~/intl';
 import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
@@ -19,6 +18,8 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { VaccineCoverageChoropleth } from '~/domain/vaccine/vaccine-coverage-choropleth';
 import { emptyCoverageData } from '~/data/gm/vaccinations/empty-coverage-data';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { AgeDataType } from '~/pages/landelijk/vaccinaties';
 
 const pageMetrics = ['vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'booster_coverage_archived_20220904'];
 
@@ -187,19 +188,19 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             warning={textGm.warning}
           />
           {filteredVaccination.autumn2022.birthyear_range_60_plus && (
-            <VaccineCoverageTile
+            <BorderedKpiSection
               title={textShared.vaccination_grade_tile.autumn_labels.title}
               description={textShared.vaccination_grade_tile.autumn_labels.description}
               source={textShared.vaccination_grade_tile.autumn_labels.source}
-              coverageData={parsedVaccineCoverageData.autumn2022}
+              tilesData={parsedVaccineCoverageData.autumn2022}
               dateUnix={filteredVaccination.autumn2022.date_unix}
             />
           )}
-          <VaccineCoverageTile
+          <BorderedKpiSection
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
             description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
             source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
-            coverageData={parsedVaccineCoverageData.primarySeries}
+            tilesData={parsedVaccineCoverageData.primarySeries}
             dateUnix={filteredVaccination.primarySeries.date_unix}
           />
           <VaccineCoverageChoropleth

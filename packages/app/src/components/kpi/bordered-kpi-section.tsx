@@ -10,11 +10,14 @@ import { mediaQueries, space } from '~/style/theme';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import styled from 'styled-components';
+import { useIntl } from '~/intl';
+import { Bar } from '~/domain/vaccine/components/bar';
+import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 type TileData = {
   title: string;
   description: string;
-  absoluteValue: number | null;
   differenceValue?: DifferenceInteger;
   value?: number | null;
   birthyear?: string | null;
@@ -57,16 +60,42 @@ interface MappedContentProps {
   tile: TileData;
 }
 
-// check if we can use something more specific than key index
-
 const MappedContent = ({ tile }: MappedContentProps) => {
+  const { commonTexts, formatPercentage } = useIntl();
+
+  const parsedAgePercentage = tile.value ? `${formatPercentage(tile.value)}%` : '-';
+
+  const parsedBirthyearRange = tile.birthyear ? parseBirthyearRange(tile.birthyear) : null;
+
   return (
     <Box>
       <BoldText>{tile.title}</BoldText>
-      <Box paddingTop={space[3]} paddingBottom={tile?.differenceValue ? space[1] : space[3]}>
-        <KpiValue absolute={tile.absoluteValue} difference={tile.differenceValue} isAmount />
+
+      <Box paddingTop={space[3]} paddingBottom={tile.differenceValue ? space[1] : space[3]}>
+        <KpiValue
+          absolute={tile.differenceValue ? tile.value : null}
+          difference={tile.differenceValue || undefined}
+          isAmount={!!tile.differenceValue}
+          text={tile.value ? parsedAgePercentage : undefined}
+          color={tile?.bar?.color}
+        />
       </Box>
-      <Markdown content={tile.description} />
+
+      {tile.bar && (
+        <Box paddingTop={space[2]} paddingBottom={space[3]}>
+          <Bar value={tile.bar.value} color={tile.bar.color} height={12} />
+        </Box>
+      )}
+
+      <Markdown
+        content={
+          parsedBirthyearRange
+            ? replaceVariablesInText(tile.description, {
+                birthyear: replaceVariablesInText(commonTexts.common.birthyear_ranges[parsedBirthyearRange.type], parsedBirthyearRange),
+              })
+            : tile.description
+        }
+      />
     </Box>
   );
 };
