@@ -1,3 +1,15 @@
 timestamp,action,key,document_id,move_to
+2023-04-18T12:24:12.257Z,add,pages.nursing_home_page.nl.kpi_tiles.infected_locations.description,7vN07KKSG21T7lMrXMAnxF,__
+2023-04-18T12:24:13.480Z,add,pages.nursing_home_page.nl.kpi_tiles.infected_locations.title,7vN07KKSG21T7lMrXMAoen,__
+2023-04-18T14:26:50.233Z,delete,pages.nursing_home_page.shared.70_plussers.datums,1LEvf83WwpdD9f7O5q4bDV,__
+2023-04-18T14:26:50.237Z,delete,pages.nursing_home_page.shared.70_plussers.pagina_toelichting,say0BNKaNSuhganBiQ6xl0,__
+2023-04-18T14:26:50.239Z,delete,pages.nursing_home_page.shared.70_plussers.positive_tested.kpi_titel,SGLLM2515ZQaKRGBsQuiqa,__
+2023-04-18T14:26:50.241Z,delete,pages.nursing_home_page.shared.70_plussers.positive_tested.kpi_toelichting,say0BNKaNSuhganBiQ6rjf,__
+2023-04-18T14:26:50.243Z,delete,pages.nursing_home_page.shared.70_plussers.reference.href,AE5jpq5sZWNgXeEUcVU4hL,__
+2023-04-18T14:26:50.246Z,delete,pages.nursing_home_page.shared.70_plussers.titel,AE5jpq5sZWNgXeEUcVU5qZ,__
+2023-04-18T14:26:50.248Z,delete,pages.nursing_home_page.shared.verpleeghuis_besmette_locaties.datums,jF33EuwumlGuwav2FD3bqe,__
+2023-04-18T14:26:50.250Z,delete,pages.nursing_home_page.shared.verpleeghuis_besmette_locaties.pagina_toelichting,jF33EuwumlGuwav2FD3bxM,__
+2023-04-18T14:26:50.252Z,delete,pages.nursing_home_page.shared.verpleeghuis_besmette_locaties.reference.href,jF33EuwumlGuwav2FD3cMW,__
+2023-04-18T14:26:50.254Z,delete,pages.nursing_home_page.shared.verpleeghuis_besmette_locaties.titel,jF33EuwumlGuwav2FD3bvg,__
 2023-04-24T11:17:35.869Z,delete,pages.positive_tests_page.shared.belangrijk_bericht,mt9hMqvnezW3fDtFvfvcu2,__
 2023-04-24T11:33:18.199Z,add,pages.positive_tests_page.shared.warning,AjemcWg1mce4pN4WDfY5e3,__

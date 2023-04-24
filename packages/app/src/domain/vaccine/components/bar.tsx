@@ -18,10 +18,8 @@ interface BarProps {
 
 export function Bar({ value, color, backgroundColor = colors.gray2, label, height = 8, showAxisValues }: BarProps) {
   const parsedVaccinatedLabel = isPresent(label) ? parseVaccinatedPercentageLabel(label) : undefined;
-
   const barValue = isPresent(parsedVaccinatedLabel) ? parsedVaccinatedLabel.value : value ?? 0;
   const barValueSign = isPresent(parsedVaccinatedLabel) ? parsedVaccinatedLabel.sign : '';
-
   const { formatPercentage } = useIntl();
 
   return (
@@ -37,6 +35,7 @@ export function Bar({ value, color, backgroundColor = colors.gray2, label, heigh
       ) : (
         <PercentageBar percentage={barValue} height={height} color={color} backgroundColor={backgroundColor} />
       )}
+
       {showAxisValues && (
         <Box display="flex" flexDirection="row" position="relative" paddingTop={space[1]}>
           <InlineText variant="label1" color="gray7">
