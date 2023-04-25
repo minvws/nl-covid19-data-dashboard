@@ -4,11 +4,11 @@ import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { HospitalsTile } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
@@ -130,20 +130,20 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <HospitalsTile
+          <BorderedKpiSection
             title={textNl.kpi_tiles.occupancies.title}
             description={textNl.kpi_tiles.occupancies.description}
             source={textNl.sources.lnaz}
             dateUnix={mostRecentDateUnix}
             tilesData={[
               {
-                absoluteValue: hospitalLastValue.beds_occupied_covid,
+                value: hospitalLastValue.beds_occupied_covid,
                 differenceValue: data.difference.hospital_lcps__beds_occupied_covid,
                 title: textNl.kpi_tiles.occupancies.hospital.title,
                 description: textNl.kpi_tiles.occupancies.hospital.description,
               },
               {
-                absoluteValue: icuLastValue.beds_occupied_covid,
+                value: icuLastValue.beds_occupied_covid,
                 differenceValue: data.difference.intensive_care_lcps__beds_occupied_covid,
                 title: textNl.kpi_tiles.occupancies.icu.title,
                 description: textNl.kpi_tiles.occupancies.icu.description,
@@ -255,19 +255,19 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          <HospitalsTile
+          <BorderedKpiSection
             title={textNl.kpi_tiles.influxes.title}
             description={textNl.kpi_tiles.influxes.description}
             source={textNl.sources.lnaz}
             dateUnix={mostRecentDateUnix}
             tilesData={[
               {
-                absoluteValue: hospitalLastValue.influx_covid_patients,
+                value: hospitalLastValue.influx_covid_patients,
                 title: textNl.kpi_tiles.influxes.hospital.title,
                 description: textNl.kpi_tiles.influxes.hospital.description,
               },
               {
-                absoluteValue: icuLastValue.influx_covid_patients,
+                value: icuLastValue.influx_covid_patients,
                 title: textNl.kpi_tiles.influxes.icu.title,
                 description: textNl.kpi_tiles.influxes.icu.description,
               },

@@ -12,7 +12,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { AdmissionsPerAgeGroup } from '~/domain/hospital';
+import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group/admissions-per-age-group';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
