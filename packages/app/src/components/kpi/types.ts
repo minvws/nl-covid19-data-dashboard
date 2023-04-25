@@ -1,6 +1,6 @@
 import { DifferenceInteger } from '@corona-dashboard/common';
 
-type TileData = {
+export type TileData = {
   description: string;
   title: string;
   value: number | null;
