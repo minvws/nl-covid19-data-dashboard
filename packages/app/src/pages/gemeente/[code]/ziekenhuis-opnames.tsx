@@ -22,7 +22,6 @@ const pageMetrics = ['hospital_nice'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textGm: siteText.pages.hospital_page.gm,
-  textShared: siteText.pages.hospital_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -67,7 +66,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
 
-  const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textGm } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const lastValue = data.hospital_nice.last_value;
   const lastValueChoropleth = last(choropleth.gm.hospital_nice_choropleth) || lastValue;
@@ -183,7 +182,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             }}
             description={textGm.map_toelichting}
             legend={{
-              title: textShared.chloropleth_legenda.titel,
+              title: textGm.chloropleth_legenda.titel,
               thresholds: thresholds.gm.admissions_on_date_of_admission,
             }}
           >

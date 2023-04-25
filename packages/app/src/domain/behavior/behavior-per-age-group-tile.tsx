@@ -26,7 +26,7 @@ interface BehaviorPerAgeGroupProps {
   data: NlBehaviorPerAgeGroup;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
-  text: Pick<SiteText['pages']['behavior_page'], 'nl' | 'shared'>;
+  text: SiteText['pages']['behavior_page']['nl'];
   metadata: MetadataProps;
 }
 
@@ -48,11 +48,11 @@ export const BehaviorPerAgeGroup = ({ title, description, data, currentId, setCu
       id: `${age.ageGroup}-${index}`,
       firstPercentage: complianceValue?.[age.ageGroup] ?? null,
       secondPercentage: supportValue?.[age.ageGroup] ?? null,
-      firstColumnLabel: <AgeGroup range={text.shared.leeftijden.tabel[age.ageGroup]} birthYearRange={age.birthYearRange} />,
+      firstColumnLabel: <AgeGroup range={text.leeftijden.tabel[age.ageGroup]} birthYearRange={age.birthYearRange} />,
     };
   });
 
-  const percentageTitles = { first: text.shared.basisregels.rules_followed, second: text.shared.basisregels.rules_supported };
+  const percentageTitles = { first: text.basisregels.rules_followed, second: text.basisregels.rules_supported };
   const percentageColors = { first: colors.blue6, second: colors.yellow3 };
   const percentageFormattingRules = { first: { shouldFormat: true }, second: { shouldFormat: true } };
   const percentageData = useGetPercentageData(requiredData, percentageTitles, percentageColors, percentageFormattingRules);
@@ -61,7 +61,7 @@ export const BehaviorPerAgeGroup = ({ title, description, data, currentId, setCu
     <ChartTile title={title} description={description} metadata={metadata}>
       <Box spacing={4} width="100%">
         <Box paddingRight={space[3]} width={breakpoints.lg ? '50%' : '100%'}>
-          <SelectBehavior label={text.nl.select_behaviour_label} value={currentId} onChange={setCurrentId} />
+          <SelectBehavior label={text.select_behaviour_label} value={currentId} onChange={setCurrentId} />
         </Box>
 
         <Box overflow="auto">
@@ -69,20 +69,20 @@ export const BehaviorPerAgeGroup = ({ title, description, data, currentId, setCu
             breakpoints.lg ? (
               <WideTable
                 headerText={{
-                  firstColumn: text.shared.leeftijden.tabel.age_group,
-                  secondColumn: text.shared.basisregels.rules_followed,
-                  thirdColumn: text.shared.basisregels.rules_supported,
-                  fourthColumn: text.shared.basisregels.percentage_bar_column_header,
+                  firstColumn: text.leeftijden.tabel.age_group,
+                  secondColumn: text.basisregels.rules_followed,
+                  thirdColumn: text.basisregels.rules_supported,
+                  fourthColumn: text.basisregels.percentage_bar_column_header,
                 }}
                 tableData={requiredData}
                 percentageData={percentageData}
               />
             ) : (
-              <NarrowTable headerText={text.nl.tabel_per_leeftijdsgroep.narrow_table_header} tableData={requiredData} percentageData={percentageData} />
+              <NarrowTable headerText={text.tabel_per_leeftijdsgroep.narrow_table_header} tableData={requiredData} percentageData={percentageData} />
             )
           ) : (
             <Box display="flex" alignItems="center" minHeight="325px" maxWidth="300px" width="100%" marginX="auto">
-              <Text textAlign="center">{text.shared.leeftijden.tabel.error}</Text>
+              <Text textAlign="center">{text.leeftijden.tabel.error}</Text>
             </Box>
           )}
         </Box>

@@ -154,7 +154,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   const variables = {
-    regio: commonTexts.choropleth.choropleth_vaccination_coverage.shared.gm,
+    regio: commonTexts.choropleth.choropleth_vaccination_coverage.nl,
   };
 
   return (

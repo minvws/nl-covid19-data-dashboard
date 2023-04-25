@@ -33,7 +33,6 @@ const pageMetrics = [
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.hospitals_and_care_page.nl,
-  textShared: siteText.pages.hospitals_and_care_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;

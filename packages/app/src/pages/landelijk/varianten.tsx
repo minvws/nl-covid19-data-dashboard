@@ -21,7 +21,6 @@ const pageMetrics = ['variants', 'named_difference'];
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.variants_page.nl,
-  textShared: siteText.pages.variants_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -61,7 +60,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
   const { pageText, selectedNlData: data, lastGenerated, content, variantTable, variantChart, variantColors, dates } = props;
 
   const { commonTexts } = useIntl();
-  const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -114,7 +113,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
           <VariantsTableTile
             data={variantTable}
             text={{
-              ...textShared.varianten_tabel,
+              ...textNl.varianten_tabel,
               variantCodes: commonTexts.variant_codes,
               description: textNl.varianten_omschrijving,
             }}

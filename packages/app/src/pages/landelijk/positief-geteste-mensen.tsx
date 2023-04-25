@@ -179,8 +179,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               ]}
               dataOptions={{
                 outOfBoundsConfig: {
-                  label: textShared.labels.infected_out_of_bounds,
-                  tooltipLabel: textShared.tooltip_labels.annotations,
+                  label: textNl.labels.infected_out_of_bounds,
+                  tooltipLabel: textNl.tooltip_labels.annotations,
                   checkIsOutofBounds: (x: NlTestedOverallValue, max: number) => x.infected > max,
                 },
                 timelineEvents: getTimelineEvents(content.elements.timeSeries, 'tested_overall'),
@@ -222,7 +222,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                       metricProperty: 'infected_percentage_moving_average',
                       color: colors.primary,
                       label: textNl.ggd.linechart_percentage_legend_label,
-                      shortLabel: textShared.tooltip_labels.ggd_infected_percentage_moving_average,
+                      shortLabel: textNl.tooltip_labels.ggd_infected_percentage_moving_average,
                     },
                   ]}
                   dataOptions={{
@@ -263,14 +263,14 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                       metricProperty: 'tested_total_moving_average',
                       color: colors.secondary,
                       label: textNl.ggd.linechart_totaltests_legend_label_moving_average,
-                      shortLabel: textShared.tooltip_labels.ggd_tested_total_moving_average__renamed,
+                      shortLabel: textNl.tooltip_labels.ggd_tested_total_moving_average__renamed,
                     },
                     {
                       type: 'line',
                       metricProperty: 'infected_moving_average',
                       color: colors.primary,
                       label: textNl.ggd.linechart_positivetests_legend_label_moving_average,
-                      shortLabel: textShared.tooltip_labels.infected_moving_average,
+                      shortLabel: textNl.tooltip_labels.infected_moving_average,
                     },
                   ]}
                 />
@@ -280,8 +280,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
           <InView rootMargin="400px">
             <ChartTile
-              title={textShared.infected_per_age_group.title}
-              description={textShared.infected_per_age_group.description}
+              title={textNl.infected_per_age_group.title}
+              description={textNl.infected_per_age_group.description}
               timeframeOptions={TimeframeOptionsList}
               metadata={{
                 source: textNl.bronnen.rivm,
@@ -295,7 +295,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 values={data.tested_per_age_group.values}
                 timeframe={confirmedCasesInfectedPerAgeTimeframe}
                 timelineEvents={getTimelineEvents(content.elements.timeSeries, 'tested_per_age_group')}
-                text={textShared}
+                text={textNl}
               />
             </ChartTile>
           </InView>
@@ -319,7 +319,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 </>
               }
               legend={{
-                title: textShared.chloropleth_legenda.titel,
+                title: textShared.chloropleth_legenda_titel,
                 thresholds: thresholds.gm.infected_per_100k,
               }}
             >

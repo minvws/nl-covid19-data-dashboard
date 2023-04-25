@@ -70,7 +70,7 @@ export function NlLayout(props: NlLayoutProps) {
 
             <Box paddingX={space[3]}>
               <Heading level={2} variant={'h3'}>
-                {commonTexts.sidebar.shared.nl_title}
+                {commonTexts.sidebar.nl.title}
               </Heading>
             </Box>
 

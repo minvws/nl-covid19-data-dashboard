@@ -236,7 +236,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               }
               legend={{
                 thresholds: thresholds.gm.infected_per_100k,
-                title: textShared.chloropleth_legenda.titel,
+                title: textShared.chloropleth_legenda_titel,
               }}
               metadata={{
                 date: lastValue.date_unix,
