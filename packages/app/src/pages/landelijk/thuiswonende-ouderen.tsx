@@ -33,7 +33,6 @@ const pageMetrics = ['elderly_at_home'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-  textShared: siteText.pages.elderly_at_home_page.shared,
   textNl: siteText.pages.elderly_at_home_page.nl,
 });
 
@@ -80,7 +79,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
   const elderlyAtHomeDeceasedUnderReportedRange = getBoundaryDateStartUnix(elderlyAtHomeData.values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
-  const { metadataTexts, textShared, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -90,7 +89,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
-  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+  const hasActiveWarningTile = !!textNl.belangrijk_bericht;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -112,7 +111,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile

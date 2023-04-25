@@ -95,31 +95,31 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.development_of_the_virus.title}
-            title={textShared.section_sterftemonitor.title}
+            title={textNl.section_sterftemonitor.title}
             icon={<Coronavirus />}
-            description={textShared.section_sterftemonitor.description}
-            referenceLink={textShared.section_sterftemonitor.reference.href}
+            description={textNl.section_sterftemonitor.description}
+            referenceLink={textNl.section_sterftemonitor.reference.href}
             metadata={{
-              datumsText: textShared.section_sterftemonitor.datums,
+              datumsText: textNl.section_sterftemonitor.datums,
               dateOrRange: {
                 start: dataCbs.last_value.date_start_unix,
                 end: dataCbs.last_value.date_end_unix,
               },
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
-              dataSources: [textShared.section_sterftemonitor.bronnen.cbs],
+              dataSources: [textNl.section_sterftemonitor.bronnen.cbs],
             }}
             articles={content.monitorArticles}
           />
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="informational" />}
 
-          <DeceasedMonitorSection data={dataCbs} text={textShared.section_sterftemonitor} showCauseMessage />
+          <DeceasedMonitorSection data={dataCbs} text={textNl.section_sterftemonitor} showCauseMessage />
 
           <Divider />
 
           <PageInformationBlock
-            title={textShared.section_archived.title}
-            description={textShared.section_archived.description}
+            title={textNl.section_archived.title}
+            description={textNl.section_archived.description}
             isArchivedHidden={isArchivedContentShown}
             onToggleArchived={() => setIsArchivedContentShown(!isArchivedContentShown)}
           />
@@ -201,11 +201,11 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               </ChartTile>
 
               <ChartTile
-                title={textShared.age_groups.title}
-                description={textShared.age_groups.description}
+                title={textNl.age_groups.title}
+                description={textNl.age_groups.description}
                 metadata={{
                   date: lastdeceasedPerAgeGroupInsertionDate,
-                  source: textShared.age_groups.bronnen.rivm,
+                  source: textNl.age_groups.bronnen.rivm,
                 }}
               >
                 <AgeDemographic
@@ -218,7 +218,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                   rightColor={colors.primary}
                   leftColor={colors.neutral}
                   maxDisplayValue={60}
-                  text={textShared.age_groups.graph}
+                  text={textNl.age_groups.graph}
                   formatValue={(a: number) => `${formatPercentage(a * 100)}%`}
                 />
               </ChartTile>
