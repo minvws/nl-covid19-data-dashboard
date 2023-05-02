@@ -12,18 +12,15 @@ import { GappedAreaSeriesDefinition } from '~/components/time-series-chart/logic
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { SiteText } from '~/locale';
 import { useList } from '~/utils/use-list';
-import { ColorMatch, VariantCode } from '~/domain/variants/static-props';
+import { ColorMatch } from '~/domain/variants/static-props';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 import { space } from '~/style/theme';
-
-type VariantsStackedAreaTileText = {
-  variantCodes: SiteText['common']['variant_codes'];
-} & SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
+import { useRouter } from 'next/router';
 
 const alwaysEnabled: (keyof VariantChartValue)[] = [];
 
 interface VariantsStackedAreaTileProps {
-  text: VariantsStackedAreaTileText;
+  text: SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
   values: VariantChartValue[];
   metadata: MetadataProps;
   variantColors: ColorMatch[];
@@ -128,7 +125,9 @@ const useFilteredSeriesConfig = (
   }, [seriesConfig, otherConfig, compareList]);
 };
 
-const useSeriesConfig = (text: VariantsStackedAreaTileText, values: VariantChartValue[], variantColors: ColorMatch[]) => {
+const useSeriesConfig = (text: SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'], values: VariantChartValue[], variantColors: ColorMatch[]) => {
+  const { locale = 'nl' } = useRouter();
+
   return useMemo(() => {
     const baseVariantsFiltered = values
       .flatMap((x) => Object.keys(x))
@@ -140,7 +139,7 @@ const useSeriesConfig = (text: VariantsStackedAreaTileText, values: VariantChart
     const seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[] = baseVariantsFiltered.map((variantKey) => {
       const variantCodeFragments = variantKey.split('_');
       variantCodeFragments.pop();
-      const variantCode = variantCodeFragments.join('_') as VariantCode;
+      const variantCode = variantCodeFragments.join('_');
 
       const color = variantColors.find((variantColors) => variantColors.variant === variantCode)?.color || colors.gray5;
 
@@ -148,7 +147,7 @@ const useSeriesConfig = (text: VariantsStackedAreaTileText, values: VariantChart
         type: 'gapped-area',
         metricProperty: variantKey as keyof VariantChartValue,
         color,
-        label: text.variantCodes[variantCode],
+        label: locale === 'en' ? 'label_en' : 'label_nl',
         shape: 'gapped-area',
         strokeWidth: 2,
         fillOpacity: 0.2,

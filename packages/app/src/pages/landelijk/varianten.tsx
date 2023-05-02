@@ -36,12 +36,11 @@ export const getStaticProps = createGetStaticProps(
       selectedNlData: { variants },
     } = data;
 
-    const variantColors = getVariantOrderColors(variants);
+    // const variantColors = getVariantOrderColors(variants);
 
     return {
       ...getVariantTableData(variants, data.selectedNlData.named_difference, variantColors),
       ...getVariantChartData(variants),
-      variantColors,
     };
   },
   async (context: GetStaticPropsContext) => {
@@ -96,10 +95,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
 
           {variantChart && (
             <VariantsStackedAreaTile
-              text={{
-                ...textNl.varianten_over_tijd_grafiek,
-                variantCodes: commonTexts.variant_codes,
-              }}
+              text={textNl.varianten_over_tijd_grafiek}
               values={variantChart}
               variantColors={variantColors}
               metadata={{
@@ -114,7 +110,6 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             data={variantTable}
             text={{
               ...textNl.varianten_tabel,
-              variantCodes: commonTexts.variant_codes,
               description: textNl.varianten_omschrijving,
             }}
             source={textNl.bronnen.rivm}

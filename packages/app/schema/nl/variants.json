@@ -20,40 +20,13 @@
       "required": ["variant_code", "values", "last_value"],
       "properties": {
         "variant_code": {
-          "type": "string",
-          "enum": [
-            "B_1_1_529",
-            "BA_1",
-            "BA_2",
-            "BA_4",
-            "BA_4_6",
-            "BA_5",
-            "BA_2+S:L452X",
-            "BA_2_12_1",
-            "BA_3",
-            "B_1_617_2",
-            "B_1_351",
-            "P_1",
-            "B_1_1_7",
-            "B_1_621",
-            "C_37",
-            "BA_2_75",
-            "BA_2_75_2",
-            "BF_7",
-            "BQ_1",
-            "BQ_1_1",
-            "XBB",
-            "XBB_1_5",
-            "CH_1_1",
-            "XBB_1_9",
-            "XBB_1_5_1",
-            "XBB_2_3",
-            "XBB_1_9_1",
-            "XBB_1_16",
-            "XBF",
-            "other_table",
-            "other_graph"
-          ]
+          "type": "string"
+        },
+        "label_nl": {
+          "type": "string"
+        },
+        "label_en": {
+          "type": "string"
         },
         "values": {
           "type": "array",
