@@ -2,12 +2,14 @@ import { TrendIcon } from '@corona-dashboard/app/src/domain/topical/types';
 import { SeverityLevel } from '~/components/severity-indicator-tile/types';
 import { IconName as TopicalIcon } from '@corona-dashboard/icons/src/icon-name2filename';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
+import { ImageBlock } from '~/types/cms';
 
 export interface TopicalSanityData {
   topicalConfig: TopicalConfig;
   weeklySummary: WeeklySummary;
   kpiThemes: KpiThemes;
   thermometer: ThermometerConfig;
+  advice: Advice;
 }
 
 interface ThermometerConfig {
@@ -97,3 +99,16 @@ export interface Cta {
   title: string | null;
   href: string | null;
 }
+
+export interface AdviceLink {
+  id: string;
+  linkUrl: string;
+  linkLabel: string;
+}
+
+export type Advice = {
+  title: string;
+  description: PortableTextEntry[];
+  links: AdviceLink[];
+  image: ImageBlock;
+};

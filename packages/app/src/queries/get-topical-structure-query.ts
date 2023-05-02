@@ -92,6 +92,24 @@ export function getTopicalStructureQuery(locale: string) {
             dateEnd
           },
       },
+    },
+    'advice': *[
+      _type == 'advice' && !(_id in path('drafts.**'))
+    ][0]{
+      'title': title.${locale},
+      'description': description.${locale},
+      'links': links[]->{
+        'id': _id,
+        'linkUrl': linkUrl,
+        'linkLabel': linkLabel.${locale},
+      },
+      "image": {
+        ...image,
+        "altText": image.altText.${locale},
+        "asset": {
+          ...image.asset->,
+        }
+      }
     }
   }`;
 
