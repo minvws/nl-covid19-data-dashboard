@@ -102,8 +102,8 @@ export interface Cta {
 
 export interface AdviceLink {
   id: string;
-  linkUrl: string;
-  linkLabel: string;
+  url: string;
+  label: string;
 }
 
 export type Advice = {

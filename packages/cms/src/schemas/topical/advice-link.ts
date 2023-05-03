@@ -8,22 +8,22 @@ export const adviceLink = {
     {
       title: 'Link Label',
       description: 'Het label voor de link.',
-      name: 'linkLabel',
+      name: 'label',
       type: 'localeString',
       validation: REQUIRED,
     },
     {
       title: 'Link URL',
-      description: 'De bestemming van de link. Gebruik altijd relatieve URLs.',
-      name: 'linkUrl',
+      description: 'De bestemming van de link.',
+      name: 'url',
       type: 'string',
       validation: REQUIRED,
     },
   ],
   preview: {
     select: {
-      title: 'linkLabel.nl',
-      subtitle: 'linkUrl',
+      title: 'label.nl',
+      subtitle: 'url',
     },
   },
 };

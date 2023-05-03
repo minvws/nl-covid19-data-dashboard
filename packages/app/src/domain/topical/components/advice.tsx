@@ -1,5 +1,5 @@
 import { colors } from '@corona-dashboard/common';
-import { External } from '@corona-dashboard/icons';
+import { External as ExternalIcon } from '@corona-dashboard/icons';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import styled from 'styled-components';
 import { Box } from '~/components/base/box';
@@ -7,7 +7,7 @@ import { RichContent } from '~/components/cms/rich-content';
 import { SanityImage } from '~/components/cms/sanity-image';
 import { ExternalLink } from '~/components/external-link';
 import { MaxWidth } from '~/components/max-width';
-import { Anchor, Heading } from '~/components/typography';
+import { Heading } from '~/components/typography';
 import { getImageProps } from '~/lib/sanity';
 import type { AdviceLink as AdviceLinkType } from '~/queries/query-types';
 import { fontSizes, fontWeights, mediaQueries, radii, sizes, space } from '~/style/theme';
@@ -32,7 +32,7 @@ export const Advice = ({ title, description, links, image }: AdviceProps) => {
         justifyContent="space-between"
         margin="0"
         paddingX={{ _: space[3], sm: space[4] }}
-        paddingY={{ _: space[4], sm: space[4] }}
+        paddingY={space[4]}
       >
         <Box maxWidth={sizes.maxWidthText}>
           <Heading level={2} variant="h2">
@@ -44,14 +44,12 @@ export const Advice = ({ title, description, links, image }: AdviceProps) => {
           <UnorderedList>
             {links.map((link) => (
               <ListItem key={link.id}>
-                {isInternalUrl(link.linkUrl) ? (
-                  <Link href={link.linkUrl} passHref>
-                    <Anchor>{link.linkLabel}</Anchor>
-                  </Link>
+                {isInternalUrl(link.url) ? (
+                  <Link href={link.url}>{link.label}</Link>
                 ) : (
-                  <ExternalLink href={link.linkUrl}>
-                    {link.linkLabel}
-                    <External />
+                  <ExternalLink href={link.url}>
+                    {link.label}
+                    <ExternalIcon />
                   </ExternalLink>
                 )}
               </ListItem>
@@ -59,7 +57,7 @@ export const Advice = ({ title, description, links, image }: AdviceProps) => {
           </UnorderedList>
         </Box>
 
-        <Box display="flex" justifyContent={{ _: 'center', sm: 'flex-start' }} maxHeight="520px">
+        <Box display="flex" justifyContent={{ _: 'center', sm: 'flex-start' }}>
           <SanityImage {...getImageProps(image, { defaultWidth: '300px' })} />
         </Box>
       </MaxWidth>
@@ -85,8 +83,7 @@ const UnorderedList = styled.ul`
 `;
 
 const ListItem = styled.li`
-  ${Anchor} {
-    // We can style an Anchor here because both Link and ExternalLink render an Anchor
+  a {
     align-items: center;
     background-color: ${colors.white};
     border-radius: ${radii[1]}px;
