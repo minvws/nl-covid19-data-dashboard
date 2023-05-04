@@ -4019,7 +4019,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@corona-dashboard/cms-v3@workspace:packages/cms-v3"
   dependencies:
+    "@sanity/document-internationalization": ^1.1.1
     "@sanity/eslint-config-studio": ^2.0.1
+    "@sanity/ui": ^1.3.2
     "@sanity/vision": ^3.9.0
     "@types/react": ^18.0.25
     "@types/styled-components": ^5.1.26
@@ -4027,6 +4029,7 @@ __metadata:
     prettier: ^2.8.8
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-icons: ^4.8.0
     react-is: ^18.2.0
     sanity: ^3.9.0
     styled-components: ^5.3.9
@@ -4150,6 +4153,13 @@ __metadata:
     react: ^16.8.6 || ^17
   languageName: unknown
   linkType: soft
+
+"@cprecioso/country-flag-emoji@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@cprecioso/country-flag-emoji@npm:1.0.0"
+  checksum: 06e6171d5e2596d502619ae7f232616b3aaa9334e5daf5b52858274f75efed812a46de0b602b48f6907f3ffa36ea145843eb61d0899ba99238270300c11e2ff9
+  languageName: node
+  linkType: hard
 
 "@cspotcode/source-map-support@npm:^0.8.0":
   version: 0.8.1
@@ -6290,6 +6300,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sanity/document-internationalization@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@sanity/document-internationalization@npm:1.1.1"
+  dependencies:
+    "@cprecioso/country-flag-emoji": ^1.0.0
+    "@sanity/color": ^2.1.20
+    "@sanity/icons": ^2.0.0
+    "@sanity/incompatible-plugin": ^1.0.4
+    "@sanity/ui": ^1.0.0
+    "@sanity/uuid": ^3.0.1
+    html-react-parser: ^1.4.12
+    just-omit: ^2.0.1
+    just-safe-get: ^4.0.1
+    just-split: ^3.0.1
+    pinst: ^2.1.6
+    react-fast-compare: ^3.2.0
+    react-twemoji: ^0.5.0
+    twemoji: ^14.0.2
+  peerDependencies:
+    lodash: ^4.0.0
+    react: ^18
+    react-dom: ^18
+    react-router: ^5.0.0
+    react-router-dom: ^5.0.0
+    rxjs: ^7.0.0
+    sanity: ^3.0.0
+    styled-components: ^5.0.0
+  checksum: b74d1953a3ca740e326a5d7340ef678fe119ee41853307f36d862d7d6f818fe19d08020f9b6f4efe26699f14cf05d4e24e8ae22d83c867c59ea1e2ebf090d269
+  languageName: node
+  linkType: hard
+
 "@sanity/eslint-config-studio@npm:^2.0.1":
   version: 2.0.1
   resolution: "@sanity/eslint-config-studio@npm:2.0.1"
@@ -6553,7 +6594,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/icons@npm:^2.2.2, @sanity/icons@npm:^2.3.0":
+"@sanity/icons@npm:^1.3":
+  version: 1.3.10
+  resolution: "@sanity/icons@npm:1.3.10"
+  peerDependencies:
+    react: ^16.9 || ^17 || ^18
+  checksum: 9c606bc60d4edd3873996b34871cb7480b2f8af4175a6828a9ec02b08d75bc9d38eff3678f969a4363c068bd35258b554fb340425eccbc41d1046490a2fadfa6
+  languageName: node
+  linkType: hard
+
+"@sanity/icons@npm:^2.0.0, @sanity/icons@npm:^2.2.2, @sanity/icons@npm:^2.3.0":
   version: 2.3.1
   resolution: "@sanity/icons@npm:2.3.1"
   peerDependencies:
@@ -6664,6 +6714,19 @@ __metadata:
     split2: ^3.2.2
     tar-fs: ^2.1.1
   checksum: 0aa9f2b1dba15a61b4d24d03a06bfb0d328d9f810f867b876e0aaeb1ebc7370cb677a7d840bbf789012b180e6fd29da1d968f0b856c683b533262ed85867fb3d
+  languageName: node
+  linkType: hard
+
+"@sanity/incompatible-plugin@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@sanity/incompatible-plugin@npm:1.0.4"
+  dependencies:
+    "@sanity/icons": ^1.3
+    react-copy-to-clipboard: ^5.1.0
+  peerDependencies:
+    react: ^16.9 || ^17 || ^18
+    react-dom: ^16.9 || ^17 || ^18
+  checksum: 3ca24c2c570a6d9a787eb5314081250481583f286e45a76c03b17b2c2d18caf3fa138bde293d295bf97c561cba30ac931cc00e3fa80bf07a20262a1cddac5730
   languageName: node
   linkType: hard
 
@@ -7205,7 +7268,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/ui@npm:^1.3.0":
+"@sanity/ui@npm:^1.0.0, @sanity/ui@npm:^1.3.0, @sanity/ui@npm:^1.3.2":
   version: 1.3.2
   resolution: "@sanity/ui@npm:1.3.2"
   dependencies:
@@ -15765,6 +15828,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"domhandler@npm:4.3.1, domhandler@npm:^4.2.2":
+  version: 4.3.1
+  resolution: "domhandler@npm:4.3.1"
+  dependencies:
+    domelementtype: ^2.2.0
+  checksum: 4c665ceed016e1911bf7d1dadc09dc888090b64dee7851cccd2fcf5442747ec39c647bb1cb8c8919f8bbdd0f0c625a6bafeeed4b2d656bbecdbae893f43ffaaa
+  languageName: node
+  linkType: hard
+
 "domhandler@npm:^3.3.0":
   version: 3.3.0
   resolution: "domhandler@npm:3.3.0"
@@ -15793,7 +15865,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domutils@npm:^2.4.2, domutils@npm:^2.6.0":
+"domutils@npm:^2.4.2, domutils@npm:^2.6.0, domutils@npm:^2.8.0":
   version: 2.8.0
   resolution: "domutils@npm:2.8.0"
   dependencies:
@@ -16084,6 +16156,13 @@ __metadata:
   version: 2.2.0
   resolution: "entities@npm:2.2.0"
   checksum: 19010dacaf0912c895ea262b4f6128574f9ccf8d4b3b65c7e8334ad0079b3706376360e28d8843ff50a78aabcb8f08f0a32dbfacdc77e47ed77ca08b713669b3
+  languageName: node
+  linkType: hard
+
+"entities@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "entities@npm:3.0.1"
+  checksum: aaf7f12033f0939be91f5161593f853f2da55866db55ccbf72f45430b8977e2b79dbd58c53d0fdd2d00bd7d313b75b0968d09f038df88e308aa97e39f9456572
   languageName: node
   linkType: hard
 
@@ -18334,6 +18413,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fromentries@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "fromentries@npm:1.3.2"
+  checksum: 33729c529ce19f5494f846f0dd4945078f4e37f4e8955f4ae8cc7385c218f600e9d93a7d225d17636c20d1889106fd87061f911550861b7072f53bf891e6b341
+  languageName: node
+  linkType: hard
+
 "fs-constants@npm:^1.0.0":
   version: 1.0.0
   resolution: "fs-constants@npm:1.0.0"
@@ -18360,6 +18446,17 @@ __metadata:
     jsonfile: ^4.0.0
     universalify: ^0.1.0
   checksum: 141b9dccb23b66a66cefdd81f4cda959ff89282b1d721b98cea19ba08db3dcbe6f862f28841f3cf24bb299e0b7e6c42303908f65093cb7e201708e86ea5a8dcf
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:^8.0.1":
+  version: 8.1.0
+  resolution: "fs-extra@npm:8.1.0"
+  dependencies:
+    graceful-fs: ^4.2.0
+    jsonfile: ^4.0.0
+    universalify: ^0.1.0
+  checksum: bf44f0e6cea59d5ce071bba4c43ca76d216f89e402dc6285c128abc0902e9b8525135aa808adad72c9d5d218e9f4bcc63962815529ff2f684ad532172a284880
   languageName: node
   linkType: hard
 
@@ -19432,6 +19529,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-dom-parser@npm:1.2.0":
+  version: 1.2.0
+  resolution: "html-dom-parser@npm:1.2.0"
+  dependencies:
+    domhandler: 4.3.1
+    htmlparser2: 7.2.0
+  checksum: d5e72baba7e1a9da334f023f3b3669247c5cebaf51b23011764202c11b3850339aa0fef9f26e00c2b0510e75fe6183453fcba33304a006f9fcde3d037bf60f3d
+  languageName: node
+  linkType: hard
+
 "html-element@npm:^2.0.0":
   version: 2.3.1
   resolution: "html-element@npm:2.3.1"
@@ -19473,6 +19580,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-react-parser@npm:^1.4.12":
+  version: 1.4.14
+  resolution: "html-react-parser@npm:1.4.14"
+  dependencies:
+    domhandler: 4.3.1
+    html-dom-parser: 1.2.0
+    react-property: 2.0.0
+    style-to-js: 1.1.1
+  peerDependencies:
+    react: 0.14 || 15 || 16 || 17 || 18
+  checksum: 14745d2949da38c31d9812ed0f7d77bbbffcf5a6db441d3c703d57ca884ebe705fc2dbc312f47353c349f11f5e61f4735b6610ed905cb4d06da56d475ecc2892
+  languageName: node
+  linkType: hard
+
 "html-to-react@npm:^1.3.4":
   version: 1.4.5
   resolution: "html-to-react@npm:1.4.5"
@@ -19484,6 +19605,18 @@ __metadata:
   peerDependencies:
     react: ^16.0 || ^17.0
   checksum: 078cb011b4cc823dfa1115c4b3e940c5ec89cba96770ff6b3193e7eeea2a38d438c5651e8a0698753d32acb965b11bfa50ba3e850627c9389dc6d9d04aa32979
+  languageName: node
+  linkType: hard
+
+"htmlparser2@npm:7.2.0":
+  version: 7.2.0
+  resolution: "htmlparser2@npm:7.2.0"
+  dependencies:
+    domelementtype: ^2.0.1
+    domhandler: ^4.2.2
+    domutils: ^2.8.0
+    entities: ^3.0.1
+  checksum: 96563d9965729cfcb3f5f19c26d013c6831b4cb38d79d8c185e9cd669ea6a9ffe8fb9ccc74d29a068c9078aa0e2767053ed6b19aa32723c41550340d0094bea0
   languageName: node
   linkType: hard
 
@@ -19898,6 +20031,13 @@ __metadata:
   version: 1.3.8
   resolution: "ini@npm:1.3.8"
   checksum: dfd98b0ca3a4fc1e323e38a6c8eb8936e31a97a918d3b377649ea15bdb15d481207a0dda1021efbd86b464cae29a0d33c1d7dcaf6c5672bee17fa849bc50a1b3
+  languageName: node
+  linkType: hard
+
+"inline-style-parser@npm:0.1.1":
+  version: 0.1.1
+  resolution: "inline-style-parser@npm:0.1.1"
+  checksum: 5d545056a3e1f2bf864c928a886a0e1656a3517127d36917b973de581bd54adc91b4bf1febcb0da054f204b4934763f1a4e09308b4d55002327cf1d48ac5d966
   languageName: node
   linkType: hard
 
@@ -21263,6 +21403,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jsonfile@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "jsonfile@npm:5.0.0"
+  dependencies:
+    graceful-fs: ^4.1.6
+    universalify: ^0.1.2
+  dependenciesMeta:
+    graceful-fs:
+      optional: true
+  checksum: e0ecff572dba34153a66e3a3bc5c6cb01a2c1d2cf4a2c19b6728dcfcab39d94be9cca4a0fc86a17ff2c815f2aeb43768ac75545780dbea4009433fdc32aa14d1
+  languageName: node
+  linkType: hard
+
 "jsonfile@npm:^6.0.1":
   version: 6.1.0
   resolution: "jsonfile@npm:6.1.0"
@@ -21312,6 +21465,27 @@ __metadata:
   version: 4.2.1
   resolution: "just-extend@npm:4.2.1"
   checksum: ff9fdede240fad313efeeeb68a660b942e5586d99c0058064c78884894a2690dc09bba44c994ad4e077e45d913fef01a9240c14a72c657b53687ac58de53b39c
+  languageName: node
+  linkType: hard
+
+"just-omit@npm:^2.0.1":
+  version: 2.2.0
+  resolution: "just-omit@npm:2.2.0"
+  checksum: 5040465b4db6195f9e1b6e777050307e97107b29e449cded40cb97dc93e420dc34e40ff4726f7fe00996c4d2f42ef269937f73196c3a1d4d6ed5aabd80b0a679
+  languageName: node
+  linkType: hard
+
+"just-safe-get@npm:^4.0.1":
+  version: 4.2.0
+  resolution: "just-safe-get@npm:4.2.0"
+  checksum: d4d651048659a30ae8dbc53055900f3bb8724f594afcee32c1f411a656236d3878118b50167b3d230821c780598a26f6b3925311d4c72cc7b17d09d8d7a9b048
+  languageName: node
+  linkType: hard
+
+"just-split@npm:^3.0.1":
+  version: 3.2.0
+  resolution: "just-split@npm:3.2.0"
+  checksum: 3362be1a864f6f5a16e05c49ff628ec0cf3242c35cb196acdea020e264b314c15a846d8da8f0e6caae9c1678ed9f1490c1793dd4f64e392c0e6ddfdda8987150
   languageName: node
   linkType: hard
 
@@ -24425,6 +24599,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pinst@npm:^2.1.6":
+  version: 2.1.6
+  resolution: "pinst@npm:2.1.6"
+  dependencies:
+    fromentries: ^1.3.2
+  bin:
+    pinst: bin.js
+  checksum: 3644c352a7a956a0a299012609783456e055b2c4dab274bcbe8ea86d3347355a0552da31a7f3fb6ce91d6102f27b6dde64edd69c2cdaaeb811b87bf205655e36
+  languageName: node
+  linkType: hard
+
 "pirates@npm:^4.0.0":
   version: 4.0.1
   resolution: "pirates@npm:4.0.1"
@@ -26484,6 +26669,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-copy-to-clipboard@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "react-copy-to-clipboard@npm:5.1.0"
+  dependencies:
+    copy-to-clipboard: ^3.3.1
+    prop-types: ^15.8.1
+  peerDependencies:
+    react: ^15.3.0 || 16 || 17 || 18
+  checksum: f00a4551b9b63c944a041a6ab46af5ef20ba1106b3bc25173e7ef9bffbfba17a613368682ab8820cfe8d4b3acc5335cd9ce20229145bcc1e6aa8d1db04c512e5
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:^16.13.1":
   version: 16.14.0
   resolution: "react-dom@npm:16.14.0"
@@ -26666,6 +26863,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-icons@npm:^4.8.0":
+  version: 4.8.0
+  resolution: "react-icons@npm:4.8.0"
+  peerDependencies:
+    react: "*"
+  checksum: 4dbba7ad989c295b410e19b2a702722dae44368cb04b6515f9471353552f31ac80bd350f121d5bff79f81504b84039ede44d09e9f035f48bb1032e6eace126c4
+  languageName: node
+  linkType: hard
+
 "react-input-autosize@npm:^3.0.0":
   version: 3.0.0
   resolution: "react-input-autosize@npm:3.0.0"
@@ -26789,6 +26995,13 @@ __metadata:
     "@popperjs/core": ^2.0.0
     react: ^16.8.0 || ^17
   checksum: 915fcf08e1da4fd48a200074fcdd936f601ee2173f1e730cfed8a54fd47716aa8bf9cce2392463e3bcbe64a096d0baf463809ed2874b94d3a9d430ae6d817b5d
+  languageName: node
+  linkType: hard
+
+"react-property@npm:2.0.0":
+  version: 2.0.0
+  resolution: "react-property@npm:2.0.0"
+  checksum: 8a444df30ef0937689c7968dae2501a0ca523777169f450e1f7ef5beeb855d6509bd058bf612f6ed8f459aa35468335d356e50264492e1938586e59fdb988262
   languageName: node
   linkType: hard
 
@@ -27026,6 +27239,19 @@ __metadata:
     react: ">=16.6.0"
     react-dom: ">=16.6.0"
   checksum: b67bf5b3e86dbab72d658b9a52a3589e5960583ab28c7c66272427d8fe30d4c7de422d5046ae96bd2683cdf80cc3264b2516f5ce80cae1dbe6cf3ca6dda392c5
+  languageName: node
+  linkType: hard
+
+"react-twemoji@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "react-twemoji@npm:0.5.0"
+  dependencies:
+    lodash.isequal: ^4.5.0
+    prop-types: ^15.7.2
+    twemoji: 14.0.1
+  peerDependencies:
+    react: ">=16.4.2"
+  checksum: a82b6719623739941ce8bde10facc9d01c3a75d18e0dc3350a83a4633d3b6bc8e0ce9edb4423c419a2c6ae79a7c8f079f3ed08909144c449b5bba7bfcbead255
   languageName: node
   linkType: hard
 
@@ -29801,6 +30027,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"style-to-js@npm:1.1.1":
+  version: 1.1.1
+  resolution: "style-to-js@npm:1.1.1"
+  dependencies:
+    style-to-object: 0.3.0
+  checksum: 91b9742af9fc389118e5c3f39a95cbebe1a456b65530aba7595e789783d015aab4bbbf4bc3e0998c41ce7c46661f1244aeffd9e7c407ad8ac928e2ba2be37aa0
+  languageName: node
+  linkType: hard
+
+"style-to-object@npm:0.3.0":
+  version: 0.3.0
+  resolution: "style-to-object@npm:0.3.0"
+  dependencies:
+    inline-style-parser: 0.1.1
+  checksum: 4d7084015207f2a606dfc10c29cb5ba569f2fe8005551df7396110dd694d6ff650f2debafa95bd5d147dfb4ca50f57868e2a7f91bf5d11ef734fe7ccbd7abf59
+  languageName: node
+  linkType: hard
+
 "style-value-types@npm:4.1.4":
   version: 4.1.4
   resolution: "style-value-types@npm:4.1.4"
@@ -30838,6 +31082,37 @@ __metadata:
   version: 0.14.5
   resolution: "tweetnacl@npm:0.14.5"
   checksum: 6061daba1724f59473d99a7bb82e13f211cdf6e31315510ae9656fefd4779851cb927adad90f3b488c8ed77c106adc0421ea8055f6f976ff21b27c5c4e918487
+  languageName: node
+  linkType: hard
+
+"twemoji-parser@npm:14.0.0":
+  version: 14.0.0
+  resolution: "twemoji-parser@npm:14.0.0"
+  checksum: 8eede69cf71f94735de7b6fddf5dfbfe3cb2e01baefc3201360984ccc97cfc659f206c8f73bd1405a2282779af3b79a8c9bed3864c672e15e2dc6f8ce4810452
+  languageName: node
+  linkType: hard
+
+"twemoji@npm:14.0.1":
+  version: 14.0.1
+  resolution: "twemoji@npm:14.0.1"
+  dependencies:
+    fs-extra: ^8.0.1
+    jsonfile: ^5.0.0
+    twemoji-parser: 14.0.0
+    universalify: ^0.1.2
+  checksum: 9a30aa0a8922a82d5e96a144510a6fb14484098ea968f7aa126e169993f5e559c157ac3d5b70873ec491f9a557ea82e1ffd66790e947dd4b8f74df0ba7fe46e5
+  languageName: node
+  linkType: hard
+
+"twemoji@npm:^14.0.2":
+  version: 14.0.2
+  resolution: "twemoji@npm:14.0.2"
+  dependencies:
+    fs-extra: ^8.0.1
+    jsonfile: ^5.0.0
+    twemoji-parser: 14.0.0
+    universalify: ^0.1.2
+  checksum: 686a356a7af3cf15f7894568bfcdfafcea0cd45473b3f8c59d6ca95e549695f1222845d1a8c39ffa3bc4057e9d59e41ab83e4ce3cbcd68823ff50d57e3ff58da
   languageName: node
   linkType: hard
 

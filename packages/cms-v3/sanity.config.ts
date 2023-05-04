@@ -1,9 +1,10 @@
-import {visionTool} from '@sanity/vision'
-import {defineConfig} from 'sanity'
-import {deskTool} from 'sanity/desk'
-import {schemaTypes} from './schemas'
-import {Logo} from './studio/components/logo'
-import {theme} from './studio/theme'
+import { visionTool } from '@sanity/vision';
+import { defineConfig } from 'sanity';
+import { deskTool } from 'sanity/desk';
+import { schemaTypes } from './schemas';
+import { Logo } from './components/logo';
+import { theme } from './studio/theme';
+import structure from './studio/desk-structure';
 
 export default defineConfig({
   title: 'Coronavirus Dashboard CMS',
@@ -16,7 +17,12 @@ export default defineConfig({
   // TODO: either remove this or set up a [[...studio]].tsx route inside the app package for a 'self-hosted' Sanity studio page
   // basePath: '/studio',
 
-  plugins: [deskTool(), visionTool()],
+  plugins: [
+    deskTool({
+      structure,
+    }),
+    visionTool(),
+  ],
   schema: {
     types: schemaTypes,
   },
@@ -28,4 +34,4 @@ export default defineConfig({
     },
   },
   theme,
-})
+});

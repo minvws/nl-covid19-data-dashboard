@@ -1,5 +1,5 @@
-import {defineCliConfig} from 'sanity/cli'
-import path from 'path'
+import { defineCliConfig } from 'sanity/cli';
+import path from 'path';
 
 export default defineCliConfig({
   api: {
@@ -14,4 +14,4 @@ export default defineCliConfig({
       },
     },
   },
-})
+});
