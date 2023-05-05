@@ -69,7 +69,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
 
   const [outlineGeoInfo] = useProjectedCoordinates(choroplethFeatures.outline, mapProjection, fitExtent);
 
-  const highlightedFeature = useHighlightedFeature(geoInfo, dataOptions ?? {});
+  const highlightedFeature = useHighlightedFeature(geoInfo, dataOptions);
 
   const selectFeature = useCallback(
     (code: CodeProp | undefined, isKeyboardAction = false) => {

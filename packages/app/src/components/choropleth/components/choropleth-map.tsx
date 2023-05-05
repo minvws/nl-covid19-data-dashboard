@@ -62,9 +62,9 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(props: ChoroplethMapP
 
   const getFillColor = useFillColor(data, map, dataConfig, thresholdMap);
 
-  const featureProps = useFeatureProps(map, getFillColor, dataOptions ?? {}, dataConfig);
+  const featureProps = useFeatureProps(map, getFillColor, dataConfig, dataOptions);
 
-  const [featureOverHandler, featureOutHandler, tooltipTrigger] = useChoroplethTooltip(map, data, dataConfig, dataOptions ?? {}, isTabInteractive, setTooltip, containerRef);
+  const [featureOverHandler, featureOutHandler, tooltipTrigger] = useChoroplethTooltip(map, data, dataConfig, isTabInteractive, setTooltip, containerRef, dataOptions);
 
   const getFeatureName = useFeatureName(map, dataOptions?.getFeatureName);
 
