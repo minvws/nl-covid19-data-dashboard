@@ -531,12 +531,8 @@ timestamp,action,key,document_id,move_to
 2023-04-20T09:31:49.386Z,delete,common.choropleth_tooltip.vr.has_one_shot_percentage.>,4Hn4MB4VRci1fnngMV5IkK,__
 2023-04-20T09:31:49.386Z,delete,common.choropleth_tooltip.vr.has_one_shot_percentage.content,Ierr3hadoEWr1dYNoEUhXb,__
 2023-04-20T09:31:49.386Z,delete,common.choropleth_tooltip.vr.has_one_shot_percentage.subject,4Hn4MB4VRci1fnngMV5J3g,__
-2023-04-20T09:31:49.386Z,delete,common.choropleth_tooltip.vr.infected_locations_percentage.content,WcslWj37E82J6PAznCRyfn,__
-2023-04-20T09:31:49.386Z,delete,common.choropleth_tooltip.vr.infected_locations_percentage.subject,jF33EuwumlGuwav2FD4IGq,__
 2023-04-20T09:31:49.387Z,delete,common.choropleth_tooltip.vr.infected_per_100k.content,q6JNEIlv8e5jJVtFa0WpQ3,__
 2023-04-20T09:31:49.387Z,delete,common.choropleth_tooltip.vr.infected_per_100k.subject,WcslWj37E82J6PAznCRwbo,__
-2023-04-20T09:31:49.387Z,delete,common.choropleth_tooltip.vr.positive_tested_daily_per_100k.content,WcslWj37E82J6PAznCRysm,__
-2023-04-20T09:31:49.387Z,delete,common.choropleth_tooltip.vr.positive_tested_daily_per_100k.subject,jF33EuwumlGuwav2FD4IIW,__
 2023-04-20T09:31:49.387Z,delete,pages.topical_page.vr.data_driven_texts.infected_people_total.value.plural,jF33EuwumlGuwav2FD4Dum,__
 2023-04-20T09:31:49.387Z,delete,pages.topical_page.vr.data_driven_texts.infected_people_total.value.singular,jF33EuwumlGuwav2FD4Dt6,__
 2023-04-20T09:31:49.387Z,delete,pages.topical_page.vr.data_driven_texts.infected_people_total.value.zero,jF33EuwumlGuwav2FD4DrQ,__
