@@ -1,7 +1,8 @@
 import { supportedLanguages } from '../../studio/i18n';
-// import { ValidatedRichText } from '../../components/validated-input/validated-input';
+import { blockFields } from '../objects/block-fields';
+// TODO: Fix these imports, see corresponding inputComponent in fields below
+// import { ValidatedRichText../objects/block-fieldslidated-input/validated-input';
 // import { supportedLanguages } from '../../language/supported-languages';
-// import { blockFields } from '../objects/block-fields';
 
 export const localeBlock = {
   name: 'localeBlock',
@@ -16,7 +17,7 @@ export const localeBlock = {
     title,
     name: id,
     type: 'array',
-    // of: blockFields,
+    of: blockFields,
     // inputComponent: ValidatedRichText,
   })),
 };
