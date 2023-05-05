@@ -10,16 +10,16 @@ export const overDitDashboard = defineType({
       type: 'localeString',
       title: 'Titel',
     }),
-    defineField({
-      name: 'description',
-      type: 'localeBlock',
-      title: 'Beschrijving',
-    }),
+    // defineField({
+    //   name: 'description',
+    //   type: 'localeBlock',
+    //   title: 'Beschrijving',
+    // }),
   ],
   preview: {
     select: {
-      title: 'title.nl',
-      subtitle: 'description.nl',
+      title: 'title',
+      subtitle: 'description',
     },
   },
 });

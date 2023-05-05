@@ -30,7 +30,8 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/document-internationalization": "^1.1.1",
+    "@sanity/language-filter": "^3.0.1",
+    "@sanity/types": "^3.10.0",
     "@sanity/ui": "^1.3.2",
     "@sanity/vision": "^3.9.0",
     "react": "^18.2.0",

@@ -1,10 +1,12 @@
+import { languageFilter } from '@sanity/language-filter';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { deskTool } from 'sanity/desk';
-import { schemaTypes } from './schemas';
 import { Logo } from './components/logo';
-import { theme } from './studio/theme';
+import { schemaTypes } from './schemas';
 import structure from './studio/desk-structure';
+import { theme } from './studio/theme';
+import { supportedLanguages } from './studio/i18n';
 
 export default defineConfig({
   title: 'Coronavirus Dashboard CMS',
@@ -22,6 +24,12 @@ export default defineConfig({
       structure,
     }),
     visionTool(),
+    languageFilter({
+      supportedLanguages,
+      defaultLanguages: ['nl'],
+      // documentTypes: [],
+      filterField: (enclosingType, field, selectedLanguageIds) => !enclosingType.name.startsWith('locale') || selectedLanguageIds.includes(field.name),
+    }),
   ],
   schema: {
     types: schemaTypes,
