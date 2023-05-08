@@ -8,12 +8,15 @@ import path from 'path';
 import sanitize from 'sanitize-filename';
 import { isDefined } from 'ts-is-present';
 import { DataConfig, DataOptions } from '~/components/choropleth';
-import { ChoroplethDataItem, CHOROPLETH_ASPECT_RATIO, FitExtent, getChoroplethFeatures, getFeatureProps, getFillColor, MapType } from '~/components/choropleth/logic';
 import { createDataConfig } from '~/components/choropleth/logic/create-data-config';
 import { getProjectedCoordinates } from '~/components/choropleth/logic/use-projected-coordinates';
 import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
 import { resolvePublicFolder } from '~/utils/api/resolve-public-folder';
 import { gmGeo, nlGeo, vrGeo } from './topology';
+import { MapType, CHOROPLETH_ASPECT_RATIO, ChoroplethDataItem, FitExtent } from '~/components/choropleth/logic/types';
+import { getChoroplethFeatures } from '~/components/choropleth/logic/use-choropleth-features';
+import { getFillColor } from '~/components/choropleth/logic/use-fill-color';
+import { getFeatureProps } from '~/components/choropleth/logic/use-feature-props';
 /**
  * The combination node-canvas and sharp leads to runtime crashes under Windows, this
  * ENV variable disables compression. By conditionally importing the sharp lib we
