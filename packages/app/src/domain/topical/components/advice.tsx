@@ -1,6 +1,5 @@
 import { colors } from '@corona-dashboard/common';
 import { External as ExternalIcon } from '@corona-dashboard/icons';
-import { PortableTextEntry } from '@sanity/block-content-to-react';
 import styled from 'styled-components';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
@@ -9,26 +8,18 @@ import { ExternalLink } from '~/components/external-link';
 import { MaxWidth } from '~/components/max-width';
 import { Heading } from '~/components/typography';
 import { getImageProps } from '~/lib/sanity';
+import { Advice as AdviceProps } from '~/queries/query-types';
 import { fontSizes, fontWeights, mediaQueries, radii, sizes, space } from '~/style/theme';
-import { ImageBlock, LinkProps } from '~/types/cms';
 import { isInternalUrl } from '~/utils/is-internal-url';
 import { Link } from '~/utils/link';
 
-interface AdviceProps {
-  title: string;
-  description: PortableTextEntry[];
-  links: LinkProps[];
-  image: ImageBlock;
-}
-
 export const Advice = ({ title, description, links, image }: AdviceProps) => (
   <Box width="100%" backgroundColor={colors.blue1} marginY={space[4]}>
-    <MaxWidth
+    <AdviceContainer
       alignItems={{ _: 'flex-start', sm: 'center' }}
       display="flex"
       flexDirection={{ _: 'column', sm: 'row' }}
       justifyContent="space-between"
-      margin="0"
       paddingX={{ _: space[3], sm: space[4] }}
       paddingY={space[4]}
     >
@@ -56,9 +47,13 @@ export const Advice = ({ title, description, links, image }: AdviceProps) => (
       </Box>
 
       <AdviceImage {...getImageProps(image, { defaultWidth: '300px' })} />
-    </MaxWidth>
+    </AdviceContainer>
   </Box>
 );
+
+const AdviceContainer = styled(MaxWidth)`
+  column-gap: ${space[4]};
+`;
 
 const AdviceDescription = styled(Box)`
   font-size: ${fontSizes[3]};

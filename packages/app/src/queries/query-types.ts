@@ -100,9 +100,9 @@ export interface Cta {
   href: string | null;
 }
 
-export type Advice = {
+export interface Advice {
   title: string;
   description: PortableTextEntry[];
   links: LinkProps[];
   image: ImageBlock;
-};
+}
