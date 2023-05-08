@@ -98,10 +98,9 @@ export function getTopicalStructureQuery(locale: string) {
     ][0]{
       'title': title.${locale},
       'description': description.${locale},
-      'links': links[]->{
-        'id': _id,
-        'url': url,
-        'label': label.${locale},
+      'links': links[]{
+        'href': href,
+        'title': title.${locale},
       },
       'image': {
         ...image,

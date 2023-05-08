@@ -2,7 +2,7 @@ import { TrendIcon } from '@corona-dashboard/app/src/domain/topical/types';
 import { SeverityLevel } from '~/components/severity-indicator-tile/types';
 import { IconName as TopicalIcon } from '@corona-dashboard/icons/src/icon-name2filename';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
-import { ImageBlock } from '~/types/cms';
+import { ImageBlock, LinkProps } from '~/types/cms';
 
 export interface TopicalSanityData {
   topicalConfig: TopicalConfig;
@@ -100,15 +100,9 @@ export interface Cta {
   href: string | null;
 }
 
-export interface AdviceLink {
-  id: string;
-  url: string;
-  label: string;
-}
-
 export type Advice = {
   title: string;
   description: PortableTextEntry[];
-  links: AdviceLink[];
+  links: LinkProps[];
   image: ImageBlock;
 };
