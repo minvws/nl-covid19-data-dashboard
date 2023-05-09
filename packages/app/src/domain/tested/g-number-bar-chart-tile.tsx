@@ -45,9 +45,6 @@ export function GNumberBarChartTile({ data: __data, timeframeInitialValue = Time
         values={values}
         endDate={endDate}
         timeframe={gnumberTimeframe}
-        dataOptions={{
-          isPercentage: true,
-        }}
         seriesConfig={[
           {
             type: 'split-bar',

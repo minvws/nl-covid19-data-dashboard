@@ -159,7 +159,7 @@ export function ChoroplethTooltip<T extends VaccineCoverageData>({ data, selecte
   });
 
   return (
-    <TooltipContent title={data.featureName} link={data.dataOptions.getLink ? data.dataOptions.getLink(data.code) : undefined}>
+    <TooltipContent title={data.featureName} link={data.dataOptions?.getLink ? data.dataOptions.getLink(data.code) : undefined}>
       <BoldText>{coverageKindsText[selectedCoverageKind]}</BoldText>
       {tooltipContentValues}
     </TooltipContent>

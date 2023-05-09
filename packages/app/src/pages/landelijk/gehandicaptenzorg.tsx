@@ -242,9 +242,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
                   infected_locations_percentage: formatNumber,
                 },
               }}
-              dataOptions={{
-                isPercentage: true,
-              }}
             />
           </ChoroplethTile>
 

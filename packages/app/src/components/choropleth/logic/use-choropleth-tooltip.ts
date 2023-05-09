@@ -42,24 +42,20 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   map: MapType,
   data: T[],
   dataConfig: DataConfig<T>,
-  dataOptions: DataOptions,
   showTooltipOnFocus: boolean | undefined,
   setTooltip: (tooltip: TooltipSettings<T> | undefined) => void,
-  containerRef: React.RefObject<HTMLDivElement>
+  containerRef: React.RefObject<HTMLDivElement>,
+  dataOptions?: DataOptions
 ) {
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
   const intl = useIntl();
 
-  const metricPropertyFormatter = useMetricPropertyFormatter(
-    data,
-    dataConfig,
-    intl
-  );
+  const metricPropertyFormatter = useMetricPropertyFormatter(data, dataConfig, intl);
 
   const codeType = mapToCodeType[map];
 
-  const getFeatureName = useFeatureName(map, dataOptions.getFeatureName);
+  const getFeatureName = useFeatureName(map, dataOptions?.getFeatureName);
 
   const getItemByCode = useMemo(() => {
     return (code: CodeProp) => {
@@ -69,21 +65,13 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
           return filterFn && filterFn(x);
         })
         .find((x) => (x as any)[codeType] === code);
-      assert(
-        item,
-        `[${useChoroplethTooltip.name}:${getItemByCode.name}] No data item found for code ${code}`
-      );
+      assert(item, `[${useChoroplethTooltip.name}:${getItemByCode.name}] No data item found for code ${code}`);
       return item;
     };
   }, [codeType, data]);
 
   const threshold = thresholds[map][dataConfig.metricProperty as string];
-  assert(
-    isDefined(threshold),
-    `[${
-      useChoroplethTooltip.name
-    }] No threshold configured for map type ${map} and metric property ${dataConfig.metricProperty.toString()}`
-  );
+  assert(isDefined(threshold), `[${useChoroplethTooltip.name}] No threshold configured for map type ${map} and metric property ${dataConfig.metricProperty.toString()}`);
 
   useEffect(() => {
     if (!showTooltipOnFocus) {
@@ -143,44 +131,12 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       container.removeEventListener('focusin', handleBubbledFocusIn);
       container.removeEventListener('focusout', handleBubbledFocusOut);
     };
-  }, [
-    containerRef,
-    setTooltip,
-    showTooltipOnFocus,
-    isTouch,
-    getFeatureName,
-    dataConfig,
-    dataOptions,
-    getItemByCode,
-    threshold,
-    map,
-    metricPropertyFormatter,
-  ]);
+  }, [containerRef, setTooltip, showTooltipOnFocus, isTouch, getFeatureName, dataConfig, dataOptions, getItemByCode, threshold, map, metricPropertyFormatter]);
 
   return [
-    createFeatureMouseOverHandler(
-      timeout,
-      setTooltip,
-      containerRef,
-      getItemByCode,
-      dataConfig,
-      dataOptions,
-      threshold,
-      getFeatureName,
-      map,
-      metricPropertyFormatter
-    ),
+    createFeatureMouseOverHandler(timeout, setTooltip, containerRef, getItemByCode, dataConfig, threshold, getFeatureName, map, metricPropertyFormatter, dataOptions),
     createFeatureMouseOutHandler(timeout, setTooltip, isTouch),
-    createTooltipTrigger(
-      setTooltip,
-      getItemByCode,
-      dataConfig,
-      dataOptions,
-      threshold,
-      getFeatureName,
-      map,
-      metricPropertyFormatter
-    ),
+    createTooltipTrigger(setTooltip, getItemByCode, dataConfig, threshold, getFeatureName, map, metricPropertyFormatter, dataOptions),
   ] as ChoroplethTooltipHandlers;
 }
 
@@ -190,11 +146,11 @@ const createTooltipTrigger = <T extends ChoroplethDataItem>(
   setTooltip: (settings: TooltipSettings<T> | undefined) => void,
   getItemByCode: (code: CodeProp) => T,
   dataConfig: DataConfig<T>,
-  dataOptions: DataOptions,
   threshold: ChoroplethThresholdsValue[],
   getFeatureName: (code: string) => string,
   map: MapType,
-  metricPropertyFormatter: (value: number) => string
+  metricPropertyFormatter: (value: number) => string,
+  dataOptions?: DataOptions
 ) => {
   return (hoverInfo?: HoverInfo) => {
     if (!isDefined(hoverInfo)) {
@@ -225,11 +181,11 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
   ref: RefObject<HTMLElement>,
   getItemByCode: (code: CodeProp) => T,
   dataConfig: DataConfig<T>,
-  dataOptions: DataOptions,
   threshold: ChoroplethThresholdsValue[],
   getFeatureName: (code: string) => string,
   map: MapType,
-  metricPropertyFormatter: (value: number) => string
+  metricPropertyFormatter: (value: number) => string,
+  dataOptions?: DataOptions
 ) => {
   return (event: React.MouseEvent<HTMLElement>) => {
     const elm = event.target as HTMLElement;
@@ -280,11 +236,7 @@ const createFeatureMouseOutHandler = <T extends ChoroplethDataItem>(
       };
 };
 
-function useMetricPropertyFormatter<T extends ChoroplethDataItem>(
-  data: T[],
-  dataConfig: DataConfig<T>,
-  intl: IntlContextProps
-) {
+function useMetricPropertyFormatter<T extends ChoroplethDataItem>(data: T[], dataConfig: DataConfig<T>, intl: IntlContextProps) {
   return useMemo(() => {
     const values = data.map((value) => {
       const valueEntry = value[dataConfig.metricProperty];

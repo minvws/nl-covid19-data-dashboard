@@ -225,9 +225,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                       shortLabel: textNl.tooltip_labels.ggd_infected_percentage_moving_average,
                     },
                   ]}
-                  dataOptions={{
-                    isPercentage: true,
-                  }}
                 />
               </ChartTile>
             )}

@@ -21,7 +21,7 @@ export interface CanvasChoroplethMapProps {
   annotations: AccessibilityAnnotations;
   choroplethFeatures: ChoroplethFeatures;
   containerRef: MutableRefObject<HTMLDivElement | null>;
-  dataOptions: DataOptions;
+  dataOptions?: DataOptions;
   featureOutHandler: ChoroplethTooltipHandlers[1];
   featureOverHandler: ChoroplethTooltipHandlers[0];
   featureProps: FeatureProps;
@@ -124,7 +124,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
     }
   }, [hoverCode, hoveredRef, tooltipTrigger, isKeyboardActive]);
 
-  const { getLink } = dataOptions;
+  const getLink = dataOptions?.getLink;
 
   const mapId = useUniqueId();
 
@@ -169,7 +169,7 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
         >
           <Outlines geoInfo={outlineGeoInfo} featureProps={featureProps} />
           <Features geoInfo={geoInfo} featureProps={featureProps}>
-            <HighlightedFeature feature={highlightedFeature} featureProps={featureProps} code={dataOptions.selectedCode} hoverCode={hoverCode} />
+            <HighlightedFeature feature={highlightedFeature} featureProps={featureProps} code={dataOptions?.selectedCode} hoverCode={hoverCode} />
           </Features>
           <HoveredFeature hoveredRef={hoveredRef} hover={hover} hoverCode={hoverCode} featureProps={featureProps} isKeyboardActive={isKeyboardActive} />
         </Stage>
@@ -182,10 +182,10 @@ export const CanvasChoroplethMap = (props: CanvasChoroplethMapProps) => {
 };
 
 interface HighlightedFeatureProps {
-  feature: [number, number][][] | undefined;
+  feature?: [number, number][][];
   featureProps: FeatureProps;
-  code: string | undefined;
-  hoverCode: string | undefined;
+  code?: string;
+  hoverCode?: string;
 }
 
 const HighlightedFeature = memo((props: HighlightedFeatureProps) => {
