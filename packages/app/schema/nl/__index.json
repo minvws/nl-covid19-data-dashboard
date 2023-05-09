@@ -17,7 +17,6 @@
     "difference",
     "named_difference",
     "disability_care_archived_20230126",
-    "doctor",
     "elderly_at_home_archived_20230126",
     "g_number",
     "hospital_lcps",
@@ -91,9 +90,6 @@
     },
     "booster_coverage_archived_20220904": {
       "$ref": "booster_coverage_archived_20220904.json"
-    },
-    "doctor": {
-      "$ref": "doctor.json"
     },
     "g_number": {
       "$ref": "g_number.json"
