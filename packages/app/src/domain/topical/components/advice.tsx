@@ -1,5 +1,6 @@
 import { colors } from '@corona-dashboard/common';
 import { External as ExternalIcon } from '@corona-dashboard/icons';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 import styled from 'styled-components';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
@@ -8,10 +9,17 @@ import { ExternalLink } from '~/components/external-link';
 import { MaxWidth } from '~/components/max-width';
 import { Heading } from '~/components/typography';
 import { getImageProps } from '~/lib/sanity';
-import { Advice as AdviceProps } from '~/queries/query-types';
 import { fontSizes, fontWeights, mediaQueries, radii, sizes, space } from '~/style/theme';
+import { ImageBlock, LinkProps } from '~/types/cms';
 import { isInternalUrl } from '~/utils/is-internal-url';
 import { Link } from '~/utils/link';
+
+interface AdviceProps {
+  title: string;
+  description: PortableTextEntry[];
+  links: LinkProps[];
+  image: ImageBlock;
+}
 
 export const Advice = ({ title, description, links, image }: AdviceProps) => (
   <Box width="100%" backgroundColor={colors.blue1} marginY={space[4]}>
