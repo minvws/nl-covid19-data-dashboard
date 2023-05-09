@@ -38,7 +38,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-is": "^18.2.0",
-    "sanity": "^3.9.0",
+    "sanity": "latest",
     "styled-components": "^5.3.9"
   },
   "devDependencies": {
