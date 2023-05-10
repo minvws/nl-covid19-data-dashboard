@@ -43,6 +43,14 @@ async function rewrites() {
         source: '/gemeente/(g|G)(m|M)(\\d{5,})(\\/?)(\\S*):slug*',
         destination: '/gemeente/code/404',
       },
+      /**
+       * The rewrite below is a workaround. 404 seems to be a reserved route, so it does not go to the
+       * catch-all route by default. This rewrite ensures that basePath/404 will also go to the catch-all route.
+       */
+      {
+        source: '/(404):slug*',
+        destination: '/not-found/404',
+      },
     ],
   };
 }

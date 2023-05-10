@@ -59,10 +59,10 @@ export function GmLayout(props: GmLayoutProps) {
     layout: 'gm',
     code: code,
     map: [
-      ['development_of_the_virus', ['sewage_measurement', 'positive_tests']],
+      ['development_of_the_virus', ['sewage_measurement']],
       ['consequences_for_healthcare', ['hospital_admissions']],
       ['actions_to_take', ['vaccinations']],
-      ['archived_metrics', ['mortality']],
+      ['archived_metrics', ['positive_tests', 'mortality']],
     ],
   });
 

@@ -14,7 +14,6 @@ import {
   VaccinationsKpiHeader,
   VaccineCoverageChoropleth,
   VaccineCoveragePerAgeGroup,
-  VaccineCoverageTile,
   VaccineCoverageToggleTile,
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
@@ -33,6 +32,7 @@ import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/t
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 
 const pageMetrics = [
   'vaccine_administered_doctors',
@@ -153,7 +153,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   const variables = {
-    regio: commonTexts.choropleth.choropleth_vaccination_coverage.shared.gm,
+    regio: commonTexts.choropleth.choropleth_vaccination_coverage.nl,
   };
 
   return (
@@ -176,13 +176,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             referenceLink={textNl.information_block.reference.href}
             articles={content.articles}
           />
-          <VaccineCoverageTile
+          <BorderedKpiSection
             title={textShared.vaccination_grade_tile.autumn_labels.title}
             description={textShared.vaccination_grade_tile.autumn_labels.description}
             source={textShared.vaccination_grade_tile.autumn_labels.source}
-            coverageData={[
+            tilesData={[
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_60_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedAutumn2022.age_60_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_60_plus,
                 description: textShared.vaccination_grade_tile.autumn_labels.description_60_plus,
@@ -193,6 +194,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               },
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_12_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedAutumn2022.age_12_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
                 description: textShared.vaccination_grade_tile.autumn_labels.description_12_plus,
@@ -204,13 +206,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             ]}
             dateUnix={vaccineCoverageEstimatedAutumn2022.date_unix}
           />
-          <VaccineCoverageTile
+          <BorderedKpiSection
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
             description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
             source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
-            coverageData={[
+            tilesData={[
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_18_plus,
                 description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_18_plus,
@@ -221,6 +224,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               },
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_12_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedFullyVaccinated.age_12_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
                 description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_12_plus,

@@ -108,14 +108,14 @@ data is returned.
 For example:
 
 ```ts
-createGetStaticProps(createGetContent<MyStrongTypedSanityData>("*[_type == 'mySanityData']"));
+createGetStaticProps(createGetContent<MyStronglyTypedSanityData>("*[_type == 'mySanityData']"));
 ```
 
 The result of which is typed as follows:
 
 ```ts
 type PageProps = {
-  content: MyStrongTypedSanityData;
+  content: MyStronglyTypedSanityData;
 };
 ```
 
@@ -124,7 +124,7 @@ type PageProps = {
 As mentioned earlier, `createGetStaticProps` can receive multiple functions, so data selection and querying can be combined:
 
 ```ts
-createGetStaticProps(selectNlData('infectious_people'), createGetContent<MyStrongTypedSanityData>("*[_type == 'mySanityData']"));
+createGetStaticProps(selectNlData('infectious_people'), createGetContent<MyStronglyTypedSanityData>("*[_type == 'mySanityData']"));
 ```
 
 These calls will end up being pushed down to the Page props as this type:
@@ -132,7 +132,7 @@ These calls will end up being pushed down to the Page props as this type:
 ```ts
 type PageProps = {
   data: NlInfectiousPeople;
-  content: MyStrongTypedSanityData;
+  content: MyStronglyTypedSanityData;
 };
 ```
 

@@ -37,10 +37,10 @@ export function NlLayout(props: NlLayoutProps) {
   const items = useSidebar({
     layout: 'nl',
     map: [
-      ['development_of_the_virus', ['sewage_measurement', 'positive_tests', 'reproduction_number', 'variants', 'mortality']],
+      ['development_of_the_virus', ['sewage_measurement', 'tests', 'reproduction_number', 'variants', 'mortality']],
       ['consequences_for_healthcare', ['hospitals_and_care', 'patients', 'nursing_home_care']],
       ['actions_to_take', ['vaccinations', 'compliance']],
-      ['archived_metrics', ['disabled_care', 'elderly_at_home', 'coronamelder_app', 'infectious_people', 'general_practitioner_suspicions']],
+      ['archived_metrics', ['positive_tests', 'disabled_care', 'elderly_at_home', 'coronamelder_app', 'infectious_people', 'general_practitioner_suspicions']],
     ],
   });
 
@@ -70,7 +70,7 @@ export function NlLayout(props: NlLayoutProps) {
 
             <Box paddingX={space[3]}>
               <Heading level={2} variant={'h3'}>
-                {commonTexts.sidebar.shared.nl_title}
+                {commonTexts.sidebar.nl.title}
               </Heading>
             </Box>
 

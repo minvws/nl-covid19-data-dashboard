@@ -2,6 +2,7 @@ import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard
 import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
+import { WarningTile } from '~/components';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -102,7 +103,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.development_of_the_virus.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
@@ -119,6 +120,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}
           />
+
+          {!!textShared.warning && <WarningTile isFullWidth message={textShared.warning} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile
@@ -224,7 +227,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               }
               legend={{
                 thresholds: thresholds.gm.infected_per_100k,
-                title: textShared.chloropleth_legenda.titel,
+                title: textShared.chloropleth_legenda_titel,
               }}
               metadata={{
                 date: lastValue.date_unix,
