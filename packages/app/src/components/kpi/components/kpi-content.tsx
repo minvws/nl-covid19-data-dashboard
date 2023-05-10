@@ -7,40 +7,33 @@ import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-rang
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils';
-import { KpiContentProps } from '../types';
+import { TileData as KpiContentProps } from '../types';
 
-export const KpiContent = ({ tile }: KpiContentProps) => {
-  const { commonTexts, formatPercentage } = useIntl();
-  const parsedAgePercentage = tile.value ? `${formatPercentage(tile.value)}%` : '-';
-  const parsedBirthyearRange = tile.birthyear ? parseBirthyearRange(tile.birthyear) : null;
+export const KpiContent = ({ title, description, value, bar, birthyear, differenceValue, isPercentage = false }: KpiContentProps) => {
+  const { commonTexts } = useIntl();
+  const parsedBirthyearRange = birthyear ? parseBirthyearRange(birthyear) : null;
 
   return (
     <Box>
-      <BoldText>{tile.title}</BoldText>
+      <BoldText>{title}</BoldText>
 
-      <Box paddingTop={space[3]} paddingBottom={tile.differenceValue ? space[1] : space[3]}>
-        <KpiValue
-          absolute={tile.differenceValue ? tile.value : null}
-          difference={tile.differenceValue || undefined}
-          isAmount={!!tile.differenceValue}
-          text={!tile.differenceValue ? parsedAgePercentage : undefined}
-          color={tile?.bar?.color}
-        />
+      <Box paddingTop={space[3]} paddingBottom={differenceValue ? space[1] : space[3]}>
+        <KpiValue absolute={!isPercentage ? value : null} percentage={isPercentage ? value : null} difference={differenceValue} isAmount={!!differenceValue} color={bar?.color} />
       </Box>
 
-      {tile.bar && (
+      {bar && (
         <Box paddingTop={space[2]} paddingBottom={space[3]}>
-          <Bar value={tile.bar.value} color={tile.bar.color} height={12} />
+          <Bar value={bar.value} color={bar.color} height={12} />
         </Box>
       )}
 
       <Markdown
         content={
           parsedBirthyearRange
-            ? replaceVariablesInText(tile.description, {
+            ? replaceVariablesInText(description, {
                 birthyear: replaceVariablesInText(commonTexts.common.birthyear_ranges[parsedBirthyearRange.type], parsedBirthyearRange),
               })
-            : tile.description
+            : description
         }
       />
     </Box>
