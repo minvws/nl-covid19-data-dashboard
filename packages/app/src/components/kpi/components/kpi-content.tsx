@@ -7,22 +7,7 @@ import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-rang
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils';
-import { DifferenceInteger } from '@corona-dashboard/common';
-
-export type TileData = {
-  description: string;
-  title: string;
-  value: number | null;
-  bar?: BarType;
-  isPercentage?: boolean;
-  birthyear?: string | null;
-  differenceValue?: DifferenceInteger;
-};
-
-export type BarType = {
-  value: number;
-  color: string;
-};
+import { TileData } from '../types';
 
 export const KpiContent = ({ title, description, value, bar, birthyear, differenceValue, isPercentage = false }: TileData) => {
   const { commonTexts } = useIntl();
