@@ -6,8 +6,17 @@ import { KpiTile } from '../kpi-tile';
 import { Metadata, MetadataProps } from '../metadata';
 import { TwoKpiSection } from '../two-kpi-section';
 import { Text } from '../typography';
-import { KpiContent } from './components/kpi-content';
-import { BorderedKpiSectionProps } from './types';
+import { KpiContent, TileData } from './components/kpi-content';
+export interface BorderedKpiSectionProps {
+  dateUnix: number;
+  description: string;
+  source: {
+    href: string;
+    text: string;
+  };
+  tilesData: [TileData, TileData];
+  title: string;
+}
 
 export const BorderedKpiSection = ({ title, description, source, dateUnix, tilesData }: BorderedKpiSectionProps) => {
   const metadata: MetadataProps = {
@@ -21,7 +30,7 @@ export const BorderedKpiSection = ({ title, description, source, dateUnix, tiles
       <TwoKpiSection spacing={5}>
         <KpiContentContainer>
           {tilesData.map((tile, index) => (
-            <KpiContent key={index} tile={tile} />
+            <KpiContent key={index} {...tile} />
           ))}
         </KpiContentContainer>
       </TwoKpiSection>

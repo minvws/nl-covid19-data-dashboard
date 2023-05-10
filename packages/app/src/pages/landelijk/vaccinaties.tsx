@@ -184,6 +184,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             tilesData={[
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_60_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedAutumn2022.age_60_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_60_plus,
                 description: textShared.vaccination_grade_tile.autumn_labels.description_60_plus,
@@ -194,6 +195,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               },
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_12_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedAutumn2022.age_12_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
                 description: textShared.vaccination_grade_tile.autumn_labels.description_12_plus,
@@ -212,6 +214,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             tilesData={[
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_18_plus,
                 description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_18_plus,
@@ -222,6 +225,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               },
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_12_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedFullyVaccinated.age_12_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
                 description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_12_plus,
