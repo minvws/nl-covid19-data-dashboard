@@ -87,7 +87,7 @@ export function KpiValue({
         </StyledValue>
       ) : isDefined(text) ? (
         <StyledValue color={color} {...otherProps}>
-          {text} test
+          {text}
         </StyledValue>
       ) : isPresent(absolute) ? (
         <StyledValue color={color} {...otherProps}>
