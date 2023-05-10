@@ -7,6 +7,7 @@ import { Metadata, MetadataProps } from '../metadata';
 import { TwoKpiSection } from '../two-kpi-section';
 import { Text } from '../typography';
 import { KpiContent, TileData } from './components/kpi-content';
+
 export interface BorderedKpiSectionProps {
   dateUnix: number;
   description: string;
