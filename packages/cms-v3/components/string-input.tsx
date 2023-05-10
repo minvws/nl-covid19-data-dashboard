@@ -28,9 +28,9 @@ export const StringInput = (props: StringInputProps) => {
   return (
     <Stack space={3}>
       <TextInputContainer>
-        <TextInput {...elementProps} onChange={handleChange} value={value} style={{ border: `2px solid ${hasValidationError ? 'red' : 'transparent'}` }} />
+        <TextInput {...elementProps} onChange={handleChange} value={value} style={{ border: `2px solid ${hasValidationError ? colors.red2 : 'transparent'}` }} />
 
-        {hasValidationError ? <BsExclamationCircle color={colors.red3} /> : <BsCheckCircle color={colors.green1} />}
+        {hasValidationError ? <BsExclamationCircle color={colors.red2} /> : <BsCheckCircle color={colors.green1} />}
       </TextInputContainer>
 
       <Text size={1}>

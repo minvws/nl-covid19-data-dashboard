@@ -1,12 +1,11 @@
 import { defineType, defineField } from 'sanity';
-import { localeStringValidation } from '../../../studio/i18n';
-
-// TODO: Should these fiels have validation?
+import { localeStringValidation, localeValidation } from '../../../studio/i18n';
 
 export const overDitDashboard = defineType({
   name: 'overDitDashboard',
   type: 'document',
   title: 'Over dit dashboard',
+  // TODO: Should these fields have validation?
   fields: [
     defineField({
       name: 'title',
@@ -18,6 +17,7 @@ export const overDitDashboard = defineType({
       name: 'description',
       type: 'localeBlock',
       title: 'Beschrijving',
+      validation: localeValidation((rule) => rule.required()),
     }),
   ],
   preview: {

@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import { richTextEditorFields } from '../fields/rich-text-editor-fields';
+import { richContentFields } from '../fields/rich-content-fields';
 
 export const inlineBlock = defineType({
   name: 'inlineBlock',
@@ -7,10 +7,10 @@ export const inlineBlock = defineType({
   title: 'Locale Block Content',
   fields: [
     defineField({
-      title: 'Text en andere inhoud',
+      title: 'Tekst en andere inhoud',
       name: 'inlineBlockContent',
       type: 'array',
-      of: richTextEditorFields,
+      of: richContentFields,
     }),
   ],
 });

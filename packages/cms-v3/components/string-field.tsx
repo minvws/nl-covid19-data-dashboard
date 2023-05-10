@@ -2,10 +2,9 @@ import { Card, Text } from '@sanity/ui';
 import { StringFieldProps } from 'sanity';
 
 // TODO: Figure out if we want to use this
-
 export const StringField = (props: StringFieldProps) => {
-  const { children, title, description, value = '' } = props;
-  // console.log('String Field', props);
+  const { children, title, description } = props;
+
   return (
     <Card padding={2}>
       <Card paddingY={2}>

@@ -1,6 +1,7 @@
+import { defineField, defineType } from 'sanity';
+import { RichContentInput } from '../../components/rich-content-input';
 import { supportedLanguages } from '../../studio/i18n';
-import { richTextEditorFields } from '../fields/rich-text-editor-fields';
-import { defineType, defineField } from 'sanity';
+import { richContentFields } from '../fields/rich-content-fields';
 
 export const localeBlock = defineType({
   name: 'localeBlock',
@@ -16,8 +17,10 @@ export const localeBlock = defineType({
       title,
       name: id,
       type: 'array',
-      of: richTextEditorFields,
-      // inputComponent: ValidatedRichText,
+      of: richContentFields,
+      components: {
+        input: RichContentInput,
+      },
     })
   ),
 });
