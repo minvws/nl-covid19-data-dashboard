@@ -16,6 +16,7 @@ import { SeverityLevel, SeverityLevels } from '~/components/severity-indicator-t
 import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
 import { TopicalWeeklySummaryTile } from '~/components/weekly-summary/topical-weekly-summary-tile';
 import { Layout } from '~/domain/layout';
+import { Advice } from '~/domain/topical/components/advice';
 import { IndicatorLevelDescription } from '~/domain/topical/components/indicator-level-description';
 import { TopicalArticlesList } from '~/domain/topical/components/topical-article-list';
 import { TopicalHeader } from '~/domain/topical/components/topical-header';
@@ -70,7 +71,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { topicalStructure } = content;
 
-  const { topicalConfig, thermometer, kpiThemes, weeklySummary } = topicalStructure;
+  const { topicalConfig, thermometer, kpiThemes, weeklySummary, advice } = topicalStructure;
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -222,7 +223,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
         </MaxWidth>
 
-        <Spacer marginBottom={space[5]} />
+        <Spacer marginBottom={{ _: space[5], md: space[6] }} />
+
+        <Advice title={advice.title} description={advice.description} links={advice.links} image={advice.image} />
 
         <Box width="100%" paddingBottom={space[5]}>
           <MaxWidth spacing={4} paddingTop={{ _: space[3], md: space[5] }} paddingX={{ _: space[3], sm: space[4], md: space[3], lg: space[4] }}>

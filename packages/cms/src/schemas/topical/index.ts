@@ -1,4 +1,5 @@
 export * from './topical-page';
+export * from './advice';
 export * from './theme';
 export * from './theme-collection';
 export * from './theme-link';
