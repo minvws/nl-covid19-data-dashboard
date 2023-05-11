@@ -1,5 +1,5 @@
-import {colors} from '@corona-dashboard/common'
-import {buildLegacyTheme} from 'sanity'
+import { colors } from '@corona-dashboard/common';
+import { buildLegacyTheme } from 'sanity';
 
 export const theme = buildLegacyTheme({
   '--brand-primary': colors.magenta4,
@@ -12,7 +12,7 @@ export const theme = buildLegacyTheme({
   // '--component-bg': string
   // '--component-text-color': string
   // '--default-button-color': string
-  // '--default-button-primary-color': string
+  '--default-button-primary-color': colors.primary,
   // '--default-button-success-color': string
   // '--default-button-warning-color': string
   // '--default-button-danger-color': string
@@ -29,4 +29,4 @@ export const theme = buildLegacyTheme({
   // '--screen-default-break': string
   // '--screen-large-break': string
   // '--screen-xlarge-break': string
-})
+});
