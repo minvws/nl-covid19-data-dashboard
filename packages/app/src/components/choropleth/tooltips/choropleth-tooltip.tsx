@@ -29,7 +29,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: Choroplet
 
   const tooltipVars = {
     ...data.dataItem,
-    ...data.dataOptions.tooltipVariables,
+    ...data.dataOptions?.tooltipVariables,
   } as Record<string, string | number>;
 
   const formattedTooltipVars = Object.entries(dataFormatters || {}).reduce((accumulator, [key, formatter]) => {
@@ -71,7 +71,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(props: Choroplet
   }
 
   return (
-    <TooltipContent title={data.featureName} link={data.dataOptions.getLink ? data.dataOptions.getLink(data.code) : undefined}>
+    <TooltipContent title={data.featureName} link={data.dataOptions?.getLink ? data.dataOptions.getLink(data.code) : undefined}>
       <TooltipSubject subject={replaceVariablesInText(subject, tooltipVars)} thresholdValues={data.thresholdValues} filterBelow={filterBelow}>
         <VisuallyHidden>{ariaContent}</VisuallyHidden>
         <Box aria-hidden>

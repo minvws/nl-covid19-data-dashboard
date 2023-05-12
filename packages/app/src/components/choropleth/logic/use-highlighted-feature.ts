@@ -13,15 +13,10 @@ import { ProjectedGeoInfo } from './use-projected-coordinates';
  * @param dataOptions
  * @returns
  */
-export function useHighlightedFeature(
-  geoInfo: ProjectedGeoInfo[],
-  dataOptions: DataOptions
-) {
+export function useHighlightedFeature(geoInfo: ProjectedGeoInfo[], dataOptions?: DataOptions) {
   return useMemo(() => {
-    if (dataOptions.highlightSelection && isDefined(dataOptions.selectedCode)) {
-      return geoInfo
-        .filter((x) => x.code === dataOptions.selectedCode)
-        .map((x) => x.coordinates);
+    if (dataOptions?.highlightSelection && isDefined(dataOptions?.selectedCode)) {
+      return geoInfo.filter((x) => x.code === dataOptions?.selectedCode).map((x) => x.coordinates);
     }
   }, [geoInfo, dataOptions]);
 }

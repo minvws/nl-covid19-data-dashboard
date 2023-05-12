@@ -26,7 +26,6 @@ import { createGetStaticProps, StaticProps } from '~/static-props/create-get-sta
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
@@ -34,7 +33,6 @@ const pageMetrics = ['elderly_at_home'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-  textShared: siteText.pages.elderly_at_home_page.shared,
   textNl: siteText.pages.elderly_at_home_page.nl,
 });
 
@@ -81,9 +79,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
   const elderlyAtHomeDeceasedUnderReportedRange = getBoundaryDateStartUnix(elderlyAtHomeData.values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
-  const { metadataTexts, textShared, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
-
-  const reverseRouter = useReverseRouter();
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -93,7 +89,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
-  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+  const hasActiveWarningTile = !!textNl.belangrijk_bericht;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -115,7 +111,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             articles={content.articles}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile
@@ -126,7 +122,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               }}
             >
               <KpiValue
-                data-cy="positive_tested_daily"
                 absolute={elderlyAtHomeData.last_value.positive_tested_daily}
                 difference={data.difference.elderly_at_home__positive_tested_daily_archived_20230126}
                 isAmount
@@ -140,7 +135,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.section_positive_tested.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="positive_tested_daily_per_100k" absolute={elderlyAtHomeData.last_value.positive_tested_daily_per_100k} />
+              <KpiValue absolute={elderlyAtHomeData.last_value.positive_tested_daily_per_100k} />
               <Text>{textNl.section_positive_tested.kpi_daily_per_100k_description}</Text>
             </KpiTile>
           </TwoKpiSection>
@@ -211,9 +206,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                   positive_tested_daily_per_100k: formatNumber,
                 },
               }}
-              dataOptions={{
-                getLink: reverseRouter.vr.thuiswonendeOuderen,
-              }}
             />
           </ChoroplethTile>
           <Divider />
@@ -238,7 +230,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.section_deceased.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="deceased_daily" absolute={elderlyAtHomeData.last_value.deceased_daily} />
+              <KpiValue absolute={elderlyAtHomeData.last_value.deceased_daily} />
             </KpiTile>
           </TwoKpiSection>
           <ChartTile

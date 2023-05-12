@@ -5,6 +5,7 @@ import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { ChartTile, PageInformationBlock, TileList, TimeSeriesChart, WarningTile, Divider } from '~/components';
 import { Layout, NlLayout } from '~/domain/layout';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import {
   selectAdministrationData,
   VaccinationsOverTimeTile,
@@ -13,7 +14,6 @@ import {
   VaccinationsKpiHeader,
   VaccineCoverageChoropleth,
   VaccineCoveragePerAgeGroup,
-  VaccineCoverageTile,
   VaccineCoverageToggleTile,
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
@@ -32,6 +32,7 @@ import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/t
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 
 const pageMetrics = [
   'vaccine_administered_doctors',
@@ -114,13 +115,13 @@ export const getStaticProps = createGetStaticProps(
   },
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }) => vaccine_coverage_per_age_group ?? null,
-    vr: ({ vaccine_coverage_per_age_group }) => vaccine_coverage_per_age_group ?? null,
   })
 );
 
 function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const { content, choropleth, selectedNlData: data, lastGenerated, administrationData } = props;
   const { commonTexts, formatNumber } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(props.pageText, selectLokalizeTexts);
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
@@ -151,6 +152,10 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
+  const variables = {
+    regio: commonTexts.choropleth.choropleth_vaccination_coverage.nl,
+  };
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -171,13 +176,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             referenceLink={textNl.information_block.reference.href}
             articles={content.articles}
           />
-          <VaccineCoverageTile
+          <BorderedKpiSection
             title={textShared.vaccination_grade_tile.autumn_labels.title}
             description={textShared.vaccination_grade_tile.autumn_labels.description}
             source={textShared.vaccination_grade_tile.autumn_labels.source}
-            coverageData={[
+            tilesData={[
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_60_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedAutumn2022.age_60_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_60_plus,
                 description: textShared.vaccination_grade_tile.autumn_labels.description_60_plus,
@@ -188,6 +194,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               },
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_12_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedAutumn2022.age_12_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
                 description: textShared.vaccination_grade_tile.autumn_labels.description_12_plus,
@@ -199,13 +206,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             ]}
             dateUnix={vaccineCoverageEstimatedAutumn2022.date_unix}
           />
-          <VaccineCoverageTile
+          <BorderedKpiSection
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
             description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
             source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
-            coverageData={[
+            tilesData={[
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_18_plus,
                 description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_18_plus,
@@ -216,6 +224,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               },
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_12_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedFullyVaccinated.age_12_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
                 description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_12_plus,
@@ -253,7 +262,16 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }}
           />
 
-          <VaccineCoverageChoropleth data={choropleth} />
+          <VaccineCoverageChoropleth
+            data={choropleth.gm}
+            dataOptions={{ getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode), isPercentage: true }}
+            text={{
+              title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.title, variables),
+              description: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.description, variables),
+              vaccinationKindLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_vaccination_coverage_kind_select,
+              ageGroupLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_age_group_select,
+            }}
+          />
           <Autumn2022ShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}

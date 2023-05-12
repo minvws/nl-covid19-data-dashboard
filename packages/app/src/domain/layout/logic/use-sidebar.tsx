@@ -15,24 +15,24 @@ const mapCategoriesToIcons = {
 const mapKeysToReverseRouter = {
   compliance: 'gedrag',
   coronamelder_app: 'coronamelder',
+  current_advices: 'geldendeAdviezen',
   disabled_care: 'gehandicaptenzorg',
   elderly_at_home: 'thuiswonendeOuderen',
   general_practitioner_suspicions: 'verdenkingenHuisartsen',
   hospital_admissions: 'ziekenhuisopnames',
   hospitals_and_care: 'ziekenhuizenEnZorg',
-  patients: 'patientenInBeeld',
   infectious_people: 'besmettelijkeMensen',
   intensive_care_admissions: 'intensiveCareOpnames',
-  current_advices: 'geldendeAdviezen',
   mortality: 'sterfte',
   // Still the nursing home care name is used because of legacy naming inside of sanity's lokalize texts.
   nursing_home_care: 'kwetsbareGroepen',
+  patients: 'patientenInBeeld',
   positive_tests: 'positiefGetesteMensen',
+  reproduction_number: 'reproductiegetal',
   sewage_measurement: 'rioolwater',
-  source_investigation: 'brononderzoek',
+  tests: 'testen',
   vaccinations: 'vaccinaties',
   variants: 'varianten',
-  reproduction_number: 'reproductiegetal',
 } as const;
 
 type UseSidebarArgs<T extends Layout> = {
@@ -54,10 +54,6 @@ export function useSidebar<T extends Layout>({ layout, map, code }: UseSidebarAr
       const route = mapKeysToReverseRouter[key];
       if (layout === 'nl') {
         return reverseRouter.nl[route]();
-      }
-
-      if (layout === 'vr' && isPresent(code)) {
-        return reverseRouter.vr[route as keyof ReverseRouter['vr']](code);
       }
 
       if (layout === 'gm' && isPresent(code)) {

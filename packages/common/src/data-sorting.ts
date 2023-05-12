@@ -1,16 +1,9 @@
 import { isDefined } from 'ts-is-present';
-import {
-  GmSewerPerInstallationValue,
-  NlVariantsVariantValue,
-  VrSewerPerInstallationValue,
-} from './types';
+import { GmSewerPerInstallationValue, NlVariantsVariantValue } from './types';
 
 export type UnknownObject = Record<string, unknown>;
 
-export function sortTimeSeriesInDataInPlace<T>(
-  data: T,
-  { setDatesToMiddleOfDay = false } = {}
-) {
+export function sortTimeSeriesInDataInPlace<T>(data: T, { setDatesToMiddleOfDay = false } = {}) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
@@ -31,9 +24,7 @@ export function sortTimeSeriesInDataInPlace<T>(
         timeSeries.values = timeSeries.values.map(setValueDatesToMiddleOfDay);
 
         if (timeSeries.last_value) {
-          timeSeries.last_value = setValueDatesToMiddleOfDay(
-            timeSeries.last_value
-          );
+          timeSeries.last_value = setValueDatesToMiddleOfDay(timeSeries.last_value);
         }
       }
     } catch (e) {
@@ -47,8 +38,7 @@ export function sortTimeSeriesInDataInPlace<T>(
    * to process that separately.
    */
   if (isDefined((data as UnknownObject).sewer_per_installation)) {
-    const nestedSeries = (data as UnknownObject)
-      .sewer_per_installation as SewerPerInstallationData;
+    const nestedSeries = (data as UnknownObject).sewer_per_installation as SewerPerInstallationData;
 
     if (!nestedSeries.values) {
       /**
@@ -74,14 +64,10 @@ export function sortTimeSeriesInDataInPlace<T>(
          * It can happen that we get incomplete json data and assuming that values
          * exists here might crash the app
          */
-        console.error(
-          `sewer_per_installation.values[${index}] does not have a values collection`
-        );
+        console.error(`sewer_per_installation.values[${index}] does not have a values collection`);
         return x;
       }
-      x.values = sortTimeSeriesValues(x.values) as
-        | VrSewerPerInstallationValue[]
-        | GmSewerPerInstallationValue[];
+      x.values = sortTimeSeriesValues(x.values) as GmSewerPerInstallationValue[];
 
       if (setDatesToMiddleOfDay) {
         x.values = x.values.map(setValueDatesToMiddleOfDay);
@@ -116,9 +102,7 @@ export function sortTimeSeriesInDataInPlace<T>(
          * It can happen that we get incomplete json data and assuming that values
          * exists here might crash the app
          */
-        console.error(
-          `variants.nestedSeries.values[${index}].values does not exist`
-        );
+        console.error(`variants.nestedSeries.values[${index}].values does not exist`);
         return x;
       }
 
@@ -142,11 +126,7 @@ export function sortTimeSeriesInDataInPlace<T>(
  * in their content. All time series data is kept in this values field.
  */
 function getTimeSeriesPropertyNames<T>(data: T) {
-  return Object.entries(data).reduce(
-    (acc, [propertyKey, propertyValue]) =>
-      isTimeSeries(propertyValue) ? [...acc, propertyKey as keyof T] : acc,
-    [] as (keyof T)[]
-  );
+  return Object.entries(data).reduce((acc, [propertyKey, propertyValue]) => (isTimeSeries(propertyValue) ? [...acc, propertyKey as keyof T] : acc), [] as (keyof T)[]);
 }
 
 export function sortTimeSeriesValues(values: TimestampedValue[]) {
@@ -164,9 +144,7 @@ export function sortTimeSeriesValues(values: TimestampedValue[]) {
    * If none match we throw, since it means an unknown timestamp is used and we
    * want to be sure we sort all data.
    */
-  throw new Error(
-    `Unknown timestamp in value ${JSON.stringify(values[0], null, 2)}`
-  );
+  throw new Error(`Unknown timestamp in value ${JSON.stringify(values[0], null, 2)}`);
 }
 
 function setValueDatesToMiddleOfDay<T extends TimestampedValue>(value: T) {
@@ -198,9 +176,7 @@ export interface TimeSeriesMetric<T = TimestampedValue> {
 }
 
 export interface SewerPerInstallationData {
-  values: (TimeSeriesMetric<
-    VrSewerPerInstallationValue | GmSewerPerInstallationValue
-  > & {
+  values: (TimeSeriesMetric<GmSewerPerInstallationValue> & {
     rwzi_awzi_name: string;
   })[];
 }
@@ -220,39 +196,25 @@ export function isDateValue(value: TimestampedValue): value is DateValue {
   return isDefined((value as DateValue).date_unix);
 }
 
-export function isDateSpanValue(
-  value: TimestampedValue
-): value is DateSpanValue {
-  return (
-    isDefined((value as DateSpanValue).date_start_unix) &&
-    isDefined((value as DateSpanValue).date_end_unix)
-  );
+export function isDateSpanValue(value: TimestampedValue): value is DateSpanValue {
+  return isDefined((value as DateSpanValue).date_start_unix) && isDefined((value as DateSpanValue).date_end_unix);
 }
 
-export function isTimeSeries(
-  value: unknown | TimeSeriesMetric
-): value is TimeSeriesMetric {
+export function isTimeSeries(value: unknown | TimeSeriesMetric): value is TimeSeriesMetric {
   const metric = value as TimeSeriesMetric;
   return isDefined(metric.values) && isDefined(metric.last_value);
 }
 
-export function isDateSeries(
-  timeSeries: TimestampedValue[]
-): timeSeries is DateValue[] {
+export function isDateSeries(timeSeries: TimestampedValue[]): timeSeries is DateValue[] {
   if (!timeSeries.length) return false;
   const firstValue = (timeSeries as DateValue[])[0];
   return isDefined(firstValue?.date_unix);
 }
 
-export function isDateSpanSeries(
-  timeSeries: TimestampedValue[]
-): timeSeries is DateSpanValue[] {
+export function isDateSpanSeries(timeSeries: TimestampedValue[]): timeSeries is DateSpanValue[] {
   if (!timeSeries.length) return false;
   const firstValue = (timeSeries as DateSpanValue[])[0];
-  return (
-    isDefined(firstValue?.date_end_unix) &&
-    isDefined(firstValue?.date_start_unix)
-  );
+  return isDefined(firstValue?.date_end_unix) && isDefined(firstValue?.date_start_unix);
 }
 
 export function startOfDayInSeconds(seconds: number) {

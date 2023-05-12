@@ -3,14 +3,12 @@ import { GetStaticPropsContext } from 'next';
 import { middleOfDayInSeconds } from '@corona-dashboard/common';
 import { useMemo, useRef, useState } from 'react';
 import { Box } from '~/components/base';
-import { Divider } from '~/components/divider';
 import { Heading } from '~/components/typography';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { BehaviorChoroplethsTile } from '~/domain/behavior/behavior-choropleths-tile';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
@@ -22,7 +20,7 @@ import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
@@ -31,11 +29,9 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 const pageMetrics = ['behavior', 'behavior_annotations', 'behavior_per_age_group'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  caterogyTexts: siteText.common.sidebar.categories.actions_to_take.title,
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   text: siteText.pages.behavior_page,
   textNl: siteText.pages.behavior_page.nl,
-  textShared: siteText.pages.behavior_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -44,9 +40,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData('behavior', 'behavior_annotations', 'behavior_per_age_group'),
-  createGetChoroplethData({
-    vr: ({ behavior_archived_20221019 }) => ({ behavior_archived_20221019 }),
-  }),
+
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('behavior_page'))(context);
 
@@ -59,11 +53,11 @@ export const getStaticProps = createGetStaticProps(
 );
 
 export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
+  const { pageText, selectedNlData: data, content, lastGenerated } = props;
   const behaviorLastValue = data.behavior.last_value;
 
-  const { formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
-  const { caterogyTexts, metadataTexts, text, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { commonTexts, formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
+  const { metadataTexts, text, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -75,8 +69,6 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
   const scrollToRef = useRef<HTMLDivElement>(null);
 
   const behaviorLookupKeys = useBehaviorLookupKeys();
-
-  const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
 
   const { highestCompliance, highestSupport } = useMemo(() => {
     const list = behaviorLookupKeys.map((x) => ({
@@ -115,7 +107,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={caterogyTexts}
+            category={commonTexts.sidebar.categories.actions_to_take.title}
             title={text.nl.pagina.titel}
             icon={<Bevolking aria-hidden="true" />}
             description={text.nl.pagina.toelichting}
@@ -164,13 +156,13 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
           </TwoKpiSection>
 
           <BehaviorTableTile
-            title={text.shared.basisregels.title}
+            title={textNl.basisregels.title}
             description={textNl.basisregels.description}
             value={behaviorLastValue}
-            annotation={text.shared.basisregels.annotation}
+            annotation={textNl.basisregels.annotation}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
-            text={textShared}
+            text={textNl}
             metadata={{
               datumsText: textNl.datums,
               date: data.behavior.last_value.date_start_unix,
@@ -189,7 +181,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
             {...timelineProp}
             currentId={currentId}
             setCurrentId={setCurrentId}
-            text={text}
+            text={textNl}
           />
 
           {data.behavior_per_age_group && (
@@ -199,32 +191,12 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
               data={data.behavior_per_age_group}
               currentId={currentId}
               setCurrentId={setCurrentId}
-              text={text}
+              text={textNl}
               metadata={{
                 datumsText: textNl.datums,
                 date: data.behavior_per_age_group.date_start_unix,
                 source: textNl.bronnen.rivm,
               }}
-            />
-          )}
-
-          <Divider />
-
-          <PageInformationBlock
-            title={textNl.section_archived.title}
-            description={textNl.section_archived.description}
-            isArchivedHidden={hasHideArchivedCharts}
-            onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
-          />
-
-          {hasHideArchivedCharts && (
-            <BehaviorChoroplethsTile
-              title={textNl.verdeling_in_nederland.titel}
-              description={textNl.verdeling_in_nederland.description}
-              data={choropleth.vr}
-              currentId={currentId}
-              setCurrentId={setCurrentId}
-              text={text}
             />
           )}
         </TileList>

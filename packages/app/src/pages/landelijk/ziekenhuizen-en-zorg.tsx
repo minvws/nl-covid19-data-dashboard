@@ -4,18 +4,18 @@ import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { HospitalsTile } from '~/domain/hospital';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
@@ -33,7 +33,6 @@ const pageMetrics = [
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.hospitals_and_care_page.nl,
-  textShared: siteText.pages.hospitals_and_care_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -42,10 +41,6 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData('difference.hospital_lcps__beds_occupied_covid', 'difference.intensive_care_lcps__beds_occupied_covid', 'hospital_lcps', 'intensive_care_lcps'),
-  createGetChoroplethData({
-    vr: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
-    gm: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
-  }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts | LinkParts>;
@@ -130,20 +125,20 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <HospitalsTile
+          <BorderedKpiSection
             title={textNl.kpi_tiles.occupancies.title}
             description={textNl.kpi_tiles.occupancies.description}
             source={textNl.sources.lnaz}
             dateUnix={mostRecentDateUnix}
             tilesData={[
               {
-                absoluteValue: hospitalLastValue.beds_occupied_covid,
+                value: hospitalLastValue.beds_occupied_covid,
                 differenceValue: data.difference.hospital_lcps__beds_occupied_covid,
                 title: textNl.kpi_tiles.occupancies.hospital.title,
                 description: textNl.kpi_tiles.occupancies.hospital.description,
               },
               {
-                absoluteValue: icuLastValue.beds_occupied_covid,
+                value: icuLastValue.beds_occupied_covid,
                 differenceValue: data.difference.intensive_care_lcps__beds_occupied_covid,
                 title: textNl.kpi_tiles.occupancies.icu.title,
                 description: textNl.kpi_tiles.occupancies.icu.description,
@@ -255,19 +250,19 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          <HospitalsTile
+          <BorderedKpiSection
             title={textNl.kpi_tiles.influxes.title}
             description={textNl.kpi_tiles.influxes.description}
             source={textNl.sources.lnaz}
             dateUnix={mostRecentDateUnix}
             tilesData={[
               {
-                absoluteValue: hospitalLastValue.influx_covid_patients,
+                value: hospitalLastValue.influx_covid_patients,
                 title: textNl.kpi_tiles.influxes.hospital.title,
                 description: textNl.kpi_tiles.influxes.hospital.description,
               },
               {
-                absoluteValue: icuLastValue.influx_covid_patients,
+                value: icuLastValue.influx_covid_patients,
                 title: textNl.kpi_tiles.influxes.icu.title,
                 description: textNl.kpi_tiles.influxes.icu.description,
               },

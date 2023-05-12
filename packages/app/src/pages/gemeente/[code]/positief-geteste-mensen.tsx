@@ -2,6 +2,7 @@ import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard
 import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
+import { WarningTile } from '~/components';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -26,7 +27,7 @@ import { createGetStaticProps, StaticProps } from '~/static-props/create-get-sta
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { getVrForMunicipalityCode, replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
+import { replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
@@ -55,7 +56,6 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }, context) => ({
       tested_overall: filterByRegionMunicipalities(tested_overall, context),
     }),
-    vr: ({ tested_overall }) => ({ tested_overall }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -86,8 +86,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
   const lastValue = data.tested_overall.last_value;
   const populationCount = data.static_values.population_count;
-  const vrForMunicipality = getVrForMunicipalityCode(data.code);
-  const vrData = choropleth.vr.tested_overall.find((v) => v.vrcode === vrForMunicipality?.code);
   const metadata = {
     ...commonTexts.gemeente_index.metadata,
     title: replaceVariablesInText(textGm.metadata.title, {
@@ -105,7 +103,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
       <GmLayout code={data.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.development_of_the_virus.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             title={replaceVariablesInText(textGm.titel, {
               municipality: municipalityName,
             })}
@@ -123,6 +121,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             warning={textGm.warning}
           />
 
+          {!!textShared.warning && <WarningTile isFullWidth message={textShared.warning} variant="informational" />}
+
           <TwoKpiSection>
             <KpiTile
               title={textGm.infected_kpi.title}
@@ -131,7 +131,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="infected_moving_average" absolute={lastValue.infected_moving_average_rounded} isAmount />
+              <KpiValue absolute={lastValue.infected_moving_average_rounded} isAmount />
               <Text>
                 {replaceComponentsInText(commonTexts.gemeente_index.population_count, {
                   municipalityName,
@@ -158,7 +158,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="infected_per_100k_moving_average" absolute={lastValue.infected_per_100k_moving_average} isAmount />
+              <KpiValue absolute={lastValue.infected_per_100k_moving_average} isAmount />
               <Text>{textGm.barscale_toelichting}</Text>
 
               <CollapsibleContent label={commonTexts.gemeente_index.population_count_explanation_title}>
@@ -223,17 +223,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                       municipality: municipalityName,
                     })}
                   />
-                  <Markdown
-                    content={replaceVariablesInText(textGm.map_safety_region_last_value_text, {
-                      infected_per_100k: formatNumber(vrData?.infected_per_100k),
-                      safetyRegion: vrForMunicipality?.name,
-                    })}
-                  />
                 </>
               }
               legend={{
                 thresholds: thresholds.gm.infected_per_100k,
-                title: textShared.chloropleth_legenda.titel,
+                title: textShared.chloropleth_legenda_titel,
               }}
               metadata={{
                 date: lastValue.date_unix,

@@ -1,4 +1,4 @@
-import { colors, NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
+import { colors, NlBehaviorValue } from '@corona-dashboard/common';
 import React, { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -20,11 +20,11 @@ import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
 interface BehaviorTableTileProps {
   title: string;
   description: string;
-  value: NlBehaviorValue | VrBehaviorArchived_20221019Value;
+  value: NlBehaviorValue;
   annotation: string;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   scrollRef: { current: HTMLDivElement | null };
-  text: SiteText['pages']['behavior_page']['shared'];
+  text: SiteText['pages']['behavior_page']['nl'];
   metadata: MetadataProps;
 }
 

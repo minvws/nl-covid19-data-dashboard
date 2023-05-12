@@ -117,7 +117,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               }}
             >
               <KpiValue
-                data-cy="average"
                 absolute={sewerAverages.last_value.average}
                 valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
@@ -141,7 +140,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue data-cy="total_number_of_samples" absolute={sewerAverages.last_value.total_number_of_samples} />
+              <KpiValue absolute={sewerAverages.last_value.total_number_of_samples} />
               <Text>
                 {replaceComponentsInText(textGm.total_measurements_locations, {
                   sampled_installation_count: <strong>{sewerAverages.last_value.sampled_installation_count}</strong>,
@@ -165,10 +164,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               averagesTooltipLabel: commonTexts.common.charts.weekly_averages_label,
               valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
               rwziSelectDropdown: textGm.linechart_select,
-              rwziLabel: textShared.RWZI_label,
+              rwziLabel: textGm.RWZI_label,
             }}
             vrNameOrGmName={municipalityName}
-            incompleteDatesAndTexts={textShared.zeewolde_incomplete_manualy_override}
+            incompleteDatesAndTexts={textGm.zeewolde_incomplete_manualy_override}
             warning={textGm.warning_chart}
           />
         </TileList>

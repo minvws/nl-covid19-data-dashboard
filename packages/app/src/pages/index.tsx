@@ -4,11 +4,11 @@ import { css } from '@styled-system/css';
 import { GetStaticPropsContext } from 'next';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import { MaxWidth } from '~/components/max-width';
 import { Box, Spacer } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { CollapsibleSection } from '~/components/collapsible';
-import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic/get-timeline-range-dates';
+import { MaxWidth } from '~/components/max-width';
+import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic';
 import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
 import { SEVERITY_LEVELS_LIST, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '~/components/severity-indicator-tile/constants';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
@@ -16,8 +16,8 @@ import { SeverityLevel, SeverityLevels } from '~/components/severity-indicator-t
 import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
 import { TopicalWeeklySummaryTile } from '~/components/weekly-summary/topical-weekly-summary-tile';
 import { Layout } from '~/domain/layout';
+import { Advice } from '~/domain/topical/components/advice';
 import { IndicatorLevelDescription } from '~/domain/topical/components/indicator-level-description';
-import { Search } from '~/domain/topical/components/search/search';
 import { TopicalArticlesList } from '~/domain/topical/components/topical-article-list';
 import { TopicalHeader } from '~/domain/topical/components/topical-header';
 import { TopicalTile } from '~/domain/topical/components/topical-kpi-tile/topical-tile';
@@ -29,7 +29,7 @@ import { Languages, SiteText } from '~/locale';
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { getThermometerEvents, getTopicalStructureQuery } from '~/queries/get-topical-structure-query';
 import { TopicalSanityData } from '~/queries/query-types';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { space } from '~/style/theme';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
@@ -71,7 +71,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const { topicalStructure } = content;
 
-  const { topicalConfig, thermometer, kpiThemes, weeklySummary } = topicalStructure;
+  const { topicalConfig, thermometer, kpiThemes, weeklySummary, advice } = topicalStructure;
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -223,15 +223,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
         </MaxWidth>
 
-        <Spacer marginBottom={space[5]} />
+        <Spacer marginBottom={{ _: space[5], md: space[6] }} />
 
-        <Box width="100%" backgroundColor="gray1" paddingY={space[5]}>
-          <Box paddingY={space[4]} paddingX={{ _: space[3], sm: space[4] }}>
-            <Search title={textShared.secties.search.title.nl} />
-          </Box>
-        </Box>
-
-        <Spacer marginBottom={space[5]} />
+        <Advice title={advice.title} description={advice.description} links={advice.links} image={advice.image} />
 
         <Box width="100%" paddingBottom={space[5]}>
           <MaxWidth spacing={4} paddingTop={{ _: space[3], md: space[5] }} paddingX={{ _: space[3], sm: space[4], md: space[3], lg: space[4] }}>

@@ -49,24 +49,24 @@ export const ChoroplethMap: <T extends ChoroplethDataItem>(props: ChoroplethMapP
 
   const dataConfig = createDataConfig(partialDataConfig);
 
-  const mapProjection = isDefined(dataOptions.projection) ? geoConicConformal : geoMercator;
+  const mapProjection = isDefined(dataOptions?.projection) ? geoConicConformal : geoMercator;
 
   const annotations = useAccessibilityAnnotations(accessibility);
-  const data = useChoroplethData(originalData, map, dataOptions.selectedCode);
+  const data = useChoroplethData(originalData, map, dataOptions?.selectedCode);
 
   const [containerRef, { width = 0, height = minHeight }] = useResizeObserver<HTMLDivElement>();
 
   const [mapHeight, padding] = useResponsiveSize(width, height, boundingBoxPadding, responsiveSizeConfiguration);
 
-  const choroplethFeatures = useChoroplethFeatures(map, data, dataOptions.selectedCode);
+  const choroplethFeatures = useChoroplethFeatures(map, data, dataOptions?.selectedCode);
 
   const getFillColor = useFillColor(data, map, dataConfig, thresholdMap);
 
-  const featureProps = useFeatureProps(map, getFillColor, dataOptions, dataConfig);
+  const featureProps = useFeatureProps(map, getFillColor, dataConfig, dataOptions);
 
-  const [featureOverHandler, featureOutHandler, tooltipTrigger] = useChoroplethTooltip(map, data, dataConfig, dataOptions, isTabInteractive, setTooltip, containerRef);
+  const [featureOverHandler, featureOutHandler, tooltipTrigger] = useChoroplethTooltip(map, data, dataConfig, isTabInteractive, setTooltip, containerRef, dataOptions);
 
-  const getFeatureName = useFeatureName(map, dataOptions.getFeatureName);
+  const getFeatureName = useFeatureName(map, dataOptions?.getFeatureName);
 
   const fitExtent: FitExtent = useMemo(
     () => [

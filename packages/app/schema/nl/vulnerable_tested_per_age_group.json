@@ -2,21 +2,17 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "nl_vulnerable_tested_per_age_group",
   "type": "object",
-  "required":[
-    "infected_age_70_plus",
-    "date_unix",
-    "date_of_insertion_unix"
-  ],
+  "required": ["infected_age_70_plus", "date_unix", "date_of_insertion_unix"],
   "additionalProperties": false,
   "properties": {
-      "infected_age_70_plus": {
-        "type": "integer"
-      },
-      "date_unix": {
-        "type": "integer"
-      },
-      "date_of_insertion_unix": {
-        "type": "integer"
-      }
+    "infected_age_70_plus": {
+      "type": "integer"
+    },
+    "date_unix": {
+      "type": "integer"
+    },
+    "date_of_insertion_unix": {
+      "type": "integer"
+    }
   }
 }
