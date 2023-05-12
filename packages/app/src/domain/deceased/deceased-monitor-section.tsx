@@ -1,4 +1,4 @@
-import { colors, NlDeceasedCbs, VrDeceasedCbs } from '@corona-dashboard/common';
+import { colors, NlDeceasedCbs } from '@corona-dashboard/common';
 import { AnchorTile } from '~/components/anchor-tile';
 import { ChartTile } from '~/components/chart-tile';
 import { Markdown } from '~/components/markdown';
@@ -10,7 +10,7 @@ export function DeceasedMonitorSection({
   text,
   showCauseMessage,
 }: {
-  data: NlDeceasedCbs | VrDeceasedCbs;
+  data: NlDeceasedCbs;
   text: SiteText['pages']['deceased_page']['nl']['section_sterftemonitor'];
   showCauseMessage?: boolean;
 }) {

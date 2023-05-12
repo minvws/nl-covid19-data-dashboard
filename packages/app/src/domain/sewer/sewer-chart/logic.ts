@@ -4,7 +4,7 @@
  * new-sewer-chart here later and rename it to logic.
  */
 
-import { assert, GmSewer, NlSewer, SewerPerInstallationData, VrSewer } from '@corona-dashboard/common';
+import { assert, GmSewer, NlSewer, SewerPerInstallationData } from '@corona-dashboard/common';
 import { useMemo, useState } from 'react';
 
 type MergedValue = {
@@ -21,7 +21,7 @@ export type MergedSewerType = ReturnType<typeof mergeData>[number];
  * with different formats. In order to display them in the chart together we
  * need to convert them to format with the same type of timestamps.
  */
-export const mergeData = (dataAverages: VrSewer | GmSewer | NlSewer, dataPerInstallation: SewerPerInstallationData, selectedInstallation: string) => {
+export const mergeData = (dataAverages: GmSewer | NlSewer, dataPerInstallation: SewerPerInstallationData, selectedInstallation: string) => {
   const valuesForInstallation = dataPerInstallation.values.find((x) => x.rwzi_awzi_name === selectedInstallation)?.values;
 
   assert(valuesForInstallation, `[${mergeData.name}] Failed to find data for rwzi_awzi_name ${selectedInstallation}`);

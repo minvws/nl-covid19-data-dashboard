@@ -3,23 +3,7 @@
   "type": "object",
   "title": "vr_collection",
   "additionalProperties": false,
-  "required": [
-    "last_generated",
-    "proto_name",
-    "name",
-    "code",
-    "tested_overall",
-    "vulnerable_nursing_home",
-    "nursing_home_archived_20230126",
-    "behavior_archived_20221019",
-    "hospital_nice",
-    "hospital_nice_choropleth",
-    "elderly_at_home_archived_20230126",
-    "disability_care_archived_20230126",
-    "sewer",
-    "situations",
-    "vaccine_coverage_per_age_group"
-  ],
+  "required": ["last_generated", "proto_name", "name", "code", "disability_care_archived_20230126", "elderly_at_home_archived_20230126", "nursing_home_archived_20230126"],
   "properties": {
     "last_generated": {
       "type": "string"
@@ -32,61 +16,6 @@
     },
     "code": {
       "$ref": "#/$defs/vr_collection_id"
-    },
-    "hospital_nice": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "hospital_nice.json"
-      }
-    },
-    "hospital_nice_choropleth": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "hospital_nice.json"
-      }
-    },
-    "tested_overall": {
-      "type": "array",
-      "maxItems": 25,
-      "items": {
-        "$ref": "tested_overall.json"
-      }
-    },
-    "vulnerable_nursing_home": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "vulnerable_nursing_home.json"
-      }
-    },
-    "nursing_home_archived_20230126": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "nursing_home_archived_20230126.json"
-      }
-    },
-    "sewer": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "sewer.json"
-      }
-    },
-    "behavior_archived_20221019": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "behavior_archived_20221019.json"
-      }
     },
     "disability_care_archived_20230126": {
       "type": "array",
@@ -104,20 +33,12 @@
         "$ref": "elderly_at_home_archived_20230126.json"
       }
     },
-    "situations": {
+    "nursing_home_archived_20230126": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "situations.json"
-      }
-    },
-    "vaccine_coverage_per_age_group": {
-      "type": "array",
-      "minItems": 50,
-      "maxItems": 50,
-      "items": {
-        "$ref": "vaccine_coverage_per_age_group.json"
+        "$ref": "nursing_home_archived_20230126.json"
       }
     }
   },
