@@ -1,8 +1,8 @@
 import { createElement } from 'react';
 import { BsFileEarmark } from 'react-icons/bs';
-import { Path, Rule, defineField, defineType } from 'sanity';
-import { isDefined } from 'ts-is-present';
+import { defineField, defineType } from 'sanity';
 import { LokalizeDocumentDescription } from '../../lokalize/components/lokalize-document-description';
+import { validateLocaleTextPlaceholders } from '../../studio/validation/lokalize-variable-placeholder-validation';
 
 /**
  * A text coming from the original Lokalize JSON structure is split into a
@@ -13,10 +13,6 @@ import { LokalizeDocumentDescription } from '../../lokalize/components/lokalize-
  * both Lokalize and Sanity.
  */
 export const lokalizeText = defineType({
-  // See: https://www.sanity.io/docs/ui-affordances-for-actions
-  // We don't allow creation of new keys or deleting them from the UI.
-  // TODO: Update the experimental actions.
-  // __experimental_actions: ['update', 'publish'],
   name: 'lokalizeText',
   type: 'document',
   title: 'Text',
@@ -41,10 +37,10 @@ export const lokalizeText = defineType({
       name: 'text',
       description: createElement(LokalizeDocumentDescription),
       type: 'localeText',
-      validation: (rule: Rule) => [
+      validation: (rule) => [
         rule.fields({
-          nl: (rule: Rule) => rule.required(),
-          en: (rule: Rule) => rule.required().warning(),
+          nl: (rule) => rule.required(),
+          en: (rule) => rule.required().warning(),
         }),
 
         rule.custom(validateLocaleTextPlaceholders),
@@ -93,50 +89,3 @@ export const lokalizeText = defineType({
     },
   },
 });
-
-function validateLocaleTextPlaceholders({ en, nl }: { en?: string; nl?: string }):
-  | true
-  | {
-      message: string;
-      paths: Path[];
-    } {
-  const enErrors = getFaultyParameterPlaceholders(en);
-  const nlErrors = getFaultyParameterPlaceholders(nl);
-
-  if (enErrors.length) {
-    const vars = enErrors.map((x) => `"${x}"`).join(', ');
-    return {
-      message: `De volgende variabelen zijn niet juist geformatteerd: ${vars}`,
-      paths: [['en']],
-    };
-  }
-
-  if (nlErrors.length) {
-    const vars = nlErrors.map((x) => `"${x}"`).join(', ');
-    return {
-      message: `De volgende variabelen zijn niet juist geformatteerd: ${vars}`,
-      paths: [['nl']],
-    };
-  }
-
-  return true;
-}
-
-/**
- * A valid placeholder is considered to look like ``{{placeholderName}}``.
- * This validator looks for mistakes such as ``{placeHolderName}}`` or
- * ``{{placeHolderName}}}``.
- */
-function getFaultyParameterPlaceholders(text = '') {
-  const faultyVariables = [...(text.matchAll(/{+[^}]+}+/g) as any)]
-    .map((matchInfo: string[]) => {
-      const match = matchInfo[0].match(/{{2}[^{}]+}{2}/);
-      if (!match || match[0] !== matchInfo[0]) {
-        return matchInfo[0];
-      }
-      return;
-    })
-    .filter(isDefined);
-
-  return faultyVariables;
-}

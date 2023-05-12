@@ -1,5 +1,5 @@
-import { defineType, defineField } from 'sanity';
-import { localeStringValidation, localeValidation } from '../../../studio/i18n';
+import { defineField, defineType } from 'sanity';
+import { localeStringValidation, localeValidation } from '../../../studio/validation/locale-validation';
 
 export const overDitDashboard = defineType({
   name: 'overDitDashboard',

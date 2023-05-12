@@ -16,7 +16,7 @@ export const theme = buildLegacyTheme({
   // '--default-button-success-color': string
   // '--default-button-warning-color': string
   // '--default-button-danger-color': string
-  // '--focus-color': string
+  '--focus-color': colors.primary,
   // '--gray-base': string
   // '--gray': string
   // '--main-navigation-color': string

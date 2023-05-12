@@ -41,22 +41,23 @@ export default defineConfig({
     },
   },
   theme,
-  // TODO: Type and implement the code below. It is the new version of __experimentalActions in lokalize-text.ts.
-  // document: {
-  //   // Removes lokalize from the global "create new" interface at the top left of the navigation bar.
-  //   newDocumentOptions: (prev, { creationContext }) => {
-  //     if (creationContext.type === 'global') {
-  //       return prev.filter((templateItem) => templateItem.templateId != 'lokalizeText')
-  //     }
-  //     return prev
-  //   },
-  //   actions: (prev, { schemaType }) => {
-  //     if (schemaType === 'lokalizeText') {
-  //       // Should ensure that the user can only update and publish, but not create or delete Lokalize keys.
-  //       // Please double check that this indeed does what we expect when implementing.
-  //       return prev.filter(({ action }) => !['unpublish', 'delete', 'duplicate'].includes(action))
-  //     }
-  //     return prev
-  //   },
-  // },
+  document: {
+    // Removes lokalize from the global "create new" interface at the top left of the navigation bar.
+    newDocumentOptions: (prev, { creationContext }) => {
+      if (creationContext.type === 'global') {
+        return prev.filter((templateItem) => templateItem.templateId !== 'lokalizeText');
+      }
+
+      return prev;
+    },
+    actions: (prev, { schemaType }) => {
+      if (schemaType === 'lokalizeText') {
+        // Should ensure that the user can only update and publish, but not create or delete Lokalize keys.
+        const allowedActions = ['unpublish', 'delete', 'duplicate'];
+        return prev.filter(({ action }) => !allowedActions.includes(action!));
+      }
+
+      return prev;
+    },
+  },
 });

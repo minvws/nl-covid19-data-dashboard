@@ -3,7 +3,7 @@ import { BsFolder, BsTranslate } from 'react-icons/bs';
 import { map } from 'rxjs/operators';
 import { StructureBuilder, StructureResolverContext } from 'sanity/desk';
 
-export function lokalizeStructureItem(S: StructureBuilder, context: StructureResolverContext) {
+export const lokalizeStructureItem = (S: StructureBuilder, context: StructureResolverContext) => {
   const { documentStore } = context;
 
   return S.listItem()
@@ -13,19 +13,25 @@ export function lokalizeStructureItem(S: StructureBuilder, context: StructureRes
     .child(() => {
       const type = 'lokalizeText';
 
-      return documentStore.listenQuery(`*[_type == $type]{ subject }`, { type }, {}).pipe(
-        map((documents: { subject: string }[]) => {
-          const subjects = uniq(documents.map((document) => document.subject).filter(Boolean));
+      return documentStore
+        .listenQuery(
+          `//groq
+            *[_type == $type]{ subject }
+          `,
+          { type },
+          {}
+        )
+        .pipe(
+          map((documents: { subject: string }[]) => {
+            const subjects = uniq(documents.map((document) => document.subject).filter(Boolean));
 
-          return lokalizeStructureItemChild(S, subjects, type);
-        })
-      );
+            return lokalizeStructureItemChild(S, subjects, type);
+          })
+        );
     });
-}
+};
 
 const lokalizeStructureItemChild = (S: StructureBuilder, subjects: string[], type: string) => {
-  console.log(subjects);
-  console.log(type);
   return S.list()
     .title('Onderwerp')
     .items(
@@ -44,7 +50,11 @@ const lokalizeStructureItemChild = (S: StructureBuilder, subjects: string[], typ
                 .title(subject)
                 .schemaType(type)
                 .defaultOrdering([{ field: 'key', direction: 'asc' }])
-                .filter('subject == $subject')
+                .filter(
+                  `//groq
+                    subject == $subject
+                  `
+                )
                 .params({ subject })
                 .child((id) => S.editor().id(id).schemaType(type).documentId(id).views([S.view.form()]))
             )
