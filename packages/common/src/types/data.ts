@@ -270,7 +270,7 @@ export interface Nl {
   vaccine_administered_hospitals_and_care_institutions: NlVaccineAdministeredHospitalsAndCareInstitutions;
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
-  vaccine_administered_last_week: NlVaccineAdministeredLastWeek;
+  vaccine_administered_last_timeframe: NlVaccineAdministeredLastTimeframe;
   vaccine_campaigns: NlVaccineCampaigns;
   vaccine_campaigns_archived_20220908: NlVaccineCampaignsArchived_20220908;
   vaccine_planned_archived_20220908: NlVaccinePlannedArchived_20220908;
@@ -966,7 +966,7 @@ export interface NlVaccineAdministeredPlannedValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineAdministeredLastWeek {
+export interface NlVaccineAdministeredLastTimeframe {
   vaccine_types: NlVaccineType[];
   date_unix: number;
   date_start_unix: number;
@@ -989,7 +989,7 @@ export interface NlVaccineCampaign {
   vaccine_campaign_name_nl: string;
   vaccine_campaign_name_en: string;
   vaccine_administered_total: number;
-  vaccine_administered_last_week: number;
+  vaccine_administered_last_timeframe: number;
 }
 export interface NlVaccineCampaignsArchived_20220908 {
   vaccine_campaigns: NlVaccineCampaignsArchived_202209081[];

@@ -53,7 +53,7 @@
     "vaccine_administered_hospitals_and_care_institutions",
     "vaccine_administered_total",
     "vaccine_administered_planned",
-    "vaccine_administered_last_week",
+    "vaccine_administered_last_timeframe",
     "vaccine_stock",
     "vaccine_delivery_per_supplier",
     "vaccine_coverage_per_age_group",
@@ -215,8 +215,8 @@
     "vaccine_administered_planned": {
       "$ref": "vaccine_administered_planned.json"
     },
-    "vaccine_administered_last_week": {
-      "$ref": "vaccine_administered_last_week.json"
+    "vaccine_administered_last_timeframe": {
+      "$ref": "vaccine_administered_last_timeframe.json"
     },
     "vaccine_campaigns": {
       "$ref": "vaccine_campaigns.json"
