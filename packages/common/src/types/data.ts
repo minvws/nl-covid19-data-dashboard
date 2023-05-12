@@ -989,9 +989,7 @@ export interface NlVaccineCampaign {
   vaccine_campaign_name_nl: string;
   vaccine_campaign_name_en: string;
   vaccine_administered_total: number;
-  vaccine_administered_last_week?: number;
   vaccine_administered_last_timeframe: number;
-  [k: string]: unknown;
 }
 export interface NlVaccineCampaignsArchived_20220908 {
   vaccine_campaigns: NlVaccineCampaignsArchived_202209081[];

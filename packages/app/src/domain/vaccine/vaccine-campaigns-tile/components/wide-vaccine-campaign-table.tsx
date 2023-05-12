@@ -60,7 +60,11 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, isFirst }: Vaccine
               </StyledCell>
 
               <StyledCell>
-                {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_last_week)}</BoldText> : formatNumber(campaign.vaccine_administered_last_week)}
+                {isOpen ? (
+                  <BoldText>{formatNumber(campaign.vaccine_administered_last_week || campaign.vaccine_administered_last_timeframe)}</BoldText>
+                ) : (
+                  formatNumber(campaign.vaccine_administered_last_week || campaign.vaccine_administered_last_timeframe)
+                )}
               </StyledCell>
 
               <StyledCell>
