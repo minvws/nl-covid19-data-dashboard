@@ -1,4 +1,4 @@
-import { colors, NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
+import { colors, NlBehaviorValue } from '@corona-dashboard/common';
 import { dropRightWhile, dropWhile } from 'lodash';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
@@ -15,7 +15,7 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
 import { BehaviorIdentifier } from './logic/behavior-types';
 
-type ValueType = NlBehaviorValue | VrBehaviorArchived_20221019Value;
+type ValueType = NlBehaviorValue;
 type ValueKey = keyof ValueType;
 
 interface BehaviorLineChartTileProps {
@@ -26,7 +26,7 @@ interface BehaviorLineChartTileProps {
   behaviorOptions?: BehaviorIdentifier[];
   timelineEvents?: TimelineEventConfig[];
   useDatesAsRange?: boolean;
-  text: SiteText['pages']['behavior_page'];
+  text: SiteText['pages']['behavior_page']['nl'];
 }
 
 export function BehaviorLineChartTile({ values, metadata, currentId, setCurrentId, behaviorOptions, timelineEvents, useDatesAsRange, text }: BehaviorLineChartTileProps) {
@@ -39,16 +39,16 @@ export function BehaviorLineChartTile({ values, metadata, currentId, setCurrentI
   const breakpoints = useBreakpoints();
 
   return (
-    <ChartTile title={text.shared.line_chart.title} metadata={metadata} description={text.shared.line_chart.description}>
+    <ChartTile title={text.line_chart.title} metadata={metadata} description={text.line_chart.description}>
       <Box spacing={4}>
         <Box display="flex" alignItems={{ lg: 'center' }} spacing={{ _: 3, lg: 0 }} flexDirection={{ _: 'column', lg: 'row' }} paddingBottom={space[3]}>
           <Box paddingRight={space[3]} width={breakpoints.lg ? '50%' : '100%'}>
-            <SelectBehavior label={text.nl.select_behaviour_label} value={currentId} onChange={setCurrentId} options={behaviorOptions} />
+            <SelectBehavior label={text.select_behaviour_label} value={currentId} onChange={setCurrentId} options={behaviorOptions} />
           </Box>
 
           {(complianceValuesHasGap || supportValuesHasGap) && (
-            <InlineTooltip content={text.shared.line_chart.tooltip_witte_gaten_beschrijving}>
-              <BoldText>{text.shared.line_chart.tooltip_witte_gaten_label}</BoldText>
+            <InlineTooltip content={text.line_chart.tooltip_witte_gaten_beschrijving}>
+              <BoldText>{text.line_chart.tooltip_witte_gaten_label}</BoldText>
             </InlineTooltip>
           )}
         </Box>
@@ -62,16 +62,16 @@ export function BehaviorLineChartTile({ values, metadata, currentId, setCurrentI
             {
               type: 'gapped-line',
               metricProperty: selectedComplianceValueKey,
-              label: text.shared.line_chart.compliance_label,
-              shortLabel: text.shared.line_chart.compliance_short_label,
+              label: text.line_chart.compliance_label,
+              shortLabel: text.line_chart.compliance_short_label,
               strokeWidth: 3,
               color: colors.blue6,
             },
             {
               type: 'gapped-line',
               metricProperty: selectedSupportValueKey,
-              label: text.shared.line_chart.support_label,
-              shortLabel: text.shared.line_chart.support_short_label,
+              label: text.line_chart.support_label,
+              shortLabel: text.line_chart.support_short_label,
               strokeWidth: 3,
               color: colors.yellow3,
             },

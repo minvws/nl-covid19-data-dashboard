@@ -164,10 +164,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               averagesTooltipLabel: commonTexts.common.charts.weekly_averages_label,
               valueAnnotation: commonTexts.waarde_annotaties.riool_normalized,
               rwziSelectDropdown: textGm.linechart_select,
-              rwziLabel: textShared.RWZI_label,
+              rwziLabel: textGm.RWZI_label,
             }}
             vrNameOrGmName={municipalityName}
-            incompleteDatesAndTexts={textShared.zeewolde_incomplete_manualy_override}
+            incompleteDatesAndTexts={textGm.zeewolde_incomplete_manualy_override}
             warning={textGm.warning_chart}
           />
         </TileList>

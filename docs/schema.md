@@ -72,7 +72,7 @@ Use these guidelines when defining a new schema:
    suffix but keep otherwise the same as the root title.
 3. In order to avoid Typescript interface name clashes between national and
    regional and municipal types, the data should have the `nl_`,
-   `vr_` etc. prefix in the titles. That way we can tweak definition per
+   `gm_`, etc. prefix in the titles. That way we can tweak definition per
    source without creating any interdependencies. An example of this is
    `nursing_home.json` which exists in both national and regional folders.
 4. Property names should first say what it is measuring and then optionally
@@ -109,7 +109,7 @@ validations.
 
 This script will retrieve all of its path information from `schema-info.ts`, this file
 generates a list of paths to each json file in the `packages/app/public/json` folder
-and serves them in a structure that divides them up between `in`, `nl`, `vr` and `gm`.
+and serves them in a structure that divides them up between `in`, `nl`, and `gm`.
 
 The validator will then be able to associate the right schema with the right JSON file.
 

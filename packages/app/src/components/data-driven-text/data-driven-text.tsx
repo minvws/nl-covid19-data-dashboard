@@ -1,11 +1,11 @@
-import { Gm, Nl, Vr } from '@corona-dashboard/common';
+import { Gm, Nl } from '@corona-dashboard/common';
 import React, { ReactNode } from 'react';
 import { Text } from '../typography';
 import { Difference } from './components/difference';
 import { Metric } from './components/metric';
 import { PluralizationTexts } from './logic/get-pluralized-text';
 
-export type DataKeys = keyof Nl | keyof Vr | keyof Gm;
+export type DataKeys = keyof Nl | keyof Gm;
 
 /**
  * This type ensures that if a metricName of type keyof Nl is assigned,
@@ -20,13 +20,7 @@ export type DataKeys = keyof Nl | keyof Vr | keyof Gm;
  * forgiving because it will work on any data structure.
  *
  */
-export type DataFile<T> = T extends keyof Nl
-  ? Pick<Nl, 'difference' | T>
-  : T extends keyof Vr
-  ? Pick<Vr, 'difference' | T>
-  : T extends keyof Gm
-  ? Pick<Gm, 'difference' | T>
-  : never;
+export type DataFile<T> = T extends keyof Nl ? Pick<Nl, 'difference' | T> : T extends keyof Gm ? Pick<Gm, 'difference' | T> : never;
 
 export type Content<T extends DataKeys> =
   | {
@@ -51,28 +45,18 @@ interface DataDrivenTextProps<T extends DataKeys, K = DataFile<T>> {
   content: Content<T>[];
 }
 
-export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
-  data,
-  content,
-}: DataDrivenTextProps<T, K>) {
+export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({ data, content }: DataDrivenTextProps<T, K>) {
   return (
     <Text variant="datadriven">
-      {React.Children.toArray(
-        content.map((x) => renderContent(x, data))
-      ).reduce((children: ReactNode[], child: ReactNode, index, arr) => {
+      {React.Children.toArray(content.map((x) => renderContent(x, data))).reduce((children: ReactNode[], child: ReactNode, index, arr) => {
         // inject spaces between content
-        return index < arr.length - 1
-          ? children.concat(child, ' ')
-          : children.concat(child);
+        return index < arr.length - 1 ? children.concat(child, ' ') : children.concat(child);
       }, [])}
     </Text>
   );
 }
 
-function renderContent<T extends DataKeys, K = DataFile<T>>(
-  content: Content<T>,
-  data: K
-) {
+function renderContent<T extends DataKeys, K = DataFile<T>>(content: Content<T>, data: K) {
   switch (content.type) {
     case 'metric':
       return <Metric data={data} {...content} />;

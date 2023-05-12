@@ -20,9 +20,9 @@ point to a unique data element in the app via a combination of `scope`, `element
 The type of element then defines what can be configured for that element. At the
 time of writing we only use this to configure timeline events.
 
-As an example, the chart that is shown on the safety region page about hospital
+As an example, the chart that is shown on the municipality page about hospital
 admissions exists in the CMS as an element with id
-`vr__hospital_nice__time_series`, and for the national page on confirmed cases
+`gm__hospital_nice__time_series`, and for the national page on confirmed cases
 we have an element with id `nl__tested_overall__time_series`.
 
 ## Adding An Element

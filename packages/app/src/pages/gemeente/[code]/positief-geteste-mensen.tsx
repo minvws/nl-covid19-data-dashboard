@@ -27,7 +27,7 @@ import { createGetStaticProps, StaticProps } from '~/static-props/create-get-sta
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { getVrForMunicipalityCode, replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
+import { replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
@@ -56,7 +56,6 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }, context) => ({
       tested_overall: filterByRegionMunicipalities(tested_overall, context),
     }),
-    vr: ({ tested_overall }) => ({ tested_overall }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -87,8 +86,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
 
   const lastValue = data.tested_overall.last_value;
   const populationCount = data.static_values.population_count;
-  const vrForMunicipality = getVrForMunicipalityCode(data.code);
-  const vrData = choropleth.vr.tested_overall.find((v) => v.vrcode === vrForMunicipality?.code);
   const metadata = {
     ...commonTexts.gemeente_index.metadata,
     title: replaceVariablesInText(textGm.metadata.title, {
@@ -226,17 +223,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                       municipality: municipalityName,
                     })}
                   />
-                  <Markdown
-                    content={replaceVariablesInText(textGm.map_safety_region_last_value_text, {
-                      infected_per_100k: formatNumber(vrData?.infected_per_100k),
-                      safetyRegion: vrForMunicipality?.name,
-                    })}
-                  />
                 </>
               }
               legend={{
                 thresholds: thresholds.gm.infected_per_100k,
-                title: textShared.chloropleth_legenda.titel,
+                title: textShared.chloropleth_legenda_titel,
               }}
               metadata={{
                 date: lastValue.date_unix,
