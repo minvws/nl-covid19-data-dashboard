@@ -2,7 +2,7 @@ import { BsFolder } from 'react-icons/bs';
 import { defineField, defineType } from 'sanity';
 import { localeStringValidation, localeValidation } from '../../studio/validation/locale-validation';
 
-export const faqQuestion = defineType({
+export const faqItem = defineType({
   title: 'Vragen',
   name: 'faqQuestion',
   type: 'document',

@@ -2,9 +2,9 @@ import { BsFolder } from 'react-icons/bs';
 import { defineField, defineType } from 'sanity';
 import { localeStringValidation } from '../../studio/validation/locale-validation';
 
-export const faqQuestionGroups = defineType({
+export const dataExplainedGroups = defineType({
   title: 'Groepen',
-  name: 'veelgesteldeVragenGroups',
+  name: 'cijferVerantwoordingGroups',
   type: 'document',
   icon: BsFolder,
   fields: [

@@ -1,21 +1,31 @@
-import { faqQuestion } from './documents/faq-question';
-import { faqQuestionGroups } from './documents/faq-question-groups';
+import { dataExplainedGroups } from './documents/data-explained-groups';
+import { dataExplainedItem } from './documents/data-explained-item';
+import { faqGroups } from './documents/faq-groups';
+import { faqItem } from './documents/faq-item';
 import { lokalizeText } from './documents/lokalize-text';
+import { notFoundItem } from './documents/not-found-item';
+import { notFoundLink } from './documents/not-found-link';
+import { pageIdentifier } from './documents/page-identifier';
 import { about } from './documents/pages/about';
+import { accessibility } from './documents/pages/accessibility';
+import { contact } from './documents/pages/contact';
+import { dataExplained } from './documents/pages/data-explained';
 import { faq } from './documents/pages/faq';
+import { notFound } from './documents/pages/not-found';
 import { timeSeries } from './elements/time-series';
 import { timelineEvent } from './elements/timeline-event';
 import { timelineEventCollection } from './elements/timeline-event-collection';
 import { localeBlock } from './locale/locale-block';
+import { localeRichContentBlock } from './locale/locale-rich-content-block';
 import { localeString } from './locale/locale-string';
 import { localeText } from './locale/locale-text';
 import { inlineBlock } from './objects/inline-block';
 import { inlineCollapsible } from './objects/inline-collapsible';
 
-const localeSpecificSchemas = [localeString, localeBlock, localeText];
+const localeSpecificSchemas = [localeString, localeBlock, localeRichContentBlock, localeText];
 const richContentSchemas = [inlineCollapsible, inlineBlock];
-const documentSchemas = [lokalizeText, faqQuestion, faqQuestionGroups];
-const pageSchemas = [about, faq];
+const documentSchemas = [lokalizeText, faqItem, faqGroups, dataExplainedItem, dataExplainedGroups, notFoundItem, notFoundLink, pageIdentifier];
+const pageSchemas = [about, faq, dataExplained, accessibility, contact, notFound];
 const elementSchemas = [timelineEvent, timelineEventCollection, timeSeries];
 
 export const schemaTypes = [...localeSpecificSchemas, ...richContentSchemas, ...documentSchemas, ...elementSchemas, ...pageSchemas];

@@ -15,7 +15,7 @@ interface PagePartChildPage {
   title: string;
 }
 
-export const pagePartStructureItem = (S: StructureBuilder, context: StructureResolverContext) => {
+export const pagesStructureItem = (S: StructureBuilder, context: StructureResolverContext) => {
   return S.listItem()
     .id('dashboard-paginas')
     .title("Dashboard pagina's")
