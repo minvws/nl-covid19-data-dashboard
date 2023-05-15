@@ -31,8 +31,8 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, selectedArchivedNlData: data, lastGenerated } = props;
-  const lastValue = data.doctor_archived_20210903.last_value;
+  const { pageText, selectedArchivedNlData: archivedData, lastGenerated } = props;
+  const lastValue = archivedData.doctor_archived_20210903.last_value;
   const { metadataTexts } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
   const text = commonTexts.verdenkingen_huisartsen;
@@ -74,7 +74,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.nivel,
               }}
             >
-              <KpiValue absolute={lastValue.covid_symptoms} difference={data.difference.doctor__covid_symptoms_archived_20210903} isAmount />
+              <KpiValue absolute={lastValue.covid_symptoms} difference={archivedData.difference.doctor__covid_symptoms_archived_20210903} isAmount />
               <Markdown content={text.barscale_toelichting} />
             </KpiTile>
             <KpiTile
@@ -84,7 +84,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.nivel,
               }}
             >
-              <KpiValue absolute={lastValue.covid_symptoms_per_100k} difference={data.difference.doctor__covid_symptoms_per_100k_archived_20210903} isAmount />
+              <KpiValue absolute={lastValue.covid_symptoms_per_100k} difference={archivedData.difference.doctor__covid_symptoms_per_100k_archived_20210903} isAmount />
               <Text>{text.normalized_kpi_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
@@ -95,7 +95,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
                 key: 'doctor_covid_symptoms_over_time_chart',
               }}
               timeframe={TimeframeOption.ALL}
-              values={data.doctor_archived_20210903.values}
+              values={archivedData.doctor_archived_20210903.values}
               seriesConfig={[
                 {
                   type: 'area',
