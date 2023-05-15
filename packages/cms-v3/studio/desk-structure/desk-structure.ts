@@ -4,6 +4,7 @@ import { lokalizeStructureItem } from './lokalize-structure-item';
 import { BsInfoCircle } from 'react-icons/bs';
 import { pagePartStructureItem } from './page-part-structure-item';
 import { elementsStructureItem } from './elements-structure-item';
+import { faqStructureItem } from './faq-structure-item';
 
 export const DeskStructure = (S: StructureBuilder, context: StructureResolverContext) =>
   S.list()
@@ -14,4 +15,5 @@ export const DeskStructure = (S: StructureBuilder, context: StructureResolverCon
       lokalizeStructureItem(S, context),
       elementsStructureItem(S, context),
       addStructureItem(S, BsInfoCircle, 'Over dit dashboard', 'overDitDashboard'),
+      faqStructureItem(S),
     ]);

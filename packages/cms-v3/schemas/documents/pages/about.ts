@@ -1,7 +1,7 @@
 import { defineField, defineType } from 'sanity';
 import { localeStringValidation, localeValidation } from '../../../studio/validation/locale-validation';
 
-export const overDitDashboard = defineType({
+export const about = defineType({
   name: 'overDitDashboard',
   type: 'document',
   title: 'Over dit dashboard',
