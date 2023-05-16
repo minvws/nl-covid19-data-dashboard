@@ -20,7 +20,7 @@ import {
   BoosterShotCoveragePerAgeGroup,
   Autumn2022ShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
-import { VaccinationsPerSupplierOverLastWeekTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-week-tile';
+import { VaccinationsPerSupplierOverLastTimeframeTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-timeframe-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
@@ -39,7 +39,7 @@ const pageMetrics = [
   'vaccine_administered_hospitals_and_care_institutions',
   'vaccine_administered_planned',
   'vaccine_administered_total',
-  'vaccine_administered_last_week',
+  'vaccine_administered_last_timeframe',
   'vaccine_coverage_per_age_group',
   'vaccine_coverage',
   'vaccine_delivery_per_supplier',
@@ -70,7 +70,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_planned',
     'vaccine_administered_total',
-    'vaccine_administered_last_week',
+    'vaccine_administered_last_timeframe',
     'vaccine_coverage_per_age_group',
     'vaccine_coverage_per_age_group_archived_20220908',
     'vaccine_coverage_per_age_group_archived',
@@ -115,7 +115,6 @@ export const getStaticProps = createGetStaticProps(
   },
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }) => vaccine_coverage_per_age_group ?? null,
-    vr: ({ vaccine_coverage_per_age_group }) => vaccine_coverage_per_age_group ?? null,
   })
 );
 
@@ -184,6 +183,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             tilesData={[
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_60_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedAutumn2022.age_60_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_60_plus,
                 description: textShared.vaccination_grade_tile.autumn_labels.description_60_plus,
@@ -194,6 +194,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               },
               {
                 value: vaccineCoverageEstimatedAutumn2022.age_12_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedAutumn2022.age_12_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
                 description: textShared.vaccination_grade_tile.autumn_labels.description_12_plus,
@@ -212,6 +213,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             tilesData={[
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedFullyVaccinated.age_18_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_18_plus,
                 description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_18_plus,
@@ -222,6 +224,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               },
               {
                 value: vaccineCoverageEstimatedFullyVaccinated.age_12_plus_vaccinated,
+                isPercentage: true,
                 birthyear: vaccineCoverageEstimatedFullyVaccinated.age_12_plus_birthyear,
                 title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
                 description: textShared.vaccination_grade_tile.fully_vaccinated_labels.description_12_plus,
@@ -248,14 +251,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }}
           />
 
-          <VaccinationsPerSupplierOverLastWeekTile
-            title={textNl.vaccinations_per_supplier_over_last_week.title}
-            description={textNl.vaccinations_per_supplier_over_last_week.description}
-            data={data.vaccine_administered_last_week.vaccine_types}
+          <VaccinationsPerSupplierOverLastTimeframeTile
+            title={textNl.vaccinations_per_supplier_over_last_timeframe.title}
+            description={textNl.vaccinations_per_supplier_over_last_timeframe.description}
+            data={data.vaccine_administered_last_timeframe.vaccine_types}
             metadata={{
               source: textShared.bronnen.rivm,
-              date: [data.vaccine_administered_last_week.date_start_unix, data.vaccine_administered_last_week.date_end_unix],
-              obtainedAt: data.vaccine_administered_last_week.date_of_insertion_unix,
+              date: [data.vaccine_administered_last_timeframe.date_start_unix, data.vaccine_administered_last_timeframe.date_end_unix],
+              obtainedAt: data.vaccine_administered_last_timeframe.date_of_insertion_unix,
             }}
           />
 

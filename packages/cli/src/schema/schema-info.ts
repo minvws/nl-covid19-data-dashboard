@@ -24,11 +24,6 @@ export function getSchemaInfo(jsonDirectory: string = defaultJsonDirectory): Sch
       files: ['NL.json'],
       basePath: jsonDirectory,
     },
-    vr: {
-      files: getFileNames(fileList, /^VR[0-9]+.json$/),
-      basePath: jsonDirectory,
-      customValidations: [createChoroplethValidation(path.join(defaultJsonDirectory, 'VR_COLLECTION.json'), 'vrcode', ['vaccine_coverage_per_age_group']), validateMovingAverages],
-    },
     vr_collection: { files: ['VR_COLLECTION.json'], basePath: jsonDirectory },
     gm: {
       files: getFileNames(fileList, /^GM[0-9]+.json$/),

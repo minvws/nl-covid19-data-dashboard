@@ -6,7 +6,7 @@ import { ChartTileDoubleColumn } from '~/components/chart-tile-double-column';
 import { MetadataProps } from '~/components/metadata';
 import { PieChart, PiePartConfig } from '~/components/pie-chart';
 
-interface VaccinationsPerSupplierOverLastWeekTileProps {
+interface VaccinationsPerSupplierOverLastTimeframeTileProps {
   title: string;
   description: string;
   data: NlVaccineType[];
@@ -35,9 +35,9 @@ const vaccines = [
   'cure_vac',
   'sanofi',
 ] as const;
-vaccines.forEach((vaccine) => assert(colors.vaccines[vaccine], `[${VaccinationsPerSupplierOverLastWeekTile.name}] missing vaccine color for vaccine ${vaccine}`));
+vaccines.forEach((vaccine) => assert(colors.vaccines[vaccine], `[${VaccinationsPerSupplierOverLastTimeframeTile.name}] missing vaccine color for vaccine ${vaccine}`));
 
-export function VaccinationsPerSupplierOverLastWeekTile({ title, description, data, metadata }: VaccinationsPerSupplierOverLastWeekTileProps) {
+export function VaccinationsPerSupplierOverLastTimeframeTile({ title, description, data, metadata }: VaccinationsPerSupplierOverLastTimeframeTileProps) {
   const { formatNumber } = useIntl();
 
   const formatLabel = (label: string, value: number) => `${label}: **${formatNumber(value)}**`;

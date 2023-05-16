@@ -206,7 +206,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
                   positive_tested_daily_per_100k: formatNumber,
                 },
               }}
-              dataOptions={{}}
             />
           </ChoroplethTile>
           <Divider />

@@ -1,10 +1,11 @@
 import { DifferenceInteger } from '@corona-dashboard/common';
 
-type TileData = {
+export type TileData = {
   description: string;
   title: string;
   value: number | null;
   bar?: BarType;
+  isPercentage?: boolean;
   birthyear?: string | null;
   differenceValue?: DifferenceInteger;
 };
@@ -20,11 +21,7 @@ export interface BorderedKpiSectionProps {
   title: string;
 }
 
-export interface KpiContentProps {
-  tile: TileData;
-}
-
-export type BarType = {
+type BarType = {
   value: number;
   color: string;
 };

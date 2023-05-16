@@ -1,10 +1,10 @@
-import { gmData, sortTimeSeriesInDataInPlace, vrData } from '@corona-dashboard/common';
+import { gmData, sortTimeSeriesInDataInPlace } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
 import { schemaDirectory } from '../config';
-import { createValidateFunction, executeValidations, getSchemaInfo, SchemaInfo, SchemaInfoItem } from '../schema';
+import { SchemaInfo, SchemaInfoItem, createValidateFunction, executeValidations, getSchemaInfo } from '../schema';
 import { JSONObject } from '../schema/custom-validations';
 
 const cli = meow(
@@ -26,11 +26,6 @@ const customJsonPath = customJsonPathArg ? path.join(__dirname, '..', '..', cust
 const schemaInfo = getSchemaInfo(customJsonPath);
 
 if (!customJsonPathArg) {
-  if (schemaInfo.vr.files.length !== vrData.length) {
-    console.error(chalk.bgRed.bold(`\n Expected ${vrData.length} region files, actually found ${schemaInfo.vr.files.length} \n`));
-    process.exit(1);
-  }
-
   if (schemaInfo.gm.files.length !== gmData.length) {
     console.error(chalk.bgRed.bold(`\n Expected ${gmData.length} municipal files, actually found ${schemaInfo.gm.files.length} \n`));
     process.exit(1);
