@@ -1,20 +1,10 @@
-import {
-  gmData,
-  sortTimeSeriesInDataInPlace,
-  vrData,
-} from '@corona-dashboard/common';
+import { gmData, sortTimeSeriesInDataInPlace, vrData } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
 import { schemaDirectory } from '../config';
-import {
-  createValidateFunction,
-  executeValidations,
-  getSchemaInfo,
-  SchemaInfo,
-  SchemaInfoItem,
-} from '../schema';
+import { createValidateFunction, executeValidations, getSchemaInfo, SchemaInfo, SchemaInfoItem } from '../schema';
 import { JSONObject } from '../schema/custom-validations';
 
 const cli = meow(
@@ -31,36 +21,24 @@ const cliArgs = cli.input;
 
 const customJsonPathArg = cliArgs[0];
 
-const customJsonPath = customJsonPathArg
-  ? path.join(__dirname, '..', '..', customJsonPathArg)
-  : undefined;
+const customJsonPath = customJsonPathArg ? path.join(__dirname, '..', '..', customJsonPathArg) : undefined;
 
 const schemaInfo = getSchemaInfo(customJsonPath);
 
 if (!customJsonPathArg) {
   if (schemaInfo.vr.files.length !== vrData.length) {
-    console.error(
-      chalk.bgRed.bold(
-        `\n Expected ${vrData.length} region files, actually found ${schemaInfo.vr.files.length} \n`
-      )
-    );
+    console.error(chalk.bgRed.bold(`\n Expected ${vrData.length} region files, actually found ${schemaInfo.vr.files.length} \n`));
     process.exit(1);
   }
 
   if (schemaInfo.gm.files.length !== gmData.length) {
-    console.error(
-      chalk.bgRed.bold(
-        `\n Expected ${gmData.length} municipal files, actually found ${schemaInfo.gm.files.length} \n`
-      )
-    );
+    console.error(chalk.bgRed.bold(`\n Expected ${gmData.length} municipal files, actually found ${schemaInfo.gm.files.length} \n`));
     process.exit(1);
   }
 }
 
 // The validations are asynchronous so this reducer gathers all the Promises in one array.
-const promisedValidations = Object.keys(schemaInfo).map((schemaName) =>
-  validate(schemaName, schemaInfo[schemaName as keyof SchemaInfo])
-);
+const promisedValidations = Object.keys(schemaInfo).map((schemaName) => validate(schemaName, schemaInfo[schemaName as keyof SchemaInfo]));
 
 // Here the script waits for all the validations to finish, the result of each run is simply
 // a true or false. So if the result array contains one or more false values, we
@@ -74,9 +52,7 @@ Promise.all(promisedValidations)
       throw new Error('Validation errors occurred...');
     }
 
-    console.info(
-      chalk.bold.green('\n  All validations finished without errors!  \n')
-    );
+    console.info(chalk.bold.green('\n  All validations finished without errors!  \n'));
   })
   .catch((error) => {
     console.error(chalk.bgRed.bold(`\n  ${error}  \n`));
@@ -92,21 +68,14 @@ Promise.all(promisedValidations)
  * @returns An array of promises that will resolve either to true or false dependent on the validation result
  */
 async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
-  const validateFunction = await createValidateFunction(
-    '__index.json',
-    path.join(schemaDirectory, schemaName)
-  );
+  const validateFunction = await createValidateFunction('__index.json', path.join(schemaDirectory, schemaName));
 
   return schemaInfo.files.map((fileName) => {
     const jsonFilePath = path.join(schemaInfo.basePath, fileName);
     if (!fs.existsSync(jsonFilePath)) {
       if (schemaInfo.optional) {
         console.group();
-        console.warn(
-          chalk.bgBlue.bold(
-            `  ${jsonFilePath} does not exist, but is optional, so no problem  \n`
-          )
-        );
+        console.warn(chalk.bgBlue.bold(`  ${jsonFilePath} does not exist, but is optional, so no problem  \n`));
         console.groupEnd();
         return true;
       } else {
@@ -124,28 +93,24 @@ async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
       const data: JSONObject = JSON.parse(contentAsString);
       sortTimeSeriesInDataInPlace(data);
 
-      const { isValid, schemaErrors } = executeValidations(
-        validateFunction,
-        data,
-        schemaInfo
-      );
+      const { isValid, schemaErrors } = executeValidations(validateFunction, data, schemaInfo);
 
       if (!isValid) {
         console.group();
         console.error(schemaErrors);
-        console.error(chalk.bgRed.bold(`  ${fileName} is invalid  \n`));
+        console.error(chalk.bgRed.bold(`  ${fileName} for ${schemaName} is invalid  \n`));
         console.groupEnd();
         return false;
       }
     } catch (e) {
       console.group();
       console.error(e);
-      console.error(chalk.bgRed.bold(`  ${fileName} cannot be parsed  \n`));
+      console.error(chalk.bgRed.bold(`  ${fileName} for ${schemaName} cannot be parsed  \n`));
       console.groupEnd();
       return false;
     }
 
-    console.log(chalk.green.bold(`${fileName} is valid`));
+    console.log(chalk.green.bold(`${fileName} for ${schemaName} is valid`));
     return true;
   });
 }

@@ -1,4 +1,4 @@
-import { Gm, Nl, Vr } from '.';
+import { ArchivedNl, Gm, Nl, Vr } from '.';
 
 /**
  * All possible datascopes. Can be used to access the types of a scope based on
@@ -7,6 +7,7 @@ import { Gm, Nl, Vr } from '.';
 export type ScopedData = {
   gm: Gm;
   nl: Nl;
+  archived_nl: ArchivedNl;
   /** TODO: when this gets removed, also remove the type "DataScopeKeyForRouter".
    **  It was created for COR-1499, because the router needed to have the VR excluded.
    **  When picking up ticket COR-1504 this line scoped data should be adjusted for the validation of the VR JSONS.

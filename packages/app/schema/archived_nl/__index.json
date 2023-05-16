@@ -25,10 +25,10 @@
       "$ref": "#/$defs/archived_nl_id"
     },
     "difference": {
-      "$ref": "nl/__difference.json"
+      "$ref": "__difference.json"
     },
     "doctor_archived_20210903": {
-      "$ref": "nl/doctor.json"
+      "$ref": "doctor.json"
     }
   },
   "$defs": {
