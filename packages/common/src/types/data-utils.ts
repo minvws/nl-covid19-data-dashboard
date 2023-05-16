@@ -10,7 +10,10 @@ export type ScopedData = {
   archived_nl: ArchivedNl;
 };
 
+export type ScopedRouterData = Omit<ScopedData, 'archived_nl'>;
+
 export type DataScopeKey = keyof ScopedData;
+export type RouterDataScopeKey = keyof ScopedRouterData;
 
 export type DataScope = ScopedData[DataScopeKey];
 
