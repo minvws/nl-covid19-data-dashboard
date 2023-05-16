@@ -19,7 +19,6 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.infectious_people_page.nl,
-  textShared: siteText.pages.infectious_people_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -42,7 +41,7 @@ export const getStaticProps = createGetStaticProps(
 const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, lastGenerated, content } = props;
   const { commonTexts } = useIntl();
-  const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const lastFullValue = getLastFilledValue(data.infectious_people);
 
@@ -52,7 +51,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
-  const hasActiveWarningTile = !!textShared.belangrijk_bericht;
+  const hasActiveWarningTile = !!textNl.belangrijk_bericht;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -74,7 +73,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.belangrijk_bericht} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <ChartTile metadata={{ source: textNl.bronnen.rivm }} title={textNl.linechart_titel} description={textNl.linechart_description}>
             <TimeSeriesChart

@@ -1,4 +1,4 @@
-import { colors, NlSewer, SewerPerInstallationData, TimeframeOption, TimeframeOptionsList, VrSewer } from '@corona-dashboard/common';
+import { colors, NlSewer, SewerPerInstallationData, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
@@ -24,7 +24,7 @@ interface SewerChartProps {
    * graph with a label and description.
    */
   accessibility: AccessibilityDefinition;
-  dataAverages: VrSewer | NlSewer;
+  dataAverages: NlSewer;
   dataPerInstallation?: SewerPerInstallationData;
   text: {
     title: string;

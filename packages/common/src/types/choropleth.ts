@@ -1,12 +1,6 @@
 import type { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
 import type { MetricKeys } from '.';
-import type {
-  GmCollection,
-  GmDifference,
-  NlDifference,
-  VrCollection,
-  VrDifference,
-} from './data';
+import type { GmCollection, GmDifference, NlDifference, VrCollection } from './data';
 
 export type Metric<T> = {
   values: T[];
@@ -16,10 +10,7 @@ export type Metric<T> = {
 export type GmCollectionMetricName = MetricKeys<GmCollection>;
 export type VrCollectionMetricName = MetricKeys<VrCollection>;
 
-export type DifferenceKey =
-  | keyof NlDifference
-  | keyof VrDifference
-  | keyof GmDifference;
+export type DifferenceKey = keyof NlDifference | keyof GmDifference;
 
 export interface VrGeoProperties {
   vrcode: string;
@@ -35,15 +26,9 @@ export type InGeoProperties = { ISO_A3: string };
 
 export type InGeoJSON = FeatureCollection<MultiPolygon, InGeoProperties>;
 
-export type GmGeoJSON = FeatureCollection<
-  MultiPolygon | Polygon,
-  GmGeoProperties
->;
+export type GmGeoJSON = FeatureCollection<MultiPolygon | Polygon, GmGeoProperties>;
 
-export type VrGeoJSON = FeatureCollection<
-  MultiPolygon | Polygon,
-  VrGeoProperties
->;
+export type VrGeoJSON = FeatureCollection<MultiPolygon | Polygon, VrGeoProperties>;
 
 export type ChoroplethThresholdsValue<T extends number = number> = {
   color: string;

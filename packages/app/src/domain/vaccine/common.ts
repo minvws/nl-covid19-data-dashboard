@@ -1,4 +1,4 @@
-import { colors, GmCollectionVaccineCoveragePerAgeGroup, VrCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
+import { colors, GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
 
 export const COLOR_FULLY_VACCINATED = colors.scale.blueDetailed[3];
 export const COLOR_FULLY_BOOSTERED = colors.scale.blue[5];
@@ -23,7 +23,7 @@ type MatchingVaccineCoverageAgeGroupsType = {
   primary_series: PrimarySeriesVaccinatedAges[];
 };
 
-export type VaccineCoverageData = GmCollectionVaccineCoveragePerAgeGroup | VrCollectionVaccineCoveragePerAgeGroup;
+export type VaccineCoverageData = GmCollectionVaccineCoveragePerAgeGroup;
 
 export const matchingAgeGroups: MatchingVaccineCoverageAgeGroupsType = {
   autumn_2022: ['60', '12'],

@@ -43,7 +43,6 @@ const pageMetrics = [
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.nursing_home_page.nl,
-  textShared: siteText.pages.nursing_home_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -99,14 +98,14 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
   const nusingHomeArchivedUnderReportedDateStart = getBoundaryDateStartUnix(data.nursing_home_archived_20230126.values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
-  const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
-  const infectedLocationsText = textShared.verpleeghuis_besmette_locaties;
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const infectedLocationsText = textNl.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText = textNl.verpleeghuis_positief_geteste_personen;
 
   const vulnerableNursingHomeDataLastValue = data.vulnerable_nursing_home.last_value;
   const vulnerableHospitalAdmissionsData = data.vulnerable_hospital_admissions;
 
-  const ElderlyPeopleText = textShared['70_plussers'];
+  const ElderlyPeopleText = textNl['70_plussers'];
 
   const metadata = {
     ...metadataTexts,
@@ -114,7 +113,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
     description: infectedLocationsText.metadata.description,
   };
 
-  const hasActiveWarningTile = textShared.osiris_archiving_notification;
+  const hasActiveWarningTile = textNl.osiris_archiving_notification;
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
@@ -198,9 +197,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                   infected_locations_percentage: formatNumber,
                 },
               }}
-              dataOptions={{
-                isPercentage: true,
-              }}
             />
           </ChoroplethTile>
 
@@ -221,7 +217,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                 {
                   type: 'line',
                   metricProperty: 'infected_locations_total',
-                  label: textShared.verpleeghuis_besmette_locaties.linechart_tooltip_label,
+                  label: textNl.verpleeghuis_besmette_locaties.linechart_tooltip_label,
                   color: colors.primary,
                 },
               ]}
@@ -232,8 +228,8 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
           <Divider />
 
           <PageInformationBlock
-            title={textShared.section_archived.title}
-            description={textShared.section_archived.description}
+            title={textNl.section_archived.title}
+            description={textNl.section_archived.description}
             isArchivedHidden={isArchivedContentShown}
             onToggleArchived={() => setIsArchivedContentShown(!isArchivedContentShown)}
           />

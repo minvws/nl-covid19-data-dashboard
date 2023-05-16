@@ -1,4 +1,4 @@
-import { colors, NlGNumber, TimeframeOption, TimeframeOptionsList, VrGNumber } from '@corona-dashboard/common';
+import { colors, NlGNumber, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -8,7 +8,7 @@ import { useIntl } from '~/intl';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 
 interface GNumberBarChartTileProps {
-  data: NlGNumber | VrGNumber;
+  data: NlGNumber;
   timeframeInitialValue?: TimeframeOption;
 }
 
@@ -45,9 +45,6 @@ export function GNumberBarChartTile({ data: __data, timeframeInitialValue = Time
         values={values}
         endDate={endDate}
         timeframe={gnumberTimeframe}
-        dataOptions={{
-          isPercentage: true,
-        }}
         seriesConfig={[
           {
             type: 'split-bar',
