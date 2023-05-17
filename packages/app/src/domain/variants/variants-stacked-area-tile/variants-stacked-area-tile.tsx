@@ -149,16 +149,18 @@ const useSeriesConfig = (text: VariantsStackedAreaTileText, values: VariantChart
       const color = variantColors.find((variantColors) => variantColors.variant === variantCode)?.color || colors.gray5;
 
       if (variantDynamicLabel) {
-        const newConfig: GappedAreaSeriesDefinition<VariantChartValue> = {
+        const newConfig = {
           type: 'gapped-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
           label: variantDynamicLabel,
           strokeWidth: 2,
           fillOpacity: 0.2,
+          shape: 'gapped-area',
+          mixBlendMode: 'multiply',
         };
 
-        seriesConfig.push(newConfig);
+        seriesConfig.push(newConfig as GappedAreaSeriesDefinition<VariantChartValue>);
       }
     });
 
