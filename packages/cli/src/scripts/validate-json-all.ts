@@ -93,19 +93,19 @@ async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
       if (!isValid) {
         console.group();
         console.error(schemaErrors);
-        console.error(chalk.bgRed.bold(`  ${fileName} is invalid  \n`));
+        console.error(chalk.bgRed.bold(`  ${fileName} for ${schemaName} is invalid  \n`));
         console.groupEnd();
         return false;
       }
     } catch (e) {
       console.group();
       console.error(e);
-      console.error(chalk.bgRed.bold(`  ${fileName} cannot be parsed  \n`));
+      console.error(chalk.bgRed.bold(`  ${fileName} for ${schemaName} cannot be parsed  \n`));
       console.groupEnd();
       return false;
     }
 
-    console.log(chalk.green.bold(`${fileName} is valid`));
+    console.log(chalk.green.bold(`${fileName} for ${schemaName} is valid`));
     return true;
   });
 }

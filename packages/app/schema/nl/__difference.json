@@ -30,12 +30,6 @@
     "intensive_care_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_integer"
     },
-    "doctor__covid_symptoms_per_100k": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "doctor__covid_symptoms": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"
     },
@@ -84,8 +78,6 @@
     "infectious_people__estimate",
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
     "intensive_care_lcps__beds_occupied_covid",
-    "doctor__covid_symptoms_per_100k",
-    "doctor__covid_symptoms",
     "sewer__average",
     "nursing_home__newly_infected_people_archived_20230126",
     "nursing_home__deceased_daily_archived_20230126",

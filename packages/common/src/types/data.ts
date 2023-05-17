@@ -4,6 +4,44 @@
  * and run 'yarn generate-data-types' to regenerate this file.
  */
 
+export type ArchivedNlId = 'NL';
+
+export interface ArchivedNl {
+  last_generated: string;
+  proto_name: ArchivedNlId;
+  name: ArchivedNlId;
+  code: ArchivedNlId;
+  difference: ArchivedNlDifference;
+  doctor_archived_20210903: NlDoctor;
+}
+export interface ArchivedNlDifference {
+  doctor__covid_symptoms_per_100k_archived_20210903: DifferenceDecimal;
+  doctor__covid_symptoms_archived_20210903: DifferenceInteger;
+}
+export interface DifferenceDecimal {
+  old_value: number;
+  difference: number;
+  old_date_unix: number;
+  new_date_unix: number;
+}
+export interface DifferenceInteger {
+  old_value: number;
+  difference: number;
+  old_date_unix: number;
+  new_date_unix: number;
+}
+export interface NlDoctor {
+  values: NlDoctorValue[];
+  last_value: NlDoctorValue;
+}
+export interface NlDoctorValue {
+  date_start_unix: number;
+  date_end_unix: number;
+  covid_symptoms_per_100k: number;
+  covid_symptoms: number;
+  date_of_insertion_unix: number;
+}
+
 export type GmCode = string;
 
 export interface Gm {
@@ -229,7 +267,6 @@ export interface Nl {
   booster_shot_administered_archived_20220904: NlBoosterShotAdministeredArchived_20220904;
   repeating_shot_administered: NlRepeatingShotAdministered;
   booster_coverage_archived_20220904: NlBoosterCoverageArchived_20220904;
-  doctor: NlDoctor;
   g_number: NlGNumber;
   infectious_people: NlInfectiousPeople;
   intensive_care_nice: NlIntensiveCareNice;
@@ -294,8 +331,6 @@ export interface NlDifference {
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
   intensive_care_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
-  doctor__covid_symptoms_per_100k: DifferenceDecimal;
-  doctor__covid_symptoms: DifferenceInteger;
   sewer__average: DifferenceInteger;
   vulnerable_nursing_home__infected_locations_total: DifferenceInteger;
   nursing_home__newly_infected_people_archived_20230126: DifferenceInteger;
@@ -389,17 +424,6 @@ export interface NlBoosterCoverageArchived_20220904Value {
   age_group?: '12+' | '18+';
   percentage: number;
   date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlDoctor {
-  values: NlDoctorValue[];
-  last_value: NlDoctorValue;
-}
-export interface NlDoctorValue {
-  date_start_unix: number;
-  date_end_unix: number;
-  covid_symptoms_per_100k: number;
-  covid_symptoms: number;
   date_of_insertion_unix: number;
 }
 export interface NlGNumber {
