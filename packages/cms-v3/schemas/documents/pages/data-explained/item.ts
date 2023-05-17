@@ -1,6 +1,6 @@
 import { BsFolder } from 'react-icons/bs';
 import { defineField, defineType } from 'sanity';
-import { localeStringValidation, localeValidation } from '../../studio/validation/locale-validation';
+import { localeStringValidation, localeValidation } from '../../../../studio/validation/locale-validation';
 
 export const dataExplainedItem = defineType({
   title: 'Verantwoordingen',

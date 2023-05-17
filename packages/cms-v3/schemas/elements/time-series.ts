@@ -1,7 +1,7 @@
 import { DataScopeKey, MetricKeys, MetricName, ScopedData } from '@corona-dashboard/common';
 import { snakeCase } from 'change-case';
 import { BsFileEarmark } from 'react-icons/bs';
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 import { isDefined } from 'ts-is-present';
 import { getTitleForElementType, getTitleForMetricName } from '../../studio/utils';
 
@@ -38,7 +38,7 @@ export const timeSeries = defineType({
       title: 'Timeline Event Collections',
       name: 'timelineEventCollections',
       type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'timelineEventCollection' }] }],
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'timelineEventCollection' }] })],
     }),
   ],
   preview: {

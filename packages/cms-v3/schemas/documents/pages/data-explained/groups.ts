@@ -1,6 +1,6 @@
 import { BsFolder } from 'react-icons/bs';
 import { defineField, defineType } from 'sanity';
-import { localeStringValidation } from '../../studio/validation/locale-validation';
+import { localeStringValidation } from '../../../../studio/validation/locale-validation';
 
 export const dataExplainedGroups = defineType({
   title: 'Groepen',

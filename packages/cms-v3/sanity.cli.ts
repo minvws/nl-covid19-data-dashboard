@@ -11,6 +11,7 @@ export default defineCliConfig({
       alias: {
         '@corona-dashboard/common': path.resolve(__dirname, '../common/src'),
         '@corona-dashboard/app': path.resolve(__dirname, '../app/src/style/theme'),
+        '@corona-dashboard/icons': path.resolve(__dirname, '../icons/src'),
       },
     },
   },

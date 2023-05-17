@@ -1,7 +1,7 @@
 import { BsLink } from 'react-icons/bs';
 import { defineField, defineType } from 'sanity';
-import { IconInput } from '../../components/icon-input';
-import { localeStringValidation } from '../../studio/validation/locale-validation';
+import { IconInput } from '../../../../components/icon-input';
+import { localeStringValidation } from '../../../../studio/validation/locale-validation';
 
 export const notFoundLink = defineType({
   name: 'notFoundPageLinks',
@@ -28,10 +28,9 @@ export const notFoundLink = defineType({
       description: 'Optioneel icoon voor de link. Wordt links van de tekst getoond.',
       name: 'linkIcon',
       type: 'string',
-      // TODO: make this work
-      // components: {
-      //   input: IconInput,
-      // },
+      components: {
+        input: IconInput,
+      },
     }),
   ],
   preview: {

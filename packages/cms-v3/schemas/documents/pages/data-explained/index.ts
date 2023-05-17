@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const dataExplained = defineType({
   name: 'cijferVerantwoording',
@@ -20,7 +20,7 @@ export const dataExplained = defineType({
       type: 'array',
       title: 'Verantwoordingen',
       description: 'Je kan verantwoordingen toevoegen, de volgorde veranderen, de teksten bijwerken of verwijderen',
-      of: [{ type: 'reference', to: { type: 'cijferVerantwoordingItem' } }],
+      of: [defineArrayMember({ type: 'reference', to: { type: 'cijferVerantwoordingItem' } })],
     }),
   ],
   preview: {

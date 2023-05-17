@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const faq = defineType({
   name: 'veelgesteldeVragen',
@@ -20,7 +20,7 @@ export const faq = defineType({
       type: 'array',
       title: 'Vragen',
       description: 'Je kan veel gestelde vragen toevoegen, de volgorde veranderen, de tekst bijwerken of verwijderen',
-      of: [{ type: 'reference', to: { type: 'faqQuestion' } }],
+      of: [defineArrayMember({ type: 'reference', to: { type: 'faqQuestion' } })],
     }),
   ],
   preview: {

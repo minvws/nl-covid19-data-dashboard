@@ -1,13 +1,14 @@
+import { BsInfoCircle, BsMailbox, BsUniversalAccessCircle } from 'react-icons/bs';
 import { StructureBuilder, StructureResolverContext } from 'sanity/desk';
 import { addStructureItem } from '../utils';
-import { lokalizeStructureItem } from './lokalize-structure-item';
-import { BsInfoCircle, BsMailbox, BsUniversalAccessCircle } from 'react-icons/bs';
-import { pagesStructureItem } from './pages-structure-item';
+import { dataExplainedStructureItem } from './data-explained-structure-item';
 import { elementsStructureItem } from './elements-structure-item';
 import { faqStructureItem } from './faq-structure-item';
-import { dataExplainedStructureItem } from './data-explained-structure-item';
-import { notFoundPageStructure } from './not-found-page-structure';
+import { homepageStructureItem } from './homepage-structure-item';
+import { lokalizeStructureItem } from './lokalize-structure-item';
+import { notFoundPageStructureItem } from './not-found-page-structure-item';
 import { pagePartsStructureItem } from './page-parts-structure-item';
+import { pagesStructureItem } from './pages-structure-item';
 
 export const DeskStructure = (S: StructureBuilder, context: StructureResolverContext) =>
   S.list()
@@ -25,9 +26,11 @@ export const DeskStructure = (S: StructureBuilder, context: StructureResolverCon
 
       S.divider(),
 
-      notFoundPageStructure(S),
+      homepageStructureItem(S),
 
-      pagePartsStructureItem(S),
+      notFoundPageStructureItem(S),
+
+      // pagePartsStructureItem(S),
 
       // TODO: add the following structure items
       //  - Page parts

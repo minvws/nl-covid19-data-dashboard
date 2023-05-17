@@ -1,4 +1,5 @@
 import { MetricName } from '@corona-dashboard/common';
+import { Bs1Circle, Bs2Circle, Bs3Circle, Bs4Circle } from 'react-icons/bs';
 
 // By mapping the metric name to a title we can make the UI a little more user-friendly.
 export const titleByMetricName: Partial<Record<MetricName, string>> & { deceased_rivm: string } = {
@@ -74,3 +75,39 @@ export const titleByMetricName: Partial<Record<MetricName, string>> & { deceased
 export const titleByElementType: Record<string, string> = {
   timeSeries: 'Grafiek',
 };
+
+// TODO: see if this can be imported from packages/app/src/components/severity-indicator-tile/constants.ts
+export const SEVERITY_LEVELS_LIST = [1, 2, 3, 4];
+export const thermometerLevelPreviewMedia = [Bs1Circle, Bs2Circle, Bs3Circle, Bs4Circle];
+
+export const DATE_FORMAT = 'YYYY-MM-DD';
+export const DAYS_OF_THE_WEEK_LIST = [
+  {
+    title: 'Zondag',
+    value: 0,
+  },
+  {
+    title: 'Maandag',
+    value: 1,
+  },
+  {
+    title: 'Dinsdag',
+    value: 2,
+  },
+  {
+    title: 'Woensdag',
+    value: 3,
+  },
+  {
+    title: 'Donderdag',
+    value: 4,
+  },
+  {
+    title: 'Vrijdag',
+    value: 5,
+  },
+  {
+    title: 'Zaterdag',
+    value: 6,
+  },
+];

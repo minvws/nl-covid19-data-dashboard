@@ -1,7 +1,7 @@
 import { BsFolderX } from 'react-icons/bs';
 import { StructureBuilder } from 'sanity/desk';
 
-export const notFoundPageStructure = (S: StructureBuilder) => {
+export const notFoundPageStructureItem = (S: StructureBuilder) => {
   return S.listItem()
     .id('notFoundPages')
     .title("404 Pagina's")

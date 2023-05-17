@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const notFound = defineType({
   name: 'notFoundPagesCollection',
@@ -10,7 +10,7 @@ export const notFound = defineType({
       title: "Pagina's",
       description: 'Configureer elke 404 pagina. Voeg nieuwe items toe aan specifieke 404 pagina\'s. Selecteer tijdens het toevoegen een "Pagina Type".',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'notFoundPageItem' } }],
+      of: [defineArrayMember({ type: 'reference', to: { type: 'notFoundPageItem' } })],
       // TODO: properly type this
       validation: (rule: any) => [
         rule.required(),

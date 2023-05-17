@@ -1,7 +1,7 @@
-import { defineField, defineType } from 'sanity';
-import { IconInput } from '../../components/icon-input';
-import { client } from '../../studio/client';
-import { localeStringValidation, localeValidation } from '../../studio/validation/locale-validation';
+import { defineArrayMember, defineField, defineType } from 'sanity';
+import { IconInput } from '../../../../components/icon-input';
+import { client } from '../../../../studio/client';
+import { localeStringValidation, localeValidation } from '../../../../studio/validation/locale-validation';
 
 const pageTypeOptions = [
   { value: 'general', title: 'Algemeen' },
@@ -61,7 +61,7 @@ export const notFoundItem = defineType({
       description:
         "Configureer een lijst van een of meer links. Wordt onder de beschrijving getoond op de 'Algemeen' pagina. Wordt onder de CTA of zoekveld getoond op de overige pagina's.",
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'notFoundPageLinks' } }],
+      of: [defineArrayMember({ type: 'reference', to: { type: 'notFoundPageLinks' } })],
     }),
     defineField({
       name: 'image',
@@ -104,10 +104,9 @@ export const notFoundItem = defineType({
           title: 'Icon',
           description: 'Optioneel icoon voor de CTA. Wordt links van de tekst getoond.',
           type: 'string',
-          // TODO: make this work
-          // components: {
-          //   input: IconInput,
-          // },
+          components: {
+            input: IconInput,
+          },
         }),
       ],
     }),

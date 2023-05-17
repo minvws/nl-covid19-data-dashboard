@@ -1,5 +1,5 @@
 import { BsTags } from 'react-icons/bs';
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const timelineEventCollection = defineType({
   name: 'timelineEventCollection',
@@ -17,7 +17,7 @@ export const timelineEventCollection = defineType({
       title: 'Timeline Events',
       name: 'timelineEvents',
       type: 'array',
-      of: [{ type: 'timelineEvent' }],
+      of: [defineArrayMember({ type: 'timelineEvent' })],
       validation: (rule) => rule.required().min(1),
     }),
   ],
