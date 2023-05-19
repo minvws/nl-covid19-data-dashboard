@@ -1,4 +1,4 @@
-import { colors, NlBehaviorValue, VrBehaviorArchived_20221019Value } from '@corona-dashboard/common';
+import { colors, NlBehaviorValue } from '@corona-dashboard/common';
 import { dropRightWhile, dropWhile } from 'lodash';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
@@ -15,7 +15,7 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
 import { BehaviorIdentifier } from './logic/behavior-types';
 
-type ValueType = NlBehaviorValue | VrBehaviorArchived_20221019Value;
+type ValueType = NlBehaviorValue;
 type ValueKey = keyof ValueType;
 
 interface BehaviorLineChartTileProps {

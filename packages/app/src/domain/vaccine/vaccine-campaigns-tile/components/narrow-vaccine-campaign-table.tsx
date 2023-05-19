@@ -64,7 +64,12 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst }
 
             <tr>
               <StyledCell paddingY="0" isMobile>
-                {headers.last_week}: {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_last_week)}</BoldText> : formatNumber(campaign.vaccine_administered_last_week)}
+                {headers.last_week}:{' '}
+                {isOpen ? (
+                  <BoldText>{formatNumber(campaign.vaccine_administered_last_week || campaign.vaccine_administered_last_timeframe)}</BoldText>
+                ) : (
+                  formatNumber(campaign.vaccine_administered_last_week || campaign.vaccine_administered_last_timeframe)
+                )}
               </StyledCell>
             </tr>
 

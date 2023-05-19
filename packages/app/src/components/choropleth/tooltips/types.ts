@@ -8,9 +8,7 @@ export type TooltipSettings<T extends ChoroplethDataItem> = {
   data: TooltipData<T>;
 };
 
-export type TooltipFormatter<T extends ChoroplethDataItem> = (
-  tooltipData: TooltipData<T>
-) => React.ReactNode;
+export type TooltipFormatter<T extends ChoroplethDataItem> = (tooltipData: TooltipData<T>) => React.ReactNode;
 
 export type TooltipData<T extends ChoroplethDataItem> = {
   dataItem: T;
@@ -18,7 +16,7 @@ export type TooltipData<T extends ChoroplethDataItem> = {
   metricPropertyFormatter: (value: number) => string;
   featureName: string;
   dataConfig: DataConfig<T>;
-  dataOptions: DataOptions;
+  dataOptions?: DataOptions;
   thresholdValues?: ChoroplethThresholdsValue[];
   map: MapType;
 };
