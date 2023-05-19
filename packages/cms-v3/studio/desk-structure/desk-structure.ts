@@ -1,6 +1,7 @@
 import { BsInfoCircle, BsMailbox, BsUniversalAccessCircle } from 'react-icons/bs';
 import { StructureBuilder, StructureResolverContext } from 'sanity/desk';
 import { addStructureItem } from '../utils';
+import { articlesStructureItem } from './articles-structure-item';
 import { dataExplainedStructureItem } from './data-explained-structure-item';
 import { elementsStructureItem } from './elements-structure-item';
 import { faqStructureItem } from './faq-structure-item';
@@ -30,12 +31,10 @@ export const DeskStructure = (S: StructureBuilder, context: StructureResolverCon
 
       notFoundPageStructureItem(S),
 
-      // pagePartsStructureItem(S),
+      articlesStructureItem(S),
+
+      pagePartsStructureItem(S),
 
       // TODO: add the following structure items
-      //  - Page parts
-      //  - Homepage
       //  - Rest (check if this is actually necessary)
-
-      // Grafieken is to be ignored
     ]);

@@ -5,8 +5,12 @@ import { deskTool } from 'sanity/desk';
 import { Logo } from './components/logo';
 import { schemaTypes } from './schemas';
 import { DeskStructure } from './studio/desk-structure/desk-structure';
-import { theme } from './studio/theme';
 import { supportedLanguages } from './studio/i18n';
+
+const { theme } = (await import(
+  // @ts-expect-error -- TODO setup themer.d.ts to get correct typings
+  'https://themer.sanity.build/api/hues?primary=007bc0&positive=69c253;400&caution=ffc000;300&critical=f35065'
+)) as { theme: import('sanity').StudioTheme };
 
 export default defineConfig({
   title: 'Coronavirus Dashboard CMS',

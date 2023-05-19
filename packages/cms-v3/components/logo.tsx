@@ -8,7 +8,7 @@ export const Logo = ({ title }: LogoProps) => {
   return (
     <Flex align="center" justify="space-between">
       <img src={logo} alt={title} />
-      <Card padding={3} radius={2}>
+      <Card padding={3} radius={2} style={{ backgroundColor: 'transparent' }}>
         <Text>
           {title} | {dataset === 'development' ? 'Development' : ''}
         </Text>

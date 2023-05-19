@@ -1,5 +1,9 @@
+import { article } from './documents/article';
 import { lokalizeText } from './documents/lokalize-text';
 import { pageIdentifier } from './documents/page-identifier';
+import { articles } from './documents/page-parts/articles';
+import { highlights } from './documents/page-parts/highlights';
+import { links } from './documents/page-parts/links';
 import { about } from './documents/pages/about';
 import { accessibility } from './documents/pages/accessibility';
 import { contact } from './documents/pages/contact';
@@ -39,6 +43,7 @@ import { link } from './objects/link';
 const localeSpecificSchemas = [localeBlock, localeRichContentBlock, localeString, localeText];
 const richContentSchemas = [inlineBlock, inlineCollapsible];
 const documentSchemas = [
+  article,
   dataExplainedGroups,
   dataExplainedItem,
   faqGroups,
@@ -61,7 +66,8 @@ const documentSchemas = [
   pageIdentifier,
 ];
 const pageSchemas = [about, accessibility, contact, dataExplained, faq, homepage, notFound];
+const pagePartSchemas = [articles, highlights, links];
 const elementSchemas = [timelineEvent, timelineEventCollection, timeSeries];
 const objectSchemas = [link];
 
-export const schemaTypes = [...localeSpecificSchemas, ...richContentSchemas, ...documentSchemas, ...elementSchemas, ...pageSchemas, ...objectSchemas];
+export const schemaTypes = [...localeSpecificSchemas, ...richContentSchemas, ...documentSchemas, ...elementSchemas, ...pageSchemas, ...pagePartSchemas, ...objectSchemas];

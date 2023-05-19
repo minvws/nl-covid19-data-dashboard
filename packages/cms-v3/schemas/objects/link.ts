@@ -1,3 +1,4 @@
+import { BsLink } from 'react-icons/bs';
 import { defineField, defineType } from 'sanity';
 import { localeStringValidation } from '../../studio/validation/locale-validation';
 
@@ -5,6 +6,7 @@ export const link = defineType({
   type: 'object',
   title: 'Een link voorzien van een label',
   name: 'link',
+  icon: BsLink,
   fields: [
     defineField({
       title: 'Titel',

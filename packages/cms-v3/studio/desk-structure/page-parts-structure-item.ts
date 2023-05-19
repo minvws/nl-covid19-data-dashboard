@@ -9,10 +9,6 @@ export const pagePartsStructureItem = (S: StructureBuilder) => {
     .child(
       S.list()
         .title("Pagina's en onderdelen")
-        .items([
-          ...S.documentTypeListItems().filter((item) => item.getId() === 'pageIdentifier'),
-          // S.divider(),
-          // ...S.documentTypeListItems().filter((item) => ['pageArticles', 'pageLinks', 'pageHighlightedItems', 'pageRichText'].includes(item.getId() ?? '')),
-        ])
+        .items([...S.documentTypeListItems().filter((item) => ['pageIdentifier', 'pageArticles', 'pageLinks', 'pageHighlightedItems'].includes(item.getId() ?? ''))])
     );
 };

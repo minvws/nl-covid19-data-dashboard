@@ -81,6 +81,7 @@ export const SEVERITY_LEVELS_LIST = [1, 2, 3, 4];
 export const thermometerLevelPreviewMedia = [Bs1Circle, Bs2Circle, Bs3Circle, Bs4Circle];
 
 export const DATE_FORMAT = 'YYYY-MM-DD';
+export const TIME_FORMAT = 'HH:mm';
 export const DAYS_OF_THE_WEEK_LIST = [
   {
     title: 'Zondag',
