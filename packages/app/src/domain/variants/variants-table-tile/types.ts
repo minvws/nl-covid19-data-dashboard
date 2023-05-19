@@ -1,4 +1,4 @@
-export type VariantDynamicLabels = Partial<{ [key: string]: string }>;
+export type VariantDynamicLabels = Record<string, string>;
 
 export type TableText = {
   anderen_tooltip: string;

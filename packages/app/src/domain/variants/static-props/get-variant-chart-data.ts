@@ -7,7 +7,7 @@ export type VariantChartValue = {
   date_start_unix: number;
   date_end_unix: number;
   is_reliable: boolean;
-} & Partial<{ [key: string]: number }>;
+} & Record<string, number>;
 
 const EMPTY_VALUES = {
   variantChart: null,
