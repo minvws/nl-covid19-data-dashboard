@@ -1,5 +1,5 @@
 import { BsNewspaper } from 'react-icons/bs';
-import { ConditionalProperty, defineArrayMember, defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 import { isDefined } from 'ts-is-present';
 import { whenNotAdministrator } from '../../../studio/roles';
 import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-fields';

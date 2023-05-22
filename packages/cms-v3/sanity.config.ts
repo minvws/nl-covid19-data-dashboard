@@ -1,6 +1,8 @@
+import { dashboardTool } from '@sanity/dashboard';
 import { languageFilter } from '@sanity/language-filter';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
+import { media } from 'sanity-plugin-media';
 import { deskTool } from 'sanity/desk';
 import { Logo } from './components/logo';
 import { schemaTypes } from './schemas';
@@ -8,6 +10,7 @@ import { DeskStructure } from './studio/desk-structure/desk-structure';
 import { supportedLanguages } from './studio/i18n';
 
 const { theme } = (await import(
+  // The below comment is from Sanity.
   // @ts-expect-error -- TODO setup themer.d.ts to get correct typings
   'https://themer.sanity.build/api/hues?primary=007bc0&positive=69c253;400&caution=ffc000;300&critical=f35065'
 )) as { theme: import('sanity').StudioTheme };
@@ -27,6 +30,9 @@ export default defineConfig({
     deskTool({
       structure: DeskStructure,
     }),
+    // TODO: add widgets and place above deskTool
+    dashboardTool({ widgets: [] }),
+    media(),
     visionTool(),
     languageFilter({
       supportedLanguages,
@@ -36,6 +42,7 @@ export default defineConfig({
     }),
   ],
   schema: {
+    // TODO: figure out why this errors
     types: schemaTypes,
   },
   tools: [],

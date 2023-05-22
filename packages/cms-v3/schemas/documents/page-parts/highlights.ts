@@ -1,5 +1,5 @@
-import { BsNewspaper } from 'react-icons/bs';
-import { defineField, defineType } from 'sanity';
+import { BsFileEarmarkText, BsNewspaper } from 'react-icons/bs';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 import { isDefined } from 'ts-is-present';
 import { whenNotAdministrator } from '../../../studio/roles';
 import { localeStringValidation } from '../../../studio/validation/locale-validation';
@@ -49,8 +49,10 @@ export const highlights = defineType({
       name: 'highlights',
       type: 'array',
       of: [
-        {
+        // TODO: move this into its own schema/type?
+        defineArrayMember({
           type: 'object',
+          icon: BsFileEarmarkText,
           preview: {
             select: {
               title: 'title.nl',
@@ -92,7 +94,7 @@ export const highlights = defineType({
               validation: (rule) => rule.required(),
             }),
           ],
-        },
+        }),
       ],
       validation: (rule) => [
         // TODO: see if this can be typed properly
