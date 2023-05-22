@@ -17,15 +17,9 @@
       "type": "object",
       "title": "nl_variants_variant",
       "additionalProperties": false,
-      "required": ["variant_code", "label_nl", "label_en", "values", "last_value"],
+      "required": ["variant_code", "values", "last_value"],
       "properties": {
         "variant_code": {
-          "type": "string"
-        },
-        "label_nl": {
-          "type": "string"
-        },
-        "label_en": {
           "type": "string"
         },
         "values": {
@@ -53,7 +47,9 @@
         "date_start_unix",
         "date_end_unix",
         "date_of_report_unix",
-        "date_of_insertion_unix"
+        "date_of_insertion_unix",
+        "label_nl",
+        "label_en" 
       ],
       "properties": {
         "order": {
@@ -85,6 +81,12 @@
         },
         "date_of_report_unix": {
           "type": "integer"
+        },
+        "label_nl": {
+          "type": "string"
+        },
+        "label_en": {
+          "type": "string"
         }
       }
     }

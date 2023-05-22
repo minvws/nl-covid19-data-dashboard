@@ -74,7 +74,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
   const variantLabels: VariantDynamicLabels = {};
 
   data.variants?.values.forEach((variant) => {
-    variantLabels[`${variant.variant_code}`] = locale === 'nl' ? variant.label_nl : variant.label_en;
+    variantLabels[`${variant.variant_code}`] = locale === 'nl' ? variant.values[0].label_nl : variant.values[0].label_en;
   });
 
   return (
