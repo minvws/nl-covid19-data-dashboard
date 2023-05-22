@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "archived_nl_difference",
+  "type": "object",
+  "properties": {
+    "doctor__covid_symptoms_per_100k_archived_20210903": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "doctor__covid_symptoms_archived_20210903": {
+      "$ref": "#/definitions/diff_integer"
+    }
+  },
+  "required": [
+    "doctor__covid_symptoms_per_100k_archived_20210903",
+    "doctor__covid_symptoms_archived_20210903"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "diff_integer": {
+      "title": "difference_integer",
+      "type": "object",
+      "properties": {
+        "old_value": {
+          "type": "integer"
+        },
+        "difference": {
+          "type": "integer"
+        },
+        "old_date_unix": {
+          "type": "integer"
+        },
+        "new_date_unix": {
+          "type": "integer"
+        }
+      },
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
+      "additionalProperties": false
+    },
+    "diff_decimal": {
+      "title": "difference_decimal",
+      "type": "object",
+      "properties": {
+        "old_value": {
+          "type": "number"
+        },
+        "difference": {
+          "type": "number"
+        },
+        "old_date_unix": {
+          "type": "integer"
+        },
+        "new_date_unix": {
+          "type": "integer"
+        }
+      },
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
+      "additionalProperties": false
+    }
+  }
+}

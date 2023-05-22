@@ -15,7 +15,7 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
@@ -27,12 +27,12 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('difference.doctor__covid_symptoms_per_100k', 'difference.doctor__covid_symptoms', 'doctor')
+  selectArchivedNlData('difference.doctor__covid_symptoms_per_100k_archived_20210903', 'difference.doctor__covid_symptoms_archived_20210903', 'doctor_archived_20210903')
 );
 
 const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, selectedNlData: data, lastGenerated } = props;
-  const lastValue = data.doctor.last_value;
+  const { pageText, selectedArchivedNlData: archivedData, lastGenerated } = props;
+  const lastValue = archivedData.doctor_archived_20210903.last_value;
   const { metadataTexts } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
   const text = commonTexts.verdenkingen_huisartsen;
@@ -74,7 +74,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.nivel,
               }}
             >
-              <KpiValue absolute={lastValue.covid_symptoms} difference={data.difference.doctor__covid_symptoms} isAmount />
+              <KpiValue absolute={lastValue.covid_symptoms} difference={archivedData.difference.doctor__covid_symptoms_archived_20210903} isAmount />
               <Markdown content={text.barscale_toelichting} />
             </KpiTile>
             <KpiTile
@@ -84,7 +84,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.nivel,
               }}
             >
-              <KpiValue absolute={lastValue.covid_symptoms_per_100k} difference={data.difference.doctor__covid_symptoms_per_100k} isAmount />
+              <KpiValue absolute={lastValue.covid_symptoms_per_100k} difference={archivedData.difference.doctor__covid_symptoms_per_100k_archived_20210903} isAmount />
               <Text>{text.normalized_kpi_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
@@ -95,7 +95,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
                 key: 'doctor_covid_symptoms_over_time_chart',
               }}
               timeframe={TimeframeOption.ALL}
-              values={data.doctor.values}
+              values={archivedData.doctor_archived_20210903.values}
               seriesConfig={[
                 {
                   type: 'area',
