@@ -6,8 +6,10 @@ import { media } from 'sanity-plugin-media';
 import { deskTool } from 'sanity/desk';
 import { Logo } from './components/logo';
 import { schemaTypes } from './schemas';
-import { DeskStructure } from './studio/desk-structure/desk-structure';
+import { deskStructure } from './studio/desk-structure/desk-structure';
 import { supportedLanguages } from './studio/i18n';
+import { newLokalizeKeys, recentlyPublishedArticles, recentlyPublishedDocuments, unpublishedDocuments, untranslatedLokalizeKeys } from './studio/widgets';
+import { actions } from './studio/actions';
 
 const { theme } = (await import(
   // The below comment is from Sanity.
@@ -27,11 +29,13 @@ export default defineConfig({
   // basePath: '/studio',
 
   plugins: [
-    deskTool({
-      structure: DeskStructure,
+    dashboardTool({
+      // TODO: figure out if widgets can be grouped as on V2 of the CMS, but without custom components
+      widgets: [unpublishedDocuments, recentlyPublishedDocuments, untranslatedLokalizeKeys, newLokalizeKeys, recentlyPublishedArticles],
     }),
-    // TODO: add widgets and place above deskTool
-    dashboardTool({ widgets: [] }),
+    deskTool({
+      structure: deskStructure,
+    }),
     media(),
     visionTool(),
     languageFilter({
@@ -46,11 +50,7 @@ export default defineConfig({
     types: schemaTypes,
   },
   tools: [],
-  studio: {
-    components: {
-      logo: Logo,
-    },
-  },
+  studio: { components: { logo: Logo } },
   theme,
   document: {
     // Removes lokalize from the global "create new" interface at the top left of the navigation bar.
@@ -61,14 +61,6 @@ export default defineConfig({
 
       return prev;
     },
-    actions: (prev, { schemaType }) => {
-      if (schemaType === 'lokalizeText') {
-        // Should ensure that the user can only update and publish, but not create or delete Lokalize keys.
-        const allowedActions = ['unpublish', 'delete', 'duplicate'];
-        return prev.filter(({ action }) => !allowedActions.includes(action!));
-      }
-
-      return prev;
-    },
+    actions,
   },
 });

@@ -41,6 +41,7 @@
     "react-icons": "^4.8.0",
     "react-is": "^18.2.0",
     "sanity": "latest",
+    "sanity-plugin-dashboard-widget-document-list": "^1.0.1",
     "sanity-plugin-media": "^2.0.5",
     "styled-components": "^5.3.9"
   },

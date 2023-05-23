@@ -14,6 +14,7 @@ import { faq } from './documents/pages/faq';
 import { faqGroups } from './documents/pages/faq/groups';
 import { faqItem } from './documents/pages/faq/item';
 import { homepage } from './documents/pages/homepage';
+import { advice } from './documents/pages/homepage/advice';
 import { summary } from './documents/pages/homepage/summary';
 import { summaryItem } from './documents/pages/homepage/summary-item';
 import { theme } from './documents/pages/homepage/theme';
@@ -43,6 +44,7 @@ import { link } from './objects/link';
 const localeSpecificSchemas = [localeBlock, localeRichContentBlock, localeString, localeText];
 const richContentSchemas = [inlineBlock, inlineCollapsible];
 const documentSchemas = [
+  advice,
   article,
   dataExplainedGroups,
   dataExplainedItem,

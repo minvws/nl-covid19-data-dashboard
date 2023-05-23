@@ -11,7 +11,7 @@ import { notFoundPageStructureItem } from './not-found-page-structure-item';
 import { pagePartsStructureItem } from './page-parts-structure-item';
 import { pagesStructureItem } from './pages-structure-item';
 
-export const DeskStructure = (S: StructureBuilder, context: StructureResolverContext) =>
+export const deskStructure = (S: StructureBuilder, context: StructureResolverContext) =>
   S.list()
     .id('content')
     .title('Content')
@@ -34,7 +34,4 @@ export const DeskStructure = (S: StructureBuilder, context: StructureResolverCon
       articlesStructureItem(S),
 
       pagePartsStructureItem(S),
-
-      // TODO: add the following structure items
-      //  - Rest (check if this is actually necessary)
     ]);
