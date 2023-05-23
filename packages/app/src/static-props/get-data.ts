@@ -1,4 +1,4 @@
-import { assert, Gm, GmCollection, gmData, Nl, sortTimeSeriesInDataInPlace, VrCollection } from '@corona-dashboard/common';
+import { ArchivedNl, assert, Gm, GmCollection, gmData, Nl, sortTimeSeriesInDataInPlace, VrCollection } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import { get } from 'lodash';
 import set from 'lodash/set';
@@ -28,7 +28,7 @@ type UnionDeepMerge<T extends Record<string, unknown>> = {
  * 3. Merge picked data object union into a single object
  * 4. Merge nested properties unions
  */
-type DataShape<T extends string, D extends Nl | Gm> = UnionDeepMerge<U.Merge<O.P.Pick<D, S.Split<T, '.'>>>>;
+type DataShape<T extends string, D extends Nl | Gm | ArchivedNl> = UnionDeepMerge<U.Merge<O.P.Pick<D, S.Split<T, '.'>>>>;
 
 /**
  * Usage:
@@ -46,6 +46,9 @@ const json = {
   nl: initializeFeatureFlaggedData<Nl>(loadJsonFromDataFile<Nl>('NL.json'), 'nl'),
   vrCollection: initializeFeatureFlaggedData<VrCollection>(loadJsonFromDataFile<VrCollection>('VR_COLLECTION.json'), 'vr_collection'),
   gmCollection: initializeFeatureFlaggedData<GmCollection>(loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'), 'gm_collection'),
+  archived: {
+    nl: initializeFeatureFlaggedData<ArchivedNl>(loadJsonFromDataFile<ArchivedNl>('NL.json', 'json/archived'), 'nl'),
+  },
 };
 
 export function getLastGeneratedDate() {
@@ -151,6 +154,45 @@ export function selectNlData<T extends keyof Nl | F.AutoPath<Nl, keyof Nl, '.'>>
 export function getNlData() {
   // clone data to prevent mutation of the original
   const data = JSON.parse(JSON.stringify(json.nl)) as Nl;
+
+  sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
+
+  return { data };
+}
+
+/**
+ * This method selects the specified metric properties from the archived national data.
+ * (public/json/archived/nl.json)
+ *
+ */
+export function selectArchivedNlData<T extends keyof ArchivedNl | F.AutoPath<ArchivedNl, keyof ArchivedNl, '.'>>(...metrics: T[]) {
+  return () => {
+    const { data } = getArchivedNlData();
+
+    const selectedArchivedNlData = metrics.reduce(
+      (acc, p) =>
+        set(
+          acc,
+          p,
+          /**
+           * convert `undefined` values to `null` because nextjs cannot pass
+           * undefined values via initial props.
+           */
+          get(data, p) ?? null
+        ),
+
+      {} as DataShape<T, ArchivedNl>
+    );
+
+    replaceInaccurateLastValue(selectedArchivedNlData);
+
+    return { selectedArchivedNlData };
+  };
+}
+
+export function getArchivedNlData() {
+  // clone data to prevent mutation of the original
+  const data = JSON.parse(JSON.stringify(json.archived.nl)) as ArchivedNl;
 
   sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 

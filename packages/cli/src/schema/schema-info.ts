@@ -31,5 +31,9 @@ export function getSchemaInfo(jsonDirectory: string = defaultJsonDirectory): Sch
       customValidations: [createChoroplethValidation(path.join(defaultJsonDirectory, 'GM_COLLECTION.json'), 'gmcode', ['vaccine_coverage_per_age_group']), validateMovingAverages],
     },
     gm_collection: { files: ['GM_COLLECTION.json'], basePath: jsonDirectory },
+    archived_nl: {
+      files: ['NL.json'],
+      basePath: path.join(jsonDirectory, 'archived'),
+    },
   };
 }

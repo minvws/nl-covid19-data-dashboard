@@ -6,28 +6,25 @@ require('dotenv').config(config);
 const download = require('download');
 const decompress = require('decompress');
 
-const API_URL =
-  process.env.API_URL ||
-  'https://coronadashboard.rijksoverheid.nl/json/latest-data.zip';
+const ACTIVE_DATA_URL = process.env.ACTIVE_DATA_URL || 'https://coronadashboard.rijksoverheid.nl/json/latest-data.zip';
+const ARCHIVED_DATA_URL = process.env.ARCHIVED_DATA_URL || 'https://coronadashboard.rijksoverheid.nl/json/archived/latest-archived-data.zip';
 
-console.log(
-  'The download command will read the download URL from your .env.local settings'
-);
-console.log(
-  'If you want to download from a different URL than the default, make sure to set the API_URL ENV var'
-);
-console.log(`Downloading json data from this location: ${API_URL}`);
+const downloadAndUnzip = (url, destination, filename) => {
+  (async () => {
+    await download(url, destination, { filename });
 
-const filename = 'latest-data.zip';
-const jsonPath = path.join('.', 'public', 'json');
-const zipPath = path.join(jsonPath, filename);
+    const zipPath = path.join(destination, filename);
+    await decompress(zipPath, destination, {
+      strip: 1,
+    });
+  })();
+};
 
-(async () => {
-  await download(API_URL, jsonPath, {
-    filename: filename,
-  });
+console.log('The download command will read the download URLs from your .env.local settings');
+console.log('If you want to download from a different URL than the default, make sure to set the ACTIVE_DATA_URL and/or ARCHIVED_DATA_URL ENV vars');
 
-  await decompress(zipPath, jsonPath, {
-    strip: 1,
-  });
-})();
+console.log(`Downloading active data json from this location: ${ACTIVE_DATA_URL}`);
+downloadAndUnzip(ACTIVE_DATA_URL, path.join('.', 'public', 'json'), 'latest-data.zip');
+
+console.log(`Downloading archived data json from this location: ${ARCHIVED_DATA_URL}`);
+downloadAndUnzip(ARCHIVED_DATA_URL, path.join('.', 'public', 'json', 'archived'), 'latest-archived-data.zip');
