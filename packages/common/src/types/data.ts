@@ -11,24 +11,7 @@ export interface ArchivedNl {
   proto_name: ArchivedNlId;
   name: ArchivedNlId;
   code: ArchivedNlId;
-  difference: ArchivedNlDifference;
   doctor_archived_20210903: NlDoctor;
-}
-export interface ArchivedNlDifference {
-  doctor__covid_symptoms_per_100k_archived_20210903: DifferenceDecimal;
-  doctor__covid_symptoms_archived_20210903: DifferenceInteger;
-}
-export interface DifferenceDecimal {
-  old_value: number;
-  difference: number;
-  old_date_unix: number;
-  new_date_unix: number;
-}
-export interface DifferenceInteger {
-  old_value: number;
-  difference: number;
-  old_date_unix: number;
-  new_date_unix: number;
 }
 export interface NlDoctor {
   values: NlDoctorValue[];
