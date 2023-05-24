@@ -1,30 +1,15 @@
 import { colors } from '@corona-dashboard/common';
-import { buildLegacyTheme } from 'sanity';
 
-export const theme = buildLegacyTheme({
-  //  '--font-family-monospace': string
-  // '--font-family-base': string
-  // '--black': string
-  // '--white': string
-  '--brand-primary': colors.magenta4,
-  // '--component-bg': string,
-  // '--component-text-color': string
-  // '--default-button-color': string
-  '--default-button-primary-color': colors.primary,
-  // '--default-button-success-color': string
-  // '--default-button-warning-color': string
-  // '--default-button-danger-color': string
-  '--focus-color': colors.primary,
-  // '--gray-base': string
-  // '--gray': string
-  '--main-navigation-color': colors.secondary,
-  // '--main-navigation-color--inverted': string
-  // '--state-info-color': string
-  // '--state-success-color': string
-  // '--state-warning-color': string
-  // '--state-danger-color': string
-  // '--screen-medium-break': string
-  // '--screen-default-break': string
-  // '--screen-large-break': string
-  // '--screen-xlarge-break': string
-});
+const removeHash = (input: string) => input.replace(/#/g, '');
+
+const themeColors = {
+  primary: removeHash(colors.primary),
+  positive: removeHash(colors.green1),
+  caution: removeHash(colors.yellow3),
+  critical: removeHash(colors.red2),
+};
+
+export const { theme } = (await import(
+  // The below colours are used inside the COVID-19 dashboard, meaning that these are consistent between Sanity and the actual website.
+  `https://themer.sanity.build/api/hues?primary=${themeColors.primary}&positive=${themeColors.positive};400&caution=${themeColors.caution};300&critical=${themeColors.critical}`
+)) as { theme: import('sanity').StudioTheme };

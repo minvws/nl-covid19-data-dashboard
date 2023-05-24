@@ -97,7 +97,7 @@ export const highlights = defineType({
         }),
       ],
       validation: (rule) => [
-        // TODO: see if this can be typed properly
+        // TODO: properly type this
         rule
           .custom((value: any, context: any) => {
             const max = context.parent?.maxNumber ?? 2;

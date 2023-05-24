@@ -4,7 +4,6 @@ export const actions = (prev: DocumentActionComponent[], { schemaType }: { schem
   let allowedActions: DocumentActionComponent['action'][] = [];
 
   // TODO: consider if the below commented out schemas are also required
-
   switch (schemaType) {
     // Individual pages
     case 'overDitDashboard':

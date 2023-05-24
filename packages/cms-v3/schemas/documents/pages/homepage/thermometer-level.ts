@@ -37,7 +37,9 @@ export const thermometerLevel = defineType({
       title: 'label.nl',
       subtitle: 'level',
     },
-    prepare({ title, subtitle }: { title: string; subtitle: string }) {
+    prepare(value) {
+      const { title, subtitle }: { title: string; subtitle: string } = value;
+
       return {
         title,
         subtitle: `Stand ${subtitle}`,

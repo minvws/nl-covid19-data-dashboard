@@ -41,7 +41,9 @@ export const thermometerTimelineEvent = defineType({
       date: 'date',
       dateEnd: 'dateEnd',
     },
-    prepare({ title, date, dateEnd }: { title: number; date: string; dateEnd: string }) {
+    prepare(value) {
+      const { title, date, dateEnd }: { title: number; date: string; dateEnd: string } = value;
+
       // Construct a custom start date
       const [year, month, day] = date.split('-');
 

@@ -44,7 +44,7 @@ export const articles = defineType({
       type: 'array',
       of: [defineArrayMember({ type: 'reference', to: { type: 'article' } })],
       validation: (rule) =>
-        // TODO: see if this can be typed properly
+        // TODO: properly type this
         rule.unique().custom((_: any, context: any) => {
           const min = context.parent?.minNumber;
           const max = context.parent?.maxNumber;

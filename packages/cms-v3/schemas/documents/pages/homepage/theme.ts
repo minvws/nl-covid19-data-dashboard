@@ -80,8 +80,6 @@ export const theme = defineType({
     select: {
       title: 'title.nl',
       subtitle: 'subTitle.nl',
-      // TODO: See if this can somehow be implemented?
-      // media: 'themeIcon',
     },
   },
 });

@@ -32,8 +32,6 @@ export const summaryItem = defineType({
   preview: {
     select: {
       title: 'description.nl',
-      // TODO: See if this can somehow be implemented?
-      // media: 'tileIcon',
     },
   },
 });

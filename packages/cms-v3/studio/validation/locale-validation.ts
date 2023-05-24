@@ -25,7 +25,7 @@ export const localeStringValidation = (getRule: GetRule) => {
        * Add a custom validation which will report a validation-error when the
        * document type doesn't match "localeString"
        */
-      // TODO: strictly type the below params
+      // TODO: properly type this
       .custom((_: any, context: any) => {
         if (context.parent._type !== 'localeString') {
           return `Cannot apply localeStringValidation on document type ${context.parent._type}. Please use the localeValidation or write a custom validation without locale wrapper.`;

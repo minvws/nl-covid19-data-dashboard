@@ -42,7 +42,6 @@ const lokalizeStructureItemChild = (S: StructureBuilder, subjects: string[], typ
           S.listItem()
             .title(subject)
             .id(subject)
-            // TODO: See if we can introduce some logic to change the icon when the pane is open/active.
             .icon(BsFolder)
             .child(
               S.documentList()
