@@ -12,7 +12,6 @@ interface CollapsibleSectionProps extends BoxProps {
   summary: string;
   children: ReactNode;
   id?: string;
-  hideBorder?: boolean;
   textColor?: string;
   borderColor?: string;
   border?: string;
@@ -24,7 +23,6 @@ export const CollapsibleSection = ({
   summary,
   children,
   id,
-  hideBorder,
   textColor = colors.blue8,
   borderColor = colors.gray2,
   border,
@@ -64,7 +62,7 @@ export const CollapsibleSection = ({
   }, [toggle, id]);
 
   return (
-    <Box as="section" borderTop={hideBorder ? undefined : `1px solid ${borderColor}`} id={id} ref={section} border={border} borderRadius={borderRadius} marginBottom={marginBottom}>
+    <Box as="section" borderTop={`1px solid ${borderColor}`} id={id} ref={section} border={border} borderRadius={borderRadius} marginBottom={marginBottom}>
       <StyledSummary textColor={textColor} onClick={() => collapsible.toggle()}>
         <Box width="100%" position="relative">
           {summary}
