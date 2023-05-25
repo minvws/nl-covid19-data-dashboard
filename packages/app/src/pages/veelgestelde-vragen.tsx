@@ -1,16 +1,16 @@
 import { colors } from '@corona-dashboard/common';
 import groupBy from 'lodash/groupBy';
 import Head from 'next/head';
+import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { CollapsibleSection } from '~/components/collapsible';
 import { Heading } from '~/components/typography';
-import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate } from '~/static-props/get-data';
-import { radii, space } from '~/style/theme';
+import { radii, sizes, space } from '~/style/theme';
 import { FAQuestionAndAnswer, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skip-links';
 
@@ -66,16 +66,18 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...commonTexts.veelgestelde_vragen_metadata} lastGenerated={lastGenerated}>
-      <Head>
-        <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" />
-        <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
-      </Head>
+      <Box margin={`${space[5]} auto`} maxWidth={`${sizes.maxWidth}px`} padding={` 0 ${space[4]}`}>
+        <Head>
+          <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" />
+          <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
+        </Head>
 
-      <Content>
-        <Box spacing={4}>
+        <Box maxWidth="50%" marginBottom={space[4]}>
           {content.title && <Heading level={1}>{content.title}</Heading>}
           {content.description && <RichContent blocks={content.description} />}
+        </Box>
 
+        <FaqLayout>
           {Object.entries(groups).map(([group, questions]) => (
             <Box as="article" key={group} spacing={3}>
               <Heading level={3} as="h2">
@@ -105,10 +107,16 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
               </div>
             </Box>
           ))}
-        </Box>
-      </Content>
+        </FaqLayout>
+      </Box>
     </Layout>
   );
 };
 
 export default Verantwoording;
+
+const FaqLayout = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: ${space[4]};
+`;
