@@ -17,6 +17,7 @@ interface CollapsibleSectionProps extends BoxProps {
   border?: string;
   borderRadius?: string;
   marginBottom?: string;
+  hasNormalFontWeight?: boolean;
 }
 
 export const CollapsibleSection = ({
@@ -28,6 +29,7 @@ export const CollapsibleSection = ({
   border,
   borderRadius,
   marginBottom,
+  hasNormalFontWeight,
 }: CollapsibleSectionProps) => {
   const section = useRef<HTMLElement>(null);
 
@@ -63,7 +65,7 @@ export const CollapsibleSection = ({
 
   return (
     <Box as="section" borderTop={`1px solid ${borderColor}`} id={id} ref={section} border={border} borderRadius={borderRadius} marginBottom={marginBottom}>
-      <StyledSummary textColor={textColor} onClick={() => collapsible.toggle()}>
+      <StyledSummary textColor={textColor} onClick={() => collapsible.toggle()} hasNormalFontWeight={hasNormalFontWeight}>
         <Box width="100%" position="relative">
           {summary}
           {id && (
@@ -97,6 +99,7 @@ const StyledAnchor = styled(Anchor)`
 
 interface SummaryProps {
   textColor: string;
+  hasNormalFontWeight?: boolean;
 }
 
 const StyledSummary = styled(Box)<SummaryProps>`
@@ -105,7 +108,7 @@ const StyledSummary = styled(Box)<SummaryProps>`
   cursor: pointer;
   display: flex;
   font-size: ${fontSizes[5]};
-  font-weight: ${fontWeights.bold};
+  font-weight: ${({ hasNormalFontWeight }) => (hasNormalFontWeight ? `${fontWeights.normal}` : `${fontWeights.bold}`)};
   justify-content: space-between;
   padding: ${space[3]};
   user-select: none;

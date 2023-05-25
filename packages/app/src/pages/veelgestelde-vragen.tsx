@@ -85,7 +85,15 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
                 {questions.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (
-                    <CollapsibleSection key={id} id={id} summary={item.title} border={`1px solid ${colors.gray2}`} borderRadius={`${radii[1]}px`} marginBottom={`8px`}>
+                    <CollapsibleSection
+                      key={id}
+                      id={id}
+                      summary={item.title}
+                      border={`1px solid ${colors.gray2}`}
+                      borderRadius={`${radii[1]}px`}
+                      marginBottom={`8px`}
+                      hasNormalFontWeight
+                    >
                       {item.content && (
                         <Box paddingY={space[3]}>
                           <RichContent blocks={item.content} />
