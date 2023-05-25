@@ -8,5 +8,5 @@
     }
   },
   "required": ["population_count"],
-  "additionalProperties": false
+  "logAdditionalProperties": true
 }

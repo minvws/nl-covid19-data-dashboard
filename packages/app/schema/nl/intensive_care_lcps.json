@@ -14,7 +14,7 @@
     }
   },
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "definitions": {
     "value": {
       "title": "nl_intensive_care_lcps_value",
@@ -47,7 +47,7 @@
         "date_unix",
         "date_of_insertion_unix"
       ],
-      "additionalProperties": false
+      "logAdditionalProperties": true
     }
   }
 }

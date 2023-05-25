@@ -3,7 +3,7 @@
   "title": "nl_vulnerable_tested_per_age_group",
   "type": "object",
   "required": ["infected_age_70_plus", "date_unix", "date_of_insertion_unix"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "infected_age_70_plus": {
       "type": "integer"

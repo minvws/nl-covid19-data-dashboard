@@ -14,7 +14,7 @@
     }
   },
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "definitions": {
     "value": {
       "title": "nl_behavior_get_tested_support_per_age_group_value",
@@ -59,7 +59,7 @@
         "date_end_unix",
         "date_of_insertion_unix"
       ],
-      "additionalProperties": false
+      "logAdditionalProperties": true
     }
   }
 }

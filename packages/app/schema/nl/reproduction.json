@@ -3,7 +3,7 @@
     "value": {
       "title": "nl_reproduction_value",
       "type": "object",
-      "additionalProperties": false,
+      "logAdditionalProperties": true,
       "required": [
         "index_low",
         "index_average",
@@ -38,7 +38,7 @@
   "title": "nl_reproduction",
   "type": "object",
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "values": {
       "type": "array",

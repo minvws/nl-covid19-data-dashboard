@@ -11,7 +11,7 @@
     }
   },
   "required": ["variants__percentage"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "definitions": {
     "named_diff_decimal": {
       "title": "named_difference_decimal",
@@ -67,7 +67,7 @@
         }
       },
       "required": ["variant_code", "old_value", "difference", "old_date_unix", "new_date_unix"],
-      "additionalProperties": false
+      "logAdditionalProperties": true
     }
   }
 }

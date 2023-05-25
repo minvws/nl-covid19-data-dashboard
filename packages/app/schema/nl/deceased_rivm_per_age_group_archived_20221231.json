@@ -3,7 +3,7 @@
   "title": "nl_deceased_rivm_per_age_group_archived_20221231",
   "type": "object",
   "required": ["values"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "values": {
       "type": "array",
@@ -17,7 +17,7 @@
       "title": "nl_deceased_rivm_per_age_group_archived_20221231_value",
       "type": "object",
       "required": ["age_group_range", "age_group_percentage", "covid_percentage", "date_of_insertion_unix"],
-      "additionalProperties": false,
+      "logAdditionalProperties": true,
       "properties": {
         "age_group_range": {
           "type": "string"

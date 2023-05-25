@@ -15,7 +15,7 @@
         "date_end_unix",
         "date_of_report_unix"
       ],
-      "additionalProperties": false,
+      "logAdditionalProperties": true,
       "properties": {
         "total": {
           "type": "integer"
@@ -63,7 +63,7 @@
   "title": "nl_vaccine_delivery_per_supplier",
   "type": "object",
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "values": {
       "type": "array",

@@ -9,7 +9,7 @@
         "date_end_unix",
         "date_of_insertion_unix"
       ],
-      "additionalProperties": false,
+      "logAdditionalProperties": true,
       "properties": {
         "doses": {
           "type": "integer"
@@ -30,7 +30,7 @@
   "title": "nl_vaccine_administered_planned",
   "type": "object",
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "values": {
       "type": "array",

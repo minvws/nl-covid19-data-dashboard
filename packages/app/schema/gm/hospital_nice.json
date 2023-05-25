@@ -3,7 +3,7 @@
     "value": {
       "title": "gm_hospital_nice_value",
       "type": "object",
-      "additionalProperties": false,
+      "logAdditionalProperties": true,
       "required": [
         "admissions_on_date_of_admission",
         "admissions_on_date_of_admission_moving_average",
@@ -38,7 +38,7 @@
   "title": "gm_hospital_nice",
   "type": "object",
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "values": {
       "type": "array",

@@ -4,8 +4,8 @@
       "title": "nl_self_test_overall_value",
       "type": "object",
       "required": ["infected_percentage", "date_start_unix", "date_end_unix", "date_of_insertion_unix"],
-      "additionalProperties": false,
-      "properties": {
+      "logAdditionalProperties": true,
+            "properties": {
         "infected_percentage": {
           "type": ["number", "null"]
         },
@@ -25,7 +25,7 @@
   "title": "nl_self_test_overall",
   "type": "object",
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "values": {
       "type": "array",

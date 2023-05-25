@@ -14,7 +14,7 @@
     }
   },
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "definitions": {
     "value": {
       "title": "nl_tested_ggd_archived_value",
@@ -39,7 +39,7 @@
         "date_unix",
         "date_of_insertion_unix"
       ],
-      "additionalProperties": false
+      "logAdditionalProperties": true
     }
   }
 }

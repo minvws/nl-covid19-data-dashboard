@@ -3,7 +3,7 @@
   "type": "object",
   "title": "nl_variants",
   "required": ["values"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "values": {
       "type": "array",
@@ -16,8 +16,8 @@
     "variant": {
       "type": "object",
       "title": "nl_variants_variant",
-      "additionalProperties": false,
-      "required": ["variant_code", "values", "last_value"],
+      "logAdditionalProperties": true,
+            "required": ["variant_code", "values", "last_value"],
       "properties": {
         "variant_code": {
           "type": "string",
@@ -69,7 +69,6 @@
     "value": {
       "type": "object",
       "title": "nl_variants_variant_value",
-      "additionalProperties": false,
       "required": [
         "order",
         "occurrence",

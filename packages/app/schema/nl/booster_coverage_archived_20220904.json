@@ -13,7 +13,7 @@
     }
   },
   "required": ["values"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "definitions": {
     "value": {
       "title": "nl_booster_coverage_archived_20220904_value",
@@ -37,7 +37,7 @@
         }
       },
       "required": ["percentage", "date_unix", "date_of_insertion_unix"],
-      "additionalProperties": false
+      "logAdditionalProperties": true
     }
   }
 }

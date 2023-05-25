@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "gm_collection_vaccine_coverage_per_age_group",
   "type": "object",
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "required": [
     "gmcode",
     "vaccination_type",

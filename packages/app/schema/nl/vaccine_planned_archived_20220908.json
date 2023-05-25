@@ -9,7 +9,7 @@
     "date_end_unix",
     "date_of_insertion_unix"
   ],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "doses": {
       "type": "integer"

@@ -4,7 +4,7 @@
       "title": "nl_sewer_value",
       "type": "object",
       "required": ["average", "date_of_insertion_unix", "date_unix"],
-      "additionalProperties": false,
+      "logAdditionalProperties": true,
       "properties": {
         "average": {
           "type": ["integer", "null"]
@@ -22,7 +22,7 @@
   "title": "nl_sewer",
   "type": "object",
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "values": {
       "type": "array",

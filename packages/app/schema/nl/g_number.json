@@ -14,7 +14,7 @@
     }
   },
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "definitions": {
     "value": {
       "title": "nl_g_number_value",
@@ -31,7 +31,7 @@
         }
       },
       "required": ["g_number", "date_unix", "date_of_insertion_unix"],
-      "additionalProperties": false
+      "logAdditionalProperties": true
     }
   }
 }

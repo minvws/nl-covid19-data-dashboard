@@ -3,7 +3,7 @@
     "value": {
       "title": "gm_tested_overall_value",
       "type": "object",
-      "additionalProperties": false,
+      "logAdditionalProperties": true,
       "required": [
         "date_unix",
         "infected",
@@ -43,7 +43,7 @@
   "title": "gm_tested_overall",
   "type": "object",
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "values": {
       "type": "array",

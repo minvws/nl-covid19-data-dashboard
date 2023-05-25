@@ -16,7 +16,7 @@
     }
   },
   "required": ["values", "last_value"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "definitions": {
     "value": {
       "title": "nl_booster_shot_administered_archived_20220904_value",
@@ -45,7 +45,7 @@
         "date_unix",
         "date_of_insertion_unix"
       ],
-      "additionalProperties": false
+      "logAdditionalProperties": true
     }
   }
 }

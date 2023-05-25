@@ -4,7 +4,7 @@
       "title": "nl_vaccine_type",
       "type": "object",
       "required": ["vaccine_type_name", "vaccine_type_value"],
-      "additionalProperties": false,
+      "logAdditionalProperties": true,
       "properties": {
         "vaccine_type_name": {
           "type": "string"
@@ -19,7 +19,7 @@
   "title": "nl_vaccine_administered_last_timeframe",
   "type": "object",
   "required": ["vaccine_types", "date_unix", "date_start_unix", "date_end_unix", "date_of_insertion_unix"],
-  "additionalProperties": false,
+  "logAdditionalProperties": true,
   "properties": {
     "vaccine_types": {
       "type": "array",
