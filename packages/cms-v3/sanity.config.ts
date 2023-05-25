@@ -6,10 +6,11 @@ import { media } from 'sanity-plugin-media';
 import { deskTool } from 'sanity/desk';
 import { Logo } from './components/logo';
 import { schemaTypes } from './schemas';
-import { actions } from './studio/actions';
 import { deskStructure } from './studio/desk-structure/desk-structure';
+import { actions, newDocumentOptions } from './studio/document-options';
 import { supportedLanguages } from './studio/i18n';
 import { theme } from './studio/theme';
+import { tools } from './studio/tools';
 import { newLokalizeKeys, recentlyPublishedArticles, recentlyPublishedDocuments, unpublishedDocuments, untranslatedLokalizeKeys } from './studio/widgets';
 
 export default defineConfig({
@@ -40,21 +41,9 @@ export default defineConfig({
       filterField: (enclosingType, field, selectedLanguageIds) => !enclosingType.name.startsWith('locale') || selectedLanguageIds.includes(field.name),
     }),
   ],
-  schema: {
-    types: schemaTypes,
-  },
-  tools: [],
+  schema: { types: schemaTypes },
   studio: { components: { logo: Logo } },
+  document: { newDocumentOptions, actions },
+  tools,
   theme,
-  document: {
-    // Removes lokalize from the global "create new" interface at the top left of the navigation bar.
-    newDocumentOptions: (prev, { creationContext }) => {
-      if (creationContext.type === 'global') {
-        return prev.filter((templateItem) => templateItem.templateId !== 'lokalizeText');
-      }
-
-      return prev;
-    },
-    actions,
-  },
 });

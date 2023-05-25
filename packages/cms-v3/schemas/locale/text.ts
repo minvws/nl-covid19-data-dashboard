@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity';
 import { TextAreaInput } from '../../components/string-input';
 import { supportedLanguages } from '../../studio/i18n';
 
-export const localeText = defineType({
+export const text = defineType({
   name: 'localeText',
   type: 'object',
   title: 'Locale Text Content',

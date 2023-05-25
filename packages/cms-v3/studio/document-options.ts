@@ -1,4 +1,13 @@
-import { DocumentActionComponent } from 'sanity';
+import { DocumentActionComponent, NewDocumentCreationContext, TemplateResponse } from 'sanity';
+
+// Removes lokalize from the global "create new" interface at the top left of the navigation bar.
+export const newDocumentOptions = (prev: TemplateResponse[], { creationContext }: { creationContext: NewDocumentCreationContext }) => {
+  if (creationContext.type === 'global') {
+    return prev.filter((templateItem) => templateItem.templateId !== 'lokalizeText');
+  }
+
+  return prev;
+};
 
 export const actions = (prev: DocumentActionComponent[], { schemaType }: { schemaType: string }) => {
   let allowedActions: DocumentActionComponent['action'][] = [];

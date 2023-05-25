@@ -3,7 +3,7 @@ import { StringField } from '../../components/string-field';
 import { supportedLanguages } from '../../studio/i18n';
 import { defineType, defineField } from 'sanity';
 
-export const localeString = defineType({
+export const string = defineType({
   name: 'localeString',
   type: 'object',
   title: 'Locale String Content',
