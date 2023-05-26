@@ -29,7 +29,7 @@
     "date_end_unix": { "type": "integer" }
   },
   "required": ["date_of_insertion_unix", "date_start_unix", "date_end_unix"],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "definitions": {
     "value": {
       "title": "nl_behavior_per_age_group_value",
@@ -42,7 +42,7 @@
         "70_plus": { "type": ["integer", "null"] }
       },
       "required": ["16_24", "25_39", "40_54", "55_69", "70_plus"],
-      "logAdditionalProperties": true
+      "additionalProperties": false
     }
   }
 }

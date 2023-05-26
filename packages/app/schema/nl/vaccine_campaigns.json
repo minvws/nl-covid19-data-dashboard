@@ -4,7 +4,7 @@
       "title": "nl_vaccine_campaign",
       "type": "object",
       "required": ["vaccine_campaign_order", "vaccine_campaign_name_nl", "vaccine_campaign_name_en", "vaccine_administered_total", "vaccine_administered_last_timeframe"],
-      "logAdditionalProperties": true,
+      "additionalProperties": false,
       "properties": {
         "vaccine_campaign_order": {
           "type": "integer"
@@ -28,7 +28,7 @@
   "title": "nl_vaccine_campaigns",
   "type": "object",
   "required": ["vaccine_campaigns", "date_unix", "date_start_unix", "date_end_unix", "date_of_insertion_unix"],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "vaccine_campaigns": {
       "type": "array",

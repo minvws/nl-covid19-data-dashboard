@@ -3,7 +3,7 @@
     "value": {
       "title": "nl_intensive_care_nice_value",
       "type": "object",
-      "logAdditionalProperties": true,
+      "additionalProperties": false,
       "required": [
         "admissions_on_date_of_admission",
         "admissions_on_date_of_admission_moving_average",
@@ -38,7 +38,7 @@
   "title": "nl_intensive_care_nice",
   "type": "object",
   "required": ["values", "last_value"],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "values": {
       "type": "array",

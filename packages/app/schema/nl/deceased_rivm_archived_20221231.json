@@ -14,7 +14,7 @@
     }
   },
   "required": ["values", "last_value"],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "definitions": {
     "value": {
       "title": "nl_deceased_rivm_archived_20221231_value",
@@ -37,7 +37,7 @@
         }
       },
       "required": ["covid_daily", "covid_daily_moving_average", "covid_total", "date_unix", "date_of_insertion_unix"],
-      "logAdditionalProperties": true
+      "additionalProperties": false
     }
   }
 }

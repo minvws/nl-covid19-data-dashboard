@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "nl_intensive_care_nice_per_age_group",
   "type": "object",
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "values": {
       "type": "array",
@@ -18,7 +18,7 @@
   "definitions": {
     "value": {
       "title": "nl_intensive_care_nice_per_age_group_value",
-      "logAdditionalProperties": true,
+      "additionalProperties": false,
       "type": "object",
       "required": [
         "admissions_age_0_19_per_million",

@@ -3,7 +3,7 @@
     "value": {
       "title": "gm_sewer_value",
       "type": "object",
-      "logAdditionalProperties": true,
+      "additionalProperties": false,
       "required": [
         "date_start_unix",
         "date_end_unix",
@@ -46,7 +46,7 @@
   "title": "gm_sewer",
   "type": "object",
   "required": ["values", "last_value"],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "values": {
       "type": "array",

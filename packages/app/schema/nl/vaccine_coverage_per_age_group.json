@@ -3,7 +3,7 @@
   "title": "nl_vaccine_coverage_per_age_group",
   "type": "object",
   "required": ["values"],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "values": {
       "type": "array",
@@ -15,7 +15,7 @@
   "definitions": {
     "value": {
       "title": "nl_vaccine_coverage_per_age_group_value",
-      "logAdditionalProperties": true,
+      "additionalProperties": false,
       "type": "object",
       "required": [
         "age_group_percentage",

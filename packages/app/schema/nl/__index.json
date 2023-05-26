@@ -62,7 +62,7 @@
     "vaccine_coverage_per_age_group_estimated_autumn_2022",
     "vaccine_coverage_per_age_group_estimated_fully_vaccinated"
   ],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "last_generated": {
       "type": "string"

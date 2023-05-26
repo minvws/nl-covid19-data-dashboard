@@ -10,7 +10,7 @@
         "vaccine_administered_total",
         "vaccine_administered_last_week"
       ],
-      "logAdditionalProperties": true,
+      "additionalProperties": false,
       "properties": {
         "vaccine_campaign_order": {
           "type": "integer"
@@ -40,7 +40,7 @@
     "date_end_unix",
     "date_of_insertion_unix"
   ],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "vaccine_campaigns": {
       "type": "array",

@@ -10,7 +10,7 @@
     "name",
     "proto_name"
   ],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "last_generated": {
       "type": "string"

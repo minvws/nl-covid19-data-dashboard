@@ -13,7 +13,7 @@
         "date_unix",
         "date_of_insertion_unix"
       ],
-      "logAdditionalProperties": true,
+      "additionalProperties": false,
       "properties": {
         "booster_vaccinated": {
           "type": "integer"
@@ -46,7 +46,7 @@
   "title": "nl_vaccine_coverage",
   "type": "object",
   "required": ["values", "last_value"],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "values": {
       "type": "array",

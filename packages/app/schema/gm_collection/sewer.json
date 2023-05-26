@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "gm_collection_sewer",
   "type": "object",
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "required": [
     "date_start_unix",
     "date_end_unix",

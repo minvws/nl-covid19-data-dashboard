@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "title": "vr_collection",
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "required": ["last_generated", "proto_name", "name", "code", "disability_care_archived_20230126", "elderly_at_home_archived_20230126", "nursing_home_archived_20230126"],
   "properties": {
     "last_generated": {

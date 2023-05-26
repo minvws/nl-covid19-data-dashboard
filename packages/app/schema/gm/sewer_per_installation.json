@@ -3,7 +3,7 @@
     "value": {
       "title": "gm_sewer_per_installation_value",
       "type": "object",
-      "logAdditionalProperties": true,
+      "additionalProperties": false,
       "required": ["date_unix", "rna_normalized", "date_of_insertion_unix"],
       "properties": {
         "date_unix": {
@@ -20,7 +20,7 @@
     "installation": {
       "title": "municipal_sewer_per_installation_installation",
       "type": "object",
-      "logAdditionalProperties": true,
+      "additionalProperties": false,
       "required": ["rwzi_awzi_name", "values", "last_value"],
       "properties": {
         "rwzi_awzi_name": {
@@ -42,7 +42,7 @@
   "title": "gm_sewer_per_installation",
   "type": "object",
   "required": ["values"],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "values": {
       "type": "array",

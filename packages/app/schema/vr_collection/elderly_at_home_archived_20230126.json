@@ -31,5 +31,5 @@
     "date_of_insertion_unix",
     "vrcode"
   ],
-  "logAdditionalProperties": true
+  "additionalProperties": false
 }

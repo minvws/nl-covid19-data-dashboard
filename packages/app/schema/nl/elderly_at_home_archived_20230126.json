@@ -14,7 +14,7 @@
     }
   },
   "required": ["values", "last_value"],
-  "logAdditionalProperties": true,
+  "additionalProperties": false,
   "definitions": {
     "value": {
       "title": "nl_elderly_at_home_archived_20230126_value",
@@ -51,7 +51,7 @@
         "date_unix",
         "date_of_insertion_unix"
       ],
-      "logAdditionalProperties": true
+      "additionalProperties": false
     }
   }
 }
