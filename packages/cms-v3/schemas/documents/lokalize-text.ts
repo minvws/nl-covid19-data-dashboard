@@ -15,7 +15,7 @@ import { validateLocaleTextPlaceholders } from '../../studio/validation/lokalize
 export const lokalizeText = defineType({
   name: 'lokalizeText',
   type: 'document',
-  title: 'Text',
+  title: 'Lokalize tekst',
   icon: BsFileEarmark,
   fields: [
     defineField({

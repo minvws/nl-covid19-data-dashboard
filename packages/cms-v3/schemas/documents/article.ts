@@ -31,10 +31,11 @@ export const article = defineType({
       date: 'publicationDate',
       media: 'cover',
     },
-    prepare({ title, date }: { title: string; date: string }) {
+    prepare({ title, date, media }) {
       return {
         title,
         subtitle: new Date(date).toLocaleString(),
+        media,
       };
     },
   },

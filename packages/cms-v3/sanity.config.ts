@@ -11,7 +11,7 @@ import { actions, newDocumentOptions } from './studio/document-options';
 import { supportedLanguages } from './studio/i18n';
 import { theme } from './studio/theme';
 import { tools } from './studio/tools';
-import { newLokalizeKeys, recentlyPublishedArticles, recentlyPublishedDocuments, unpublishedDocuments, untranslatedLokalizeKeys } from './studio/widgets';
+import { widgets } from './studio/widgets';
 
 export default defineConfig({
   title: 'Coronavirus Dashboard CMS',
@@ -27,7 +27,7 @@ export default defineConfig({
   plugins: [
     dashboardTool({
       // TODO: figure out if widgets can be grouped as on V2 of the CMS, but without custom components
-      widgets: [unpublishedDocuments, recentlyPublishedDocuments, untranslatedLokalizeKeys, newLokalizeKeys, recentlyPublishedArticles],
+      widgets,
     }),
     deskTool({
       structure: deskStructure,
