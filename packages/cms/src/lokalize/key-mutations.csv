@@ -1,1 +1,7 @@
 timestamp,action,key,document_id,move_to
+2023-05-26T09:50:37.406Z,delete,common.verdenkingen_huisartsen.barscale_screenreader_text,jF33EuwumlGuwav2FD3X24,__
+2023-05-26T09:50:37.407Z,delete,common.verdenkingen_huisartsen.barscale_toelichting,jF33EuwumlGuwav2FD3WvM,__
+2023-05-26T09:50:37.407Z,delete,common.verdenkingen_huisartsen.kpi_titel,jF33EuwumlGuwav2FD3Wx2,__
+2023-05-26T09:50:37.407Z,delete,common.verdenkingen_huisartsen.normalized_kpi_titel,jF33EuwumlGuwav2FD3X8m,__
+2023-05-26T09:50:37.407Z,delete,common.verdenkingen_huisartsen.normalized_kpi_toelichting,jF33EuwumlGuwav2FD3XAS,__
+2023-05-26T09:50:37.407Z,delete,common.verdenkingen_huisartsen.titel_kpi,jF33EuwumlGuwav2FD3XC8,__
