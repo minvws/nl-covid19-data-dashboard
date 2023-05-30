@@ -73,7 +73,7 @@ export const DashboardDocumentListWidget = ({ title, query, countQuery, createBu
   return (
     <DashboardWidgetContainer
       // TODO: Should we show number of documents visible or total number of documents
-      header={`${title} - ${documents.length}`}
+      header={`${title} - ${documents.length} van ${totalDocumentCount}`}
       footer={
         <Flex direction="row" align="center" justify="space-between">
           <Button
