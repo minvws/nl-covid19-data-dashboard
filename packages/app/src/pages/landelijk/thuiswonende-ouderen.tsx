@@ -8,14 +8,12 @@ import { Divider } from '~/components/divider';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { WarningTile } from '~/components/warning-tile';
-import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
@@ -113,32 +111,6 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
-          <TwoKpiSection>
-            <KpiTile
-              title={textNl.section_positive_tested.kpi_daily_title}
-              metadata={{
-                date: elderlyAtHomeData.last_value.date_unix,
-                source: textNl.section_positive_tested.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                absolute={elderlyAtHomeData.last_value.positive_tested_daily}
-                difference={data.difference.elderly_at_home__positive_tested_daily_archived_20230126}
-                isAmount
-              />
-              <Markdown content={textNl.section_positive_tested.kpi_daily_description} />
-            </KpiTile>
-            <KpiTile
-              title={textNl.section_positive_tested.kpi_daily_per_100k_title}
-              metadata={{
-                date: elderlyAtHomeData.last_value.date_unix,
-                source: textNl.section_positive_tested.bronnen.rivm,
-              }}
-            >
-              <KpiValue absolute={elderlyAtHomeData.last_value.positive_tested_daily_per_100k} />
-              <Text>{textNl.section_positive_tested.kpi_daily_per_100k_description}</Text>
-            </KpiTile>
-          </TwoKpiSection>
           <ChartTile
             timeframeOptions={TimeframeOptionsList}
             title={textNl.section_positive_tested.line_chart_daily_title}
