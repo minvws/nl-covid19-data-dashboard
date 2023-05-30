@@ -22,3 +22,15 @@ timestamp,action,key,document_id,move_to
 2023-05-30T06:44:50.865Z,delete,pages.elderly_at_home_page.nl.section_positive_tested.kpi_daily_per_100k_description,jF33EuwumlGuwav2FD3z2C,__
 2023-05-30T06:44:50.865Z,delete,pages.elderly_at_home_page.nl.section_positive_tested.kpi_daily_per_100k_title,jF33EuwumlGuwav2FD3z0W,__
 2023-05-30T06:44:50.865Z,delete,pages.elderly_at_home_page.nl.section_positive_tested.kpi_daily_title,jF33EuwumlGuwav2FD3yxA,__
+2023-05-30T07:35:04.114Z,delete,pages.disability_care_page.nl.besmette_locaties.barscale_screenreader_text,jF33EuwumlGuwav2FD3vC0,__
+2023-05-30T07:35:04.115Z,delete,pages.disability_care_page.nl.besmette_locaties.barscale_titel,jF33EuwumlGuwav2FD3v3c,__
+2023-05-30T07:35:04.115Z,delete,pages.disability_care_page.nl.besmette_locaties.barscale_toelichting,jF33EuwumlGuwav2FD3v5I,__
+2023-05-30T07:35:04.115Z,delete,pages.disability_care_page.nl.besmette_locaties.kpi_titel,jF33EuwumlGuwav2FD3v6y,__
+2023-05-30T07:35:04.115Z,delete,pages.disability_care_page.nl.besmette_locaties.kpi_toelichting,jF33EuwumlGuwav2FD3v8e,__
+2023-05-30T07:35:04.115Z,delete,pages.disability_care_page.nl.oversterfte.barscale_screenreader_text,jF33EuwumlGuwav2FD3wPU,__
+2023-05-30T07:35:04.115Z,delete,pages.disability_care_page.nl.oversterfte.barscale_titel,jF33EuwumlGuwav2FD3wNo,__
+2023-05-30T07:35:04.115Z,delete,pages.disability_care_page.nl.oversterfte.extra_uitleg,jF33EuwumlGuwav2FD3wRA,__
+2023-05-30T07:35:04.115Z,delete,pages.disability_care_page.nl.positief_geteste_personen.barscale_screenreader_text,jF33EuwumlGuwav2FD3voa,__
+2023-05-30T07:35:04.116Z,delete,pages.disability_care_page.nl.positief_geteste_personen.barscale_titel,jF33EuwumlGuwav2FD3vhs,__
+2023-05-30T07:35:04.116Z,delete,pages.disability_care_page.nl.positief_geteste_personen.extra_uitleg,jF33EuwumlGuwav2FD3vjY,__
+2023-05-30T07:35:04.116Z,delete,pages.disability_care_page.nl.positief_geteste_personen.kpi_titel,jF33EuwumlGuwav2FD3wAO,__
