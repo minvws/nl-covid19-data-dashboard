@@ -60,9 +60,6 @@
     "disability_care__infected_locations_total_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
-    "elderly_at_home__positive_tested_daily_archived_20230126": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "deceased_rivm__covid_daily_archived_20221231": {
       "$ref": "#/definitions/diff_integer"
     }
@@ -87,7 +84,6 @@
     "corona_melder_app_warning__count",
     "disability_care__newly_infected_people_archived_20230126",
     "disability_care__infected_locations_total_archived_20230126",
-    "elderly_at_home__positive_tested_daily_archived_20230126",
     "deceased_rivm__covid_daily_archived_20221231"
   ],
   "additionalProperties": false,
