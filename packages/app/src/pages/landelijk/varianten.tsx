@@ -15,6 +15,7 @@ import { createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts 
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { VariantDynamicLabels } from '~/domain/variants/variants-table-tile/types';
 
 const pageMetrics = ['variants', 'named_difference'];
 
@@ -59,7 +60,7 @@ export const getStaticProps = createGetStaticProps(
 export default function CovidVariantenPage(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedNlData: data, lastGenerated, content, variantTable, variantChart, variantColors, dates } = props;
 
-  const { commonTexts } = useIntl();
+  const { commonTexts, locale } = useIntl();
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
@@ -69,6 +70,12 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
   };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
+  const variantLabels: VariantDynamicLabels = {};
+
+  data.variants?.values.forEach((variant) => {
+    variantLabels[`${variant.variant_code}`] = locale === 'nl' ? variant.values[0].label_nl : variant.values[0].label_en;
+  });
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -94,11 +101,11 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             articles={content.articles}
           />
 
-          {variantChart && (
+          {variantChart && variantLabels && (
             <VariantsStackedAreaTile
               text={{
                 ...textNl.varianten_over_tijd_grafiek,
-                variantCodes: commonTexts.variant_codes,
+                variantCodes: variantLabels as VariantDynamicLabels,
               }}
               values={variantChart}
               variantColors={variantColors}
@@ -110,20 +117,22 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             />
           )}
 
-          <VariantsTableTile
-            data={variantTable}
-            text={{
-              ...textNl.varianten_tabel,
-              variantCodes: commonTexts.variant_codes,
-              description: textNl.varianten_omschrijving,
-            }}
-            source={textNl.bronnen.rivm}
-            dates={{
-              date_end_unix: dates.date_end_unix,
-              date_of_report_unix: dates.date_of_report_unix,
-              date_start_unix: dates.date_start_unix,
-            }}
-          />
+          {variantLabels && (
+            <VariantsTableTile
+              data={variantTable}
+              text={{
+                ...textNl.varianten_tabel,
+                variantCodes: variantLabels,
+                description: textNl.varianten_omschrijving,
+              }}
+              source={textNl.bronnen.rivm}
+              dates={{
+                date_end_unix: dates.date_end_unix,
+                date_of_report_unix: dates.date_of_report_unix,
+                date_start_unix: dates.date_start_unix,
+              }}
+            />
+          )}
         </TileList>
       </NlLayout>
     </Layout>
