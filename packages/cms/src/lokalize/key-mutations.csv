@@ -11,7 +11,8 @@ timestamp,action,key,document_id,move_to
 2023-05-30T05:55:00.821Z,delete,common.corona_melder_app.rapport.title,jF33EuwumlGuwav2FD4HoK,__
 2023-05-30T05:55:00.821Z,delete,common.corona_melder_app.waarschuwingen.description,jF33EuwumlGuwav2FD4Hky,__
 2023-05-30T05:55:00.821Z,delete,common.corona_melder_app.waarschuwingen.title,jF33EuwumlGuwav2FD4HjI,__
-2023-05-30T05:55:00.821Z,delete,common.corona_melder_app.waarschuwingen.total,jF33EuwumlGuwav2FD4Hme,__2023-05-30T06:44:50.863Z,delete,common.corona_melder_app.rapport.description,jF33EuwumlGuwav2FD4Hq0,__
+2023-05-30T05:55:00.821Z,delete,common.corona_melder_app.waarschuwingen.total,jF33EuwumlGuwav2FD4Hme,__
+2023-05-30T06:44:50.863Z,delete,common.corona_melder_app.rapport.description,jF33EuwumlGuwav2FD4Hq0,__
 2023-05-30T06:44:50.864Z,delete,common.corona_melder_app.rapport.link.href,jF33EuwumlGuwav2FD4HtM,__
 2023-05-30T06:44:50.864Z,delete,common.corona_melder_app.rapport.link.text,jF33EuwumlGuwav2FD4Hrg,__
 2023-05-30T06:44:50.864Z,delete,common.corona_melder_app.rapport.title,jF33EuwumlGuwav2FD4HoK,__
