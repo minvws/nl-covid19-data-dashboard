@@ -8,43 +8,76 @@ import styled from 'styled-components';
 interface DashboardDocumentListWidgetProps {
   title: string | undefined;
   query: string | undefined;
+  countQuery: string;
   createButtonText: string | null;
   types: string[] | null;
 }
 
-// TODO: Add fetch more button. Set state for the limit.
-export const DashboardDocumentListWidget = ({ title, query, createButtonText, types }: DashboardDocumentListWidgetProps) => {
-  const [documents, setDocuments] = useState<SanityDocument[] | undefined>(undefined);
+export const DashboardDocumentListWidget = ({ title, query, countQuery, createButtonText, types }: DashboardDocumentListWidgetProps) => {
+  const [documents, setDocuments] = useState<SanityDocument[]>([]);
   const [limit, setLimit] = useState(25);
   const [isLoading, setIsLoading] = useState(false);
+  const [totalDocumentCount, setTotalDocumentCount] = useState(0);
+  const [isFetchMoreDisabled, setIsFetchMoreDisabled] = useState(documents?.length === totalDocumentCount);
   const client = useClient({ apiVersion: '2021-10-21' });
 
-  const fetchDocuments = async () => {
-    if (documents && !(documents?.length >= limit)) setLimit((previousLimit) => previousLimit + 25);
+  const handleFetchMoreClick = () => setLimit((previousLimit) => previousLimit + 25);
 
+  const fetchDocuments = async () => {
     setIsLoading(true);
 
-    const response = query ? await client.fetch(`${query}[0...${limit}]`) : undefined;
-    setDocuments(response);
-    setLimit((previousLimit) => previousLimit + 25);
-    setIsLoading(false);
+    try {
+      const startOfQueryLimit = documents && documents?.length <= limit ? documents?.length : 0;
+      const response = await client.fetch(`${query}[${startOfQueryLimit}...${limit}]`);
+
+      setDocuments((previousDocuments) => [...previousDocuments, ...response]);
+    } catch (error) {
+      console.error(`There was an error while fetching documents: ${error}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchDocumentCount = async () => {
+    try {
+      const response = await client.fetch(countQuery);
+      setTotalDocumentCount(response);
+    } catch (error) {
+      console.error(`There was an error fetching the document count: ${error}`);
+    }
   };
 
   useEffect(() => {
-    if (!documents) fetchDocuments();
+    if (!documents || (documents && documents?.length <= limit)) fetchDocuments();
+  }, [limit]);
+
+  useEffect(() => {
+    fetchDocumentCount();
   }, []);
 
   useEffect(() => {
-    console.log(documents);
-  }, [documents]);
+    setIsFetchMoreDisabled(documents?.length === totalDocumentCount);
+  }, [totalDocumentCount]);
 
   return (
+    // TODO: Style the dashboard layout
     <DashboardWidgetContainer
-      header={title}
-      // TODO: Implement fetch more button, only if there is more to fetch
+      // TODO: Should we show number of documents visible or total number of documents?
+      header={`${title} - ${documents?.length}`}
       footer={
         <Flex direction="row" align="center" justify="space-between">
-          <Button onClick={fetchDocuments} mode="bleed" padding={[2, 4]} tone="primary" text={isLoading ? 'Laden...' : 'Toon meer'} style={{ cursor: 'pointer' }} />
+          <Button
+            onClick={handleFetchMoreClick}
+            padding={[2, 4]}
+            mode="ghost"
+            tone="primary"
+            // TODO: Change button text when there are no more documents to fetch
+            text={isLoading ? 'Laden...' : 'Toon meer'}
+            // TODO: Figure out how to get rid of this border radius. Its coming from a card which is not in our code.
+            style={{ cursor: isFetchMoreDisabled ? 'not-allowed' : 'pointer', width: '100%', borderRadius: 0 }}
+            disabled={isFetchMoreDisabled || isLoading}
+            title={isFetchMoreDisabled ? 'No more documents to show' : 'Retrieve more documents'}
+          />
 
           {createButtonText && types && (
             <IntentButton
