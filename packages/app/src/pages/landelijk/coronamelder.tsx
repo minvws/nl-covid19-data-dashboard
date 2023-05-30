@@ -25,7 +25,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('difference.corona_melder_app_warning__count', 'corona_melder_app_warning', 'corona_melder_app_download')
+  selectNlData('corona_melder_app_warning', 'corona_melder_app_download')
 );
 
 const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
