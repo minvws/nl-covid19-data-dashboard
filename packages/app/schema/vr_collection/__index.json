@@ -3,7 +3,7 @@
   "type": "object",
   "title": "vr_collection",
   "additionalProperties": false,
-  "required": ["last_generated", "proto_name", "name", "code", "disability_care_archived_20230126", "elderly_at_home_archived_20230126", "nursing_home_archived_20230126"],
+  "required": ["last_generated", "proto_name", "name", "code", "disability_care_archived_20230126", "elderly_at_home_archived_20230126", "vulnerable_nursing_home"],
   "properties": {
     "last_generated": {
       "type": "string"
@@ -33,12 +33,12 @@
         "$ref": "elderly_at_home_archived_20230126.json"
       }
     },
-    "nursing_home_archived_20230126": {
+    "vulnerable_nursing_home": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "nursing_home_archived_20230126.json"
+        "$ref": "vulnerable_nursing_home.json"
       }
     }
   },
