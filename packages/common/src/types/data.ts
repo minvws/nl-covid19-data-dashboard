@@ -1217,7 +1217,7 @@ export interface VrCollection {
   code: VrCollectionId;
   disability_care_archived_20230126: VrCollectionDisabilityCareArchived_20230126[];
   elderly_at_home_archived_20230126: VrCollectionElderlyAtHomeArchived_20230126[];
-  nursing_home_archived_20230126: VrCollectionNursingHomeArchived_20230126[];
+  vulnerable_nursing_home: VrCollectionVulnerableNursingHome[];
 }
 export interface VrCollectionDisabilityCareArchived_20230126 {
   newly_infected_people: number;
@@ -1237,13 +1237,11 @@ export interface VrCollectionElderlyAtHomeArchived_20230126 {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface VrCollectionNursingHomeArchived_20230126 {
-  newly_infected_people: number;
+export interface VrCollectionVulnerableNursingHome {
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
-  deceased_daily: number;
-  date_unix: number;
   date_of_insertion_unix: number;
+  date_unix: number;
   vrcode: string;
 }
