@@ -5,3 +5,10 @@ timestamp,action,key,document_id,move_to
 2023-05-26T09:50:37.407Z,delete,common.verdenkingen_huisartsen.normalized_kpi_titel,jF33EuwumlGuwav2FD3X8m,__
 2023-05-26T09:50:37.407Z,delete,common.verdenkingen_huisartsen.normalized_kpi_toelichting,jF33EuwumlGuwav2FD3XAS,__
 2023-05-26T09:50:37.407Z,delete,common.verdenkingen_huisartsen.titel_kpi,jF33EuwumlGuwav2FD3XC8,__
+2023-05-30T05:55:00.820Z,delete,common.corona_melder_app.rapport.description,jF33EuwumlGuwav2FD4Hq0,__
+2023-05-30T05:55:00.821Z,delete,common.corona_melder_app.rapport.link.href,jF33EuwumlGuwav2FD4HtM,__
+2023-05-30T05:55:00.821Z,delete,common.corona_melder_app.rapport.link.text,jF33EuwumlGuwav2FD4Hrg,__
+2023-05-30T05:55:00.821Z,delete,common.corona_melder_app.rapport.title,jF33EuwumlGuwav2FD4HoK,__
+2023-05-30T05:55:00.821Z,delete,common.corona_melder_app.waarschuwingen.description,jF33EuwumlGuwav2FD4Hky,__
+2023-05-30T05:55:00.821Z,delete,common.corona_melder_app.waarschuwingen.title,jF33EuwumlGuwav2FD4HjI,__
+2023-05-30T05:55:00.821Z,delete,common.corona_melder_app.waarschuwingen.total,jF33EuwumlGuwav2FD4Hme,__
