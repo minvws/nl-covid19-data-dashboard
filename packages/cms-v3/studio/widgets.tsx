@@ -39,11 +39,10 @@ export const dashboardWidgets: TDashboardWidget[] = [
   },
 ];
 
-export const widgets = dashboardWidgets.map(({ name, title, query, countQuery, createButtonText = null, types = null }, index) => {
+export const widgets = dashboardWidgets.map(({ name, title, query, countQuery, createButtonText = null, types = null }, index): DashboardWidget => {
   return {
     name: name,
-    component: function component() {
-      return <DashboardDocumentListWidget key={index} title={title} query={query} createButtonText={createButtonText} types={types} countQuery={countQuery} />;
-    },
+    component: () => <DashboardDocumentListWidget key={index} title={title} query={query} createButtonText={createButtonText} types={types} countQuery={countQuery} />,
+    layout: { width: index === dashboardWidgets.length - 1 ? 'full' : 'large' },
   };
 });

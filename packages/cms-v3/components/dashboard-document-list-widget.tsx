@@ -18,7 +18,7 @@ export const DashboardDocumentListWidget = ({ title, query, countQuery, createBu
   const [limit, setLimit] = useState(25);
   const [isLoading, setIsLoading] = useState(false);
   const [totalDocumentCount, setTotalDocumentCount] = useState(0);
-  const [isFetchMoreDisabled, setIsFetchMoreDisabled] = useState(documents?.length === totalDocumentCount);
+  const [isFetchMoreDisabled, setIsFetchMoreDisabled] = useState(documents.length === totalDocumentCount);
   const client = useClient({ apiVersion: '2021-10-21' });
 
   const handleFetchMoreClick = () => setLimit((previousLimit) => previousLimit + 25);
@@ -27,7 +27,7 @@ export const DashboardDocumentListWidget = ({ title, query, countQuery, createBu
     setIsLoading(true);
 
     try {
-      const startOfQueryLimit = documents && documents?.length <= limit ? documents?.length : 0;
+      const startOfQueryLimit = documents && documents.length <= limit ? documents.length : 0;
       const response = await client.fetch(`${query}[${startOfQueryLimit}...${limit}]`);
 
       setDocuments((previousDocuments) => [...previousDocuments, ...response]);
@@ -47,8 +47,19 @@ export const DashboardDocumentListWidget = ({ title, query, countQuery, createBu
     }
   };
 
+  /**
+   * Resetting styles on the container happens like this because we do not have access to the element within which the dashboard is rendered.
+   */
   useEffect(() => {
-    if (!documents || (documents && documents?.length <= limit)) fetchDocuments();
+    const container = document.querySelector('[data-ui="Container"]') as HTMLElement;
+    if (container) {
+      container.style.maxWidth = 'none';
+      container.style.paddingInline = '128px';
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!documents || (documents && documents.length <= limit)) fetchDocuments();
   }, [limit]);
 
   useEffect(() => {
@@ -56,23 +67,21 @@ export const DashboardDocumentListWidget = ({ title, query, countQuery, createBu
   }, []);
 
   useEffect(() => {
-    setIsFetchMoreDisabled(documents?.length === totalDocumentCount);
+    setIsFetchMoreDisabled(documents.length === totalDocumentCount);
   }, [totalDocumentCount]);
 
   return (
-    // TODO: Style the dashboard layout
     <DashboardWidgetContainer
-      // TODO: Should we show number of documents visible or total number of documents?
-      header={`${title} - ${documents?.length}`}
+      // TODO: Should we show number of documents visible or total number of documents
+      header={`${title} - ${documents.length}`}
       footer={
         <Flex direction="row" align="center" justify="space-between">
           <Button
             onClick={handleFetchMoreClick}
             padding={[2, 4]}
-            mode="ghost"
+            mode="bleed"
             tone="primary"
-            // TODO: Change button text when there are no more documents to fetch
-            text={isLoading ? 'Laden...' : 'Toon meer'}
+            text={isFetchMoreDisabled ? 'Alles geladen' : isLoading ? 'Laden...' : 'Laad meer'}
             // TODO: Figure out how to get rid of this border radius. Its coming from a card which is not in our code.
             style={{ cursor: isFetchMoreDisabled ? 'not-allowed' : 'pointer', width: '100%', borderRadius: 0 }}
             disabled={isFetchMoreDisabled || isLoading}
@@ -85,7 +94,7 @@ export const DashboardDocumentListWidget = ({ title, query, countQuery, createBu
               style={{ width: '100%' }}
               paddingX={2}
               paddingY={4}
-              tone="primary"
+              tone="positive"
               type="button"
               intent="create"
               params={{ type: types[0] }}
@@ -97,7 +106,7 @@ export const DashboardDocumentListWidget = ({ title, query, countQuery, createBu
       }
     >
       <DashboardDocumentWidgetContainer>
-        {documents?.map((document) => (
+        {documents.map((document) => (
           <DashboardDocumentWidgetEntry key={document._id} document={document} />
         ))}
       </DashboardDocumentWidgetContainer>
