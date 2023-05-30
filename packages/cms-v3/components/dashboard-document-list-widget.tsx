@@ -1,6 +1,7 @@
 import { DashboardWidgetContainer } from '@sanity/dashboard';
-import { Button, Card, Flex } from '@sanity/ui';
+import { Button, Flex } from '@sanity/ui';
 import { useEffect, useState } from 'react';
+import { BsPlus } from 'react-icons/bs';
 import { IntentButton, Preview, SanityDocument, getPublishedId, useClient, useSchema } from 'sanity';
 import styled from 'styled-components';
 
@@ -15,17 +16,18 @@ interface DashboardDocumentListWidgetProps {
 export const DashboardDocumentListWidget = ({ title, query, createButtonText, types }: DashboardDocumentListWidgetProps) => {
   const [documents, setDocuments] = useState<SanityDocument[] | undefined>(undefined);
   const [limit, setLimit] = useState(25);
+  const [isLoading, setIsLoading] = useState(false);
   const client = useClient({ apiVersion: '2021-10-21' });
 
   const fetchDocuments = async () => {
-    // TODO: remove this limit, though it seems to be impacting performance quite a bit?
-    // const doesDocumentCountMatchLimit = documents?.length ?? 0 === limit;
     if (documents && !(documents?.length >= limit)) setLimit((previousLimit) => previousLimit + 25);
 
-    // const response = query ? await client.fetch(`${query}[${documents?.length ?? 0}...${limit}]`) : undefined;
+    setIsLoading(true);
+
     const response = query ? await client.fetch(`${query}[0...${limit}]`) : undefined;
     setDocuments(response);
-    // setLimit(documents?.length ?? 25)
+    setLimit((previousLimit) => previousLimit + 25);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -41,7 +43,9 @@ export const DashboardDocumentListWidget = ({ title, query, createButtonText, ty
       header={title}
       // TODO: Implement fetch more button, only if there is more to fetch
       footer={
-        <>
+        <Flex direction="row" align="center" justify="space-between">
+          <Button onClick={fetchDocuments} mode="bleed" padding={[2, 4]} tone="primary" text={isLoading ? 'Laden...' : 'Toon meer'} style={{ cursor: 'pointer' }} />
+
           {createButtonText && types && (
             <IntentButton
               mode="bleed"
@@ -53,11 +57,10 @@ export const DashboardDocumentListWidget = ({ title, query, createButtonText, ty
               intent="create"
               params={{ type: types[0] }}
               text={createButtonText}
+              icon={BsPlus}
             />
           )}
-
-          <Button onClick={fetchDocuments}>Fetch more items</Button>
-        </>
+        </Flex>
       }
     >
       <DashboardDocumentWidgetContainer>
