@@ -1,12 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
 
-  "title": "vr_collection_nursing_home_archived_20230126",
+  "title": "vr_collection_vulnerable_nursing_home",
   "type": "object",
   "properties": {
-    "newly_infected_people": {
-      "type": "integer"
-    },
     "newly_infected_locations": {
       "type": "integer"
     },
@@ -16,29 +13,24 @@
     "infected_locations_percentage": {
       "type": "number"
     },
-    "deceased_daily": {
+    "date_of_insertion_unix": {
       "type": "integer"
     },
     "date_unix": {
       "type": "integer"
     },
-    "date_of_insertion_unix": {
-      "type": "integer"
-    },
     "vrcode": {
       "type": "string",
-      "pattern": "^VR[0-9]+$"
+      "equalsRootProperty": "code"
     }
   },
   "required": [
-    "newly_infected_people",
     "newly_infected_locations",
     "infected_locations_total",
     "infected_locations_percentage",
-    "deceased_daily",
     "date_unix",
-    "date_of_insertion_unix",
-    "vrcode"
+    "vrcode",
+    "date_of_insertion_unix"
   ],
   "additionalProperties": false
 }
