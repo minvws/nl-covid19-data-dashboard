@@ -1,3 +1,5 @@
+import { Rule } from '~/sanity';
+
 export const veelgesteldeVragen = {
   name: 'veelgesteldeVragen',
   type: 'document',
@@ -14,12 +16,18 @@ export const veelgesteldeVragen = {
       title: 'Beschrijving',
     },
     {
-      name: 'questions',
+      name: 'groupLeft',
       type: 'array',
-      title: 'Vragen',
-      description:
-        'Je kan veel gestelde vragen toevoegen, de volgorde veranderen, de tekst bijwerken of verwijderen',
-      of: [{ type: 'reference', to: { type: 'faqQuestion' } }],
+      title: 'Groepen Links',
+      validation: (Rule: Rule) => Rule.reset().required(),
+      of: [{ type: 'reference', to: { type: 'veelgesteldeVragenGroups' } }],
+    },
+    {
+      name: 'groupRight',
+      type: 'array',
+      title: 'Groepen Rechts',
+      validation: (Rule: Rule) => Rule.reset().required(),
+      of: [{ type: 'reference', to: { type: 'veelgesteldeVragenGroups' } }],
     },
   ],
   preview: {

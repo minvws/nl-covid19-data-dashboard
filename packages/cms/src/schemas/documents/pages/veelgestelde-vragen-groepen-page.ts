@@ -10,6 +10,13 @@ export const veelgesteldeVragenGroups = {
       type: 'localeString',
       title: 'Groepsnaam',
     },
+    {
+      name: 'questions',
+      type: 'array',
+      title: 'Vragen',
+      description: 'Je kan veel gestelde vragen toevoegen, de volgorde veranderen, de tekst bijwerken of verwijderen',
+      of: [{ type: 'reference', to: { type: 'faqQuestion' } }],
+    },
   ],
   preview: {
     select: {
