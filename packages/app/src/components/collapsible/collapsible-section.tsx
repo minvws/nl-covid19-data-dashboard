@@ -12,24 +12,28 @@ interface CollapsibleSectionProps extends BoxProps {
   summary: string;
   children: ReactNode;
   id?: string;
+  hideBorder?: boolean;
   textColor?: string;
   borderColor?: string;
   border?: string;
   borderRadius?: string;
   marginBottom?: string;
   hasNormalFontWeight?: boolean;
+  hasSmallerFontSize?: boolean;
 }
 
 export const CollapsibleSection = ({
   summary,
   children,
   id,
+  hideBorder,
   textColor = colors.blue8,
   borderColor = colors.gray2,
   border,
   borderRadius,
   marginBottom,
   hasNormalFontWeight,
+  hasSmallerFontSize,
 }: CollapsibleSectionProps) => {
   const section = useRef<HTMLElement>(null);
 
@@ -64,8 +68,8 @@ export const CollapsibleSection = ({
   }, [toggle, id]);
 
   return (
-    <Box as="section" borderTop={`1px solid ${borderColor}`} id={id} ref={section} border={border} borderRadius={borderRadius} marginBottom={marginBottom}>
-      <StyledSummary textColor={textColor} onClick={() => collapsible.toggle()} hasNormalFontWeight={hasNormalFontWeight}>
+    <Box as="section" borderTop={hideBorder ? undefined : `1px solid ${borderColor}`} id={id} ref={section} border={border} borderRadius={borderRadius} marginBottom={marginBottom}>
+      <StyledSummary textColor={textColor} onClick={() => collapsible.toggle()} hasNormalFontWeight={hasNormalFontWeight} hasSmallerFontSize={hasSmallerFontSize}>
         <Box width="100%" position="relative">
           {summary}
           {id && (
@@ -100,6 +104,7 @@ const StyledAnchor = styled(Anchor)`
 interface SummaryProps {
   textColor: string;
   hasNormalFontWeight?: boolean;
+  hasSmallerFontSize?: boolean;
 }
 
 const StyledSummary = styled(Box)<SummaryProps>`
@@ -107,7 +112,7 @@ const StyledSummary = styled(Box)<SummaryProps>`
   color: ${({ textColor }) => textColor};
   cursor: pointer;
   display: flex;
-  font-size: ${fontSizes[5]};
+  font-size: ${({ hasSmallerFontSize }) => (hasSmallerFontSize ? `${fontSizes[2]}` : `${fontSizes[5]}`)};
   font-weight: ${({ hasNormalFontWeight }) => (hasNormalFontWeight ? `${fontWeights.normal}` : `${fontWeights.bold}`)};
   justify-content: space-between;
   padding: ${space[3]};

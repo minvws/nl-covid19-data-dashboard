@@ -64,6 +64,9 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
 
   const groups = groupBy<FAQuestionAndAnswer>(content.questions, (x) => x.group);
 
+  const firstHalf = Object.entries(groups).slice(0, Math.round(Object.entries(groups).length / 2));
+  const secondHalf = Object.entries(groups).slice(Math.round(Object.entries(groups).length / 2));
+
   return (
     <Layout {...commonTexts.veelgestelde_vragen_metadata} lastGenerated={lastGenerated}>
       <Box margin={`${space[5]} auto`} maxWidth={`${sizes.maxWidth}px`} padding={` 0 ${space[4]}`}>
@@ -76,38 +79,81 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
           {content.title && <Heading level={1}>{content.title}</Heading>}
           {content.description && <RichContent blocks={content.description} />}
         </Box>
-
-        <FaqLayout>
-          {Object.entries(groups).map(([group, questions]) => (
-            <Box as="article" key={group} spacing={3}>
-              <Heading level={3} as="h2">
-                {group}
-              </Heading>
-              <div>
-                {questions.map((item) => {
-                  const id = getSkipLinkId(item.title);
-                  return (
-                    <CollapsibleSection
-                      key={id}
-                      id={id}
-                      summary={item.title}
-                      border={`1px solid ${colors.gray2}`}
-                      borderRadius={`${radii[1]}px`}
-                      marginBottom={`8px`}
-                      hasNormalFontWeight
-                    >
-                      {item.content && (
-                        <Box paddingY={space[3]}>
-                          <RichContent blocks={item.content} />
-                        </Box>
-                      )}
-                    </CollapsibleSection>
-                  );
-                })}
-              </div>
-            </Box>
-          ))}
-        </FaqLayout>
+        <Box>
+          <FaqLayout>
+            <div>
+              {firstHalf.map(([group, questions]) => (
+                // make it's own component
+                <Box as="article" key={group} spacing={3}>
+                  <Heading level={3} as="h2">
+                    {group}
+                  </Heading>
+                  <div>
+                    {questions.map((item) => {
+                      const id = getSkipLinkId(item.title);
+                      return (
+                        <SelectedDropDown key={id}>
+                          <CollapsibleSection
+                            id={id}
+                            summary={item.title}
+                            // border={`1px solid ${colors.gray2}`}
+                            // borderRadius={`${radii[1]}px`}
+                            // marginBottom={`80px`}
+                            hasNormalFontWeight
+                            hasSmallerFontSize
+                            hideBorder
+                          >
+                            {item.content && (
+                              <Box paddingY={space[3]}>
+                                <RichContent blocks={item.content} />
+                              </Box>
+                            )}
+                          </CollapsibleSection>
+                        </SelectedDropDown>
+                      );
+                    })}
+                  </div>
+                </Box>
+              ))}
+            </div>
+            <div>
+              {secondHalf.map(([group, questions]) => (
+                // make it's own component
+                <Box as="article" key={group} spacing={3}>
+                  <Heading level={3} as="h2">
+                    {group}
+                  </Heading>
+                  <div>
+                    {questions.map((item) => {
+                      const id = getSkipLinkId(item.title);
+                      return (
+                        <SelectedDropDown key={id}>
+                          <CollapsibleSection
+                            id={id}
+                            summary={item.title}
+                            // border={`1px solid ${colors.gray2}`}
+                            // borderRadius={`${radii[1]}px`}
+                            // marginBottom={`80px`}
+                            hasNormalFontWeight
+                            hasSmallerFontSize
+                            hideBorder
+                          >
+                            {item.content && (
+                              <Box paddingY={space[3]}>
+                                <RichContent blocks={item.content} />
+                              </Box>
+                            )}
+                          </CollapsibleSection>
+                        </SelectedDropDown>
+                      );
+                    })}
+                  </div>
+                </Box>
+                //////
+              ))}
+            </div>
+          </FaqLayout>
+        </Box>
       </Box>
     </Layout>
   );
@@ -115,8 +161,22 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
 
 export default Verantwoording;
 
-const FaqLayout = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: ${space[4]};
+const FaqLayout = styled(Box)`
+  display: flex;
+  gap: ${space[4]} ${space[5]};
+`;
+
+const SelectedDropDown = styled.div`
+  margin-bottom: ${space[2]};
+  border: 1px solid ${colors.gray2};
+  border-radius: ${radii[1]}px;
+
+  &:hover {
+    border-color: ${colors.blue8};
+    background: ${colors.gray1};
+  }
+  &:focus {
+    background: ${colors.white};
+    border-color: ${colors.gray2};
+  }
 `;
