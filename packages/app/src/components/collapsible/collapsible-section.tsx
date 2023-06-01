@@ -11,30 +11,14 @@ import { fontSizes, fontWeights, space } from '~/style/theme';
 interface CollapsibleSectionProps extends BoxProps {
   summary: string;
   children: ReactNode;
+  className?: string;
   id?: string;
   hideBorder?: boolean;
   textColor?: string;
   borderColor?: string;
-  border?: string;
-  borderRadius?: string;
-  marginBottom?: string;
-  hasNormalFontWeight?: boolean;
-  hasSmallerFontSize?: boolean;
 }
 
-export const CollapsibleSection = ({
-  summary,
-  children,
-  id,
-  hideBorder,
-  textColor = colors.blue8,
-  borderColor = colors.gray2,
-  border,
-  borderRadius,
-  marginBottom,
-  hasNormalFontWeight,
-  hasSmallerFontSize,
-}: CollapsibleSectionProps) => {
+export const CollapsibleSection = ({ summary, children, id, hideBorder, textColor = colors.blue8, borderColor = colors.gray2, className }: CollapsibleSectionProps) => {
   const section = useRef<HTMLElement>(null);
 
   const collapsible = useCollapsible();
@@ -68,8 +52,8 @@ export const CollapsibleSection = ({
   }, [toggle, id]);
 
   return (
-    <Box as="section" borderTop={hideBorder ? undefined : `1px solid ${borderColor}`} id={id} ref={section} border={border} borderRadius={borderRadius} marginBottom={marginBottom}>
-      <StyledSummary textColor={textColor} onClick={() => collapsible.toggle()} hasNormalFontWeight={hasNormalFontWeight} hasSmallerFontSize={hasSmallerFontSize}>
+    <Box as="section" borderTop={hideBorder ? undefined : `1px solid ${borderColor}`} id={id} ref={section} className={`${className} ${collapsible.isOpen ? 'open' : ''}`}>
+      <StyledSummary textColor={textColor} onClick={() => collapsible.toggle()}>
         <Box width="100%" position="relative">
           {summary}
           {id && (
@@ -103,8 +87,6 @@ const StyledAnchor = styled(Anchor)`
 
 interface SummaryProps {
   textColor: string;
-  hasNormalFontWeight?: boolean;
-  hasSmallerFontSize?: boolean;
 }
 
 const StyledSummary = styled(Box)<SummaryProps>`
@@ -112,8 +94,8 @@ const StyledSummary = styled(Box)<SummaryProps>`
   color: ${({ textColor }) => textColor};
   cursor: pointer;
   display: flex;
-  font-size: ${({ hasSmallerFontSize }) => (hasSmallerFontSize ? `${fontSizes[2]}` : `${fontSizes[5]}`)};
-  font-weight: ${({ hasNormalFontWeight }) => (hasNormalFontWeight ? `${fontWeights.normal}` : `${fontWeights.bold}`)};
+  font-size: ${fontSizes[5]};
+  font-weight: ${fontWeights.bold};
   justify-content: space-between;
   padding: ${space[3]};
   user-select: none;
