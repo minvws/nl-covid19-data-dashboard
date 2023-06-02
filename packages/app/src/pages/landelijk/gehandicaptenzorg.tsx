@@ -7,14 +7,10 @@ import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { Divider } from '~/components/divider';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
 import { WarningTile } from '~/components/warning-tile';
-import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
@@ -44,11 +40,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
-    'difference.disability_care__newly_infected_people_archived_20230126',
-    'difference.disability_care__infected_locations_total_archived_20230126',
-    'disability_care_archived_20230126'
-  ),
+  selectNlData('disability_care_archived_20230126'),
   createGetChoroplethData({
     vr: ({ disability_care_archived_20230126 }) => ({ disability_care_archived_20230126 }),
   }),
@@ -117,19 +109,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
-          <TwoKpiSection>
-            <KpiTile
-              title={textNl.positief_geteste_personen.barscale_titel}
-              description={textNl.positief_geteste_personen.extra_uitleg}
-              metadata={{
-                date: lastValue.date_unix,
-                source: textNl.positief_geteste_personen.bronnen.rivm,
-              }}
-            >
-              <KpiValue absolute={lastValue.newly_infected_people} difference={data.difference.disability_care__newly_infected_people_archived_20230126} isAmount />
-            </KpiTile>
-          </TwoKpiSection>
-
           <ChartTile
             metadata={{ source: textNl.positief_geteste_personen.bronnen.rivm }}
             title={textNl.positief_geteste_personen.linechart_titel}
@@ -188,34 +167,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             }}
             referenceLink={textNl.besmette_locaties.reference.href}
           />
-
-          <TwoKpiSection>
-            <KpiTile
-              title={textNl.besmette_locaties.kpi_titel}
-              metadata={{
-                date: lastValue.date_unix,
-                source: textNl.besmette_locaties.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                absolute={lastValue.infected_locations_total}
-                percentage={lastValue.infected_locations_percentage}
-                difference={data.difference.disability_care__infected_locations_total_archived_20230126}
-                isAmount
-              />
-              <Text>{textNl.besmette_locaties.kpi_toelichting}</Text>
-            </KpiTile>
-            <KpiTile
-              title={textNl.besmette_locaties.barscale_titel}
-              metadata={{
-                date: lastValue.date_unix,
-                source: textNl.besmette_locaties.bronnen.rivm,
-              }}
-            >
-              <KpiValue absolute={lastValue.newly_infected_locations} />
-              <Text>{textNl.besmette_locaties.barscale_toelichting}</Text>
-            </KpiTile>
-          </TwoKpiSection>
 
           <ChoroplethTile
             title={textNl.besmette_locaties.map_titel}
@@ -288,19 +239,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             }}
             referenceLink={textNl.oversterfte.reference.href}
           />
-
-          <TwoKpiSection>
-            <KpiTile
-              title={textNl.oversterfte.barscale_titel}
-              description={textNl.oversterfte.extra_uitleg}
-              metadata={{
-                date: lastValue.date_unix,
-                source: textNl.oversterfte.bronnen.rivm,
-              }}
-            >
-              <KpiValue absolute={lastValue.deceased_daily} />
-            </KpiTile>
-          </TwoKpiSection>
 
           <ChartTile
             metadata={{ source: textNl.oversterfte.bronnen.rivm }}
