@@ -2,6 +2,7 @@ import { Bevolking } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { middleOfDayInSeconds } from '@corona-dashboard/common';
 import { useMemo, useRef, useState } from 'react';
+import { WarningTile } from '~/components';
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
 import { Markdown } from '~/components/markdown';
@@ -20,13 +21,13 @@ import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
-const pageMetrics = ['behavior', 'behavior_annotations', 'behavior_per_age_group'];
+const pageMetrics = ['behavior_archived_20230411', 'behavior_annotations_archived_20230412', 'behavior_per_age_group_archived_20230411'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -39,7 +40,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('behavior', 'behavior_annotations', 'behavior_per_age_group'),
+  selectArchivedNlData('behavior_archived_20230411', 'behavior_annotations_archived_20230412', 'behavior_per_age_group_archived_20230411'),
 
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('behavior_page'))(context);
@@ -53,8 +54,11 @@ export const getStaticProps = createGetStaticProps(
 );
 
 export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, content, lastGenerated } = props;
-  const behaviorLastValue = data.behavior.last_value;
+  const { pageText, selectedArchivedNlData: data, content, lastGenerated } = props;
+  const behaviorLastValue = data.behavior_archived_20230411.last_value;
+  const behaviorValues = data.behavior_archived_20230411.values;
+  const behaviorAnnotations = data.behavior_annotations_archived_20230412;
+  const behaviorPerAgeGroup = data.behavior_per_age_group_archived_20230411;
 
   const { commonTexts, formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
   const { metadataTexts, text, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -86,7 +90,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
 
   const { currentTimelineEvents } = useMemo(() => {
     // Timeline event from the current selected behaviour
-    const currentTimelineEvents = data.behavior_annotations.values
+    const currentTimelineEvents = behaviorAnnotations.values
       .filter((a) => a.behavior_indicator === currentId)
       .map((event) => ({
         title: event[`message_title_${locale}`],
@@ -96,18 +100,20 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
       }));
 
     return { currentTimelineEvents };
-  }, [currentId, data.behavior_annotations.values, locale]);
+  }, [currentId, behaviorAnnotations.values, locale]);
 
   const timelineProp = { timelineEvents: currentTimelineEvents };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+
+  const hasActiveWarningTile = !!textNl.belangrijk_bericht;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.actions_to_take.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             title={text.nl.pagina.titel}
             icon={<Bevolking aria-hidden="true" />}
             description={text.nl.pagina.toelichting}
@@ -123,6 +129,8 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
             referenceLink={textNl.reference.href}
             articles={content.articles}
           />
+
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <Tile>
@@ -165,7 +173,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
             text={textNl}
             metadata={{
               datumsText: textNl.datums,
-              date: data.behavior.last_value.date_start_unix,
+              date: behaviorLastValue.date_start_unix,
               source: textNl.bronnen.rivm,
             }}
           />
@@ -173,7 +181,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
           <span ref={scrollToRef} />
 
           <BehaviorLineChartTile
-            values={data.behavior.values}
+            values={behaviorValues}
             metadata={{
               date: [behaviorLastValue.date_start_unix, behaviorLastValue.date_end_unix],
               source: textNl.bronnen.rivm,
@@ -184,21 +192,19 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
             text={textNl}
           />
 
-          {data.behavior_per_age_group && (
-            <BehaviorPerAgeGroup
-              title={textNl.tabel_per_leeftijdsgroep.title}
-              description={textNl.tabel_per_leeftijdsgroep.description}
-              data={data.behavior_per_age_group}
-              currentId={currentId}
-              setCurrentId={setCurrentId}
-              text={textNl}
-              metadata={{
-                datumsText: textNl.datums,
-                date: data.behavior_per_age_group.date_start_unix,
-                source: textNl.bronnen.rivm,
-              }}
-            />
-          )}
+          <BehaviorPerAgeGroup
+            title={textNl.tabel_per_leeftijdsgroep.title}
+            description={textNl.tabel_per_leeftijdsgroep.description}
+            data={behaviorPerAgeGroup}
+            currentId={currentId}
+            setCurrentId={setCurrentId}
+            text={textNl}
+            metadata={{
+              datumsText: textNl.datums,
+              date: behaviorPerAgeGroup.date_start_unix,
+              source: textNl.bronnen.rivm,
+            }}
+          />
         </TileList>
       </NlLayout>
     </Layout>

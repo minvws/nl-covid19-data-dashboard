@@ -3,6 +3,9 @@
   "type": "object",
   "title": "archived_nl",
   "required": [
+    "behavior_archived_20230411",
+    "behavior_annotations_archived_20230412",
+    "behavior_per_age_group_archived_20230411",
     "code",
     "doctor_archived_20210903",
     "last_generated",
@@ -22,6 +25,15 @@
     },
     "code": {
       "$ref": "#/$defs/archived_nl_id"
+    },
+    "behavior_archived_20230411": {
+      "$ref": "behavior/behavior.json"
+    },
+    "behavior_annotations_archived_20230412": {
+      "$ref": "behavior/behavior_annotations.json"
+    },
+    "behavior_per_age_group_archived_20230411": {
+      "$ref": "behavior/behavior_per_age_group.json"
     },
     "doctor_archived_20210903": {
       "$ref": "doctor.json"

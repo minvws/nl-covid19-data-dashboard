@@ -11,7 +11,129 @@ export interface ArchivedNl {
   proto_name: ArchivedNlId;
   name: ArchivedNlId;
   code: ArchivedNlId;
+  behavior_archived_20230411: NlBehavior;
+  behavior_annotations_archived_20230412: NlBehaviorAnnotations;
+  behavior_per_age_group_archived_20230411: NlBehaviorPerAgeGroup;
   doctor_archived_20210903: NlDoctor;
+}
+export interface NlBehavior {
+  values: NlBehaviorValue[];
+  last_value: NlBehaviorValue;
+}
+export interface NlBehaviorValue {
+  number_of_participants: number;
+  curfew_compliance?: number | null;
+  curfew_compliance_trend: ('up' | 'down' | 'equal') | null;
+  wash_hands_compliance?: number | null;
+  wash_hands_compliance_trend: ('up' | 'down' | 'equal') | null;
+  keep_distance_compliance?: number | null;
+  keep_distance_compliance_trend: ('up' | 'down' | 'equal') | null;
+  work_from_home_compliance?: number | null;
+  work_from_home_compliance_trend: ('up' | 'down' | 'equal') | null;
+  avoid_crowds_compliance?: number | null;
+  avoid_crowds_compliance_trend: ('up' | 'down' | 'equal') | null;
+  symptoms_stay_home_if_mandatory_compliance?: number | null;
+  symptoms_stay_home_if_mandatory_compliance_trend?: ('up' | 'down' | 'equal') | null;
+  symptoms_get_tested_compliance?: number | null;
+  symptoms_get_tested_compliance_trend?: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_indoors_compliance?: number | null;
+  wear_mask_public_indoors_compliance_trend: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_transport_compliance?: number | null;
+  wear_mask_public_transport_compliance_trend?: ('up' | 'down' | 'equal') | null;
+  sneeze_cough_elbow_compliance?: number | null;
+  sneeze_cough_elbow_compliance_trend: ('up' | 'down' | 'equal') | null;
+  max_visitors_compliance?: number | null;
+  max_visitors_compliance_trend: ('up' | 'down' | 'equal') | null;
+  ventilate_home_compliance?: number | null;
+  ventilate_home_compliance_trend: ('up' | 'down' | 'equal') | null;
+  selftest_visit_compliance?: number | null;
+  selftest_visit_compliance_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_compliance?: number | null;
+  posttest_isolation_compliance_trend: ('up' | 'down' | 'equal') | null;
+  curfew_support?: number | null;
+  curfew_support_trend: ('up' | 'down' | 'equal') | null;
+  wash_hands_support?: number | null;
+  wash_hands_support_trend: ('up' | 'down' | 'equal') | null;
+  keep_distance_support?: number | null;
+  keep_distance_support_trend: ('up' | 'down' | 'equal') | null;
+  work_from_home_support?: number | null;
+  work_from_home_support_trend: ('up' | 'down' | 'equal') | null;
+  avoid_crowds_support?: number | null;
+  avoid_crowds_support_trend: ('up' | 'down' | 'equal') | null;
+  symptoms_stay_home_if_mandatory_support?: number | null;
+  symptoms_stay_home_if_mandatory_support_trend?: ('up' | 'down' | 'equal') | null;
+  symptoms_get_tested_support?: number | null;
+  symptoms_get_tested_support_trend?: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_indoors_support?: number | null;
+  wear_mask_public_indoors_support_trend: ('up' | 'down' | 'equal') | null;
+  wear_mask_public_transport_support?: number | null;
+  wear_mask_public_transport_support_trend?: ('up' | 'down' | 'equal') | null;
+  sneeze_cough_elbow_support?: number | null;
+  sneeze_cough_elbow_support_trend: ('up' | 'down' | 'equal') | null;
+  max_visitors_support?: number | null;
+  max_visitors_support_trend: ('up' | 'down' | 'equal') | null;
+  ventilate_home_support?: number | null;
+  ventilate_home_support_trend: ('up' | 'down' | 'equal') | null;
+  selftest_visit_support?: number | null;
+  selftest_visit_support_trend: ('up' | 'down' | 'equal') | null;
+  posttest_isolation_support?: number | null;
+  posttest_isolation_support_trend: ('up' | 'down' | 'equal') | null;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlBehaviorAnnotations {
+  values: NlBehaviorAnnotations1[];
+}
+export interface NlBehaviorAnnotations1 {
+  behavior_indicator:
+    | 'wash_hands'
+    | 'curfew'
+    | 'keep_distance'
+    | 'work_from_home'
+    | 'avoid_crowds'
+    | 'symptoms_stay_home_if_mandatory'
+    | 'symptoms_get_tested'
+    | 'wear_mask_public_indoors'
+    | 'wear_mask_public_transport'
+    | 'sneeze_cough_elbow'
+    | 'max_visitors'
+    | 'ventilate_home'
+    | 'selftest_visit'
+    | 'posttest_isolation';
+  message_title_nl: string;
+  message_title_en: string;
+  message_desc_nl: string;
+  message_desc_en: string;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlBehaviorPerAgeGroup {
+  keep_distance_compliance?: NlBehaviorPerAgeGroupValue;
+  keep_distance_support?: NlBehaviorPerAgeGroupValue;
+  sneeze_cough_elbow_compliance?: NlBehaviorPerAgeGroupValue;
+  sneeze_cough_elbow_support?: NlBehaviorPerAgeGroupValue;
+  wash_hands_compliance?: NlBehaviorPerAgeGroupValue;
+  wash_hands_support?: NlBehaviorPerAgeGroupValue;
+  work_from_home_compliance?: NlBehaviorPerAgeGroupValue;
+  work_from_home_support?: NlBehaviorPerAgeGroupValue;
+  ventilate_home_compliance?: NlBehaviorPerAgeGroupValue;
+  ventilate_home_support?: NlBehaviorPerAgeGroupValue;
+  selftest_visit_compliance?: NlBehaviorPerAgeGroupValue;
+  selftest_visit_support?: NlBehaviorPerAgeGroupValue;
+  posttest_isolation_compliance?: NlBehaviorPerAgeGroupValue;
+  posttest_isolation_support?: NlBehaviorPerAgeGroupValue;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlBehaviorPerAgeGroupValue {
+  '16_24': number | null;
+  '25_39': number | null;
+  '40_54': number | null;
+  '55_69': number | null;
+  '70_plus': number | null;
 }
 export interface NlDoctor {
   values: NlDoctorValue[];
@@ -269,10 +391,6 @@ export interface Nl {
   vulnerable_tested_per_age_group: NlVulnerableTestedPerAgeGroup;
   vulnerable_hospital_admissions: NlVulnerableHospitalAdmissions;
   disability_care_archived_20230126: NlDisabilityCareArchived_20230126;
-  behavior: NlBehavior;
-  behavior_per_age_group?: NlBehaviorPerAgeGroup;
-  behavior_get_tested_support_per_age_group?: NlBehaviorGetTestedSupportPerAgeGroup;
-  behavior_annotations: NlBehaviorAnnotations;
   deceased_rivm_archived_20221231: NlDeceasedRivmArchived_20221231;
   deceased_rivm_per_age_group_archived_20221231: NlDeceasedRivmPerAgeGroupArchived_20221231;
   deceased_cbs: NlDeceasedCbs;
@@ -606,140 +724,6 @@ export interface NlDisabilityCareArchived_20230126Value {
   infected_locations_total: number;
   infected_locations_percentage: number;
   date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlBehavior {
-  values: NlBehaviorValue[];
-  last_value: NlBehaviorValue;
-}
-export interface NlBehaviorValue {
-  number_of_participants: number;
-  curfew_compliance?: number | null;
-  curfew_compliance_trend: ('up' | 'down' | 'equal') | null;
-  wash_hands_compliance?: number | null;
-  wash_hands_compliance_trend: ('up' | 'down' | 'equal') | null;
-  keep_distance_compliance?: number | null;
-  keep_distance_compliance_trend: ('up' | 'down' | 'equal') | null;
-  work_from_home_compliance?: number | null;
-  work_from_home_compliance_trend: ('up' | 'down' | 'equal') | null;
-  avoid_crowds_compliance?: number | null;
-  avoid_crowds_compliance_trend: ('up' | 'down' | 'equal') | null;
-  symptoms_stay_home_if_mandatory_compliance?: number | null;
-  symptoms_stay_home_if_mandatory_compliance_trend?: ('up' | 'down' | 'equal') | null;
-  symptoms_get_tested_compliance?: number | null;
-  symptoms_get_tested_compliance_trend?: ('up' | 'down' | 'equal') | null;
-  wear_mask_public_indoors_compliance?: number | null;
-  wear_mask_public_indoors_compliance_trend: ('up' | 'down' | 'equal') | null;
-  wear_mask_public_transport_compliance?: number | null;
-  wear_mask_public_transport_compliance_trend?: ('up' | 'down' | 'equal') | null;
-  sneeze_cough_elbow_compliance?: number | null;
-  sneeze_cough_elbow_compliance_trend: ('up' | 'down' | 'equal') | null;
-  max_visitors_compliance?: number | null;
-  max_visitors_compliance_trend: ('up' | 'down' | 'equal') | null;
-  ventilate_home_compliance?: number | null;
-  ventilate_home_compliance_trend: ('up' | 'down' | 'equal') | null;
-  selftest_visit_compliance?: number | null;
-  selftest_visit_compliance_trend: ('up' | 'down' | 'equal') | null;
-  posttest_isolation_compliance?: number | null;
-  posttest_isolation_compliance_trend: ('up' | 'down' | 'equal') | null;
-  curfew_support?: number | null;
-  curfew_support_trend: ('up' | 'down' | 'equal') | null;
-  wash_hands_support?: number | null;
-  wash_hands_support_trend: ('up' | 'down' | 'equal') | null;
-  keep_distance_support?: number | null;
-  keep_distance_support_trend: ('up' | 'down' | 'equal') | null;
-  work_from_home_support?: number | null;
-  work_from_home_support_trend: ('up' | 'down' | 'equal') | null;
-  avoid_crowds_support?: number | null;
-  avoid_crowds_support_trend: ('up' | 'down' | 'equal') | null;
-  symptoms_stay_home_if_mandatory_support?: number | null;
-  symptoms_stay_home_if_mandatory_support_trend?: ('up' | 'down' | 'equal') | null;
-  symptoms_get_tested_support?: number | null;
-  symptoms_get_tested_support_trend?: ('up' | 'down' | 'equal') | null;
-  wear_mask_public_indoors_support?: number | null;
-  wear_mask_public_indoors_support_trend: ('up' | 'down' | 'equal') | null;
-  wear_mask_public_transport_support?: number | null;
-  wear_mask_public_transport_support_trend?: ('up' | 'down' | 'equal') | null;
-  sneeze_cough_elbow_support?: number | null;
-  sneeze_cough_elbow_support_trend: ('up' | 'down' | 'equal') | null;
-  max_visitors_support?: number | null;
-  max_visitors_support_trend: ('up' | 'down' | 'equal') | null;
-  ventilate_home_support?: number | null;
-  ventilate_home_support_trend: ('up' | 'down' | 'equal') | null;
-  selftest_visit_support?: number | null;
-  selftest_visit_support_trend: ('up' | 'down' | 'equal') | null;
-  posttest_isolation_support?: number | null;
-  posttest_isolation_support_trend: ('up' | 'down' | 'equal') | null;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlBehaviorPerAgeGroup {
-  keep_distance_compliance?: NlBehaviorPerAgeGroupValue;
-  keep_distance_support?: NlBehaviorPerAgeGroupValue;
-  sneeze_cough_elbow_compliance?: NlBehaviorPerAgeGroupValue;
-  sneeze_cough_elbow_support?: NlBehaviorPerAgeGroupValue;
-  wash_hands_compliance?: NlBehaviorPerAgeGroupValue;
-  wash_hands_support?: NlBehaviorPerAgeGroupValue;
-  work_from_home_compliance?: NlBehaviorPerAgeGroupValue;
-  work_from_home_support?: NlBehaviorPerAgeGroupValue;
-  ventilate_home_compliance?: NlBehaviorPerAgeGroupValue;
-  ventilate_home_support?: NlBehaviorPerAgeGroupValue;
-  selftest_visit_compliance?: NlBehaviorPerAgeGroupValue;
-  selftest_visit_support?: NlBehaviorPerAgeGroupValue;
-  posttest_isolation_compliance?: NlBehaviorPerAgeGroupValue;
-  posttest_isolation_support?: NlBehaviorPerAgeGroupValue;
-  date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
-}
-export interface NlBehaviorPerAgeGroupValue {
-  '16_24': number | null;
-  '25_39': number | null;
-  '40_54': number | null;
-  '55_69': number | null;
-  '70_plus': number | null;
-}
-export interface NlBehaviorGetTestedSupportPerAgeGroup {
-  values: NlBehaviorGetTestedSupportPerAgeGroupValue[];
-  last_value: NlBehaviorGetTestedSupportPerAgeGroupValue;
-}
-export interface NlBehaviorGetTestedSupportPerAgeGroupValue {
-  percentage_average: number;
-  percentage_70_plus: number;
-  percentage_55_69: number;
-  percentage_40_54: number;
-  percentage_25_39: number;
-  percentage_16_24: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlBehaviorAnnotations {
-  values: NlBehaviorAnnotations1[];
-}
-export interface NlBehaviorAnnotations1 {
-  behavior_indicator:
-    | 'wash_hands'
-    | 'curfew'
-    | 'keep_distance'
-    | 'work_from_home'
-    | 'avoid_crowds'
-    | 'symptoms_stay_home_if_mandatory'
-    | 'symptoms_get_tested'
-    | 'wear_mask_public_indoors'
-    | 'wear_mask_public_transport'
-    | 'sneeze_cough_elbow'
-    | 'max_visitors'
-    | 'ventilate_home'
-    | 'selftest_visit'
-    | 'posttest_isolation';
-  message_title_nl: string;
-  message_title_en: string;
-  message_desc_nl: string;
-  message_desc_en: string;
-  date_start_unix: number;
-  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlDeceasedRivmArchived_20221231 {
