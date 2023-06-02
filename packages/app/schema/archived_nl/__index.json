@@ -7,7 +7,6 @@
     "behavior_annotations_archived_20230412",
     "behavior_per_age_group_archived_20230411",
     "code",
-    "difference",
     "doctor_archived_20210903",
     "last_generated",
     "name",
@@ -35,9 +34,6 @@
     },
     "behavior_per_age_group_archived_20230411": {
       "$ref": "behavior/behavior_per_age_group.json"
-    },
-    "difference": {
-      "$ref": "__difference.json"
     },
     "doctor_archived_20210903": {
       "$ref": "doctor.json"
