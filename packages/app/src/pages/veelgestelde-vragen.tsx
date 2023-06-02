@@ -1,7 +1,7 @@
 import groupBy from 'lodash/groupBy';
 import Head from 'next/head';
 import styled from 'styled-components';
-import { Box } from '~/components/base';
+import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
 import { FaqSection } from '~/components/faq/faq-section';
 import { Heading } from '~/components/typography';

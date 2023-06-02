@@ -1,12 +1,12 @@
 import { colors } from '@corona-dashboard/common';
-import styled from 'styled-components';
 import { fontSizes, fontWeights, radii, space } from '~/style/theme';
 import { FAQuestionAndAnswer } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skip-links';
-import { Box } from '../base';
+import { Box } from '../base/box';
 import { RichContent } from '../cms/rich-content';
-import { CollapsibleSection } from '../collapsible';
 import { Heading } from '../typography';
+import { CollapsibleSection } from '../collapsible/collapsible-section';
+import styled from 'styled-components';
 
 interface FaqSectionProps {
   section: [string, [FAQuestionAndAnswer, ...FAQuestionAndAnswer[]]][];
