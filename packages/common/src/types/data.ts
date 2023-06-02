@@ -11,24 +11,7 @@ export interface ArchivedNl {
   proto_name: ArchivedNlId;
   name: ArchivedNlId;
   code: ArchivedNlId;
-  difference: ArchivedNlDifference;
   doctor_archived_20210903: NlDoctor;
-}
-export interface ArchivedNlDifference {
-  doctor__covid_symptoms_per_100k_archived_20210903: DifferenceDecimal;
-  doctor__covid_symptoms_archived_20210903: DifferenceInteger;
-}
-export interface DifferenceDecimal {
-  old_value: number;
-  difference: number;
-  old_date_unix: number;
-  new_date_unix: number;
-}
-export interface DifferenceInteger {
-  old_value: number;
-  difference: number;
-  old_date_unix: number;
-  new_date_unix: number;
 }
 export interface NlDoctor {
   values: NlDoctorValue[];
@@ -359,38 +342,7 @@ export interface NlNamedDifference {
   variants__percentage: NamedDifferenceDecimal[];
 }
 export interface NamedDifferenceDecimal {
-  variant_code:
-    | 'B_1_1_529'
-    | 'BA_1'
-    | 'BA_2'
-    | 'BA_4'
-    | 'BA_4_6'
-    | 'BA_5'
-    | 'BA_2+S:L452X'
-    | 'BA_2_12_1'
-    | 'BA_3'
-    | 'B_1_617_2'
-    | 'B_1_351'
-    | 'P_1'
-    | 'B_1_1_7'
-    | 'B_1_621'
-    | 'C_37'
-    | 'BA_2_75'
-    | 'BA_2_75_2'
-    | 'BF_7'
-    | 'BQ_1'
-    | 'BQ_1_1'
-    | 'XBB'
-    | 'XBB_1_5'
-    | 'CH_1_1'
-    | 'XBB_1_9'
-    | 'XBB_1_5_1'
-    | 'XBB_2_3'
-    | 'XBB_1_9_1'
-    | 'XBB_1_16'
-    | 'XBF'
-    | 'other_table'
-    | 'other_graph';
+  variant_code: string;
   old_value: number;
   difference: number;
   old_date_unix: number;
@@ -1149,38 +1101,7 @@ export interface NlVariants {
   values: NlVariantsVariant[];
 }
 export interface NlVariantsVariant {
-  variant_code:
-    | 'B_1_1_529'
-    | 'BA_1'
-    | 'BA_2'
-    | 'BA_4'
-    | 'BA_4_6'
-    | 'BA_5'
-    | 'BA_2+S:L452X'
-    | 'BA_2_12_1'
-    | 'BA_3'
-    | 'B_1_617_2'
-    | 'B_1_351'
-    | 'P_1'
-    | 'B_1_1_7'
-    | 'B_1_621'
-    | 'C_37'
-    | 'BA_2_75'
-    | 'BA_2_75_2'
-    | 'BF_7'
-    | 'BQ_1'
-    | 'BQ_1_1'
-    | 'XBB'
-    | 'XBB_1_5'
-    | 'CH_1_1'
-    | 'XBB_1_9'
-    | 'XBB_1_5_1'
-    | 'XBB_2_3'
-    | 'XBB_1_9_1'
-    | 'XBB_1_16'
-    | 'XBF'
-    | 'other_table'
-    | 'other_graph';
+  variant_code: string;
   values: NlVariantsVariantValue[];
   last_value: NlVariantsVariantValue;
 }
@@ -1195,6 +1116,8 @@ export interface NlVariantsVariantValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
+  label_nl: string;
+  label_en: string;
 }
 export interface NlSelfTestOverall {
   values: NlSelfTestOverallValue[];
@@ -1216,7 +1139,7 @@ export interface VrCollection {
   code: VrCollectionId;
   disability_care_archived_20230126: VrCollectionDisabilityCareArchived_20230126[];
   elderly_at_home_archived_20230126: VrCollectionElderlyAtHomeArchived_20230126[];
-  nursing_home_archived_20230126: VrCollectionNursingHomeArchived_20230126[];
+  vulnerable_nursing_home: VrCollectionVulnerableNursingHome[];
 }
 export interface VrCollectionDisabilityCareArchived_20230126 {
   newly_infected_people: number;
@@ -1236,13 +1159,11 @@ export interface VrCollectionElderlyAtHomeArchived_20230126 {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface VrCollectionNursingHomeArchived_20230126 {
-  newly_infected_people: number;
+export interface VrCollectionVulnerableNursingHome {
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
-  deceased_daily: number;
-  date_unix: number;
   date_of_insertion_unix: number;
+  date_unix: number;
   vrcode: string;
 }

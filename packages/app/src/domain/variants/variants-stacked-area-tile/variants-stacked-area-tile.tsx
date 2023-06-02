@@ -12,12 +12,13 @@ import { GappedAreaSeriesDefinition } from '~/components/time-series-chart/logic
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { SiteText } from '~/locale';
 import { useList } from '~/utils/use-list';
-import { ColorMatch, VariantCode } from '~/domain/variants/static-props';
+import { ColorMatch } from '~/domain/variants/static-props';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 import { space } from '~/style/theme';
+import { VariantDynamicLabels } from '../variants-table-tile/types';
 
 type VariantsStackedAreaTileText = {
-  variantCodes: SiteText['common']['variant_codes'];
+  variantCodes: VariantDynamicLabels;
 } & SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
 
 const alwaysEnabled: (keyof VariantChartValue)[] = [];
@@ -137,23 +138,30 @@ const useSeriesConfig = (text: VariantsStackedAreaTileText, values: VariantChart
       .reverse(); // Reverse to be in an alphabetical order
 
     /* Enrich config with dynamic data / locale */
-    const seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[] = baseVariantsFiltered.map((variantKey) => {
+    const seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[] = [];
+    baseVariantsFiltered.forEach((variantKey) => {
       const variantCodeFragments = variantKey.split('_');
       variantCodeFragments.pop();
-      const variantCode = variantCodeFragments.join('_') as VariantCode;
+      const variantCode = variantCodeFragments.join('_');
+
+      const variantDynamicLabel = text.variantCodes[variantCode];
 
       const color = variantColors.find((variantColors) => variantColors.variant === variantCode)?.color || colors.gray5;
 
-      return {
-        type: 'gapped-area',
-        metricProperty: variantKey as keyof VariantChartValue,
-        color,
-        label: text.variantCodes[variantCode],
-        shape: 'gapped-area',
-        strokeWidth: 2,
-        fillOpacity: 0.2,
-        mixBlendMode: 'multiply',
-      };
+      if (variantDynamicLabel) {
+        const newConfig = {
+          type: 'gapped-area',
+          metricProperty: variantKey as keyof VariantChartValue,
+          color,
+          label: variantDynamicLabel,
+          strokeWidth: 2,
+          fillOpacity: 0.2,
+          shape: 'gapped-area',
+          mixBlendMode: 'multiply',
+        };
+
+        seriesConfig.push(newConfig as GappedAreaSeriesDefinition<VariantChartValue>);
+      }
     });
 
     const otherConfig = {

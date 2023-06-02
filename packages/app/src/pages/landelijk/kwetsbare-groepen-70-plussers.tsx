@@ -60,7 +60,7 @@ export const getStaticProps = createGetStaticProps(
     'vulnerable_hospital_admissions'
   ),
   createGetChoroplethData({
-    vr: ({ nursing_home_archived_20230126 }) => ({ nursing_home_archived_20230126 }),
+    vr: ({ vulnerable_nursing_home }) => ({ vulnerable_nursing_home }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -156,16 +156,16 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             title={textNl.kpi_tiles.infected_locations.title}
             description={textNl.kpi_tiles.infected_locations.description}
             source={infectedLocationsText.bronnen.rivm}
-            dateUnix={nursinghomeDataLastValue.date_unix}
+            dateUnix={vulnerableNursingHomeDataLastValue.date_unix}
             tilesData={[
               {
-                value: nursinghomeDataLastValue.infected_locations_total,
+                value: vulnerableNursingHomeDataLastValue.infected_locations_total,
                 differenceValue: data.difference.vulnerable_nursing_home__infected_locations_total,
                 title: infectedLocationsText.kpi_titel,
                 description: infectedLocationsText.kpi_toelichting,
               },
               {
-                value: nursinghomeDataLastValue.newly_infected_locations,
+                value: vulnerableNursingHomeDataLastValue.newly_infected_locations,
                 title: infectedLocationsText.barscale_titel,
                 description: infectedLocationsText.barscale_toelichting,
               },
@@ -176,7 +176,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             title={infectedLocationsText.map_titel}
             description={infectedLocationsText.map_toelichting}
             metadata={{
-              date: nursinghomeDataLastValue.date_unix,
+              date: vulnerableNursingHomeDataLastValue.date_unix,
               source: infectedLocationsText.bronnen.rivm,
             }}
             legend={{
@@ -189,9 +189,9 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'nursing_home_infected_people_choropleth',
               }}
-              data={choropleth.vr.nursing_home_archived_20230126}
+              data={choropleth.vr.vulnerable_nursing_home}
               dataConfig={{
-                metricName: 'nursing_home_archived_20230126',
+                metricName: 'vulnerable_nursing_home',
                 metricProperty: 'infected_locations_percentage',
                 dataFormatters: {
                   infected_locations_percentage: formatNumber,
@@ -211,7 +211,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'nursing_home_infected_locations_over_time_chart',
               }}
-              values={data.nursing_home_archived_20230126.values}
+              values={data.vulnerable_nursing_home.values}
               timeframe={nursingHomeInfectedLocationsTimeframe}
               seriesConfig={[
                 {

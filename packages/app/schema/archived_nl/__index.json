@@ -4,7 +4,6 @@
   "title": "archived_nl",
   "required": [
     "code",
-    "difference",
     "doctor_archived_20210903",
     "last_generated",
     "name",
@@ -23,9 +22,6 @@
     },
     "code": {
       "$ref": "#/$defs/archived_nl_id"
-    },
-    "difference": {
-      "$ref": "__difference.json"
     },
     "doctor_archived_20210903": {
       "$ref": "doctor.json"
