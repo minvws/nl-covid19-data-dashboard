@@ -322,7 +322,6 @@ export interface NlDifference {
   vulnerable_hospital_admissions: DifferenceInteger;
   reproduction__index_average: DifferenceDecimal;
   corona_melder_app_warning__count: DifferenceInteger;
-  elderly_at_home__positive_tested_daily_archived_20230126: DifferenceInteger;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
 }
 export interface DifferenceDecimal {
