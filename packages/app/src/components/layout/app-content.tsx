@@ -24,18 +24,34 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
   const reverseRouter = useReverseRouter();
   const { commonTexts } = useIntl();
 
-  const isMenuOpen = router.pathname == '/landelijk' || router.pathname == '/veiligheidsregio/[code]' || router.pathname == '/gemeente/[code]' || router.query.menu === '1';
+  const isMenuOpen = router.pathname == '/landelijk' || router.pathname == '/verantwoording' || router.pathname == '/gemeente/[code]' || router.query.menu === '1';
 
   const currentPageScope = getCurrentPageScope(router);
   const currentCode = router.query.code as string | undefined;
   const isNational = currentPageScope === 'nl';
+  const isGeneral = currentPageScope === 'general';
 
-  /**
-   * @TODO Open the menu purely client side without loading a new page
-   */
-  const backButtonUrl = currentPageScope ? (isMenuOpen ? (isNational ? reverseRouter.topical.nl : undefined) : reverseRouter[currentPageScope].index(currentCode)) : undefined;
+  // TODO: Try to optimize
+  const backButtonUrl = currentPageScope
+    ? isMenuOpen
+      ? isNational
+        ? reverseRouter.topical.nl
+        : undefined
+      : isGeneral
+      ? reverseRouter.general.verantwoording()
+      : reverseRouter[currentPageScope].index(currentCode)
+    : undefined;
 
-  const backButtonText = currentPageScope ? (isMenuOpen ? (isNational ? commonTexts.nav.back_topical.nl : '') : commonTexts.nav.back_all_metrics[currentPageScope]) : '';
+  // TODO: Try to optimize
+  const backButtonText = currentPageScope
+    ? isMenuOpen
+      ? isNational
+        ? commonTexts.nav.back_topical.nl
+        : ''
+      : isGeneral
+      ? 'something-else' // TODO: Make this a lokalize key in the shared back_all_metrics.
+      : commonTexts.nav.back_all_metrics[currentPageScope]
+    : '';
 
   return (
     <MaxWidth paddingX={{ _: '0', lg: space[3] }}>
