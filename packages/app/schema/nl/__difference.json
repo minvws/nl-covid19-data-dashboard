@@ -51,9 +51,6 @@
     "reproduction__index_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "corona_melder_app_warning__count": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "deceased_rivm__covid_daily_archived_20221231": {
       "$ref": "#/definitions/diff_integer"
     }
@@ -75,7 +72,6 @@
     "vulnerable_nursing_home__infected_locations_total",
     "vulnerable_tested_per_age_group",
     "vulnerable_hospital_admissions",
-    "corona_melder_app_warning__count",
     "deceased_rivm__covid_daily_archived_20221231"
   ],
   "additionalProperties": false,
