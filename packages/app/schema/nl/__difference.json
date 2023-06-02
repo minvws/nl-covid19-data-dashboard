@@ -51,15 +51,6 @@
     "reproduction__index_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "disability_care__newly_infected_people_archived_20230126": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "disability_care__infected_locations_total_archived_20230126": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "elderly_at_home__positive_tested_daily_archived_20230126": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "deceased_rivm__covid_daily_archived_20221231": {
       "$ref": "#/definitions/diff_integer"
     }
@@ -81,9 +72,6 @@
     "vulnerable_nursing_home__infected_locations_total",
     "vulnerable_tested_per_age_group",
     "vulnerable_hospital_admissions",
-    "disability_care__newly_infected_people_archived_20230126",
-    "disability_care__infected_locations_total_archived_20230126",
-    "elderly_at_home__positive_tested_daily_archived_20230126",
     "deceased_rivm__covid_daily_archived_20221231"
   ],
   "additionalProperties": false,
