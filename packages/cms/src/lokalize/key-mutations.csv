@@ -66,3 +66,5 @@ timestamp,action,key,document_id,move_to
 2023-05-17T10:55:29.531Z,delete,common.variant_codes.XBF,ps9F7aH5kHk3YIueyBwB9V,__
 2023-05-17T10:55:29.531Z,delete,common.variant_codes.other_graph,An4w9epLkFHDxSkpYv8m71,__
 2023-05-17T10:55:29.531Z,delete,common.variant_codes.other_table,60cpu3ttRIYKBCP3mTDrhL,__
+2023-06-05T11:36:55.896Z,delete,pages.elderly_at_home_page.nl.section_deceased.kpi_daily_description,jF33EuwumlGuwav2FD3zWO,__
+2023-06-05T11:36:55.897Z,delete,pages.elderly_at_home_page.nl.section_deceased.kpi_daily_title,jF33EuwumlGuwav2FD3zUi,__
