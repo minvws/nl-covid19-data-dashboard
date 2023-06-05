@@ -7,16 +7,11 @@ import { NextRouter } from 'next/router';
 export function getCurrentPageScope(router: NextRouter): (RouterDataScopeKey | 'general') | undefined {
   const { pathname } = router;
 
-  // TODO: Implement object lookup
-  // const currentPageScopeMap = {
-  //   landelijk: 'nl',
-  //   gemeente: 'gm',
-  //   verantwoording: 'general',
-  // };
+  const pageScopeMap: Record<string, RouterDataScopeKey | 'general'> = {
+    landelijk: 'nl',
+    gemeente: 'gm',
+    verantwoording: 'general',
+  };
 
-  // Object.entries(currentPageScopeMap).forEach(([key, value]) => {
-  //   return pathname.startsWith(`/${key}`) ? value : undefined;
-  // });
-
-  return pathname.startsWith('/landelijk') ? 'nl' : pathname.startsWith('/gemeente') ? 'gm' : pathname.startsWith('/verantwoording') ? 'general' : undefined;
+  return pageScopeMap[Object.keys(pageScopeMap).find((key) => pathname.startsWith(`/${key}`)) as keyof typeof pageScopeMap] || undefined;
 }
