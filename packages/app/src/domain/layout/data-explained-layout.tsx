@@ -7,7 +7,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { DataExplainedGroups } from '~/pages/verantwoording/[slug]';
+import { DataExplainedGroups } from '~/queries/data-explanation/query-types';
 import { space } from '~/style/theme';
 import { getFilenameToIconName } from '~/utils/get-filename-to-icon-name';
 import { ExpandedSidebarMap } from './logic/types';
