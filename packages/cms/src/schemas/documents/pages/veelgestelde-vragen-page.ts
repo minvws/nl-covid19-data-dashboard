@@ -18,7 +18,7 @@ export const veelgesteldeVragen = {
       type: 'array',
       title: 'Vragen',
       description:
-        'Je kan veel gestelde vragen toevoegen, de volgorde veranderen, de tekst bijwerken of verwijderen',
+        'Je kan veelgestelde vragen toevoegen, de volgorde veranderen, de tekst bijwerken of verwijderen. Om de groepen en vragen opnieuw te ordenen, hoeft je slechts één van de vragen in een groep te verplaatsen. Waar de eerste vraag van een bepaalde groep staat, is waar de groep zal verschijnen op de Veelgestelde vragen pagina. Heb je bijvoorbeeld één vraag uit de groep Algemeen bovenaan en de andere vragen onderaan de lijst, dan wordt de groep Algemeen als eerste groep getoond.',
       of: [{ type: 'reference', to: { type: 'faqQuestion' } }],
     },
   ],

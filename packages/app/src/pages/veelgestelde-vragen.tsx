@@ -60,7 +60,6 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
   const { commonTexts } = useIntl();
 
-  // Questions and groups are coming from Sanity. Below we have split the array in half to determine the columns. Ordering and sorting is controlled in Sanity.
   const groups = groupBy<FAQuestionAndAnswer>(content.questions, (x) => x.group);
   const groupsArray = Object.entries(groups);
   const middleIndexOfGroups = Math.ceil(groupsArray.length / 2);
