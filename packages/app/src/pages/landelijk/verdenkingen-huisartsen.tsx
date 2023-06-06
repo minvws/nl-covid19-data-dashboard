@@ -1,15 +1,10 @@
 import { colors, TimeframeOption } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
 import { WarningTile } from '~/components/warning-tile';
-import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
@@ -27,7 +22,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectArchivedNlData('difference.doctor__covid_symptoms_per_100k_archived_20210903', 'difference.doctor__covid_symptoms_archived_20210903', 'doctor_archived_20210903')
+  selectArchivedNlData('doctor_archived_20210903')
 );
 
 const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
@@ -65,29 +60,6 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={text.belangrijk_bericht} variant="informational" />}
-
-          <TwoKpiSection>
-            <KpiTile
-              title={text.kpi_titel}
-              metadata={{
-                date: [lastValue.date_start_unix, lastValue.date_end_unix],
-                source: text.bronnen.nivel,
-              }}
-            >
-              <KpiValue absolute={lastValue.covid_symptoms} difference={archivedData.difference.doctor__covid_symptoms_archived_20210903} isAmount />
-              <Markdown content={text.barscale_toelichting} />
-            </KpiTile>
-            <KpiTile
-              title={text.normalized_kpi_titel}
-              metadata={{
-                date: [lastValue.date_start_unix, lastValue.date_end_unix],
-                source: text.bronnen.nivel,
-              }}
-            >
-              <KpiValue absolute={lastValue.covid_symptoms_per_100k} difference={archivedData.difference.doctor__covid_symptoms_per_100k_archived_20210903} isAmount />
-              <Text>{text.normalized_kpi_toelichting}</Text>
-            </KpiTile>
-          </TwoKpiSection>
 
           <ChartTile title={text.linechart_titel} metadata={{ source: text.bronnen.nivel }} description={text.linechart_description}>
             <TimeSeriesChart
