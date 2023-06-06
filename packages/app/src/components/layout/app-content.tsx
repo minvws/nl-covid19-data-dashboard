@@ -9,6 +9,7 @@ import { mediaQueries, space } from '~/style/theme';
 import { getCurrentPageScope } from '~/utils/get-current-page-scope';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LinkWithIcon } from '../link-with-icon';
+import { getBackButtonValues } from './logic/get-back-button-values';
 
 interface AppContentProps {
   children: React.ReactNode;
@@ -23,33 +24,18 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
   const { commonTexts } = useIntl();
 
   const isMenuOpen = router.pathname == '/landelijk' || router.pathname == '/verantwoording' || router.pathname == '/gemeente/[code]' || router.query.menu === '1';
-
   const currentPageScope = getCurrentPageScope(router);
   const currentCode = router.query.code as string | undefined;
-  const isNational = currentPageScope === 'nl';
-  const isGeneral = currentPageScope === 'general';
-  const backButtonConfig = {
-    isMenuOpen,
-    url: {
-      truthyValue: isNational ? reverseRouter.topical.nl : undefined,
-      falsyValue: isGeneral ? reverseRouter.general.verantwoording() : reverseRouter[currentPageScope as 'nl' | 'gm'].index(currentCode),
-    },
-    text: {
-      truthyValue: isNational ? commonTexts.nav.back_topical.nl : '',
-      falsyValue: isGeneral ? commonTexts.nav.back_all_metrics.data_explanation : commonTexts.nav.back_all_metrics[currentPageScope as 'nl' | 'gm'],
-    },
-  };
-
-  const backButtonUrl = currentPageScope ? (backButtonConfig.isMenuOpen ? backButtonConfig.url.truthyValue : backButtonConfig.url.falsyValue) : undefined;
-  const backButtonText = currentPageScope ? (backButtonConfig.isMenuOpen ? backButtonConfig.text.truthyValue : backButtonConfig.text.falsyValue) : '';
+  const backButtonConfig = { currentPageScope, currentCode, isMenuOpen, reverseRouter, commonTexts };
+  const backButtonValues = getBackButtonValues(backButtonConfig);
 
   return (
     <MaxWidth paddingX={{ _: '0', lg: space[3] }}>
       <Box display={{ _: 'block', md: 'flex' }} flexDirection={{ _: 'column', md: 'row' }} margin={`0 auto ${space[4]} auto`} minHeight="50vh" paddingBottom={space[4]}>
-        {backButtonUrl && (
+        {backButtonValues?.url && (
           <BackButtonContainer isVisible={!hideBackButton} isMenuOpen={isMenuOpen}>
-            <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
-              {backButtonText}
+            <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonValues?.url}>
+              {backButtonValues?.text}
             </LinkWithIcon>
           </BackButtonContainer>
         )}
@@ -73,10 +59,10 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
         <Box as="main" id="content" flexGrow={1} flexShrink={1} minWidth={0} position="relative" width="100%" zIndex={3}>
           <ResponsiveVisible isVisible={!isMenuOpen}>{children}</ResponsiveVisible>
 
-          {backButtonUrl && (
+          {backButtonValues?.url && (
             <BackButtonContainer isVisible={!hideBackButton} marginTop={space[4]} isMenuOpen={isMenuOpen}>
-              <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
-                {backButtonText}
+              <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonValues?.url}>
+                {backButtonValues?.text}
               </LinkWithIcon>
             </BackButtonContainer>
           )}
