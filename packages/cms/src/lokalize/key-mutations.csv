@@ -30,3 +30,5 @@ timestamp,action,key,document_id,move_to
 2023-05-17T10:55:29.531Z,delete,common.variant_codes.XBF,ps9F7aH5kHk3YIueyBwB9V,__
 2023-05-17T10:55:29.531Z,delete,common.variant_codes.other_graph,An4w9epLkFHDxSkpYv8m71,__
 2023-05-17T10:55:29.531Z,delete,common.variant_codes.other_table,60cpu3ttRIYKBCP3mTDrhL,__
+2023-06-05T10:04:44.410Z,add,common.nav.back_all_metrics.data_explanation,wfXaEuUC60baRPGPSCgIO6,__
+2023-06-07T09:36:32.180Z,add,common.nav.back_to_gemeente_map,sXgD7KgoEiuyD1j6tkg3OI,__

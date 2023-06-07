@@ -1,4 +1,4 @@
-export type Layout = 'nl' | 'gm';
+export type Layout = 'nl' | 'gm' | 'custom';
 
 type SharedCategoryKeys = 'development_of_the_virus' | 'consequences_for_healthcare' | 'actions_to_take';
 
