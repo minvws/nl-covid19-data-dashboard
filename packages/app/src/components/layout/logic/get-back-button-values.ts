@@ -18,14 +18,13 @@ export const getBackButtonValues = ({ currentPageScope, currentCode, isMenuOpen,
        * further going back to the home page from the menu. This is why isMenuOpen needs to be checked here to pass the correct values to the button.
        */
       return {
-        url: isMenuOpen ? reverseRouter.topical.nl : reverseRouter[currentPageScope].index(),
-        text: isMenuOpen ? commonTexts.nav.back_topical.nl : commonTexts.nav.back_all_metrics[currentPageScope],
+        url: isMenuOpen ? reverseRouter.topical.nl : reverseRouter.nl.index(),
+        text: isMenuOpen ? commonTexts.nav.back_topical.nl : commonTexts.nav.back_all_metrics.nl,
       };
     case 'gm':
-      if (isMenuOpen) break;
       return {
-        url: reverseRouter[currentPageScope].index(currentCode),
-        text: commonTexts.nav.back_all_metrics[currentPageScope],
+        url: isMenuOpen ? reverseRouter.gm.index() : reverseRouter.gm.index(currentCode),
+        text: isMenuOpen ? commonTexts.nav.back_to_gemeente_map : commonTexts.nav.back_all_metrics.gm,
       };
     case 'general':
       if (isMenuOpen) break;
