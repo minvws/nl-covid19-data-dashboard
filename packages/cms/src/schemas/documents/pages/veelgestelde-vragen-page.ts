@@ -1,3 +1,6 @@
+import React from 'react';
+import { FrequentlyAskedQuestionsList } from '../../../components/frequently-asked-questions-list';
+
 export const veelgesteldeVragen = {
   name: 'veelgesteldeVragen',
   type: 'document',
@@ -17,8 +20,7 @@ export const veelgesteldeVragen = {
       name: 'questions',
       type: 'array',
       title: 'Vragen',
-      description:
-        'Je kan veel gestelde vragen toevoegen, de volgorde veranderen, de tekst bijwerken of verwijderen',
+      description: React.createElement(FrequentlyAskedQuestionsList),
       of: [{ type: 'reference', to: { type: 'faqQuestion' } }],
     },
   ],
