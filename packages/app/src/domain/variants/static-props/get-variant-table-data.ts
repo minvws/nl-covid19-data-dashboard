@@ -1,10 +1,4 @@
-import {
-  colors,
-  NlNamedDifference,
-  NlVariants,
-  NlVariantsVariant,
-  NamedDifferenceDecimal,
-} from '@corona-dashboard/common';
+import { colors, NlNamedDifference, NlVariants, NlVariantsVariant, NamedDifferenceDecimal } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
 import { ColorMatch } from './get-variant-order-colors';
@@ -19,11 +13,7 @@ export type VariantRow = {
 
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
-export function getVariantTableData(
-  variants: NlVariants | undefined,
-  namedDifference: NlNamedDifference,
-  variantColors: ColorMatch[]
-) {
+export function getVariantTableData(variants: NlVariants | undefined, namedDifference: NlNamedDifference, variantColors: ColorMatch[]) {
   const emptyValues = {
     variantTable: null,
     dates: {
@@ -39,9 +29,7 @@ export function getVariantTableData(
 
   function findDifference(name: string) {
     if (isPresent(namedDifference.variants__percentage)) {
-      const difference = namedDifference.variants__percentage.find(
-        (x) => x.variant_code === name
-      );
+      const difference = namedDifference.variants__percentage.find((x) => x.variant_code === name);
 
       if (!difference) {
         return null;
@@ -63,16 +51,10 @@ export function getVariantTableData(
   };
 
   const variantTable = variants.values
-    .filter(
-      (variant) =>
-        variant.variant_code !== 'other_graph' && !variant.last_value.has_historical_significance
-    )
+    .filter((variant) => variant.variant_code !== 'other_graph' && !variant.last_value.has_historical_significance)
     .sort((a, b) => b.last_value.order - a.last_value.order)
     .map<VariantRow>((variant) => {
-      const color =
-        variantColors.find(
-          (variantColor) => variantColor.variant === variant.variant_code
-        )?.color || colors.gray5;
+      const color = variantColors.find((variantColor) => variantColor.variant === variant.variant_code)?.color || colors.gray5;
 
       return {
         variantCode: variant.variant_code,

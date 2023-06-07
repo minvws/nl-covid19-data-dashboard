@@ -3,7 +3,7 @@ import { getNotFoundPageQuery } from '~/queries/get-not-found-page-query';
 import { NotFoundPageConfiguration } from './types';
 
 const determinePageTypeFromUrl = (url: string) => {
-  const levelsToPageTypeMapping: { [key: string]: string } = { landelijk: 'nl', gemeente: 'gm', artikelen: 'article', general: 'general' };
+  const levelsToPageTypeMapping: { [key: string]: string } = { landelijk: 'nl', gemeente: 'gm', artikelen: 'article', general: 'general', verantwoording: 'dataExplained' };
   const pageType = levelsToPageTypeMapping[Object.keys(levelsToPageTypeMapping).find((key) => url.includes(`/${key}`)) ?? 'general'];
 
   return pageType;

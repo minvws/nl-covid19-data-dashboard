@@ -2,47 +2,32 @@ import Head from 'next/head';
 import { Menu, MenuRenderer } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
+import DynamicIcon, { IconName } from '~/components/get-icon-by-name';
 import { AppContent } from '~/components/layout/app-content';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
-import { useIntl } from '~/intl';
+import { DataExplainedGroups } from '~/queries/data-explanation/query-types';
 import { space } from '~/style/theme';
-import { useSidebar } from './logic/use-sidebar';
+import { getFilenameToIconName } from '~/utils/get-filename-to-icon-name';
+import { ExpandedSidebarMap } from './logic/types';
 
-interface NlLayoutProps {
+interface DataExplainedLayoutProps {
   children?: React.ReactNode;
+  groups: DataExplainedGroups;
+  title: string;
 }
 
-/**
- * NlLayout is a composition of persistent layouts.
- *
- * ## States
- *
- * ### Mobile
- * - /landelijk -> only show aside
- * - /landelijk/[metric] -> only show content (children)
- *
- * ### Desktop
- * - /landelijk -> shows aside and content (children)
- * - /landelijk/[metric] -> shows aside and content (children)
- *
- * More info on persistent layouts:
- * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
- */
-export function NlLayout(props: NlLayoutProps) {
-  const { children } = props;
-
-  const { commonTexts } = useIntl();
-
-  const items = useSidebar({
-    layout: 'nl',
-    map: [
-      ['development_of_the_virus', ['sewage_measurement', 'tests', 'reproduction_number', 'variants', 'mortality']],
-      ['consequences_for_healthcare', ['hospitals_and_care', 'patients', 'nursing_home_care']],
-      ['actions_to_take', ['vaccinations']],
-      ['archived_metrics', ['compliance', 'positive_tests', 'disabled_care', 'elderly_at_home', 'coronamelder_app', 'infectious_people', 'general_practitioner_suspicions']],
-    ],
-  });
+export const DataExplainedLayout = ({ children, groups, title }: DataExplainedLayoutProps) => {
+  const items = Object.entries(groups).map(([name, items]) => ({
+    key: name,
+    title: name,
+    icon: <DynamicIcon name={getFilenameToIconName(items[0].groupIcon) as IconName} />,
+    items: items.map((item) => ({
+      key: item.title,
+      title: item.title,
+      href: `/verantwoording/${item.slug}`,
+    })),
+  }));
 
   return (
     <>
@@ -65,18 +50,18 @@ export function NlLayout(props: NlLayoutProps) {
             spacing={1}
           >
             <VisuallyHidden as="h2" id="sidebar-title">
-              {commonTexts.nationaal_layout.headings.sidebar}
+              {title}
             </VisuallyHidden>
 
             <Box paddingX={space[3]}>
               <Heading level={2} variant={'h3'}>
-                {commonTexts.sidebar.nl.title}
+                {title}
               </Heading>
             </Box>
 
             <Box paddingBottom={space[3]}>
               <Menu spacing={2}>
-                <MenuRenderer items={items} />
+                <MenuRenderer items={items as ExpandedSidebarMap<'custom'>} />
               </Menu>
             </Box>
           </Box>
@@ -86,4 +71,4 @@ export function NlLayout(props: NlLayoutProps) {
       </AppContent>
     </>
   );
-}
+};
