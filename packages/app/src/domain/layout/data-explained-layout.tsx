@@ -6,7 +6,6 @@ import DynamicIcon, { IconName } from '~/components/get-icon-by-name';
 import { AppContent } from '~/components/layout/app-content';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
-import { useIntl } from '~/intl';
 import { DataExplainedGroups } from '~/queries/data-explanation/query-types';
 import { space } from '~/style/theme';
 import { getFilenameToIconName } from '~/utils/get-filename-to-icon-name';
@@ -15,15 +14,14 @@ import { ExpandedSidebarMap } from './logic/types';
 interface DataExplainedLayoutProps {
   children?: React.ReactNode;
   groups: DataExplainedGroups;
+  title: string;
 }
 
-export const DataExplainedLayout = ({ children, groups }: DataExplainedLayoutProps) => {
-  const { commonTexts } = useIntl();
-
+export const DataExplainedLayout = ({ children, groups, title }: DataExplainedLayoutProps) => {
   const items = Object.entries(groups).map(([name, items]) => ({
     key: name,
     title: name,
-    icon: <DynamicIcon name={getFilenameToIconName(items[0].groupIcon as IconName) as IconName} />,
+    icon: <DynamicIcon name={getFilenameToIconName(items[0].groupIcon) as IconName} />,
     items: items.map((item) => ({
       key: item.title,
       title: item.title,
@@ -52,12 +50,12 @@ export const DataExplainedLayout = ({ children, groups }: DataExplainedLayoutPro
             spacing={1}
           >
             <VisuallyHidden as="h2" id="sidebar-title">
-              {commonTexts.nationaal_layout.headings.sidebar}
+              {title}
             </VisuallyHidden>
 
             <Box paddingX={space[3]}>
               <Heading level={2} variant={'h3'}>
-                {commonTexts.sidebar.nl.title}
+                {title}
               </Heading>
             </Box>
 

@@ -50,10 +50,11 @@ const DataExplainedDetailPage = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const groups = groupBy<DataExplainedGroup>(page.collapsibleList, (item) => item.group);
+  const pageTitle = page.title || 'Cijferverantwoording';
 
   return (
     <Layout {...commonTexts.verantwoording_metadata} lastGenerated={lastGenerated}>
-      <DataExplainedLayout groups={groups}>
+      <DataExplainedLayout groups={groups} title={pageTitle}>
         <Head>
           <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" />
           <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
@@ -61,10 +62,10 @@ const DataExplainedDetailPage = (props: StaticProps<typeof getStaticProps>) => {
 
         <Box maxWidth={sizes.contentWidth} spacing={4} paddingTop={{ _: space[3], md: space[5] }} paddingLeft={{ _: space[3], sm: space[5] }} paddingRight={{ _: space[3], sm: 0 }}>
           <PageInformationBlock
-            category={page.title || 'Cijferverantwoording'}
-            screenReaderCategory={page.title || 'Cijferverantwoording'}
+            category={pageTitle}
+            screenReaderCategory={pageTitle}
             title={item.title}
-            icon={item.icon ? <DynamicIcon name={getFilenameToIconName(item.icon as IconName) as IconName} /> : undefined}
+            icon={item.icon ? <DynamicIcon name={getFilenameToIconName(item.icon) as IconName} /> : undefined}
           />
 
           <RichContent blocks={item.content} />

@@ -20,7 +20,7 @@ export const getStaticProps = createGetStaticProps(
       locale
     ),
   getLastGeneratedDate,
-  createGetContent<{ page: DataExplainedGroups }>(({ locale }) => {
+  createGetContent<{ page: DataExplainedGroups & Pick<DataExplainedGroup, 'title'> }>(({ locale }) => {
     return `{
         "page": ${getPageQuery(locale)},
       }`;
@@ -50,7 +50,7 @@ const DataExplainedPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...pageText.text} lastGenerated={lastGenerated}>
-      <DataExplainedLayout groups={groups} />
+      <DataExplainedLayout groups={groups} title={page.title || 'Cijferverantwoording'} />
     </Layout>
   );
 };

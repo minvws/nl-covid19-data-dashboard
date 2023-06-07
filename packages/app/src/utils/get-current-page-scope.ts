@@ -13,5 +13,7 @@ export function getCurrentPageScope(router: NextRouter): (RouterDataScopeKey | '
     verantwoording: 'general',
   };
 
-  return pageScopeMap[Object.keys(pageScopeMap).find((key) => pathname.startsWith(`/${key}`)) as keyof typeof pageScopeMap] || undefined;
+  const pageScopeMapKey = Object.keys(pageScopeMap).find((key) => pathname.startsWith(`/${key}`));
+
+  return pageScopeMapKey ? pageScopeMap[pageScopeMapKey] : undefined;
 }
