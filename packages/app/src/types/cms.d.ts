@@ -61,10 +61,12 @@ export type FAQuestionAndAnswer = {
   group: string;
 };
 
-export type CollapsibleList = {
+export type DataExplainedGroup = {
   content: RichContentBlock[] | null;
-  title: string;
   group: string;
+  groupIcon: string;
+  slug: { current: string };
+  title: string;
 };
 
 export type InlineCollapsibleList = {

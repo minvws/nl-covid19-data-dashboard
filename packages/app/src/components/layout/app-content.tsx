@@ -1,16 +1,15 @@
 import { colors } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
-import { asResponsiveArray } from '~/style/utils';
+import { mediaQueries, space } from '~/style/theme';
 import { getCurrentPageScope } from '~/utils/get-current-page-scope';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LinkWithIcon } from '../link-with-icon';
+import { getBackButtonValues } from './logic/get-back-button-values';
 
 interface AppContentProps {
   children: React.ReactNode;
@@ -24,121 +23,94 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
   const reverseRouter = useReverseRouter();
   const { commonTexts } = useIntl();
 
-  const isMenuOpen = router.pathname == '/landelijk' || router.pathname == '/veiligheidsregio/[code]' || router.pathname == '/gemeente/[code]' || router.query.menu === '1';
-
+  const isMenuOpen = router.pathname == '/landelijk' || router.pathname == '/verantwoording' || router.pathname == `/gemeente/[code]` || router.query.menu === '1';
   const currentPageScope = getCurrentPageScope(router);
   const currentCode = router.query.code as string | undefined;
-  const isNational = currentPageScope === 'nl';
-
-  /**
-   * @TODO Open the menu purely client side without loading a new page
-   */
-  const backButtonUrl = currentPageScope ? (isMenuOpen ? (isNational ? reverseRouter.topical.nl : undefined) : reverseRouter[currentPageScope].index(currentCode)) : undefined;
-
-  const backButtonText = currentPageScope ? (isMenuOpen ? (isNational ? commonTexts.nav.back_topical.nl : '') : commonTexts.nav.back_all_metrics[currentPageScope]) : '';
+  const backButtonConfig = { currentPageScope, currentCode, isMenuOpen, reverseRouter, commonTexts };
+  const backButtonValues = getBackButtonValues(backButtonConfig);
 
   return (
     <MaxWidth paddingX={{ _: '0', lg: space[3] }}>
-      <AppContentContainer>
-        {backButtonUrl && (
-          <>
-            <BackButtonContainer
-              isMenuOpen={isMenuOpen}
-              isVisible={!hideBackButton}
-              css={css({
-                background: 'white',
-                paddingY: space[3],
-                position: 'relative',
-                borderBottom: 'solid 1px',
-                borderColor: colors.gray3,
-              })}
-            >
-              <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
-                {backButtonText}
-              </LinkWithIcon>
-            </BackButtonContainer>
-          </>
+      <Box display={{ _: 'block', md: 'flex' }} flexDirection={{ _: 'column', md: 'row' }} margin={`0 auto ${space[4]} auto`} minHeight="50vh" paddingBottom={space[4]}>
+        {backButtonValues?.url && (
+          <BackButtonContainer isVisible={!hideBackButton} isMenuOpen={isMenuOpen}>
+            <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonValues?.url}>
+              {backButtonValues?.text}
+            </LinkWithIcon>
+          </BackButtonContainer>
         )}
 
-        <StyledSidebar>
+        <Box
+          as="aside"
+          borderRight={{ _: 'none', md: `1px solid ${colors.gray2}` }}
+          flexGrow={0}
+          flexShrink={0}
+          minHeight={{ lg: '35em' }}
+          width={{ md: '18rem', lg: '21rem' }}
+          zIndex={3}
+        >
           <ResponsiveVisible isVisible={isMenuOpen}>
             {searchComponent}
             {sidebarComponent}
           </ResponsiveVisible>
-        </StyledSidebar>
+        </Box>
 
-        <StyledAppContent
-          /** id is for hash navigation */
-          id="content"
-        >
+        {/* id is for hash navigation */}
+        <Box as="main" id="content" flexGrow={1} flexShrink={1} minWidth={0} position="relative" width="100%" zIndex={3}>
           <ResponsiveVisible isVisible={!isMenuOpen}>{children}</ResponsiveVisible>
-          {backButtonUrl && (
+
+          {backButtonValues?.url && (
             <BackButtonContainer isVisible={!hideBackButton} marginTop={space[4]} isMenuOpen={isMenuOpen}>
-              <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonUrl}>
-                {backButtonText}
+              <LinkWithIcon icon={<ArrowIconLeft />} href={backButtonValues?.url}>
+                {backButtonValues?.text}
               </LinkWithIcon>
             </BackButtonContainer>
           )}
-        </StyledAppContent>
-      </AppContentContainer>
+        </Box>
+      </Box>
     </MaxWidth>
   );
 }
 
-const BackButtonContainer = styled(Box)<{
+interface BackButtonContainerProps {
   isVisible: boolean;
   isMenuOpen: boolean;
-}>((x) =>
-  css({
-    marginX: x.isMenuOpen ? asResponsiveArray({ _: space[1], xs: 'auto' }) : asResponsiveArray({ _: space[1], sm: space[5] }),
-    display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
-    paddingX: space[1],
-    maxWidth: x.isMenuOpen ? '38rem' : undefined,
-  })
-);
+}
 
-const AppContentContainer = styled.div(
-  css({
-    display: ['block', null, null, 'flex'],
-    flexDirection: ['column', null, null, 'row'],
-    marginBottom: space[4],
-    margin: `0 auto`,
-    paddingBottom: space[4],
-    minHeight: '50vh',
-  })
-);
+const BackButtonContainer = styled(Box)<BackButtonContainerProps>`
+  background-color: ${colors.white};
+  border-bottom: 1px solid ${colors.gray3};
+  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+  margin-inline: ${space[1]};
+  max-width: ${({ isMenuOpen }) => (isMenuOpen ? '38rem' : undefined)};
+  padding: ${space[3]} ${space[1]};
+  position: relative;
 
-const StyledAppContent = styled.main(
-  css({
-    zIndex: 3,
-    position: 'relative',
-    width: '100%',
-    minWidth: '0',
-    flexGrow: 1,
-    flexShrink: 1,
-  })
-);
+  @media ${mediaQueries.xs} {
+    margin-inline: ${({ isMenuOpen }) => (isMenuOpen ? 'auto' : undefined)};
+  }
 
-const StyledSidebar = styled.aside(
-  css({
-    zIndex: 3,
-    minHeight: [null, null, null, null, '35em'],
-    width: asResponsiveArray({ md: '18rem', lg: '21rem' }),
-    flexShrink: 0,
-    flexGrow: 0,
-    borderRight: asResponsiveArray({
-      _: 'none',
-      md: `solid 1px ${colors.gray2}`,
-    }),
-  })
-);
+  @media ${mediaQueries.sm} {
+    margin-inline: ${({ isMenuOpen }) => (!isMenuOpen ? space[5] : undefined)};
+  }
 
-const ResponsiveVisible = styled.div<{ isVisible: boolean }>((x) =>
-  css({
-    display: x.isVisible ? 'block' : ['none', null, null, 'block'],
+  @media ${mediaQueries.md} {
+    display: none;
+  }
+`;
 
-    '.has-no-js &': {
-      display: 'block',
-    },
-  })
-);
+interface ResponsiveVisibleProps {
+  isVisible: boolean;
+}
+
+const ResponsiveVisible = styled.div<ResponsiveVisibleProps>`
+  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+
+  @media ${mediaQueries.md} {
+    display: ${({ isVisible }) => (!isVisible ? 'block' : undefined)};
+  }
+
+  .has-no-js & {
+    display: block;
+  }
+`;
