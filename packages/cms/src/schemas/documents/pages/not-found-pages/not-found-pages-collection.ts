@@ -1,5 +1,7 @@
 import { Rule } from '~/sanity';
 
+const MAXIMUM_AMOUNT_OF_PAGES = 5;
+
 export const notFoundPagesCollection = {
   name: 'notFoundPagesCollection',
   title: "404 Pagina's",
@@ -16,8 +18,8 @@ export const notFoundPagesCollection = {
 
         // This will populate error messages and stop the document from being published.
         rule.custom((value: string | any[]) => {
-          if (value && value?.length > 4) {
-            return "Je kunt maximaal vier pagina's aan deze lijst toevoegen.";
+          if (value && value?.length > MAXIMUM_AMOUNT_OF_PAGES) {
+            return `Je kunt maximaal ${MAXIMUM_AMOUNT_OF_PAGES} pagina's aan deze lijst toevoegen.`;
           }
 
           return true;

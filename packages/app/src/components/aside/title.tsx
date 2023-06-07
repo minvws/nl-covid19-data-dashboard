@@ -1,9 +1,10 @@
-import css from '@styled-system/css';
-import React, { ReactNode } from 'react';
+import { colors } from '@corona-dashboard/common';
 import { ChevronRight } from '@corona-dashboard/icons';
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
+import { space } from '~/style/theme';
 import { Box } from '../base';
 import { Text } from '../typography';
-import { space } from '~/style/theme';
 
 type TitleProps = {
   title: string;
@@ -12,33 +13,26 @@ type TitleProps = {
   showArrow?: boolean;
 };
 
-/**
- * This is a title (with or without an icon) that looks like a heading, but isn't rendered using an H* element.
- * To be used in places where the optics are required, but semantically it shouldn't be a heading.
- *
- * @param props
- */
-export function AsideTitle(props: TitleProps) {
-  const { title, subtitle, showArrow } = props;
-
+export const AsideTitle = ({ title, subtitle, showArrow }: TitleProps) => {
   return (
     <Box width="100%" display="flex" flexDirection="row" flexWrap="nowrap" alignItems="center">
       <Box width="100%">
         <Text>
-          <span
-            css={css({
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              width: '100%',
-            })}
-          >
+          <Box as="span" display="flex" justifyContent="space-between" alignItems="center" width="100%">
             {title}
-            {showArrow && <ChevronRight width={space[3]} height="20px" css={css({ color: 'blue8' })} />}
-          </span>
+            {showArrow && <AsideArrow />}
+          </Box>
         </Text>
-        <Text>{subtitle}</Text>
+
+        {subtitle && <Text>{subtitle}</Text>}
       </Box>
     </Box>
   );
-}
+};
+
+const AsideArrow = styled(ChevronRight)`
+  color: ${colors.blue8};
+  flex-shrink: 0;
+  height: 20px;
+  width: ${space[3]};
+`;
