@@ -68,7 +68,7 @@ const DataExplainedDetailPage = (props: StaticProps<typeof getStaticProps>) => {
             icon={item.icon ? <DynamicIcon name={getFilenameToIconName(item.icon) as IconName} /> : undefined}
           />
 
-          <RichContent blocks={item.content} />
+          <RichContent blocks={item.content} elementAlignment="start" />
         </Box>
       </DataExplainedLayout>
     </Layout>
