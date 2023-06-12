@@ -11,11 +11,6 @@ export const dataExplained = defineType({
       title: 'Titel',
     }),
     defineField({
-      name: 'description',
-      type: 'localeBlock',
-      title: 'Beschrijving',
-    }),
-    defineField({
       name: 'collapsibleList',
       type: 'array',
       title: 'Verantwoordingen',

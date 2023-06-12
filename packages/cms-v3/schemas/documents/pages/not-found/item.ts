@@ -8,6 +8,7 @@ const pageTypeOptions = [
   { value: 'nl', title: 'Landelijk' },
   { value: 'gm', title: 'Gemeente' },
   { value: 'article', title: 'Artikelen' },
+  { value: 'dataExplained', title: 'Cijferverantwoording' },
 ];
 
 export const notFoundItem = defineType({

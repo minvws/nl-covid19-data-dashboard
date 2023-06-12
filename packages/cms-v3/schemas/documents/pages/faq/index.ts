@@ -1,4 +1,6 @@
+import { createElement } from 'react';
 import { defineArrayMember, defineField, defineType } from 'sanity';
+import { FaqQuestionsDescription } from '../../../../components/faq-questions-description';
 
 export const faq = defineType({
   name: 'veelgesteldeVragen',
@@ -19,7 +21,7 @@ export const faq = defineType({
       name: 'questions',
       type: 'array',
       title: 'Vragen',
-      description: 'Je kan veel gestelde vragen toevoegen, de volgorde veranderen, de tekst bijwerken of verwijderen',
+      description: createElement(FaqQuestionsDescription),
       of: [defineArrayMember({ type: 'reference', to: { type: 'faqQuestion' } })],
     }),
   ],

@@ -1,4 +1,5 @@
 import { createClient } from '@sanity/client';
+import { SanityClient } from 'sanity';
 // import dotenv from 'dotenv';
 // TODO: Sanity complains about path not being available in the browser. Fix.
 // import path from 'path';
@@ -9,7 +10,6 @@ import { createClient } from '@sanity/client';
 
 // TODO:
 //  - clean this up
-//  - properly type this
 //  - use .env variables
 const isDevelopBuild = process.env.NEXT_PUBLIC_PHASE === 'develop';
 
