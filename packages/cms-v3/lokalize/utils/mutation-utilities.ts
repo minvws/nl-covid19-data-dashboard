@@ -2,13 +2,15 @@ import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { assert, ID_PREFIX, removeIdsFromKeys } from '@corona-dashboard/common';
 import { parse } from '@fast-csv/parse';
 import fs from 'fs';
-import { sortBy } from 'lodash';
+import lodash from 'lodash';
 import { EOL } from 'os';
 import path from 'path';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { client } from '../../studio/client';
 import { getDirectoryName } from './get-directory-name';
 import { getLocaleFlatTexts } from './get-locale-files';
+
+const { sortBy } = lodash;
 
 const __dirname = getDirectoryName();
 const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');

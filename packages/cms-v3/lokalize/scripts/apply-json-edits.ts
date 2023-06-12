@@ -1,18 +1,12 @@
 import { assert } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import prompts from 'prompts';
-// import {
-//   appendTextMutation,
-//   importLokalizeTexts,
-//   getLocalMutations,
-//   getLocaleReferenceTexts,
-// } from './logic';
 import { client } from '../../studio/client';
-import { createLokalizeTextDocument } from '../utils/create-lokalize-text-document';
 import { onState } from '../utils/abort-process';
+import { createLokalizeTextDocument } from '../utils/create-lokalize-text-document';
 import { getLocaleReferenceTexts } from '../utils/get-locale-files';
-import { appendTextMutation, getLocalMutations } from '../utils/mutation-utilities';
 import { importLokalizeTexts } from '../utils/import-lokalize-texts';
+import { appendTextMutation, getLocalMutations } from '../utils/mutation-utilities';
 
 /**
  * Read the contents of the (edited) local export JSON file and compare it to
@@ -114,7 +108,7 @@ import { importLokalizeTexts } from '../utils/import-lokalize-texts';
   });
 
   console.log('Successfully applied the following mutations:\n', JSON.stringify(response.keys, null, 2));
-})().catch((err) => {
-  console.error('An error occurred:', err.message);
+})().catch((error) => {
+  console.error('An error occurred:', error.message);
   process.exit(1);
 });

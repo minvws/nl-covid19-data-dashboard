@@ -15,6 +15,6 @@ export const localeDirectory = path.resolve(
 export const localeReferenceDirectory = path.resolve(
   __dirname,
   '..', // lokalize
-  '..', // cms-v3
+  '..', // cms-v3 TODO: change this to cms as we are getting rid of the old CMS folder
   '.lokalize-reference'
 );

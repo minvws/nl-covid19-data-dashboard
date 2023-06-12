@@ -27,3 +27,6 @@
 
 # Dotenv and similar local-only files
 *.local
+
+# cache dir for sanity lokalize exports
+.lokalize-reference
