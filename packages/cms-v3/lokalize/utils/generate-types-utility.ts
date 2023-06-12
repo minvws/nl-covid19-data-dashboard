@@ -4,19 +4,9 @@ import fs from 'fs-extra';
 import mapValues from 'lodash/mapValues';
 import path from 'path';
 import prettier from 'prettier';
-import { fileURLToPath } from 'url';
+import { localeDirectory } from './locale-directories';
 
 const { flatten, unflatten } = flat;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export const localeDirectory = path.resolve(
-  __dirname,
-  '..', // lokalize
-  '..', // cms-v3 TODO: change this to cms as we are getting rid of the old CMS folder
-  '..', // packages
-  'app/src/locale'
-);
 
 export const generateTypesUtility = async () => {
   const data = flatten(

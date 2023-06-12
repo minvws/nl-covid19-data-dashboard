@@ -48,7 +48,8 @@
     "sanity": "latest",
     "sanity-plugin-dashboard-widget-document-list": "^1.0.1",
     "sanity-plugin-media": "^2.0.5",
-    "styled-components": "^5.3.9"
+    "styled-components": "^5.3.9",
+    "ts-is-present": "^1.2.2"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^2.0.1",
@@ -58,6 +59,7 @@
     "@types/react": "^18.0.25",
     "@types/styled-components": "^5.1.26",
     "eslint": "^8.6.0",
+    "fast-csv": "^4.3.6",
     "meow": "^9.0.0",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",

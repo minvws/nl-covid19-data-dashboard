@@ -40,7 +40,6 @@ export const actions = (prev: DocumentActionComponent[], { schemaType }: { schem
       // Should ensure that the user can only update and (un)publish, but not create or delete Lokalize keys.
       allowedActions = ['delete', 'duplicate'];
       return prev.filter((context) => {
-        console.log('context :', context);
         return !allowedActions.includes(context.action!);
       });
   }

@@ -3,6 +3,7 @@ import meow from 'meow';
 import prompts from 'prompts';
 import { client } from '../../studio/client';
 import { createLokalizeTextDocument } from '../utils/create-lokalize-text-document';
+import { onState } from '../utils/abort-process';
 /**
  * This script allows a developer to manually add a lokalize document to Sanity (either to the development or production dataset)
  * Usually this script shouldn't be required to be used, because all mutations to the lokalize documents should ideally be
@@ -79,12 +80,3 @@ const generateTerminalPrompt = async (name: string, message: string, client: any
   console.error(chalk.red('An error occurred:'), err.message);
   process.exit(1);
 });
-
-/**
- * There is currently no native way to exit prompts on ctrl-c. This is a
- * workaround that needs to be added to every prompts instance. For more info
- * see: https://github.com/terkelg/prompts/issues/252#issuecomment-778683666
- */
-function onState(state: { aborted: boolean }) {
-  if (state.aborted) process.nextTick(() => process.exit(0));
-}
