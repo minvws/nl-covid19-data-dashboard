@@ -1,3 +1,4 @@
+import { colors } from '@corona-dashboard/common';
 import { Box, Button, Heading, Text, TextProps } from '@sanity/ui';
 import { outdent } from 'outdent';
 import { useState } from 'react';
@@ -95,7 +96,7 @@ const P = styled(Text)<TextProps>`
 `;
 
 const Pre = styled.pre`
-  background: #eee;
+  background-color: ${colors.yellow3}26; // results in colors.yellow3 with 85% transparency
   padding: 10px;
   white-space: pre-wrap;
 `;
