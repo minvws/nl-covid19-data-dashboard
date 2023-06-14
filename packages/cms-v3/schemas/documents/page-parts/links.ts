@@ -1,6 +1,6 @@
 import { BsLink } from 'react-icons/bs';
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { whenNotAdministrator } from '../../../studio/roles';
+import { isAdmin } from '../../../studio/roles';
 import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-fields';
 
 export const links = defineType({
@@ -25,7 +25,7 @@ export const links = defineType({
       title: 'Maximum aantal links',
       name: 'maxNumber',
       type: 'number',
-      hidden: whenNotAdministrator,
+      hidden: ({ currentUser }) => !isAdmin(currentUser),
       fieldset: 'linksConfiguration',
       validation: (rule) => rule.required(),
     }),

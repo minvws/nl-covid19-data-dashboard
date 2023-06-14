@@ -1,5 +1,5 @@
 import { defineField } from 'sanity';
-import { whenNotAdministrator } from '../../studio/roles';
+import { isAdmin } from '../../studio/roles';
 
 export const PAGE_IDENTIFIER_REFERENCE_FIELDSET = {
   title: 'Pagina Configuratie',
@@ -15,7 +15,7 @@ export const PAGE_IDENTIFIER_REFERENCE_FIELDS = [
     title: 'Menu titel (This value is only used in the Sanity UI, not anywhere on the dashboard)',
     name: 'title',
     type: 'string',
-    hidden: whenNotAdministrator,
+    hidden: ({ currentUser }) => !isAdmin(currentUser),
     fieldset: 'pageConfiguration',
     validation: (rule) => rule.required(),
   }),
@@ -24,7 +24,7 @@ export const PAGE_IDENTIFIER_REFERENCE_FIELDS = [
     name: 'pageIdentifier',
     type: 'reference',
     to: { type: 'pageIdentifier' },
-    hidden: whenNotAdministrator,
+    hidden: ({ currentUser }) => !isAdmin(currentUser),
     fieldset: 'pageConfiguration',
     validation: (rule) => rule.required(),
   }),
@@ -32,7 +32,7 @@ export const PAGE_IDENTIFIER_REFERENCE_FIELDS = [
     title: 'Pagina data soort',
     name: 'pageDataKind',
     type: 'string',
-    hidden: whenNotAdministrator,
+    hidden: ({ currentUser }) => !isAdmin(currentUser),
     fieldset: 'pageConfiguration',
     validation: (rule) => rule.required(),
   }),

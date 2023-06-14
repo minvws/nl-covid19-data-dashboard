@@ -1,7 +1,7 @@
 import { BsNewspaper } from 'react-icons/bs';
 import { ValidationContext, defineArrayMember, defineField, defineType } from 'sanity';
 import { isDefined } from 'ts-is-present';
-import { whenNotAdministrator } from '../../../studio/roles';
+import { isAdmin } from '../../../studio/roles';
 import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-fields';
 
 interface ArticleValidationContextParent {
@@ -35,7 +35,7 @@ export const articles = defineType({
       title: 'Minimum aantal artikelen',
       name: 'minNumber',
       type: 'number',
-      hidden: whenNotAdministrator,
+      hidden: ({ currentUser }) => !isAdmin(currentUser),
       fieldset: 'articleConfiguration',
       validation: (rule) => rule.min(0),
     }),
@@ -43,7 +43,7 @@ export const articles = defineType({
       title: 'Maximum aantal artikelen',
       name: 'maxNumber',
       type: 'number',
-      hidden: whenNotAdministrator,
+      hidden: ({ currentUser }) => !isAdmin(currentUser),
       fieldset: 'articleConfiguration',
       validation: (rule) => rule.min(0),
     }),

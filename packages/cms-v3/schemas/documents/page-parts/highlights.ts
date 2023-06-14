@@ -1,7 +1,7 @@
 import { BsFileEarmarkText, BsNewspaper } from 'react-icons/bs';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { isDefined } from 'ts-is-present';
-import { whenNotAdministrator } from '../../../studio/roles';
+import { isAdmin } from '../../../studio/roles';
 import { localeStringValidation } from '../../../studio/validation/locale-validation';
 import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-fields';
 
@@ -27,7 +27,7 @@ export const highlights = defineType({
       title: 'Minimum aantal items',
       name: 'minNumber',
       type: 'number',
-      hidden: whenNotAdministrator,
+      hidden: ({ currentUser }) => !isAdmin(currentUser),
       fieldset: 'highlightConfiguration',
       validation: (rule) => rule.required().min(1),
     }),
@@ -35,7 +35,7 @@ export const highlights = defineType({
       title: 'Maximum aantal items',
       name: 'maxNumber',
       type: 'number',
-      hidden: whenNotAdministrator,
+      hidden: ({ currentUser }) => !isAdmin(currentUser),
       fieldset: 'highlightConfiguration',
       validation: (rule) => rule.required().min(1),
     }),
