@@ -167,7 +167,8 @@ export interface Gm {
   booster_coverage_archived_20220904: GmBoosterCoverageArchived_20220904;
 }
 export interface GmStaticValues {
-  population_count: number;
+  population_count?: number;
+  population_count_connected_to_rwzis: number;
 }
 export interface GmDeceasedRivmArchived_20221231 {
   values: GmDeceasedRivmArchived_20221231Value[];

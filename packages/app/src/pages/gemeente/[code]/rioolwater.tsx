@@ -38,7 +38,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData('difference.sewer__average', 'sewer_per_installation', 'static_values.population_count', 'sewer', 'code'),
+  selectGmData('difference.sewer__average', 'sewer_per_installation', 'static_values.population_count_connected_to_rwzis', 'sewer', 'code'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('sewer_page'))(context);
 
@@ -57,7 +57,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const sewerAverages = data.sewer;
-  const populationCount = data.static_values.population_count;
+  const populationCountConnectedToRwzis = data.static_values.population_count_connected_to_rwzis;
 
   if (!sewerAverages) {
     /**
@@ -125,7 +125,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               <Text>
                 {replaceComponentsInText(commonTexts.gemeente_index.population_count, {
                   municipalityName: municipalityName,
-                  populationCount: <strong>{formatNumber(populationCount)}</strong>,
+                  populationCountConnectedToRwzis: <strong>{formatNumber(populationCountConnectedToRwzis)}</strong>,
                 })}
               </Text>
 
