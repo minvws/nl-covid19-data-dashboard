@@ -1,7 +1,8 @@
 import { BsLink } from 'react-icons/bs';
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import { ValidationContext, defineArrayMember, defineField, defineType } from 'sanity';
 import { isAdmin } from '../../../studio/roles';
 import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-fields';
+import { isLinkValidationContextParent } from '../../utils/links';
 
 export const links = defineType({
   title: "'Ook interessant' links",
@@ -39,12 +40,16 @@ export const links = defineType({
         rule
           .unique()
           .min(1)
-          // TODO: properly type this
-          .custom((_: any, context: any) => {
-            const max = context.parent?.maxNumber ?? 0;
-            if (max > 0 && context.parent?.links?.length > max) {
-              return `Maximaal ${max} links toegestaan`;
-            }
+          .custom((_, context: ValidationContext) => {
+            const parent = context.parent;
+            if (!parent) return true;
+
+            const isParent = isLinkValidationContextParent(parent);
+            if (!isParent) return true;
+
+            const max = parent.maxNumber ?? 0;
+            if (max > 0 && parent.links?.length > max) return `Maximaal ${max} links toegestaan`;
+
             return true;
           }),
     }),

@@ -1,4 +1,4 @@
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import { ValidationContext, defineArrayMember, defineField, defineType } from 'sanity';
 import { IconInput } from '../../../../components/icon-input';
 import { client } from '../../../../studio/client';
 import { localeStringValidation, localeValidation } from '../../../../studio/validation/locale-validation';
@@ -26,16 +26,16 @@ export const notFoundItem = defineType({
         list: pageTypeOptions,
         layout: 'dropdown',
       },
-      // TODO: properly type this
-      validation: (rule: any) => [
+      validation: (rule) => [
         rule.required(),
 
         // This will populate error messages if there already is an item with this title.
-        rule.custom(async (pageType: string, context: any) => {
-          const query = `*[_type == 'notFoundPageItem' && pageType == '${pageType}' && !(_id in path('drafts.**')) && !(_id match "*${context.document._id.replace(
-            'drafts.',
-            ''
-          )}")]{...,}`;
+        rule.custom(async (pageType: string | undefined, context: ValidationContext) => {
+          if (!pageType) return true;
+
+          const query = `//groq
+            *[_type == 'notFoundPageItem' && pageType == '${pageType}' && !(_id in path('drafts.**')) && !(_id match "*${context.document?._id.replace('drafts.', '')}")]{...,}
+          `;
 
           const count = await client.fetch(query);
           return count.length > 0 ? 'Het pagina type moet uniek zijn.' : true;

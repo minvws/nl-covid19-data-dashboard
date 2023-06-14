@@ -42,7 +42,7 @@ export default defineConfig({
   ],
   schema: { types: schemaTypes },
   studio: { components: { logo: Logo } },
-  document: { newDocumentOptions, actions }, // TODO: fix typing issue
+  document: { newDocumentOptions, actions },
   tools,
   theme,
 });

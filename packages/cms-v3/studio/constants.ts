@@ -2,7 +2,6 @@ import { MetricName } from '@corona-dashboard/common';
 import { Bs1Circle, Bs2Circle, Bs3Circle, Bs4Circle } from 'react-icons/bs';
 
 // By mapping the metric name to a title we can make the UI a little more user-friendly.
-// TODO: update this when wrapping up this feature.
 export const titleByMetricName: Partial<Record<MetricName, string>> = {
   behavior_annotations_archived_20230412: 'Gedrag - Annotaties',
   behavior_archived_20230411: 'Gedrag (archief per 19-10-2022)',

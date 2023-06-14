@@ -20,23 +20,25 @@ export const elementsStructureItem = (S: StructureBuilder, context: StructureRes
             .title('Elements')
             .icon(BsBarChart)
             .child(() => {
-              // TODO: is only 'timeSeries' now necessary because we have removed other items/types?
-              const types = ['timeSeries', 'kpi', 'choropleth', 'warning'];
+              const types = ['timeSeries'];
 
-              return documentStore
-                .listenQuery(
-                  `//groq
-                        *[_type in $types]{ scope, metricName, metricProperty }
-                      `,
-                  { types },
-                  {}
-                )
-                .pipe(
-                  map((documents: { scope: string }[]) => {
-                    const scopes = uniq(documents.map((document) => document.scope).filter(Boolean));
-                    return elementsStructureItemChild(S, scopes, 'timeSeries');
-                  })
-                );
+              return (
+                documentStore
+                  .listenQuery(
+                    `//groq
+                    *[_type in $types]{ scope, metricName, metricProperty }
+                  `,
+                    { types },
+                    {}
+                  )
+                  // TODO: fix this
+                  .pipe(
+                    map((documents: { scope: string }[]) => {
+                      const scopes = uniq(documents.map((document) => document.scope).filter(Boolean));
+                      return elementsStructureItemChild(S, scopes, 'timeSeries');
+                    })
+                  )
+              );
             }),
           timelineEventCollectionsListItem(S),
         ])
@@ -66,7 +68,7 @@ const elementsStructureItemChild = (S: StructureBuilder, scopes: string[], type:
                 ])
                 .filter(
                   `//groq
-                  scope == $scope
+                    scope == $scope
                 `
                 )
                 .params({ scope })

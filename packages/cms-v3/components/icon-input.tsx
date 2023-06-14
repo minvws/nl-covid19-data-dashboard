@@ -1,4 +1,5 @@
 import { colors } from '@corona-dashboard/common';
+// TODO: Figure out why these imports are redlining.
 import * as allIcons from '@corona-dashboard/icons';
 import { iconName2filename } from '@corona-dashboard/icons';
 import { Box, Button, Dialog, Flex, Grid, Radio, Stack, Text, TextInput } from '@sanity/ui';
@@ -38,7 +39,7 @@ export const IconInput = (props: StringInputProps) => {
     <>
       <Stack space={3}>
         <Box display="none">
-          <TextInput value={value} />
+          <TextInput value={value} readOnly />
         </Box>
 
         {Icon === undefined ? <Text size={1}>Er is nog geen icoon geselecteerd.</Text> : <Icon width="50px" height="50px" />}

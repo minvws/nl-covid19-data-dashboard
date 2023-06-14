@@ -1,16 +1,8 @@
-import { colors } from '@corona-dashboard/common';
-
-const removeHash = (input: string) => input.replace(/#/g, '');
-
-const themeColors = {
-  primary: removeHash(colors.primary),
-  positive: removeHash(colors.green1),
-  caution: removeHash(colors.yellow3),
-  critical: removeHash(colors.red2),
-};
-
-// TODO: Vite complains about this, and should be resolved
 export const { theme } = (await import(
   // The below colours are used inside the COVID-19 dashboard, meaning that these are consistent between Sanity and the actual website.
-  `https://themer.sanity.build/api/hues?primary=${themeColors.primary}&positive=${themeColors.positive};400&caution=${themeColors.caution};300&critical=${themeColors.critical}`
+  // However, these can not be dynamically appended to the URL.
+  // The below TODO is imported as such from themer.sanity.build.
+
+  // @ts-expect-error -- TODO setup themer.d.ts to get correct typings
+  'https://themer.sanity.build/api/hues?primary=007bc7&positive=69c253&caution=ffc000&critical=f35065'
 )) as { theme: import('sanity').StudioTheme };

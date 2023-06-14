@@ -1,6 +1,12 @@
 import { BsLink } from 'react-icons/bs';
 import { defineField, defineType } from 'sanity';
 import { localeStringValidation } from '../../studio/validation/locale-validation';
+import { LocaleString } from '../locale/string';
+
+export type Link = {
+  title: LocaleString;
+  href: string;
+};
 
 export const link = defineType({
   type: 'object',
