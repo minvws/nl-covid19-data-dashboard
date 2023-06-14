@@ -1,8 +1,17 @@
 import { BsNewspaper } from 'react-icons/bs';
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import { ValidationContext, defineArrayMember, defineField, defineType } from 'sanity';
 import { isDefined } from 'ts-is-present';
 import { whenNotAdministrator } from '../../../studio/roles';
 import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-fields';
+
+interface ArticleValidationContextParent {
+  minNumber: number;
+  maxNumber: number;
+  articles: any[]; // TODO: properly type this
+}
+
+const isArticleValidationContextParent = (parent: unknown): parent is ArticleValidationContextParent =>
+  typeof parent === 'object' && parent !== null && 'minNumber' in parent && 'maxNumber' in parent && 'articles' in parent;
 
 export const articles = defineType({
   title: 'Pagina Artikelen',
@@ -44,16 +53,22 @@ export const articles = defineType({
       type: 'array',
       of: [defineArrayMember({ type: 'reference', to: { type: 'article' } })],
       validation: (rule) =>
-        // TODO: properly type this
-        rule.unique().custom((_: any, context: any) => {
-          const min = context.parent?.minNumber;
-          const max = context.parent?.maxNumber;
-          if (isDefined(max) && context.parent?.articles?.length > max) {
+        rule.unique().custom((_, context: ValidationContext) => {
+          const parent = context.parent;
+          if (!parent) return true;
+
+          const isParent = isArticleValidationContextParent(parent);
+          if (!isParent) return true;
+
+          const { minNumber: min, maxNumber: max, articles } = parent;
+          if (isDefined(max) && articles?.length > max) {
             return `Maximaal ${max} artikelen toegestaan`;
           }
-          if (isDefined(min) && context.parent?.articles?.length < min) {
+
+          if (isDefined(min) && articles?.length < min) {
             return `Minstens ${min} artikel(en) verplicht`;
           }
+
           return true;
         }),
     }),

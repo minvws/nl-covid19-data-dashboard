@@ -1,9 +1,10 @@
 import chalk from 'chalk';
 import meow from 'meow';
 import prompts from 'prompts';
+import { SanityClient } from 'sanity';
 import { client } from '../../studio/client';
-import { createLokalizeTextDocument } from '../utils/create-lokalize-text-document';
 import { onState } from '../utils/abort-process';
+import { createLokalizeTextDocument } from '../utils/create-lokalize-text-document';
 /**
  * This script allows a developer to manually add a lokalize document to Sanity (either to the development or production dataset)
  * Usually this script shouldn't be required to be used, because all mutations to the lokalize documents should ideally be
@@ -32,7 +33,7 @@ const cli = meow(cliCommand, {
 });
 
 // TODO: Properly type this
-const generateTerminalPrompt = async (name: string, message: string, client: any = null) => {
+const generateTerminalPrompt = async (name: string, message: string, client?: SanityClient) => {
   const prompt = await prompts({
     type: 'text',
     name: name,

@@ -26,7 +26,6 @@ export default defineConfig({
 
   plugins: [
     dashboardTool({
-      // TODO: figure out if widgets can be grouped as on V2 of the CMS, but without custom components
       widgets,
     }),
     deskTool({

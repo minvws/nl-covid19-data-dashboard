@@ -62,7 +62,7 @@ const TextInputContainer = styled.div<TextInputContainerProps>`
 
   svg {
     position: absolute;
-    right: 4px; // TODO: see if we can convert this to space[X]
+    right: 4px;
     top: ${({ multiline }) => (multiline ? '10%' : '50%')};
     transform: translate(-50%, -50%);
   }

@@ -1,5 +1,4 @@
 import { StringInput } from '../../components/string-input';
-import { StringField } from '../../components/string-field';
 import { supportedLanguages } from '../../studio/i18n';
 import { defineType, defineField } from 'sanity';
 
@@ -14,7 +13,6 @@ export const string = defineType({
       type: 'string',
       components: {
         input: StringInput,
-        field: StringField,
       },
     })
   ),

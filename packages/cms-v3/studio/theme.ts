@@ -9,6 +9,7 @@ const themeColors = {
   critical: removeHash(colors.red2),
 };
 
+// TODO: Vite complains about this, and should be resolved
 export const { theme } = (await import(
   // The below colours are used inside the COVID-19 dashboard, meaning that these are consistent between Sanity and the actual website.
   `https://themer.sanity.build/api/hues?primary=${themeColors.primary}&positive=${themeColors.positive};400&caution=${themeColors.caution};300&critical=${themeColors.critical}`
