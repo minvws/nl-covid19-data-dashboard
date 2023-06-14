@@ -5,7 +5,6 @@ export const about = defineType({
   name: 'overDitDashboard',
   type: 'document',
   title: 'Over dit dashboard',
-  // TODO: Should these fields have validation?
   fields: [
     defineField({
       name: 'title',

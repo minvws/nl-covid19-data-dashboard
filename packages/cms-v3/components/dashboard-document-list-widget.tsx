@@ -72,7 +72,6 @@ export const DashboardDocumentListWidget = ({ title, query, countQuery, createBu
 
   return (
     <DashboardWidgetContainer
-      // TODO: Should we show number of documents visible or total number of documents
       header={`${title} - ${documents.length} van ${totalDocumentCount}`}
       footer={
         <Flex direction="row" align="center" justify="space-between">
@@ -82,7 +81,6 @@ export const DashboardDocumentListWidget = ({ title, query, countQuery, createBu
             mode="bleed"
             tone="primary"
             text={isFetchMoreDisabled ? 'Alles geladen' : isLoading ? 'Laden...' : 'Laad meer'}
-            // TODO: Figure out how to get rid of this border radius. Its coming from a card which is not in our code.
             style={{ cursor: isFetchMoreDisabled ? 'not-allowed' : 'pointer', width: '100%', borderRadius: 0 }}
             disabled={isFetchMoreDisabled || isLoading}
             title={isFetchMoreDisabled ? 'No more documents to show' : 'Retrieve more documents'}

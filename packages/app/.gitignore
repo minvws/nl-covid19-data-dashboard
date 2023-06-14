@@ -39,8 +39,6 @@ yarn-error.log*
 
 src/locale/*_export.json
 src/locale/site-text.d.ts
-# TODO-1491: Remove the line below when the migration is complete.
-src/locale/site-text-v3.d.ts
 
 # Typescript compiler traces
 trace*

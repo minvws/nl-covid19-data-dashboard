@@ -35,12 +35,6 @@ export const generateTypesUtility = async () => {
   );
 
   return new Promise<void>((resolve, reject) =>
-    fs.writeFile(
-      // path.join(localeDirectory, 'site-text.d.ts'),
-      path.join(localeDirectory, 'site-text-v3.d.ts'), // TODO: remove this line once we've removed the old CMS folder
-      body,
-      { encoding: 'utf8' },
-      (error) => (error ? reject(error) : resolve())
-    )
+    fs.writeFile(path.join(localeDirectory, 'site-text.d.ts'), body, { encoding: 'utf8' }, (error) => (error ? reject(error) : resolve()))
   );
 };

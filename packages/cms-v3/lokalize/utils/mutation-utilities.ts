@@ -34,10 +34,6 @@ export type AddMutation = {
   action: 'add';
   timestamp: string;
   key: string;
-  /**
-   * @TODO once the mutation log is cleared and this branch is merged, we can
-   * make document_id required.
-   */
   document_id?: string;
 };
 
@@ -184,13 +180,6 @@ export const getCollapsedAddDeleteMutations = (mutations: TextMutation[]): (AddM
     .map(([key, { weight, timestamp, document_id }]) => {
       switch (true) {
         case weight > 0:
-          /**
-           * @TODO enable assertion once the log is cleared and this branch is merged.
-           */
-          // assert(
-          //   document_id,
-          //   `Trying to collapse to an add mutation without document_id, for key: ${key}`
-          // );
           return {
             key,
             action: 'add',

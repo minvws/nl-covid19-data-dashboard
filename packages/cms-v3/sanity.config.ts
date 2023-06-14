@@ -20,10 +20,6 @@ export default defineConfig({
   // TODO: figure out how to use environment variables
   // dataset: process.env.NEXT_PUBLIC_PHASE === 'develop' ? 'development' : 'production',
   dataset: 'development',
-
-  // TODO: either remove this or set up a [[...studio]].tsx route inside the app package for a 'self-hosted' Sanity studio page
-  // basePath: '/studio',
-
   plugins: [
     dashboardTool({
       widgets,
@@ -36,7 +32,6 @@ export default defineConfig({
     languageFilter({
       supportedLanguages,
       defaultLanguages: ['nl'],
-      // documentTypes: [],
       filterField: (enclosingType, field, selectedLanguageIds) => !enclosingType.name.startsWith('locale') || selectedLanguageIds.includes(field.name),
     }),
   ],

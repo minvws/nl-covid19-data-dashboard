@@ -11,8 +11,6 @@
     "nuke": "yarn clean && npx rimraf node_modules",
     "dev": "yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/cli generate-data-structures && sanity dev",
     "deploy": "yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/cli generate-data-structures && sanity deploy",
-    "test": "echo 'Sanity check is deprecated \n@TODO add sanity test script'",
-    "test:ci": "echo 'Sanity check is deprecated \n@TODO add sanity test ci script'",
     "typecheck": "tsc --pretty --noEmit",
     "lint": "eslint .",
     "lokalize:import": "ts-node lokalize/scripts/import.ts",
