@@ -7,7 +7,7 @@ import { EOL } from 'os';
 import path from 'path';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { client } from '../../studio/client';
-import { getDirectoryName } from './get-directory-name';
+import { getDirectoryName } from '../../studio/utils/get-directory-name';
 import { getLocaleFlatTexts } from './get-locale-files';
 
 const { sortBy } = lodash;

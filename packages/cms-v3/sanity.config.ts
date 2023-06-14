@@ -7,7 +7,7 @@ import { deskTool } from 'sanity/desk';
 import { Logo } from './components/logo';
 import { schemaTypes } from './schemas';
 import { deskStructure } from './studio/desk-structure/desk-structure';
-import { actions, newDocumentOptions } from './studio/document-options';
+import { actions, newDocumentOptions } from './studio/document-options/document-options';
 import { supportedLanguages } from './studio/i18n';
 import { theme } from './studio/theme';
 import { tools } from './studio/tools';
@@ -42,7 +42,7 @@ export default defineConfig({
   ],
   schema: { types: schemaTypes },
   studio: { components: { logo: Logo } },
-  document: { newDocumentOptions, actions },
+  document: { newDocumentOptions, actions }, // TODO: fix typing issue
   tools,
   theme,
 });

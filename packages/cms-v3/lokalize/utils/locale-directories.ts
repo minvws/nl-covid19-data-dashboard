@@ -1,5 +1,5 @@
 import path from 'path';
-import { getDirectoryName } from './get-directory-name';
+import { getDirectoryName } from '../../studio/utils/get-directory-name';
 
 // TODO: This is not really a utility, should it be moved elsewhere?
 const __dirname = getDirectoryName();

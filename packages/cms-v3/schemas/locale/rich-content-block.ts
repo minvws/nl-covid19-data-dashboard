@@ -3,6 +3,10 @@ import { RichContentInput } from '../../components/rich-content-input';
 import { supportedLanguages } from '../../studio/i18n';
 import { richContentFields } from '../fields/rich-content-fields';
 
+export type LocaleRichContentBlock = {
+  [key: string]: string;
+};
+
 export const richContentBlock = defineType({
   name: 'localeRichContentBlock',
   type: 'object',

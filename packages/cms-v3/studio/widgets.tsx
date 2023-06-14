@@ -8,32 +8,52 @@ export const dashboardWidgets: TDashboardWidget[] = [
   {
     name: 'unpublished-documents',
     title: 'Niet-gepubliceerde documenten',
-    query: `*[_id in path("drafts.**") && (defined(text))] | order(_updatedAt desc)`,
-    countQuery: `count(*[_id in path("drafts.**") && (defined(text))])`,
+    query: `//groq
+      *[_id in path("drafts.**") && (defined(text))] | order(_updatedAt desc)
+    `,
+    countQuery: `//groq
+      count(*[_id in path("drafts.**") && (defined(text))])
+    `,
   },
   {
     name: 'recently-published-documents',
     title: 'Recent gepubliceerde documenten',
-    query: `*[!(_id in path("drafts.**")) && (defined(text)) && (defined(key))] | order(_publishedAt desc)`,
-    countQuery: `count(*[!(_id in path("drafts.**")) && (defined(text)) && (defined(key))])`,
+    query: `//groq
+      *[!(_id in path("drafts.**")) && (defined(text)) && (defined(key))] | order(_publishedAt desc)
+    `,
+    countQuery: `//groq
+      count(*[!(_id in path("drafts.**")) && (defined(text)) && (defined(key))])
+    `,
   },
   {
     name: 'untranslated-lokalize-keys',
     title: 'Onvertaalde Lokalize teksten',
-    query: `*[_type == "lokalizeText" && (!defined(text.en) || text.en == "")] | order(_updatedAt desc)`,
-    countQuery: `count(*[_type == "lokalizeText" && (!defined(text.en) || text.en == "")])`,
+    query: `//groq
+      *[_type == "lokalizeText" && (!defined(text.en) || text.en == "")] | order(_updatedAt desc)
+    `,
+    countQuery: `//groq
+      count(*[_type == "lokalizeText" && (!defined(text.en) || text.en == "")])
+    `,
   },
   {
     name: 'new-lokalize-keys',
     title: 'Nieuwe Lokalize teksten',
-    query: `*[_type == "lokalizeText" && is_newly_added == true] | order(key asc)`,
-    countQuery: `count(*[_type == "lokalizeText" && is_newly_added == true])`,
+    query: `//groq
+      *[_type == "lokalizeText" && is_newly_added == true] | order(key asc)
+    `,
+    countQuery: `//groq
+      count(*[_type == "lokalizeText" && is_newly_added == true])
+    `,
   },
   {
     name: 'recently-updated-articles',
     title: 'Laatst gewijzigde artikelen',
-    query: `*[_type == 'article'] | order(_updatedAt desc)`,
-    countQuery: `count(*[_type == 'article'])`,
+    query: `//groq
+      *[_type == 'article'] | order(_updatedAt desc)
+    `,
+    countQuery: `//groq
+      count(*[_type == 'article'])
+    `,
     createButtonText: 'Nieuw artikel',
     types: ['article'],
   },

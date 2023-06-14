@@ -22,7 +22,7 @@
     "lokalize:sync-after-release": "ts-node lokalize/scripts/sync-after-release.ts",
     "lokalize:sync-after-feature": "ts-node lokalize/scripts/sync-after-feature.ts",
     "lokalize:sync-prd-to-dev": "ts-node lokalize/scripts/sync-prd-to-dev.ts",
-    "elements:add": "ts-node src/elements/add.ts",
+    "elements:add": "ts-node studio/scripts/add-chart.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "keywords": [

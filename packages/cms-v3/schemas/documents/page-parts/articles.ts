@@ -3,15 +3,7 @@ import { ValidationContext, defineArrayMember, defineField, defineType } from 's
 import { isDefined } from 'ts-is-present';
 import { isAdmin } from '../../../studio/roles';
 import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-fields';
-
-interface ArticleValidationContextParent {
-  minNumber: number;
-  maxNumber: number;
-  articles: any[]; // TODO: properly type this
-}
-
-const isArticleValidationContextParent = (parent: unknown): parent is ArticleValidationContextParent =>
-  typeof parent === 'object' && parent !== null && 'minNumber' in parent && 'maxNumber' in parent && 'articles' in parent;
+import { isArticleValidationContextParent } from '../../utils/articles';
 
 export const articles = defineType({
   title: 'Pagina Artikelen',
@@ -61,13 +53,8 @@ export const articles = defineType({
           if (!isParent) return true;
 
           const { minNumber: min, maxNumber: max, articles } = parent;
-          if (isDefined(max) && articles?.length > max) {
-            return `Maximaal ${max} artikelen toegestaan`;
-          }
-
-          if (isDefined(min) && articles?.length < min) {
-            return `Minstens ${min} artikel(en) verplicht`;
-          }
+          if (isDefined(max) && articles?.length > max) return `Maximaal ${max} artikelen toegestaan`;
+          if (isDefined(min) && articles?.length < min) return `Minstens ${min} artikel(en) verplicht`;
 
           return true;
         }),

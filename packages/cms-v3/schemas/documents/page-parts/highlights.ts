@@ -1,9 +1,10 @@
 import { BsFileEarmarkText, BsNewspaper } from 'react-icons/bs';
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import { ValidationContext, defineArrayMember, defineField, defineType } from 'sanity';
 import { isDefined } from 'ts-is-present';
 import { isAdmin } from '../../../studio/roles';
 import { localeStringValidation } from '../../../studio/validation/locale-validation';
 import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-fields';
+import { isArticleValidationContextParent } from '../../utils/articles';
 
 export const highlights = defineType({
   title: 'Uitgelichte items',
@@ -49,15 +50,9 @@ export const highlights = defineType({
       name: 'highlights',
       type: 'array',
       of: [
-        // TODO: move this into its own schema/type?
         defineArrayMember({
           type: 'object',
           icon: BsFileEarmarkText,
-          preview: {
-            select: {
-              title: 'title.nl',
-            },
-          },
           fields: [
             defineField({
               title: 'Titel',
@@ -94,14 +89,38 @@ export const highlights = defineType({
               validation: (rule) => rule.required(),
             }),
           ],
+          preview: {
+            select: {
+              title: 'title.nl',
+              date: 'publicationDate',
+              media: 'cover',
+            },
+            prepare({ title, date, media }) {
+              return {
+                title,
+                subtitle: new Date(date).toLocaleString(),
+                media,
+              };
+            },
+          },
         }),
       ],
       validation: (rule) => [
-        // TODO: properly type this
         rule
-          .custom((value: any, context: any) => {
-            const max = context.parent?.maxNumber ?? 2;
-            if (context.document.showWeeklyHighlight) {
+          .custom((value: unknown, context: ValidationContext) => {
+            console.log({ value, context });
+
+            const parent = context.parent;
+            if (!parent) return true;
+
+            const isParent = isArticleValidationContextParent(parent);
+            if (!isParent) return true;
+
+            const valueIsArray = Array.isArray(value);
+            if (!valueIsArray) return true;
+
+            const max = parent.maxNumber ?? 2;
+            if (context.document?.showWeeklyHighlight) {
               return value.length === max - 1 ? true : `Als er een weekbericht geselecteerd is moet er ${max - 1} uitgelicht item(s) toegevoegd zijn.`;
             } else {
               return value.length === max ? true : `Als er geen weekbericht geselecteerd is moeten er ${max} uitgelichte item(s) toegevoegd zijn.`;
@@ -111,15 +130,17 @@ export const highlights = defineType({
         rule
           .required()
           .unique()
-          .custom((_: any, context: any) => {
-            const min = context.parent?.minNumber;
-            const max = context.parent?.maxNumber;
-            if (isDefined(max) && context.parent?.articles?.length > max) {
-              return `Maximaal ${max} artikelen toegestaan`;
-            }
-            if (isDefined(min) && context.parent?.articles?.length < min) {
-              return `Minstens ${min} artikel(en) verplicht`;
-            }
+          .custom((_, context: ValidationContext) => {
+            const parent = context.parent;
+            if (!parent) return true;
+
+            const isParent = isArticleValidationContextParent(parent);
+            if (!isParent) return true;
+
+            const { minNumber: min, maxNumber: max, articles } = parent;
+            if (isDefined(max) && articles?.length > max) return `Maximaal ${max} artikelen toegestaan`;
+            if (isDefined(min) && articles?.length < min) return `Minstens ${min} artikel(en) verplicht`;
+
             return true;
           }),
       ],

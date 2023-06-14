@@ -2,7 +2,7 @@ import { assert } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import prompts from 'prompts';
 import { client } from '../../studio/client';
-import { onState } from '../utils/abort-process';
+import { onState } from '../../studio/utils/abort-process';
 import { createLokalizeTextDocument } from '../utils/create-lokalize-text-document';
 import { getLocaleReferenceTexts } from '../utils/get-locale-files';
 import { importLokalizeTexts } from '../utils/import-lokalize-texts';
