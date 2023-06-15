@@ -3,6 +3,7 @@ import { IconInput } from '../../../../components/icon-input';
 import { SEVERITY_LEVELS_LIST } from '../../../../studio/constants';
 import { localeStringValidation } from '../../../../studio/validation/locale-validation';
 
+// TODO: should we remove this?
 export const thermometer = defineType({
   type: 'object',
   title: 'Thermometer',

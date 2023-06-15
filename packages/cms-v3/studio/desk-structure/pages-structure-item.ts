@@ -51,6 +51,7 @@ const pageDataListItem = (page: PagePartPage, S: StructureBuilder, context: Stru
     .title(page.title)
     .icon(BsBookHalf)
     .child(
+      // TODO fix this
       documentStore
         .listenQuery(
           `//groq
