@@ -10,6 +10,6 @@
       "type": "integer"
     }
   },
-  "required": ["population_count_connected_to_rwzis"],
+  "required": ["population_count", "population_count_connected_to_rwzis"],
   "additionalProperties": false
 }
