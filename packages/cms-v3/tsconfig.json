@@ -13,6 +13,7 @@
     //   "~/*": ["./*"]
     //   // "studio": ["./studio/*"]
     // }
+    "types": ["node", "vite/client"]
   },
   "include": ["**/*.ts", "**/*.tsx"]
 }

@@ -15,11 +15,8 @@ import { widgets } from './studio/widgets';
 
 export default defineConfig({
   title: 'Coronavirus Dashboard CMS',
-  projectId: '5mog5ask',
-
-  // TODO: figure out how to use environment variables
-  // dataset: process.env.NEXT_PUBLIC_PHASE === 'develop' ? 'development' : 'production',
-  dataset: 'development',
+  projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID,
+  dataset: import.meta.env.SANITY_STUDIO_DATASET,
   plugins: [
     dashboardTool({
       widgets,

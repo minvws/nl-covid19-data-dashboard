@@ -26,7 +26,8 @@
 *.tsbuildinfo
 
 # Dotenv and similar local-only files
-*.local
+*.env.*
+!*.env.*.example
 
 # cache dir for sanity lokalize exports
 .lokalize-reference
