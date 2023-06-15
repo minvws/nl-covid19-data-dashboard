@@ -35,10 +35,14 @@ export const actions = (prev: DocumentActionComponent[], { schemaType }: { schem
     case 'theme':
     // case 'themeTile':
     case 'advice':
+    // TODO: Make lokalizeText deletable only if Admin and Development Dataset.
     case 'lokalizeText':
       // Should ensure that the user can only update and (un)publish, but not create or delete Lokalize keys.
       allowedActions = ['delete', 'duplicate'];
-      return prev.filter(({ action }) => !allowedActions.includes(action!));
+      return prev.filter((context) => {
+        console.log('context :', context);
+        return !allowedActions.includes(context.action!);
+      });
   }
 
   return prev;

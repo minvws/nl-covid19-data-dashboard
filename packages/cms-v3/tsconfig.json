@@ -1,26 +1,18 @@
 {
   "extends": "../../tsconfig.base.json",
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    "module": "ESNext",
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    // TODO: Paths are not working out at the moment. Consider moving everything into SRC so that it works with the paths from common config.
     // "baseUrl": ".",
     // "paths": {
-    //   "~/*": ["src/*"]
+    //   "~/*": ["./*"]
+    //   // "studio": ["./studio/*"]
     // }
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"],
-  // "references": [{ "path": "../common" }]
+  "include": ["**/*.ts", "**/*.tsx"]
 }

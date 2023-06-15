@@ -19,7 +19,7 @@ export const DashboardDocumentListWidget = ({ title, query, countQuery, createBu
   const [isLoading, setIsLoading] = useState(false);
   const [totalDocumentCount, setTotalDocumentCount] = useState(0);
   const [isFetchMoreDisabled, setIsFetchMoreDisabled] = useState(documents.length === totalDocumentCount);
-  const client = useClient({ apiVersion: '2021-10-21' });
+  const client = useClient({ apiVersion: '2023-05-03' });
 
   const handleFetchMoreClick = () => setLimit((previousLimit) => previousLimit + 25);
 

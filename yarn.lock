@@ -4019,17 +4019,25 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@corona-dashboard/cms-v3@workspace:packages/cms-v3"
   dependencies:
+    "@sanity/cli": ^3.11.5
     "@sanity/dashboard": ^3.1.4
     "@sanity/eslint-config-studio": ^2.0.1
     "@sanity/language-filter": ^3.0.1
     "@sanity/types": ^3.10.0
     "@sanity/ui": ^1.3.2
     "@sanity/vision": ^3.9.0
+    "@types/flat": ^5.0.2
+    "@types/fs-extra": ^11
+    "@types/prompts": 2.0.14
     "@types/react": ^18.0.25
     "@types/styled-components": ^5.1.26
     change-case: ^4.1.2
     eslint: ^8.6.0
+    flat: ^5.0.2
+    fs-extra: ^11.1.1
+    meow: ^9.0.0
     prettier: ^2.8.8
+    prompts: ^2.4.2
     react: ^18.2.0
     react-dom: ^18.2.0
     react-icons: ^4.8.0
@@ -4038,7 +4046,8 @@ __metadata:
     sanity-plugin-dashboard-widget-document-list: ^1.0.1
     sanity-plugin-media: ^2.0.5
     styled-components: ^5.3.9
-    typescript: ^4.0.0
+    ts-node: ^10.9.1
+    typescript: ^4.7.3
   languageName: unknown
   linkType: soft
 
@@ -6155,6 +6164,25 @@ __metadata:
   bin:
     sanity: bin/sanity
   checksum: dae16c3219dce6e0aca3e6a8cb49819ce7f16a314c8179650c42e7db8894bbb2444244d134410fa8ad44fcac6ab5580a4e130c5a1cccf2ce59022aab57313cab
+  languageName: node
+  linkType: hard
+
+"@sanity/cli@npm:^3.11.5":
+  version: 3.11.5
+  resolution: "@sanity/cli@npm:3.11.5"
+  dependencies:
+    "@babel/traverse": ^7.19.0
+    "@vercel/frameworks": 1.4.2
+    "@vercel/fs-detectors": 3.9.2
+    chalk: ^4.1.2
+    esbuild: ^0.16.5
+    esbuild-register: ^3.4.1
+    get-it: ^8.0.9
+    golden-fleece: ^1.0.9
+    pkg-dir: ^5.0.0
+  bin:
+    sanity: bin/sanity
+  checksum: 4da40768106a8cfe8c9dc3e51fc3afdf0cad417d73099fc4202258630bb59a591695a54371eb89e9032d388cd157ab2b26c91f2e59841ff67ff7d9f540d2bc15
   languageName: node
   linkType: hard
 
@@ -9638,6 +9666,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/fs-extra@npm:^11":
+  version: 11.0.1
+  resolution: "@types/fs-extra@npm:11.0.1"
+  dependencies:
+    "@types/jsonfile": "*"
+    "@types/node": "*"
+  checksum: 3e930346e5d84f419deb8ced1c582beef8cb20d0bd8a0eb145a37d75bab0572a1895f0e48a0d681d386b3a58b9a992b2d2acecc464bcaec2548f53ea00718651
+  languageName: node
+  linkType: hard
+
 "@types/fs-extra@npm:^9.0.13":
   version: 9.0.13
   resolution: "@types/fs-extra@npm:9.0.13"
@@ -9792,6 +9830,15 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: e60b153664572116dfea673c5bda7778dbff150498f44f998e34b5886d8afc47f16799280e4b6e241c0472aef1bc36add771c569c68fc5125fc2ae519a3eb9ac
+  languageName: node
+  linkType: hard
+
+"@types/jsonfile@npm:*":
+  version: 6.1.1
+  resolution: "@types/jsonfile@npm:6.1.1"
+  dependencies:
+    "@types/node": "*"
+  checksum: 0f8fe0a9221a00e8413cffba723dfe16553868724b830237256fb0052ecd5cac96498189d1235a001cfa815f352008261c9ceb373f0aa58227f891e0c7a12c4d
   languageName: node
   linkType: hard
 
@@ -10662,6 +10709,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vercel/error-utils@npm:1.0.10":
+  version: 1.0.10
+  resolution: "@vercel/error-utils@npm:1.0.10"
+  checksum: 84d8233b1912b1fc5e83ba27230c70df10c41f558c70f5b8509e19b0fab72c396e7eea03886c9fa1e81dcc19acad30a07730c4c30fa366d9827bdaccfd0383a5
+  languageName: node
+  linkType: hard
+
 "@vercel/error-utils@npm:1.0.9":
   version: 1.0.9
   resolution: "@vercel/error-utils@npm:1.0.9"
@@ -10676,6 +10730,16 @@ __metadata:
     "@iarna/toml": 2.2.3
     js-yaml: 3.13.1
   checksum: cfb2166220725018bb0473240cdd115adc3c5b3755a627f2d535884c1d26f0f29b5cab7118f9aff0088298067482dbff815f3840262164321b563184b846f52b
+  languageName: node
+  linkType: hard
+
+"@vercel/frameworks@npm:1.4.2":
+  version: 1.4.2
+  resolution: "@vercel/frameworks@npm:1.4.2"
+  dependencies:
+    "@iarna/toml": 2.2.3
+    js-yaml: 3.13.1
+  checksum: 4edc4ec6487a98c1a2862d786b3c3847f54ec05f46e73ab09aefe75e52d5fd5a39806b5f838825decfc21493b91f0ece409fa4072554c80134ccad1d0075f120
   languageName: node
   linkType: hard
 
@@ -10695,6 +10759,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vercel/fs-detectors@npm:3.9.2":
+  version: 3.9.2
+  resolution: "@vercel/fs-detectors@npm:3.9.2"
+  dependencies:
+    "@vercel/error-utils": 1.0.10
+    "@vercel/frameworks": 1.4.2
+    "@vercel/routing-utils": 2.2.1
+    glob: 8.0.3
+    js-yaml: 4.1.0
+    json5: 2.2.2
+    minimatch: 3.1.2
+    semver: 6.1.1
+  checksum: d96f8400dff8a4d74af2e41929c78cf6cf55693a1f4bcff39bf428afeeb81e615fdfd3d607b00adfff170e954d43071115d0f5821c6c2fbf2cc550a92f1afa22
+  languageName: node
+  linkType: hard
+
 "@vercel/routing-utils@npm:2.2.0":
   version: 2.2.0
   resolution: "@vercel/routing-utils@npm:2.2.0"
@@ -10705,6 +10785,19 @@ __metadata:
     ajv:
       optional: true
   checksum: cf61d8081e6bb0ff7d4c306c3c2ed240314573fac59976b31210a3469119f9b43996cdab388d1e40635ccca027bc1faf9b767e4c9b9095fe1ea86b304336c51d
+  languageName: node
+  linkType: hard
+
+"@vercel/routing-utils@npm:2.2.1":
+  version: 2.2.1
+  resolution: "@vercel/routing-utils@npm:2.2.1"
+  dependencies:
+    ajv: ^6.0.0
+    path-to-regexp: 6.1.0
+  dependenciesMeta:
+    ajv:
+      optional: true
+  checksum: b56ef0fa3f3c6c931f5b716697ef1dd604b67f5a32c76dc3f2a90c73c8d9b5839daffebceb03f548147ec9a18d5036873c6f6d21d3ca8c9bc2f4dd573166a58c
   languageName: node
   linkType: hard
 
@@ -15564,12 +15657,12 @@ __metadata:
   linkType: hard
 
 "decamelize-keys@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "decamelize-keys@npm:1.1.0"
+  version: 1.1.1
+  resolution: "decamelize-keys@npm:1.1.1"
   dependencies:
     decamelize: ^1.1.0
     map-obj: ^1.0.0
-  checksum: 8bc5d32e035a072f5dffc1f1f3d26ca7ab1fb44a9cade34c97ab6cd1e62c81a87e718101e96de07d78cecda20a3fdb955df958e46671ccad01bb8dcf0de2e298
+  checksum: fc645fe20b7bda2680bbf9481a3477257a7f9304b1691036092b97ab04c0ab53e3bf9fcc2d2ae382536568e402ec41fb11e1d4c3836a9abe2d813dd9ef4311e0
   languageName: node
   linkType: hard
 
@@ -18687,6 +18780,17 @@ __metadata:
     jsonfile: ^6.0.1
     universalify: ^2.0.0
   checksum: 5285a3d8f34b917cf2b66af8c231a40c1623626e9d701a20051d3337be16c6d7cac94441c8b3732d47a92a2a027886ca93c69b6a4ae6aee3c89650d2a8880c0a
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:^11.1.1":
+  version: 11.1.1
+  resolution: "fs-extra@npm:11.1.1"
+  dependencies:
+    graceful-fs: ^4.2.0
+    jsonfile: ^6.0.1
+    universalify: ^2.0.0
+  checksum: fb883c68245b2d777fbc1f2082c9efb084eaa2bbf9fddaa366130d196c03608eebef7fb490541276429ee1ca99f317e2d73e96f5ca0999eefedf5a624ae1edfd
   languageName: node
   linkType: hard
 
@@ -22536,9 +22640,9 @@ __metadata:
   linkType: hard
 
 "map-obj@npm:^4.0.0":
-  version: 4.2.1
-  resolution: "map-obj@npm:4.2.1"
-  checksum: 2745227b11ba6e6ddc5927b555a8f317aa33886fcd12806193f3e3c6f201eb24c9cff44bf932b1113a1ba461755a479b22439d0d670380330325164ed0e99547
+  version: 4.3.0
+  resolution: "map-obj@npm:4.3.0"
+  checksum: fbc554934d1a27a1910e842bc87b177b1a556609dd803747c85ece420692380827c6ae94a95cce4407c054fa0964be3bf8226f7f2cb2e9eeee432c7c1985684e
   languageName: node
   linkType: hard
 
@@ -31585,16 +31689,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.0.0":
-  version: 4.9.5
-  resolution: "typescript@npm:4.9.5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: ee000bc26848147ad423b581bd250075662a354d84f0e06eb76d3b892328d8d4440b7487b5a83e851b12b255f55d71835b008a66cbf8f255a11e4400159237db
-  languageName: node
-  linkType: hard
-
 "typescript@npm:^4.3.5":
   version: 4.4.4
   resolution: "typescript@npm:4.4.4"
@@ -31622,16 +31716,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: dc7141ab555b23a8650a6787f98845fc11692063d02b75ff49433091b3af2fe3d773650dea18389d7c21f47d620fb3b110ea363dab4ab039417a6ccbbaf96fc2
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^4.0.0#~builtin<compat/typescript>":
-  version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=ddd1e8"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 2eee5c37cad4390385db5db5a8e81470e42e8f1401b0358d7390095d6f681b410f2c4a0c496c6ff9ebd775423c7785cdace7bcdad76c7bee283df3d9718c0f20
   languageName: node
   linkType: hard
 

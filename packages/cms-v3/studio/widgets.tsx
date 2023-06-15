@@ -43,6 +43,6 @@ export const widgets = dashboardWidgets.map(({ name, title, query, countQuery, c
   return {
     name: name,
     component: () => <DashboardDocumentListWidget key={index} title={title} query={query} createButtonText={createButtonText} types={types} countQuery={countQuery} />,
-    layout: { width: index === dashboardWidgets.length - 1 ? 'full' : 'large' },
+    layout: { width: 'large' },
   };
 });
