@@ -3,8 +3,6 @@
   "type": "object",
   "title": "nl",
   "required": [
-    "behavior",
-    "behavior_annotations",
     "booster_shot_administered_archived_20220904",
     "repeating_shot_administered",
     "booster_coverage_archived_20220904",
@@ -147,18 +145,6 @@
     },
     "disability_care_archived_20230126": {
       "$ref": "disability_care_archived_20230126.json"
-    },
-    "behavior": {
-      "$ref": "behavior.json"
-    },
-    "behavior_per_age_group": {
-      "$ref": "behavior_per_age_group.json"
-    },
-    "behavior_get_tested_support_per_age_group": {
-      "$ref": "behavior_get_tested_support_per_age_group.json"
-    },
-    "behavior_annotations": {
-      "$ref": "behavior_annotations.json"
     },
     "deceased_rivm_archived_20221231": {
       "$ref": "deceased_rivm_archived_20221231.json"

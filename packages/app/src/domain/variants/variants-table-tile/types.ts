@@ -1,4 +1,4 @@
-import { SiteText } from '~/locale';
+export type VariantDynamicLabels = Record<string, string>;
 
 export type TableText = {
   anderen_tooltip: string;
@@ -13,7 +13,7 @@ export type TableText = {
     vorige_meting: string;
   };
   verschil: { gelijk: string; meer: string; minder: string };
-  variantCodes: SiteText['common']['variant_codes'];
+  variantCodes: VariantDynamicLabels;
   description: string;
   geen_percentage_cijfer: string;
   geen_percentage_cijfer_tooltip: string;

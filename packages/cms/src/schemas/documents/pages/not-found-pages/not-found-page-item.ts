@@ -22,6 +22,7 @@ export const notFoundPageItem = {
           { value: 'nl', title: 'Landelijk' },
           { value: 'gm', title: 'Gemeente' },
           { value: 'article', title: 'Artikelen' },
+          { value: 'dataExplained', title: 'Cijferverantwoording' },
         ],
         layout: 'dropdown',
       },
