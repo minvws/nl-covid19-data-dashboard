@@ -1,5 +1,4 @@
 import { defineField, defineType } from 'sanity';
-import { RichContentInput } from '../../components/rich-content-input';
 import { supportedLanguages } from '../../studio/i18n';
 import { richContentFields } from '../fields/rich-content-fields';
 
@@ -21,9 +20,6 @@ export const block = defineType({
       name: id,
       type: 'array',
       of: richContentFields,
-      components: {
-        input: RichContentInput,
-      },
     })
   ),
 });

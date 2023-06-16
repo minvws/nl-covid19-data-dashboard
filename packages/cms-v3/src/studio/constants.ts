@@ -69,7 +69,6 @@ export const titleByElementType: Record<string, string> = {
   timeSeries: 'Grafiek',
 };
 
-// TODO: see if this can be imported from packages/app/src/components/severity-indicator-tile/constants.ts
 export const SEVERITY_LEVELS_LIST = [1, 2, 3, 4];
 export const thermometerLevelPreviewMedia = [Bs1Circle, Bs2Circle, Bs3Circle, Bs4Circle];
 
