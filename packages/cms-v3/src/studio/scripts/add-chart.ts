@@ -2,8 +2,8 @@ import { DataScopeKey } from '@corona-dashboard/common';
 import { snakeCase } from 'change-case';
 import prompts from 'prompts';
 import { isDefined } from 'ts-is-present';
-import { client } from '../../studio/client';
-import { onState } from '../../studio/utils/abort-process';
+import { client } from '../client';
+import { onState } from '../utils/abort-process';
 import { getSchemaMetricProperties } from '../utils/get-schema-metric-properties';
 import { getSchemaMetrics } from '../utils/get-schema-metrics';
 

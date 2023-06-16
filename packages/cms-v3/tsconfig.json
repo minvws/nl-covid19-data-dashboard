@@ -7,12 +7,10 @@
   "compilerOptions": {
     "module": "ESNext",
     "esModuleInterop": true,
-    // TODO: Paths are not working out at the moment. Consider moving everything into SRC so that it works with the paths from common config.
-    // "baseUrl": ".",
-    // "paths": {
-    //   "~/*": ["./*"]
-    //   // "studio": ["./studio/*"]
-    // }
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
     "types": ["node", "vite/client"]
   },
   "include": ["**/*.ts", "**/*.tsx"]
