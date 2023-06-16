@@ -1,36 +1,40 @@
 import { defineField, defineType } from 'sanity';
 
+export const SHARED_TREND_ICON_FIELDS = [
+  defineField({
+    title: 'Kleur',
+    name: 'color',
+    type: 'string',
+    options: {
+      list: [
+        { value: 'RED', title: 'Rood' },
+        { value: 'GREEN', title: 'Groen' },
+      ],
+      layout: 'dropdown',
+    },
+    validation: (rule) => rule.required(),
+  }),
+  defineField({
+    title: 'Richting',
+    name: 'direction',
+    type: 'string',
+    options: {
+      list: [
+        { value: 'UP', title: 'Omhoog' },
+        { value: 'DOWN', title: 'Omlaag' },
+      ],
+      layout: 'dropdown',
+    },
+    validation: (rule) => rule.required(),
+  }),
+];
+
 export const trendIcon = defineType({
   name: 'trendIcon',
   type: 'document',
   title: 'Trend icon',
   fields: [
-    defineField({
-      title: 'Kleur',
-      name: 'color',
-      type: 'string',
-      options: {
-        list: [
-          { value: 'RED', title: 'Rood' },
-          { value: 'GREEN', title: 'Groen' },
-        ],
-        layout: 'dropdown',
-      },
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      title: 'Richting',
-      name: 'direction',
-      type: 'string',
-      options: {
-        list: [
-          { value: 'UP', title: 'Omhoog' },
-          { value: 'DOWN', title: 'Omlaag' },
-        ],
-        layout: 'dropdown',
-      },
-      validation: (rule) => rule.required(),
-    }),
+    ...SHARED_TREND_ICON_FIELDS,
     defineField({
       title: 'Intensiteit',
       name: 'intensity',

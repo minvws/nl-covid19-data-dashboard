@@ -3,7 +3,6 @@ import { IconInput } from '../../../../components/icon-input';
 import { SEVERITY_LEVELS_LIST } from '../../../../studio/constants';
 import { localeStringValidation } from '../../../../studio/validation/locale-validation';
 
-// TODO: should we remove this?
 export const thermometer = defineType({
   type: 'object',
   title: 'Thermometer',
@@ -111,13 +110,13 @@ export const thermometer = defineType({
       type: 'localeString',
       validation: localeStringValidation((rule) => rule.required()),
     }),
-    // TODO: figure out if this is still necessary as I don't think it is used anymore?
-    // defineField({
-    //   title: 'Titel van standen informatie',
-    //   name: 'trendIcon',
-    //   type: 'trendIcon',
-    //   fieldset: 'level-information',
-    // }),
+    // TODO: convert this to a single icon
+    defineField({
+      title: 'Titel van standen informatie',
+      name: 'trendIcon',
+      type: 'thermometerTrendIcon',
+      fieldset: 'level-information',
+    }),
     defineField({
       title: 'Tijdlijn',
       name: 'timeline',

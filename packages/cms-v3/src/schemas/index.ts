@@ -26,6 +26,7 @@ import { thermometer } from './documents/pages/homepage/thermometer';
 import { thermometerLevel } from './documents/pages/homepage/thermometer-level';
 import { thermometerTimeline } from './documents/pages/homepage/thermometer-timeline';
 import { thermometerTimelineEvent } from './documents/pages/homepage/thermometer-timeline-event';
+import { thermometerTrendIcon } from './documents/pages/homepage/thermometer-trend-icon';
 import { notFound } from './documents/pages/not-found';
 import { notFoundItem } from './documents/pages/not-found/item';
 import { notFoundLink } from './documents/pages/not-found/link';
@@ -50,22 +51,23 @@ const documentSchemas = [
   dataExplainedItem,
   faqGroups,
   faqItem,
-  summary,
-  summaryItem,
-  theme,
-  themeLink,
-  themeTile,
-  themeTileConfig,
-  themeCollection,
-  thermometer,
-  thermometerLevel,
-  thermometerTimeline,
-  thermometerTimelineEvent,
-  trendIcon,
   lokalizeText,
   notFoundItem,
   notFoundLink,
   pageIdentifier,
+  summary,
+  summaryItem,
+  theme,
+  themeCollection,
+  themeLink,
+  themeTile,
+  themeTileConfig,
+  thermometer,
+  thermometerLevel,
+  thermometerTimeline,
+  thermometerTimelineEvent,
+  thermometerTrendIcon,
+  trendIcon,
 ];
 const pageSchemas = [about, accessibility, contact, dataExplained, faq, homepage, notFound];
 const pagePartSchemas = [articles, highlights, links];
