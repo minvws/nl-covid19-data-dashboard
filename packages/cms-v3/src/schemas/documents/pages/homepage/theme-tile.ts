@@ -3,6 +3,7 @@ import { defineField, defineType } from 'sanity';
 import { IconInput } from '../../../../components/icon-input';
 import { supportedLanguages } from '../../../../studio/i18n';
 import { localeStringValidation, localeValidation } from '../../../../studio/validation/locale-validation';
+import { ThemeTileDate } from '../../../../components/topical-theme-tile-date/theme-tile-date';
 
 export const themeTile = defineType({
   type: 'document',
@@ -71,15 +72,17 @@ export const themeTile = defineType({
       description: 'Deze velden krijgen hun input van de tegeldatum-configuratie. Om de configuratie te resetten kunnen deze velden leeg gemaakt worden.',
       name: 'tileDate',
       type: 'object',
-      fields: supportedLanguages.map(({ title, id }) => ({
-        title,
-        name: id,
-        type: 'string',
-        // TODO: make this work
-        // components: {
-        //   input: TopicalTileDate
-        // }
-      })),
+      fields: supportedLanguages.map(({ title, id }) =>
+        defineField({
+          title,
+          name: id,
+          type: 'string',
+          description: 'Het resultaat van de tegeldatum-configuratie is:',
+          components: {
+            input: ThemeTileDate,
+          },
+        })
+      ),
     }),
     defineField({
       title: 'Configuratie velden',

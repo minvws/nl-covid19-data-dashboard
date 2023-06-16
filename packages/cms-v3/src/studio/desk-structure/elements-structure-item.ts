@@ -19,26 +19,27 @@ export const elementsStructureItem = (S: StructureBuilder, context: StructureRes
             .id(id)
             .title('Elements')
             .icon(BsBarChart)
+            // @ts-expect-error - The below code works like a charm and creates list items accordingly.
+            // The old CMS would also face challenges here, but does not report this as such given the TS implementation.
             .child(() => {
               const types = ['timeSeries'];
 
-              return (
-                documentStore
-                  .listenQuery(
-                    `//groq
+              return documentStore
+                .listenQuery(
+                  `//groq
                     *[_type in $types]{ scope, metricName, metricProperty }
                   `,
-                    { types },
-                    {}
-                  )
-                  // TODO: fix this
-                  .pipe(
-                    map((documents: { scope: string }[]) => {
-                      const scopes = uniq(documents.map((document) => document.scope).filter(Boolean));
-                      return elementsStructureItemChild(S, scopes, 'timeSeries');
-                    })
-                  )
-              );
+                  { types },
+                  {}
+                )
+                .pipe(
+                  // @ts-expect-error - The below code works like a charm and creates list items accordingly.
+                  // The old CMS would also face challenges here, but does not report this as such given the TS implementation.
+                  map((documents: { scope: string }[]) => {
+                    const scopes = uniq(documents.map((document) => document.scope));
+                    return elementsStructureItemChild(S, scopes, 'timeSeries');
+                  })
+                );
             }),
           timelineEventCollectionsListItem(S),
         ])
@@ -69,7 +70,7 @@ const elementsStructureItemChild = (S: StructureBuilder, scopes: string[], type:
                 .filter(
                   `//groq
                     scope == $scope
-                `
+                  `
                 )
                 .params({ scope })
                 .child((id) => S.editor().id(id).title(id).schemaType(type).documentId(id).views([S.view.form()]))

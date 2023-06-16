@@ -1,5 +1,4 @@
 import { colors } from '@corona-dashboard/common';
-// TODO: Figure out why these imports are redlining.
 import * as allIcons from '@corona-dashboard/icons';
 import { iconName2filename } from '@corona-dashboard/icons';
 import { Box, Button, Dialog, Flex, Grid, Radio, Stack, Text, TextInput } from '@sanity/ui';

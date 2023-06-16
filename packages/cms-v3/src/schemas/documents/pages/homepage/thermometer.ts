@@ -110,7 +110,6 @@ export const thermometer = defineType({
       type: 'localeString',
       validation: localeStringValidation((rule) => rule.required()),
     }),
-    // TODO: convert this to a single icon
     defineField({
       title: 'Titel van standen informatie',
       name: 'trendIcon',

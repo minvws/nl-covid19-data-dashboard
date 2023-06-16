@@ -6,29 +6,35 @@ import { StructureBuilder, StructureResolverContext } from 'sanity/desk';
 export const lokalizeStructureItem = (S: StructureBuilder, context: StructureResolverContext) => {
   const { documentStore } = context;
 
-  return S.listItem()
-    .id('lokalize')
-    .title('Lokalize')
-    .icon(BsTranslate)
-    .child(() => {
-      const type = 'lokalizeText';
+  return (
+    S.listItem()
+      .id('lokalize')
+      .title('Lokalize')
+      .icon(BsTranslate)
+      // @ts-expect-error - The below code works like a charm and creates list items accordingly.
+      // The old CMS would also face challenges here, but does not report this as such given the TS implementation.
+      .child(() => {
+        const type = 'lokalizeText';
 
-      return documentStore
-        .listenQuery(
-          `//groq
+        return documentStore
+          .listenQuery(
+            `//groq
             *[_type == $type]{ subject }
           `,
-          { type },
-          {}
-        )
-        .pipe(
-          map((documents: { subject: string }[]) => {
-            const subjects = uniq(documents.map((document) => document.subject).filter(Boolean));
+            { type },
+            {}
+          )
+          .pipe(
+            // @ts-expect-error - The below code works like a charm and creates list items accordingly.
+            // The old CMS would also face challenges here, but does not report this as such given the TS implementation.
+            map((documents: { subject: string }[]) => {
+              const subjects = uniq(documents.map((document) => document.subject).filter(Boolean));
 
-            return lokalizeStructureItemChild(S, subjects, type);
-          })
-        );
-    });
+              return lokalizeStructureItemChild(S, subjects, type);
+            })
+          );
+      })
+  );
 };
 
 const lokalizeStructureItemChild = (S: StructureBuilder, subjects: string[], type: string) => {

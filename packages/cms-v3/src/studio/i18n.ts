@@ -2,5 +2,5 @@ import { Language } from '@sanity/language-filter';
 
 export const supportedLanguages: Language[] = [
   { id: 'nl', title: 'Nederlands' },
-  { id: 'en', title: 'English' },
+  { id: 'en', title: 'Engels' },
 ];
