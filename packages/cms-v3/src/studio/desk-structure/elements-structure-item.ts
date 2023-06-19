@@ -36,7 +36,7 @@ export const elementsStructureItem = (S: StructureBuilder, context: StructureRes
                   // @ts-expect-error - The below code works like a charm and creates list items accordingly.
                   // The old CMS would also face challenges here, but does not report this as such given the TS implementation.
                   map((documents: { scope: string }[]) => {
-                    const scopes = uniq(documents.map((document) => document.scope));
+                    const scopes = uniq(documents.map((document) => document.scope).filter(Boolean));
                     return elementsStructureItemChild(S, scopes, 'timeSeries');
                   })
                 );
