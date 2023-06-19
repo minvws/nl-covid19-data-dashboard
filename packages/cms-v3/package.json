@@ -52,7 +52,7 @@
     "@types/flat": "^5.0.2",
     "@types/fs-extra": "^11",
     "@types/prompts": "2.0.14",
-    "@types/react": "^18.0.25",
+    "@types/react": "17.0.43",
     "@types/styled-components": "^5.1.26",
     "eslint": "^8.6.0",
     "fast-csv": "^4.3.6",

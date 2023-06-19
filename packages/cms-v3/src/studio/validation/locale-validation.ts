@@ -2,6 +2,13 @@ import { Rule, ValidationContext } from 'sanity';
 
 type GetRule = (fieldRule: Rule, language: 'nl' | 'en') => Rule;
 
+interface LocaleStringValidationContextParent {
+  _type: string;
+}
+
+const isLocaleStringValidationContextParent = (parent: unknown): parent is LocaleStringValidationContextParent =>
+  typeof parent === 'object' && parent !== null && '_type' in parent;
+
 export const localeValidation = (getRule: GetRule) => {
   return (rule: Rule) =>
     rule.fields({
@@ -29,7 +36,10 @@ export const localeStringValidation = (getRule: GetRule) => {
         const parent = context.parent;
         if (!parent) return true;
 
-        if (typeof parent === 'object' && parent !== null && '_type' in parent && parent._type !== 'localeString') {
+        const isParent = isLocaleStringValidationContextParent(parent);
+        if (!isParent) return true;
+
+        if (parent._type !== 'localeString') {
           return `Cannot apply localeStringValidation on document type ${parent._type}. Please use the localeValidation or write a custom validation without locale wrapper.`;
         }
 

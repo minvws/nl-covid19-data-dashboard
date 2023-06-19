@@ -1,7 +1,7 @@
+import { createClient } from '@sanity/client';
 import chalk from 'chalk';
 import meow from 'meow';
 import prompts from 'prompts';
-import { SanityClient } from 'sanity';
 import { client } from '../../studio/client';
 import { onState } from '../../studio/utils/abort-process';
 import { createLokalizeTextDocument } from '../utils/create-lokalize-text-document';
@@ -32,7 +32,7 @@ const cli = meow(cliCommand, {
   },
 });
 
-const generateTerminalPrompt = async (name: string, message: string, client?: SanityClient) => {
+const generateTerminalPrompt = async (name: string, message: string, client?: ReturnType<typeof createClient>) => {
   const prompt = await prompts({
     type: 'text',
     name: name,
