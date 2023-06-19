@@ -12,7 +12,7 @@ import { getLocaleFlatTexts } from './get-locale-files';
 
 const { sortBy } = lodash;
 
-const __dirname = getDirectoryName();
+const __dirname = getDirectoryName(import.meta.url);
 const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');
 
 /**
