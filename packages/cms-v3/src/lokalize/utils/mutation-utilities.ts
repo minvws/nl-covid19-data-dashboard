@@ -9,6 +9,7 @@ import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { client } from '../../studio/client';
 import { getDirectoryName } from '../../studio/utils/get-directory-name';
 import { getLocaleFlatTexts } from './get-locale-files';
+import { initialiseEnvironmentVariables } from './initialise-environment-variables';
 
 const { sortBy } = lodash;
 
@@ -304,7 +305,8 @@ function parseKeyWithId(keyWithId: string) {
  * the original document to set it to the new moveTo key.
  */
 export const finalizeMoveMutations = async (dataset: 'development' | 'production', moves: MoveMutation[]) => {
-  const sanityClient = client.withConfig({ dataset });
+  await initialiseEnvironmentVariables();
+  const sanityClient = client.withConfig({ dataset, token: process.env.SANITY_API_TOKEN });
   const transaction = sanityClient.transaction();
 
   for (const { document_id, move_to } of moves) {

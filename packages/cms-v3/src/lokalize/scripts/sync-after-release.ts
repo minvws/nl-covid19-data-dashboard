@@ -27,13 +27,13 @@ import prompts from 'prompts';
 import { client } from '../../studio/client';
 import { clearMutationsLogFile, finalizeMoveMutations, getCollapsedMoveMutations, readTextMutations } from '../utils/mutation-utilities';
 import { lokalizeDocumentsWithoutDrafts } from '../utils/queries';
-
-const developmentClient = client.withConfig({ dataset: 'development' });
-const productionClient = client.withConfig({ dataset: 'production' });
+import { initialiseEnvironmentVariables } from '../utils/initialise-environment-variables';
 
 const { difference } = lodash;
 
 const syncMissingTextsToPrd = async (allDevelopmentTexts: LokalizeText[], allProductionTexts: LokalizeText[]) => {
+  await initialiseEnvironmentVariables();
+  const productionClient = client.withConfig({ dataset: 'production', token: process.env.SANITY_API_TOKEN });
   const allDevelopmentKeys = allDevelopmentTexts.map((developmentText) => developmentText.key);
   const allProductionKeys = allProductionTexts.map((productionText) => productionText.key);
   /**
@@ -86,6 +86,8 @@ const syncMissingTextsToPrd = async (allDevelopmentTexts: LokalizeText[], allPro
 };
 
 const syncDeletionsToProd = async (allDevelopmentTexts: LokalizeText[], allProductionTexts: LokalizeText[]) => {
+  await initialiseEnvironmentVariables();
+  const productionClient = client.withConfig({ dataset: 'production', token: process.env.SANITY_API_TOKEN });
   const allDevelopmentKeys = allDevelopmentTexts.map((developmentText) => developmentText.key);
   const allProductionKeys = allProductionTexts.map((productionText) => productionText.key);
 
@@ -130,6 +132,11 @@ const syncDeletionsToProd = async (allDevelopmentTexts: LokalizeText[], allProdu
   ]);
 
   if (!confirmScriptPrompt.isConfirmed) process.exit(0);
+
+  await initialiseEnvironmentVariables();
+
+  const developmentClient = client.withConfig({ dataset: 'development', token: process.env.SANITY_API_TOKEN });
+  const productionClient = client.withConfig({ dataset: 'production', token: process.env.SANITY_API_TOKEN });
 
   const mutations = await readTextMutations();
   const moveMutations = getCollapsedMoveMutations(mutations);

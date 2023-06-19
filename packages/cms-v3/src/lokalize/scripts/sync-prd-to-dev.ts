@@ -4,10 +4,9 @@ import { outdent } from 'outdent';
 import prompts from 'prompts';
 import { client } from '../../studio/client';
 import { lokalizeDocumentsWithoutDrafts } from '../utils/queries';
+import { initialiseEnvironmentVariables } from '../utils/initialise-environment-variables';
 
 const { chunk } = lodash;
-const developmentClient = client.withConfig({ dataset: 'development' });
-const productionClient = client.withConfig({ dataset: 'production' });
 
 /**
  * This script takes all the existing published texts from production and
@@ -33,9 +32,13 @@ const productionClient = client.withConfig({ dataset: 'production' });
 
   if (!response.isConfirmed) process.exit(0);
 
-  const productionDocuments = (await productionClient.fetch(lokalizeDocumentsWithoutDrafts)) as LokalizeText[];
+  await initialiseEnvironmentVariables();
+
+  const developmentClient = client.withConfig({ dataset: 'development', token: process.env.SANITY_API_TOKEN });
+  const productionClient = client.withConfig({ dataset: 'production', token: process.env.SANITY_API_TOKEN });
 
   const developmentDocuments = (await developmentClient.fetch(lokalizeDocumentsWithoutDrafts)) as LokalizeText[];
+  const productionDocuments = (await productionClient.fetch(lokalizeDocumentsWithoutDrafts)) as LokalizeText[];
 
   const developmentDocumentIds = developmentDocuments.map((document) => document._id);
   const transaction = developmentClient.transaction();

@@ -6,6 +6,7 @@ import { onState } from '../../studio/utils/abort-process';
 import { createLokalizeTextDocument } from '../utils/create-lokalize-text-document';
 import { getLocaleReferenceTexts } from '../utils/get-locale-files';
 import { importLokalizeTexts } from '../utils/import-lokalize-texts';
+import { initialiseEnvironmentVariables } from '../utils/initialise-environment-variables';
 import { appendTextMutation, getLocalMutations } from '../utils/mutation-utilities';
 
 /**
@@ -15,6 +16,7 @@ import { appendTextMutation, getLocalMutations } from '../utils/mutation-utiliti
  * log file and possibly adding new documents to Sanity.
  */
 (async function applyJsonEdits() {
+  await initialiseEnvironmentVariables();
   const referenceTexts = await getLocaleReferenceTexts();
 
   assert(referenceTexts, 'Failed to read reference texts. Please run lokalize:import first.');
@@ -57,7 +59,7 @@ import { appendTextMutation, getLocalMutations } from '../utils/mutation-utiliti
 
   if (!response.keys.length) return console.log('\nNo mutations selected\n');
 
-  const devClient = client.withConfig({ dataset: 'development' });
+  const devClient = client.withConfig({ dataset: 'development', token: process.env.SANITY_API_TOKEN });
 
   for (const choice of response.keys) {
     if (choice.type === 'delete') {
@@ -78,7 +80,9 @@ import { appendTextMutation, getLocalMutations } from '../utils/mutation-utiliti
        *
        * If a document with the given key already exists we log a warning.
        */
-      const count = await devClient.fetch(`count(*[_type == 'lokalizeText' && key == '${key}'])`);
+      const count = await devClient.fetch(`//groq
+        count(*[_type == 'lokalizeText' && key == '${key}'])
+      `);
 
       if (count === 0) {
         const document = await devClient.create(createLokalizeTextDocument(key, text));

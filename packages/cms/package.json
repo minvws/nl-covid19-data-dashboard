@@ -7,7 +7,7 @@
     "clean": "npx rimraf dist .sanity-asset-cache .lokalize-reference",
     "nuke": "yarn clean && npx rimraf node_modules",
     "dev": "yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/cli generate-data-structures && sanity start",
-    "build": "sanity build",
+    "build": "yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/cli generate-data-structures && sanity build",
     "deploy": "yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/cli generate-data-structures && sanity deploy",
     "test": "echo 'Sanity check is deprecated \n@TODO add sanity test script'",
     "test:ci": "echo 'Sanity check is deprecated \n@TODO add sanity test ci script'",

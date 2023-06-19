@@ -4015,6 +4015,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@corona-dashboard/cms-scripts@workspace:packages/cms-scripts":
+  version: 0.0.0-use.local
+  resolution: "@corona-dashboard/cms-scripts@workspace:packages/cms-scripts"
+  languageName: unknown
+  linkType: soft
+
 "@corona-dashboard/cms-v3@workspace:packages/cms-v3":
   version: 0.0.0-use.local
   resolution: "@corona-dashboard/cms-v3@workspace:packages/cms-v3"
@@ -4026,12 +4032,14 @@ __metadata:
     "@sanity/types": ^3.12.1
     "@sanity/ui": ^1.3.2
     "@sanity/vision": ^3.12.1
+    "@types/dotenv-flow": ^3
     "@types/flat": ^5.0.2
     "@types/fs-extra": ^11
     "@types/prompts": 2.0.14
     "@types/react": 17.0.43
     "@types/styled-components": ^5.1.26
     change-case: ^4.1.2
+    dotenv-flow: ^3.2.0
     eslint: ^8.6.0
     fast-csv: ^4.3.6
     flat: ^5.0.2
@@ -9614,6 +9622,13 @@ __metadata:
   version: 1.0.32
   resolution: "@types/diff-match-patch@npm:1.0.32"
   checksum: 8431ab2bf2f0e96ece30beddeae3bc8024429bd6071f1ab695c3f64112b2551446fc4a746a44a7a7d14e47ffce622333286c1c78869cfb510c775a9e8c47a1b1
+  languageName: node
+  linkType: hard
+
+"@types/dotenv-flow@npm:^3":
+  version: 3.2.0
+  resolution: "@types/dotenv-flow@npm:3.2.0"
+  checksum: ff11155349578fe76f0b69556f3e22e13115b17a7684cef1dec9f5d7fdaa1bfc1848b1337e3d08093687a3e372cf1b4b0fd0c9900a2db62031a3ee02ffabe3e6
   languageName: node
   linkType: hard
 

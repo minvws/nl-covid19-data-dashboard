@@ -5,6 +5,8 @@ import prompts from 'prompts';
 import { client } from '../../studio/client';
 import { onState } from '../../studio/utils/abort-process';
 import { createLokalizeTextDocument } from '../utils/create-lokalize-text-document';
+import { initialiseEnvironmentVariables } from '../utils/initialise-environment-variables';
+
 /**
  * This script allows a developer to manually add a lokalize document to Sanity (either to the development or production dataset)
  * Usually this script shouldn't be required to be used, because all mutations to the lokalize documents should ideally be
@@ -62,8 +64,10 @@ const generateTerminalPrompt = async (name: string, message: string, client?: Re
 };
 
 (async function run() {
+  await initialiseEnvironmentVariables();
   const dataset = cli.flags.dataset;
-  const sanityClient = client.withConfig({ dataset });
+
+  const sanityClient = client.withConfig({ dataset, token: process.env.SANITY_API_TOKEN });
 
   const newKeyPrompt = await generateTerminalPrompt('newKey', 'Specify the name of the new key', sanityClient);
   const newValuePromptNL = await generateTerminalPrompt('newValue', 'Specify a value in Dutch for the new key');
@@ -76,7 +80,7 @@ const generateTerminalPrompt = async (name: string, message: string, client?: Re
     New lokalize document with key '${newKeyPrompt.newKey}' and values of '${newValuePromptNL.newValue}' and '${newValuePromptEN.newValue}' was created.
   `)
   );
-})().catch((err) => {
-  console.error(chalk.red('An error occurred:'), err.message);
+})().catch((error) => {
+  console.error(chalk.red('An error occurred:'), error.message);
   process.exit(1);
 });
