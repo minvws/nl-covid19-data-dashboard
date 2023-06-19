@@ -4015,12 +4015,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@corona-dashboard/cms-scripts@workspace:packages/cms-scripts":
-  version: 0.0.0-use.local
-  resolution: "@corona-dashboard/cms-scripts@workspace:packages/cms-scripts"
-  languageName: unknown
-  linkType: soft
-
 "@corona-dashboard/cms-v3@workspace:packages/cms-v3":
   version: 0.0.0-use.local
   resolution: "@corona-dashboard/cms-v3@workspace:packages/cms-v3"
