@@ -7,11 +7,6 @@
   "compilerOptions": {
     "module": "ESNext",
     "esModuleInterop": true,
-    // TODO: Why don't these paths work?
-    // "baseUrl": ".",
-    // "paths": {
-    //   "~/*": ["src/*"]
-    // },
     "types": ["node", "vite/client"]
   },
   "include": ["**/*.ts", "**/*.tsx"]

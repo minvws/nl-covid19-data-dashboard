@@ -1,6 +1,5 @@
 import { createFormatting } from '@corona-dashboard/common';
 
-// TODO: Migrate.
 export interface ThemeTileDateConfig {
   weekOffset: number;
   startDayOfDate: 0 | 1 | 2 | 3 | 4 | 5 | 6;

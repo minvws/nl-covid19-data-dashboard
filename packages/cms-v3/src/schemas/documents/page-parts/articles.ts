@@ -29,7 +29,6 @@ export const articles = defineType({
       type: 'number',
       hidden: ({ currentUser }) => !isAdmin(currentUser),
       fieldset: 'articleConfiguration',
-      validation: (rule) => rule.min(0),
     }),
     defineField({
       title: 'Maximum aantal artikelen',
@@ -37,7 +36,6 @@ export const articles = defineType({
       type: 'number',
       hidden: ({ currentUser }) => !isAdmin(currentUser),
       fieldset: 'articleConfiguration',
-      validation: (rule) => rule.min(0),
     }),
     defineField({
       title: 'Artikelen',
