@@ -29,7 +29,7 @@ const skippedProperties = ['code', 'vrcode', 'gmcode', 'country_code', 'date_uni
   const code = generateCodeStructure(schemas);
 
   // TODO (COR-1491): change this once CMS V2 has been omitted.
-  fs.writeFileSync(path.join(process.cwd(), '../cms-v3/src/studio/data/data-structure.ts'), code, {
+  fs.writeFileSync(path.join(process.cwd(), '../cms/src/studio/data/data-structure.ts'), code, {
     encoding: 'utf-8',
   });
 })();

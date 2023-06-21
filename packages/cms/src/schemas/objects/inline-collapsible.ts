@@ -1,26 +1,26 @@
-import { Rule } from '~/sanity';
+import { defineField, defineType } from 'sanity';
 
-export const inlineCollapsible = {
+export const inlineCollapsible = defineType({
   title: 'Inklapbare titel en inhoud',
   name: 'inlineCollapsible',
   type: 'object',
   fields: [
-    {
+    defineField({
       name: 'title',
       type: 'string',
       title: 'Titel',
-      validation: (rule: Rule) => rule.required(),
-    },
-    {
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'content',
       type: 'inlineBlock',
       title: 'Inhoud',
-      validation: (rule: Rule) => rule.required(),
-    },
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: {
       title: 'title',
     },
   },
-};
+});

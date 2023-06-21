@@ -40,7 +40,7 @@
       "packages/common",
       "packages/icons",
       "packages/cms",
-      "packages/cms-v3"
+      "packages/cms-v2"
     ]
   },
   "packageManager": "yarn@3.1.0",

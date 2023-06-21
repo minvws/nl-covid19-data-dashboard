@@ -1,17 +1,15 @@
-import { Rule } from '~/sanity';
-import {
-  localeStringValidation,
-  localeValidation,
-} from '../../language/locale-validation';
+import { defineArrayMember, defineField } from 'sanity';
+import { localeStringValidation, localeValidation } from '../../studio/validation/locale-validation';
+import { DATE_FORMAT, TIME_FORMAT } from '../../studio/constants';
 
 export const ARTICLE_FIELDS = [
-  {
+  defineField({
     title: 'Titel',
     name: 'title',
     type: 'localeString',
     validation: localeStringValidation((rule) => rule.required()),
-  },
-  {
+  }),
+  defineField({
     title: 'Slug',
     name: 'slug',
     type: 'slug',
@@ -19,38 +17,37 @@ export const ARTICLE_FIELDS = [
       source: 'title.nl',
     },
     fieldset: 'metadata',
-    validation: (rule: Rule) => rule.required(),
-  },
-  {
+    validation: (rule) => rule.required(),
+  }),
+  defineField({
     title: 'Meta description',
     name: 'metaDescription',
     type: 'localeString',
     fieldset: 'metadata',
     validation: localeStringValidation((rule) => rule.required()),
-  },
-  {
+  }),
+  defineField({
     title: 'Publicatie datum',
     name: 'publicationDate',
     type: 'datetime',
     options: {
-      dateFormat: 'YYYY-MM-DD',
-      timeFormat: 'HH:mm',
+      dateFormat: DATE_FORMAT,
+      timeFormat: TIME_FORMAT,
       timeStep: 15,
-      calendarTodayLabel: 'Today',
     },
     fieldset: 'metadata',
-    validation: (rule: Rule) => rule.required(),
-  },
-  {
+    validation: (rule) => rule.required(),
+  }),
+  defineField({
     title: 'Categorieën instellen',
     name: 'categories',
     type: 'array',
-    of: [{ type: 'string' }],
+    of: [defineArrayMember({ type: 'string' })],
     options: {
       layout: 'grid',
       list: [
         { title: 'Vaccinaties', value: 'vaccinaties' },
-        { title: 'besmettingen', value: 'besmettingen' },
+        { title: 'Besmettingen', value: 'besmettingen' },
         { title: 'Sterfte', value: 'sterfte' },
         { title: 'Ziekenhuizen', value: 'ziekenhuizen' },
         { title: 'Kwetsbare groepen', value: 'kwetsbare_groepen' },
@@ -58,23 +55,22 @@ export const ARTICLE_FIELDS = [
         { title: 'Gedrag', value: 'gedrag' },
       ],
     },
-    validation: (rule: Rule) => rule.required().min(1),
-  },
-  {
+    validation: (rule) => rule.required().min(1),
+  }),
+  defineField({
     title: 'Samenvatting',
-    description:
-      'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina. Maximaal 120 karakters toegestaan.',
+    description: 'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina. Maximaal 120 karakters toegestaan.',
     name: 'summary',
     type: 'localeText',
     validation: localeValidation((rule) => rule.required().max(120)),
-  },
-  {
+  }),
+  defineField({
     title: 'Intro',
     name: 'intro',
     type: 'localeBlock',
     validation: localeValidation((rule) => rule.required()),
-  },
-  {
+  }),
+  defineField({
     title: 'Afbeelding',
     name: 'cover',
     type: 'image',
@@ -88,14 +84,14 @@ export const ARTICLE_FIELDS = [
         type: 'localeString',
       },
     ],
-    validation: (rule: Rule) =>
+    validation: (rule) =>
       rule
         .custom((context: any) => {
           return context.asset ? true : 'Image required';
         })
         .required(),
-  },
-  {
+  }),
+  defineField({
     title: 'Afbeelding voor grote schermen',
     name: 'imageDesktop',
     type: 'image',
@@ -107,10 +103,11 @@ export const ARTICLE_FIELDS = [
         title: 'Alternatieve tekst (toegankelijkheid)',
         name: 'alt',
         type: 'localeString',
+        validation: localeStringValidation((rule) => rule.required()),
       },
     ],
-  },
-  {
+  }),
+  defineField({
     title: 'Afbeelding voor kleine schermen',
     name: 'imageMobile',
     type: 'image',
@@ -122,13 +119,14 @@ export const ARTICLE_FIELDS = [
         title: 'Alternatieve tekst (toegankelijkheid)',
         name: 'alt',
         type: 'localeString',
+        validation: localeStringValidation((rule) => rule.required()),
       },
     ],
-  },
-  {
+  }),
+  defineField({
     title: 'Content',
     name: 'content',
     type: 'localeRichContentBlock',
     validation: localeValidation((rule) => rule.required()),
-  },
+  }),
 ];
