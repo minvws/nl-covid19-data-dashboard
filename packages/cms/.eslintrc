@@ -1,0 +1,6 @@
+{
+  "extends": "@sanity/eslint-config-studio",
+  "rules": {
+    "react/no-unescaped-entities": 0
+  }
+}

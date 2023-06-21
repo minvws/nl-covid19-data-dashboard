@@ -1,17 +1,20 @@
-import { Rule } from '~/sanity';
-import { localeStringValidation } from '../../language/locale-validation';
+import { BsLink } from 'react-icons/bs';
+import { defineField, defineType } from 'sanity';
+import { localeStringValidation } from '../../studio/validation/locale-validation';
+import { LocaleString } from '../locale/string';
 
-export const link = {
+export type Link = {
+  title: LocaleString;
+  href: string;
+};
+
+export const link = defineType({
   type: 'object',
   title: 'Een link voorzien van een label',
   name: 'link',
-  preview: {
-    select: {
-      title: 'title.nl',
-    },
-  },
+  icon: BsLink,
   fields: [
-    {
+    defineField({
       title: 'Titel',
       name: 'title',
       type: 'localeString',
@@ -22,12 +25,17 @@ export const link = {
          */
         ignoreLanguageSwitcher: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: 'href',
       type: 'string',
       title: 'Link naar pagina',
-      validation: (rule: Rule) => rule.required(),
-    },
+      validation: (rule) => rule.required(),
+    }),
   ],
-};
+  preview: {
+    select: {
+      title: 'title.nl',
+    },
+  },
+});
