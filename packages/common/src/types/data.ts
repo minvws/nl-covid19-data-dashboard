@@ -346,7 +346,7 @@ export interface GmCollectionSewer {
   date_end_unix: number;
   gmcode: string;
   average: number;
-  total_installation_count: number;
+  total_installation_count?: number;
   date_of_insertion_unix: number;
   data_is_outdated: boolean;
 }
