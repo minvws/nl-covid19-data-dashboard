@@ -38,7 +38,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-selectGmData('difference.sewer__average', 'sewer_per_installation', 'sewer_installation_measurement', 'static_values.population_count_connected_to_rwzis', 'sewer', 'code')
+  selectGmData('difference.sewer__average', 'sewer_per_installation', 'sewer_installation_measurement', 'static_values.population_count_connected_to_rwzis', 'sewer', 'code'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('sewer_page'))(context);
 
