@@ -8,7 +8,6 @@
     "date_end_unix",
     "gmcode",
     "average",
-    "total_installation_count",
     "date_of_insertion_unix",
     "data_is_outdated"
   ],
@@ -25,9 +24,6 @@
     },
     "average": {
       "type": "integer"
-    },
-    "total_installation_count": {
-      "type": "number"
     },
     "date_of_insertion_unix": {
       "type": "integer"

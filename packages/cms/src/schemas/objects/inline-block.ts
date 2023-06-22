@@ -1,15 +1,16 @@
-import { blockFields } from './block-fields';
+import { defineField, defineType } from 'sanity';
+import { richContentFields } from '../fields/rich-content-fields';
 
-export const inlineBlock = {
+export const inlineBlock = defineType({
   name: 'inlineBlock',
   type: 'object',
   title: 'Locale Block Content',
   fields: [
-    {
-      title: 'Text en andere inhoud',
+    defineField({
+      title: 'Tekst en andere inhoud',
       name: 'inlineBlockContent',
       type: 'array',
-      of: blockFields,
-    },
+      of: richContentFields,
+    }),
   ],
-};
+});

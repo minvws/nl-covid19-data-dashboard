@@ -5,10 +5,9 @@ developers that have access to the CMS.
 
 ## Usage
 
-Run `yarn sanity login` and choose the Google option. This retrieves a token
-which is then used to talk to the Sanity API.
+Run `yarn dev` to serve the CMS. This will run the `sanity dev` command. The CMS can be run on an alternate port using `--port XXXX` in which `XXXX` is the port number.
 
-Run `yarn dev` to start serve the CMS.
+Previewing production builds of the CMS are done using `yarn build` and `yarn start` from this directory respectively.
 
 ## Lokalize Texts
 

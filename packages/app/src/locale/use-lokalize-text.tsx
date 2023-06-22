@@ -50,7 +50,7 @@ export function useLokalizeText(initialLocale: LanguageKey) {
 
   useEffect(() => {
     let isCancelled = false;
-    let subscription: Subscription | undefined;
+    let subscription: Pick<Subscription, 'unsubscribe'> | undefined;
 
     function updateSiteText() {
       if (isCancelled) return;
