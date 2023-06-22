@@ -38,7 +38,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData('difference.sewer__average', 'sewer_per_installation', 'static_values.population_count', 'sewer', 'code'),
+  selectGmData('difference.sewer__average', 'sewer_per_installation', 'sewer_installation_measurement', 'static_values.population_count', 'sewer', 'code'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('sewer_page'))(context);
 
@@ -57,6 +57,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const sewerAverages = data.sewer;
+  const sewerInstallationMeasurement = data.sewer_installation_measurement;
   const populationCount = data.static_values.population_count;
 
   if (!sewerAverages) {
@@ -136,15 +137,15 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title={textGm.total_measurements_title}
               description={textGm.total_measurements_description}
               metadata={{
-                date: [sewerAverages.last_value.date_start_unix, sewerAverages.last_value.date_end_unix],
+                date: [sewerInstallationMeasurement.date_start_unix, sewerInstallationMeasurement.date_end_unix],
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue absolute={sewerAverages.last_value.total_number_of_samples} />
+              <KpiValue absolute={sewerInstallationMeasurement.total_number_of_samples} />
               <Text>
                 {replaceComponentsInText(textGm.total_measurements_locations, {
-                  sampled_installation_count: <strong>{sewerAverages.last_value.sampled_installation_count}</strong>,
-                  total_installation_count: <strong>{sewerAverages.last_value.total_installation_count}</strong>,
+                  sampled_installation_count: <strong>{sewerInstallationMeasurement.sampled_installation_count}</strong>,
+                  total_installation_count: <strong>{sewerInstallationMeasurement.total_installation_count}</strong>,
                 })}
               </Text>
             </KpiTile>

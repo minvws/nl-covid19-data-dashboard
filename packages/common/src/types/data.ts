@@ -160,7 +160,8 @@ export interface Gm {
   hospital_nice: GmHospitalNice;
   tested_overall: GmTestedOverall;
   sewer: GmSewer;
-  sewer_per_installation?: GmSewerPerInstallation;
+  sewer_per_installation: GmSewerPerInstallation;
+  sewer_installation_measurement: GmSewerInstallationMeasurement;
   vaccine_coverage_per_age_group: GmVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: GmVaccineCoveragePerAgeGroupArchived;
   vaccine_coverage_per_age_group_archived_20220908: GmVaccineCoveragePerAgeGroupArchived_20220908;
@@ -232,9 +233,6 @@ export interface GmSewerValue {
   date_start_unix: number;
   date_end_unix: number;
   average: number;
-  total_number_of_samples: number;
-  sampled_installation_count: number;
-  total_installation_count: number;
   date_of_insertion_unix: number;
   data_is_outdated: boolean;
 }
@@ -249,6 +247,14 @@ export interface MunicipalSewerPerInstallationInstallation {
 export interface GmSewerPerInstallationValue {
   date_unix: number;
   rna_normalized: number;
+  date_of_insertion_unix: number;
+}
+export interface GmSewerInstallationMeasurement {
+  date_start_unix: number;
+  date_end_unix: number;
+  total_number_of_samples: number;
+  sampled_installation_count: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
 }
 export interface GmVaccineCoveragePerAgeGroup {
@@ -340,7 +346,7 @@ export interface GmCollectionSewer {
   date_end_unix: number;
   gmcode: string;
   average: number;
-  total_installation_count: number;
+  total_installation_count?: number;
   date_of_insertion_unix: number;
   data_is_outdated: boolean;
 }

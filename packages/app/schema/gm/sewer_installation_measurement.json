@@ -1,16 +1,15 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "gm_collection_sewer",
+  "title": "gm_sewer_installation_measurement",
   "type": "object",
-  "additionalProperties": false,
   "required": [
     "date_start_unix",
     "date_end_unix",
-    "gmcode",
-    "average",
-    "date_of_insertion_unix",
-    "data_is_outdated"
-  ],
+    "total_number_of_samples",
+    "sampled_installation_count",
+    "total_installation_count",
+    "date_of_insertion_unix"],
+  "additionalProperties": false,
   "properties": {
     "date_start_unix": {
       "type": "integer"
@@ -18,18 +17,17 @@
     "date_end_unix": {
       "type": "integer"
     },
-    "gmcode": {
-      "type": "string",
-      "pattern": "^GM[0-9]+$"
+    "total_number_of_samples": {
+      "type": "integer"
     },
-    "average": {
+    "sampled_installation_count": {
+      "type": "integer"
+    },
+    "total_installation_count": {
       "type": "integer"
     },
     "date_of_insertion_unix": {
       "type": "integer"
-    },
-    "data_is_outdated": {
-      "type": "boolean"
     }
   }
 }
