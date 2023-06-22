@@ -169,6 +169,7 @@ export interface Gm {
 }
 export interface GmStaticValues {
   population_count: number;
+  population_count_connected_to_rwzis: number;
 }
 export interface GmDeceasedRivmArchived_20221231 {
   values: GmDeceasedRivmArchived_20221231Value[];
