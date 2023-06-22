@@ -1,9 +1,12 @@
+import { BsFileEarmarkText } from 'react-icons/bs';
+import { defineType } from 'sanity';
 import { ARTICLE_FIELDS } from '../fields/article-fields';
 
-export const article = {
+export const article = defineType({
   title: 'Artikel',
   name: 'article',
   type: 'document',
+  icon: BsFileEarmarkText,
   fieldsets: [
     {
       title: 'Metadata',
@@ -19,7 +22,7 @@ export const article = {
     {
       title: 'publication date order',
       name: 'publicationDateOrder',
-      by: [{ field: 'publicationDate' }],
+      by: [{ field: 'publicationDate', direction: 'asc' }],
     },
   ],
   preview: {
@@ -28,11 +31,12 @@ export const article = {
       date: 'publicationDate',
       media: 'cover',
     },
-    prepare({ title, date }: { title: string; date: string }) {
+    prepare({ title, date, media }) {
       return {
         title,
         subtitle: new Date(date).toLocaleString(),
+        media,
       };
     },
   },
-};
+});
