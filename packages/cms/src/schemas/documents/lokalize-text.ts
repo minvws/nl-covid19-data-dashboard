@@ -1,7 +1,8 @@
-import React from 'react';
-import { isDefined } from 'ts-is-present';
-import { Rule } from '~/sanity';
-import { LokalizeTextDescription } from '../../lokalize/lokalize-text-description';
+import { createElement } from 'react';
+import { BsFileEarmark } from 'react-icons/bs';
+import { defineField, defineType } from 'sanity';
+import { LokalizeDocumentDescription } from '../../lokalize/components/lokalize-document-description';
+import { validateLocaleTextPlaceholders } from '../../studio/validation/lokalize-variable-placeholder-validation';
 
 /**
  * A text coming from the original Lokalize JSON structure is split into a
@@ -11,67 +12,63 @@ import { LokalizeTextDescription } from '../../lokalize/lokalize-text-descriptio
  * The key is added with :: notation for easy access to the search function in
  * both Lokalize and Sanity.
  */
-export const lokalizeText = {
-  // See: https://www.sanity.io/docs/ui-affordances-for-actions
-  // We don't allow creation of new keys or deleting them from the UI.
-  __experimental_actions: ['update', 'publish'],
+export const lokalizeText = defineType({
   name: 'lokalizeText',
   type: 'document',
-  title: 'Text',
+  title: 'Lokalize tekst',
+  icon: BsFileEarmark,
   fields: [
-    {
+    defineField({
       title: 'Key',
       name: 'key',
       type: 'string',
       readOnly: true,
       hidden: true,
-    },
-    {
+    }),
+    defineField({
       title: 'Onderwerp',
       name: 'subject',
       type: 'string',
       readOnly: true,
       hidden: true,
-    },
-    {
+    }),
+    defineField({
       title: 'Text',
       name: 'text',
-      description: React.createElement(LokalizeTextDescription),
+      description: createElement(LokalizeDocumentDescription),
       type: 'localeText',
-      options: {
-        ignoreLanguageSwitcher: true,
-      },
-      validation: (rule: Rule) => [
+      validation: (rule) => [
         rule.fields({
-          nl: (rule: Rule) => rule.required(),
-          en: (rule: Rule) => rule.required().warning(),
+          nl: (rule) => rule.required(),
+          en: (rule) => rule.required().warning(),
         }),
+
         rule.custom(validateLocaleTextPlaceholders),
       ],
-    },
-    {
+    }),
+    defineField({
       title: 'Toon als lege tekst',
       name: 'should_display_empty',
       type: 'boolean',
-    },
-    {
+    }),
+    defineField({
       name: 'is_newly_added',
       type: 'boolean',
       readOnly: true,
       hidden: true,
-    },
-    {
+    }),
+    defineField({
       name: 'is_move_placeholder',
       type: 'boolean',
       readOnly: true,
       hidden: true,
-    },
-    {
+    }),
+    defineField({
       name: 'publish_count',
       type: 'number',
       readOnly: true,
       hidden: true,
-    },
+    }),
   ],
   preview: {
     select: {
@@ -83,60 +80,12 @@ export const lokalizeText = {
       key: 'key',
       subtitle: 'text.nl',
     },
-    prepare({ key, subtitle}: { key: string, subtitle: string}) {
+    prepare({ key, subtitle }: Record<'key' | 'subtitle', string>) {
       const title = key.split('.').slice(3).join('.');
       return {
         title,
-        subtitle
-      }
+        subtitle,
+      };
     },
   },
-};
-
-function validateLocaleTextPlaceholders({
-  en,
-  nl,
-}: {
-  en?: string;
-  nl?: string;
-}) {
-  const enErrors = getFaultyParameterPlaceholders(en);
-  const nlErrors = getFaultyParameterPlaceholders(nl);
-
-  if (enErrors.length) {
-    const vars = enErrors.map((x) => `"${x}"`).join(', ');
-    return {
-      message: `De volgende variabelen zijn niet juist geformatteerd: ${vars}`,
-      paths: ['en'],
-    };
-  }
-
-  if (nlErrors.length) {
-    const vars = nlErrors.map((x) => `"${x}"`).join(', ');
-    return {
-      message: `De volgende variabelen zijn niet juist geformatteerd: ${vars}`,
-      paths: ['nl'],
-    };
-  }
-
-  return true;
-}
-
-/**
- * A valid placeholder is considered to look like ``{{placeholderName}}``.
- * This validator looks for mistakes such as ``{placeHolderName}}`` or
- * ``{{placeHolderName}}}``.
- */
-function getFaultyParameterPlaceholders(text = '') {
-  const faultyVariables = [...(text.matchAll(/{+[^}]+}+/g) as any)]
-    .map((matchInfo: string[]) => {
-      const match = matchInfo[0].match(/{{2}[^{}]+}{2}/);
-      if (!match || match[0] !== matchInfo[0]) {
-        return matchInfo[0];
-      }
-      return;
-    })
-    .filter(isDefined);
-
-  return faultyVariables;
-}
+});
