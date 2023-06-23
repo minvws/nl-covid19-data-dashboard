@@ -75,7 +75,7 @@ export const dataStructure = {
       'admissions_on_date_of_reporting',
     ],
     tested_overall: ['infected', 'infected_moving_average', 'infected_moving_average_rounded', 'infected_per_100k', 'infected_per_100k_moving_average'],
-    sewer: ['average', 'total_number_of_samples', 'sampled_installation_count', 'total_installation_count', 'data_is_outdated'],
+    sewer: ['average', 'data_is_outdated'],
     vaccine_coverage_per_age_group: [
       'vaccination_type',
       'birthyear_range_12_plus',
@@ -112,7 +112,7 @@ export const dataStructure = {
     hospital_nice: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
     hospital_nice_choropleth: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
     tested_overall: ['infected_per_100k', 'infected'],
-    sewer: ['average', 'total_installation_count', 'data_is_outdated'],
+    sewer: ['average', 'data_is_outdated'],
     vaccine_coverage_per_age_group: [
       'vaccination_type',
       'birthyear_range_12_plus',

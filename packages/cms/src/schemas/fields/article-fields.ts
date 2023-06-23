@@ -39,6 +39,20 @@ export const ARTICLE_FIELDS = [
     validation: (rule) => rule.required(),
   }),
   defineField({
+    title: 'Hoofdcategorie',
+    name: 'mainCategory',
+    type: 'array',
+    of: [defineArrayMember({ type: 'string' })],
+    options: {
+      layout: 'grid',
+      list: [
+        { title: 'Kennisartikelen', value: 'knowledge' },
+        { title: 'Nieuwsartikelen', value: 'news' },
+      ],
+    },
+    validation: (rule) => rule.required().min(1).max(1),
+  }),
+  defineField({
     title: 'Categorieën instellen',
     name: 'categories',
     type: 'array',
@@ -46,13 +60,13 @@ export const ARTICLE_FIELDS = [
     options: {
       layout: 'grid',
       list: [
-        { title: 'Vaccinaties', value: 'vaccinaties' },
         { title: 'Besmettingen', value: 'besmettingen' },
-        { title: 'Sterfte', value: 'sterfte' },
-        { title: 'Ziekenhuizen', value: 'ziekenhuizen' },
-        { title: 'Kwetsbare groepen', value: 'kwetsbare_groepen' },
-        { title: 'Vroege indicatoren', value: 'vroege_indicatoren' },
         { title: 'Gedrag', value: 'gedrag' },
+        { title: 'Kwetsbare groepen', value: 'kwetsbare_groepen' },
+        { title: 'Sterfte', value: 'sterfte' },
+        { title: 'Vaccinaties', value: 'vaccinaties' },
+        { title: 'Vroege indicatoren', value: 'vroege_indicatoren' },
+        { title: 'Ziekenhuizen', value: 'ziekenhuizen' },
       ],
     },
     validation: (rule) => rule.required().min(1),
