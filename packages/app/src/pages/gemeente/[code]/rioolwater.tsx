@@ -126,7 +126,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               <Text>
                 {replaceComponentsInText(commonTexts.gemeente_index.population_count, {
                   municipalityName: municipalityName,
-                  populationCountConnectedToRwzis: <strong>{formatNumber(populationCountConnectedToRwzis)}</strong>,
+                  populationCount: <strong>{formatNumber(populationCountConnectedToRwzis)}</strong>,
                 })}
               </Text>
 
