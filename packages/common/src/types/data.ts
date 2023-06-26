@@ -4,6 +4,49 @@
  * and run 'yarn generate-data-types' to regenerate this file.
  */
 
+export type ArchivedGmCode = string;
+
+export interface ArchivedGm {
+  last_generated: string;
+  proto_name: ArchivedGmCode;
+  name: ArchivedGmCode;
+  code: ArchivedGmCode;
+  sewer_archived_20230623: GmSewer;
+}
+export interface GmSewer {
+  values: GmSewerValue[];
+  last_value: GmSewerValue;
+}
+export interface GmSewerValue {
+  date_start_unix: number;
+  date_end_unix: number;
+  average: number;
+  total_number_of_samples: number;
+  sampled_installation_count: number;
+  total_installation_count: number;
+  date_of_insertion_unix: number;
+  data_is_outdated: boolean;
+}
+
+export type ArchivedGmCollectionId = 'GM_COLLECTION';
+
+export interface ArchivedGmCollection {
+  last_generated: string;
+  proto_name: ArchivedGmCollectionId;
+  name: ArchivedGmCollectionId;
+  code: ArchivedGmCollectionId;
+  sewer_archived_20230623: GmCollectionSewer[];
+}
+export interface GmCollectionSewer {
+  date_start_unix: number;
+  date_end_unix: number;
+  gmcode: string;
+  average: number;
+  total_installation_count: number;
+  date_of_insertion_unix: number;
+  data_is_outdated: boolean;
+}
+
 export type ArchivedNlId = 'NL';
 
 export interface ArchivedNl {
@@ -15,6 +58,7 @@ export interface ArchivedNl {
   behavior_annotations_archived_20230412: NlBehaviorAnnotations;
   behavior_per_age_group_archived_20230411: NlBehaviorPerAgeGroup;
   doctor_archived_20210903: NlDoctor;
+  sewer_archived_20230623: NlSewer;
 }
 export interface NlBehavior {
   values: NlBehaviorValue[];
@@ -146,6 +190,15 @@ export interface NlDoctorValue {
   covid_symptoms: number;
   date_of_insertion_unix: number;
 }
+export interface NlSewer {
+  values: NlSewerValue[];
+  last_value: NlSewerValue;
+}
+export interface NlSewerValue {
+  average: number | null;
+  date_of_insertion_unix: number;
+  date_unix: number;
+}
 
 export type GmCode = string;
 
@@ -160,7 +213,8 @@ export interface Gm {
   hospital_nice: GmHospitalNice;
   tested_overall: GmTestedOverall;
   sewer: GmSewer;
-  sewer_per_installation?: GmSewerPerInstallation;
+  sewer_per_installation: GmSewerPerInstallation;
+  sewer_installation_measurement: GmSewerInstallationMeasurement;
   vaccine_coverage_per_age_group: GmVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived: GmVaccineCoveragePerAgeGroupArchived;
   vaccine_coverage_per_age_group_archived_20220908: GmVaccineCoveragePerAgeGroupArchived_20220908;
@@ -168,6 +222,7 @@ export interface Gm {
 }
 export interface GmStaticValues {
   population_count: number;
+  population_count_connected_to_rwzis: number;
 }
 export interface GmDeceasedRivmArchived_20221231 {
   values: GmDeceasedRivmArchived_20221231Value[];
@@ -232,9 +287,6 @@ export interface GmSewerValue {
   date_start_unix: number;
   date_end_unix: number;
   average: number;
-  total_number_of_samples: number;
-  sampled_installation_count: number;
-  total_installation_count: number;
   date_of_insertion_unix: number;
   data_is_outdated: boolean;
 }
@@ -249,6 +301,14 @@ export interface MunicipalSewerPerInstallationInstallation {
 export interface GmSewerPerInstallationValue {
   date_unix: number;
   rna_normalized: number;
+  date_of_insertion_unix: number;
+}
+export interface GmSewerInstallationMeasurement {
+  date_start_unix: number;
+  date_end_unix: number;
+  total_number_of_samples: number;
+  sampled_installation_count: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
 }
 export interface GmVaccineCoveragePerAgeGroup {
@@ -340,7 +400,6 @@ export interface GmCollectionSewer {
   date_end_unix: number;
   gmcode: string;
   average: number;
-  total_installation_count: number;
   date_of_insertion_unix: number;
   data_is_outdated: boolean;
 }
