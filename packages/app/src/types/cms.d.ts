@@ -27,7 +27,26 @@ export type PageBasePart = {
 
 export type ArticleParts = {
   _type: 'pageArticles';
-  articles: ArticleSummary[];
+  articles: Article[];
+} & PageBasePart;
+
+export type DataExplainedParts = {
+  _type: 'pageDataExplained';
+  dataExplainedItem: {
+    slug: { current: string };
+  };
+} & PageBasePart;
+
+export type FaqParts = {
+  _type: 'pageFAQs';
+  faqQuestions: FAQuestionAndAnswer[];
+  title: string;
+} & PageBasePart;
+
+export type HighlightedItemParts = {
+  _type: 'pageHighlightedItems';
+  highlights: ArticleSummary[];
+  showWeeklyHighlight: boolean;
 } & PageBasePart;
 
 export type LinkParts = {
@@ -38,18 +57,12 @@ export type LinkParts = {
   }[];
 } & PageBasePart;
 
-export type HighlightedItemParts = {
-  _type: 'pageHighlightedItems';
-  highlights: ArticleSummary[];
-  showWeeklyHighlight: boolean;
-} & PageBasePart;
-
 export type RichTextParts = {
   _type: 'pageRichText';
   text: RichContentBlock[];
 } & PageBasePart;
 
-export type PagePart = ArticleParts | LinkParts | HighlightedItemParts | RichTextParts;
+export type PagePart = ArticleParts | DataExplainedParts | FaqParts | HighlightedItemParts | LinkParts | RichTextParts;
 
 export type PagePartQueryResult<T extends PagePart = PagePart> = {
   pageParts: T[];
@@ -106,6 +119,7 @@ export interface Article {
     _type: 'slug';
     current: string;
   };
+  mainCategory: 'knowledge' | 'news';
   categories?: CategoriesTypes[];
   cover: ImageBlock;
   imageMobile?: ImageBlock;

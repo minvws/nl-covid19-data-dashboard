@@ -3,36 +3,38 @@ import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { ChartTile, PageInformationBlock, TileList, TimeSeriesChart, WarningTile, Divider } from '~/components';
+import { ChartTile, Divider, PageInformationBlock, TileList, TimeSeriesChart, WarningTile } from '~/components';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { PageArticlesTile } from '~/components/page-articles-tile/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { Layout, NlLayout } from '~/domain/layout';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import {
-  selectAdministrationData,
-  VaccinationsOverTimeTile,
-  VaccineBoosterAdministrationsKpiSection,
-  VaccinationsShotKpiSection,
+  Autumn2022ShotCoveragePerAgeGroup,
+  BoosterShotCoveragePerAgeGroup,
   VaccinationsKpiHeader,
+  VaccinationsOverTimeTile,
+  VaccinationsShotKpiSection,
+  VaccineBoosterAdministrationsKpiSection,
   VaccineCoverageChoropleth,
   VaccineCoveragePerAgeGroup,
   VaccineCoverageToggleTile,
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
-  BoosterShotCoveragePerAgeGroup,
-  Autumn2022ShotCoveragePerAgeGroup,
+  selectAdministrationData,
 } from '~/domain/vaccine';
 import { VaccinationsPerSupplierOverLastTimeframeTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-timeframe-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getLinkParts, getPagePartsQuery, getRichTextParts } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery, getRichTextParts } from '~/queries/get-page-parts-query';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, getNlData, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 const pageMetrics = [
   'vaccine_administered_doctors',
@@ -103,6 +105,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.parts.pageParts, 'vaccinationsPageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'vaccinationsPageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'vaccinationsPageDataExplained'),
         links: getLinkParts(content.parts.pageParts, 'vaccinationsPageLinks'),
         boosterArticles: getArticleParts(content.parts.pageParts, 'vaccineBoosterArticles'),
         thirdShotArticles: getArticleParts(content.parts.pageParts, 'vaccineThirdShotArticles'),
@@ -175,7 +179,17 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             pageLinks={content.links}
             referenceLink={textNl.information_block.reference.href}
             articles={content.articles}
+            pageInformationHeader={{
+              dataExplainedLink: content.dataExplained ? `/verantwoording/${content.dataExplained.slug.current}` : undefined,
+              faqLink: content.faqs?.length ? 'veelgestelde-vragen' : undefined,
+            }}
           />
+
+          {/* TODO: always place these above archived section */}
+          {content.faqs?.length && content.faqs?.length > 0 && <PageFaqTile questions={content.faqs} />}
+
+          {content.articles?.length && content.articles?.length > 0 && <PageArticlesTile articles={content.articles} />}
+
           <BorderedKpiSection
             title={textShared.vaccination_grade_tile.autumn_labels.title}
             description={textShared.vaccination_grade_tile.autumn_labels.description}
