@@ -13,9 +13,21 @@ export const about = defineType({
       validation: localeStringValidation((rule) => rule.required()),
     }),
     defineField({
+      name: 'intro',
+      type: 'localeBlock',
+      title: 'introductie (linker column)',
+      validation: localeValidation((rule) => rule.required()),
+    }),
+    defineField({
+      name: 'timelineImage',
+      type: 'localeImage',
+      title: 'Afbeelding tijdslijn',
+      validation: localeValidation((rule) => rule.required()),
+    }),
+    defineField({
       name: 'description',
       type: 'localeBlock',
-      title: 'Beschrijving',
+      title: 'Beschrijving (rechter column)',
       validation: localeValidation((rule) => rule.required()),
     }),
   ],
