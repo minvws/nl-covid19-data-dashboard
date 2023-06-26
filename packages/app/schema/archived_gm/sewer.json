@@ -1,0 +1,61 @@
+{
+  "definitions": {
+    "value": {
+      "title": "gm_sewer_value",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date_start_unix",
+        "date_end_unix",
+        "average",
+        "total_number_of_samples",
+        "sampled_installation_count",
+        "total_installation_count",
+        "date_of_insertion_unix",
+        "data_is_outdated"
+      ],
+      "properties": {
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
+          "type": "integer"
+        },
+        "average": {
+          "type": "integer"
+        },
+        "total_number_of_samples": {
+          "type": "integer"
+        },
+        "sampled_installation_count": {
+          "type": "integer"
+        },
+        "total_installation_count": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        },
+        "data_is_outdated": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "gm_sewer",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}

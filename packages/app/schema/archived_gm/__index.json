@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "archived_gm",
+  "additionalProperties": false,
+  "required": [
+    "last_generated",
+    "proto_name",
+    "name",
+    "code",
+    "sewer_archived_20230623"
+  ],
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "$ref": "#/$defs/archived_gm_code"
+    },
+    "name": {
+      "$ref": "#/$defs/archived_gm_code"
+    },
+    "code": {
+      "$ref": "#/$defs/archived_gm_code"
+    },
+    "sewer_archived_20230623": {
+      "$ref": "sewer.json"
+    }
+  },
+  "$defs": {
+    "archived_gm_code": {
+      "type": "string",
+      "pattern": "^GM[0-9]+$"
+    }
+  }
+}
