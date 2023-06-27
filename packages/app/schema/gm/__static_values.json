@@ -5,8 +5,11 @@
   "properties": {
     "population_count": {
       "type": "integer"
+    },
+    "population_count_connected_to_rwzis": {
+      "type": "integer"
     }
   },
-  "required": ["population_count"],
+  "required": ["population_count", "population_count_connected_to_rwzis"],
   "additionalProperties": false
 }

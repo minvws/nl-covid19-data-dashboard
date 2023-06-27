@@ -1,37 +1,25 @@
 {
   "definitions": {
     "value": {
-      "title": "gm_sewer_value",
+      "title": "nl_sewer_value",
       "type": "object",
+      "required": ["average", "date_of_insertion_unix", "date_unix"],
       "additionalProperties": false,
-      "required": [
-        "date_start_unix",
-        "date_end_unix",
-        "average",
-        "date_of_insertion_unix",
-        "data_is_outdated"
-      ],
       "properties": {
-        "date_start_unix": {
-          "type": "integer"
-        },
-        "date_end_unix": {
-          "type": "integer"
-        },
         "average": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "date_of_insertion_unix": {
           "type": "integer"
         },
-        "data_is_outdated": {
-          "type": "boolean"
+        "date_unix": {
+          "type": "integer"
         }
       }
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "gm_sewer",
+  "title": "nl_sewer",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

@@ -4,20 +4,22 @@
   "title": "gm",
   "additionalProperties": false,
   "required": [
-    "last_generated",
-    "proto_name",
     "name",
+    "proto_name",
     "code",
-    "tested_overall",
-    "hospital_nice",
-    "deceased_rivm_archived_20221231",
     "difference",
     "static_values",
+    "booster_coverage_archived_20220904",
+    "deceased_rivm_archived_20221231",
+    "hospital_nice",
+    "sewer_installation_measurement",
+    "sewer_per_installation",
     "sewer",
+    "tested_overall",
     "vaccine_coverage_per_age_group",
     "vaccine_coverage_per_age_group_archived",
     "vaccine_coverage_per_age_group_archived_20220908",
-    "booster_coverage_archived_20220904"
+    "last_generated"
   ],
   "properties": {
     "last_generated": {
@@ -52,6 +54,9 @@
     },
     "sewer_per_installation": {
       "$ref": "sewer_per_installation.json"
+    },
+    "sewer_installation_measurement": {
+      "$ref": "sewer_installation_measurement.json"
     },
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
