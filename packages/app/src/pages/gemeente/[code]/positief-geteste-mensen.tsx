@@ -13,6 +13,8 @@ import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
+import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
@@ -22,7 +24,7 @@ import { GmLayout, Layout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
@@ -71,6 +73,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.parts.pageParts, 'positiveTestsPageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'positiveTestsPageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'positiveTestsPageDataExplained'),
         elements: content.elements,
       },
     } as const;
@@ -115,10 +119,29 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
             }}
-            referenceLink={textGm.reference.href}
-            articles={content.articles}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}
+            pageInformationHeader={{
+              dataExplained: content.dataExplained
+                ? {
+                    link: `/verantwoording/${content.dataExplained.item.slug.current}`,
+                    button: {
+                      header: content.dataExplained.buttonTitle,
+                      text: content.dataExplained.buttonText,
+                    },
+                  }
+                : undefined,
+              faq:
+                content.faqs && content.faqs.questions.length > 0
+                  ? {
+                      link: 'veelgestelde-vragen',
+                      button: {
+                        header: content.faqs.buttonTitle,
+                        text: content.faqs.buttonText,
+                      },
+                    }
+                  : undefined,
+            }}
           />
 
           {!!textShared.warning && <WarningTile isFullWidth message={textShared.warning} variant="informational" />}
@@ -256,6 +279,18 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               />
             </ChoroplethTile>
           </InView>
+
+          {content.faqs && content.faqs.questions.length > 0 && (
+            <InView rootMargin="400px">
+              <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />
+            </InView>
+          )}
+
+          {content.articles && content.articles.articles.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
       </GmLayout>
     </Layout>

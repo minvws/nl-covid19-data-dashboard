@@ -3,8 +3,10 @@ import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { Divider, PageInformationBlock, TileList } from '~/components';
+import { Divider, InView, PageInformationBlock, TileList } from '~/components';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
 import { emptyCoverageData } from '~/data/gm/vaccinations/empty-coverage-data';
 import { GmLayout, Layout } from '~/domain/layout';
@@ -12,7 +14,7 @@ import { VaccineCoveragePerAgeGroup, VaccineCoverageToggleTile } from '~/domain/
 import { VaccineCoverageChoropleth } from '~/domain/vaccine/vaccine-coverage-choropleth';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
@@ -64,6 +66,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.pageParts, 'vaccinationsPageArticles'),
+        faqs: getFaqParts(content.pageParts, 'vaccinationsPageFAQs'),
+        dataExplained: getDataExplainedParts(content.pageParts, 'vaccinationsPageDataExplained'),
         links: getLinkParts(content.pageParts, 'vaccinationsPageLinks'),
       },
     };
@@ -129,10 +133,29 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               dataSources: [textShared.bronnen.rivm],
             }}
             pageLinks={content.links}
-            referenceLink={textGm.vaccination_coverage.top_level_information_block.reference.href}
-            articles={content.articles}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}
+            pageInformationHeader={{
+              dataExplained: content.dataExplained
+                ? {
+                    link: `/verantwoording/${content.dataExplained.item.slug.current}`,
+                    button: {
+                      header: content.dataExplained.buttonTitle,
+                      text: content.dataExplained.buttonText,
+                    },
+                  }
+                : undefined,
+              faq:
+                content.faqs && content.faqs.questions.length > 0
+                  ? {
+                      link: 'veelgestelde-vragen',
+                      button: {
+                        header: content.faqs.buttonTitle,
+                        text: content.faqs.buttonText,
+                      },
+                    }
+                  : undefined,
+            }}
           />
           {filteredVaccination.autumn2022.birthyear_range_60_plus && (
             <BorderedKpiSection
@@ -206,6 +229,19 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               ageGroupLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_age_group_select,
             }}
           />
+
+          {content.faqs && content.faqs.questions.length > 0 && (
+            <InView rootMargin="400px">
+              <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />
+            </InView>
+          )}
+
+          {content.articles && content.articles.articles.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
+
           <Divider />
           <PageInformationBlock
             title={textNl.section_archived.title}

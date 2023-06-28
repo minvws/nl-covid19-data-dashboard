@@ -1,4 +1,5 @@
 import { colors } from '@corona-dashboard/common';
+import { useIntl } from '~/intl';
 import { fontSizes, space } from '~/style/theme';
 import { FAQuestionAndAnswer } from '~/types/cms';
 import { Box } from './base/box';
@@ -12,8 +13,10 @@ interface PageFaqTileProps {
 }
 
 export const PageFaqTile = ({ questions, title }: PageFaqTileProps) => {
+  const { commonTexts } = useIntl();
+
   return (
-    <ChartTile title={title} id="veelgestelde-vragen" disableFullscreen>
+    <ChartTile title={title ?? commonTexts.faq.title} id="veelgestelde-vragen" disableFullscreen>
       {questions.map((question, index) => (
         <CollapsibleSection key={index} summary={question.title} textColor={colors.black} fontSize={fontSizes[3]}>
           {question.content && (

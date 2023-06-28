@@ -237,7 +237,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               text={textShared}
             />
 
-            {isPresent(content.articles) && <TopicalArticlesList articles={content.articles} text={textShared} />}
+            {isPresent(content.articles) && isPresent(content.articles.articles) && <TopicalArticlesList articles={content.articles.articles} text={textShared} />}
           </MaxWidth>
         </Box>
       </Box>

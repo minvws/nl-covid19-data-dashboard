@@ -2,7 +2,10 @@ import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard
 import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
+import { InView } from '~/components';
 import { ChartTile } from '~/components/chart-tile';
+import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -11,7 +14,7 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
@@ -45,6 +48,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.parts.pageParts, 'testsPageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'testsPageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'testsPageDataExplained'),
         elements: content.elements,
       },
     };
@@ -87,8 +92,27 @@ const Tests = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.sources.rivm],
             }}
-            referenceLink={textNl.reference.href}
-            articles={content.articles}
+            pageInformationHeader={{
+              dataExplained: content.dataExplained
+                ? {
+                    link: `/verantwoording/${content.dataExplained.item.slug.current}`,
+                    button: {
+                      header: content.dataExplained.buttonTitle,
+                      text: content.dataExplained.buttonText,
+                    },
+                  }
+                : undefined,
+              faq:
+                content.faqs && content.faqs.questions.length > 0
+                  ? {
+                      link: 'veelgestelde-vragen',
+                      button: {
+                        header: content.faqs.buttonTitle,
+                        text: content.faqs.buttonText,
+                      },
+                    }
+                  : undefined,
+            }}
           />
 
           <ChartTile
@@ -122,6 +146,18 @@ const Tests = (props: StaticProps<typeof getStaticProps>) => {
               forceLegend
             />
           </ChartTile>
+
+          {content.faqs && content.faqs.questions.length > 0 && (
+            <InView rootMargin="400px">
+              <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />
+            </InView>
+          )}
+
+          {content.articles && content.articles.articles.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
       </NlLayout>
     </Layout>

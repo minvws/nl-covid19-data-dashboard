@@ -3,9 +3,9 @@ import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { ChartTile, Divider, PageInformationBlock, TileList, TimeSeriesChart, WarningTile } from '~/components';
+import { ChartTile, Divider, InView, PageInformationBlock, TileList, TimeSeriesChart, WarningTile } from '~/components';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
-import { PageArticlesTile } from '~/components/page-articles-tile/page-articles-tile';
+import { PageArticlesTile } from '~/components/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { Layout, NlLayout } from '~/domain/layout';
 import {
@@ -177,7 +177,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               dataSources: [textShared.bronnen.rivm],
             }}
             pageLinks={content.links}
-            referenceLink={textNl.information_block.reference.href}
             pageInformationHeader={{
               dataExplained: content.dataExplained
                 ? {
@@ -191,7 +190,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               faq:
                 content.faqs && content.faqs.questions.length > 0
                   ? {
-                      link: `veelgestelde-vragen`,
+                      link: 'veelgestelde-vragen',
                       button: {
                         header: content.faqs.buttonTitle,
                         text: content.faqs.buttonText,
@@ -310,10 +309,16 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             values={data.vaccine_coverage_per_age_group.values}
           />
 
-          {content.faqs?.questions.length && content.faqs?.questions.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+          {content.faqs && content.faqs.questions.length > 0 && (
+            <InView rootMargin="400px">
+              <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />
+            </InView>
+          )}
 
-          {content.articles?.articles.length && content.articles?.articles.length > 0 && (
-            <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+          {content.articles && content.articles.articles.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
           )}
 
           <Divider />

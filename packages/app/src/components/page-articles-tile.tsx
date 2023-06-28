@@ -1,13 +1,13 @@
 import { colors } from '@corona-dashboard/common';
 import { getImageProps } from '~/lib/sanity';
 import { fontWeights, mediaQueries, radii, space } from '~/style/theme';
-import { Box } from '../base';
-import { ChartTile } from '../chart-tile';
-import { SanityImage } from '../cms/sanity-image';
-import { Anchor, BoldText } from '../typography';
+import { Box } from './base';
+import { ChartTile } from './chart-tile';
+import { SanityImage } from './cms/sanity-image';
+import { Anchor, BoldText } from './typography';
 import { Link } from '~/utils/link';
 import styled, { css } from 'styled-components';
-import { PublicationDate } from '../publication-date';
+import { PublicationDate } from './publication-date';
 import { ChevronRight } from '@corona-dashboard/icons';
 import { Article } from '~/types/cms';
 import { useIntl } from '~/intl';
@@ -21,12 +21,12 @@ export const PageArticlesTile = ({ articles, title }: PageArticlesTileProps) => 
   const { commonTexts } = useIntl();
 
   return (
-    <ChartTile title={title} disableFullscreen>
+    <ChartTile title={title ?? commonTexts.article_list.title} disableFullscreen>
       <Grid>
         {articles.map((article, index) => (
           <Link passHref href={`/artikelen/${article.slug.current}`} key={index}>
             <ArticleCard>
-              <Box display="grid" gridTemplateColumns="1fr 4fr" style={{ gap: space[2] }} alignItems="center">
+              <ArticleCardHeader>
                 <ArticleImage {...getImageProps(article.cover, {})} />
 
                 <Box display="grid" color={colors.gray5}>
@@ -41,7 +41,7 @@ export const PageArticlesTile = ({ articles, title }: PageArticlesTileProps) => 
                     )}
                   </Box>
                 </Box>
-              </Box>
+              </ArticleCardHeader>
 
               <Box color={colors.black}>{article.summary}</Box>
 
@@ -83,13 +83,19 @@ const ArticleCard = styled(Anchor)`
   padding: ${space[3]};
 `;
 
+const ArticleCardHeader = styled(Box)`
+  align-items: center;
+  display: flex;
+  gap: ${space[3]};
+`;
+
 const ArticleImage = styled(SanityImage)`
   object-fit: cover;
 
   img {
     border-radius: ${radii[2]}px;
-    height: ${space[5]};
-    width: 100%;
+    height: 48px;
+    width: 48px;
   }
 `;
 

@@ -2,13 +2,15 @@ import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { ChartTile, KpiTile, KpiValue, Markdown, PageInformationBlock, TileList, TimeSeriesChart, TwoKpiSection, WarningTile } from '~/components';
+import { ChartTile, InView, KpiTile, KpiValue, Markdown, PageInformationBlock, TileList, TimeSeriesChart, TwoKpiSection, WarningTile } from '~/components';
+import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { Text } from '~/components/typography';
 import { GmLayout, Layout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
@@ -46,6 +48,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.parts.pageParts, 'deceasedPageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'deceasedPageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'deceasedPageDataExplained'),
         elements: content.elements,
       },
     };
@@ -92,9 +96,29 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.section_deceased_rivm.bronnen.rivm],
             }}
-            articles={content.articles}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}
+            pageInformationHeader={{
+              dataExplained: content.dataExplained
+                ? {
+                    link: `/verantwoording/${content.dataExplained.item.slug.current}`,
+                    button: {
+                      header: content.dataExplained.buttonTitle,
+                      text: content.dataExplained.buttonText,
+                    },
+                  }
+                : undefined,
+              faq:
+                content.faqs && content.faqs.questions.length > 0
+                  ? {
+                      link: 'veelgestelde-vragen',
+                      button: {
+                        header: content.faqs.buttonTitle,
+                        text: content.faqs.buttonText,
+                      },
+                    }
+                  : undefined,
+            }}
           />
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textGm.notification.message} variant="informational" />}
@@ -157,6 +181,18 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
               }}
             />
           </ChartTile>
+
+          {content.faqs && content.faqs.questions.length > 0 && (
+            <InView rootMargin="400px">
+              <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />
+            </InView>
+          )}
+
+          {content.articles && content.articles.articles.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
       </GmLayout>
     </Layout>

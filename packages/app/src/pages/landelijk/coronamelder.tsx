@@ -62,7 +62,6 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: warningLastValue.date_of_insertion_unix,
               dataSources: [corona_melder_app.header.bronnen.rivm],
             }}
-            referenceLink={corona_melder_app.header.reference.href}
           />
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={corona_melder_app.belangrijk_bericht} variant="informational" />}
