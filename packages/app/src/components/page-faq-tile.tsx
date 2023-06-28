@@ -8,12 +8,12 @@ import { CollapsibleSection } from './collapsible';
 
 interface PageFaqTileProps {
   questions: FAQuestionAndAnswer[];
+  title: string;
 }
 
-export const PageFaqTile = ({ questions }: PageFaqTileProps) => {
+export const PageFaqTile = ({ questions, title }: PageFaqTileProps) => {
   return (
-    // TODO: create a common Lokalize key for the below text
-    <ChartTile title="Veelgestelde vragen" id="veelgestelde-vragen" disableFullscreen>
+    <ChartTile title={title} id="veelgestelde-vragen" disableFullscreen>
       {questions.map((question, index) => (
         <CollapsibleSection key={index} summary={question.title} textColor={colors.black} fontSize={fontSizes[3]}>
           {question.content && (

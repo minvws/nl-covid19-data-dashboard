@@ -178,17 +178,28 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }}
             pageLinks={content.links}
             referenceLink={textNl.information_block.reference.href}
-            articles={content.articles}
             pageInformationHeader={{
-              dataExplainedLink: content.dataExplained ? `/verantwoording/${content.dataExplained.slug.current}` : undefined,
-              faqLink: content.faqs?.length ? 'veelgestelde-vragen' : undefined,
+              dataExplained: content.dataExplained
+                ? {
+                    link: `/verantwoording/${content.dataExplained.item.slug.current}`,
+                    button: {
+                      header: content.dataExplained.buttonTitle,
+                      text: content.dataExplained.buttonText,
+                    },
+                  }
+                : undefined,
+              faq:
+                content.faqs && content.faqs.questions.length > 0
+                  ? {
+                      link: `veelgestelde-vragen`,
+                      button: {
+                        header: content.faqs.buttonTitle,
+                        text: content.faqs.buttonText,
+                      },
+                    }
+                  : undefined,
             }}
           />
-
-          {/* TODO: always place these above archived section */}
-          {content.faqs?.length && content.faqs?.length > 0 && <PageFaqTile questions={content.faqs} />}
-
-          {content.articles?.length && content.articles?.length > 0 && <PageArticlesTile articles={content.articles} />}
 
           <BorderedKpiSection
             title={textShared.vaccination_grade_tile.autumn_labels.title}
@@ -298,6 +309,13 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }}
             values={data.vaccine_coverage_per_age_group.values}
           />
+
+          {content.faqs?.questions.length && content.faqs?.questions.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles?.articles.length && content.articles?.articles.length > 0 && (
+            <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+          )}
+
           <Divider />
           <PageInformationBlock
             title={textNl.section_archived.title}

@@ -14,14 +14,14 @@ import { useIntl } from '~/intl';
 
 interface PageArticlesTileProps {
   articles: Article[];
+  title: string;
 }
 
-export const PageArticlesTile = ({ articles }: PageArticlesTileProps) => {
+export const PageArticlesTile = ({ articles, title }: PageArticlesTileProps) => {
   const { commonTexts } = useIntl();
 
   return (
-    // TODO: add these things as Lokalize keys
-    <ChartTile title="Artikelen over dit onderwerp" disableFullscreen id="artikelen">
+    <ChartTile title={title} disableFullscreen>
       <Grid>
         {articles.map((article, index) => (
           <Link passHref href={`/artikelen/${article.slug.current}`} key={index}>
@@ -67,18 +67,19 @@ export const PageArticlesTile = ({ articles }: PageArticlesTileProps) => {
 const Grid = styled(Box)`
   display: grid;
   gap: ${space[4]};
+  margin-bottom: ${space[3]};
+
   @media ${mediaQueries.sm} {
     grid-template-columns: repeat(2, 1fr);
   }
-  margin-bottom: ${space[3]};
 `;
 
 const ArticleCard = styled(Anchor)`
+  border-radius: ${radii[2]}px;
+  border: 1px solid ${colors.gray3};
   display: grid;
   gap: ${space[2]};
   height: 100%;
-  border: 1px solid ${colors.gray3};
-  border-radius: ${radii[2]}px;
   padding: ${space[3]};
 `;
 
@@ -87,8 +88,8 @@ const ArticleImage = styled(SanityImage)`
 
   img {
     border-radius: ${radii[2]}px;
-    width: 100%;
     height: ${space[5]};
+    width: 100%;
   }
 `;
 
@@ -97,9 +98,9 @@ const linkStyles = css`
   cursor: pointer;
 
   svg {
+    height: 10px;
     margin-left: ${space[1]};
     width: 10px;
-    height: 10px;
   }
 `;
 

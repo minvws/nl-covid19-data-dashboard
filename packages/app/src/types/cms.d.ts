@@ -21,6 +21,8 @@ export type PageIdentifier =
   | 'vaccinations_page'
   | 'variants_page';
 
+export type PartTypes = 'pageArticles' | 'pageDataExplained' | 'pageFAQs' | 'pageHighlightedItems' | 'pageLinks' | 'pageRichText';
+
 export type PageBasePart = {
   pageDataKind: string;
 };
@@ -28,6 +30,7 @@ export type PageBasePart = {
 export type ArticleParts = {
   _type: 'pageArticles';
   articles: Article[];
+  sectionTitle: string;
 } & PageBasePart;
 
 export type DataExplainedParts = {
@@ -35,12 +38,16 @@ export type DataExplainedParts = {
   dataExplainedItem: {
     slug: { current: string };
   };
+  buttonTitle: string;
+  buttonText: RichContentBlock[];
 } & PageBasePart;
 
 export type FaqParts = {
   _type: 'pageFAQs';
   faqQuestions: FAQuestionAndAnswer[];
-  title: string;
+  sectionTitle: string;
+  buttonTitle: string;
+  buttonText: RichContentBlock[];
 } & PageBasePart;
 
 export type HighlightedItemParts = {

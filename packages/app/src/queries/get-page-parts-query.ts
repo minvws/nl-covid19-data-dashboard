@@ -1,30 +1,6 @@
 import { isDefined } from 'ts-is-present';
 import { ArticleParts, DataExplainedParts, FaqParts, HighlightedItemParts, LinkParts, PageIdentifier, PagePart, RichTextParts } from '~/types/cms';
 
-export const isArticleParts = (value: PagePart): value is ArticleParts => {
-  return value._type === 'pageArticles';
-};
-
-export const isDataExplainedParts = (value: PagePart): value is DataExplainedParts => {
-  return value._type === 'pageDataExplained';
-};
-
-export const isFaqParts = (value: PagePart): value is FaqParts => {
-  return value._type === 'pageFAQs';
-};
-
-export const isHighlightedItemParts = (value: PagePart): value is HighlightedItemParts => {
-  return value._type === 'pageHighlightedItems';
-};
-
-export const isLinkParts = (value: PagePart): value is LinkParts => {
-  return value._type === 'pageLinks';
-};
-
-export const isRichTextParts = (value: PagePart): value is RichTextParts => {
-  return value._type === 'pageRichText';
-};
-
 export const getPagePartsQuery = (pageIdentifier: PageIdentifier) => {
   const query = `//groq
     *[_type == 'pageIdentifier' && identifier == '${pageIdentifier}']
@@ -34,13 +10,19 @@ export const getPagePartsQuery = (pageIdentifier: PageIdentifier) => {
         _type,
         pageDataKind,
         (_type == 'pageArticles') => {
-          articles[]->{_id, title, slug, summary, intro, "cover": {"asset": cover.asset->}, mainCategory[0], publicationDate}
+          articles[]->{_id, title, slug, summary, intro, "cover": {"asset": cover.asset->}, mainCategory[0], publicationDate},
+          sectionTitle
         },
         (_type == 'pageFAQs') => {
-          faqQuestions[]->{_id, title, content}
+          faqQuestions[]->{_id, title, content},
+          buttonTitle,
+          buttonText,
+          sectionTitle
         },
         (_type == 'pageDataExplained') => {
-          dataExplainedItem->{slug}
+          dataExplainedItem->{slug},
+          buttonTitle,
+          buttonText
         },
         (_type == 'pageHighlightedItems') => {
           showWeeklyHighlight,
@@ -58,23 +40,45 @@ export const getPagePartsQuery = (pageIdentifier: PageIdentifier) => {
   return query;
 };
 
+const isOfType = <T extends PagePart>(value: PagePart, type: string): value is T => value._type === type;
+
+const filterByType = <T extends PagePart>(pageParts: PagePart[], type: string): T[] => pageParts.filter((value): value is T => isOfType<T>(value, type));
+
 export const getArticleParts = (pageParts: PagePart[], pageDataKind: string) => {
-  const parts = pageParts.filter(isArticleParts).find((pagePart) => pagePart.pageDataKind === pageDataKind)?.articles;
-  return isDefined(parts) ? parts : null;
+  const parts = filterByType<ArticleParts>(pageParts, 'pageArticles').find((pagePart) => pagePart.pageDataKind === pageDataKind);
+  return isDefined(parts)
+    ? {
+        articles: parts.articles,
+        sectionTitle: parts.sectionTitle,
+      }
+    : null;
 };
 
 export const getDataExplainedParts = (pageParts: PagePart[], pageDataKind: string) => {
-  const parts = pageParts.filter(isDataExplainedParts).find((pagePart) => pagePart.pageDataKind === pageDataKind)?.dataExplainedItem;
-  return isDefined(parts) ? parts : null;
+  const parts = filterByType<DataExplainedParts>(pageParts, 'pageDataExplained').find((pagePart) => pagePart.pageDataKind === pageDataKind);
+  return isDefined(parts)
+    ? {
+        item: parts.dataExplainedItem,
+        buttonTitle: parts.buttonTitle,
+        buttonText: parts.buttonText,
+      }
+    : null;
 };
 
 export const getFaqParts = (pageParts: PagePart[], pageDataKind: string) => {
-  const parts = pageParts.filter(isFaqParts).find((pagePart) => pagePart.pageDataKind === pageDataKind)?.faqQuestions;
-  return isDefined(parts) ? parts : null;
+  const parts = filterByType<FaqParts>(pageParts, 'pageFAQs').find((pagePart) => pagePart.pageDataKind === pageDataKind);
+  return isDefined(parts)
+    ? {
+        questions: parts.faqQuestions,
+        buttonTitle: parts.buttonTitle,
+        buttonText: parts.buttonText,
+        sectionTitle: parts.sectionTitle,
+      }
+    : null;
 };
 
 export const getHighlightedItemParts = (pageParts: PagePart[], pageDataKind: string) => {
-  const parts = pageParts.filter(isHighlightedItemParts).find((pagePart) => pagePart.pageDataKind === pageDataKind);
+  const parts = filterByType<HighlightedItemParts>(pageParts, 'pageHighlightedItems').find((pagePart) => pagePart.pageDataKind === pageDataKind);
   return isDefined(parts)
     ? {
         highlights: parts.highlights,
@@ -84,11 +88,11 @@ export const getHighlightedItemParts = (pageParts: PagePart[], pageDataKind: str
 };
 
 export const getLinkParts = (pageParts: PagePart[], pageDataKind: string) => {
-  const parts = pageParts.filter(isLinkParts).find((pagePart) => pagePart.pageDataKind === pageDataKind)?.links;
+  const parts = filterByType<LinkParts>(pageParts, 'pageLinks').find((pagePart) => pagePart.pageDataKind === pageDataKind)?.links;
   return isDefined(parts) ? parts : null;
 };
 
 export const getRichTextParts = (pageParts: PagePart[], pageDataKind: string) => {
-  const parts = pageParts.filter(isRichTextParts).find((pagePart) => pagePart.pageDataKind === pageDataKind)?.text;
+  const parts = filterByType<RichTextParts>(pageParts, 'pageRichText').find((pagePart) => pagePart.pageDataKind === pageDataKind)?.text;
   return isDefined(parts) ? parts : null;
 };

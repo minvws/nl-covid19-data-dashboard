@@ -2,7 +2,6 @@ import { colors } from '@corona-dashboard/common';
 import { ChevronDown, ChevronRight, Warning } from '@corona-dashboard/icons';
 import { ReactNode, isValidElement } from 'react';
 import styled from 'styled-components';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Markdown } from '~/components/markdown';
@@ -20,7 +19,6 @@ interface InformationBlockProps {
   title?: string;
   icon?: JSX.Element;
   description?: string | RichContentBlock[] | ReactNode;
-  articles?: ArticleSummary[] | null;
   pageLinks?:
     | {
         title: string;
@@ -37,8 +35,20 @@ interface InformationBlockProps {
   warning?: string;
   isArchivedHidden?: boolean;
   pageInformationHeader?: {
-    dataExplainedLink?: string;
-    faqLink?: string;
+    dataExplained?: {
+      button: {
+        header: string;
+        text: RichContentBlock[];
+      };
+      link: string;
+    };
+    faq?: {
+      button: {
+        header: string;
+        text: RichContentBlock[];
+      };
+      link: string;
+    };
   };
   onToggleArchived?: () => void;
 }
@@ -90,7 +100,7 @@ export function PageInformationBlock({
 
       {description && (
         <Tile hasTitle={!!title}>
-          <Box spacing={3} display="grid" gridTemplateColumns={{ md: 'repeat(2, 1fr)' }} style={{ gap: space[4] }}>
+          <Grid>
             <Box spacing={3}>
               {DescriptionBlock}
               {MetaDataBlock}
@@ -98,26 +108,26 @@ export function PageInformationBlock({
 
             {isPageInformationHeader && (
               <Box flex="1" display="flex" flexDirection="column" spacing={3}>
-                {pageInformationHeader.dataExplainedLink && (
-                  <PageInformationButton href={pageInformationHeader.dataExplainedLink}>
-                    {/* TODO: add Lokalize keys for this */}
-                    <BoldText>Meer informatie en databestanden</BoldText>
-                    <p>Cijferverantwoording</p>
+                {pageInformationHeader.dataExplained && (
+                  <PageInformationButton href={pageInformationHeader.dataExplained.link}>
+                    <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
+                    <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
+
                     <ChevronRight />
                   </PageInformationButton>
                 )}
 
-                {pageInformationHeader.faqLink && (
-                  <PageInformationButton href={`#${pageInformationHeader.faqLink}`}>
-                    {/* TODO: add Lokalize keys for this */}
-                    <BoldText>Vragen over dit onderwerp?</BoldText>
-                    <p>FAQ</p>
+                {pageInformationHeader.faq && (
+                  <PageInformationButton href={`#${pageInformationHeader.faq.link}`}>
+                    <BoldText>{pageInformationHeader.faq.button.header}</BoldText>
+                    <RichContent blocks={pageInformationHeader.faq.button.text} />
+
                     <ChevronDown />
                   </PageInformationButton>
                 )}
               </Box>
             )}
-          </Box>
+          </Grid>
 
           {pageLinks && pageLinks.length && <PageLinks links={pageLinks} />}
 
@@ -162,23 +172,36 @@ const MetadataBox = styled.div`
   }
 `;
 
+const Grid = styled(Box)`
+  display: grid;
+
+  @media ${mediaQueries.md} {
+    gap: ${space[4]};
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
 const PageInformationButton = styled(Anchor)`
-  padding: ${space[3]} ${space[4]};
-  border: 1px solid ${colors.gray3};
   background-color: ${colors.white};
   border-radius: ${radii[2]}px;
-  text-align: left;
-  cursor: pointer;
-  position: relative;
+  border: 1px solid ${colors.gray3};
   color: ${colors.black};
+  cursor: pointer;
+  padding: ${space[3]} ${space[4]};
+  position: relative;
+  text-align: left;
 
   svg {
     color: ${colors.primary};
-    width: 24px;
     position: absolute;
     right: ${space[2]};
     top: 50%;
     transform: translate(-50%, -50%);
+    width: 24px;
+  }
+
+  .underline {
+    text-decoration: underline;
   }
 `;
 
@@ -188,8 +211,8 @@ interface ArchiveButtonProps {
 
 const ArchiveButton = styled.button<ArchiveButtonProps>`
   background: ${({ isActive }) => (isActive ? colors.blue1 : colors.white)};
-  border: 1px solid ${({ isActive }) => (isActive ? colors.transparent : colors.gray3)};
   border-radius: 5px;
+  border: 1px solid ${({ isActive }) => (isActive ? colors.transparent : colors.gray3)};
   color: ${({ isActive }) => (isActive ? colors.blue8 : colors.blue8)};
   cursor: pointer;
   min-height: 36px;
@@ -197,8 +220,8 @@ const ArchiveButton = styled.button<ArchiveButtonProps>`
 
   &:hover {
     background: ${colors.blue8};
-    color: ${colors.white};
     border-color: ${colors.transparent};
+    color: ${colors.white};
   }
 
   &:hover:focus-visible {
