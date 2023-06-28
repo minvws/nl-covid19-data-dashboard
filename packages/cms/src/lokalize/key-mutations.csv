@@ -1,1 +1,5 @@
 timestamp,action,key,document_id,move_to
+2023-06-28T11:28:23.814Z,add,common.article_list.articles_page_link,i4tC336oRzoosjJ7ciMAty,__
+2023-06-28T11:28:25.329Z,add,common.article_teaser.categories.knowledge,1CbY4BczrwxgbzbvsJsVot,__
+2023-06-28T11:28:26.304Z,add,common.article_teaser.categories.news,i4tC336oRzoosjJ7ciMBOt,__
+2023-06-28T11:28:27.381Z,add,common.article_teaser.read_more,posbL87hXRea8MK3Cj6fYl,__
