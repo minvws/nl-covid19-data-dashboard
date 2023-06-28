@@ -1,3 +1,1 @@
-export const lokalizeDocumentsWithoutDrafts = `//groq
-  *[_type == 'lokalizeText' && !(_id in path("drafts.**"))]
-`;
+export const lokalizeDocumentsWithoutDrafts = `*[_type == 'lokalizeText' && !(_id in path("drafts.**"))]`;

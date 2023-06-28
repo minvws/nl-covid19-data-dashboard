@@ -1,0 +1,37 @@
+{
+  "definitions": {
+    "value": {
+      "title": "nl_sewer_value",
+      "type": "object",
+      "required": ["average", "date_of_insertion_unix", "date_unix"],
+      "additionalProperties": false,
+      "properties": {
+        "average": {
+          "type": ["integer", "null"]
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        },
+        "date_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_sewer",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}

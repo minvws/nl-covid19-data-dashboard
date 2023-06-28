@@ -18,6 +18,7 @@ export function getSchemaInfo(jsonDirectory: string = defaultJsonDirectory): Sch
   assert(fs.existsSync(jsonDirectory), `Path ${jsonDirectory} does not exist`);
 
   const fileList = fs.readdirSync(jsonDirectory);
+  const archivedFileList = fs.readdirSync(path.join(jsonDirectory, 'archived'));
 
   return {
     nl: {
@@ -33,6 +34,18 @@ export function getSchemaInfo(jsonDirectory: string = defaultJsonDirectory): Sch
     gm_collection: { files: ['GM_COLLECTION.json'], basePath: jsonDirectory },
     archived_nl: {
       files: ['NL.json'],
+      basePath: path.join(jsonDirectory, 'archived'),
+    },
+    archived_gm: {
+      files: getFileNames(archivedFileList, /^GM[0-9]+.json$/),
+      basePath: path.join(jsonDirectory, 'archived'),
+      customValidations: [
+        createChoroplethValidation(path.join(defaultJsonDirectory, 'archived', 'GM_COLLECTION.json'), 'gmcode', ['vaccine_coverage_per_age_group']),
+        validateMovingAverages,
+      ],
+    },
+    archived_gm_collection: {
+      files: ['GM_COLLECTION.json'],
       basePath: path.join(jsonDirectory, 'archived'),
     },
   };
