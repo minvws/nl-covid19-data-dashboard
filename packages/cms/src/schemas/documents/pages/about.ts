@@ -15,7 +15,7 @@ export const about = defineType({
     defineField({
       name: 'intro',
       type: 'localeBlock',
-      title: 'introductie (linker column)',
+      title: 'Introductie (linker column)',
       validation: localeValidation((rule) => rule.required()),
     }),
     defineField({
