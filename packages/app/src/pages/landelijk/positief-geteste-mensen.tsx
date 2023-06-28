@@ -367,11 +367,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             <GNumberBarChartTile data={data.g_number} />
           </InView>
 
-          {content.faqs && content.faqs.questions.length > 0 && (
-            <InView rootMargin="400px">
-              <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />
-            </InView>
-          )}
+          {content.faqs && content.faqs.questions.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 
           {content.articles && content.articles.articles.length > 0 && (
             <InView rootMargin="400px">
