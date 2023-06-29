@@ -10,13 +10,14 @@ import { SiteText } from '~/locale';
 import { Article } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { mergeAdjacentKpiBlocks } from '~/utils/merge-adjacent-kpi-blocks';
-import { ContentImage } from './cms/content-image';
-import { RichContent } from './cms/rich-content';
-import { LinkWithIcon } from './link-with-icon';
-import { PublicationDate } from './publication-date';
+import { ContentImage } from '../cms/content-image';
+import { RichContent } from '../cms/rich-content';
+import { LinkWithIcon } from '../link-with-icon';
+import { PublicationDate } from '../publication-date';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { colors } from '@corona-dashboard/common';
 import { space } from '~/style/theme';
+
 interface ArticleDetailProps {
   article: Article;
   text: SiteText['pages']['topical_page']['shared'];

@@ -6,3 +6,4 @@ timestamp,action,key,document_id,move_to
 2023-06-19T15:08:37.390Z,delete,__root.test_19062023_2,FW1NJKvivUBn8c48tQ653o,__
 2023-06-23T14:55:23.911Z,add,pages.topical_page.shared.secties.artikelen.categorie_filters.knowledge,Ku8wHpYNOt4eyma9n0xDYK,__
 2023-06-23T14:55:24.898Z,add,pages.topical_page.shared.secties.artikelen.categorie_filters.news,7Z5IwKV6fNGjCgSOcTM4Kl,__
+2023-06-29T10:43:45.602Z,add,common.article_list.articles_per_year,HZtFOUnNN2MvnI1rq0PJy5,__

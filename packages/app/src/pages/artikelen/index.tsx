@@ -2,12 +2,12 @@ import { colors } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
-import { ArticleSummary } from '~/components/article-teaser';
+import { ArticleSummary } from '~/components/articles/article-teaser';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
 import { RichContentSelect } from '~/components/rich-content-select';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { ArticlesList } from '~/domain/articles/articles-list';
+import { ArticlesList } from '~/components/articles/articles-list';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleCategoryType, allPossibleArticleCategories } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
@@ -17,6 +17,7 @@ import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/stat
 import { mediaQueries, space } from '~/style/theme';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { getCategories } from '~/components/articles/logic/get-categories';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textShared: siteText.pages.topical_page.shared,
@@ -40,7 +41,7 @@ export const getStaticProps = createGetStaticProps(
           "asset": cover.asset->
         },
         publicationDate,
-        mainCategory
+        mainCategory[0]
       }`;
   })
 );
@@ -52,18 +53,9 @@ const Articles = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
-  // TODO: Reorder the array so that News and Knoeldge come after "Alle"
   const articleCategories = useMemo(() => {
     // Find all categories currently active on published articles. Used later to filter out items from the cateogry menu which are not used.
-    const availableCategoriesWithDuplicates = content
-      .map((item) => {
-        // TODO: Abstract to function
-        const categories = [...(item.categories && item.categories.length ? item.categories : []), ...(item.mainCategory && item.mainCategory.length ? item.mainCategory : [])];
-
-        return categories;
-      })
-      .flat();
-
+    const availableCategoriesWithDuplicates = content.map((item) => getCategories(item)).flat();
     const availableCategoriesWithoutDuplicates = new Set(availableCategoriesWithDuplicates);
     const allAvailableCategories: string[] = ['__alles', ...availableCategoriesWithoutDuplicates].filter(Boolean);
     const filteredArticleCategoryList = allPossibleArticleCategories.filter((item) => allAvailableCategories.includes(item));
@@ -139,7 +131,7 @@ const Articles = (props: StaticProps<typeof getStaticProps>) => {
             </NarrowScreenDropDownContainer>
           )}
 
-          {content && content.length && <ArticlesList articleList={content} currentCategory={currentCategory} articleCategories={articleCategories} />}
+          {content && content.length && <ArticlesList articleList={content} currentCategory={currentCategory} />}
         </MaxWidth>
       </Box>
     </Layout>

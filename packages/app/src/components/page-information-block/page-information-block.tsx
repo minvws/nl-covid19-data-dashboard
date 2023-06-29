@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { Warning } from '@corona-dashboard/icons';
 import { isValidElement, ReactNode } from 'react';
 import styled from 'styled-components';
-import { ArticleSummary } from '~/components/article-teaser';
+import { ArticleSummary } from '~/components/articles/article-teaser';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Markdown } from '~/components/markdown';
