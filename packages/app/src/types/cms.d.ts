@@ -100,23 +100,24 @@ export interface InlineAttachment {
 
 export type Editorial = Record<string, never> & Article;
 export interface Article {
-  title: string;
+  categories: CategoriesTypes[];
+  category: string;
+  content: RichContentBlock[];
+  cover: ImageBlock;
+  intro: RichContentBlock[];
+  isHighlighted: boolean;
+  mainCategory: 'knowledge' | 'news';
+  metaDescription: string;
+  publicationDate: string;
   slug: {
     _key: string;
     _type: 'slug';
     current: string;
   };
-  categories?: CategoriesTypes[];
-  cover: ImageBlock;
+  summary: Block;
+  title: string;
   imageMobile?: ImageBlock;
   imageDesktop?: ImageBlock;
-  summary: Block;
-  intro: RichContentBlock[];
-  content: RichContentBlock[];
-  metaDescription: string;
-  publicationDate: string;
-  isHighlighted: boolean;
-  category: string;
 }
 
 export interface ImageBlock {

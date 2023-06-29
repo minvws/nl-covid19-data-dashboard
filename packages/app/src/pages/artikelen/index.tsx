@@ -7,9 +7,9 @@ import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
 import { RichContentSelect } from '~/components/rich-content-select';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { ArticlesList } from '~/domain/articles/articles-overview';
+import { ArticlesList } from '~/domain/articles/articles-list';
 import { Layout } from '~/domain/layout/layout';
-import { ArticleCategoryType, articleCategoryList } from '~/domain/topical/common/categories';
+import { ArticleCategoryType, allPossibleArticleCategories } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -39,25 +39,35 @@ export const getStaticProps = createGetStaticProps(
           ...cover,
           "asset": cover.asset->
         },
-        publicationDate
+        publicationDate,
+        mainCategory
       }`;
   })
 );
 
 const Articles = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, content, lastGenerated } = props;
+  const { pageText, lastGenerated, content } = props;
   const { commonTexts } = useIntl();
   const { textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
+  // TODO: Reorder the array so that News and Knoeldge come after "Alle"
   const articleCategories = useMemo(() => {
     // Find all categories currently active on published articles. Used later to filter out items from the cateogry menu which are not used.
-    const availableCategoriesWithDuplicates = content.map((item) => item.categories).flat();
-    const availableCategoriesWithoutDuplicates = new Set(availableCategoriesWithDuplicates);
-    const allAvailableCategories: string[] = ['__alles', ...availableCategoriesWithoutDuplicates, 'test', 'test1', 'test2', 'test3'].filter(Boolean);
+    const availableCategoriesWithDuplicates = content
+      .map((item) => {
+        // TODO: Abstract to function
+        const categories = [...(item.categories && item.categories.length ? item.categories : []), ...(item.mainCategory && item.mainCategory.length ? item.mainCategory : [])];
 
-    const filteredArticleCategoryList = articleCategoryList.filter((item) => allAvailableCategories.includes(item));
+        return categories;
+      })
+      .flat();
+
+    const availableCategoriesWithoutDuplicates = new Set(availableCategoriesWithDuplicates);
+    const allAvailableCategories: string[] = ['__alles', ...availableCategoriesWithoutDuplicates].filter(Boolean);
+    const filteredArticleCategoryList = allPossibleArticleCategories.filter((item) => allAvailableCategories.includes(item));
+
     const articleCategoriesWithLabels = filteredArticleCategoryList.map((item) => {
       return {
         label: textShared.secties.artikelen.categorie_filters[item],
@@ -90,7 +100,9 @@ const Articles = (props: StaticProps<typeof getStaticProps>) => {
     [router]
   );
 
-  const currentCategory = (articleCategoryList.includes(router.query.category as ArticleCategoryType) ? router.query.category : articleCategoryList[0]) as ArticleCategoryType;
+  const currentCategory = (
+    allPossibleArticleCategories.includes(router.query.category as ArticleCategoryType) ? router.query.category : allPossibleArticleCategories[0]
+  ) as ArticleCategoryType;
 
   return (
     <Layout {...commonTexts.articles_metadata} lastGenerated={lastGenerated}>
@@ -127,7 +139,7 @@ const Articles = (props: StaticProps<typeof getStaticProps>) => {
             </NarrowScreenDropDownContainer>
           )}
 
-          <ArticlesList articleSummaries={content} currentCategory={currentCategory} />
+          {content && content.length && <ArticlesList articleList={content} currentCategory={currentCategory} articleCategories={articleCategories} />}
         </MaxWidth>
       </Box>
     </Layout>
