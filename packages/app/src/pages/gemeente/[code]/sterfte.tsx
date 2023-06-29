@@ -2,13 +2,16 @@ import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { ChartTile, InView, Markdown, TimeSeriesChart } from '~/components';
+import { ChartTile } from '~/components/chart-tile';
+import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { PageArticlesTile } from '~/components/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block/page-information-block';
 import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
