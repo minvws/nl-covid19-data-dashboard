@@ -6,7 +6,7 @@ import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
 import { SanityImage } from '~/components/cms/sanity-image';
 import { getImageProps } from '~/lib/sanity';
-import theme, { space } from '~/style/theme';
+import { space, shadows } from '~/style/theme';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
 import { Text } from '../typography';
 
@@ -54,12 +54,8 @@ export function ContentImage({ node, contentWrapper, sizes, enableShadow = false
   ) : (
     <ContentWrapper>
       <Box as="figure" role="group" spacing={3} marginY={space[2]} textAlign="center">
-        <Box marginBottom={space[3]}>
-          {node.asset && (
-            <Box boxShadow={enableShadow ? theme.shadows.tile : null}>
-              <SanityImage {...getImageProps(node, { sizes })} />
-            </Box>
-          )}
+        <Box marginBottom={space[3]} boxShadow={enableShadow ? shadows.tile : null}>
+          {node.asset && <SanityImage {...getImageProps(node, { sizes })} />}
         </Box>
         {caption}
       </Box>

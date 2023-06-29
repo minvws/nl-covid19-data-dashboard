@@ -2,10 +2,6 @@ import { StringRule, defineField, defineType } from 'sanity';
 import { supportedLanguages } from '../../studio/i18n';
 import { BsCardImage } from 'react-icons/bs';
 
-export type LocaleText = {
-  [key: string]: string;
-};
-
 export const image = defineType({
   name: 'localeImage',
   type: 'object',
