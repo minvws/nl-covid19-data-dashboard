@@ -3,10 +3,16 @@ import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { ChartTile, Divider, InView, PageInformationBlock, TileList, TimeSeriesChart, WarningTile } from '~/components';
+import { ChartTile } from '~/components/chart-tile';
+import { Divider } from '~/components/divider';
+import { InView } from '~/components/in-view';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { PageArticlesTile } from '~/components/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
+import { PageInformationBlock } from '~/components/page-information-block/page-information-block';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout, NlLayout } from '~/domain/layout';
 import {
   Autumn2022ShotCoveragePerAgeGroup,
@@ -34,6 +40,7 @@ import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/t
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 const pageMetrics = [
@@ -177,27 +184,10 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               dataSources: [textShared.bronnen.rivm],
             }}
             pageLinks={content.links}
-            pageInformationHeader={{
-              dataExplained: content.dataExplained
-                ? {
-                    link: `/verantwoording/${content.dataExplained.item.slug.current}`,
-                    button: {
-                      header: content.dataExplained.buttonTitle,
-                      text: content.dataExplained.buttonText,
-                    },
-                  }
-                : undefined,
-              faq:
-                content.faqs && content.faqs.questions.length > 0
-                  ? {
-                      link: 'veelgestelde-vragen',
-                      button: {
-                        header: content.faqs.buttonTitle,
-                        text: content.faqs.buttonText,
-                      },
-                    }
-                  : undefined,
-            }}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           <BorderedKpiSection
@@ -309,9 +299,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             values={data.vaccine_coverage_per_age_group.values}
           />
 
-          {content.faqs && content.faqs.questions.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 
-          {content.articles && content.articles.articles.length > 0 && (
+          {content.articles && content.articles.articles?.length > 0 && (
             <InView rootMargin="400px">
               <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
             </InView>

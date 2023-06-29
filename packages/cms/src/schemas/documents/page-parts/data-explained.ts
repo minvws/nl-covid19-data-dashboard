@@ -35,7 +35,7 @@ export const dataExplained = defineType({
     }),
     defineField({
       title: 'Cijferverantwoordingpagina-link',
-      name: 'dataExplainedItem',
+      name: 'item',
       type: 'reference',
       to: [{ type: 'cijferVerantwoordingItem' }],
       validation: (rule) => rule.required(),

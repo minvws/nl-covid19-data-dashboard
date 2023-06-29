@@ -1,6 +1,6 @@
 import { Varianten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { InView } from '~/components';
+import { InView } from '~/components/in-view';
 import { PageArticlesTile } from '~/components/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -19,6 +19,7 @@ import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData 
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
 const pageMetrics = ['variants', 'named_difference'];
 
@@ -102,27 +103,10 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               dataSources: [textNl.bronnen.rivm],
             }}
             pageLinks={content.links}
-            pageInformationHeader={{
-              dataExplained: content.dataExplained
-                ? {
-                    link: `/verantwoording/${content.dataExplained.item.slug.current}`,
-                    button: {
-                      header: content.dataExplained.buttonTitle,
-                      text: content.dataExplained.buttonText,
-                    },
-                  }
-                : undefined,
-              faq:
-                content.faqs && content.faqs.questions.length > 0
-                  ? {
-                      link: 'veelgestelde-vragen',
-                      button: {
-                        header: content.faqs.buttonTitle,
-                        text: content.faqs.buttonText,
-                      },
-                    }
-                  : undefined,
-            }}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           {variantChart && variantLabels && (
@@ -159,9 +143,9 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
           )}
         </TileList>
 
-        {content.faqs && content.faqs.questions.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+        {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 
-        {content.articles && content.articles.articles.length > 0 && (
+        {content.articles && content.articles.articles?.length > 0 && (
           <InView rootMargin="400px">
             <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
           </InView>

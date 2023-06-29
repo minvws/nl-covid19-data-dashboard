@@ -2,11 +2,11 @@ import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { InView } from '~/components';
 import { AgeDemographic } from '~/components/age-demographic';
-import { Box } from '~/components/base';
+import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
 import { Divider } from '~/components/divider';
+import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -30,6 +30,7 @@ import { space } from '~/style/theme';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
 const pageMetrics = ['deceased_cbs', 'deceased_rivm_per_age_group_archived_20221231', 'deceased_rivm_archived_20221231'];
 
@@ -112,36 +113,19 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
               dataSources: [textNl.section_sterftemonitor.bronnen.cbs],
             }}
-            pageInformationHeader={{
-              dataExplained: content.dataExplained
-                ? {
-                    link: `/verantwoording/${content.dataExplained.item.slug.current}`,
-                    button: {
-                      header: content.dataExplained.buttonTitle,
-                      text: content.dataExplained.buttonText,
-                    },
-                  }
-                : undefined,
-              faq:
-                content.faqs && content.faqs.questions.length > 0
-                  ? {
-                      link: 'veelgestelde-vragen',
-                      button: {
-                        header: content.faqs.buttonTitle,
-                        text: content.faqs.buttonText,
-                      },
-                    }
-                  : undefined,
-            }}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="informational" />}
 
           <DeceasedMonitorSection data={dataCbs} text={textNl.section_sterftemonitor} showCauseMessage />
 
-          {content.faqs && content.faqs.questions.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 
-          {content.articles && content.articles.articles.length > 0 && (
+          {content.articles && content.articles.articles?.length > 0 && (
             <InView rootMargin="400px">
               <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
             </InView>

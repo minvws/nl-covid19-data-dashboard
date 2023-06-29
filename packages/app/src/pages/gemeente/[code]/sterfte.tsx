@@ -2,10 +2,16 @@ import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard
 import { Coronavirus } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { ChartTile, InView, KpiTile, KpiValue, Markdown, PageInformationBlock, TileList, TimeSeriesChart, TwoKpiSection, WarningTile } from '~/components';
+import { ChartTile, InView, Markdown, TimeSeriesChart } from '~/components';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
 import { PageArticlesTile } from '~/components/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
+import { PageInformationBlock } from '~/components/page-information-block/page-information-block';
+import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { GmLayout, Layout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
@@ -17,6 +23,7 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
 const pageMetrics = ['deceased_rivm_archived_20221231'];
 
@@ -98,27 +105,10 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}
-            pageInformationHeader={{
-              dataExplained: content.dataExplained
-                ? {
-                    link: `/verantwoording/${content.dataExplained.item.slug.current}`,
-                    button: {
-                      header: content.dataExplained.buttonTitle,
-                      text: content.dataExplained.buttonText,
-                    },
-                  }
-                : undefined,
-              faq:
-                content.faqs && content.faqs.questions.length > 0
-                  ? {
-                      link: 'veelgestelde-vragen',
-                      button: {
-                        header: content.faqs.buttonTitle,
-                        text: content.faqs.buttonText,
-                      },
-                    }
-                  : undefined,
-            }}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textGm.notification.message} variant="informational" />}
@@ -182,9 +172,9 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          {content.faqs && content.faqs.questions.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 
-          {content.articles && content.articles.articles.length > 0 && (
+          {content.articles && content.articles.articles?.length > 0 && (
             <InView rootMargin="400px">
               <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
             </InView>

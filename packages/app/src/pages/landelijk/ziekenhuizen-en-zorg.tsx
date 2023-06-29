@@ -2,9 +2,9 @@ import { colors, getLastFilledValue, TimeframeOption, TimeframeOptionsList } fro
 import { IntensiveCareOpnames } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { InView } from '~/components';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
+import { InView } from '~/components/in-view';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { PageArticlesTile } from '~/components/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
@@ -22,6 +22,7 @@ import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData 
 import { PagePart, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { trimLeadingNullValues } from '~/utils/trim-leading-null-values';
 
 const pageMetrics = [
@@ -126,27 +127,10 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [textNl.sources.lnaz],
             }}
             pageLinks={content.links}
-            pageInformationHeader={{
-              dataExplained: content.dataExplained
-                ? {
-                    link: `/verantwoording/${content.dataExplained.item.slug.current}`,
-                    button: {
-                      header: content.dataExplained.buttonTitle,
-                      text: content.dataExplained.buttonText,
-                    },
-                  }
-                : undefined,
-              faq:
-                content.faqs && content.faqs.questions.length > 0
-                  ? {
-                      link: 'veelgestelde-vragen',
-                      button: {
-                        header: content.faqs.buttonTitle,
-                        text: content.faqs.buttonText,
-                      },
-                    }
-                  : undefined,
-            }}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           <BorderedKpiSection
@@ -375,9 +359,9 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          {content.faqs && content.faqs.questions.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 
-          {content.articles && content.articles.articles.length > 0 && (
+          {content.articles && content.articles.articles?.length > 0 && (
             <InView rootMargin="400px">
               <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
             </InView>

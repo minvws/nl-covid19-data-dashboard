@@ -35,7 +35,7 @@ export type ArticleParts = {
 
 export type DataExplainedParts = {
   _type: 'pageDataExplained';
-  dataExplainedItem: {
+  item: {
     slug: { current: string };
   };
   buttonTitle: string;
@@ -44,7 +44,7 @@ export type DataExplainedParts = {
 
 export type FaqParts = {
   _type: 'pageFAQs';
-  faqQuestions: FAQuestionAndAnswer[];
+  questions: FAQuestionAndAnswer[];
   sectionTitle: string;
   buttonTitle: string;
   buttonText: RichContentBlock[];

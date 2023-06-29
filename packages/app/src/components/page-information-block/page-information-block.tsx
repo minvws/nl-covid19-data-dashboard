@@ -73,7 +73,7 @@ export function PageInformationBlock({
   const showArchivedToggleButton = typeof isArchivedHidden !== 'undefined' && typeof onToggleArchived !== 'undefined';
   const { commonTexts } = useIntl();
 
-  const isPageInformationHeader = !!pageInformationHeader;
+  const hasPageInformationHeader = !!pageInformationHeader;
 
   const MetaDataBlock = metadata ? (
     <MetadataBox>
@@ -106,7 +106,7 @@ export function PageInformationBlock({
               {MetaDataBlock}
             </Box>
 
-            {isPageInformationHeader && (
+            {hasPageInformationHeader && (
               <Box flex="1" display="flex" flexDirection="column" spacing={3}>
                 {pageInformationHeader.dataExplained && (
                   <PageInformationButton href={pageInformationHeader.dataExplained.link}>

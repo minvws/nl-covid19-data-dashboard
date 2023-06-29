@@ -10,17 +10,18 @@ export const getPagePartsQuery = (pageIdentifier: PageIdentifier) => {
         _type,
         pageDataKind,
         (_type == 'pageArticles') => {
+          // TODO: add updateDate field as introduced by COR-1601
           articles[]->{_id, title, slug, summary, intro, "cover": {"asset": cover.asset->}, mainCategory[0], publicationDate},
           sectionTitle
         },
         (_type == 'pageFAQs') => {
-          faqQuestions[]->{_id, title, content},
+          questions[]->{_id, title, content},
           buttonTitle,
           buttonText,
           sectionTitle
         },
         (_type == 'pageDataExplained') => {
-          dataExplainedItem->{slug},
+          item->{slug},
           buttonTitle,
           buttonText
         },
@@ -58,7 +59,7 @@ export const getDataExplainedParts = (pageParts: PagePart[], pageDataKind: strin
   const parts = filterByType<DataExplainedParts>(pageParts, 'pageDataExplained').find((pagePart) => pagePart.pageDataKind === pageDataKind);
   return isDefined(parts)
     ? {
-        item: parts.dataExplainedItem,
+        item: parts.item,
         buttonTitle: parts.buttonTitle,
         buttonText: parts.buttonText,
       }
@@ -69,7 +70,7 @@ export const getFaqParts = (pageParts: PagePart[], pageDataKind: string) => {
   const parts = filterByType<FaqParts>(pageParts, 'pageFAQs').find((pagePart) => pagePart.pageDataKind === pageDataKind);
   return isDefined(parts)
     ? {
-        questions: parts.faqQuestions,
+        questions: parts.questions,
         buttonTitle: parts.buttonTitle,
         buttonText: parts.buttonText,
         sectionTitle: parts.sectionTitle,

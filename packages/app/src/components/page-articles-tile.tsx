@@ -4,7 +4,7 @@ import { fontWeights, mediaQueries, radii, space } from '~/style/theme';
 import { Box } from './base';
 import { ChartTile } from './chart-tile';
 import { SanityImage } from './cms/sanity-image';
-import { Anchor, BoldText } from './typography';
+import { Anchor, BoldText, Text } from './typography';
 import { Link } from '~/utils/link';
 import styled, { css } from 'styled-components';
 import { PublicationDate } from './publication-date';
@@ -17,6 +17,7 @@ interface PageArticlesTileProps {
   title: string;
 }
 
+// TODO: this should be moved to the /articles/ directory, as picked up in COR-1601
 export const PageArticlesTile = ({ articles, title }: PageArticlesTileProps) => {
   const { commonTexts } = useIntl();
 
@@ -29,17 +30,13 @@ export const PageArticlesTile = ({ articles, title }: PageArticlesTileProps) => 
               <ArticleCardHeader>
                 <ArticleImage {...getImageProps(article.cover, {})} />
 
-                <Box display="grid" color={colors.gray5}>
+                <Box display="grid">
                   <BoldText color={colors.black}>{article.title}</BoldText>
-                  <Box>
-                    {article.mainCategory === 'knowledge' ? (
-                      commonTexts.article_teaser.categories.knowledge
-                    ) : (
-                      <>
-                        {commonTexts.article_teaser.categories.news} · <PublicationDate date={article.publicationDate} />
-                      </>
-                    )}
-                  </Box>
+                  <Text color={colors.gray8}>
+                    {/* TODO: this should be updated after COR-1601 implements publicationDate vs updateDate logic */}
+                    {article.mainCategory && `${commonTexts.article_teaser.categories[article.mainCategory]} · `}
+                    <PublicationDate date={article.publicationDate} />
+                  </Text>
                 </Box>
               </ArticleCardHeader>
 
@@ -91,6 +88,7 @@ const ArticleCardHeader = styled(Box)`
 
 const ArticleImage = styled(SanityImage)`
   object-fit: cover;
+  flex-shrink: 0;
 
   img {
     border-radius: ${radii[2]}px;

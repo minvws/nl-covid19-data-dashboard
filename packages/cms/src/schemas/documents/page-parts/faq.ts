@@ -41,7 +41,7 @@ export const faq = defineType({
     }),
     defineField({
       title: 'Vragen',
-      name: 'faqQuestions',
+      name: 'questions',
       type: 'array',
       of: [
         defineArrayMember({

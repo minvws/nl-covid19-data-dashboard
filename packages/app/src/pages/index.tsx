@@ -59,7 +59,7 @@ export const getStaticProps = createGetStaticProps(
     })(context);
     return {
       content: {
-        articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles'),
+        articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles')?.articles,
         topicalStructure: content.topicalStructure,
       },
     };
@@ -237,7 +237,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               text={textShared}
             />
 
-            {isPresent(content.articles) && isPresent(content.articles.articles) && <TopicalArticlesList articles={content.articles.articles} text={textShared} />}
+            {isPresent(content.articles) && <TopicalArticlesList articles={content.articles} text={textShared} />}
           </MaxWidth>
         </Box>
       </Box>
