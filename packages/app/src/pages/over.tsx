@@ -101,9 +101,8 @@ const TwoColumnLayout = styled(Box)`
   display: grid;
   grid-template-columns: 1fr;
   gap: ${space[4]} ${space[5]};
-  
+
   @media ${mediaQueries.sm} {
     grid-template-columns: 1fr 1fr;
   }
-}
 `;
