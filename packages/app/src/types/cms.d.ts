@@ -21,13 +21,39 @@ export type PageIdentifier =
   | 'vaccinations_page'
   | 'variants_page';
 
+export type PartTypes = 'pageArticles' | 'pageDataExplained' | 'pageFAQs' | 'pageHighlightedItems' | 'pageLinks' | 'pageRichText';
+
 export type PageBasePart = {
   pageDataKind: string;
 };
 
 export type ArticleParts = {
   _type: 'pageArticles';
-  articles: ArticleSummary[];
+  articles: Article[];
+  sectionTitle: string;
+} & PageBasePart;
+
+export type DataExplainedParts = {
+  _type: 'pageDataExplained';
+  item: {
+    slug: { current: string };
+  };
+  buttonTitle: string;
+  buttonText: RichContentBlock[];
+} & PageBasePart;
+
+export type FaqParts = {
+  _type: 'pageFAQs';
+  questions: FAQuestionAndAnswer[];
+  sectionTitle: string;
+  buttonTitle: string;
+  buttonText: RichContentBlock[];
+} & PageBasePart;
+
+export type HighlightedItemParts = {
+  _type: 'pageHighlightedItems';
+  highlights: ArticleSummary[];
+  showWeeklyHighlight: boolean;
 } & PageBasePart;
 
 export type LinkParts = {
@@ -38,18 +64,12 @@ export type LinkParts = {
   }[];
 } & PageBasePart;
 
-export type HighlightedItemParts = {
-  _type: 'pageHighlightedItems';
-  highlights: ArticleSummary[];
-  showWeeklyHighlight: boolean;
-} & PageBasePart;
-
 export type RichTextParts = {
   _type: 'pageRichText';
   text: RichContentBlock[];
 } & PageBasePart;
 
-export type PagePart = ArticleParts | LinkParts | HighlightedItemParts | RichTextParts;
+export type PagePart = ArticleParts | DataExplainedParts | FaqParts | HighlightedItemParts | LinkParts | RichTextParts;
 
 export type PagePartQueryResult<T extends PagePart = PagePart> = {
   pageParts: T[];
@@ -106,6 +126,7 @@ export interface Article {
     _type: 'slug';
     current: string;
   };
+  mainCategory: 'knowledge' | 'news';
   categories?: CategoriesTypes[];
   cover: ImageBlock;
   imageMobile?: ImageBlock;

@@ -1,29 +1,24 @@
-import css from '@styled-system/css';
-import { Warning } from '@corona-dashboard/icons';
-import { isValidElement, ReactNode } from 'react';
+import { colors } from '@corona-dashboard/common';
+import { ChevronDown, ChevronRight, Warning } from '@corona-dashboard/icons';
+import { ReactNode, isValidElement } from 'react';
 import styled from 'styled-components';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Markdown } from '~/components/markdown';
-import { HeadingLevel } from '~/components/typography';
-import { asResponsiveArray } from '~/style/utils';
+import { Anchor, BoldText, HeadingLevel } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
+import { useIntl } from '~/intl';
+import { mediaQueries, radii, space } from '~/style/theme';
 import { RichContentBlock } from '~/types/cms';
-import { Articles } from './components/articles';
+import { useScopedWarning } from '~/utils/use-scoped-warning';
 import { Header } from './components/header';
 import { Metadata, MetadataProps } from './components/metadata';
 import { PageLinks } from './components/page-links';
-import { WarningTile } from '~/components/warning-tile';
-import { useScopedWarning } from '~/utils/use-scoped-warning';
-import { useIntl } from '~/intl';
-import { colors } from '@corona-dashboard/common';
-import { space } from '~/style/theme';
 
 interface InformationBlockProps {
   title?: string;
   icon?: JSX.Element;
   description?: string | RichContentBlock[] | ReactNode;
-  articles?: ArticleSummary[] | null;
   pageLinks?:
     | {
         title: string;
@@ -39,6 +34,22 @@ interface InformationBlockProps {
   vrNameOrGmName?: string;
   warning?: string;
   isArchivedHidden?: boolean;
+  pageInformationHeader?: {
+    dataExplained?: {
+      button: {
+        header: string;
+        text: RichContentBlock[];
+      };
+      link: string;
+    };
+    faq?: {
+      button: {
+        header: string;
+        text: RichContentBlock[];
+      };
+      link: string;
+    };
+  };
   onToggleArchived?: () => void;
 }
 
@@ -46,7 +57,6 @@ export function PageInformationBlock({
   title,
   icon,
   description,
-  articles,
   pageLinks,
   metadata,
   referenceLink,
@@ -56,11 +66,14 @@ export function PageInformationBlock({
   vrNameOrGmName,
   warning,
   isArchivedHidden,
+  pageInformationHeader,
   onToggleArchived,
 }: InformationBlockProps) {
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
   const showArchivedToggleButton = typeof isArchivedHidden !== 'undefined' && typeof onToggleArchived !== 'undefined';
   const { commonTexts } = useIntl();
+
+  const hasPageInformationHeader = !!pageInformationHeader;
 
   const MetaDataBlock = metadata ? (
     <MetadataBox>
@@ -87,77 +100,119 @@ export function PageInformationBlock({
 
       {description && (
         <Tile hasTitle={!!title}>
-          <Box spacing={3} width="100%">
-            <Box
-              display={{ md: 'grid' }}
-              gridTemplateColumns="repeat(2, 1fr)"
-              width="100%"
-              spacing={{
-                _: pageLinks && pageLinks.length ? 0 : 3,
-                md: 0,
-              }}
-              css={css({
-                columnGap: space[5],
-              })}
-            >
-              {articles && articles.length ? (
-                <>
-                  <Box spacing={3}>
-                    {DescriptionBlock}
-                    {MetaDataBlock}
-                  </Box>
-
-                  <Articles articles={articles} />
-                </>
-              ) : (
-                <>
-                  {DescriptionBlock}
-                  {MetaDataBlock}
-                </>
-              )}
+          <Grid>
+            <Box spacing={3}>
+              {DescriptionBlock}
+              {MetaDataBlock}
             </Box>
 
-            {pageLinks && pageLinks.length && <PageLinks links={pageLinks} />}
-          </Box>
-          <Box marginY={space[3]}>
-            {showArchivedToggleButton && (
-              <StyledArchiveButton type="button" onClick={onToggleArchived} isActive={isArchivedHidden}>
-                {!isArchivedHidden ? commonTexts.common.show_archived : commonTexts.common.hide_archived}
-              </StyledArchiveButton>
+            {hasPageInformationHeader && (
+              <Box flex="1" display="flex" flexDirection="column" spacing={3}>
+                {pageInformationHeader.dataExplained && (
+                  <PageInformationButton href={pageInformationHeader.dataExplained.link}>
+                    <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
+                    <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
+
+                    <ChevronRight />
+                  </PageInformationButton>
+                )}
+
+                {pageInformationHeader.faq && (
+                  <PageInformationButton href={`#${pageInformationHeader.faq.link}`}>
+                    <BoldText>{pageInformationHeader.faq.button.header}</BoldText>
+                    <RichContent blocks={pageInformationHeader.faq.button.text} />
+
+                    <ChevronDown />
+                  </PageInformationButton>
+                )}
+              </Box>
             )}
-          </Box>
+          </Grid>
+
+          {pageLinks && pageLinks.length && <PageLinks links={pageLinks} />}
+
+          {showArchivedToggleButton && (
+            <Box marginY={space[3]}>
+              <ArchiveButton type="button" onClick={onToggleArchived} isActive={isArchivedHidden}>
+                {!isArchivedHidden ? commonTexts.common.show_archived : commonTexts.common.hide_archived}
+              </ArchiveButton>
+            </Box>
+          )}
         </Tile>
       )}
     </Box>
   );
 }
 
-const Tile = styled.div<{ hasTitle?: boolean }>((x) =>
-  css({
-    paddingTop: x.hasTitle ? undefined : asResponsiveArray({ _: space[2], sm: space[3] }),
-    display: 'flex',
-    flexWrap: 'wrap',
-    borderTop: x.hasTitle ? undefined : 'solid 2px gray2',
-  })
-);
+interface TileProps {
+  hasTitle?: boolean;
+}
 
-const MetadataBox = styled.div(
-  css({
-    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
-    marginBottom: asResponsiveArray({ _: space[3], md: '0' }),
-  })
-);
+const Tile = styled.div<TileProps>`
+  border-top: ${({ hasTitle }) => (!hasTitle ? `2px solid ${colors.gray2}` : undefined)};
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: ${({ hasTitle }) => (!hasTitle ? space[2] : undefined)};
 
-interface StyledArchiveButtonProps {
+  @media ${mediaQueries.sm} {
+    padding-top: ${({ hasTitle }) => (!hasTitle ? space[3] : undefined)};
+  }
+`;
+
+const MetadataBox = styled.div`
+  flex: 1 1 auto;
+  margin-bottom: ${space[3]};
+
+  @media ${mediaQueries.md} {
+    margin-bottom: 0;
+  }
+
+  @media ${mediaQueries.lg} {
+    flex: 1 1 40%;
+  }
+`;
+
+const Grid = styled(Box)`
+  display: grid;
+
+  @media ${mediaQueries.md} {
+    gap: ${space[4]};
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+const PageInformationButton = styled(Anchor)`
+  background-color: ${colors.white};
+  border-radius: ${radii[2]}px;
+  border: 1px solid ${colors.gray3};
+  color: ${colors.black};
+  cursor: pointer;
+  padding: ${space[3]} ${space[4]};
+  position: relative;
+  text-align: left;
+
+  svg {
+    color: ${colors.primary};
+    position: absolute;
+    right: ${space[2]};
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+  }
+
+  .underline {
+    text-decoration: underline;
+  }
+`;
+
+interface ArchiveButtonProps {
   isActive?: boolean;
 }
 
-const StyledArchiveButton = styled.button<StyledArchiveButtonProps>`
+const ArchiveButton = styled.button<ArchiveButtonProps>`
   background: ${({ isActive }) => (isActive ? colors.blue1 : colors.white)};
-  border: ${({ isActive }) => (isActive ? colors.transparent : colors.gray3)};
   border-radius: 5px;
-  border-style: solid;
-  border-width: 1px;
+  border: 1px solid ${({ isActive }) => (isActive ? colors.transparent : colors.gray3)};
   color: ${({ isActive }) => (isActive ? colors.blue8 : colors.blue8)};
   cursor: pointer;
   min-height: 36px;
@@ -165,8 +220,8 @@ const StyledArchiveButton = styled.button<StyledArchiveButtonProps>`
 
   &:hover {
     background: ${colors.blue8};
-    color: ${colors.white};
     border-color: ${colors.transparent};
+    color: ${colors.white};
   }
 
   &:hover:focus-visible {
