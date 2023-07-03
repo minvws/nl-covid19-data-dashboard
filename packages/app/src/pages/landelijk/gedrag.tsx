@@ -2,8 +2,6 @@ import { Bevolking } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { middleOfDayInSeconds } from '@corona-dashboard/common';
 import { useMemo, useRef, useState } from 'react';
-import { WarningTile } from '~/components';
-import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -19,13 +17,19 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { WarningTile } from '~/components/warning-tile';
+import { Box } from '~/components/base/box';
+import { InView } from '~/components/in-view';
 
 const pageMetrics = ['behavior_archived_20230411', 'behavior_annotations_archived_20230412', 'behavior_per_age_group_archived_20230411'];
 
@@ -48,6 +52,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.pageParts, 'behaviorPageArticles'),
+        faqs: getFaqParts(content.pageParts, 'behaviorPageFAQs'),
+        dataExplained: getDataExplainedParts(content.pageParts, 'behaviorPageDataExplained'),
       },
     };
   }
@@ -126,8 +132,10 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
             }}
-            referenceLink={textNl.reference.href}
-            articles={content.articles}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
@@ -205,6 +213,14 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
               source: textNl.bronnen.rivm,
             }}
           />
+
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
       </NlLayout>
     </Layout>

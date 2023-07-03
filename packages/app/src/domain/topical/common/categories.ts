@@ -1,5 +1,7 @@
 export const articleCategory = [
   '__alles',
+  'knowledge',
+  'news',
   'vaccinaties',
   'besmettingen',
   'sterfte',

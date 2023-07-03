@@ -1,8 +1,11 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import { Reproductiegetal } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
+import { InView } from '~/components/in-view';
 import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
 import { Markdown } from '~/components/markdown';
+import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
 import { TileList } from '~/components/tile-list';
@@ -12,28 +15,14 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectNlData,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
 const pageMetrics = ['reproduction'];
 
@@ -45,8 +34,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectNlData('reproduction', 'difference.reproduction__index_average'),
   async (context: GetStaticPropsContext) => {
@@ -63,10 +51,9 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       content: {
-        articles: getArticleParts(
-          content.parts.pageParts,
-          'reproductionPageArticles'
-        ),
+        articles: getArticleParts(content.parts.pageParts, 'reproductionPageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'reproductionPageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'reproductionPageDataExplained'),
         elements: content.elements,
       },
     };
@@ -79,10 +66,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
   const lastFilledValue = getLastFilledValue(data.reproduction);
 
   const { commonTexts } = useIntl();
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -97,12 +81,8 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.development_of_the_virus.title
-            }
-            screenReaderCategory={
-              commonTexts.sidebar.metrics.reproduction_number.title
-            }
+            category={commonTexts.sidebar.categories.development_of_the_virus.title}
+            screenReaderCategory={commonTexts.sidebar.metrics.reproduction_number.title}
             title={textNl.titel}
             icon={<Reproductiegetal aria-hidden="true" />}
             description={textNl.pagina_toelichting}
@@ -112,8 +92,10 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
             }}
-            referenceLink={textNl.reference.href}
-            articles={content.articles}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           <TwoKpiSection>
@@ -143,14 +125,15 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             </KpiWithIllustrationTile>
           </TwoKpiSection>
 
-          <ReproductionChartTile
-            data={data.reproduction}
-            timelineEvents={getTimelineEvents(
-              content.elements.timeSeries,
-              'reproduction'
-            )}
-            text={textNl}
-          />
+          <ReproductionChartTile data={data.reproduction} timelineEvents={getTimelineEvents(content.elements.timeSeries, 'reproduction')} text={textNl} />
+
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
       </NlLayout>
     </Layout>

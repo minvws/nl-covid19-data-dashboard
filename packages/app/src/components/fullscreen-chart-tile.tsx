@@ -16,12 +16,13 @@ import { Modal } from './modal';
 
 interface FullscreenChartTileProps {
   children: React.ReactNode;
-  metadata?: MetadataProps;
   disabled?: boolean;
+  id?: string;
+  metadata?: MetadataProps;
   disableBorder?: boolean;
 }
 
-export function FullscreenChartTile({ children, metadata, disabled, disableBorder }: FullscreenChartTileProps) {
+export const FullscreenChartTile = ({ children, disabled, id, metadata, disableBorder }: FullscreenChartTileProps) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const wasFullscreen = usePrevious(isFullscreen);
   const breakpoints = useBreakpoints();
@@ -37,7 +38,7 @@ export function FullscreenChartTile({ children, metadata, disabled, disableBorde
   const label = replaceVariablesInText(isFullscreen ? commonTexts.common.modal_close : commonTexts.common.modal_open, { subject: commonTexts.common.grafiek_singular });
 
   const tile = (
-    <Tile hasNoBorder={isFullscreen || disableBorder} height="100%">
+    <Tile hasNoBorder={isFullscreen || disableBorder} height="100%" id={id}>
       <Box
         paddingX={isFullscreen ? { _: space[3], sm: space[4] } : undefined}
         paddingY={isFullscreen ? { _: space[2], sm: space[3] } : undefined}
@@ -74,7 +75,7 @@ export function FullscreenChartTile({ children, metadata, disabled, disableBorde
   }
 
   return <div>{tile}</div>;
-}
+};
 
 interface StyledModalCloseButtonWrapperProps {
   isFullscreen: boolean;

@@ -59,7 +59,7 @@ export const getStaticProps = createGetStaticProps(
     })(context);
     return {
       content: {
-        articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles'),
+        articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles')?.articles,
         topicalStructure: content.topicalStructure,
       },
     };

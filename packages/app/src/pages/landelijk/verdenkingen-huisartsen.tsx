@@ -56,7 +56,6 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.nivel],
             }}
-            referenceLink={text.reference.href}
           />
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={text.belangrijk_bericht} variant="informational" />}

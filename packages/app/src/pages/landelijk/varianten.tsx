@@ -1,5 +1,8 @@
 import { Varianten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
+import { InView } from '~/components/in-view';
+import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
@@ -7,15 +10,16 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { getVariantChartData, getVariantOrderColors, getVariantTableData } from '~/domain/variants/static-props';
 import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
+import { VariantDynamicLabels } from '~/domain/variants/variants-table-tile/types';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, selectNlData, getLokalizeTexts } from '~/static-props/get-data';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { VariantDynamicLabels } from '~/domain/variants/variants-table-tile/types';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
 const pageMetrics = ['variants', 'named_difference'];
 
@@ -51,6 +55,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.pageParts, 'variantsPageArticles'),
+        faqs: getFaqParts(content.pageParts, 'variantsPageFAQs'),
+        dataExplained: getDataExplainedParts(content.pageParts, 'variantsPageDataExplained'),
         links: getLinkParts(content.pageParts, 'variantsPageLinks'),
       },
     };
@@ -96,9 +102,11 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
             }}
-            referenceLink={textNl.reference.href}
             pageLinks={content.links}
-            articles={content.articles}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           {variantChart && variantLabels && (
@@ -134,6 +142,14 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             />
           )}
         </TileList>
+
+        {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+        {content.articles && content.articles.articles?.length > 0 && (
+          <InView rootMargin="400px">
+            <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+          </InView>
+        )}
       </NlLayout>
     </Layout>
   );

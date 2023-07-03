@@ -18,6 +18,7 @@ import { ChevronRight, Download, External as ExternalLinkIcon } from '@corona-da
 import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils';
 import React from 'react';
+import { InlineText } from '../typography';
 
 type ElementAlignment = 'start' | 'center' | 'end' | 'stretch';
 
@@ -34,22 +35,14 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
   const serializers = {
     types: {
       inlineBlock: (props: unknown) => {
-        assert(
-          PortableText.defaultSerializers.types?.inlineBlock,
-          `[${RichContent.name}] PortableText needs to provide a serializer for inlineBlock content`
-        );
+        assert(PortableText.defaultSerializers.types?.inlineBlock, `[${RichContent.name}] PortableText needs to provide a serializer for inlineBlock content`);
         return <ContentWrapper>{PortableText.defaultSerializers.types.inlineBlock(props)}</ContentWrapper>;
       },
       block: (props: unknown) => {
-        assert(
-          PortableText.defaultSerializers.types?.block,
-          `[${RichContent.name}] PortableText needs to provide a serializer for block content`
-        );
+        assert(PortableText.defaultSerializers.types?.block, `[${RichContent.name}] PortableText needs to provide a serializer for block content`);
         return <ContentWrapper>{PortableText.defaultSerializers.types.block(props)}</ContentWrapper>;
       },
-      image: (props: { node: ImageBlock | RichContentImageBlock }) => (
-        <ContentImage contentWrapper={contentWrapper} sizes={imageSizes} {...props} />
-      ),
+      image: (props: { node: ImageBlock | RichContentImageBlock }) => <ContentImage contentWrapper={contentWrapper} sizes={imageSizes} {...props} />,
       inlineCollapsible: (props: { node: InlineCollapsibleList }) => {
         if (!props.node.content.inlineBlockContent) return null;
 
@@ -86,12 +79,14 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
         return (
           <>
             {children.map((child, index) => (
-              <React.Fragment key={index}>
-                {child.includes('{{kpiValue}}') && variableValue ? replaceVariablesInText(child, { kpiValue: variableValue }) : child}
-              </React.Fragment>
+              <React.Fragment key={index}>{child.includes('{{kpiValue}}') && variableValue ? replaceVariablesInText(child, { kpiValue: variableValue }) : child}</React.Fragment>
             ))}
           </>
         );
+      },
+      u: (props: { children: string[] }) => {
+        const { children } = props;
+        return <InlineText className="underline">{children}</InlineText>;
       },
     },
   };

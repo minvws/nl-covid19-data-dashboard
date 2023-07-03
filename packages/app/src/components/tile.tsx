@@ -7,17 +7,18 @@ import { asResponsiveArray } from '~/style/utils';
 interface TileProps {
   children: React.ReactNode;
   height?: number | string;
+  id?: string;
   hasNoBorder?: boolean;
   hasNoPaddingBottom?: boolean;
 }
 
-export function Tile({ children, height, hasNoBorder = false, hasNoPaddingBottom = false }: TileProps) {
+export const Tile = ({ children, height, id, hasNoBorder = false, hasNoPaddingBottom = false }: TileProps) => {
   return (
-    <StyledTile height={height} hasNoBorder={hasNoBorder} hasNoPaddingBottom={hasNoPaddingBottom}>
+    <StyledTile height={height} hasNoBorder={hasNoBorder} hasNoPaddingBottom={hasNoPaddingBottom} id={id}>
       {children}
     </StyledTile>
   );
-}
+};
 
 const StyledTile = styled.article<{
   height?: number | string;

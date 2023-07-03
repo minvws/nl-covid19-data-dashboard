@@ -45,8 +45,8 @@ import { AddMutation, DeleteMutation, finalizeMoveMutations, getCollapsedAddDele
   const additions = addDeleteMutations.filter(hasValueAtKey('action', 'add' as const));
 
   await syncAdditionsToProduction(additions);
-})().catch((err) => {
-  console.error('An error occurred:', err.message);
+})().catch((error) => {
+  console.error('An error occurred:', error);
   process.exit(1);
 });
 

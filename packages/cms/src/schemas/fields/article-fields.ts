@@ -39,6 +39,20 @@ export const ARTICLE_FIELDS = [
     validation: (rule) => rule.required(),
   }),
   defineField({
+    title: 'Hoofdcategorie',
+    name: 'mainCategory',
+    type: 'array',
+    of: [defineArrayMember({ type: 'string' })],
+    options: {
+      layout: 'grid',
+      list: [
+        { title: 'Kennisartikelen', value: 'knowledge' },
+        { title: 'Nieuwsartikelen', value: 'news' },
+      ],
+    },
+    validation: (rule) => rule.required().min(1).max(1),
+  }),
+  defineField({
     title: 'Categorieën instellen',
     name: 'categories',
     type: 'array',
