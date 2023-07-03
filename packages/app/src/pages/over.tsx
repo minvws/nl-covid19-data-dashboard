@@ -69,7 +69,9 @@ const Over = (props: StaticProps<typeof getStaticProps>) => {
         <Box textVariant="body1" bg="white">
           <Box paddingBottom={space[5]}>
             <Box marginBottom={space[4]} maxWidth={sizes.maxWidthText}>
-              <Heading level={1}>{content.title}</Heading>
+              <Heading variant="h2" level={1}>
+                {content.title}
+              </Heading>
             </Box>
             <TwoColumnLayout>
               <div>
