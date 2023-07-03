@@ -20,12 +20,13 @@ export const image = defineType({
           name: 'alt',
           title: 'Alternatieve tekst (toegankelijkheid)',
           type: 'string',
-          validation: (rule: StringRule) => rule.required().error('Alt text is verplicht'),
+          validation: (rule) => rule.required().error('Alt text is verplicht'),
         }),
         defineField({
           name: 'isFullWidth',
           title: 'Afbeelding breed weergeven?',
           type: 'boolean',
+          initialValue: false,
         }),
         defineField({
           name: 'caption',
