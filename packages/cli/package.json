@@ -14,7 +14,7 @@
     "lodash": "^4.17.21",
     "meow": "^9.0.0",
     "p-memoize": "^4.0.3",
-    "semver": "^7.3.5",
+    "semver": "^7.5.2",
     "simple-git": "^3.16.0",
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.2.2",
