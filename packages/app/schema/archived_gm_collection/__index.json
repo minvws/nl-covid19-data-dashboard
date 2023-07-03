@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "archived_gm_collection",
+  "additionalProperties": false,
+  "required": [
+    "last_generated",
+    "proto_name",
+    "name",
+    "code",
+    "sewer_archived_20230623"
+  ],
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "$ref": "#/$defs/archived_gm_collection_id"
+    },
+    "name": {
+      "$ref": "#/$defs/archived_gm_collection_id"
+    },
+    "code": {
+      "$ref": "#/$defs/archived_gm_collection_id"
+    },
+    "sewer_archived_20230623": {
+      "type": "array",
+      "minItems": 342,
+      "maxItems": 342,
+      "items": {
+        "$ref": "sewer.json"
+      }
+    }
+  },
+  "$defs": {
+    "archived_gm_collection_id": {
+      "type": "string",
+      "enum": ["GM_COLLECTION"]
+    }
+  }
+}

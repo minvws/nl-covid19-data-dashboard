@@ -2,6 +2,7 @@ import { BsNewspaper } from 'react-icons/bs';
 import { ValidationContext, defineArrayMember, defineField, defineType } from 'sanity';
 import { isDefined } from 'ts-is-present';
 import { isAdmin } from '../../../studio/roles';
+import { localeStringValidation } from '../../../studio/validation/locale-validation';
 import { PAGE_IDENTIFIER_REFERENCE_FIELDS, PAGE_IDENTIFIER_REFERENCE_FIELDSET } from '../../fields/page-fields';
 import { isArticleValidationContextParent } from '../../utils/articles';
 
@@ -58,6 +59,12 @@ export const articles = defineType({
 
           return true;
         }),
+    }),
+    defineField({
+      title: 'Sectie titel',
+      name: 'sectionTitle',
+      type: 'localeString',
+      validation: localeStringValidation((rule) => rule.required()),
     }),
   ],
 });

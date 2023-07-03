@@ -86,6 +86,7 @@ export const gmData: MunicipalityInfo[] = [
     name: 'Amsterdam',
     vrCode: 'VR13',
     gemcode: 'GM0363',
+    searchTerms: ['Damsco'],
   },
   {
     name: 'Apeldoorn',
@@ -528,7 +529,7 @@ export const gmData: MunicipalityInfo[] = [
     vrCode: 'VR15',
     gemcode: 'GM0518',
     displayName: 'Den Haag',
-    searchTerms: ['Den Haag'],
+    searchTerms: ['Den Haag', 'Agga', 'Skiffa'],
   },
   {
     name: 'Groningen',
@@ -1227,6 +1228,7 @@ export const gmData: MunicipalityInfo[] = [
     name: 'Rotterdam',
     vrCode: 'VR17',
     gemcode: 'GM0599',
+    searchTerms: ['Roffa'],
   },
   {
     name: 'Rozendaal',
@@ -1383,6 +1385,7 @@ export const gmData: MunicipalityInfo[] = [
     name: 'Tilburg',
     vrCode: 'VR20',
     gemcode: 'GM0855',
+    searchTerms: ['Tilly', 'Chillburg'],
   },
   {
     name: 'Tubbergen',
@@ -1424,6 +1427,7 @@ export const gmData: MunicipalityInfo[] = [
     name: 'Utrecht',
     vrCode: 'VR09',
     gemcode: 'GM0344',
+    searchTerms: ['Utca'],
   },
   {
     name: 'Utrechtse Heuvelrug',

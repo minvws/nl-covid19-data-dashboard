@@ -68,9 +68,7 @@ const syncMissingTextsToPrd = async (allDevelopmentTexts: LokalizeText[], allPro
         publish_count: 0,
       };
 
-      const count = await productionClient.fetch(`//groq
-        count(*[_type == 'lokalizeText' && key == '${documentToInject.key}'])
-      `);
+      const count = await productionClient.fetch(`count(*[_type == 'lokalizeText' && key == '${documentToInject.key}'])`);
 
       if (count === 0) {
         productionTransaction.createOrReplace(documentToInject);
@@ -147,13 +145,9 @@ const syncDeletionsToProd = async (allDevelopmentTexts: LokalizeText[], allProdu
    * Only query published documents, we do not want to inject drafts from
    * development as drafts into production.
    */
-  const allDevelopmentTexts = (await developmentClient.fetch(`//groq
-    '${lokalizeDocumentsWithoutDrafts}' | order(subject asc)
-  `)) as LokalizeText[];
+  const allDevelopmentTexts = (await developmentClient.fetch(`${lokalizeDocumentsWithoutDrafts} | order(subject asc)`)) as LokalizeText[];
 
-  const allProductionTexts = (await productionClient.fetch(`//groq
-    '${lokalizeDocumentsWithoutDrafts}' | order(subject asc)
-  `)) as LokalizeText[];
+  const allProductionTexts = (await productionClient.fetch(`${lokalizeDocumentsWithoutDrafts} | order(subject asc)`)) as LokalizeText[];
 
   await syncMissingTextsToPrd(allDevelopmentTexts, allProductionTexts);
   await syncDeletionsToProd(allDevelopmentTexts, allProductionTexts);

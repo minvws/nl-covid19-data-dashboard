@@ -3,6 +3,8 @@
  * This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.
  */
 export const dataStructure = {
+  archived_gm: { sewer_archived_20230623: ['average', 'total_number_of_samples', 'sampled_installation_count', 'total_installation_count', 'data_is_outdated'] },
+  archived_gm_collection: { sewer_archived_20230623: ['average', 'total_installation_count', 'data_is_outdated'] },
   archived_nl: {
     behavior_archived_20230411: [
       'number_of_participants',
@@ -65,6 +67,7 @@ export const dataStructure = {
     ],
     behavior_annotations_archived_20230412: ['behavior_indicator', 'message_title_nl', 'message_title_en', 'message_desc_nl', 'message_desc_en'],
     doctor_archived_20210903: ['covid_symptoms_per_100k', 'covid_symptoms'],
+    sewer_archived_20230623: ['average'],
   },
   gm: {
     deceased_rivm_archived_20221231: ['covid_daily', 'covid_daily_moving_average', 'covid_total'],

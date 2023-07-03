@@ -2,21 +2,33 @@ import { colors, DAY_IN_SECONDS, TimeframeOption, TimeframeOptionsList, WEEK_IN_
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { last } from 'lodash';
 import { GetStaticPropsContext } from 'next';
-import { ChartTile, DynamicChoropleth, TwoKpiSection, ChoroplethTile, KpiTile, KpiValue, PageInformationBlock, TileList, TimeSeriesChart } from '~/components';
+import { useState } from 'react';
+import { ChartTile } from '~/components/chart-tile';
+import { DynamicChoropleth } from '~/components/choropleth';
+import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
-import { Layout, GmLayout } from '~/domain/layout';
+import { InView } from '~/components/in-view';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
+import { PageInformationBlock } from '~/components/page-information-block/page-information-block';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { GmLayout, Layout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { countTrailingNullValues, getBoundaryDateStartUnix, replaceVariablesInText, useReverseRouter } from '~/utils';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { useState } from 'react';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
 const pageMetrics = ['hospital_nice'];
 
@@ -51,6 +63,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.parts.pageParts, 'hospitalPageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'hospitalPageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'hospitalPageDataExplained'),
         links: getLinkParts(content.parts.pageParts, 'hospitalPageLinks'),
         elements: content.elements,
       },
@@ -107,11 +121,13 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
             }}
-            referenceLink={textGm.reference.href}
             pageLinks={content.links}
-            articles={content.articles}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           <TwoKpiSection>
@@ -206,6 +222,14 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               }}
             />
           </ChoroplethTile>
+
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
       </GmLayout>
     </Layout>
