@@ -41,7 +41,8 @@ export const getStaticProps = createGetStaticProps(
           "asset": cover.asset->
         },
         publicationDate,
-        mainCategory[0]
+        mainCategory[0],
+        updatedDate,
       }`;
   })
 );

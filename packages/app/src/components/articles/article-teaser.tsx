@@ -3,23 +3,26 @@ import { ChevronRight } from '@corona-dashboard/icons';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
 import { radii, space } from '~/style/theme';
-import { Article, ArticleMainCategory, Block, ImageBlock } from '~/types/cms';
+import { Article, ArticleMainCategory, ArticlePublishedDate, ArticleUpdatedDate, Block, ImageBlock } from '~/types/cms';
+import { replaceComponentsInText } from '~/utils';
 import { Link } from '~/utils/link';
 import { BackgroundImage } from '../background-image';
 import { Box } from '../base';
 import { PublicationDate } from '../publication-date';
 import { Heading, Text } from '../typography';
+import { getDateToUse } from './logic/get-date-to-use';
 
-export type ArticleSummary = Pick<Article, 'title' | 'slug' | 'summary' | 'cover' | 'category' | 'categories' | 'publicationDate' | 'mainCategory'>;
+export type ArticleSummary = Pick<Article, 'title' | 'slug' | 'summary' | 'cover' | 'category' | 'categories' | 'publicationDate' | 'mainCategory' | 'updatedDate'>;
 
 interface ArticleTeaserProps {
   cover: ImageBlock;
   coverSizes: string[][];
+  mainCategory: ArticleMainCategory | null;
+  publicationDate: ArticlePublishedDate;
   slug: string;
   summary: Block;
   title: string;
-  mainCategory: ArticleMainCategory | null;
-  publicationDate: string;
+  updatedDate: ArticleUpdatedDate;
 }
 
 const ArticleTeaserImage = ({ image, sizes }: { image: ImageBlock; sizes: string[][] }) => {
@@ -31,8 +34,9 @@ const ArticleTeaserImage = ({ image, sizes }: { image: ImageBlock; sizes: string
 };
 
 export const ArticleTeaser = (props: ArticleTeaserProps) => {
-  const { title, slug, summary, cover, coverSizes, mainCategory, publicationDate } = props;
+  const { title, slug, summary, cover, coverSizes, mainCategory, publicationDate, updatedDate } = props;
   const { commonTexts } = useIntl();
+  const { publishedOrUpdatedDate, isUpdatedAfterPublishing } = getDateToUse(publicationDate, updatedDate, mainCategory);
 
   return (
     <Box as="article" border={`1px solid ${colors.gray3}`} borderRadius={`${radii[2]}px`} overflow="hidden" marginBottom={{ _: space[4], xs: 0 }}>
@@ -51,7 +55,15 @@ export const ArticleTeaser = (props: ArticleTeaserProps) => {
               <Text>{summary}</Text>
             </Box>
 
-            <ArticlePublicationDate date={publicationDate} />
+            {isUpdatedAfterPublishing ? (
+              <Box color={colors.gray8} display="flex">
+                {replaceComponentsInText(commonTexts.article_teaser.articles_updated_date, {
+                  date: <ArticlePublicationDate marginLeft={space[1]} date={publishedOrUpdatedDate} />,
+                })}
+              </Box>
+            ) : (
+              <ArticlePublicationDate date={publishedOrUpdatedDate} />
+            )}
 
             <ArticleCTA aria-hidden="true">
               <span>{commonTexts.common.read_more}</span>
@@ -111,8 +123,13 @@ const ArticleTeaserCard = styled.div`
   }
 `;
 
-const ArticlePublicationDate = styled(PublicationDate)`
+interface ArticlePublicationDate {
+  marginLeft?: string;
+}
+
+const ArticlePublicationDate = styled(PublicationDate)<ArticlePublicationDate>`
   color: ${colors.gray8};
+  margin-left: ${({ marginLeft }) => (marginLeft ? marginLeft : undefined)};
 `;
 
 const ArticleCTA = styled.strong`

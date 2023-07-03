@@ -8,6 +8,7 @@ import { useIntl } from '~/intl';
 import { mediaQueries, space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils';
 import { getCategories } from './logic/get-categories';
+import { getDateToUse } from './logic/get-date-to-use';
 
 interface ArticlesListProps {
   articleList: ArticleSummary[];
@@ -26,15 +27,16 @@ export const ArticlesList = ({ articleList, currentCategory }: ArticlesListProps
 
   // Articles are grouped by year.
   const articleListPerYear = articleListForDisplay.reduce((object: Record<string, ArticleSummary[]>, currentArticle) => {
-    const { publicationDate } = currentArticle;
-    const yearOfPublishing = new Date(publicationDate).getFullYear();
+    const { publicationDate, updatedDate, mainCategory } = currentArticle;
+    const { publishedOrUpdatedDate } = getDateToUse(publicationDate, updatedDate, mainCategory);
+    const yearOfPublishingOrUpdate = new Date(publishedOrUpdatedDate).getFullYear();
 
     // Create a key for a given year if it does not already contain that key.
-    if (!Object.hasOwnProperty.call(object, yearOfPublishing)) {
-      object[yearOfPublishing] = [];
+    if (!Object.hasOwnProperty.call(object, yearOfPublishingOrUpdate)) {
+      object[yearOfPublishingOrUpdate] = [];
     }
 
-    object[yearOfPublishing].push(currentArticle);
+    object[yearOfPublishingOrUpdate].push(currentArticle);
 
     return object;
   }, {});
@@ -42,33 +44,32 @@ export const ArticlesList = ({ articleList, currentCategory }: ArticlesListProps
   const articleTeasers = Object.keys(articleListPerYear)
     // Articles list sorted by year to show the latest year first.
     .sort((a, b) => parseFloat(b) - parseFloat(a))
-    .map((yearKey, index) => {
-      return (
-        <section key={index}>
-          <Box borderBottom={`1px solid ${colors.gray3}`} display="block" marginY={space[4]}>
-            <BoldText>{replaceVariablesInText(commonTexts.article_list.articles_per_year, { year: yearKey })}</BoldText>
-          </Box>
+    .map((yearKey, index) => (
+      <section key={index}>
+        <Box borderBottom={`1px solid ${colors.gray3}`} display="block" marginY={space[4]}>
+          <BoldText>{replaceVariablesInText(commonTexts.article_list.articles_per_year, { year: yearKey })}</BoldText>
+        </Box>
 
-          <ArticlesGrid>
-            {articleListPerYear[yearKey].map((article) => (
-              <ArticleTeaser
-                key={article.slug.current}
-                title={article.title}
-                slug={article.slug.current}
-                summary={article.summary}
-                cover={article.cover}
-                mainCategory={article.mainCategory ? article.mainCategory : null}
-                publicationDate={article.publicationDate}
-                coverSizes={[
-                  // Viewport min-width 768px display images at max. 445px wide.
-                  ['768px', '445px'],
-                ]}
-              />
-            ))}
-          </ArticlesGrid>
-        </section>
-      );
-    });
+        <ArticlesGrid>
+          {articleListPerYear[yearKey].map((article) => (
+            <ArticleTeaser
+              key={article.slug.current}
+              title={article.title}
+              slug={article.slug.current}
+              summary={article.summary}
+              cover={article.cover}
+              mainCategory={article.mainCategory ? article.mainCategory : null}
+              publicationDate={article.publicationDate}
+              updatedDate={article.updatedDate}
+              coverSizes={[
+                // Viewport min-width 768px display images at max. 445px wide.
+                ['768px', '445px'],
+              ]}
+            />
+          ))}
+        </ArticlesGrid>
+      </section>
+    ));
 
   return (
     <Box as="article" margin="0" maxWidth="100%">

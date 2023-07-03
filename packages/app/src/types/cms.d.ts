@@ -101,6 +101,9 @@ export interface InlineAttachment {
 export type Editorial = Record<string, never> & Article;
 
 export type ArticleMainCategory = 'knowledge' | 'news';
+export type ArticleUpdatedDate = string | null;
+export type ArticlePublishedDate = string;
+
 export interface Article {
   categories: CategoriesTypes[];
   category: string;
@@ -110,7 +113,7 @@ export interface Article {
   isHighlighted: boolean;
   mainCategory: ArticleMainCategory;
   metaDescription: string;
-  publicationDate: string;
+  publicationDate: ArticlePublishedDate;
   slug: {
     _key: string;
     _type: 'slug';
@@ -118,6 +121,7 @@ export interface Article {
   };
   summary: Block;
   title: string;
+  updatedDate: ArticleUpdatedDate;
   imageMobile?: ImageBlock;
   imageDesktop?: ImageBlock;
 }
