@@ -10,6 +10,18 @@ export const ARTICLE_FIELDS = [
     validation: localeStringValidation((rule) => rule.required()),
   }),
   defineField({
+    title: 'Update datum',
+    name: 'updatedDate',
+    type: 'datetime',
+    description:
+      'Dit veld moet worden ingevuld wanneer een "kennis" artikel wordt bijgewerkt, zodat de datum op het dashboard de bijgewerkte datum weergeeft in plaats van de oorspronkelijke publicatiedatum. Als dit veld niet wordt bijgewerkt, blijft de publicatiedatum zichtbaar.',
+    options: {
+      dateFormat: DATE_FORMAT,
+      timeFormat: TIME_FORMAT,
+      timeStep: 15,
+    },
+  }),
+  defineField({
     title: 'Slug',
     name: 'slug',
     type: 'slug',
