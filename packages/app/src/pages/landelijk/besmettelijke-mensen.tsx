@@ -3,7 +3,7 @@ import { Ziektegolf } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { ChartTile } from '~/components/chart-tile';
 import { InView } from '~/components/in-view';
-import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';

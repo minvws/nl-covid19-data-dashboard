@@ -2,17 +2,28 @@ import { colors } from '@corona-dashboard/common';
 import { ChevronRight } from '@corona-dashboard/icons';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
-import { radii, space } from '~/style/theme';
+import { mediaQueries, radii, space } from '~/style/theme';
 import { Article, ArticleMainCategory, ArticlePublishedDate, ArticleUpdatedDate, Block, ImageBlock } from '~/types/cms';
-import { replaceComponentsInText } from '~/utils';
 import { Link } from '~/utils/link';
 import { BackgroundImage } from '../background-image';
 import { Box } from '../base';
-import { PublicationDate } from '../publication-date';
-import { Heading, Text } from '../typography';
-import { getDateToUse } from './logic/get-date-to-use';
+import { Anchor, Heading, Text } from '../typography';
+import { ArticleUpdateOrPublishingDate } from './article-update-or-publishing-date';
 
 export type ArticleSummary = Pick<Article, 'title' | 'slug' | 'summary' | 'cover' | 'category' | 'categories' | 'publicationDate' | 'mainCategory' | 'updatedDate'>;
+
+interface ArticleTeaserImageProps {
+  image: ImageBlock;
+  sizes: string[][];
+}
+
+const ArticleTeaserImage = ({ image, sizes }: ArticleTeaserImageProps) => {
+  return (
+    <div className="article-teaser-image">
+      <BackgroundImage image={image} height="200px" sizes={sizes} />
+    </div>
+  );
+};
 
 interface ArticleTeaserProps {
   cover: ImageBlock;
@@ -25,21 +36,11 @@ interface ArticleTeaserProps {
   updatedDate: ArticleUpdatedDate;
 }
 
-const ArticleTeaserImage = ({ image, sizes }: { image: ImageBlock; sizes: string[][] }) => {
-  return (
-    <div className="article-teaser-image">
-      <BackgroundImage image={image} height="200px" sizes={sizes} />
-    </div>
-  );
-};
-
-export const ArticleTeaser = (props: ArticleTeaserProps) => {
-  const { title, slug, summary, cover, coverSizes, mainCategory, publicationDate, updatedDate } = props;
+export const ArticleTeaser = ({ title, slug, summary, cover, coverSizes, mainCategory, publicationDate, updatedDate }: ArticleTeaserProps) => {
   const { commonTexts } = useIntl();
-  const { publishedOrUpdatedDate, isUpdatedAfterPublishing } = getDateToUse(publicationDate, updatedDate, mainCategory);
 
   return (
-    <Box as="article" border={`1px solid ${colors.gray3}`} borderRadius={`${radii[2]}px`} overflow="hidden" marginBottom={{ _: space[4], xs: 0 }}>
+    <article>
       <Link passHref href={`/artikelen/${slug}`}>
         <ArticleTeaserCard>
           {cover.asset && <ArticleTeaserImage image={cover} sizes={coverSizes} />}
@@ -55,15 +56,7 @@ export const ArticleTeaser = (props: ArticleTeaserProps) => {
               <Text>{summary}</Text>
             </Box>
 
-            {isUpdatedAfterPublishing ? (
-              <Box color={colors.gray8} display="flex">
-                {replaceComponentsInText(commonTexts.article_teaser.articles_updated_date, {
-                  date: <ArticlePublicationDate marginLeft={space[1]} date={publishedOrUpdatedDate} />,
-                })}
-              </Box>
-            ) : (
-              <ArticlePublicationDate date={publishedOrUpdatedDate} />
-            )}
+            <ArticleUpdateOrPublishingDate publishedDate={publicationDate} updatedDate={updatedDate} mainCategory={mainCategory} />
 
             <ArticleCTA aria-hidden="true">
               <span>{commonTexts.common.read_more}</span>
@@ -72,7 +65,7 @@ export const ArticleTeaser = (props: ArticleTeaserProps) => {
           </ArticleTeaserContent>
         </ArticleTeaserCard>
       </Link>
-    </Box>
+    </article>
   );
 };
 
@@ -87,15 +80,22 @@ const ArticleTeaserContent = styled.div`
   }
 `;
 
-const ArticleTeaserCard = styled.div`
+const ArticleTeaserCard = styled(Anchor)`
+  border: 1px solid ${colors.gray3};
+  border-radius: ${radii[2]}px;
   color: ${colors.black};
   cursor: pointer;
   display: flex;
   flex-direction: column;
   height: 100%;
+  margin-bottom: ${space[4]};
   min-height: 26rem;
   overflow: hidden;
   text-decoration: none;
+
+  @media ${mediaQueries.xs} {
+    margin-bottom: 0;
+  }
 
   .article-teaser-image {
     flex-shrink: 0;
@@ -121,15 +121,6 @@ const ArticleTeaserCard = styled.div`
       color: ${colors.blue8};
     }
   }
-`;
-
-interface ArticlePublicationDate {
-  marginLeft?: string;
-}
-
-const ArticlePublicationDate = styled(PublicationDate)<ArticlePublicationDate>`
-  color: ${colors.gray8};
-  margin-left: ${({ marginLeft }) => (marginLeft ? marginLeft : undefined)};
 `;
 
 const ArticleCTA = styled.strong`
