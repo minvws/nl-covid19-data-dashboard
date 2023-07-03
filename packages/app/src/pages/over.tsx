@@ -65,28 +65,25 @@ const Over = (props: StaticProps<typeof getStaticProps>) => {
           <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" />
           <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
         </Head>
-
-        <Box textVariant="body1" bg="white">
-          <Box paddingBottom={space[5]}>
-            <Box marginBottom={space[4]} maxWidth={sizes.maxWidthText}>
-              <Heading variant="h2" level={1}>
-                {content.title}
-              </Heading>
-            </Box>
-            <TwoColumnLayout>
-              <div>
-                <RichContent blocks={content.intro} contentWrapper={RichContentWrapper} />
-                <FullscreenChartTile disableBorder>
-                  <Box marginTop={space[2]}>
-                    <ContentImage node={content.timelineImage} contentWrapper={RichContentWrapper} enableShadow />
-                  </Box>
-                </FullscreenChartTile>
-              </div>
-              <div>
-                <RichContent blocks={content.description} contentWrapper={RichContentWrapper} />
-              </div>
-            </TwoColumnLayout>
+        <Box paddingBottom={space[5]}>
+          <Box marginBottom={space[4]} maxWidth={sizes.maxWidthText}>
+            <Heading variant="h2" level={1}>
+              {content.title}
+            </Heading>
           </Box>
+          <TwoColumnLayout>
+            <div>
+              <RichContent blocks={content.intro} contentWrapper={RichContentWrapper} />
+              <FullscreenChartTile disableBorder>
+                <Box marginTop={space[2]}>
+                  <ContentImage node={content.timelineImage} contentWrapper={RichContentWrapper} enableShadow />
+                </Box>
+              </FullscreenChartTile>
+            </div>
+            <div>
+              <RichContent blocks={content.description} contentWrapper={RichContentWrapper} />
+            </div>
+          </TwoColumnLayout>
         </Box>
       </Box>
     </Layout>
