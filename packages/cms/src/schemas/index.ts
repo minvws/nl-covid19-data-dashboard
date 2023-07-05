@@ -40,11 +40,12 @@ import { block } from './locale/block';
 import { richContentBlock } from './locale/rich-content-block';
 import { string } from './locale/string';
 import { text } from './locale/text';
+import { image } from './locale/image';
 import { inlineBlock } from './objects/inline-block';
 import { inlineCollapsible } from './objects/inline-collapsible';
 import { link } from './objects/link';
 
-const localeSpecificSchemas = [block, richContentBlock, string, text];
+const localeSpecificSchemas = [block, richContentBlock, string, text, image];
 const richContentSchemas = [inlineBlock, inlineCollapsible];
 const documentSchemas = [
   advice,

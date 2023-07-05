@@ -19,9 +19,10 @@ interface FullscreenChartTileProps {
   disabled?: boolean;
   id?: string;
   metadata?: MetadataProps;
+  disableBorder?: boolean;
 }
 
-export const FullscreenChartTile = ({ children, disabled, id, metadata }: FullscreenChartTileProps) => {
+export const FullscreenChartTile = ({ children, disabled, id, metadata, disableBorder }: FullscreenChartTileProps) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const wasFullscreen = usePrevious(isFullscreen);
   const breakpoints = useBreakpoints();
@@ -37,7 +38,7 @@ export const FullscreenChartTile = ({ children, disabled, id, metadata }: Fullsc
   const label = replaceVariablesInText(isFullscreen ? commonTexts.common.modal_close : commonTexts.common.modal_open, { subject: commonTexts.common.grafiek_singular });
 
   const tile = (
-    <Tile hasNoBorder={isFullscreen} height="100%" id={id}>
+    <Tile hasNoBorder={isFullscreen || disableBorder} height="100%" id={id}>
       <Box
         paddingX={isFullscreen ? { _: space[3], sm: space[4] } : undefined}
         paddingY={isFullscreen ? { _: space[2], sm: space[3] } : undefined}
