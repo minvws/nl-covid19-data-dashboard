@@ -13,6 +13,7 @@ import { asResponsiveArray } from '~/style/utils';
 import { BaseTile } from '~/queries/query-types';
 import { getFilenameToIconName } from '~/utils';
 import { TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '../severity-indicator-tile/constants';
+import { RichContent } from '../cms/rich-content';
 
 interface TopicalWeeklySummaryTileProps {
   label: string | undefined;
@@ -35,8 +36,8 @@ export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems }: 
               <Box minWidth="25px" height="25px">
                 <DynamicIcon width="25px" name={getFilenameToIconName(summaryItem.tileIcon) as TopicalIcon} />
               </Box>
-              <Box>
-                <InlineText>{summaryItem.description}</InlineText>
+              <Box display="flex">
+                <RichContent blocks={summaryItem.description} />
                 {summaryItem.isThermometerMetric && label && (
                   <InlineText css={css({ whiteSpace: 'nowrap' })}>
                     <SeverityIndicatorLevel level={level}>{level}</SeverityIndicatorLevel>
@@ -53,7 +54,7 @@ export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems }: 
 };
 
 const SeverityIndicatorLevel = styled.span`
-  margin: 0 ${space[1]};
+  margin: 0 ${space[2]};
   background-color: ${({ level }: { level: SeverityLevel }) => getSeverityColor(level as SeverityLevels)};
   border-radius: 50%;
   color: ${colors.white};
