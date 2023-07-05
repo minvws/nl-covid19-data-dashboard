@@ -3,54 +3,9 @@
   "title": "nl_difference",
   "type": "object",
   "properties": {
-    "tested_overall__infected_per_100k_moving_average": {
+    "reproduction__index_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "tested_overall__infected_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "tested_ggd__tested_total_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "tested_ggd__infected_percentage_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "infectious_people__estimate": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "hospital_nice__admissions_on_date_of_reporting_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "hospital_lcps__beds_occupied_covid": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "intensive_care_nice__admissions_on_date_of_reporting_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "intensive_care_lcps__beds_occupied_covid": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "sewer__average": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "vulnerable_nursing_home__infected_locations_total": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "nursing_home__newly_infected_people_archived_20230126": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "nursing_home__deceased_daily_archived_20230126": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "vulnerable_tested_per_age_group": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "vulnerable_hospital_admissions": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    // "reproduction__index_average": {
-    //   "$ref": "#/definitions/diff_decimal"
-    // },
     "deceased_rivm__covid_daily_archived_20221231": {
       "$ref": "#/definitions/diff_integer"
     }

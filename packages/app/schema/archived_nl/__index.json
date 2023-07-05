@@ -11,7 +11,8 @@
     "behavior_annotations_archived_20230412",
     "behavior_per_age_group_archived_20230411",
     "doctor_archived_20210903",
-    "sewer_archived_20230623"
+    "sewer_archived_20230623",
+    "reproduction_archived_20230711"
   ],
   "additionalProperties": false,
   "properties": {
@@ -40,6 +41,9 @@
       "$ref": "doctor.json"
     },
     "sewer_archived_20230623": {
+      "$ref": "sewer.json"
+    },
+    "reproduction_archived_20230711": {
       "$ref": "sewer.json"
     }
   },
