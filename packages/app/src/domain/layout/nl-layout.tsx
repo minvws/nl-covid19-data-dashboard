@@ -37,10 +37,13 @@ export function NlLayout(props: NlLayoutProps) {
   const items = useSidebar({
     layout: 'nl',
     map: [
-      ['development_of_the_virus', ['sewage_measurement', 'tests', 'reproduction_number', 'variants', 'mortality']],
+      ['development_of_the_virus', ['sewage_measurement', 'tests', 'variants', 'mortality']],
       ['consequences_for_healthcare', ['hospitals_and_care', 'patients', 'nursing_home_care']],
       ['actions_to_take', ['vaccinations']],
-      ['archived_metrics', ['compliance', 'positive_tests', 'disabled_care', 'elderly_at_home', 'coronamelder_app', 'infectious_people', 'general_practitioner_suspicions']],
+      [
+        'archived_metrics',
+        ['reproduction_number', 'compliance', 'positive_tests', 'disabled_care', 'elderly_at_home', 'coronamelder_app', 'infectious_people', 'general_practitioner_suspicions'],
+      ],
     ],
   });
 

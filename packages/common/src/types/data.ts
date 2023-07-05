@@ -59,6 +59,7 @@ export interface ArchivedNl {
   behavior_per_age_group_archived_20230411: NlBehaviorPerAgeGroup;
   doctor_archived_20210903: NlDoctor;
   sewer_archived_20230623: NlSewer;
+  reproduction_archived_20230711: NlReproduction;
 }
 export interface NlBehavior {
   values: NlBehaviorValue[];
@@ -198,6 +199,17 @@ export interface NlSewerValue {
   average: number | null;
   date_of_insertion_unix: number;
   date_unix: number;
+}
+export interface NlReproduction {
+  values: NlReproductionValue[];
+  last_value: NlReproductionValue;
+}
+export interface NlReproductionValue {
+  index_low: number | null;
+  index_average: number | null;
+  index_high: number | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
 }
 
 export type GmCode = string;
@@ -497,7 +509,6 @@ export interface NlDifference {
   nursing_home__deceased_daily_archived_20230126: DifferenceInteger;
   vulnerable_tested_per_age_group: DifferenceInteger;
   vulnerable_hospital_admissions: DifferenceInteger;
-  reproduction__index_average: DifferenceDecimal;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
 }
 export interface DifferenceDecimal {

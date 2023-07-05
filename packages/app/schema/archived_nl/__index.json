@@ -44,7 +44,7 @@
       "$ref": "sewer.json"
     },
     "reproduction_archived_20230711": {
-      "$ref": "sewer.json"
+      "$ref": "reproduction.json"
     }
   },
   "$defs": {
