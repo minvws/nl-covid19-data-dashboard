@@ -10,7 +10,7 @@ export const getPagePartsQuery = (pageIdentifier: PageIdentifier) => {
         _type,
         pageDataKind,
         (_type == 'pageArticles') => {
-          articles[]->{_id, title, slug, summary, intro, "cover": {"asset": cover.asset->}, mainCategory[0], publicationDate, updatedDate},
+          articles[]->{_id, title, slug, summary, intro, "cover": {"asset": cover.asset->}, mainCategory, publicationDate, updatedDate},
           sectionTitle
         },
         (_type == 'pageFAQs') => {
