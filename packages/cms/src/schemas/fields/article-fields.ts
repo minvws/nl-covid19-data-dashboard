@@ -10,18 +10,6 @@ export const ARTICLE_FIELDS = [
     validation: localeStringValidation((rule) => rule.required()),
   }),
   defineField({
-    title: 'Update datum',
-    name: 'updatedDate',
-    type: 'datetime',
-    description:
-      'Dit veld moet worden ingevuld wanneer een "kennis" artikel wordt bijgewerkt, zodat de datum op het dashboard de bijgewerkte datum weergeeft in plaats van de oorspronkelijke publicatiedatum. Als dit veld niet wordt bijgewerkt, blijft de publicatiedatum zichtbaar.',
-    options: {
-      dateFormat: DATE_FORMAT,
-      timeFormat: TIME_FORMAT,
-      timeStep: 15,
-    },
-  }),
-  defineField({
     title: 'Slug',
     name: 'slug',
     type: 'slug',
@@ -53,16 +41,28 @@ export const ARTICLE_FIELDS = [
   defineField({
     title: 'Hoofdcategorie',
     name: 'mainCategory',
-    type: 'array',
-    of: [defineArrayMember({ type: 'string' })],
+    type: 'string',
     options: {
-      layout: 'grid',
+      layout: 'radio',
       list: [
         { title: 'Kennisartikelen', value: 'knowledge' },
         { title: 'Nieuwsartikelen', value: 'news' },
       ],
     },
-    validation: (rule) => rule.required().min(1).max(1),
+    validation: (rule) => rule.required(),
+  }),
+  defineField({
+    title: 'Update datum',
+    name: 'updatedDate',
+    type: 'datetime',
+    description:
+      'Dit veld moet worden ingevuld wanneer een "kennis" artikel wordt bijgewerkt, zodat de datum op het dashboard de bijgewerkte datum weergeeft in plaats van de oorspronkelijke publicatiedatum. Als dit veld niet wordt bijgewerkt, blijft de publicatiedatum zichtbaar.',
+    options: {
+      dateFormat: DATE_FORMAT,
+      timeFormat: TIME_FORMAT,
+      timeStep: 15,
+    },
+    hidden: ({ parent }) => !parent?.mainCategory?.includes('knowledge'),
   }),
   defineField({
     title: 'Categorieën instellen',
