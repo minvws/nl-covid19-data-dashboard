@@ -46,7 +46,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
       "parts": ${getPagePartsQuery('reproduction_page')},
-      "elements": ${getElementsQuery('nl', ['reproduction'], locale)}
+      "elements": ${getElementsQuery('nl', ['reproduction_archived_20230711'], locale)}
      }`;
     })(context);
 
@@ -64,7 +64,8 @@ export const getStaticProps = createGetStaticProps(
 const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedArchivedNlData: data, content, lastGenerated } = props;
 
-  const lastFilledValue = getLastFilledValue(data.reproduction_archived_20230711);
+  const reproductionLastValue = getLastFilledValue(data.reproduction_archived_20230711);
+  const reproductionValues = data.reproduction_archived_20230711;
 
   const { commonTexts } = useIntl();
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -91,7 +92,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,
-              dateOrRange: lastFilledValue.date_unix,
+              dateOrRange: reproductionLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
             }}
@@ -107,9 +108,9 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             <KpiWithIllustrationTile
               title={textNl.barscale_titel}
               metadata={{
-                date: lastFilledValue.date_unix,
+                date: reproductionLastValue.date_unix,
                 source: textNl.bronnen.rivm,
-                obtainedAt: lastFilledValue.date_of_insertion_unix,
+                obtainedAt: reproductionLastValue.date_of_insertion_unix,
               }}
               illustration={{
                 image: '/images/reproductie-explainer.svg',
@@ -119,9 +120,9 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             >
               <PageKpi
                 data={data}
-                metricName="reproduction"
+                metricName="reproduction_archived_20230711"
                 metricProperty="index_average"
-                differenceKey="reproduction__index_average"
+                differenceKey="reproduction__index_average_archived_20230711"
                 differenceFractionDigits={2}
                 showOldDateUnix
                 isAmount={false}
@@ -130,7 +131,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             </KpiWithIllustrationTile>
           </TwoKpiSection>
 
-          <ReproductionChartTile data={data.reproduction} timelineEvents={getTimelineEvents(content.elements.timeSeries, 'reproduction')} text={textNl} />
+          <ReproductionChartTile data={reproductionValues} timelineEvents={getTimelineEvents(content.elements.timeSeries, 'reproduction_archived_20230711')} text={textNl} />
 
           {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 

@@ -7,6 +7,7 @@
     "proto_name",
     "name",
     "code",
+    "difference",
     "behavior_archived_20230411",
     "behavior_annotations_archived_20230412",
     "behavior_per_age_group_archived_20230411",
@@ -27,6 +28,9 @@
     },
     "code": {
       "$ref": "#/$defs/archived_nl_id"
+    },
+    "difference": {
+      "$ref": "__difference.json"
     },
     "behavior_archived_20230411": {
       "$ref": "behavior/behavior.json"
