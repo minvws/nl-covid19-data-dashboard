@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - 'research/**'
 
 jobs:
   sync-after-feature:
@@ -37,7 +38,7 @@ jobs:
       - name: Synchronize texts
         run: yarn workspace @corona-dashboard/cms lokalize:sync-after-feature
         env:
-          SANITY_TOKEN: ${{ secrets.sanity_token }}
+          SANITY_STUDIO_API_TOKEN: ${{ secrets.SANITY_STUDIO_API_TOKEN }}
 
       - name: Export production texts
         run: yarn workspace @corona-dashboard/cms lokalize:import --dataset=production --clean-json
