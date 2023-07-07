@@ -35,7 +35,7 @@ const cli = meow(
     flags: {
       token: {
         type: 'string',
-        default: process.env.NEXT_PUBLIC_SANITY_TOKEN,
+        default: process.env.NEXT_PUBLIC_SANITY_TOKEN?.toString(),
       },
     },
   }
