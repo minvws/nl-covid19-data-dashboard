@@ -1,22 +1,24 @@
+import { colors } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
 import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
-import { Heading, InlineText, Anchor } from '~/components/typography';
+import { Anchor, Heading, InlineText } from '~/components/typography';
 import { ArticleCategoryType } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { Article } from '~/types/cms';
+import { replaceComponentsInText } from '~/utils';
 import { Link } from '~/utils/link';
 import { mergeAdjacentKpiBlocks } from '~/utils/merge-adjacent-kpi-blocks';
-import { ContentImage } from './cms/content-image';
-import { RichContent } from './cms/rich-content';
-import { LinkWithIcon } from './link-with-icon';
-import { PublicationDate } from './publication-date';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { colors } from '@corona-dashboard/common';
-import { space } from '~/style/theme';
+import { ContentImage } from '../cms/content-image';
+import { RichContent } from '../cms/rich-content';
+import { LinkWithIcon } from '../link-with-icon';
+import { PublicationDate } from '../publication-date';
+
 interface ArticleDetailProps {
   article: Article;
   text: SiteText['pages']['topical_page']['shared'];
@@ -43,9 +45,19 @@ export function ArticleDetail({ article, text }: ArticleDetailProps) {
 
         <Box spacing={2}>
           <Heading level={1}>{article.title}</Heading>
-          <InlineText color="gray7">
+
+          <Box display="flex" color={colors.gray7}>
             <PublicationDate date={article.publicationDate} />
-          </InlineText>
+
+            {article.updatedDate && (
+              <>
+                <Box marginX={space[2]} marginBottom="5px">
+                  |
+                </Box>
+                <span>{replaceComponentsInText(commonTexts.article_detail.articles_updated_date, { date: <PublicationDate date={article.updatedDate} /> })}</span>
+              </>
+            )}
+          </Box>
         </Box>
 
         <Box textVariant="h4">

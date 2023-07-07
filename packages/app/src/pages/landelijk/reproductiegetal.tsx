@@ -4,7 +4,7 @@ import { GetStaticPropsContext } from 'next';
 import { InView } from '~/components/in-view';
 import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
 import { Markdown } from '~/components/markdown';
-import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
