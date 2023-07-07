@@ -305,7 +305,9 @@ function parseKeyWithId(keyWithId: string) {
  * the original document to set it to the new moveTo key.
  */
 export const finalizeMoveMutations = async (dataset: 'development' | 'production', moves: MoveMutation[]) => {
-  // await initialiseEnvironmentVariables();
+  console.log(process.env.ACTION_TEST);
+  await initialiseEnvironmentVariables();
+  console.log(process.env.ACTION_TEST);
   const sanityClient = client.withConfig({ dataset, token: process.env.SANITY_API_TOKEN });
   const transaction = sanityClient.transaction();
 
