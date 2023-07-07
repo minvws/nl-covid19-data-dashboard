@@ -146,6 +146,8 @@ const syncAdditionsToProduction = async (mutations: AddMutation[]) => {
 
 (async () => {
   const sanityToken = cli.flags.token;
+
+  console.log(sanityToken);
   const mutations = await readTextMutations();
 
   const addDeleteMutations = getCollapsedAddDeleteMutations(mutations);
