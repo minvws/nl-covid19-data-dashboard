@@ -18,6 +18,28 @@ import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { hasValueAtKey } from 'ts-is-present';
 import { client } from '../../studio/client';
 import { AddMutation, DeleteMutation, finalizeMoveMutations, getCollapsedAddDeleteMutations, getCollapsedMoveMutations, readTextMutations } from '../utils/mutation-utilities';
+import meow from 'meow';
+
+const cli = meow(
+  `
+    Usage
+      $ lokalize:import
+
+    Options
+      --token: use a Sanity Token
+
+    Examples
+      $ lokalize:import --token=yhwedfgliuhq3r-9gpnaepriughqepa9fvrlsitbvq3o4gbvaeiuvbw54yh3q75tgiuewdycq457tq3efhwerpv78b245
+`,
+  {
+    flags: {
+      token: {
+        type: 'string',
+        default: process.env.NEXT_PUBLIC_SANITY_TOKEN,
+      },
+    },
+  }
+);
 
 /**
  * Remove the documents that were marked for deletion from the development set.
@@ -123,6 +145,7 @@ const syncAdditionsToProduction = async (mutations: AddMutation[]) => {
 };
 
 (async () => {
+  const sanityToken = cli.flags.token;
   const mutations = await readTextMutations();
 
   const addDeleteMutations = getCollapsedAddDeleteMutations(mutations);
@@ -139,7 +162,7 @@ const syncAdditionsToProduction = async (mutations: AddMutation[]) => {
    * result in valuable document loss. We can however manually patch a failed
    * delete mutation by simply re-deleting the data from JSON output.
    */
-  await finalizeMoveMutations('development', moveMutations);
+  await finalizeMoveMutations('development', moveMutations, sanityToken);
 
   const deletions = addDeleteMutations.filter(hasValueAtKey('action', 'delete' as const));
 
