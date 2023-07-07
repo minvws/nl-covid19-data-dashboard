@@ -113,102 +113,142 @@ Contains various values defining widths for different sections or elements on th
 This is a large color palette defining various colors by name. The colors are categorized by shades (gray, red, orange, etc.), with some extra individual colors like neutral, primary, secondary, etc.
 
 ### **11.1 Color Definitions**:
-| Color Name | Hex Value |
-| --- | --- |
-| white | #ffffff |
-| gray1 | #f3f3f3 |
-| gray2 | #e6e6e6 |
-| gray3 | #cccccc |
-| gray4 | #b4b4b4 |
-| gray5 | #999999 |
-| gray6 | #696969 |
-| gray7 | #535353 |
-| gray8 | #4f5458 |
-| black | #000000 |
-| neutral | #C6C8CA |
-| blackOpacity | #0000000d |
-| red1 | #f7e8e7 |
-| red2 | #F35065 |
-| red3 | #9f3430 |
-| orange1 | #E37321 |
-| orange2 | #A14E00 |
-| yellow1 | #FFF4C1 |
-| yellow2 | #fee670 |
-| yellow3 | #FFC000 |
-| yellow4 | #D3A500 |
-| yellow5 | #CF9C00 |
-| green1 | #69c253 |
-| green2 | #69c253 |
-| green3 | #00BB95 |
-| green4 | #008372 |
-| primary | #007BC7 |
-| secondary | #154273 |
-| primaryOpacity | #007bc70d |
-| blue1 | #e5eff8 |
-| blue2 | #D0EDFF |
-| blue3 | #aeddf3 |
-| blue4 | #8bc7e8 |
-| blue5 | #67b1dc |
-| blue6 | #219BE5 |
-| blue7 | #0053FD |
-| blue8 | #01689b |
-| blue9 | #005082 |
-| blue10 | #003580 |
-| magenta1 | #D360E5 |
-| magenta2 | #9515AA |
-| magenta3 | #cd005a |
-| magenta4 | #aa004b |
-| transparent | transparent |
+
+| Color Name | Hex Value | Examples |
+| --- | --- | --- |
+| white | #ffffff | ![#ffffff](https://placehold.co/15x15/ffffff/ffffff.png) |
+| gray1 | #f3f3f3 | ![#f3f3f3](https://placehold.co/15x15/f3f3f3/f3f3f3.png) |
+| gray2 | #e6e6e6 | ![#e6e6e6](https://placehold.co/15x15/e6e6e6/e6e6e6.png) |
+| gray3 | #cccccc | ![#cccccc](https://placehold.co/15x15/cccccc/cccccc.png) |
+| gray4 | #b4b4b4 | ![#b4b4b4](https://placehold.co/15x15/b4b4b4/b4b4b4.png) |
+| gray5 | #999999 | ![#999999](https://placehold.co/15x15/999999/999999.png) |
+| gray6 | #696969 | ![#696969](https://placehold.co/15x15/696969/696969.png) |
+| gray7 | #535353 | ![#535353](https://placehold.co/15x15/535353/535353.png) |
+| gray8 | #4f5458 | ![#4f5458](https://placehold.co/15x15/4f5458/4f5458.png) |
+| black | #000000 | ![#000000](https://placehold.co/15x15/000000/000000.png) |
+| neutral | #C6C8CA | ![#C6C8CA](https://placehold.co/15x15/C6C8CA/C6C8CA.png) |
+| blackOpacity | #0000000d | ![#0000000d](https://placehold.co/15x15/0000000d/0000000d.png) |
+| red1 | #f7e8e7 | ![#f7e8e7](https://placehold.co/15x15/f7e8e7/f7e8e7.png) |
+| red2 | #F35065 | ![#F35065](https://placehold.co/15x15/F35065/F35065.png) |
+| red3 | #9f3430 | ![#9f3430](https://placehold.co/15x15/9f3430/9f3430.png) |
+| orange1 | #E37321 | ![#E37321](https://placehold.co/15x15/E37321/E37321.png) |
+| orange2 | #A14E00 | ![#A14E00](https://placehold.co/15x15/A14E00/A14E00.png) |
+| yellow1 | #FFF4C1 | ![#FFF4C1](https://placehold.co/15x15/FFF4C1/FFF4C1.png) |
+| yellow2 | #fee670 | ![#fee670](https://placehold.co/15x15/fee670/fee670.png) |
+| yellow3 | #FFC000 | ![#FFC000](https://placehold.co/15x15/FFC000/FFC000.png) |
+| yellow4 | #D3A500 | ![#D3A500](https://placehold.co/15x15/D3A500/D3A500.png) |
+| yellow5 | #CF9C00 | ![#CF9C00](https://placehold.co/15x15/CF9C00/CF9C00.png) |
+| green1 | #69c253 | ![#69c253](https://placehold.co/15x15/69c253/69c253.png) |
+| green2 | #69c253 | ![#69c253](https://placehold.co/15x15/69c253/69c253.png) |
+| green3 | #00BB95 | ![#00BB95](https://placehold.co/15x15/00BB95/00BB95.png) |
+| green4 | #008372 | ![#008372](https://placehold.co/15x15/008372/008372.png) |
+| primary | #007BC7 | ![#007BC7](https://placehold.co/15x15/007BC7/007BC7.png) |
+| secondary | #154273 | ![#154273](https://placehold.co/15x15/154273/154273.png) |
+| primaryOpacity | #007bc70d | ![#007bc70d](https://placehold.co/15x15/007bc70d/007bc70d.png) |
+| blue1 | #e5eff8 | ![#e5eff8](https://placehold.co/15x15/e5eff8/e5eff8.png) |
+| blue2 | #D0EDFF | ![#D0EDFF](https://placehold.co/15x15/D0EDFF/D0EDFF.png) |
+| blue3 | #aeddf3 | ![#aeddf3](https://placehold.co/15x15/aeddf3/aeddf3.png) |
+| blue4 | #8bc7e8 | ![#8bc7e8](https://placehold.co/15x15/8bc7e8/8bc7e8.png) |
+| blue5 | #67b1dc | ![#67b1dc](https://placehold.co/15x15/67b1dc/67b1dc.png) |
+| blue6 | #219BE5 | ![#219BE5](https://placehold.co/15x15/219BE5/219BE5.png) |
+| blue7 | #0053FD | ![#0053FD](https://placehold.co/15x15/0053FD/0053FD.png) |
+| blue8 | #01689b | ![#01689b](https://placehold.co/15x15/01689b/01689b.png) |
+| blue9 | #005082 | ![#005082](https://placehold.co/15x15/005082/005082.png) |
+| blue10 | #003580 | ![#003580](https://placehold.co/15x15/003580/003580.png) |
+| magenta1 | #D360E5 | ![#D360E5](https://placehold.co/15x15/D360E5/D360E5.png) |
+| magenta2 | #9515AA | ![#9515AA](https://placehold.co/15x15/9515AA/9515AA.png) |
+| magenta3 | #cd005a | ![#cd005a](https://placehold.co/15x15/cd005a/cd005a.png) |
+| magenta4 | #aa004b | ![#aa004b](https://placehold.co/15x15/aa004b/aa004b.png) |
+| transparent | transparent | |
 
 ### **11.2 Scale Colors**:
-| Scale | Colors |
+
+#### 11.2.1 Blue scale:
+| Colors | Examples |
 | --- | --- |
-| blue | #8FCAE7, #5BADDB, #248FCF, #0070BB, #00529D, #003580, #001D45 |
-| blueDetailed | #aeddf3, #8bc7e8, #67b1dc, #449ad1, #1f83c5, #006cb5, #005797, #00437b, #002f5f, #001d45 |
-| magenta | #F291BC, #D95790, #A11050, #68032F, #000000 |
-| yellow | #FFF2CC, #FFE699, #FFD34D, #FABC00, #E5A400, #C98600, #9E6900 |
+| #8FCAE7 | ![#8FCAE7](https://placehold.co/15x15/8FCAE7/8FCAE7.png) |
+| #5BADDB | ![#5BADDB](https://placehold.co/15x15/5BADDB/5BADDB.png) |
+| #248FCF | ![#248FCF](https://placehold.co/15x15/248FCF/248FCF.png) |
+| #0070BB | ![#0070BB](https://placehold.co/15x15/0070BB/0070BB.png) |
+| #00529D | ![#00529D](https://placehold.co/15x15/00529D/00529D.png) |
+| #003580 | ![#003580](https://placehold.co/15x15/003580/003580.png) |
+| #001D45 | ![#001D45](https://placehold.co/15x15/001D45/001D45.png) |
+
+#### 11.2.2 Blue detailed scale:
+| Colors | Examples |
+| --- | --- |
+| #aeddf3 | ![#aeddf3](https://placehold.co/15x15/aeddf3/aeddf3.png) |
+| #8bc7e8 | ![#8bc7e8](https://placehold.co/15x15/8bc7e8/8bc7e8.png) |
+| #67b1dc | ![#67b1dc](https://placehold.co/15x15/67b1dc/67b1dc.png) |
+| #449ad1 | ![#449ad1](https://placehold.co/15x15/449ad1/449ad1.png) |
+| #1f83c5 | ![#1f83c5](https://placehold.co/15x15/1f83c5/1f83c5.png) |
+| #006cb5 | ![#006cb5](https://placehold.co/15x15/006cb5/006cb5.png) |
+| #005797 | ![#005797](https://placehold.co/15x15/005797/005797.png) |
+| #00437b | ![#00437b](https://placehold.co/15x15/00437b/00437b.png) |
+| #002f5f | ![#002f5f](https://placehold.co/15x15/002f5f/002f5f.png) |
+| #001d45 | ![#001d45](https://placehold.co/15x15/001d45/001d45.png) |
+
+#### 11.2.3 Magenta scale:
+| Colors | Examples |
+| --- | --- |
+| #F291BC | ![#F291BC](https://placehold.co/15x15/F291BC/F291BC.png) |
+| #D95790 | ![#D95790](https://placehold.co/15x15/D95790/D95790.png) |
+| #A11050 | ![#A11050](https://placehold.co/15x15/A11050/A11050.png) |
+| #68032F | ![#68032F](https://placehold.co/15x15/68032F/68032F.png) |
+| #000000 | ![#000000](https://placehold.co/15x15/000000/000000.png) |
+
+#### 11.2.4 Yellow scale:
+| Colors | Examples |
+| --- | --- |
+| #FFF2CC | ![#FFF2CC](https://placehold.co/15x15/FFF2CC/FFF2CC.png) |
+| #FFE699 | ![#FFE699](https://placehold.co/15x15/FFE699/FFE699.png) |
+| #FFD34D | ![#FFD34D](https://placehold.co/15x15/FFD34D/FFD34D.png) |
+| #FABC00 | ![#FABC00](https://placehold.co/15x15/FABC00/FABC00.png) |
+| #E5A400 | ![#E5A400](https://placehold.co/15x15/E5A400/E5A400.png) |
+| #C98600 | ![#C98600](https://placehold.co/15x15/C98600/C98600.png) |
+| #9E6900 | ![#9E6900](https://placehold.co/15x15/9E6900/9E6900.png) |
 
 ### **11.3 Variants Colors**:
 
-| Variants |
-| --- |
-| #D360E5 |
-| #00BB95 |
-| #FFC000 |
-| #219BE5 |
-| #E37321 |
-| #6200AF |
-| #008372 |
-| #CF9C00 |
-| #005082 |
-| #A14E00 |
-| #D7019B |
-| #00AE31 |
-| #FFE500 |
-| #0053FD |
-| #F65234 |
-| #9515AA |
-| #001100 |
-| #FF9900 |
-| #0011A9 |
-| #C80000 |
+| Variants | Examples |
+| --- | --- |
+| #D360E5 | ![#D360E5](https://placehold.co/15x15/D360E5/D360E5.png) |
+| #00BB95 | ![#00BB95](https://placehold.co/15x15/00BB95/00BB95.png) |
+| #FFC000 | ![#FFC000](https://placehold.co/15x15/FFC000/FFC000.png) |
+| #219BE5 | ![#219BE5](https://placehold.co/15x15/219BE5/219BE5.png) |
+| #E37321 | ![#E37321](https://placehold.co/15x15/E37321/E37321.png) |
+| #6200AF | ![#6200AF](https://placehold.co/15x15/6200AF/6200AF.png) |
+| #008372 | ![#008372](https://placehold.co/15x15/008372/008372.png) |
+| #CF9C00 | ![#CF9C00](https://placehold.co/15x15/CF9C00/CF9C00.png) |
+| #005082 | ![#005082](https://placehold.co/15x15/005082/005082.png) |
+| #A14E00 | ![#A14E00](https://placehold.co/15x15/A14E00/A14E00.png) |
+| #D7019B | ![#D7019B](https://placehold.co/15x15/D7019B/D7019B.png) |
+| #00AE31 | ![#00AE31](https://placehold.co/15x15/00AE31/00AE31.png) |
+| #FFE500 | ![#FFE500](https://placehold.co/15x15/FFE500/FFE500.png) |
+| #0053FD | ![#0053FD](https://placehold.co/15x15/0053FD/0053FD.png) |
+| #F65234 | ![#F65234](https://placehold.co/15x15/F65234/F65234.png) |
+| #9515AA | ![#9515AA](https://placehold.co/15x15/9515AA/9515AA.png) |
+| #001100 | ![#001100](https://placehold.co/15x15/001100/001100.png) |
+| #FF9900 | ![#FF9900](https://placehold.co/15x15/FF9900/FF9900.png) |
+| #0011A9 | ![#0011A9](https://placehold.co/15x15/0011A9/0011A9.png) |
+| #C80000 | ![#C80000](https://placehold.co/15x15/C80000/C80000.png) |
 
 ### **11.4 Vaccine Colors**:
 
-| Vaccine | Color |
-| --- | --- |
-| bio_n_tech_pfizer | blue6 |
-| moderna | yellow3 |
-| astra_zeneca | green2 |
-| cure_vac | magenta1 |
-| janssen | orange1 |
-| sanofi | blue9 |
-| novavax | magenta2 |
-| pfizer | blue6 |
-| BioNTech/Pfizer | blue6 |
-| Moderna | yellow3 |
-| AstraZeneca | green2 |
-| Janssen | orange1 |
-| Novavax | magenta2 |
+| Vaccine | Color name | hex value | Examples |
+| --- | --- | --- | --- | 
+| bio_n_tech_pfizer | blue6 | #219BE5 | ![#219BE5](https://placehold.co/15x15/219BE5/219BE5.png) |
+| moderna | yellow3 | #FFC000 | ![#FFC000](https://placehold.co/15x15/FFC000/FFC000.png) |
+| astra_zeneca | green2 | #69c253 | ![#69c253](https://placehold.co/15x15/69c253/69c253.png) |
+| cure_vac | magenta1 | #D360E5 | ![#D360E5](https://placehold.co/15x15/D360E5/D360E5.png) |
+| janssen | orange1 | #E37321 | ![#E37321](https://placehold.co/15x15/E37321/E37321.png) |
+| sanofi | blue9 | #005082 | ![#005082](https://placehold.co/15x15/005082/005082.png) |
+| novavax | magenta2 | #9515AA | ![#9515AA](https://placehold.co/15x15/9515AA/9515AA.png) |
+| pfizer | blue6 | #219BE5 | ![#219BE5](https://placehold.co/15x15/219BE5/219BE5.png) |
+| BioNTech/Pfizer | blue6 | #219BE5 | ![#219BE5](https://placehold.co/15x15/219BE5/219BE5.png) |
+| Moderna | yellow3 | #FFC000 | ![#FFC000](https://placehold.co/15x15/FFC000/FFC000.png) |
+| AstraZeneca | green2 | #69c253 | ![#69c253](https://placehold.co/15x15/69c253/69c253.png) |
+| Janssen | orange1 | #E37321 | ![#E37321](https://placehold.co/15x15/E37321/E37321.png) |
+| Novavax | magenta2 | #9515AA | ![#9515AA](https://placehold.co/15x15/9515AA/9515AA.png) |
 
 By having this theme file, a designer can understand the available space units, font styles, breakpoints, color palette, and other styling parameters defined in the code. This will ensure that the design remains consistent with the current theme and layout restrictions.
