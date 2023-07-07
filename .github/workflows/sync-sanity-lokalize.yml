@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - "bugfix/**"
 
 jobs:
   sync-after-feature:
@@ -36,6 +37,8 @@ jobs:
 
       - name: Synchronize texts
         run: yarn workspace @corona-dashboard/cms lokalize:sync-after-feature
+        env:
+          process.env.NEXT_PUBLIC_SANITY_TOKEN: ${{ secrets.NEXT_PUBLIC_SANITY_TOKEN }}
 
       - name: Export production texts
         run: yarn workspace @corona-dashboard/cms lokalize:import --dataset=production --clean-json
