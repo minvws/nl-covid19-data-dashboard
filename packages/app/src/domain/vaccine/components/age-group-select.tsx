@@ -13,15 +13,15 @@ export type AgeGroup = '12' | '18' | '60';
 const AGE_GROUPS = [
   {
     ageGroup: '60',
-    birthyearRange: '-1961',
+    birthyearRange: '-1963',
   },
   {
     ageGroup: '18',
-    birthyearRange: '-2003',
+    birthyearRange: '-2005',
   },
   {
     ageGroup: '12',
-    birthyearRange: '-2009',
+    birthyearRange: '-2011',
   },
 ] as const;
 
