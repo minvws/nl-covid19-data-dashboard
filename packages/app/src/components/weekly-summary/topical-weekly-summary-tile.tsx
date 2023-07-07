@@ -11,18 +11,21 @@ import { SeverityLevel, SeverityLevels } from '../severity-indicator-tile/types'
 import { getSeverityColor } from '../severity-indicator-tile/logic/get-severity-color';
 import { asResponsiveArray } from '~/style/utils';
 import { BaseTile } from '~/queries/query-types';
-import { getFilenameToIconName } from '~/utils';
+import { getFilenameToIconName, replaceComponentsInText, useReverseRouter } from '~/utils';
 import { TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '../severity-indicator-tile/constants';
-import { RichContent } from '../cms/rich-content';
+import { Link } from '~/utils/link';
+import { SiteText } from '~/locale';
 
 interface TopicalWeeklySummaryTileProps {
   label: string | undefined;
   level: SeverityLevels;
   title: string;
   summaryItems: BaseTile[];
+  linkText: SiteText['pages']['topical_page']['shared'];
 }
 
-export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems }: TopicalWeeklySummaryTileProps) => {
+export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems, linkText }: TopicalWeeklySummaryTileProps) => {
+  const reverseRouter = useReverseRouter();
   return (
     <Box paddingX={space[3]} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH} marginLeft={{ sm: space[3] }} marginBottom={space[3]}>
       <Box border={`1px solid ${colors.gray3}`} padding={space[4]}>
@@ -36,8 +39,11 @@ export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems }: 
               <Box minWidth="25px" height="25px">
                 <DynamicIcon width="25px" name={getFilenameToIconName(summaryItem.tileIcon) as TopicalIcon} />
               </Box>
-              <Box display="flex">
-                <RichContent blocks={summaryItem.description} />
+              <Box>
+                {replaceComponentsInText(summaryItem.description, {
+                  coronathermometer: <Link href={reverseRouter.nl.gedrag()}>{linkText.corona_thermometer_archived_page_link_text}</Link>,
+                })}
+
                 {summaryItem.isThermometerMetric && label && (
                   <InlineText css={css({ whiteSpace: 'nowrap' })}>
                     <SeverityIndicatorLevel level={level}>{level}</SeverityIndicatorLevel>

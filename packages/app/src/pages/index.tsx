@@ -92,7 +92,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           >
             <TopicalHeader title={topicalConfig.title} />
           </Box>
-          <TopicalWeeklySummaryTile title={weeklySummary.title} summaryItems={weeklySummary.items} level={currentSeverityLevel} label={currentSeverityLevelTexts?.label} />
+          <TopicalWeeklySummaryTile
+            title={weeklySummary.title}
+            summaryItems={weeklySummary.items}
+            level={currentSeverityLevel}
+            label={currentSeverityLevelTexts?.label}
+            linkText={textShared}
+          />
           <Box paddingX={{ _: space[3], sm: space[4] }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
             <TopicalHeader description={topicalConfig.description} />
           </Box>

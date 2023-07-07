@@ -77,11 +77,13 @@ interface TopicalTheme extends Theme {
 
 export interface BaseTile {
   tileIcon: TopicalIcon;
-  description: PortableTextEntry[];
+  description: string;
   isThermometerMetric?: boolean;
 }
 
-interface TopicalTile extends BaseTile {
+interface TopicalTile {
+  tileIcon: TopicalIcon;
+  description: PortableTextEntry[];
   title: string;
   sourceLabel: string | null;
   tileDate: string;
