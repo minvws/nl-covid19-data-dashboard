@@ -37,7 +37,7 @@ const applyDeletionsToDevelopment = async (deletions: DeleteMutation[]) => {
   const developmentClient = client.withConfig({ dataset: 'development' });
 
   // Query both published and draft documents, because we want to delete both from development
-  const allTexts = (await developmentClient.fetch(`*[_type == 'lokalizeText'] | order(subject asc))`)) as LokalizeText[];
+  const allTexts = (await developmentClient.fetch(`*[_type == 'lokalizeText'] | order(subject asc)`)) as LokalizeText[];
 
   // We need to find both draft and published versions of the document
   const documentIdsToDelete = deletions.flatMap(({ key }) => allTexts.filter((allText) => allText.key === key)).map((key) => key._id);
