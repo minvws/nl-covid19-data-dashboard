@@ -20,17 +20,18 @@ import { TopicalSanityData } from '~/queries/query-types';
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { PageInformationBlock, TileList } from '~/components';
+import { PageInformationBlock, TileList, WarningTile } from '~/components';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { TopicalThemeHeader } from '~/domain/topical/components/topical-theme-header';
 import { space } from '~/style/theme';
 import { CollapsibleSection } from '~/components/collapsible';
 import { Coronathermometer } from '@corona-dashboard/icons';
 import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
-  textNl: siteText.pages.topical_page.nl,
-  textShared: siteText.pages.topical_page.shared,
+  textNl: siteText.pages.corona_thermometer_page.nl,
+  textShared: siteText.pages.corona_thermometer_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -65,10 +66,10 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
 
   const { thermometer } = topicalStructure;
 
-  const { textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
-    ...textNl.nationaal_metadata,
+    ...textNl.metadata,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
@@ -82,11 +83,27 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
 
   const { startDate, endDate } = getTimelineRangeDates(thermometerEvents);
 
+  const hasActiveWarningTile = !!textNl.pagina.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
-          <PageInformationBlock category={commonTexts.sidebar.categories.archived_metrics.title} title={'BLA'} icon={<Coronathermometer aria-hidden="true" />} />
+          <PageInformationBlock
+            category={commonTexts.sidebar.categories.archived_metrics.title}
+            title={textNl.pagina.titel}
+            description={textNl.pagina.description}
+            metadata={{
+              datumsText: textNl.pagina.dates,
+              dateOrRange: endDate,
+              dateOfInsertionUnix: lastGenerated as unknown as number,
+              dataSources: [textShared.bronnen.rivm],
+            }}
+            icon={<Coronathermometer aria-hidden="true" />}
+          />
+
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.pagina.belangrijk_bericht} variant="informational"></WarningTile>}
+
           {currentSeverityLevelTexts && (
             <Box
               marginY={space[5]}
