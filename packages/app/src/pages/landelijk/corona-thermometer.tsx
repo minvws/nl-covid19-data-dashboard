@@ -2,7 +2,7 @@ import { Languages, SiteText } from '~/locale';
 import { css } from '@styled-system/css';
 import { colors } from '@corona-dashboard/common';
 import styled from 'styled-components';
-import { Box, Spacer } from '~/components/base';
+import { Box } from '~/components/base';
 import { GetStaticPropsContext } from 'next';
 import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic';
 import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
@@ -20,15 +20,16 @@ import { TopicalSanityData } from '~/queries/query-types';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { PageInformationBlock, TileList, WarningTile } from '~/components';
+import { InView, PageInformationBlock, TileList, WarningTile } from '~/components';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { TopicalThemeHeader } from '~/domain/topical/components/topical-theme-header';
 import { space } from '~/style/theme';
-import { CollapsibleSection } from '~/components/collapsible';
 import { Coronathermometer } from '@corona-dashboard/icons';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { PageFaqTile } from '~/components/page-faq-tile';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.corona_thermometer_page.nl,
@@ -53,7 +54,7 @@ export const getStaticProps = createGetStaticProps(
     })(context);
     return {
       content: {
-        articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles'),
+        articles: getArticleParts(content.parts.pageParts, 'coronathermometerPageArticles'),
         dataExplained: getDataExplainedParts(content.parts.pageParts, 'coronathermometerPageDataExplained'),
         faqs: getFaqParts(content.parts.pageParts, 'coronathermometerPageFAQs'),
         topicalStructure: content.topicalStructure,
@@ -158,30 +159,27 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
               )}
             </Box>
           )}
-          <Box marginY={{ _: space[3], md: space[4] }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH} borderBottom={'1px solid'} borderBottomColor={colors.gray3}>
-            <Box marginY={space[3]}>
-              <OrderedList>
-                {SEVERITY_LEVELS_LIST.map((severityLevel, index) => {
-                  const indicatorTexts = thermometer.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === severityLevel);
-                  return (
-                    indicatorTexts && (
-                      <IndicatorLevelDescription key={index} level={indicatorTexts.level as SeverityLevel} label={indicatorTexts.label} description={indicatorTexts.description} />
-                    )
-                  );
-                })}
-              </OrderedList>
-            </Box>
+
+          <Box marginY={space[3]}>
+            <OrderedList>
+              {SEVERITY_LEVELS_LIST.map((severityLevel, index) => {
+                const indicatorTexts = thermometer.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === severityLevel);
+                return (
+                  indicatorTexts && (
+                    <IndicatorLevelDescription key={index} level={indicatorTexts.level as SeverityLevel} label={indicatorTexts.label} description={indicatorTexts.description} />
+                  )
+                );
+              })}
+            </OrderedList>
           </Box>
 
-          <Box marginY={{ _: space[3], md: space[4] }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH} borderBottom={'1px solid'} borderBottomColor={colors.gray3}>
-            <TopicalThemeHeader title={'Some header'} />
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle}></PageFaqTile>}
 
-            <Spacer marginBottom={{ _: space[2], md: space[3] }} />
-
-            <CollapsibleSection summary={'test'} textColor={colors.black} borderColor={colors.gray3}>
-              <Box>asd</Box>
-            </CollapsibleSection>
-          </Box>
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle}></PageArticlesTile>
+            </InView>
+          )}
         </TileList>
       </NlLayout>
     </Layout>
