@@ -123,7 +123,7 @@ const syncAdditionsToProduction = async (mutations: AddMutation[]) => {
 };
 
 (async () => {
-  console.log(process.env.SANITY_AUTH_TOKEN?.toString());
+  console.log(`${process.env.SANITY_AUTH_TOKEN} is the token and its the same as the secret: ${process.env.SANITY_AUTH_TOKEN === 'Yes'}`);
   const mutations = await readTextMutations();
 
   const addDeleteMutations = getCollapsedAddDeleteMutations(mutations);
