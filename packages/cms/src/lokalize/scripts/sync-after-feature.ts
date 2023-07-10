@@ -34,7 +34,7 @@ const applyDeletionsToDevelopment = async (deletions: DeleteMutation[]) => {
     return;
   }
 
-  const developmentClient = client.withConfig({ dataset: 'development' });
+  const developmentClient = client.withConfig({ dataset: 'development', token: process.env.SANITY_AUTH_TOKEN });
 
   // Query both published and draft documents, because we want to delete both from development
   const allTexts = (await developmentClient.fetch(`*[_type == 'lokalizeText'] | order(subject asc)`)) as LokalizeText[];
@@ -56,8 +56,8 @@ const syncAdditionsToProduction = async (mutations: AddMutation[]) => {
     return;
   }
 
-  const developmentClient = client.withConfig({ dataset: 'development' });
-  const productionClient = client.withConfig({ dataset: 'production' });
+  const developmentClient = client.withConfig({ dataset: 'development', token: process.env.SANITY_AUTH_TOKEN });
+  const productionClient = client.withConfig({ dataset: 'production', token: process.env.SANITY_AUTH_TOKEN });
   const productionTransation = productionClient.transaction();
 
   // Workaround for add mutations that have no document id yet, so that we can lookup the document by key.
