@@ -529,7 +529,7 @@ export const gmData: MunicipalityInfo[] = [
     vrCode: 'VR15',
     gemcode: 'GM0518',
     displayName: 'Den Haag',
-    searchTerms: ['Den Haag', 'Agga', 'Skiffa'],
+    searchTerms: ['Den Haag', 'Agga'],
   },
   {
     name: 'Groningen',
