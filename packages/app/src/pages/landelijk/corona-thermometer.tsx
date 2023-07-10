@@ -33,7 +33,6 @@ import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.corona_thermometer_page.nl,
-  textShared: siteText.pages.corona_thermometer_page.shared,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -70,7 +69,7 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
 
   const { thermometer } = topicalStructure;
 
-  const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...textNl.metadata,
@@ -79,11 +78,14 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
   };
 
   const { commonTexts } = useIntl();
+  const { formatDateFromSeconds } = useIntl();
 
   const currentSeverityLevel = thermometer.currentLevel as unknown as SeverityLevels;
   const currentSeverityLevelTexts = thermometer.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === currentSeverityLevel);
 
   const thermometerEvents = getThermometerEvents(thermometer.timeline.ThermometerTimelineEvents, thermometer.thermometerLevels);
+
+  const lastThermometerSetDate = formatDateFromSeconds(thermometerEvents.slice(-1)[0].end, 'weekday-long');
 
   const { startDate, endDate } = getTimelineRangeDates(thermometerEvents);
 
@@ -99,10 +101,13 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
             description={textNl.pagina.description}
             icon={<Coronathermometer aria-hidden="true" />}
             metadata={{
-              datumsText: textNl.pagina.dates,
+              datumsText: replaceVariablesInText(textNl.pagina.dates, {
+                current_state: currentSeverityLevel,
+                end_date: lastThermometerSetDate,
+              }),
               dateOrRange: endDate,
-              dateOfInsertionUnix: lastGenerated as unknown as number,
-              dataSources: [textShared.bronnen.rivm],
+              dateOfInsertionUnix: endDate,
+              dataSources: [textNl.bronnen.rivm],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,
