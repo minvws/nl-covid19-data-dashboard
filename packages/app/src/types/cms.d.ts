@@ -1,5 +1,5 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
-import { ArticleSummary } from '~/components/article-teaser';
+import { ArticleSummary } from '~/components/articles/article-teaser';
 import { CategoriesTypes } from '~/domain/topical/common/categories';
 
 export type PageIdentifier =
@@ -119,25 +119,31 @@ export interface InlineAttachment {
 }
 
 export type Editorial = Record<string, never> & Article;
+
+export type ArticleMainCategory = 'knowledge' | 'news';
+export type ArticleUpdatedDate = string | null;
+export type ArticlePublishedDate = string;
+
 export interface Article {
-  title: string;
+  categories: CategoriesTypes[];
+  category: string;
+  content: RichContentBlock[];
+  cover: ImageBlock;
+  intro: RichContentBlock[];
+  isHighlighted: boolean;
+  mainCategory: ArticleMainCategory;
+  metaDescription: string;
+  publicationDate: ArticlePublishedDate;
   slug: {
     _key: string;
     _type: 'slug';
     current: string;
   };
-  mainCategory: 'knowledge' | 'news';
-  categories?: CategoriesTypes[];
-  cover: ImageBlock;
+  summary: Block;
+  title: string;
+  updatedDate: ArticleUpdatedDate;
   imageMobile?: ImageBlock;
   imageDesktop?: ImageBlock;
-  summary: Block;
-  intro: RichContentBlock[];
-  content: RichContentBlock[];
-  metaDescription: string;
-  publicationDate: string;
-  isHighlighted: boolean;
-  category: string;
 }
 
 export interface ImageBlock {

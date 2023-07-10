@@ -6,7 +6,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
 import { InView } from '~/components/in-view';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
-import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { SEOHead } from '~/components/seo-head';

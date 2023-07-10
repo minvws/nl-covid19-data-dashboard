@@ -10,8 +10,7 @@ export const getPagePartsQuery = (pageIdentifier: PageIdentifier) => {
         _type,
         pageDataKind,
         (_type == 'pageArticles') => {
-          // TODO: add updateDate field as introduced by COR-1601
-          articles[]->{_id, title, slug, summary, intro, "cover": {"asset": cover.asset->}, mainCategory[0], publicationDate},
+          articles[]->{_id, title, slug, summary, intro, "cover": {"asset": cover.asset->}, mainCategory, publicationDate, updatedDate},
           sectionTitle
         },
         (_type == 'pageFAQs') => {

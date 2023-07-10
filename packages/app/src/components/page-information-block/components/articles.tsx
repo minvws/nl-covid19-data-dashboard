@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { Fragment } from 'react';
 import styled from 'styled-components';
 import { ChevronRight } from '@corona-dashboard/icons';
-import { ArticleSummary } from '~/components/article-teaser';
+import { ArticleSummary } from '~/components/articles/article-teaser';
 import { Box } from '~/components/base';
 import { SanityImage } from '~/components/cms/sanity-image';
 import { Anchor, InlineText, Text } from '~/components/typography';

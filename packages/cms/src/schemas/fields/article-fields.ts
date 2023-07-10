@@ -41,16 +41,28 @@ export const ARTICLE_FIELDS = [
   defineField({
     title: 'Hoofdcategorie',
     name: 'mainCategory',
-    type: 'array',
-    of: [defineArrayMember({ type: 'string' })],
+    type: 'string',
     options: {
-      layout: 'grid',
+      layout: 'radio',
       list: [
         { title: 'Kennisartikelen', value: 'knowledge' },
         { title: 'Nieuwsartikelen', value: 'news' },
       ],
     },
-    validation: (rule) => rule.required().min(1).max(1),
+    validation: (rule) => rule.required(),
+  }),
+  defineField({
+    title: 'Update datum',
+    name: 'updatedDate',
+    type: 'datetime',
+    description:
+      'Dit veld moet worden ingevuld wanneer een "kennis" artikel wordt bijgewerkt, zodat de datum op het dashboard de bijgewerkte datum weergeeft in plaats van de oorspronkelijke publicatiedatum. Als dit veld niet wordt bijgewerkt, blijft de publicatiedatum zichtbaar.',
+    options: {
+      dateFormat: DATE_FORMAT,
+      timeFormat: TIME_FORMAT,
+      timeStep: 15,
+    },
+    hidden: ({ parent }) => !parent?.mainCategory?.includes('knowledge'),
   }),
   defineField({
     title: 'Categorieën instellen',
@@ -60,13 +72,13 @@ export const ARTICLE_FIELDS = [
     options: {
       layout: 'grid',
       list: [
-        { title: 'Vaccinaties', value: 'vaccinaties' },
         { title: 'Besmettingen', value: 'besmettingen' },
-        { title: 'Sterfte', value: 'sterfte' },
-        { title: 'Ziekenhuizen', value: 'ziekenhuizen' },
-        { title: 'Kwetsbare groepen', value: 'kwetsbare_groepen' },
-        { title: 'Vroege indicatoren', value: 'vroege_indicatoren' },
         { title: 'Gedrag', value: 'gedrag' },
+        { title: 'Kwetsbare groepen', value: 'kwetsbare_groepen' },
+        { title: 'Sterfte', value: 'sterfte' },
+        { title: 'Vaccinaties', value: 'vaccinaties' },
+        { title: 'Vroege indicatoren', value: 'vroege_indicatoren' },
+        { title: 'Ziekenhuizen', value: 'ziekenhuizen' },
       ],
     },
     validation: (rule) => rule.required().min(1),
