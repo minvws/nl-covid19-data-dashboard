@@ -27,7 +27,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
@@ -36,12 +36,12 @@ import { getPageInformationHeaderContent } from '~/utils/get-page-information-he
 
 const pageMetrics = [
   'difference.nursing_home__deceased_daily_archived_20230126',
-  'difference.vulnerable_nursing_home__infected_locations_total',
+  'difference.vulnerable_nursing_home__infected_locations_total_archived_20230711',
   'difference.nursing_home__newly_infected_people_archived_20230126',
-  'difference.vulnerable_hospital_admissions',
-  'vulnerable_nursing_home',
+  'difference.vulnerable_hospital_admissions_archived_20230711',
+  'vulnerable_nursing_home_archived_20230711',
   'nursing_home_archived_20230126',
-  'vulnerable_hospital_admissions',
+  'vulnerable_hospital_admissions_archived_20230711',
 ];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
@@ -54,14 +54,14 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
+  selectArchivedNlData(
     'difference.nursing_home__deceased_daily_archived_20230126',
-    'difference.vulnerable_nursing_home__infected_locations_total',
+    'difference.vulnerable_nursing_home__infected_locations_total_archived_20230711',
     'difference.nursing_home__newly_infected_people_archived_20230126',
-    'difference.vulnerable_hospital_admissions',
-    'vulnerable_nursing_home',
+    'difference.vulnerable_hospital_admissions_archived_20230711',
+    'vulnerable_nursing_home_archived_20230711',
     'nursing_home_archived_20230126',
-    'vulnerable_hospital_admissions'
+    'vulnerable_hospital_admissions_archived_20230711'
   ),
   createGetChoroplethData({
     vr: ({ vulnerable_nursing_home }) => ({ vulnerable_nursing_home }),
@@ -90,7 +90,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, choropleth, lastGenerated, content } = props;
+  const { pageText, selectedArchivedNlData: data, choropleth, lastGenerated, content } = props;
 
   const [nursingHomeConfirmedCasesTimeframe, setNursingHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
@@ -101,15 +101,15 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
   const nursinghomeDataLastValue = data.nursing_home_archived_20230126.last_value;
-  const nusingHomeArchivedUnderReportedDateStart = getBoundaryDateStartUnix(data.nursing_home_archived_20230126.values, 7);
+  const nursingHomeArchivedUnderReportedDateStart = getBoundaryDateStartUnix(data.nursing_home_archived_20230126.values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const infectedLocationsText = textNl.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText = textNl.verpleeghuis_positief_geteste_personen;
 
-  const vulnerableNursingHomeDataLastValue = data.vulnerable_nursing_home.last_value;
-  const vulnerableHospitalAdmissionsData = data.vulnerable_hospital_admissions;
+  const vulnerableNursingHomeDataLastValue = data.vulnerable_nursing_home_archived_20230711.last_value;
+  const vulnerableHospitalAdmissionsData = data.vulnerable_hospital_admissions_archived_20230711;
 
   const ElderlyPeopleText = textNl['70_plussers'];
 
@@ -119,7 +119,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
     description: infectedLocationsText.metadata.description,
   };
 
-  const hasActiveWarningTile = textNl.osiris_archiving_notification;
+  const hasActiveWarningTile = !!textNl.belangrijk_bericht;
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
@@ -128,7 +128,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={commonTexts.sidebar.metrics.nursing_home_care.title}
             title={positiveTestedPeopleText.titel}
             icon={<VulnerableGroupsIcon aria-hidden="true" />}
@@ -145,7 +145,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             })}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={hasActiveWarningTile} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile
@@ -156,7 +156,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                 source: ElderlyPeopleText.bronnen.rivm,
               }}
             >
-              <KpiValue absolute={vulnerableHospitalAdmissionsData.admissions_age_70_plus} difference={data.difference.vulnerable_hospital_admissions} isAmount />
+              <KpiValue absolute={vulnerableHospitalAdmissionsData.admissions_age_70_plus} difference={data.difference.vulnerable_hospital_admissions_archived_20230711} isAmount />
             </KpiTile>
           </TwoKpiSection>
 
@@ -168,7 +168,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             tilesData={[
               {
                 value: vulnerableNursingHomeDataLastValue.infected_locations_total,
-                differenceValue: data.difference.vulnerable_nursing_home__infected_locations_total,
+                differenceValue: data.difference.vulnerable_nursing_home__infected_locations_total_archived_20230711,
                 title: infectedLocationsText.kpi_titel,
                 description: infectedLocationsText.kpi_toelichting,
               },
@@ -219,7 +219,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'nursing_home_infected_locations_over_time_chart',
               }}
-              values={data.vulnerable_nursing_home.values}
+              values={data.vulnerable_nursing_home_archived_20230711.values}
               timeframe={nursingHomeInfectedLocationsTimeframe}
               seriesConfig={[
                 {
@@ -297,7 +297,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                   dataOptions={{
                     timespanAnnotations: [
                       {
-                        start: nusingHomeArchivedUnderReportedDateStart,
+                        start: nursingHomeArchivedUnderReportedDateStart,
                         end: Infinity,
                         label: positiveTestedPeopleText.line_chart_legend_inaccurate_label,
                         shortLabel: positiveTestedPeopleText.tooltip_labels.inaccurate,
@@ -370,7 +370,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                   dataOptions={{
                     timespanAnnotations: [
                       {
-                        start: nusingHomeArchivedUnderReportedDateStart,
+                        start: nursingHomeArchivedUnderReportedDateStart,
                         end: Infinity,
                         label: textNl.line_chart_legend_inaccurate_label,
                         shortLabel: textNl.tooltip_labels.inaccurate,

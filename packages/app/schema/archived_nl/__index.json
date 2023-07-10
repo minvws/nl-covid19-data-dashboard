@@ -7,11 +7,17 @@
     "proto_name",
     "name",
     "code",
+    "difference",
     "behavior_archived_20230411",
     "behavior_annotations_archived_20230412",
     "behavior_per_age_group_archived_20230411",
     "doctor_archived_20210903",
-    "sewer_archived_20230623"
+    "nursing_home_archived_20230126",
+    "sewer_archived_20230623",
+    "difference.vulnerable_nursing_home__infected_locations_total_archived_20230711",
+    "difference.vulnerable_hospital_admissions_archived_20230711",
+    "vulnerable_hospital_admissions_archived_20230711",
+    "vulnerable_nursing_home_archived_20230711"
   ],
   "additionalProperties": false,
   "properties": {
@@ -27,6 +33,9 @@
     "code": {
       "$ref": "#/$defs/archived_nl_id"
     },
+    "difference": {
+      "$ref": "__difference.json"
+    },
     "behavior_archived_20230411": {
       "$ref": "behavior/behavior.json"
     },
@@ -39,8 +48,17 @@
     "doctor_archived_20210903": {
       "$ref": "doctor.json"
     },
+    "nursing_home_archived_20230126": {
+      "$ref": "nursing_home.json"
+    },
     "sewer_archived_20230623": {
       "$ref": "sewer.json"
+    },
+    "vulnerable_nursing_home_archived_20230711": {
+      "$ref": "vulnerable_nursing_home.json"
+    },
+    "vulnerable_hospital_admissions_archived_20230711": {
+      "$ref": "vulnerable_hospital_admissions.json"
     }
   },
   "$defs": {
