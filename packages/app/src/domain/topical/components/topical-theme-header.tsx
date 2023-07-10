@@ -11,16 +11,18 @@ import { fontSizes } from '~/style/theme';
 interface TopicalThemeHeaderProps {
   title: string;
   subtitle?: PortableTextEntry[] | null;
-  icon: TopicalIcon;
+  icon?: TopicalIcon | null;
 }
 
 export const TopicalThemeHeader = ({ title, subtitle, icon }: TopicalThemeHeaderProps) => {
   return (
     <Box spacing={3}>
       <Box display="flex" justifyContent="start" alignItems="center">
-        <StyledTopicalThemeHeaderIcon>
-          <DynamicIcon name={icon} aria-hidden="true" />
-        </StyledTopicalThemeHeaderIcon>
+        {icon && (
+          <StyledTopicalThemeHeaderIcon>
+            <DynamicIcon name={icon} aria-hidden="true" />
+          </StyledTopicalThemeHeaderIcon>
+        )}
         <Heading level={2}>{title}</Heading>
       </Box>
       {subtitle && (

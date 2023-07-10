@@ -5,3 +5,5 @@ timestamp,action,key,document_id,move_to
 2023-06-28T11:28:27.381Z,add,common.article_teaser.read_more,posbL87hXRea8MK3Cj6fYl,__
 2023-06-28T14:26:47.680Z,add,common.article_list.title,OFLiaClUFOlqnxmWMBQD0u,__
 2023-06-28T14:26:49.003Z,add,common.faq.title,OFLiaClUFOlqnxmWMBQDuu,__
+2023-07-07T13:32:42.985Z,add,pages.topical_page.shared.corona_thermometer_archived_page_link_text,UZdsUj5qjYXGfA5PDPE6j5,__
+2023-07-07T13:47:16.444Z,add,common.sidebar.metrics.corona_thermometer.title,8dOsiklAGuc6hPUySphFo0,__

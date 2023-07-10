@@ -41,7 +41,7 @@ export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems, li
               </Box>
               <Box>
                 {replaceComponentsInText(summaryItem.description, {
-                  coronathermometer: <Link href={reverseRouter.nl.gedrag()}>{linkText.corona_thermometer_archived_page_link_text}</Link>,
+                  coronathermometer: <Link href={reverseRouter.nl.coronaThermometer()}>{linkText.corona_thermometer_archived_page_link_text}</Link>,
                 })}
 
                 {summaryItem.isThermometerMetric && label && (
