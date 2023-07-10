@@ -17,7 +17,7 @@ import { StaticProps, createGetStaticProps } from '~/static-props/create-get-sta
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 import { TopicalSanityData } from '~/queries/query-types';
-import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { PageInformationBlock, TileList, WarningTile } from '~/components';
@@ -28,6 +28,7 @@ import { CollapsibleSection } from '~/components/collapsible';
 import { Coronathermometer } from '@corona-dashboard/icons';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.corona_thermometer_page.nl,
@@ -46,13 +47,15 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-        "parts": ${getPagePartsQuery('topical_page')},
+        "parts": ${getPagePartsQuery('coronathermometer_page')},
         "topicalStructure": ${getTopicalStructureQuery(locale)}
       }`;
     })(context);
     return {
       content: {
-        articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles')?.articles,
+        articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'coronathermometerPageDataExplained'),
+        faqs: getFaqParts(content.parts.pageParts, 'coronathermometerPageFAQs'),
         topicalStructure: content.topicalStructure,
       },
     };
@@ -93,13 +96,17 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
             category={commonTexts.sidebar.categories.archived_metrics.title}
             title={textNl.pagina.titel}
             description={textNl.pagina.description}
+            icon={<Coronathermometer aria-hidden="true" />}
             metadata={{
               datumsText: textNl.pagina.dates,
               dateOrRange: endDate,
               dateOfInsertionUnix: lastGenerated as unknown as number,
               dataSources: [textShared.bronnen.rivm],
             }}
-            icon={<Coronathermometer aria-hidden="true" />}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.pagina.belangrijk_bericht} variant="informational"></WarningTile>}

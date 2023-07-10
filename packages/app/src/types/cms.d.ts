@@ -19,7 +19,8 @@ export type PageIdentifier =
   | 'tests_page'
   | 'topical_page'
   | 'vaccinations_page'
-  | 'variants_page';
+  | 'variants_page'
+  | 'coronathermometer_page';
 
 export type PartTypes = 'pageArticles' | 'pageDataExplained' | 'pageFAQs' | 'pageHighlightedItems' | 'pageLinks' | 'pageRichText';
 
