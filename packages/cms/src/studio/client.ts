@@ -5,5 +5,4 @@ export const client = createClient({
   dataset: 'development',
   projectId: '5mog5ask',
   useCdn: false,
-  token: process.env.NEXT_PUBLIC_SANITY_TOKEN,
 });
