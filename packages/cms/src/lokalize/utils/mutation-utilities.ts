@@ -304,9 +304,9 @@ function parseKeyWithId(keyWithId: string) {
  * Apply the moves by deleting the placeholder document and mutating the key of
  * the original document to set it to the new moveTo key.
  */
-export const finalizeMoveMutations = async (dataset: 'development' | 'production', moves: MoveMutation[], sanityToken?: string) => {
+export const finalizeMoveMutations = async (dataset: 'development' | 'production', moves: MoveMutation[]) => {
   await initialiseEnvironmentVariables();
-  const sanityClient = client.withConfig({ dataset, token: sanityToken || process.env.SANITY_API_TOKEN });
+  const sanityClient = client.withConfig({ dataset, token: process.env.SANITY_AUTH_TOKEN });
   const transaction = sanityClient.transaction();
 
   for (const { document_id, move_to } of moves) {
