@@ -123,7 +123,7 @@ const syncAdditionsToProduction = async (mutations: AddMutation[]) => {
 };
 
 (async () => {
-  console.log(process.env.SANITY_AUTH_TOKEN);
+  console.log(process.env.SANITY_AUTH_TOKEN?.toString());
   const mutations = await readTextMutations();
 
   const addDeleteMutations = getCollapsedAddDeleteMutations(mutations);
