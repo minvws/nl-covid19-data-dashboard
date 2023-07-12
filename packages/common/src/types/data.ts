@@ -54,11 +54,22 @@ export interface ArchivedNl {
   proto_name: ArchivedNlId;
   name: ArchivedNlId;
   code: ArchivedNlId;
+  difference: ArchivedNlDifference;
   behavior_archived_20230411: NlBehavior;
   behavior_annotations_archived_20230412: NlBehaviorAnnotations;
   behavior_per_age_group_archived_20230411: NlBehaviorPerAgeGroup;
   doctor_archived_20210903: NlDoctor;
   sewer_archived_20230623: NlSewer;
+  reproduction_archived_20230711: NlReproduction;
+}
+export interface ArchivedNlDifference {
+  reproduction__index_average_archived_20230711: DifferenceDecimal;
+}
+export interface DifferenceDecimal {
+  old_value: number;
+  difference: number;
+  old_date_unix: number;
+  new_date_unix: number;
 }
 export interface NlBehavior {
   values: NlBehaviorValue[];
@@ -198,6 +209,17 @@ export interface NlSewerValue {
   average: number | null;
   date_of_insertion_unix: number;
   date_unix: number;
+}
+export interface NlReproduction {
+  values: NlReproductionValue[];
+  last_value: NlReproductionValue;
+}
+export interface NlReproductionValue {
+  index_low: number | null;
+  index_average: number | null;
+  index_high: number | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
 }
 
 export type GmCode = string;
@@ -437,7 +459,6 @@ export interface Nl {
   intensive_care_nice_per_age_group: NlIntensiveCareNicePerAgeGroup;
   tested_overall: NlTestedOverall;
   tested_per_age_group: NlTestedPerAgeGroup;
-  reproduction: NlReproduction;
   sewer: NlSewer;
   hospital_nice: NlHospitalNice;
   hospital_nice_per_age_group: NlHospitalNicePerAgeGroup;
@@ -497,7 +518,6 @@ export interface NlDifference {
   nursing_home__deceased_daily_archived_20230126: DifferenceInteger;
   vulnerable_tested_per_age_group: DifferenceInteger;
   vulnerable_hospital_admissions: DifferenceInteger;
-  reproduction__index_average: DifferenceDecimal;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
 }
 export interface DifferenceDecimal {
@@ -631,17 +651,6 @@ export interface NlTestedPerAgeGroupValue {
   infected_age_80_89_per_100k: number;
   infected_age_90_plus_per_100k: number;
   infected_overall_per_100k: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlReproduction {
-  values: NlReproductionValue[];
-  last_value: NlReproductionValue;
-}
-export interface NlReproductionValue {
-  index_low: number | null;
-  index_average: number | null;
-  index_high: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }

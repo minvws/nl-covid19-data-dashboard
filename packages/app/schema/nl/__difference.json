@@ -48,9 +48,6 @@
     "vulnerable_hospital_admissions": {
       "$ref": "#/definitions/diff_integer"
     },
-    "reproduction__index_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
     "deceased_rivm__covid_daily_archived_20221231": {
       "$ref": "#/definitions/diff_integer"
     }
@@ -62,7 +59,6 @@
     "hospital_lcps__beds_occupied_covid",
     "tested_ggd__tested_total_moving_average",
     "tested_ggd__infected_percentage_moving_average",
-    "reproduction__index_average",
     "infectious_people__estimate",
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
     "intensive_care_lcps__beds_occupied_covid",

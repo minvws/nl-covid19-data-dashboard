@@ -10,21 +10,22 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { PageKpi } from '~/components/page-kpi';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { ElementsQueryResult, getElementsQuery } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
-const pageMetrics = ['reproduction'];
+const pageMetrics = ['reproduction_archived_20230711'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -36,7 +37,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('reproduction', 'difference.reproduction__index_average'),
+  selectArchivedNlData('reproduction_archived_20230711', 'difference.reproduction__index_average_archived_20230711'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -45,7 +46,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
       "parts": ${getPagePartsQuery('reproduction_page')},
-      "elements": ${getElementsQuery('nl', ['reproduction'], locale)}
+      "elements": ${getElementsQuery('nl', ['reproduction_archived_20230711'], locale)}
      }`;
     })(context);
 
@@ -61,9 +62,10 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, selectedNlData: data, content, lastGenerated } = props;
+  const { pageText, selectedArchivedNlData: data, content, lastGenerated } = props;
 
-  const lastFilledValue = getLastFilledValue(data.reproduction);
+  const reproductionLastValue = getLastFilledValue(data.reproduction_archived_20230711);
+  const reproductionValues = data.reproduction_archived_20230711;
 
   const { commonTexts } = useIntl();
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -76,19 +78,21 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
+  const hasActiveWarningTile = !!textNl.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.development_of_the_virus.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={commonTexts.sidebar.metrics.reproduction_number.title}
             title={textNl.titel}
             icon={<Reproductiegetal aria-hidden="true" />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,
-              dateOrRange: lastFilledValue.date_unix,
+              dateOrRange: reproductionLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
             }}
@@ -98,13 +102,15 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             })}
           />
 
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
+
           <TwoKpiSection>
             <KpiWithIllustrationTile
               title={textNl.barscale_titel}
               metadata={{
-                date: lastFilledValue.date_unix,
+                date: reproductionLastValue.date_unix,
                 source: textNl.bronnen.rivm,
-                obtainedAt: lastFilledValue.date_of_insertion_unix,
+                obtainedAt: reproductionLastValue.date_of_insertion_unix,
               }}
               illustration={{
                 image: '/images/reproductie-explainer.svg',
@@ -114,9 +120,9 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             >
               <PageKpi
                 data={data}
-                metricName="reproduction"
+                metricName="reproduction_archived_20230711"
                 metricProperty="index_average"
-                differenceKey="reproduction__index_average"
+                differenceKey="reproduction__index_average_archived_20230711"
                 differenceFractionDigits={2}
                 showOldDateUnix
                 isAmount={false}
@@ -125,7 +131,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             </KpiWithIllustrationTile>
           </TwoKpiSection>
 
-          <ReproductionChartTile data={data.reproduction} timelineEvents={getTimelineEvents(content.elements.timeSeries, 'reproduction')} text={textNl} />
+          <ReproductionChartTile data={reproductionValues} text={textNl} />
 
           {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 
