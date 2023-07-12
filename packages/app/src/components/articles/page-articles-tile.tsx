@@ -1,23 +1,22 @@
 import { colors } from '@corona-dashboard/common';
+import { ChevronRight } from '@corona-dashboard/icons';
+import styled, { css } from 'styled-components';
+import { useIntl } from '~/intl';
 import { getImageProps } from '~/lib/sanity';
 import { fontWeights, mediaQueries, radii, space } from '~/style/theme';
-import { Box } from './base';
-import { ChartTile } from './chart-tile';
-import { SanityImage } from './cms/sanity-image';
-import { Anchor, BoldText, Text } from './typography';
-import { Link } from '~/utils/link';
-import styled, { css } from 'styled-components';
-import { PublicationDate } from './publication-date';
-import { ChevronRight } from '@corona-dashboard/icons';
 import { Article } from '~/types/cms';
-import { useIntl } from '~/intl';
+import { Link } from '~/utils/link';
+import { Box } from '../base';
+import { ChartTile } from '../chart-tile';
+import { SanityImage } from '../cms/sanity-image';
+import { Anchor, BoldText, InlineText, Text } from '../typography';
+import { ArticleUpdateOrPublishingDate } from './article-update-or-publishing-date';
 
 interface PageArticlesTileProps {
   articles: Article[];
   title: string;
 }
 
-// TODO: this should be moved to the /articles/ directory, as picked up in COR-1601
 export const PageArticlesTile = ({ articles, title }: PageArticlesTileProps) => {
   const { commonTexts } = useIntl();
 
@@ -30,17 +29,18 @@ export const PageArticlesTile = ({ articles, title }: PageArticlesTileProps) => 
               <ArticleCardHeader>
                 <ArticleImage {...getImageProps(article.cover, {})} />
 
-                <Box display="grid">
+                <div>
                   <BoldText color={colors.black}>{article.title}</BoldText>
-                  <Text color={colors.gray8}>
-                    {/* TODO: this should be updated after COR-1601 implements publicationDate vs updateDate logic */}
-                    {article.mainCategory && `${commonTexts.article_teaser.categories[article.mainCategory]} · `}
-                    <PublicationDate date={article.publicationDate} />
-                  </Text>
-                </Box>
+
+                  <Box display="flex" color={colors.gray8} spacingHorizontal={1}>
+                    <InlineText>{article.mainCategory && `${commonTexts.article_teaser.categories[article.mainCategory]} · `}</InlineText>
+
+                    <ArticleUpdateOrPublishingDate publishedDate={article.publicationDate} updatedDate={article.updatedDate} mainCategory={article.mainCategory} />
+                  </Box>
+                </div>
               </ArticleCardHeader>
 
-              <Box color={colors.black}>{article.summary}</Box>
+              <Text color={colors.black}>{article.summary}</Text>
 
               <ArticleLink>
                 {commonTexts.article_teaser.read_more}
@@ -74,10 +74,17 @@ const Grid = styled(Box)`
 const ArticleCard = styled(Anchor)`
   border-radius: ${radii[2]}px;
   border: 1px solid ${colors.gray3};
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: ${space[2]};
   height: 100%;
   padding: ${space[3]};
+
+  ${Text} {
+    align-items: end;
+    display: flex;
+    flex-grow: 1;
+  }
 `;
 
 const ArticleCardHeader = styled(Box)`

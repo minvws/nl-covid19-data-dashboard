@@ -28,7 +28,6 @@
     "name",
     "vulnerable_tested_per_age_group",
     "proto_name",
-    "reproduction",
     "self_test_overall",
     "sewer",
     "tested_ggd",
@@ -103,9 +102,6 @@
     },
     "tested_per_age_group": {
       "$ref": "tested_per_age_group.json"
-    },
-    "reproduction": {
-      "$ref": "reproduction.json"
     },
     "sewer": {
       "$ref": "sewer.json"

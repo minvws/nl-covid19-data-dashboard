@@ -1,19 +1,12 @@
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import { ArticleDetail } from '~/components/article-detail';
+import { ArticleDetail } from '~/components/articles/article-detail';
 import { Box } from '~/components/base';
 import { Layout } from '~/domain/layout/layout';
 import { getClient, getImageSrc } from '~/lib/sanity';
 import { Languages, SiteText } from '~/locale';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { Article, Block, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -48,16 +41,12 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   createGetContent<Article>((context) => {
     const { locale } = context;
 
-    assert(
-      context?.params?.slug,
-      `[${getStaticProps.name}:artikelen] Slug required to retrieve article`
-    );
+    assert(context?.params?.slug, `[${getStaticProps.name}:artikelen] Slug required to retrieve article`);
     return `*[_type == 'article' && slug.current == '${context.params.slug}']{
       ...,
       "slug": slug.current,
@@ -88,10 +77,7 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated, pageText } = props;
   const { locale = 'nl' } = useRouter();
 
-  const { textTopicalPageShared } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { textTopicalPageShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const { cover } = content;
   const { asset } = cover;
@@ -105,17 +91,10 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
     twitterImage: imgPath,
   };
 
-  const breadcrumbsData = useMemo(
-    () => ({ [props.content.slug.current]: props.content.title }),
-    [props.content.slug, props.content.title]
-  );
+  const breadcrumbsData = useMemo(() => ({ [props.content.slug.current]: props.content.title }), [props.content.slug, props.content.title]);
 
   return (
-    <Layout
-      lastGenerated={lastGenerated}
-      breadcrumbsData={breadcrumbsData}
-      {...metadata}
-    >
+    <Layout lastGenerated={lastGenerated} breadcrumbsData={breadcrumbsData} {...metadata}>
       <Box backgroundColor="white">
         <ArticleDetail article={content} text={textTopicalPageShared} />
       </Box>
@@ -126,10 +105,7 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
 export default ArticleDetailPage;
 
 function getTitle(title: string, locale: string) {
-  const suffix =
-    locale === 'nl'
-      ? 'Dashboard Coronavirus | Rijksoverheid.nl'
-      : 'Dashboard Coronavirus | Government.nl';
+  const suffix = locale === 'nl' ? 'Dashboard Coronavirus | Rijksoverheid.nl' : 'Dashboard Coronavirus | Government.nl';
 
   return `${title} | ${suffix}`;
 }

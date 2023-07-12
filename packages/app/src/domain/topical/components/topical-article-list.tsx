@@ -1,4 +1,4 @@
-import { ArticleSummary } from '~/components/article-teaser';
+import { ArticleSummary } from '~/components/articles/article-teaser';
 import { Box } from '~/components/base';
 import { SiteText } from '~/locale';
 import { TopicalArticleTeaser } from './topical-article-teaser';

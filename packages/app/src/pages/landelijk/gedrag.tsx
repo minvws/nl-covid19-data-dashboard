@@ -24,7 +24,7 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { PageArticlesTile } from '~/components/page-articles-tile';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { WarningTile } from '~/components/warning-tile';

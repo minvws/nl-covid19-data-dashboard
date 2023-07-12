@@ -63,14 +63,22 @@ export interface ArchivedNl {
   sewer_archived_20230623: NlSewer;
   vulnerable_nursing_home_archived_20230711: NlVulnerableNursingHome;
   vulnerable_hospital_admissions_archived_20230711: NlVulnerableHospitalAdmissions;
+  reproduction_archived_20230711: NlReproduction;
 }
 export interface ArchivedNlDifference {
   nursing_home__deceased_daily_archived_20230126: DifferenceInteger;
   vulnerable_nursing_home__infected_locations_total_archived_20230711: DifferenceInteger;
   nursing_home__newly_infected_people_archived_20230126: DifferenceInteger;
   vulnerable_hospital_admissions_archived_20230711: DifferenceInteger;
+  reproduction__index_average_archived_20230711: DifferenceDecimal;
 }
 export interface DifferenceInteger {
+  old_value: number;
+  difference: number;
+  old_date_unix: number;
+  new_date_unix: number;
+}
+export interface DifferenceDecimal {
   old_value: number;
   difference: number;
   old_date_unix: number;
@@ -245,6 +253,17 @@ export interface NlVulnerableHospitalAdmissions {
   admissions_age_70_plus: number;
   date_start_unix: number;
   date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlReproduction {
+  values: NlReproductionValue[];
+  last_value: NlReproductionValue;
+}
+export interface NlReproductionValue {
+  index_low: number | null;
+  index_average: number | null;
+  index_high: number | null;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 
@@ -485,7 +504,6 @@ export interface Nl {
   intensive_care_nice_per_age_group: NlIntensiveCareNicePerAgeGroup;
   tested_overall: NlTestedOverall;
   tested_per_age_group: NlTestedPerAgeGroup;
-  reproduction: NlReproduction;
   sewer: NlSewer;
   hospital_nice: NlHospitalNice;
   hospital_nice_per_age_group: NlHospitalNicePerAgeGroup;
@@ -538,7 +556,8 @@ export interface NlDifference {
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
   sewer__average: DifferenceInteger;
   vulnerable_tested_per_age_group: DifferenceInteger;
-  reproduction__index_average: DifferenceDecimal;
+  reproduction__index_average?: DifferenceDecimal;
+  vulnerable_hospital_admissions?: DifferenceInteger;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
 }
 export interface DifferenceDecimal {
@@ -672,17 +691,6 @@ export interface NlTestedPerAgeGroupValue {
   infected_age_80_89_per_100k: number;
   infected_age_90_plus_per_100k: number;
   infected_overall_per_100k: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlReproduction {
-  values: NlReproductionValue[];
-  last_value: NlReproductionValue;
-}
-export interface NlReproductionValue {
-  index_low: number | null;
-  index_average: number | null;
-  index_high: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }

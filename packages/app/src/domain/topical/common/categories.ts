@@ -1,4 +1,4 @@
-export const articleCategory = [
+export const allPossibleArticleCategories = [
   '__alles',
   'knowledge',
   'news',
@@ -11,4 +11,4 @@ export const articleCategory = [
   'gedrag',
 ] as const;
 
-export type ArticleCategoryType = typeof articleCategory[number];
+export type ArticleCategoryType = typeof allPossibleArticleCategories[number];

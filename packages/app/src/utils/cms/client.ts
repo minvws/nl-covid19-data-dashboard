@@ -10,6 +10,5 @@ export function getClient(dataset = 'development') {
   return sanityClient({
     ...clientConfig,
     dataset,
-    token: process.env.SANITY_TOKEN,
   });
 }

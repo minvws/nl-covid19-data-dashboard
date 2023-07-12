@@ -17,7 +17,8 @@
     "difference.vulnerable_nursing_home__infected_locations_total_archived_20230711",
     "difference.vulnerable_hospital_admissions_archived_20230711",
     "vulnerable_hospital_admissions_archived_20230711",
-    "vulnerable_nursing_home_archived_20230711"
+    "vulnerable_nursing_home_archived_20230711",
+    "reproduction_archived_20230711"
   ],
   "additionalProperties": false,
   "properties": {
@@ -59,6 +60,9 @@
     },
     "vulnerable_hospital_admissions_archived_20230711": {
       "$ref": "vulnerable_hospital_admissions.json"
+    },
+    "reproduction_archived_20230711": {
+      "$ref": "reproduction.json"
     }
   },
   "$defs": {

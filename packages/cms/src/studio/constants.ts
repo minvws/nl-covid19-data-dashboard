@@ -28,7 +28,7 @@ export const titleByMetricName: Partial<Record<MetricName, string>> = {
   named_difference: 'Verschil',
   nursing_home_archived_20230126: 'Verpleeghuizen',
   repeating_shot_administered: 'Gezette herhaalprikken',
-  reproduction: 'Reproduciegetal',
+  reproduction_archived_20230711: 'Reproductiegetal',
   self_test_overall: 'Zelfgerapporteerde positieve coronatestuitslagen',
   sewer_per_installation: 'Virusdeeltjes in rioolwater',
   sewer: 'Rioolwater metingen',
