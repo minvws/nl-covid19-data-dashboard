@@ -14,8 +14,6 @@
     "doctor_archived_20210903",
     "nursing_home_archived_20230126",
     "sewer_archived_20230623",
-    "difference.vulnerable_nursing_home__infected_locations_total_archived_20230711",
-    "difference.vulnerable_hospital_admissions_archived_20230711",
     "vulnerable_hospital_admissions_archived_20230711",
     "vulnerable_nursing_home_archived_20230711",
     "reproduction_archived_20230711"
