@@ -215,10 +215,10 @@ export interface NlDoctorValue {
   date_of_insertion_unix: number;
 }
 export interface NlNursingHomeArchived_20230126 {
-  values: NlNursingHomeArchived_20230126Value[];
-  last_value: NlNursingHomeArchived_20230126Value;
+  values: NlNursingHomeValue[];
+  last_value: NlNursingHomeValue;
 }
-export interface NlNursingHomeArchived_20230126Value {
+export interface NlNursingHomeValue {
   newly_infected_people: number;
   newly_infected_people_moving_average: number | null;
   deceased_daily: number;
