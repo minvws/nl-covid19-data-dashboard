@@ -59,7 +59,7 @@ export interface ArchivedNl {
   behavior_annotations_archived_20230412: NlBehaviorAnnotations;
   behavior_per_age_group_archived_20230411: NlBehaviorPerAgeGroup;
   doctor_archived_20210903: NlDoctor;
-  nursing_home_archived_20230126: NlNursingHomeArchived_20230126;
+  nursing_home_archived_20230126: NlNursingHome;
   sewer_archived_20230623: NlSewer;
   vulnerable_nursing_home_archived_20230711: NlVulnerableNursingHome;
   vulnerable_hospital_admissions_archived_20230711: NlVulnerableHospitalAdmissions;
@@ -214,11 +214,11 @@ export interface NlDoctorValue {
   covid_symptoms: number;
   date_of_insertion_unix: number;
 }
-export interface NlNursingHomeArchived_20230126 {
-  values: NlNursingHomeValue[];
-  last_value: NlNursingHomeValue;
+export interface NlNursingHome {
+  values: NlNursingHomeArchived_20230126Value[];
+  last_value: NlNursingHomeArchived_20230126Value;
 }
-export interface NlNursingHomeValue {
+export interface NlNursingHomeArchived_20230126Value {
   newly_infected_people: number;
   newly_infected_people_moving_average: number | null;
   deceased_daily: number;
