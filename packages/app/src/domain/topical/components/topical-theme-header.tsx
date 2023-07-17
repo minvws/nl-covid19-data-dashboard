@@ -11,7 +11,7 @@ import { fontSizes } from '~/style/theme';
 interface TopicalThemeHeaderProps {
   title: string;
   subtitle?: PortableTextEntry[] | null;
-  icon?: TopicalIcon | null;
+  icon: TopicalIcon;
 }
 
 export const TopicalThemeHeader = ({ title, subtitle, icon }: TopicalThemeHeaderProps) => {

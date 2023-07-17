@@ -14,10 +14,10 @@ export function getTopicalStructureQuery(locale: string) {
       'weeklySummary': *[
         _type == 'weeklySummary' && !(_id in path('drafts.**'))
       ][0]{
-        'title': title.${locale},
+        'title': title.nl,
         'items': items[]->{
           tileIcon,
-          'description': description.${locale},
+          'description': description.nl,
           isThermometerMetric
         },
       },

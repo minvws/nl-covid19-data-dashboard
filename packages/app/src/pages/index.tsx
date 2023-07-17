@@ -5,7 +5,6 @@ import { isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
 import { TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '~/components/severity-indicator-tile/constants';
-import { SeverityLevels } from '~/components/severity-indicator-tile/types';
 import { TopicalWeeklySummaryTile } from '~/components/weekly-summary/topical-weekly-summary-tile';
 import { Layout } from '~/domain/layout';
 import { Advice } from '~/domain/topical/components/advice';
@@ -25,6 +24,7 @@ import { space } from '~/style/theme';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 import { getFilenameToIconName, replaceVariablesInText } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { getThermometerSeverityLevels } from '~/utils/get-thermometer-severity-level';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.topical_page.nl,
@@ -77,8 +77,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     md: `repeat(3, 1fr)`,
   };
 
-  const currentSeverityLevel = thermometer.currentLevel as unknown as SeverityLevels;
-  const currentSeverityLevelTexts = thermometer.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === currentSeverityLevel);
+  const { currentSeverityLevel, currentSeverityLevelTexts } = getThermometerSeverityLevels(thermometer);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -92,18 +91,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           >
             <TopicalHeader title={topicalConfig.title} />
           </Box>
-          <TopicalWeeklySummaryTile
-            title={weeklySummary.title}
-            summaryItems={weeklySummary.items}
-            level={currentSeverityLevel}
-            label={currentSeverityLevelTexts?.label}
-            linkText={textShared}
-          />
+          <TopicalWeeklySummaryTile title={weeklySummary.title} summaryItems={weeklySummary.items} level={currentSeverityLevel} label={currentSeverityLevelTexts?.label} />
           <Box paddingX={{ _: space[3], sm: space[4] }} maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
             <TopicalHeader description={topicalConfig.description} />
           </Box>
 
-          <Spacer marginBottom={{ _: space[5], md: space[6] }} />
+          <Spacer marginBottom={space[5]} />
 
           <Box spacing={{ _: 5, md: 6 }} paddingX={{ _: space[3], sm: space[4] }}>
             {kpiThemes.themes.map((theme) => {

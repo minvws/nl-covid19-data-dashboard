@@ -1,5 +1,4 @@
 import { Languages, SiteText } from '~/locale';
-import { css } from '@styled-system/css';
 import { colors } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
@@ -8,7 +7,7 @@ import { getTimelineRangeDates } from '~/components/severity-indicator-tile/comp
 import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
 import { SEVERITY_LEVELS_LIST, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '~/components/severity-indicator-tile/constants';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
-import { SeverityLevel, SeverityLevels } from '~/components/severity-indicator-tile/types';
+import { SeverityLevel } from '~/components/severity-indicator-tile/types';
 import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
 import { IndicatorLevelDescription } from '~/domain/topical/components/indicator-level-description';
 import { TrendIcon } from '~/domain/topical/types';
@@ -20,9 +19,8 @@ import { TopicalSanityData } from '~/queries/query-types';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { InView, PageInformationBlock, TileList, WarningTile } from '~/components';
+import { ChartTile, InView, PageInformationBlock, TileList, WarningTile } from '~/components';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { TopicalThemeHeader } from '~/domain/topical/components/topical-theme-header';
 import { space } from '~/style/theme';
 import { Coronathermometer } from '@corona-dashboard/icons';
 import { useIntl } from '~/intl';
@@ -30,6 +28,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { getThermometerSeverityLevels } from '~/utils/get-thermometer-severity-level';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.corona_thermometer_page.nl,
@@ -80,8 +79,7 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts } = useIntl();
   const { formatDateFromSeconds } = useIntl();
 
-  const currentSeverityLevel = thermometer.currentLevel as unknown as SeverityLevels;
-  const currentSeverityLevelTexts = thermometer.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === currentSeverityLevel);
+  const { currentSeverityLevel, currentSeverityLevelTexts } = getThermometerSeverityLevels(thermometer);
 
   const thermometerEvents = getThermometerEvents(thermometer.timeline.ThermometerTimelineEvents, thermometer.thermometerLevels);
 
@@ -117,55 +115,48 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.pagina.belangrijk_bericht} variant="informational"></WarningTile>}
 
-          {currentSeverityLevelTexts && (
-            <Box
-              marginY={space[5]}
-              paddingX={{ _: space[3], sm: space[4] }}
-              maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}
-              borderBottom={'1px solid'}
-              borderBottomColor={colors.gray3}
-            >
-              <TopicalThemeHeader title={thermometer.title} subtitle={thermometer.subTitle} />
-
-              <SeverityIndicatorTile
-                level={currentSeverityLevel}
-                description={
-                  currentSeverityLevelTexts.description &&
-                  replaceVariablesInText(currentSeverityLevelTexts.description, {
-                    label: currentSeverityLevelTexts.label.toLowerCase(),
-                  })
-                }
-                title={thermometer.tileTitle}
-                label={currentSeverityLevelTexts.label}
-                sourceLabel={thermometer.sourceLabel}
-                datesLabel={thermometer.datesLabel}
-                levelDescription={thermometer.levelDescription}
-                trendIcon={thermometer.trendIcon as TrendIcon}
-              />
-
-              {thermometerEvents && thermometerEvents.length && (
-                <Timeline
-                  startDate={startDate}
-                  endDate={endDate}
-                  timelineEvents={thermometerEvents}
-                  labels={{
-                    heading: thermometer.timeline.title,
-                    today: thermometer.timeline.todayLabel,
-                    tooltipCurrentEstimation: thermometer.timeline.tooltipLabel,
-                  }}
-                  legendItems={[
-                    {
-                      label: thermometer.timeline.legendLabel,
-                      shape: 'custom',
-                      shapeComponent: <TimelineMarker color={colors.gray6} />,
-                    },
-                  ]}
+          <ChartTile title={thermometer.title} disableFullscreen>
+            {currentSeverityLevelTexts && (
+              <Box maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
+                <SeverityIndicatorTile
+                  level={currentSeverityLevel}
+                  description={
+                    currentSeverityLevelTexts.description &&
+                    replaceVariablesInText(currentSeverityLevelTexts.description, {
+                      label: currentSeverityLevelTexts.label.toLowerCase(),
+                    })
+                  }
+                  title={thermometer.tileTitle}
+                  label={currentSeverityLevelTexts.label}
+                  sourceLabel={thermometer.sourceLabel}
+                  datesLabel={thermometer.datesLabel}
+                  levelDescription={thermometer.levelDescription}
+                  trendIcon={thermometer.trendIcon as TrendIcon}
                 />
-              )}
-            </Box>
-          )}
+                {thermometerEvents && thermometerEvents.length && (
+                  <Timeline
+                    startDate={startDate}
+                    endDate={endDate}
+                    timelineEvents={thermometerEvents}
+                    labels={{
+                      heading: thermometer.timeline.title,
+                      today: thermometer.timeline.todayLabel,
+                      tooltipCurrentEstimation: thermometer.timeline.tooltipLabel,
+                    }}
+                    legendItems={[
+                      {
+                        label: thermometer.timeline.legendLabel,
+                        shape: 'custom',
+                        shapeComponent: <TimelineMarker color={colors.gray6} />,
+                      },
+                    ]}
+                  />
+                )}
+              </Box>
+            )}
+          </ChartTile>
 
-          <Box marginY={space[3]}>
+          <ChartTile title={thermometer.title} disableFullscreen>
             <OrderedList>
               {SEVERITY_LEVELS_LIST.map((severityLevel, index) => {
                 const indicatorTexts = thermometer.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === severityLevel);
@@ -176,7 +167,7 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
                 );
               })}
             </OrderedList>
-          </Box>
+          </ChartTile>
 
           {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle}></PageFaqTile>}
 
@@ -191,12 +182,10 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
   );
 };
 
-const OrderedList = styled.ol(
-  css({
-    listStyleType: 'none',
-    margin: '0',
-    padding: '0',
-  })
-);
+const OrderedList = styled.ol`
+  margin: ${space[3]} 0;
+  padding: 0;
+  list-style-type: none;
+`;
 
 export default CoronaThermometer;

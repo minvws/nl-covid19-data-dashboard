@@ -12,7 +12,7 @@ export interface TopicalSanityData {
   advice: Advice;
 }
 
-interface ThermometerConfig {
+export interface ThermometerConfig {
   icon: TopicalIcon;
   title: string;
   subTitle: PortableTextEntry[] | null;
@@ -77,13 +77,11 @@ interface TopicalTheme extends Theme {
 
 export interface BaseTile {
   tileIcon: TopicalIcon;
-  description: string;
+  description: PortableTextEntry[];
   isThermometerMetric?: boolean;
 }
 
-interface TopicalTile {
-  tileIcon: TopicalIcon;
-  description: PortableTextEntry[];
+interface TopicalTile extends BaseTile {
   title: string;
   sourceLabel: string | null;
   tileDate: string;
