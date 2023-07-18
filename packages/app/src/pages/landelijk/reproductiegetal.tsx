@@ -2,12 +2,11 @@ import { getLastFilledValue } from '@corona-dashboard/common';
 import { Reproductiegetal } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { InView } from '~/components/in-view';
-import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
+import { IllustrationTile } from '~/components/illustration-tile';
 import { Markdown } from '~/components/markdown';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { PageKpi } from '~/components/page-kpi';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { WarningTile } from '~/components/warning-tile';
@@ -24,6 +23,8 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
 
 const pageMetrics = ['reproduction_archived_20230711'];
 
@@ -104,31 +105,27 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
-          <TwoKpiSection>
-            <KpiWithIllustrationTile
+          <TwoKpiSection hasBorder>
+            <KpiTile
               title={textNl.barscale_titel}
               metadata={{
                 date: reproductionLastValue.date_unix,
                 source: textNl.bronnen.rivm,
                 obtainedAt: reproductionLastValue.date_of_insertion_unix,
               }}
-              illustration={{
-                image: '/images/reproductie-explainer.svg',
-                alt: textNl.reproductie_explainer_alt,
-                description: textNl.extra_uitleg,
-              }}
+              hasNoBorder
             >
-              <PageKpi
-                data={data}
-                metricName="reproduction_archived_20230711"
-                metricProperty="index_average"
-                differenceKey="reproduction__index_average_archived_20230711"
+              <KpiValue
+                absolute={reproductionLastValue.index_average}
                 differenceFractionDigits={2}
-                showOldDateUnix
-                isAmount={false}
+                difference={data.difference.reproduction__index_average_archived_20230711}
+                showOldDateUnixForDifference
+                isAmount
               />
               <Markdown content={textNl.barscale_toelichting} />
-            </KpiWithIllustrationTile>
+            </KpiTile>
+
+            <IllustrationTile image={'/images/reproductie-explainer.svg'} alt={textNl.reproductie_explainer_alt} description={textNl.extra_uitleg} hasNoBorder />
           </TwoKpiSection>
 
           <ReproductionChartTile data={reproductionValues} text={textNl} />
