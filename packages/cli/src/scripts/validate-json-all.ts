@@ -1,35 +1,16 @@
 import { gmData, sortTimeSeriesInDataInPlace } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import fs from 'fs';
-import meow from 'meow';
 import path from 'path';
 import { schemaDirectory } from '../config';
 import { SchemaInfo, SchemaInfoItem, createValidateFunction, executeValidations, getSchemaInfo } from '../schema';
 import { JSONObject } from '../schema/custom-validations';
 
-const cli = meow(
-  `
-    Usage
-      $ validate-json-all <optional-json-path>
+const schemaInfo = getSchemaInfo();
 
-    Examples
-      $ validate-json-all pages-tests/fixtures
-`
-);
-
-const cliArgs = cli.input;
-
-const customJsonPathArg = cliArgs[0];
-
-const customJsonPath = customJsonPathArg ? path.join(__dirname, '..', '..', customJsonPathArg) : undefined;
-
-const schemaInfo = getSchemaInfo(customJsonPath);
-
-if (!customJsonPathArg) {
-  if (schemaInfo.gm.files.length !== gmData.length) {
-    console.error(chalk.bgRed.bold(`\n Expected ${gmData.length} municipal files, actually found ${schemaInfo.gm.files.length} \n`));
-    process.exit(1);
-  }
+if (schemaInfo.gm.files.length !== gmData.length) {
+  console.error(chalk.bgRed.bold(`\n Expected ${gmData.length} municipal files, actually found ${schemaInfo.gm.files.length} \n`));
+  process.exit(1);
 }
 
 // The validations are asynchronous so this reducer gathers all the Promises in one array.
