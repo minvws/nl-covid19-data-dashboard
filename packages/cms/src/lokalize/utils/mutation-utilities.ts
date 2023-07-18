@@ -306,7 +306,7 @@ function parseKeyWithId(keyWithId: string) {
  */
 export const finalizeMoveMutations = async (dataset: 'development' | 'production', moves: MoveMutation[]) => {
   await initialiseEnvironmentVariables();
-  const sanityClient = client.withConfig({ dataset, token: process.env.SANITY_API_TOKEN });
+  const sanityClient = client.withConfig({ dataset, token: process.env.SANITY_AUTH_TOKEN });
   const transaction = sanityClient.transaction();
 
   for (const { document_id, move_to } of moves) {
