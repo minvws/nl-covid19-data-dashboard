@@ -35,9 +35,7 @@ jobs:
         run: yarn workspace @corona-dashboard/icons build
 
       - name: Synchronize texts
-        run: yarn workspace @corona-dashboard/cms lokalize:sync-after-feature
-        env:
-          SANITY_TOKEN: ${{ secrets.sanity_token }}
+        run: SANITY_AUTH_TOKEN=${{ secrets.SANITY_AUTH_TOKEN }} yarn workspace @corona-dashboard/cms lokalize:sync-after-feature
 
       - name: Export production texts
         run: yarn workspace @corona-dashboard/cms lokalize:import --dataset=production --clean-json

@@ -1,41 +1,32 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import { Reproductiegetal } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
+import { InView } from '~/components/in-view';
+import { IllustrationTile } from '~/components/illustration-tile';
 import { Markdown } from '~/components/markdown';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { PageKpi } from '~/components/page-kpi';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import {
-  ElementsQueryResult,
-  getElementsQuery,
-  getTimelineEvents,
-} from '~/queries/get-elements-query';
-import {
-  getArticleParts,
-  getPagePartsQuery,
-} from '~/queries/get-page-parts-query';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectNlData,
-} from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery } from '~/queries/get-elements-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
 
-const pageMetrics = ['reproduction'];
+const pageMetrics = ['reproduction_archived_20230711'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -45,10 +36,9 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 export const getStaticProps = createGetStaticProps(
-  ({ locale }: { locale: keyof Languages }) =>
-    getLokalizeTexts(selectLokalizeTexts, locale),
+  ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('reproduction', 'difference.reproduction__index_average'),
+  selectArchivedNlData('reproduction_archived_20230711', 'difference.reproduction__index_average_archived_20230711'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -57,16 +47,15 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
       "parts": ${getPagePartsQuery('reproduction_page')},
-      "elements": ${getElementsQuery('nl', ['reproduction'], locale)}
+      "elements": ${getElementsQuery('nl', ['reproduction_archived_20230711'], locale)}
      }`;
     })(context);
 
     return {
       content: {
-        articles: getArticleParts(
-          content.parts.pageParts,
-          'reproductionPageArticles'
-        ),
+        articles: getArticleParts(content.parts.pageParts, 'reproductionPageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'reproductionPageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'reproductionPageDataExplained'),
         elements: content.elements,
       },
     };
@@ -74,15 +63,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, selectedNlData: data, content, lastGenerated } = props;
+  const { pageText, selectedArchivedNlData: data, content, lastGenerated } = props;
 
-  const lastFilledValue = getLastFilledValue(data.reproduction);
+  const reproductionLastValue = getLastFilledValue(data.reproduction_archived_20230711);
+  const reproductionValues = data.reproduction_archived_20230711;
 
   const { commonTexts } = useIntl();
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(
-    pageText,
-    selectLokalizeTexts
-  );
+  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -92,65 +79,64 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
+  const hasActiveWarningTile = !!textNl.belangrijk_bericht;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={
-              commonTexts.sidebar.categories.development_of_the_virus.title
-            }
-            screenReaderCategory={
-              commonTexts.sidebar.metrics.reproduction_number.title
-            }
+            category={commonTexts.sidebar.categories.archived_metrics.title}
+            screenReaderCategory={commonTexts.sidebar.metrics.reproduction_number.title}
             title={textNl.titel}
             icon={<Reproductiegetal aria-hidden="true" />}
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,
-              dateOrRange: lastFilledValue.date_unix,
+              dateOrRange: reproductionLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
             }}
-            referenceLink={textNl.reference.href}
-            articles={content.articles}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
-          <TwoKpiSection>
-            <KpiWithIllustrationTile
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
+
+          <TwoKpiSection hasBorder>
+            <KpiTile
               title={textNl.barscale_titel}
               metadata={{
-                date: lastFilledValue.date_unix,
+                date: reproductionLastValue.date_unix,
                 source: textNl.bronnen.rivm,
-                obtainedAt: lastFilledValue.date_of_insertion_unix,
+                obtainedAt: reproductionLastValue.date_of_insertion_unix,
               }}
-              illustration={{
-                image: '/images/reproductie-explainer.svg',
-                alt: textNl.reproductie_explainer_alt,
-                description: textNl.extra_uitleg,
-              }}
+              hasNoBorder
             >
-              <PageKpi
-                data={data}
-                metricName="reproduction"
-                metricProperty="index_average"
-                differenceKey="reproduction__index_average"
+              <KpiValue
+                absolute={reproductionLastValue.index_average}
                 differenceFractionDigits={2}
-                showOldDateUnix
-                isAmount={false}
+                difference={data.difference.reproduction__index_average_archived_20230711}
+                showOldDateUnixForDifference
+                isAmount
               />
               <Markdown content={textNl.barscale_toelichting} />
-            </KpiWithIllustrationTile>
+            </KpiTile>
+
+            <IllustrationTile image={'/images/reproductie-explainer.svg'} alt={textNl.reproductie_explainer_alt} description={textNl.extra_uitleg} hasNoBorder />
           </TwoKpiSection>
 
-          <ReproductionChartTile
-            data={data.reproduction}
-            timelineEvents={getTimelineEvents(
-              content.elements.timeSeries,
-              'reproduction'
-            )}
-            text={textNl}
-          />
+          <ReproductionChartTile data={reproductionValues} text={textNl} />
+
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
       </NlLayout>
     </Layout>

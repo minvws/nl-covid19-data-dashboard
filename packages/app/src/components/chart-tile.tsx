@@ -16,6 +16,7 @@ interface ChartTileProps {
   title: string;
   description?: string;
   disableFullscreen?: boolean;
+  id?: string;
   metadata?: MetadataProps;
   timeframeInitialValue?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
@@ -23,7 +24,18 @@ interface ChartTileProps {
   onSelectTimeframe?: (timeframe: TimeframeOption) => void;
 }
 
-export const ChartTile = ({ children, title, description, disableFullscreen, metadata, timeframeInitialValue, toggle, timeframeOptions, onSelectTimeframe }: ChartTileProps) => {
+export const ChartTile = ({
+  children,
+  title,
+  description,
+  disableFullscreen,
+  id,
+  metadata,
+  timeframeInitialValue,
+  toggle,
+  timeframeOptions,
+  onSelectTimeframe,
+}: ChartTileProps) => {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(timeframeInitialValue || TimeframeOption.ALL);
 
   useEffect(() => {
@@ -33,7 +45,7 @@ export const ChartTile = ({ children, title, description, disableFullscreen, met
   }, [timeframe, onSelectTimeframe]);
 
   return (
-    <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
+    <FullscreenChartTile metadata={metadata} disabled={disableFullscreen} id={id}>
       <ChartTileHeader title={title} description={description} toggle={toggle}>
         {timeframeOptions && timeframe && (
           <Box width={{ sm: '100%', lg: '50%', xl: '25%' }}>

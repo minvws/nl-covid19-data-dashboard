@@ -5,7 +5,6 @@ import { ChartTile } from '~/components/chart-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { WarningTile } from '~/components';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
@@ -14,6 +13,7 @@ import { createGetStaticProps, StaticProps } from '~/static-props/create-get-sta
 import { getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { WarningTile } from '~/components/warning-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -62,7 +62,6 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: warningLastValue.date_of_insertion_unix,
               dataSources: [corona_melder_app.header.bronnen.rivm],
             }}
-            referenceLink={corona_melder_app.header.reference.href}
           />
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={corona_melder_app.belangrijk_bericht} variant="informational" />}

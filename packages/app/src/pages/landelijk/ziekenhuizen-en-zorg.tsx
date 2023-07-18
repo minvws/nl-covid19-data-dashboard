@@ -4,7 +4,10 @@ import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
+import { InView } from '~/components/in-view';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
@@ -13,12 +16,13 @@ import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
-import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
+import { PagePart, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { trimLeadingNullValues } from '~/utils/trim-leading-null-values';
 
 const pageMetrics = [
@@ -43,7 +47,7 @@ export const getStaticProps = createGetStaticProps(
   selectNlData('difference.hospital_lcps__beds_occupied_covid', 'difference.intensive_care_lcps__beds_occupied_covid', 'hospital_lcps', 'intensive_care_lcps'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
-      parts: PagePartQueryResult<ArticleParts | LinkParts>;
+      parts: PagePartQueryResult<PagePart>;
       elements: ElementsQueryResult;
     }>((context) => {
       return `{
@@ -55,6 +59,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.parts.pageParts, 'hospitalAndCarePageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'hospitalAndCarePageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'hospitalAndCarePageDataExplained'),
         links: getLinkParts(content.parts.pageParts, 'hospitalAndCarePageLinks'),
         elements: content.elements,
       },
@@ -120,9 +126,11 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.sources.lnaz],
             }}
-            referenceLink={textNl.reference.href}
             pageLinks={content.links}
-            articles={content.articles}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           <BorderedKpiSection
@@ -349,6 +357,14 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             </ChartTile>
+          )}
+
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
           )}
         </TileList>
       </NlLayout>

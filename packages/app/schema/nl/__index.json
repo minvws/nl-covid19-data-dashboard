@@ -26,12 +26,8 @@
     "intensive_care_nice_per_age_group",
     "last_generated",
     "name",
-    "vulnerable_nursing_home",
-    "nursing_home_archived_20230126",
     "vulnerable_tested_per_age_group",
-    "vulnerable_hospital_admissions",
     "proto_name",
-    "reproduction",
     "self_test_overall",
     "sewer",
     "tested_ggd",
@@ -107,9 +103,6 @@
     "tested_per_age_group": {
       "$ref": "tested_per_age_group.json"
     },
-    "reproduction": {
-      "$ref": "reproduction.json"
-    },
     "sewer": {
       "$ref": "sewer.json"
     },
@@ -131,17 +124,8 @@
     "tested_ggd_archived": {
       "$ref": "tested_ggd_archived.json"
     },
-    "nursing_home_archived_20230126": {
-      "$ref": "nursing_home_archived_20230126.json"
-    },
-    "vulnerable_nursing_home": {
-      "$ref": "vulnerable_nursing_home.json"
-    },
     "vulnerable_tested_per_age_group": {
       "$ref": "vulnerable_tested_per_age_group.json"
-    },
-    "vulnerable_hospital_admissions": {
-      "$ref": "vulnerable_hospital_admissions.json"
     },
     "disability_care_archived_20230126": {
       "$ref": "disability_care_archived_20230126.json"

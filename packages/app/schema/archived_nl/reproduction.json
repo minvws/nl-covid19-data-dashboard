@@ -4,13 +4,7 @@
       "title": "nl_reproduction_value",
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "index_low",
-        "index_average",
-        "index_high",
-        "date_unix",
-        "date_of_insertion_unix"
-      ],
+      "required": ["index_low", "index_average", "index_high", "date_unix", "date_of_insertion_unix"],
       "properties": {
         "index_low": {
           "type": ["number", "null"],

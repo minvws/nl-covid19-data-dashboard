@@ -1,4 +1,4 @@
-import { BsBook, BsBookHalf, BsFileRichtext, BsLink, BsNewspaper, BsTranslate } from 'react-icons/bs';
+import { Bs123, BsBook, BsBookHalf, BsFileRichtext, BsLink, BsNewspaper, BsQuestionCircle, BsTranslate } from 'react-icons/bs';
 import { IconType } from 'react-icons/lib';
 import { map } from 'rxjs/operators';
 import { StructureBuilder, StructureResolverContext } from 'sanity/desk';
@@ -112,6 +112,8 @@ const pageDataListItem = (page: PagePartPage, S: StructureBuilder, context: Stru
 const pageDataItem = (pageData: PagePartChildPage, S: StructureBuilder) => {
   const iconForType: { [key: string]: IconType } = {
     pageArticles: BsNewspaper,
+    pageDataExplained: Bs123,
+    pageFAQs: BsQuestionCircle,
     pageHighlightedItems: BsNewspaper,
     pageLinks: BsLink,
     pageRichText: BsFileRichtext,

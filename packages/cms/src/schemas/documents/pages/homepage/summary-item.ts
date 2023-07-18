@@ -20,7 +20,7 @@ export const summaryItem = defineType({
     defineField({
       title: 'Omschrijving',
       name: 'description',
-      type: 'localeText',
+      type: 'localeRichContentBlock',
       validation: (rule) => rule.required(),
     }),
     defineField({

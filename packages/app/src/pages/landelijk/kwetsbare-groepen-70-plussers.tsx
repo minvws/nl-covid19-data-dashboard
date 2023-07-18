@@ -1,43 +1,47 @@
 import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { useState } from 'react';
 import { Coronavirus, VulnerableGroups as VulnerableGroupsIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
-import { Box } from '~/components/base';
+import { useState } from 'react';
+import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { Divider } from '~/components/divider';
-import { DynamicChoropleth } from '~/components/';
+import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { Markdown } from '~/components/markdown';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { Languages, SiteText } from '~/locale';
 import { useIntl } from '~/intl';
+import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
 const pageMetrics = [
   'difference.nursing_home__deceased_daily_archived_20230126',
-  'difference.vulnerable_nursing_home__infected_locations_total',
+  'difference.vulnerable_nursing_home__infected_locations_total_archived_20230711',
   'difference.nursing_home__newly_infected_people_archived_20230126',
-  'difference.vulnerable_hospital_admissions',
-  'vulnerable_nursing_home',
+  'difference.vulnerable_hospital_admissions_archived_20230711',
+  'vulnerable_nursing_home_archived_20230711',
   'nursing_home_archived_20230126',
-  'vulnerable_hospital_admissions',
+  'vulnerable_hospital_admissions_archived_20230711',
 ];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
@@ -50,14 +54,14 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
+  selectArchivedNlData(
     'difference.nursing_home__deceased_daily_archived_20230126',
-    'difference.vulnerable_nursing_home__infected_locations_total',
+    'difference.vulnerable_nursing_home__infected_locations_total_archived_20230711',
     'difference.nursing_home__newly_infected_people_archived_20230126',
-    'difference.vulnerable_hospital_admissions',
-    'vulnerable_nursing_home',
+    'difference.vulnerable_hospital_admissions_archived_20230711',
+    'vulnerable_nursing_home_archived_20230711',
     'nursing_home_archived_20230126',
-    'vulnerable_hospital_admissions'
+    'vulnerable_hospital_admissions_archived_20230711'
   ),
   createGetChoroplethData({
     vr: ({ vulnerable_nursing_home }) => ({ vulnerable_nursing_home }),
@@ -77,6 +81,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.parts.pageParts, 'nursingHomePageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'nursingHomePageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'nursingHomePageDataExplained'),
         elements: content.elements,
       },
     };
@@ -84,7 +90,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, choropleth, lastGenerated, content } = props;
+  const { pageText, selectedArchivedNlData: data, choropleth, lastGenerated, content } = props;
 
   const [nursingHomeConfirmedCasesTimeframe, setNursingHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
@@ -92,18 +98,16 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
 
   const [nursingHomeDeceasedTimeframe, setNursingHomeDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
-
   const nursinghomeDataLastValue = data.nursing_home_archived_20230126.last_value;
-  const nusingHomeArchivedUnderReportedDateStart = getBoundaryDateStartUnix(data.nursing_home_archived_20230126.values, 7);
+  const nursingHomeArchivedUnderReportedDateStart = getBoundaryDateStartUnix(data.nursing_home_archived_20230126.values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const infectedLocationsText = textNl.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText = textNl.verpleeghuis_positief_geteste_personen;
 
-  const vulnerableNursingHomeDataLastValue = data.vulnerable_nursing_home.last_value;
-  const vulnerableHospitalAdmissionsData = data.vulnerable_hospital_admissions;
+  const vulnerableNursingHomeDataLastValue = data.vulnerable_nursing_home_archived_20230711.last_value;
+  const vulnerableHospitalAdmissionsData = data.vulnerable_hospital_admissions_archived_20230711;
 
   const ElderlyPeopleText = textNl['70_plussers'];
 
@@ -113,7 +117,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
     description: infectedLocationsText.metadata.description,
   };
 
-  const hasActiveWarningTile = textNl.osiris_archiving_notification;
+  const hasActiveWarningTile = !!textNl.belangrijk_bericht;
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
@@ -122,7 +126,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
       <NlLayout>
         <TileList>
           <PageInformationBlock
-            category={commonTexts.sidebar.categories.consequences_for_healthcare.title}
+            category={commonTexts.sidebar.categories.archived_metrics.title}
             screenReaderCategory={commonTexts.sidebar.metrics.nursing_home_care.title}
             title={positiveTestedPeopleText.titel}
             icon={<VulnerableGroupsIcon aria-hidden="true" />}
@@ -133,11 +137,13 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [positiveTestedPeopleText.bronnen.rivm],
             }}
-            referenceLink={positiveTestedPeopleText.reference.href}
-            articles={content.articles}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
-          {hasActiveWarningTile && <WarningTile isFullWidth message={hasActiveWarningTile} variant="informational" />}
+          {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <TwoKpiSection>
             <KpiTile
@@ -148,7 +154,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                 source: ElderlyPeopleText.bronnen.rivm,
               }}
             >
-              <KpiValue absolute={vulnerableHospitalAdmissionsData.admissions_age_70_plus} difference={data.difference.vulnerable_hospital_admissions} isAmount />
+              <KpiValue absolute={vulnerableHospitalAdmissionsData.admissions_age_70_plus} difference={data.difference.vulnerable_hospital_admissions_archived_20230711} isAmount />
             </KpiTile>
           </TwoKpiSection>
 
@@ -160,7 +166,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             tilesData={[
               {
                 value: vulnerableNursingHomeDataLastValue.infected_locations_total,
-                differenceValue: data.difference.vulnerable_nursing_home__infected_locations_total,
+                differenceValue: data.difference.vulnerable_nursing_home__infected_locations_total_archived_20230711,
                 title: infectedLocationsText.kpi_titel,
                 description: infectedLocationsText.kpi_toelichting,
               },
@@ -211,7 +217,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'nursing_home_infected_locations_over_time_chart',
               }}
-              values={data.vulnerable_nursing_home.values}
+              values={data.vulnerable_nursing_home_archived_20230711.values}
               timeframe={nursingHomeInfectedLocationsTimeframe}
               seriesConfig={[
                 {
@@ -225,148 +231,145 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             />
           </ChartTile>
 
-          <Divider />
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 
-          <PageInformationBlock
-            title={textNl.section_archived.title}
-            description={textNl.section_archived.description}
-            isArchivedHidden={isArchivedContentShown}
-            onToggleArchived={() => setIsArchivedContentShown(!isArchivedContentShown)}
-          />
-
-          {isArchivedContentShown && (
-            <Box spacing={5}>
-              <TwoKpiSection>
-                <KpiTile
-                  title={positiveTestedPeopleText.barscale_titel}
-                  description={positiveTestedPeopleText.extra_uitleg}
-                  metadata={{
-                    date: nursinghomeDataLastValue.date_unix,
-                    source: positiveTestedPeopleText.bronnen.rivm,
-                  }}
-                >
-                  <KpiValue absolute={nursinghomeDataLastValue.newly_infected_people} difference={data.difference.nursing_home__newly_infected_people_archived_20230126} isAmount />
-                </KpiTile>
-              </TwoKpiSection>
-
-              <ChartTile
-                metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
-                title={positiveTestedPeopleText.linechart_titel}
-                description={positiveTestedPeopleText.linechart_description}
-                timeframeOptions={TimeframeOptionsList}
-                onSelectTimeframe={setNursingHomeConfirmedCasesTimeframe}
-              >
-                <TimeSeriesChart
-                  accessibility={{
-                    key: 'nursing_home_confirmed_cases_over_time_chart',
-                  }}
-                  values={data.nursing_home_archived_20230126.values}
-                  timeframe={nursingHomeConfirmedCasesTimeframe}
-                  seriesConfig={[
-                    {
-                      type: 'line',
-                      metricProperty: 'newly_infected_people_moving_average',
-                      color: colors.primary,
-                      label: positiveTestedPeopleText.line_chart_legend_trend_moving_average_label,
-                      shortLabel: positiveTestedPeopleText.tooltip_labels.newly_infected_people_moving_average,
-                    },
-                    {
-                      type: 'bar',
-                      metricProperty: 'newly_infected_people',
-                      color: colors.primary,
-                      label: positiveTestedPeopleText.line_chart_legend_trend_label,
-                      shortLabel: positiveTestedPeopleText.tooltip_labels.newly_infected_people,
-                    },
-                  ]}
-                  dataOptions={{
-                    timespanAnnotations: [
-                      {
-                        start: nusingHomeArchivedUnderReportedDateStart,
-                        end: Infinity,
-                        label: positiveTestedPeopleText.line_chart_legend_inaccurate_label,
-                        shortLabel: positiveTestedPeopleText.tooltip_labels.inaccurate,
-                        cutValuesForMetricProperties: ['newly_infected_people_moving_average'],
-                      },
-                    ],
-                    timelineEvents: getTimelineEvents(content.elements.timeSeries, 'nursing_home_archived_20230126', 'newly_infected_people'),
-                  }}
-                />
-              </ChartTile>
-
-              <Divider />
-
-              <PageInformationBlock
-                id="sterfte"
-                title={textNl.titel}
-                icon={<Coronavirus />}
-                description={textNl.pagina_toelichting}
-                metadata={{
-                  datumsText: textNl.datums,
-                  dateOrRange: nursinghomeDataLastValue.date_unix,
-                  dateOfInsertionUnix: nursinghomeDataLastValue.date_of_insertion_unix,
-                  dataSources: [textNl.bronnen.rivm],
-                }}
-                referenceLink={textNl.reference.href}
-              />
-
-              <TwoKpiSection>
-                <KpiTile
-                  title={textNl.barscale_titel}
-                  description={textNl.extra_uitleg}
-                  metadata={{
-                    date: nursinghomeDataLastValue.date_unix,
-                    source: textNl.bronnen.rivm,
-                  }}
-                >
-                  <KpiValue absolute={nursinghomeDataLastValue.deceased_daily} />
-                </KpiTile>
-              </TwoKpiSection>
-
-              <ChartTile
-                metadata={{ source: textNl.bronnen.rivm }}
-                title={textNl.linechart_titel}
-                timeframeOptions={TimeframeOptionsList}
-                description={textNl.linechart_description}
-                onSelectTimeframe={setNursingHomeDeceasedTimeframe}
-              >
-                <TimeSeriesChart
-                  accessibility={{
-                    key: 'nursing_home_deceased_over_time_chart',
-                  }}
-                  values={data.nursing_home_archived_20230126.values}
-                  timeframe={nursingHomeDeceasedTimeframe}
-                  seriesConfig={[
-                    {
-                      type: 'line',
-                      metricProperty: 'deceased_daily_moving_average',
-                      label: textNl.line_chart_legend_trend_moving_average_label,
-                      shortLabel: textNl.tooltip_labels.deceased_daily_moving_average,
-                      color: colors.primary,
-                    },
-                    {
-                      type: 'bar',
-                      metricProperty: 'deceased_daily',
-                      label: textNl.line_chart_legend_trend_label,
-                      shortLabel: textNl.tooltip_labels.deceased_daily,
-                      color: colors.primary,
-                    },
-                  ]}
-                  dataOptions={{
-                    timespanAnnotations: [
-                      {
-                        start: nusingHomeArchivedUnderReportedDateStart,
-                        end: Infinity,
-                        label: textNl.line_chart_legend_inaccurate_label,
-                        shortLabel: textNl.tooltip_labels.inaccurate,
-                        cutValuesForMetricProperties: ['deceased_daily_moving_average'],
-                      },
-                    ],
-                    timelineEvents: getTimelineEvents(content.elements.timeSeries, 'nursing_home_archived_20230126', 'deceased_daily'),
-                  }}
-                />
-              </ChartTile>
-            </Box>
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
           )}
+
+          <Box spacing={5}>
+            <TwoKpiSection>
+              <KpiTile
+                title={positiveTestedPeopleText.barscale_titel}
+                description={positiveTestedPeopleText.extra_uitleg}
+                metadata={{
+                  date: nursinghomeDataLastValue.date_unix,
+                  source: positiveTestedPeopleText.bronnen.rivm,
+                }}
+              >
+                <KpiValue absolute={nursinghomeDataLastValue.newly_infected_people} difference={data.difference.nursing_home__newly_infected_people_archived_20230126} isAmount />
+              </KpiTile>
+            </TwoKpiSection>
+
+            <ChartTile
+              metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
+              title={positiveTestedPeopleText.linechart_titel}
+              description={positiveTestedPeopleText.linechart_description}
+              timeframeOptions={TimeframeOptionsList}
+              onSelectTimeframe={setNursingHomeConfirmedCasesTimeframe}
+            >
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_confirmed_cases_over_time_chart',
+                }}
+                values={data.nursing_home_archived_20230126.values}
+                timeframe={nursingHomeConfirmedCasesTimeframe}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'newly_infected_people_moving_average',
+                    color: colors.primary,
+                    label: positiveTestedPeopleText.line_chart_legend_trend_moving_average_label,
+                    shortLabel: positiveTestedPeopleText.tooltip_labels.newly_infected_people_moving_average,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'newly_infected_people',
+                    color: colors.primary,
+                    label: positiveTestedPeopleText.line_chart_legend_trend_label,
+                    shortLabel: positiveTestedPeopleText.tooltip_labels.newly_infected_people,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: nursingHomeArchivedUnderReportedDateStart,
+                      end: Infinity,
+                      label: positiveTestedPeopleText.line_chart_legend_inaccurate_label,
+                      shortLabel: positiveTestedPeopleText.tooltip_labels.inaccurate,
+                      cutValuesForMetricProperties: ['newly_infected_people_moving_average'],
+                    },
+                  ],
+                  timelineEvents: getTimelineEvents(content.elements.timeSeries, 'nursing_home_archived_20230126', 'newly_infected_people'),
+                }}
+              />
+            </ChartTile>
+
+            <Divider />
+
+            <PageInformationBlock
+              id="sterfte"
+              title={textNl.titel}
+              icon={<Coronavirus />}
+              description={textNl.pagina_toelichting}
+              metadata={{
+                datumsText: textNl.datums,
+                dateOrRange: nursinghomeDataLastValue.date_unix,
+                dateOfInsertionUnix: nursinghomeDataLastValue.date_of_insertion_unix,
+                dataSources: [textNl.bronnen.rivm],
+              }}
+              referenceLink={textNl.reference.href}
+            />
+
+            <TwoKpiSection>
+              <KpiTile
+                title={textNl.barscale_titel}
+                description={textNl.extra_uitleg}
+                metadata={{
+                  date: nursinghomeDataLastValue.date_unix,
+                  source: textNl.bronnen.rivm,
+                }}
+              >
+                <KpiValue absolute={nursinghomeDataLastValue.deceased_daily} />
+              </KpiTile>
+            </TwoKpiSection>
+
+            <ChartTile
+              metadata={{ source: textNl.bronnen.rivm }}
+              title={textNl.linechart_titel}
+              timeframeOptions={TimeframeOptionsList}
+              description={textNl.linechart_description}
+              onSelectTimeframe={setNursingHomeDeceasedTimeframe}
+            >
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_deceased_over_time_chart',
+                }}
+                values={data.nursing_home_archived_20230126.values}
+                timeframe={nursingHomeDeceasedTimeframe}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'deceased_daily_moving_average',
+                    label: textNl.line_chart_legend_trend_moving_average_label,
+                    shortLabel: textNl.tooltip_labels.deceased_daily_moving_average,
+                    color: colors.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'deceased_daily',
+                    label: textNl.line_chart_legend_trend_label,
+                    shortLabel: textNl.tooltip_labels.deceased_daily,
+                    color: colors.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: nursingHomeArchivedUnderReportedDateStart,
+                      end: Infinity,
+                      label: textNl.line_chart_legend_inaccurate_label,
+                      shortLabel: textNl.tooltip_labels.inaccurate,
+                      cutValuesForMetricProperties: ['deceased_daily_moving_average'],
+                    },
+                  ],
+                  timelineEvents: getTimelineEvents(content.elements.timeSeries, 'nursing_home_archived_20230126', 'deceased_daily'),
+                }}
+              />
+            </ChartTile>
+          </Box>
         </TileList>
       </NlLayout>
     </Layout>

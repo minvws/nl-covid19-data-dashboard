@@ -9,6 +9,7 @@ export type GmCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 export type NlItemKeys =
   | 'compliance'
   | 'coronamelder_app'
+  | 'corona_thermometer'
   | 'disabled_care'
   | 'elderly_at_home'
   | 'general_practitioner_suspicions'

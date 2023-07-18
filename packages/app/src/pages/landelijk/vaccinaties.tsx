@@ -3,36 +3,45 @@ import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
-import { ChartTile, PageInformationBlock, TileList, TimeSeriesChart, WarningTile, Divider } from '~/components';
+import { ChartTile } from '~/components/chart-tile';
+import { Divider } from '~/components/divider';
+import { InView } from '~/components/in-view';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
+import { PageInformationBlock } from '~/components/page-information-block/page-information-block';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout, NlLayout } from '~/domain/layout';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import {
-  selectAdministrationData,
-  VaccinationsOverTimeTile,
-  VaccineBoosterAdministrationsKpiSection,
-  VaccinationsShotKpiSection,
+  Autumn2022ShotCoveragePerAgeGroup,
+  BoosterShotCoveragePerAgeGroup,
   VaccinationsKpiHeader,
+  VaccinationsOverTimeTile,
+  VaccinationsShotKpiSection,
+  VaccineBoosterAdministrationsKpiSection,
   VaccineCoverageChoropleth,
   VaccineCoveragePerAgeGroup,
   VaccineCoverageToggleTile,
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
-  BoosterShotCoveragePerAgeGroup,
-  Autumn2022ShotCoveragePerAgeGroup,
+  selectAdministrationData,
 } from '~/domain/vaccine';
 import { VaccinationsPerSupplierOverLastTimeframeTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-timeframe-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getLinkParts, getPagePartsQuery, getRichTextParts } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery, getRichTextParts } from '~/queries/get-page-parts-query';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, getNlData, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 const pageMetrics = [
   'vaccine_administered_doctors',
@@ -103,6 +112,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.parts.pageParts, 'vaccinationsPageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'vaccinationsPageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'vaccinationsPageDataExplained'),
         links: getLinkParts(content.parts.pageParts, 'vaccinationsPageLinks'),
         boosterArticles: getArticleParts(content.parts.pageParts, 'vaccineBoosterArticles'),
         thirdShotArticles: getArticleParts(content.parts.pageParts, 'vaccineThirdShotArticles'),
@@ -173,9 +184,12 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               dataSources: [textShared.bronnen.rivm],
             }}
             pageLinks={content.links}
-            referenceLink={textNl.information_block.reference.href}
-            articles={content.articles}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
+
           <BorderedKpiSection
             title={textShared.vaccination_grade_tile.autumn_labels.title}
             description={textShared.vaccination_grade_tile.autumn_labels.description}
@@ -284,6 +298,15 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }}
             values={data.vaccine_coverage_per_age_group.values}
           />
+
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
+
           <Divider />
           <PageInformationBlock
             title={textNl.section_archived.title}

@@ -1,5 +1,5 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
-import { ArticleSummary } from '~/components/article-teaser';
+import { ArticleSummary } from '~/components/articles/article-teaser';
 import { CategoriesTypes } from '~/domain/topical/common/categories';
 
 export type PageIdentifier =
@@ -19,7 +19,10 @@ export type PageIdentifier =
   | 'tests_page'
   | 'topical_page'
   | 'vaccinations_page'
-  | 'variants_page';
+  | 'variants_page'
+  | 'coronathermometer_page';
+
+export type PartTypes = 'pageArticles' | 'pageDataExplained' | 'pageFAQs' | 'pageHighlightedItems' | 'pageLinks' | 'pageRichText';
 
 export type PageBasePart = {
   pageDataKind: string;
@@ -27,7 +30,31 @@ export type PageBasePart = {
 
 export type ArticleParts = {
   _type: 'pageArticles';
-  articles: ArticleSummary[];
+  articles: Article[];
+  sectionTitle: string;
+} & PageBasePart;
+
+export type DataExplainedParts = {
+  _type: 'pageDataExplained';
+  item: {
+    slug: { current: string };
+  };
+  buttonTitle: string;
+  buttonText: RichContentBlock[];
+} & PageBasePart;
+
+export type FaqParts = {
+  _type: 'pageFAQs';
+  questions: FAQuestionAndAnswer[];
+  sectionTitle: string;
+  buttonTitle: string;
+  buttonText: RichContentBlock[];
+} & PageBasePart;
+
+export type HighlightedItemParts = {
+  _type: 'pageHighlightedItems';
+  highlights: ArticleSummary[];
+  showWeeklyHighlight: boolean;
 } & PageBasePart;
 
 export type LinkParts = {
@@ -38,18 +65,12 @@ export type LinkParts = {
   }[];
 } & PageBasePart;
 
-export type HighlightedItemParts = {
-  _type: 'pageHighlightedItems';
-  highlights: ArticleSummary[];
-  showWeeklyHighlight: boolean;
-} & PageBasePart;
-
 export type RichTextParts = {
   _type: 'pageRichText';
   text: RichContentBlock[];
 } & PageBasePart;
 
-export type PagePart = ArticleParts | LinkParts | HighlightedItemParts | RichTextParts;
+export type PagePart = ArticleParts | DataExplainedParts | FaqParts | HighlightedItemParts | LinkParts | RichTextParts;
 
 export type PagePartQueryResult<T extends PagePart = PagePart> = {
   pageParts: T[];
@@ -99,24 +120,31 @@ export interface InlineAttachment {
 }
 
 export type Editorial = Record<string, never> & Article;
+
+export type ArticleMainCategory = 'knowledge' | 'news';
+export type ArticleUpdatedDate = string | null;
+export type ArticlePublishedDate = string;
+
 export interface Article {
-  title: string;
+  categories: CategoriesTypes[];
+  category: string;
+  content: RichContentBlock[];
+  cover: ImageBlock;
+  intro: RichContentBlock[];
+  isHighlighted: boolean;
+  mainCategory: ArticleMainCategory;
+  metaDescription: string;
+  publicationDate: ArticlePublishedDate;
   slug: {
     _key: string;
     _type: 'slug';
     current: string;
   };
-  categories?: CategoriesTypes[];
-  cover: ImageBlock;
+  summary: Block;
+  title: string;
+  updatedDate: ArticleUpdatedDate;
   imageMobile?: ImageBlock;
   imageDesktop?: ImageBlock;
-  summary: Block;
-  intro: RichContentBlock[];
-  content: RichContentBlock[];
-  metaDescription: string;
-  publicationDate: string;
-  isHighlighted: boolean;
-  category: string;
 }
 
 export interface ImageBlock {
