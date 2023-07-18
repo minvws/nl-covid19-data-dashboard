@@ -59,8 +59,8 @@ export const titleByMetricName: Partial<Record<MetricName, string>> = {
   vaccine_stock: 'Vaccinvoorraad',
   vaccine_vaccinated_or_support: 'Vaccinatiebereidheid of reeds gevaccineerd',
   variants: 'Varianten van het virus',
-  vulnerable_hospital_admissions: 'Kwetsbare groepen - Ziekenhuisopnames',
-  vulnerable_nursing_home: 'Kwetsbare groepen - Verpleeg- en verzorgingshuizen',
+  vulnerable_hospital_admissions_archived_20230711: 'Kwetsbare groepen - Ziekenhuisopnames',
+  vulnerable_nursing_home_archived_20230711: 'Kwetsbare groepen - Verpleeg- en verzorgingshuizen',
   vulnerable_tested_per_age_group: 'Kwetsbare groepen - Positieve testen (per leeftijd)',
 };
 

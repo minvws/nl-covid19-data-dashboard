@@ -3,11 +3,29 @@
   "title": "archived_nl_difference",
   "type": "object",
   "properties": {
+    "nursing_home__deceased_daily_archived_20230126": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "vulnerable_nursing_home__infected_locations_total_archived_20230711": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "nursing_home__newly_infected_people_archived_20230126": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "vulnerable_hospital_admissions_archived_20230711": {
+      "$ref": "#/definitions/diff_integer"
+    },
     "reproduction__index_average_archived_20230711": {
       "$ref": "#/definitions/diff_decimal"
     }
   },
-  "required": ["reproduction__index_average_archived_20230711"],
+  "required": [
+    "nursing_home__deceased_daily_archived_20230126",
+    "vulnerable_nursing_home__infected_locations_total_archived_20230711",
+    "nursing_home__newly_infected_people_archived_20230126",
+    "vulnerable_hospital_admissions_archived_20230711",
+    "reproduction__index_average_archived_20230711"
+  ],
   "additionalProperties": false,
   "definitions": {
     "diff_integer": {

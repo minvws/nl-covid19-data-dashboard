@@ -33,17 +33,11 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"
     },
-    "vulnerable_nursing_home__infected_locations_total": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "nursing_home__newly_infected_people_archived_20230126": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "nursing_home__deceased_daily_archived_20230126": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "vulnerable_tested_per_age_group": {
       "$ref": "#/definitions/diff_integer"
+    },
+    "reproduction__index_average": {
+      "$ref": "#/definitions/diff_decimal"
     },
     "vulnerable_hospital_admissions": {
       "$ref": "#/definitions/diff_integer"
@@ -63,11 +57,7 @@
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
     "intensive_care_lcps__beds_occupied_covid",
     "sewer__average",
-    "nursing_home__newly_infected_people_archived_20230126",
-    "nursing_home__deceased_daily_archived_20230126",
-    "vulnerable_nursing_home__infected_locations_total",
     "vulnerable_tested_per_age_group",
-    "vulnerable_hospital_admissions",
     "deceased_rivm__covid_daily_archived_20221231"
   ],
   "additionalProperties": false,

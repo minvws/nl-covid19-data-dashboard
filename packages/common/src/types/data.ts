@@ -59,11 +59,24 @@ export interface ArchivedNl {
   behavior_annotations_archived_20230412: NlBehaviorAnnotations;
   behavior_per_age_group_archived_20230411: NlBehaviorPerAgeGroup;
   doctor_archived_20210903: NlDoctor;
+  nursing_home_archived_20230126: NlNursingHome;
   sewer_archived_20230623: NlSewer;
+  vulnerable_nursing_home_archived_20230711: NlVulnerableNursingHome;
+  vulnerable_hospital_admissions_archived_20230711: NlVulnerableHospitalAdmissions;
   reproduction_archived_20230711: NlReproduction;
 }
 export interface ArchivedNlDifference {
+  nursing_home__deceased_daily_archived_20230126: DifferenceInteger;
+  vulnerable_nursing_home__infected_locations_total_archived_20230711: DifferenceInteger;
+  nursing_home__newly_infected_people_archived_20230126: DifferenceInteger;
+  vulnerable_hospital_admissions_archived_20230711: DifferenceInteger;
   reproduction__index_average_archived_20230711: DifferenceDecimal;
+}
+export interface DifferenceInteger {
+  old_value: number;
+  difference: number;
+  old_date_unix: number;
+  new_date_unix: number;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -201,6 +214,21 @@ export interface NlDoctorValue {
   covid_symptoms: number;
   date_of_insertion_unix: number;
 }
+export interface NlNursingHome {
+  values: NlNursingHomeArchived_20230126Value[];
+  last_value: NlNursingHomeArchived_20230126Value;
+}
+export interface NlNursingHomeArchived_20230126Value {
+  newly_infected_people: number;
+  newly_infected_people_moving_average: number | null;
+  deceased_daily: number;
+  deceased_daily_moving_average: number | null;
+  newly_infected_locations: number;
+  infected_locations_total: number;
+  infected_locations_percentage: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NlSewer {
   values: NlSewerValue[];
   last_value: NlSewerValue;
@@ -209,6 +237,23 @@ export interface NlSewerValue {
   average: number | null;
   date_of_insertion_unix: number;
   date_unix: number;
+}
+export interface NlVulnerableNursingHome {
+  values: NlVulnerableNursingHomeValue[];
+  last_value: NlVulnerableNursingHomeValue;
+}
+export interface NlVulnerableNursingHomeValue {
+  newly_infected_locations: number;
+  infected_locations_total: number;
+  infected_locations_percentage: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVulnerableHospitalAdmissions {
+  admissions_age_70_plus: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface NlReproduction {
   values: NlReproductionValue[];
@@ -466,10 +511,7 @@ export interface Nl {
   intensive_care_lcps: NlIntensiveCareLcps;
   tested_ggd: NlTestedGgd;
   tested_ggd_archived: NlTestedGgdArchived;
-  nursing_home_archived_20230126: NlNursingHomeArchived_20230126;
-  vulnerable_nursing_home: NlVulnerableNursingHome;
   vulnerable_tested_per_age_group: NlVulnerableTestedPerAgeGroup;
-  vulnerable_hospital_admissions: NlVulnerableHospitalAdmissions;
   disability_care_archived_20230126: NlDisabilityCareArchived_20230126;
   deceased_rivm_archived_20221231: NlDeceasedRivmArchived_20221231;
   deceased_rivm_per_age_group_archived_20221231: NlDeceasedRivmPerAgeGroupArchived_20221231;
@@ -513,11 +555,9 @@ export interface NlDifference {
   intensive_care_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
   sewer__average: DifferenceInteger;
-  vulnerable_nursing_home__infected_locations_total: DifferenceInteger;
-  nursing_home__newly_infected_people_archived_20230126: DifferenceInteger;
-  nursing_home__deceased_daily_archived_20230126: DifferenceInteger;
   vulnerable_tested_per_age_group: DifferenceInteger;
-  vulnerable_hospital_admissions: DifferenceInteger;
+  reproduction__index_average?: DifferenceDecimal;
+  vulnerable_hospital_admissions?: DifferenceInteger;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
 }
 export interface DifferenceDecimal {
@@ -742,41 +782,9 @@ export interface NlTestedGgdArchivedValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlNursingHomeArchived_20230126 {
-  values: NlNursingHomeArchived_20230126Value[];
-  last_value: NlNursingHomeArchived_20230126Value;
-}
-export interface NlNursingHomeArchived_20230126Value {
-  newly_infected_people: number;
-  newly_infected_people_moving_average: number | null;
-  deceased_daily: number;
-  deceased_daily_moving_average: number | null;
-  newly_infected_locations: number;
-  infected_locations_total: number;
-  infected_locations_percentage: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlVulnerableNursingHome {
-  values: NlVulnerableNursingHomeValue[];
-  last_value: NlVulnerableNursingHomeValue;
-}
-export interface NlVulnerableNursingHomeValue {
-  newly_infected_locations: number;
-  infected_locations_total: number;
-  infected_locations_percentage: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface NlVulnerableTestedPerAgeGroup {
   infected_age_70_plus: number;
   date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlVulnerableHospitalAdmissions {
-  admissions_age_70_plus: number;
-  date_start_unix: number;
-  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlDisabilityCareArchived_20230126 {
