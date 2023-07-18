@@ -15,6 +15,7 @@ const mapCategoriesToIcons = {
 const mapKeysToReverseRouter = {
   compliance: 'gedrag',
   coronamelder_app: 'coronamelder',
+  corona_thermometer: 'coronaThermometer',
   current_advices: 'geldendeAdviezen',
   disabled_care: 'gehandicaptenzorg',
   elderly_at_home: 'thuiswonendeOuderen',

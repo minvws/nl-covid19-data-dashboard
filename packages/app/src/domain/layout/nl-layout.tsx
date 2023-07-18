@@ -45,6 +45,7 @@ export function NlLayout(props: NlLayoutProps) {
         [
           'nursing_home_care',
           'reproduction_number',
+          'corona_thermometer',
           'compliance',
           'positive_tests',
           'disabled_care',

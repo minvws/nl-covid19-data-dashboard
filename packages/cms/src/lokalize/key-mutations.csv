@@ -17,3 +17,15 @@ timestamp,action,key,document_id,move_to
 2023-07-10T13:42:50.679Z,add,pages.nursing_home_page.nl.belangrijk_bericht,fMgALacIAkVBeKUDlK02dF,__
 2023-07-10T13:42:50.682Z,delete,pages.nursing_home_page.nl.osiris_archiving_notification,AE5jpq5sZWNgXeEUc3jkhb,__
 2023-07-06T12:30:58.494Z,add,pages.reproduction_page.nl.belangrijk_bericht,EtXaM3Nx0Z98KZ15CIkYiB,__
+2023-07-07T13:32:42.985Z,add,pages.topical_page.shared.corona_thermometer_archived_page_link_text,UZdsUj5qjYXGfA5PDPE6j5,__
+2023-07-07T13:47:16.444Z,add,common.sidebar.metrics.corona_thermometer.title,8dOsiklAGuc6hPUySphFo0,__
+2023-07-10T16:34:40.407Z,add,pages.corona_thermometer_page.nl.pagina.titel,fMgALacIAkVBeKUDlKZT5V,__
+2023-07-10T16:34:41.409Z,add,pages.corona_thermometer_page.nl.pagina.description,3ckvWXHNZwmoiFiCqUbjUn,__
+2023-07-10T16:34:42.417Z,add,pages.corona_thermometer_page.nl.pagina.belangrijk_bericht,UZdsUj5qjYXGfA5PDcoqRn,__
+2023-07-10T16:34:43.437Z,add,pages.corona_thermometer_page.nl.pagina.dates,fMgALacIAkVBeKUDlKZTML,__
+2023-07-10T16:34:44.459Z,add,pages.corona_thermometer_page.nl.metadata.title,fMgALacIAkVBeKUDlKZTQY,__
+2023-07-10T16:34:45.484Z,add,pages.corona_thermometer_page.nl.metadata.description,3ckvWXHNZwmoiFiCqUbjzl,__
+2023-07-10T16:34:46.515Z,add,pages.corona_thermometer_page.nl.corona_thermometer_archived_page_link_text,3ckvWXHNZwmoiFiCqUbkDh,__
+2023-07-10T16:34:47.558Z,add,pages.corona_thermometer_page.nl.bronnen.rivm.download,fMgALacIAkVBeKUDlKZTrD,__
+2023-07-10T16:34:48.550Z,add,pages.corona_thermometer_page.nl.bronnen.rivm.href,3ckvWXHNZwmoiFiCqUbkcT,__
+2023-07-10T16:34:49.568Z,add,pages.corona_thermometer_page.nl.bronnen.rivm.text,fMgALacIAkVBeKUDlKZUHs,__

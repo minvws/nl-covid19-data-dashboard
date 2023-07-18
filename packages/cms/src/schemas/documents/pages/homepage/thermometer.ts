@@ -105,7 +105,7 @@ export const thermometer = defineType({
       fieldset: 'artikel-referentie',
     }),
     defineField({
-      title: 'Titel van uitklapbare sectie',
+      title: 'Titel van standen sectie',
       name: 'collapsibleTitle',
       type: 'localeString',
       validation: localeStringValidation((rule) => rule.required()),

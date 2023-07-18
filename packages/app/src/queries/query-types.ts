@@ -12,7 +12,7 @@ export interface TopicalSanityData {
   advice: Advice;
 }
 
-interface ThermometerConfig {
+export interface ThermometerConfig {
   icon: TopicalIcon;
   title: string;
   subTitle: PortableTextEntry[] | null;

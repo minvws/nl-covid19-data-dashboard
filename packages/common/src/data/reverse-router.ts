@@ -31,6 +31,7 @@ export function getReverseRouter(isMobile: boolean) {
       thuiswonendeOuderen: () => '/landelijk/thuiswonende-ouderen',
       rioolwater: () => '/landelijk/rioolwater',
       verdenkingenHuisartsen: () => '/landelijk/verdenkingen-huisartsen',
+      coronaThermometer: () => '/landelijk/corona-thermometer',
       gedrag: () => '/landelijk/gedrag',
       coronamelder: () => '/landelijk/coronamelder',
       varianten: () => '/landelijk/varianten',
