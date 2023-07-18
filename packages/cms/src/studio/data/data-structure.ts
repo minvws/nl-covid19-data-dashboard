@@ -78,6 +78,7 @@ export const dataStructure = {
     ],
     sewer_archived_20230623: ['average'],
     vulnerable_nursing_home_archived_20230711: ['newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage'],
+    reproduction_archived_20230711: ['index_low', 'index_average', 'index_high'],
   },
   gm: {
     deceased_rivm_archived_20221231: ['covid_daily', 'covid_daily_moving_average', 'covid_total'],
@@ -177,7 +178,6 @@ export const dataStructure = {
       'infected_age_90_plus_per_100k',
       'infected_overall_per_100k',
     ],
-    reproduction: ['index_low', 'index_average', 'index_high'],
     sewer: ['average'],
     hospital_nice: [
       'admissions_on_date_of_admission',
