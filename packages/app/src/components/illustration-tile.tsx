@@ -1,7 +1,6 @@
 import { Tile } from '~/components/tile';
 import { css } from '@styled-system/css';
 import { space } from '~/style/theme';
-
 interface IllustrationProps {
   image: string;
   alt: string;
