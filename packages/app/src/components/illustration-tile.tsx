@@ -1,6 +1,6 @@
 import { Tile } from '~/components/tile';
-import { css } from '@styled-system/css';
 import { space } from '~/style/theme';
+import { Box } from './base/box';
 
 interface IllustrationProps {
   image: string;
@@ -16,7 +16,9 @@ interface IllustrationProps {
 export function IllustrationTile({ image, alt, description, hasNoBorder, hasNoPaddingBottom }: IllustrationProps) {
   return (
     <Tile hasNoBorder={hasNoBorder} hasNoPaddingBottom={hasNoPaddingBottom}>
-      <img width="315px" height="100px" loading="lazy" src={image} alt={alt} css={css({ marginBottom: space[3] })} />
+      <Box marginBottom={space[3]}>
+        <img width="315px" height="100px" loading="lazy" src={image} alt={alt} />
+      </Box>
       <p>{description}</p>
     </Tile>
   );
