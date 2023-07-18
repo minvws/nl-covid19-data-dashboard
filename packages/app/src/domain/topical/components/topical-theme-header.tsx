@@ -18,11 +18,9 @@ export const TopicalThemeHeader = ({ title, subtitle, icon }: TopicalThemeHeader
   return (
     <Box spacing={3}>
       <Box display="flex" justifyContent="start" alignItems="center">
-        {icon && (
-          <StyledTopicalThemeHeaderIcon>
-            <DynamicIcon name={icon} aria-hidden="true" />
-          </StyledTopicalThemeHeaderIcon>
-        )}
+        <StyledTopicalThemeHeaderIcon>
+          <DynamicIcon name={icon} aria-hidden="true" />
+        </StyledTopicalThemeHeaderIcon>
         <Heading level={2}>{title}</Heading>
       </Box>
       {subtitle && (

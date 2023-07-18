@@ -41,3 +41,5 @@ timestamp,action,key,document_id,move_to
 2023-07-10T16:34:50.033Z,delete,pages.positive_tests_page.nl.linechart_self_test_titel,PKXdxxxKAnTg0F1ZCghMkN,__
 2023-07-10T16:34:50.034Z,delete,pages.positive_tests_page.nl.linechart_self_test_toelichting,PKXdxxxKAnTg0F1ZCghMnz,__
 2023-07-10T16:34:50.035Z,delete,pages.positive_tests_page.nl.linechart_self_test_tooltip_label,KoLyCpXIGU95m7jfEHZKIf,__
+2023-07-18T12:14:26.191Z,delete,pages.corona_thermometer_page.nl.corona_thermometer_archived_page_link_text,3ckvWXHNZwmoiFiCqUbkDh,__
+2023-07-18T12:14:26.192Z,delete,pages.topical_page.shared.corona_thermometer_archived_page_link_text,UZdsUj5qjYXGfA5PDPE6j5,__

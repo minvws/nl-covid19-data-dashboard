@@ -16,7 +16,7 @@ export const weeklySummaryItem = {
     {
       title: 'Omschrijving',
       name: 'description',
-      type: 'localeRichContentBlock',
+      type: 'localeText',
       validation: REQUIRED,
     },
     {

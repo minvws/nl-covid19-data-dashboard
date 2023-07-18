@@ -156,7 +156,7 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ChartTile title={thermometer.title} disableFullscreen>
+          <ChartTile title={thermometer.collapsibleTitle} disableFullscreen>
             <OrderedList>
               {SEVERITY_LEVELS_LIST.map((severityLevel, index) => {
                 const indicatorTexts = thermometer.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === severityLevel);
@@ -183,9 +183,13 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 const OrderedList = styled.ol`
-  margin: ${space[3]} 0;
+  margin-top: ${space[4]};
   padding: 0;
   list-style-type: none;
+
+  li:last-child div {
+    margin: 0;
+  }
 `;
 
 export default CoronaThermometer;
