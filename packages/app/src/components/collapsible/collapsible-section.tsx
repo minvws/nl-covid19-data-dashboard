@@ -14,11 +14,21 @@ interface CollapsibleSectionProps extends BoxProps {
   className?: string;
   id?: string;
   hideBorder?: boolean;
+  fontSize?: string;
   textColor?: string;
   borderColor?: string;
 }
 
-export const CollapsibleSection = ({ summary, children, id, hideBorder, textColor = colors.blue8, borderColor = colors.gray2, className }: CollapsibleSectionProps) => {
+export const CollapsibleSection = ({
+  summary,
+  children,
+  id,
+  hideBorder,
+  textColor = colors.blue8,
+  fontSize = fontSizes[5],
+  borderColor = colors.gray2,
+  className,
+}: CollapsibleSectionProps) => {
   const section = useRef<HTMLElement>(null);
 
   const collapsible = useCollapsible();
@@ -53,7 +63,7 @@ export const CollapsibleSection = ({ summary, children, id, hideBorder, textColo
 
   return (
     <Box as="section" borderTop={hideBorder ? undefined : `1px solid ${borderColor}`} id={id} ref={section} className={`${className} ${collapsible.isOpen ? 'open' : ''}`}>
-      <StyledSummary textColor={textColor} onClick={() => collapsible.toggle()}>
+      <Summary color={textColor} onClick={() => collapsible.toggle()} fontSize={fontSize}>
         <Box width="100%" position="relative">
           {summary}
           {id && (
@@ -63,7 +73,7 @@ export const CollapsibleSection = ({ summary, children, id, hideBorder, textColo
           )}
         </Box>
         {collapsible.button()}
-      </StyledSummary>
+      </Summary>
       {collapsible.content(<Box paddingX={space[3]}>{children}</Box>)}
     </Box>
   );
@@ -85,16 +95,10 @@ const StyledAnchor = styled(Anchor)`
   }
 `;
 
-interface SummaryProps {
-  textColor: string;
-}
-
-const StyledSummary = styled(Box)<SummaryProps>`
+const Summary = styled(Box)`
   align-items: center;
-  color: ${({ textColor }) => textColor};
   cursor: pointer;
   display: flex;
-  font-size: ${fontSizes[5]};
   font-weight: ${fontWeights.bold};
   justify-content: space-between;
   padding: ${space[3]};

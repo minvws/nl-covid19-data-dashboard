@@ -18,6 +18,7 @@ import { ChevronRight, Download, External as ExternalLinkIcon } from '@corona-da
 import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils';
 import React from 'react';
+import { InlineText } from '../typography';
 
 type ElementAlignment = 'start' | 'center' | 'end' | 'stretch';
 
@@ -82,6 +83,10 @@ export function RichContent({ contentWrapper, blocks, imageSizes, elementAlignme
             ))}
           </>
         );
+      },
+      u: (props: { children: string[] }) => {
+        const { children } = props;
+        return <InlineText className="underline">{children}</InlineText>;
       },
     },
   };

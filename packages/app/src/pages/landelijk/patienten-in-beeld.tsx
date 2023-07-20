@@ -8,6 +8,8 @@ import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { InView } from '~/components/in-view';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
@@ -17,13 +19,14 @@ import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { countTrailingNullValues, getBoundaryDateStartUnix, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
 const pageMetrics = ['hospital_nice_per_age_group', 'intensive_care_nice_per_age_group', 'hospital_nice', 'intensive_care_nice'];
 
@@ -55,6 +58,8 @@ export const getStaticProps = createGetStaticProps(
     return {
       content: {
         articles: getArticleParts(content.parts.pageParts, 'patientsPageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'patientsPageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'patientsPageDataExplained'),
         links: getLinkParts(content.parts.pageParts, 'patientsPageLinks'),
         elements: content.elements,
       },
@@ -131,9 +136,11 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.sources.nice],
             }}
-            referenceLink={textNl.reference.href}
             pageLinks={content.links}
-            articles={content.articles}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           <ChoroplethTile
@@ -322,6 +329,14 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               </ChartTile>
             )}
           </InView>
+
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
       </NlLayout>
     </Layout>

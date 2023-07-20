@@ -17,6 +17,7 @@ interface KpiValueBaseProps {
   isMovingAverageDifference?: boolean;
   differenceFractionDigits?: number;
   numFractionDigits?: number;
+  showOldDateUnixForDifference?: boolean;
 }
 
 type DifferenceProps =
@@ -65,6 +66,7 @@ export function KpiValue({
   isAmount,
   differenceFractionDigits,
   numFractionDigits,
+  showOldDateUnixForDifference,
   ...otherProps
 }: KpiValueProps) {
   const { formatPercentage, formatNumber } = useIntl();
@@ -112,7 +114,13 @@ export function KpiValue({
           </Box>
         ) : isDefined(difference) ? (
           <Box paddingTop={space[2]}>
-            <TileDifference value={difference} isPercentage={isDefined(percentage) && !isDefined(absolute)} isAmount={isAmount} maximumFractionDigits={differenceFractionDigits} />
+            <TileDifference
+              value={difference}
+              isPercentage={isDefined(percentage) && !isDefined(absolute)}
+              isAmount={isAmount}
+              showOldDateUnix={showOldDateUnixForDifference}
+              maximumFractionDigits={differenceFractionDigits}
+            />
           </Box>
         ) : null)}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}

@@ -56,7 +56,7 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   sewer: 'Rioolwater metingen',
   hospital_nice: 'Ziekenhuisopnames',
   intensive_care_nice: 'IC-opnames',
-  reproduction: 'Reproduciegetal',
+  reproduction_archived_20230711: 'Reproductiegetal',
   vaccine_coverage_per_age_group: 'Vaccinatiegraad (per leeftijd)',
   vaccine_administered: 'Gezette prikken',
   vaccine_coverage: 'Vaccinatiegraad',

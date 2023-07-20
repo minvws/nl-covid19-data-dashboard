@@ -2,9 +2,12 @@ import { NlSewer } from '@corona-dashboard/common';
 import { Experimenteel, Rioolvirus } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
+import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -15,14 +18,15 @@ import { Layout } from '~/domain/layout/layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, selectGmData, getLokalizeTexts } from '~/static-props/get-data';
-import { ArticleParts, PagePartQueryResult } from '~/types/cms';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
+import { PagePart, PagePartQueryResult } from '~/types/cms';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 
 const pageMetrics = ['sewer_per_installation', 'sewer'];
 
@@ -40,11 +44,13 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmData('difference.sewer__average', 'sewer_per_installation', 'sewer_installation_measurement', 'static_values.population_count_connected_to_rwzis', 'sewer', 'code'),
   async (context: GetStaticPropsContext) => {
-    const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('sewer_page'))(context);
+    const { content } = await createGetContent<PagePartQueryResult<PagePart>>(() => getPagePartsQuery('sewer_page'))(context);
 
     return {
       content: {
         articles: getArticleParts(content.pageParts, 'sewerPageArticles'),
+        faqs: getFaqParts(content.pageParts, 'sewerPageFAQs'),
+        dataExplained: getDataExplainedParts(content.pageParts, 'sewerPageDataExplained'),
       },
     };
   }
@@ -101,10 +107,12 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
             }}
-            referenceLink={textGm.reference.href}
-            articles={content.articles}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}
+            pageInformationHeader={getPageInformationHeaderContent({
+              dataExplained: content.dataExplained,
+              faq: content.faqs,
+            })}
           />
 
           {!isEmpty(textGm.warning_method) && <WarningTile message={textGm.warning_method} icon={Experimenteel} />}
@@ -171,6 +179,14 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             incompleteDatesAndTexts={textGm.zeewolde_incomplete_manualy_override}
             warning={textGm.warning_chart}
           />
+
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
       </GmLayout>
     </Layout>

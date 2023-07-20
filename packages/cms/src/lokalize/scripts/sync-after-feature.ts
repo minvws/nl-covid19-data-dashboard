@@ -19,9 +19,6 @@ import { hasValueAtKey } from 'ts-is-present';
 import { client } from '../../studio/client';
 import { AddMutation, DeleteMutation, finalizeMoveMutations, getCollapsedAddDeleteMutations, getCollapsedMoveMutations, readTextMutations } from '../utils/mutation-utilities';
 
-const developmentClient = client.withConfig({ dataset: 'development' });
-const productionClient = client.withConfig({ dataset: 'production' });
-
 /**
  * Remove the documents that were marked for deletion from the development set.
  * Here we intentionally DO NOT USE the document id from the mutation log, but
@@ -37,10 +34,10 @@ const applyDeletionsToDevelopment = async (deletions: DeleteMutation[]) => {
     return;
   }
 
+  const developmentClient = client.withConfig({ dataset: 'development', token: process.env.SANITY_AUTH_TOKEN });
+
   // Query both published and draft documents, because we want to delete both from development
-  const allTexts = (await developmentClient.fetch(`//groq
-    *[_type == 'lokalizeText'] | order(subject asc)
-  `)) as LokalizeText[];
+  const allTexts = (await developmentClient.fetch(`*[_type == 'lokalizeText'] | order(subject asc)`)) as LokalizeText[];
 
   // We need to find both draft and published versions of the document
   const documentIdsToDelete = deletions.flatMap(({ key }) => allTexts.filter((allText) => allText.key === key)).map((key) => key._id);
@@ -59,12 +56,12 @@ const syncAdditionsToProduction = async (mutations: AddMutation[]) => {
     return;
   }
 
-  // Workaround for add mutations that have no document id yet, so that we can lookup the document by key.
-  const allPublishedTexts = (await developmentClient.fetch(`//groq
-    *[_type == 'lokalizeText' && !(_id in path("drafts.**"))] | order(subject asc)
-  `)) as LokalizeText[];
-
+  const developmentClient = client.withConfig({ dataset: 'development', token: process.env.SANITY_AUTH_TOKEN });
+  const productionClient = client.withConfig({ dataset: 'production', token: process.env.SANITY_AUTH_TOKEN });
   const productionTransation = productionClient.transaction();
+
+  // Workaround for add mutations that have no document id yet, so that we can lookup the document by key.
+  const allPublishedTexts = (await developmentClient.fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] | order(subject asc)`)) as LokalizeText[];
 
   let successCount = 0;
   let failureCount = 0;
@@ -92,9 +89,7 @@ const syncAdditionsToProduction = async (mutations: AddMutation[]) => {
       };
 
       // Double check to see if the given key doesn't already exist on production
-      const count = await productionClient.fetch(`//groq
-        count(*[_type == 'lokalizeText' && key == '${documentToInject.key}'])
-      `);
+      const count = await productionClient.fetch(`count(*[_type == 'lokalizeText' && key == '${documentToInject.key}'])`);
 
       if (count === 0) {
         /**
@@ -154,6 +149,6 @@ const syncAdditionsToProduction = async (mutations: AddMutation[]) => {
 
   await syncAdditionsToProduction(additions);
 })().catch((error) => {
-  console.error('An error occurred:', error.message);
+  console.error('An error occurred:', error);
   process.exit(1);
 });

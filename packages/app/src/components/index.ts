@@ -24,7 +24,6 @@ export { TwoKpiSection } from './two-kpi-section';
 export { LinkWithIcon } from './link-with-icon';
 export { ChoroplethLegenda } from './choropleth-legenda';
 export { SEOHead } from './seo-head';
-export { PageKpi } from './page-kpi';
 export { PageBarScale } from './page-barscale';
 export { VisuallyHidden } from './visually-hidden';
 export { Message } from './message';

@@ -6,7 +6,7 @@ import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
 import { SanityImage } from '~/components/cms/sanity-image';
 import { getImageProps } from '~/lib/sanity';
-import { space } from '~/style/theme';
+import { space, shadows } from '~/style/theme';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
 import { Text } from '../typography';
 
@@ -14,6 +14,7 @@ interface ContentImageProps {
   node: ImageBlock | RichContentImageBlock;
   contentWrapper?: FunctionComponent;
   sizes?: string[][];
+  enableShadow?: boolean;
 }
 
 const SanityImageTile = styled(SanityImage)(
@@ -25,7 +26,7 @@ const SanityImageTile = styled(SanityImage)(
 
 const IMAGE_MAX_WIDTH = '980px';
 
-export function ContentImage({ node, contentWrapper, sizes }: ContentImageProps) {
+export function ContentImage({ node, contentWrapper, sizes, enableShadow = false }: ContentImageProps) {
   const caption = 'caption' in node && node.caption && (
     <Text as="figcaption" variant="body2" textAlign="left">
       {node.caption}
@@ -53,7 +54,9 @@ export function ContentImage({ node, contentWrapper, sizes }: ContentImageProps)
   ) : (
     <ContentWrapper>
       <Box as="figure" role="group" spacing={3} marginY={space[2]} textAlign="center">
-        <Box marginBottom={space[3]}>{node.asset && <SanityImage {...getImageProps(node, { sizes })} />}</Box>
+        <Box marginBottom={space[3]} boxShadow={enableShadow ? shadows.tile : null}>
+          {node.asset && <SanityImage {...getImageProps(node, { sizes })} />}
+        </Box>
         {caption}
       </Box>
     </ContentWrapper>
