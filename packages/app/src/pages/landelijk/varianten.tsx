@@ -141,15 +141,15 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               }}
             />
           )}
+
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
-
-        {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
-
-        {content.articles && content.articles.articles?.length > 0 && (
-          <InView rootMargin="400px">
-            <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
-          </InView>
-        )}
       </NlLayout>
     </Layout>
   );
