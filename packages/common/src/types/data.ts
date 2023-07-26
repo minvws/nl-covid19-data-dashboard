@@ -510,8 +510,6 @@ export interface Nl {
   hospital_lcps: NlHospitalLcps;
   intensive_care_lcps: NlIntensiveCareLcps;
   tested_ggd: NlTestedGgd;
-  tested_ggd_archived: NlTestedGgdArchived;
-  vulnerable_tested_per_age_group: NlVulnerableTestedPerAgeGroup;
   disability_care_archived_20230126: NlDisabilityCareArchived_20230126;
   deceased_rivm_archived_20221231: NlDeceasedRivmArchived_20221231;
   deceased_rivm_per_age_group_archived_20221231: NlDeceasedRivmPerAgeGroupArchived_20221231;
@@ -521,7 +519,6 @@ export interface Nl {
   corona_melder_app_download: NlCoronaMelderAppDownload;
   corona_melder_app_warning: NlCoronaMelderAppWarning;
   vaccine_coverage?: NlVaccineCoverage;
-  vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
   vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_doctors: NlVaccineAdministeredDoctors;
@@ -555,7 +552,6 @@ export interface NlDifference {
   intensive_care_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
   sewer__average: DifferenceInteger;
-  vulnerable_tested_per_age_group: DifferenceInteger;
   reproduction__index_average?: DifferenceDecimal;
   vulnerable_hospital_admissions?: DifferenceInteger;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
@@ -772,21 +768,6 @@ export interface NlTestedGgdValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlTestedGgdArchived {
-  values: NlTestedGgdArchivedValue[];
-  last_value: NlTestedGgdArchivedValue;
-}
-export interface NlTestedGgdArchivedValue {
-  infected_percentage: number;
-  infected_percentage_moving_average: number | null;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlVulnerableTestedPerAgeGroup {
-  infected_age_70_plus: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
 export interface NlDisabilityCareArchived_20230126 {
   values: NlDisabilityCareArchived_20230126Value[];
   last_value: NlDisabilityCareArchived_20230126Value;
@@ -895,16 +876,6 @@ export interface NlVaccineCoverageValue {
   date_end_unix: number;
   date_unix: number;
   date_of_insertion_unix: number;
-}
-export interface NlVaccineDeliveryEstimate {
-  values: NlVaccineDeliveryEstimateValue[];
-  last_value: NlVaccineDeliveryEstimateValue;
-}
-export interface NlVaccineDeliveryEstimateValue {
-  total: number;
-  date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
 }
 export interface NlVaccineDeliveryPerSupplier {
   values: NlVaccineDeliveryPerSupplierValue[];

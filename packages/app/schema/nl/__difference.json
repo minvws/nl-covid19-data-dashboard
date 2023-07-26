@@ -33,9 +33,6 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"
     },
-    "vulnerable_tested_per_age_group": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "reproduction__index_average": {
       "$ref": "#/definitions/diff_decimal"
     },
@@ -57,7 +54,6 @@
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
     "intensive_care_lcps__beds_occupied_covid",
     "sewer__average",
-    "vulnerable_tested_per_age_group",
     "deceased_rivm__covid_daily_archived_20221231"
   ],
   "additionalProperties": false,

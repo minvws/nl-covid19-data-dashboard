@@ -33,7 +33,6 @@ export const titleByMetricName: Partial<Record<MetricName, string>> = {
   sewer_per_installation: 'Virusdeeltjes in rioolwater',
   sewer: 'Rioolwater metingen',
   static_values: 'Statische waarden',
-  tested_ggd_archived: "Positief geteste mensen (GGD'en) (archief)",
   tested_ggd: "Positief geteste mensen (GGD'en)",
   tested_overall: 'Positief geteste mensen',
   tested_per_age_group: 'Positief getest (per leeftijd)',
@@ -53,7 +52,6 @@ export const titleByMetricName: Partial<Record<MetricName, string>> = {
   vaccine_coverage_per_age_group_estimated_fully_vaccinated: 'Vaccinatiegraad basisserie berekend (per leeftijd)',
   vaccine_coverage_per_age_group: 'Vaccinatiegraad (per leeftijd)',
   vaccine_coverage: 'Vaccinatiegraad',
-  vaccine_delivery_estimate: 'Vaccinleveringen berekend',
   vaccine_delivery_per_supplier: 'Vaccinleveringen per leverancier',
   vaccine_planned_archived_20220908: 'Geplande prikken (archief per 09-08-2022)',
   vaccine_stock: 'Vaccinvoorraad',
@@ -61,7 +59,6 @@ export const titleByMetricName: Partial<Record<MetricName, string>> = {
   variants: 'Varianten van het virus',
   vulnerable_hospital_admissions_archived_20230711: 'Kwetsbare groepen - Ziekenhuisopnames',
   vulnerable_nursing_home_archived_20230711: 'Kwetsbare groepen - Verpleeg- en verzorgingshuizen',
-  vulnerable_tested_per_age_group: 'Kwetsbare groepen - Positieve testen (per leeftijd)',
 };
 
 // By mapping the element type to a title we can make the UI a little more user-friendly.
