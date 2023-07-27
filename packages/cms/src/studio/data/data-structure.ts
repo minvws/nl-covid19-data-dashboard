@@ -208,7 +208,6 @@ export const dataStructure = {
       'tested_total_moving_average',
       'tested_total_moving_average_rounded',
     ],
-    tested_ggd_archived: ['infected_percentage', 'infected_percentage_moving_average'],
     disability_care_archived_20230126: [
       'newly_infected_people',
       'newly_infected_people_moving_average',
@@ -232,7 +231,6 @@ export const dataStructure = {
     corona_melder_app_download: ['count'],
     corona_melder_app_warning: ['count'],
     vaccine_coverage: ['booster_vaccinated', 'partially_vaccinated', 'fully_vaccinated', 'partially_or_fully_vaccinated'],
-    vaccine_delivery_estimate: ['total'],
     vaccine_delivery_per_supplier: ['total', 'bio_n_tech_pfizer', 'moderna', 'astra_zeneca', 'cure_vac', 'janssen', 'sanofi', 'is_estimate', 'week_number', 'date_of_report_unix'],
     vaccine_administered: ['pfizer', 'moderna', 'astra_zeneca', 'cure_vac', 'janssen', 'sanofi', 'novavax', 'total'],
     vaccine_administered_doctors: ['estimated'],

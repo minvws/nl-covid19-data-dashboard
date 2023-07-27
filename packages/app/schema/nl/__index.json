@@ -26,19 +26,16 @@
     "intensive_care_nice_per_age_group",
     "last_generated",
     "name",
-    "vulnerable_tested_per_age_group",
     "proto_name",
     "self_test_overall",
     "sewer",
     "tested_ggd",
-    "tested_ggd_archived",
     "tested_overall",
     "tested_per_age_group",
     "vaccine_campaigns",
     "vaccine_campaigns_archived_20220908",
     "vaccine_planned_archived_20220908",
     "vaccine_vaccinated_or_support",
-    "vaccine_delivery_estimate",
     "vaccine_administered",
     "vaccine_administered_doctors",
     "vaccine_administered_ggd_ghor",
@@ -121,12 +118,6 @@
     "tested_ggd": {
       "$ref": "tested_ggd.json"
     },
-    "tested_ggd_archived": {
-      "$ref": "tested_ggd_archived.json"
-    },
-    "vulnerable_tested_per_age_group": {
-      "$ref": "vulnerable_tested_per_age_group.json"
-    },
     "disability_care_archived_20230126": {
       "$ref": "disability_care_archived_20230126.json"
     },
@@ -153,9 +144,6 @@
     },
     "vaccine_coverage": {
       "$ref": "vaccine_coverage.json"
-    },
-    "vaccine_delivery_estimate": {
-      "$ref": "vaccine_delivery_estimate.json"
     },
     "vaccine_delivery_per_supplier": {
       "$ref": "vaccine_delivery_per_supplier.json"
