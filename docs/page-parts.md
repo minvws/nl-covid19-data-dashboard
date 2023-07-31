@@ -57,10 +57,9 @@ only be able to edit the links list.
 
 ### Highlighted items
 
-A list of high lighted items, currently only used on the Actueel pages.
-The document also has `minNumber` and `maxNumber` fields
-that indicate a minimum and maximum number of items. These fields are only visible
-to administrators, so normal users will only be able to edit the item list.
+A list of highlighted items, currently only used on the Actueel pages. The document also 
+has `minNumber` and `maxNumber` fields that indicate a minimum and maximum number of items. 
+These fields are only visible to administrators, so normal users will only be able to edit the item list.
 
 ## Data kind
 
