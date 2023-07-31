@@ -26,7 +26,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { space } from '~/style/theme';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -36,7 +36,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-const pageMetrics = ['g_number', 'tested_ggd', 'tested_overall', 'tested_per_age_group'];
+const pageMetrics = ['g_number_archived_20220307', 'tested_ggd_archived_20230321', 'tested_overall_archived_20230331', 'tested_per_age_group_archived_20230331'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -49,15 +49,15 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(
-    'difference.tested_ggd__infected_percentage_moving_average',
-    'difference.tested_ggd__tested_total_moving_average',
-    'difference.tested_overall__infected_moving_average',
-    'difference.tested_overall__infected_per_100k_moving_average',
-    'g_number',
-    'tested_ggd',
-    'tested_overall',
-    'tested_per_age_group'
+  selectArchivedNlData(
+    'difference.tested_ggd__infected_percentage_moving_average_archived_20230321',
+    'difference.tested_ggd__tested_total_moving_average_archived_20230321',
+    'difference.tested_overall__infected_moving_average_archived_20230331',
+    'difference.tested_overall__infected_per_100k_moving_average_archived_20230331',
+    'g_number_archived_20220307',
+    'tested_ggd_archived_20230321',
+    'tested_overall_archived_20230331',
+    'tested_per_age_group_archived_20230331'
   ),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
@@ -70,7 +70,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('positive_tests_page')},
-        "elements": ${getElementsQuery('nl', ['tested_overall', 'tested_ggd', 'tested_per_age_group'], locale)}
+        "elements": ${getElementsQuery('nl', ['tested_overall_archived_20230331', 'tested_ggd_archived_20230321', 'tested_per_age_group_archived_20230331'], locale)}
       }`;
     })(context);
     return {
@@ -85,7 +85,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
+  const { pageText, selectedArchivedNlData: data, choropleth, content, lastGenerated } = props;
 
   const [confirmedCasesInfectedTimeframe, setConfirmedCasesInfectedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
 
@@ -113,8 +113,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
     },
   ];
 
-  const dataOverallLastValue = data.tested_overall.last_value;
-  const dataGgdLastValue = data.tested_ggd.last_value;
+  const dataOverallLastValue = data.tested_overall_archived_20230331.last_value;
+  const dataGgdLastValue = data.tested_ggd_archived_20230321.last_value;
 
   const metadata = {
     ...metadataTexts,
@@ -166,7 +166,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'confirmed_cases_infected_over_time_chart',
               }}
-              values={data.tested_overall.values}
+              values={data.tested_overall_archived_20230331.values}
               timeframe={confirmedCasesInfectedTimeframe}
               seriesConfig={[
                 {
@@ -220,7 +220,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                     key: 'confirmed_cases_infected_percentage_over_time_chart',
                   }}
                   timeframe={confirmedCasesInfectedPercentageTimeframe}
-                  values={data.tested_ggd.values}
+                  values={data.tested_ggd_archived_20230321.values}
                   forceLegend
                   seriesConfig={[
                     {
@@ -259,7 +259,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                     key: 'confirmed_cases_tested_over_time_chart',
                   }}
                   timeframe={confirmedCasesTestedOverTimeTimeframe}
-                  values={data.tested_ggd.values}
+                  values={data.tested_ggd_archived_20230321.values}
                   seriesConfig={[
                     {
                       type: 'line',
@@ -295,9 +295,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 accessibility={{
                   key: 'confirmed_cases_infected_per_age_group_over_time_chart',
                 }}
-                values={data.tested_per_age_group.values}
+                values={data.tested_per_age_group_archived_20230331.values}
                 timeframe={confirmedCasesInfectedPerAgeTimeframe}
-                timelineEvents={getTimelineEvents(content.elements.timeSeries, 'tested_per_age_group')}
+                timelineEvents={getTimelineEvents(content.elements.timeSeries, 'tested_per_age_group_archived_20230331')}
                 text={textNl}
               />
             </ChartTile>
@@ -348,7 +348,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
           </InView>
 
           <InView rootMargin="400px">
-            <GNumberBarChartTile data={data.g_number} />
+            <GNumberBarChartTile data={data.g_number_archived_20220307} />
           </InView>
 
           {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
