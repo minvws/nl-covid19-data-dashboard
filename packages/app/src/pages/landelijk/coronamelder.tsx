@@ -10,7 +10,7 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { WarningTile } from '~/components/warning-tile';
@@ -25,18 +25,18 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('corona_melder_app_warning', 'corona_melder_app_download')
+  selectArchivedNlData('corona_melder_app_warning_archived_20220421', 'corona_melder_app_download_archived_20220421')
 );
 
 const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
   const [coronamelderTimeframe, setCoronamelderTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const { commonTexts } = useIntl();
 
-  const { pageText, selectedNlData: data, lastGenerated } = props;
+  const { pageText, selectedArchivedNlData: data, lastGenerated } = props;
   const { corona_melder_app } = commonTexts;
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const warningLastValue = data.corona_melder_app_warning.last_value;
+  const warningLastValue = data.corona_melder_app_warning_archived_20220421.last_value;
   const endDate = createDateFromUnixTimestamp(warningLastValue.date_unix);
 
   const metadata = {
@@ -81,7 +81,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               }}
               tooltipTitle={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
               timeframe={coronamelderTimeframe}
-              values={data.corona_melder_app_warning.values}
+              values={data.corona_melder_app_warning_archived_20220421.values}
               endDate={endDate}
               seriesConfig={[
                 {
