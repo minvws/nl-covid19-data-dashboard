@@ -137,10 +137,10 @@
       "$ref": "vaccine_vaccinated_or_support.json"
     },
     "corona_melder_app_download": {
-      "$ref": "corona_melder_app_download.json"
+      "$ref": "../archived_nl/corona_melder_app_download.json"
     },
     "corona_melder_app_warning": {
-      "$ref": "corona_melder_app_warning.json"
+      "$ref": "../archived_nl/corona_melder_app_warning.json"
     },
     "vaccine_coverage": {
       "$ref": "vaccine_coverage.json"

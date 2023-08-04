@@ -16,7 +16,9 @@
     "sewer_archived_20230623",
     "vulnerable_hospital_admissions_archived_20230711",
     "vulnerable_nursing_home_archived_20230711",
-    "reproduction_archived_20230711"
+    "reproduction_archived_20230711",
+    "corona_melder_app_warning_archived_20220421",
+    "corona_melder_app_download_archived_20220421"
   ],
   "additionalProperties": false,
   "properties": {
@@ -61,6 +63,12 @@
     },
     "reproduction_archived_20230711": {
       "$ref": "reproduction.json"
+    },
+    "corona_melder_app_warning_archived_20220421": {
+      "$ref": "corona_melder_app_warning.json"
+    },
+    "corona_melder_app_download_archived_20220421": {
+      "$ref": "corona_melder_app_download.json"
     }
   },
   "$defs": {
