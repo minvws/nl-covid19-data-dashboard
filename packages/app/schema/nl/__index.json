@@ -7,8 +7,6 @@
     "repeating_shot_administered",
     "booster_coverage_archived_20220904",
     "code",
-    "corona_melder_app_download",
-    "corona_melder_app_warning",
     "deceased_cbs",
     "deceased_rivm_archived_20221231",
     "deceased_rivm_per_age_group_archived_20221231",
@@ -135,12 +133,6 @@
     },
     "vaccine_vaccinated_or_support": {
       "$ref": "vaccine_vaccinated_or_support.json"
-    },
-    "corona_melder_app_download": {
-      "$ref": "../archived_nl/corona_melder_app_download.json"
-    },
-    "corona_melder_app_warning": {
-      "$ref": "../archived_nl/corona_melder_app_warning.json"
     },
     "vaccine_coverage": {
       "$ref": "vaccine_coverage.json"
