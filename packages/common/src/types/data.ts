@@ -64,6 +64,8 @@ export interface ArchivedNl {
   vulnerable_nursing_home_archived_20230711: NlVulnerableNursingHome;
   vulnerable_hospital_admissions_archived_20230711: NlVulnerableHospitalAdmissions;
   reproduction_archived_20230711: NlReproduction;
+  corona_melder_app_warning_archived_20220421: NlCoronaMelderAppWarning;
+  corona_melder_app_download_archived_20220421: NlCoronaMelderAppDownload;
 }
 export interface ArchivedNlDifference {
   nursing_home__deceased_daily_archived_20230126: DifferenceInteger;
@@ -263,6 +265,24 @@ export interface NlReproductionValue {
   index_low: number | null;
   index_average: number | null;
   index_high: number | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlCoronaMelderAppWarning {
+  values: NlCoronaMelderAppWarningValue[];
+  last_value: NlCoronaMelderAppWarningValue;
+}
+export interface NlCoronaMelderAppWarningValue {
+  count: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlCoronaMelderAppDownload {
+  values: NlCoronaMelderAppDownloadValue[];
+  last_value: NlCoronaMelderAppDownloadValue;
+}
+export interface NlCoronaMelderAppDownloadValue {
+  count: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -516,8 +536,6 @@ export interface Nl {
   deceased_cbs: NlDeceasedCbs;
   elderly_at_home_archived_20230126: NlElderlyAtHomeArchived_20230126;
   vaccine_vaccinated_or_support: NlVaccineVaccinatedOrSupport;
-  corona_melder_app_download: NlCoronaMelderAppDownload;
-  corona_melder_app_warning: NlCoronaMelderAppWarning;
   vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_administered: NlVaccineAdministered;
@@ -843,24 +861,6 @@ export interface NlVaccineVaccinatedOrSupportValue {
   percentage_16_24: number | null;
   date_start_unix: number;
   date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlCoronaMelderAppDownload {
-  values: NlCoronaMelderAppDownloadValue[];
-  last_value: NlCoronaMelderAppDownloadValue;
-}
-export interface NlCoronaMelderAppDownloadValue {
-  count: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlCoronaMelderAppWarning {
-  values: NlCoronaMelderAppWarningValue[];
-  last_value: NlCoronaMelderAppWarningValue;
-}
-export interface NlCoronaMelderAppWarningValue {
-  count: number;
-  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlVaccineCoverage {
