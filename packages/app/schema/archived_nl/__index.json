@@ -11,6 +11,9 @@
     "behavior_archived_20230411",
     "behavior_annotations_archived_20230412",
     "behavior_per_age_group_archived_20230411",
+    "repeating_shot_administered_20220713",
+    "corona_melder_app_warning_archived_20220421",
+    "corona_melder_app_download_archived_20220421",
     "doctor_archived_20210903",
     "nursing_home_archived_20230126",
     "infectious_people_archived_20210709",
@@ -18,8 +21,10 @@
     "vulnerable_hospital_admissions_archived_20230711",
     "vulnerable_nursing_home_archived_20230711",
     "reproduction_archived_20230711",
-    "corona_melder_app_warning_archived_20220421",
-    "corona_melder_app_download_archived_20220421"
+    "vaccine_coverage_archived_20220518",
+    "vaccine_delivery_per_supplier_archived_20211101",
+    "vaccine_stock_archived_20211024",
+
   ],
   "additionalProperties": false,
   "properties": {
@@ -47,6 +52,15 @@
     "behavior_per_age_group_archived_20230411": {
       "$ref": "behavior/behavior_per_age_group.json"
     },
+    "repeating_shot_administered_20220713": {
+      "$ref": "repeating_shot_administered.json"
+    },
+    "corona_melder_app_warning_archived_20220421": {
+      "$ref": "corona_melder_app_warning.json"
+    },
+    "corona_melder_app_download_archived_20220421": {
+      "$ref": "corona_melder_app_download.json"
+    },
     "doctor_archived_20210903": {
       "$ref": "doctor.json"
     },
@@ -68,11 +82,17 @@
     "reproduction_archived_20230711": {
       "$ref": "reproduction.json"
     },
-    "corona_melder_app_warning_archived_20220421": {
-      "$ref": "corona_melder_app_warning.json"
+    "vaccine_coverage_archived_20220518": {
+      "$ref": "vaccine_coverage.json"
     },
-    "corona_melder_app_download_archived_20220421": {
-      "$ref": "corona_melder_app_download.json"
+    "vaccine_delivery_per_supplier_archived_20211101": {
+      "$ref": "vaccine_delivery_per_supplier.json"
+    },
+    "vaccine_stock_archived_20211024": {
+      "$ref": "vaccine_stock.json"
+    },
+    "vaccine_vaccinated_or_support_archived_20230411": {
+      "$ref": "vaccine_vaccinated_or_support.json"
     }
   },
   "$defs": {
