@@ -13,6 +13,7 @@
     "behavior_per_age_group_archived_20230411",
     "doctor_archived_20210903",
     "nursing_home_archived_20230126",
+    "infectious_people_archived_20210709",
     "sewer_archived_20230623",
     "vulnerable_hospital_admissions_archived_20230711",
     "vulnerable_nursing_home_archived_20230711",
@@ -51,6 +52,9 @@
     },
     "nursing_home_archived_20230126": {
       "$ref": "nursing_home.json"
+    },
+    "infectious_people_archived_20210709": {
+      "$ref": "infectious_people.json"
     },
     "sewer_archived_20230623": {
       "$ref": "sewer.json"

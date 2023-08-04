@@ -60,6 +60,7 @@ export interface ArchivedNl {
   behavior_per_age_group_archived_20230411: NlBehaviorPerAgeGroup;
   doctor_archived_20210903: NlDoctor;
   nursing_home_archived_20230126: NlNursingHome;
+  infectious_people_archived_20210709: NlInfectiousPeople;
   sewer_archived_20230623: NlSewer;
   vulnerable_nursing_home_archived_20230711: NlVulnerableNursingHome;
   vulnerable_hospital_admissions_archived_20230711: NlVulnerableHospitalAdmissions;
@@ -228,6 +229,17 @@ export interface NlNursingHomeArchived_20230126Value {
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlInfectiousPeople {
+  values: NlInfectiousPeopleValue[];
+  last_value: NlInfectiousPeopleValue;
+}
+export interface NlInfectiousPeopleValue {
+  margin_low: number;
+  estimate: number | null;
+  margin_high: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -519,7 +531,6 @@ export interface Nl {
   repeating_shot_administered: NlRepeatingShotAdministered;
   booster_coverage_archived_20220904: NlBoosterCoverageArchived_20220904;
   g_number: NlGNumber;
-  infectious_people: NlInfectiousPeople;
   intensive_care_nice: NlIntensiveCareNice;
   intensive_care_nice_per_age_group: NlIntensiveCareNicePerAgeGroup;
   tested_overall: NlTestedOverall;
@@ -631,17 +642,6 @@ export interface NlGNumber {
 }
 export interface NlGNumberValue {
   g_number: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlInfectiousPeople {
-  values: NlInfectiousPeopleValue[];
-  last_value: NlInfectiousPeopleValue;
-}
-export interface NlInfectiousPeopleValue {
-  margin_low: number;
-  estimate: number | null;
-  margin_high: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }

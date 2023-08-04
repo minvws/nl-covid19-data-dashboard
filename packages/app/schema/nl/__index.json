@@ -18,7 +18,6 @@
     "hospital_lcps",
     "hospital_nice",
     "hospital_nice_per_age_group",
-    "infectious_people",
     "intensive_care_lcps",
     "intensive_care_nice",
     "intensive_care_nice_per_age_group",
@@ -82,9 +81,6 @@
     },
     "g_number": {
       "$ref": "g_number.json"
-    },
-    "infectious_people": {
-      "$ref": "infectious_people.json"
     },
     "intensive_care_nice": {
       "$ref": "intensive_care_nice.json"
