@@ -557,13 +557,12 @@ export interface GmCollection {
   proto_name: GmCollectionId;
   name: GmCollectionId;
   code: GmCollectionId;
-  hospital_nice: GmCollectionHospitalNice[];
-  hospital_nice_choropleth: GmCollectionHospitalNice[];
+  hospital_nice_choropleth: GmCollectionHospitalNiceChoropleth[];
   tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
   vaccine_coverage_per_age_group: GmCollectionVaccineCoveragePerAgeGroup[];
 }
-export interface GmCollectionHospitalNice {
+export interface GmCollectionHospitalNiceChoropleth {
   date_unix: number;
   gmcode: string;
   admissions_on_date_of_admission: number;

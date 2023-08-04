@@ -1,4 +1,4 @@
-import { colors, GmCollectionHospitalNice, gmData } from '@corona-dashboard/common';
+import { colors, GmCollectionHospitalNiceChoropleth, gmData } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
@@ -33,12 +33,12 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   };
 
   const data = useMemo(() => {
-    return gmData.map<GmCollectionHospitalNice>(
+    return gmData.map<GmCollectionHospitalNiceChoropleth>(
       (x) =>
         ({
           gmcode: x.gemcode,
           admissions_on_date_of_reporting: null,
-        } as unknown as GmCollectionHospitalNice)
+        } as unknown as GmCollectionHospitalNiceChoropleth)
     );
   }, []);
 
