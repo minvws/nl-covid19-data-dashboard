@@ -21,9 +21,9 @@
     "vulnerable_hospital_admissions_archived_20230711",
     "vulnerable_nursing_home_archived_20230711",
     "reproduction_archived_20230711",
-    "vaccine_coverage_archived_20220518",
     "vaccine_delivery_per_supplier_archived_20211101",
-    "vaccine_stock_archived_20211024"
+    "vaccine_stock_archived_20211024",
+    "vaccine_vaccinated_or_support_archived_20230411"
   ],
   "additionalProperties": false,
   "properties": {

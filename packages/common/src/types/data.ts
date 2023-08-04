@@ -68,10 +68,10 @@ export interface ArchivedNl {
   vulnerable_nursing_home_archived_20230711: NlVulnerableNursingHome;
   vulnerable_hospital_admissions_archived_20230711: NlVulnerableHospitalAdmissions;
   reproduction_archived_20230711: NlReproduction;
-  vaccine_coverage_archived_20220518: NlVaccineCoverage;
+  vaccine_coverage_archived_20220518?: NlVaccineCoverage;
   vaccine_delivery_per_supplier_archived_20211101: NlVaccineDeliveryPerSupplier;
   vaccine_stock_archived_20211024: NlVaccineStock;
-  vaccine_vaccinated_or_support_archived_20230411?: NlVaccineVaccinatedOrSupport;
+  vaccine_vaccinated_or_support_archived_20230411: NlVaccineVaccinatedOrSupport;
 }
 export interface ArchivedNlDifference {
   nursing_home__deceased_daily_archived_20230126: DifferenceInteger;
