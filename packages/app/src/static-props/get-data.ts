@@ -1,4 +1,4 @@
-import { ArchivedNl, assert, Gm, GmCollection, gmData, Nl, sortTimeSeriesInDataInPlace, VrCollection } from '@corona-dashboard/common';
+import { ArchivedGm, ArchivedNl, assert, Gm, GmCollection, gmData, Nl, sortTimeSeriesInDataInPlace, VrCollection } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import { get } from 'lodash';
 import set from 'lodash/set';
@@ -28,7 +28,7 @@ type UnionDeepMerge<T extends Record<string, unknown>> = {
  * 3. Merge picked data object union into a single object
  * 4. Merge nested properties unions
  */
-type DataShape<T extends string, D extends Nl | Gm | ArchivedNl> = UnionDeepMerge<U.Merge<O.P.Pick<D, S.Split<T, '.'>>>>;
+type DataShape<T extends string, D extends Nl | Gm | ArchivedNl | ArchivedGm> = UnionDeepMerge<U.Merge<O.P.Pick<D, S.Split<T, '.'>>>>;
 
 /**
  * Usage:
@@ -226,6 +226,41 @@ function getGmData(context: GetStaticPropsContext) {
   }
 
   const data = initializeFeatureFlaggedData<Gm>(loadJsonFromDataFile<Gm>(`${code}.json`), 'gm');
+
+  const municipalityName = gmData.find((x) => x.gemcode === code)?.name || '';
+
+  sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
+
+  return { data, municipalityName };
+}
+
+/**
+ * This method selects the specified metric properties from the municipal data
+ *
+ */
+export function selectArchivedGmData<T extends keyof ArchivedGm | F.AutoPath<ArchivedGm, keyof ArchivedGm, '.'>>(...metrics: T[]) {
+  return (context: GetStaticPropsContext) => {
+    const archivedGmData = getArchivedGmData(context);
+
+    const selectedArchivedGmData = metrics.reduce((acc, p) => set(acc, p, get(archivedGmData.data, p)), {} as DataShape<T, ArchivedGm>);
+
+    replaceInaccurateLastValue(selectedArchivedGmData);
+
+    return {
+      selectedArchivedGmData,
+      municipalityName: archivedGmData.municipalityName,
+    };
+  };
+}
+
+function getArchivedGmData(context: GetStaticPropsContext) {
+  const code = context.params?.code as string | undefined;
+
+  if (!code) {
+    throw Error('No valid gmcode found in context');
+  }
+
+  const data = initializeFeatureFlaggedData<ArchivedGm>(loadJsonFromDataFile<ArchivedGm>(`${code}.json`, 'json/archived'), 'gm');
 
   const municipalityName = gmData.find((x) => x.gemcode === code)?.name || '';
 
