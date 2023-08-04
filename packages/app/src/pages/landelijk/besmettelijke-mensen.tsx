@@ -15,7 +15,7 @@ import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
@@ -30,7 +30,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('infectious_people'),
+  selectArchivedNlData('infectious_people_archived_20210709'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('infectious_people_page'))(context);
 
@@ -45,11 +45,11 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, selectedNlData: data, lastGenerated, content } = props;
+  const { pageText, selectedArchivedNlData: data, lastGenerated, content } = props;
   const { commonTexts } = useIntl();
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const lastFullValue = getLastFilledValue(data.infectious_people);
+  const lastFullValue = getLastFilledValue(data.infectious_people_archived_20210709);
 
   const metadata = {
     ...metadataTexts,
@@ -89,7 +89,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
                 key: 'infectious_people_over_time_chart',
               }}
               tooltipTitle={textNl.linechart_titel}
-              values={data.infectious_people.values}
+              values={data.infectious_people_archived_20210709.values}
               seriesConfig={[
                 {
                   type: 'line',
