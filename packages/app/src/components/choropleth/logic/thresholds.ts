@@ -305,10 +305,18 @@ const hasSufficientDataThresholds = [
   },
 ];
 
+const noThresholds = [
+  {
+    color: '',
+    threshold: 0,
+  },
+];
+
 type Thresholds = Record<MapType, Record<string, ChoroplethThresholdsValue[]>>;
 
 export const thresholds: Thresholds = {
   gm: {
+    empty_value: noThresholds,
     infected_per_100k: positiveTestedThresholds,
     admissions_on_date_of_admission_per_100000: hospitalAdmissionsPer100000Thresholds,
     admissions_on_date_of_admission: hospitalAdmissionsThresholds,

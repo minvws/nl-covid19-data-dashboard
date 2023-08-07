@@ -45,9 +45,15 @@ export const mapToCodeType: Record<MapType, CodeProp> = {
 
 export type ChoroplethCollection = GmCollection | VrCollection;
 
-export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem ? 'gm' : T extends VrDataItem ? 'vr' : never;
+export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem | GmEmptyItem ? 'gm' : T extends VrDataItem ? 'vr' : never;
 
-export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem ? GmCollection : T extends VrDataItem ? VrCollection : never;
+export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem
+  ? GmCollection
+  : T extends GmEmptyItem
+  ? GmEmptyCollection
+  : T extends VrDataItem
+  ? VrCollection
+  : never;
 
 export type VrDataCollection = VrCollectionDisabilityCareArchived_20230126[] | VrCollectionElderlyAtHomeArchived_20230126[] | VrCollectionVulnerableNursingHome[];
 export type VrDataItem = VrDataCollection[number];
@@ -55,17 +61,10 @@ export type VrDataItem = VrDataCollection[number];
 export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionTestedOverall[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
 export type GmDataItem = GmDataCollection[number];
 
-/**
- * Here we map a MapType to a corresponding DataCollection type
- */
-export type MappedDataCollection<T extends MapType> = T extends 'gm' ? GmCollection : T extends 'vr' ? VrCollection : never;
+export type GmEmptyCollection = { gmcode: string; empty_value: null }[];
+export type GmEmptyItem = GmEmptyCollection[number];
 
-/**
- * Here we map a MapType to a corresponding DataItem type
- */
-export type MappedDataItem<T extends MapType> = T extends 'gm' ? GmDataItem : T extends 'vr' ? VrDataItem : never;
-
-export type ChoroplethDataItem = GmDataItem | VrDataItem;
+export type ChoroplethDataItem = GmEmptyItem | GmDataItem | VrDataItem;
 
 export type CodedGeoProperties = {
   code: string;

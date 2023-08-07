@@ -1,4 +1,4 @@
-import { colors, GmCollectionHospitalNice, gmData } from '@corona-dashboard/common';
+import { colors, gmData } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
@@ -33,13 +33,11 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   };
 
   const data = useMemo(() => {
-    return gmData.map<GmCollectionHospitalNice>(
-      (x) =>
-        ({
-          gmcode: x.gemcode,
-          admissions_on_date_of_reporting: null,
-        } as unknown as GmCollectionHospitalNice)
-    );
+    // ToDO: clean up type and do a proper empty choropleth type import
+    return gmData.map<{ gmcode: string; empty_value: null }>((x) => ({
+      gmcode: x.gemcode,
+      empty_value: null,
+    }));
   }, []);
 
   return (
@@ -69,7 +67,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
                 minHeight={0}
                 dataConfig={{
                   metricName: 'gemeente' as any,
-                  metricProperty: 'admissions_on_date_of_admission',
+                  metricProperty: 'empty_value',
                   areaStroke: colors.white,
                   areaStrokeWidth: 1,
                   hoverFill: colors.white,
