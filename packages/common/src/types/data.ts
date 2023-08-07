@@ -390,7 +390,7 @@ export interface ArchivedVrCollection {
   proto_name?: ArchivedVrCollectionId;
   name?: ArchivedVrCollectionId;
   code?: ArchivedVrCollectionId;
-  vulnerable_nursing_home_archived_20230711?: VulnerableNursingHomeArchived_20230711[];
+  vulnerable_nursing_home_archived_20230711: VulnerableNursingHomeArchived_20230711[];
 }
 export interface VulnerableNursingHomeArchived_20230711 {
   newly_infected_locations: number;

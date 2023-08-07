@@ -7,7 +7,7 @@ import type {
   VrCollection,
   VrCollectionDisabilityCareArchived_20230126,
   VrCollectionElderlyAtHomeArchived_20230126,
-  VrCollectionVulnerableNursingHome,
+  VulnerableNursingHomeArchived_20230711,
 } from '@corona-dashboard/common';
 import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
 import type { Feature, FeatureCollection, MultiPolygon, Polygon } from 'geojson';
@@ -49,7 +49,7 @@ export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem 
 
 export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem ? GmCollection : T extends VrDataItem ? VrCollection : never;
 
-export type VrDataCollection = VrCollectionDisabilityCareArchived_20230126[] | VrCollectionElderlyAtHomeArchived_20230126[] | VrCollectionVulnerableNursingHome[];
+export type VrDataCollection = VrCollectionDisabilityCareArchived_20230126[] | VrCollectionElderlyAtHomeArchived_20230126[] | VulnerableNursingHomeArchived_20230711[];
 export type VrDataItem = VrDataCollection[number];
 
 export type GmDataCollection = GmCollectionHospitalNiceChoropleth[] | GmCollectionTestedOverall[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];

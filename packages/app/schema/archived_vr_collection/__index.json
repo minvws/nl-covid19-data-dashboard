@@ -4,7 +4,7 @@
   "title": "archived_vr_collection",
   "additionalProperties": false,
   "required": [
-    "vulnerable_nursing_home"
+    "vulnerable_nursing_home_archived_20230711"
   ],
   "properties": {
     "last_generated": {
