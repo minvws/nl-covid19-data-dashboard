@@ -383,24 +383,6 @@ export interface NlVaccineVaccinatedOrSupportValue {
   date_of_insertion_unix: number;
 }
 
-export type ArchivedVrCollectionId = 'VR_COLLECTION';
-
-export interface ArchivedVrCollection {
-  last_generated?: string;
-  proto_name?: ArchivedVrCollectionId;
-  name?: ArchivedVrCollectionId;
-  code?: ArchivedVrCollectionId;
-  vulnerable_nursing_home_archived_20230711: VulnerableNursingHome[];
-}
-export interface VulnerableNursingHome {
-  newly_infected_locations: number;
-  infected_locations_total: number;
-  infected_locations_percentage: number;
-  date_of_insertion_unix: number;
-  date_unix: number;
-  vrcode: string;
-}
-
 export type GmCode = string;
 
 export interface Gm {
@@ -1184,6 +1166,7 @@ export interface VrCollection {
   code: VrCollectionId;
   disability_care_archived_20230126: VrCollectionDisabilityCareArchived_20230126[];
   elderly_at_home_archived_20230126: VrCollectionElderlyAtHomeArchived_20230126[];
+  vulnerable_nursing_home: VrCollectionVulnerableNursingHome[];
 }
 export interface VrCollectionDisabilityCareArchived_20230126 {
   newly_infected_people: number;
@@ -1201,5 +1184,13 @@ export interface VrCollectionElderlyAtHomeArchived_20230126 {
   deceased_daily: number;
   date_unix: number;
   date_of_insertion_unix: number;
+  vrcode: string;
+}
+export interface VrCollectionVulnerableNursingHome {
+  newly_infected_locations: number;
+  infected_locations_total: number;
+  infected_locations_percentage: number;
+  date_of_insertion_unix: number;
+  date_unix: number;
   vrcode: string;
 }

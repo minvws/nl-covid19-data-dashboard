@@ -27,7 +27,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
@@ -63,8 +63,8 @@ export const getStaticProps = createGetStaticProps(
     'nursing_home_archived_20230126',
     'vulnerable_hospital_admissions_archived_20230711'
   ),
-  createGetArchivedChoroplethData({
-    vr: ({ vulnerable_nursing_home_archived_20230711 }) => ({ vulnerable_nursing_home_archived_20230711 }),
+  createGetChoroplethData({
+    vr: ({ vulnerable_nursing_home }) => ({ vulnerable_nursing_home }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -195,9 +195,9 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'nursing_home_infected_people_choropleth',
               }}
-              data={choropleth.vr.vulnerable_nursing_home_archived_20230711}
+              data={choropleth.vr.vulnerable_nursing_home}
               dataConfig={{
-                metricName: 'vulnerable_nursing_home_archived_20230711',
+                metricName: 'vulnerable_nursing_home',
                 metricProperty: 'infected_locations_percentage',
                 dataFormatters: {
                   infected_locations_percentage: formatNumber,

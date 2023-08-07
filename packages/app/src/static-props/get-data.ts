@@ -48,8 +48,6 @@ const json = {
   gmCollection: initializeFeatureFlaggedData<GmCollection>(loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'), 'gm_collection'),
   archived: {
     nl: initializeFeatureFlaggedData<ArchivedNl>(loadJsonFromDataFile<ArchivedNl>('NL.json', 'json/archived'), 'nl'),
-    vrCollection: initializeFeatureFlaggedData<ArchivedVrCollection>(loadJsonFromDataFile<ArchivedVrCollection>('VR_COLLECTION.json', 'json/archived'), 'vr_collection'),
-    gmCollection: initializeFeatureFlaggedData<ArchivedGmCollection>(loadJsonFromDataFile<ArchivedGmCollection>('GM_COLLECTION.json', 'json/archived'), 'gm_collection'),
   },
 };
 
@@ -285,23 +283,6 @@ export function createGetChoroplethData<T1, T2>(settings?: {
       choropleth: {
         vr: filterVr(json.vrCollection, context) as T1,
         gm: filterGm(json.gmCollection, context) as T2,
-      },
-    };
-  };
-}
-
-export function createGetArchivedChoroplethData<T1, T2>(settings?: {
-  vr?: (collection: ArchivedVrCollection, context: GetStaticPropsContext) => T1;
-  gm?: (collection: ArchivedGmCollection, context: GetStaticPropsContext) => T2;
-}) {
-  return (context: GetStaticPropsContext) => {
-    const filterVr = settings?.vr ?? NOOP;
-    const filterGm = settings?.gm ?? NOOP;
-
-    return {
-      choropleth: {
-        vr: filterVr(json.archived.vrCollection, context) as T1,
-        gm: filterGm(json.archived.gmCollection, context) as T2,
       },
     };
   };
