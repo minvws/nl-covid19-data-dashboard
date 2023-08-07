@@ -307,13 +307,13 @@ export function createGetArchivedChoroplethData<T1, T2>(settings?: {
   gm?: (collection: ArchivedGmCollection, context: GetStaticPropsContext) => T2;
 }) {
   return (context: GetStaticPropsContext) => {
-    const filterArchivedVr = settings?.vr ?? NOOP;
-    const filterArchivedGm = settings?.gm ?? NOOP;
+    const filterVr = settings?.vr ?? NOOP;
+    const filterGm = settings?.gm ?? NOOP;
 
     return {
-      choropleth: {
-        vr: filterArchivedVr(json.archived.vrCollection, context) as T1,
-        gm: filterArchivedGm(json.archived.gmCollection, context) as T2,
+      archivedChoropleth: {
+        vr: filterVr(json.archived.vrCollection, context) as T1,
+        gm: filterGm(json.archived.gmCollection, context) as T2,
       },
     };
   };
