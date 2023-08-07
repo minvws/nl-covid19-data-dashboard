@@ -5,8 +5,6 @@ import { getDirectoryName } from './get-directory-name';
 import { loadJsonFromFile } from './load-json-from-file';
 
 const schemaPath = path.join(getDirectoryName(import.meta.url), RELATIVE_SCHEMA_PATH);
-console.log('getDirectoryName(import.meta.url) :', getDirectoryName(import.meta.url));
-console.log({ schemaPath });
 
 const pickMetricNames = ([, value]: [string, { type: string } | { $ref: string }]) => {
   if ('type' in value) {
