@@ -62,7 +62,7 @@ export type VrDataItem = VrDataCollection[number];
 export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionTestedOverall[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
 export type GmDataItem = GmDataCollection[number];
 
-export type ArchivedVrDataCollection = null[] | null[];
+export type ArchivedVrDataCollection = [];
 export type ArchivedVrDataItem = ArchivedVrDataCollection[number];
 
 export type ChoroplethDataItem = GmDataItem | VrDataItem | ArchivedVrDataItem;
