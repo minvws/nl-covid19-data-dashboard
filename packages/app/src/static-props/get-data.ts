@@ -1,4 +1,4 @@
-import { ArchivedNl, assert, Gm, GmCollection, gmData, Nl, sortTimeSeriesInDataInPlace, VrCollection } from '@corona-dashboard/common';
+import { ArchivedNl, assert, Gm, GmCollection, gmData, Nl, sortTimeSeriesInDataInPlace, VrCollection, ArchivedGm, ArchivedGmCollection } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import { get } from 'lodash';
 import set from 'lodash/set';
@@ -28,7 +28,7 @@ type UnionDeepMerge<T extends Record<string, unknown>> = {
  * 3. Merge picked data object union into a single object
  * 4. Merge nested properties unions
  */
-type DataShape<T extends string, D extends Nl | Gm | ArchivedNl> = UnionDeepMerge<U.Merge<O.P.Pick<D, S.Split<T, '.'>>>>;
+type DataShape<T extends string, D extends Nl | Gm | ArchivedNl | ArchivedGm> = UnionDeepMerge<U.Merge<O.P.Pick<D, S.Split<T, '.'>>>>;
 
 /**
  * Usage:
@@ -48,6 +48,7 @@ const json = {
   gmCollection: initializeFeatureFlaggedData<GmCollection>(loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'), 'gm_collection'),
   archived: {
     nl: initializeFeatureFlaggedData<ArchivedNl>(loadJsonFromDataFile<ArchivedNl>('NL.json', 'json/archived'), 'nl'),
+    gmCollection: initializeFeatureFlaggedData<ArchivedGmCollection>(loadJsonFromDataFile<ArchivedGmCollection>('GM_COLLECTION.json', 'json/archived'), 'archived_gm_collection'),
   },
 };
 
@@ -234,6 +235,41 @@ function getGmData(context: GetStaticPropsContext) {
   return { data, municipalityName };
 }
 
+/**
+ * This method selects the specified metric properties from the archived municipal data
+ *
+ */
+export function selectArchivedGmData<T extends keyof ArchivedGm | F.AutoPath<ArchivedGm, keyof ArchivedGm, '.'>>(...metrics: T[]) {
+  return (context: GetStaticPropsContext) => {
+    const archivedGmData = getArchivedGmData(context);
+
+    const selectedArchivedGmData = metrics.reduce((acc, p) => set(acc, p, get(archivedGmData.data, p)), {} as DataShape<T, ArchivedGm>);
+
+    replaceInaccurateLastValue(selectedArchivedGmData);
+
+    return {
+      selectedArchivedGmData,
+      municipalityName: archivedGmData.municipalityName,
+    };
+  };
+}
+
+function getArchivedGmData(context: GetStaticPropsContext) {
+  const code = context.params?.code as string | undefined;
+
+  if (!code) {
+    throw Error('No valid gmcode found in context');
+  }
+
+  const data = initializeFeatureFlaggedData<ArchivedGm>(loadJsonFromDataFile<ArchivedGm>(`${code}.json`, 'json/archived'), 'gm');
+
+  const municipalityName = gmData.find((x) => x.gemcode === code)?.name || '';
+
+  sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
+
+  return { data, municipalityName };
+}
+
 const NOOP = () => null;
 
 export function createGetChoroplethData<T1, T2>(settings?: {
@@ -248,6 +284,23 @@ export function createGetChoroplethData<T1, T2>(settings?: {
       choropleth: {
         vr: filterVr(json.vrCollection, context) as T1,
         gm: filterGm(json.gmCollection, context) as T2,
+      },
+    };
+  };
+}
+
+export function createGetChoroplethArchivedData<T1, T2>(settings?: {
+  archivedVr?: (collection: VrCollection, context: GetStaticPropsContext) => T1;
+  archivedGm?: (collection: ArchivedGmCollection, context: GetStaticPropsContext) => T2;
+}) {
+  return (context: GetStaticPropsContext) => {
+    const filterArchivedVr = settings?.archivedVr ?? NOOP;
+    const filterArchivedGm = settings?.archivedGm ?? NOOP;
+
+    return {
+      archivedChoropleth: {
+        vr: filterArchivedVr(json.vrCollection, context) as T1,
+        gm: filterArchivedGm(json.archived.gmCollection, context) as T2,
       },
     };
   };

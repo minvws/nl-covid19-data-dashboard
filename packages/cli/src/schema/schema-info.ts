@@ -19,7 +19,6 @@ export function getSchemaInfo(jsonDirectory: string = defaultJsonDirectory): Sch
 
   const fileList = fs.readdirSync(jsonDirectory);
   const archivedFileList = fs.readdirSync(path.join(jsonDirectory, 'archived'));
-
   return {
     nl: {
       files: ['NL.json'],

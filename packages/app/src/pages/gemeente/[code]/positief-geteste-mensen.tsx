@@ -26,7 +26,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
+import { createGetChoroplethArchivedData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
@@ -48,16 +48,11 @@ const pageMetrics = ['tested_overall'];
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData(
-    'code',
-    'difference.tested_overall__infected_moving_average',
-    'difference.tested_overall__infected_per_100k_moving_average',
-    'static_values.population_count',
-    'tested_overall'
-  ),
-  createGetChoroplethData({
-    gm: ({ tested_overall }, context) => ({
-      tested_overall: filterByRegionMunicipalities(tested_overall, context),
+  selectGmData('code', 'static_values.population_count'),
+  selectArchivedGmData('tested_overall_archived_20230331'),
+  createGetChoroplethArchivedData({
+    archivedGm: ({ tested_overall_archived_20230331 }, context) => ({
+      tested_overall_archived_20230331: filterByRegionMunicipalities(tested_overall_archived_20230331, context),
     }),
   }),
   async (context: GetStaticPropsContext) => {
@@ -68,7 +63,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('positive_tests_page')},
-        "elements": ${getElementsQuery('gm', ['tested_overall'], locale)}
+        "elements": ${getElementsQuery('archived_gm', ['tested_overall_archived_20230331'], locale)}
       }`;
     })(context);
     return {
@@ -83,13 +78,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedGmData: data, choropleth, municipalityName, content, lastGenerated } = props;
+  const { pageText, selectedGmData: data, selectedArchivedGmData: archived_data, archivedChoropleth, municipalityName, content, lastGenerated } = props;
   const [positivelyTestedPeopleTimeframe, setpositivelyTestedPeopleTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const lastValue = data.tested_overall.last_value;
+  const lastValue = archived_data.tested_overall_archived_20230331.last_value;
   const populationCount = data.static_values.population_count;
   const metadata = {
     ...commonTexts.gemeente_index.metadata,
@@ -193,7 +188,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'confirmed_cases_infected_over_time_chart',
               }}
-              values={data.tested_overall.values}
+              values={archived_data.tested_overall_archived_20230331.values}
               timeframe={positivelyTestedPeopleTimeframe}
               seriesConfig={[
                 {
@@ -211,7 +206,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 },
               ]}
               dataOptions={{
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'tested_overall'),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'tested_overall_archived_20230331'),
               }}
             />
           </ChartTile>
@@ -246,9 +241,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 accessibility={{
                   key: 'confirmed_cases_choropleth',
                 }}
-                data={choropleth.gm.tested_overall}
+                data={archivedChoropleth.gm.tested_overall_archived_20230331}
                 dataConfig={{
-                  metricName: 'tested_overall',
+                  metricName: 'tested_overall_archived_20230331',
                   metricProperty: 'infected_per_100k',
                   dataFormatters: {
                     infected: formatNumber,

@@ -26,7 +26,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
+import { createGetChoroplethArchivedData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { space } from '~/style/theme';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -49,18 +49,9 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectArchivedNlData(
-    'difference.tested_ggd__infected_percentage_moving_average_archived_20230321',
-    'difference.tested_ggd__tested_total_moving_average_archived_20230321',
-    'difference.tested_overall__infected_moving_average_archived_20230331',
-    'difference.tested_overall__infected_per_100k_moving_average_archived_20230331',
-    'g_number_archived_20220307',
-    'tested_ggd_archived_20230321',
-    'tested_overall_archived_20230331',
-    'tested_per_age_group_archived_20230331'
-  ),
-  createGetChoroplethData({
-    gm: ({ tested_overall }) => ({ tested_overall }),
+  selectArchivedNlData('g_number_archived_20220307', 'tested_ggd_archived_20230321', 'tested_overall_archived_20230331', 'tested_per_age_group_archived_20230331'),
+  createGetChoroplethArchivedData({
+    archivedGm: ({ tested_overall_archived_20230331 }) => ({ tested_overall_archived_20230331 }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -70,7 +61,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('positive_tests_page')},
-        "elements": ${getElementsQuery('nl', ['tested_overall_archived_20230331', 'tested_ggd_archived_20230321', 'tested_per_age_group_archived_20230331'], locale)}
+        "elements": ${getElementsQuery('archived_nl', ['tested_overall_archived_20230331', 'tested_ggd_archived_20230321', 'tested_per_age_group_archived_20230331'], locale)}
       }`;
     })(context);
     return {
@@ -85,7 +76,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedArchivedNlData: data, choropleth, content, lastGenerated } = props;
+  const { pageText, selectedArchivedNlData: data, archivedChoropleth, content, lastGenerated } = props;
 
   const [confirmedCasesInfectedTimeframe, setConfirmedCasesInfectedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
 
@@ -189,7 +180,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   tooltipLabel: textNl.tooltip_labels.annotations,
                   checkIsOutofBounds: (x: NlTestedOverallValue, max: number) => x.infected > max,
                 },
-                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'tested_overall'),
+                timelineEvents: getTimelineEvents(content.elements.timeSeries, 'tested_overall_archived_20230331'),
               }}
             />
           </ChartTile>
@@ -331,9 +322,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 accessibility={{
                   key: 'confirmed_cases_municipal_choropleth',
                 }}
-                data={choropleth.gm.tested_overall}
+                data={archivedChoropleth.gm.tested_overall_archived_20230331}
                 dataConfig={{
-                  metricName: 'tested_overall',
+                  metricName: 'tested_overall_archived_20230331',
                   metricProperty: 'infected_per_100k',
                   dataFormatters: {
                     infected: formatNumber,

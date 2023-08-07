@@ -1,4 +1,5 @@
 import type {
+  ArchivedGmCollection,
   GmCollection,
   GmCollectionHospitalNice,
   GmCollectionSewer,
@@ -43,29 +44,28 @@ export const mapToCodeType: Record<MapType, CodeProp> = {
   vr: 'vrcode',
 };
 
-export type ChoroplethCollection = GmCollection | VrCollection;
+export type ChoroplethCollection = GmCollection | ArchivedGmCollection | VrCollection;
 
-export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem ? 'gm' : T extends VrDataItem ? 'vr' : never;
+export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem | ArchivedGmDataItem ? 'gm' : T extends VrDataItem ? 'vr' : never;
 
-export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem ? GmCollection : T extends VrDataItem ? VrCollection : never;
+export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem
+  ? GmCollection
+  : T extends ArchivedGmDataItem
+  ? ArchivedGmCollection
+  : T extends VrDataItem
+  ? VrCollection
+  : never;
 
 export type VrDataCollection = VrCollectionDisabilityCareArchived_20230126[] | VrCollectionElderlyAtHomeArchived_20230126[] | VrCollectionVulnerableNursingHome[];
 export type VrDataItem = VrDataCollection[number];
 
-export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionTestedOverall[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
+export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
+export type ArchivedGmDataCollection = GmCollectionTestedOverall[];
+
 export type GmDataItem = GmDataCollection[number];
+export type ArchivedGmDataItem = ArchivedGmDataCollection[number];
 
-/**
- * Here we map a MapType to a corresponding DataCollection type
- */
-export type MappedDataCollection<T extends MapType> = T extends 'gm' ? GmCollection : T extends 'vr' ? VrCollection : never;
-
-/**
- * Here we map a MapType to a corresponding DataItem type
- */
-export type MappedDataItem<T extends MapType> = T extends 'gm' ? GmDataItem : T extends 'vr' ? VrDataItem : never;
-
-export type ChoroplethDataItem = GmDataItem | VrDataItem;
+export type ChoroplethDataItem = GmDataItem | ArchivedGmDataItem | VrDataItem;
 
 export type CodedGeoProperties = {
   code: string;

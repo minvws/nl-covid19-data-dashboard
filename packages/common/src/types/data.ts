@@ -11,7 +11,19 @@ export interface ArchivedGm {
   proto_name: ArchivedGmCode;
   name: ArchivedGmCode;
   code: ArchivedGmCode;
+  difference: ArchivedGmDifference;
   sewer_archived_20230623: GmSewer;
+  tested_overall_archived_20230331: GmTestedOverall;
+}
+export interface ArchivedGmDifference {
+  tested_overall__infected_moving_average_archived_20230331?: DifferenceDecimal;
+  tested_overall__infected_per_100k_moving_average_archived_20230331?: DifferenceDecimal;
+}
+export interface DifferenceDecimal {
+  old_value: number;
+  difference: number;
+  old_date_unix: number;
+  new_date_unix: number;
 }
 export interface GmSewer {
   values: GmSewerValue[];
@@ -27,6 +39,19 @@ export interface GmSewerValue {
   date_of_insertion_unix: number;
   data_is_outdated: boolean;
 }
+export interface GmTestedOverall {
+  values: GmTestedOverallValue[];
+  last_value: GmTestedOverallValue;
+}
+export interface GmTestedOverallValue {
+  date_unix: number;
+  infected: number;
+  infected_moving_average: number | null;
+  infected_moving_average_rounded: number | null;
+  infected_per_100k: number;
+  infected_per_100k_moving_average: number | null;
+  date_of_insertion_unix: number;
+}
 
 export type ArchivedGmCollectionId = 'GM_COLLECTION';
 
@@ -36,6 +61,7 @@ export interface ArchivedGmCollection {
   name: ArchivedGmCollectionId;
   code: ArchivedGmCollectionId;
   sewer_archived_20230623: GmCollectionSewer[];
+  tested_overall_archived_20230331: GmCollectionTestedOverall[];
 }
 export interface GmCollectionSewer {
   date_start_unix: number;
@@ -45,6 +71,13 @@ export interface GmCollectionSewer {
   total_installation_count: number;
   date_of_insertion_unix: number;
   data_is_outdated: boolean;
+}
+export interface GmCollectionTestedOverall {
+  date_unix: number;
+  gmcode: string;
+  infected_per_100k: number;
+  infected: number;
+  date_of_insertion_unix: number;
 }
 
 export type ArchivedNlId = 'NL';
@@ -342,7 +375,6 @@ export interface Gm {
   deceased_rivm_archived_20221231: GmDeceasedRivmArchived_20221231;
   difference: GmDifference;
   hospital_nice: GmHospitalNice;
-  tested_overall: GmTestedOverall;
   sewer: GmSewer;
   sewer_per_installation: GmSewerPerInstallation;
   sewer_installation_measurement: GmSewerInstallationMeasurement;
@@ -367,8 +399,6 @@ export interface GmDeceasedRivmArchived_20221231Value {
   date_of_insertion_unix: number;
 }
 export interface GmDifference {
-  tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
-  tested_overall__infected_moving_average: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average?: DifferenceInteger;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
@@ -395,19 +425,6 @@ export interface GmHospitalNiceValue {
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
-  date_of_insertion_unix: number;
-}
-export interface GmTestedOverall {
-  values: GmTestedOverallValue[];
-  last_value: GmTestedOverallValue;
-}
-export interface GmTestedOverallValue {
-  date_unix: number;
-  infected: number;
-  infected_moving_average: number | null;
-  infected_moving_average_rounded: number | null;
-  infected_per_100k: number;
-  infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
 }
 export interface GmSewer {
@@ -507,7 +524,6 @@ export interface GmCollection {
   code: GmCollectionId;
   hospital_nice: GmCollectionHospitalNice[];
   hospital_nice_choropleth: GmCollectionHospitalNice[];
-  tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
   vaccine_coverage_per_age_group: GmCollectionVaccineCoveragePerAgeGroup[];
 }
@@ -517,13 +533,6 @@ export interface GmCollectionHospitalNice {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_per_100000: number;
   admissions_on_date_of_reporting: number;
-  date_of_insertion_unix: number;
-}
-export interface GmCollectionTestedOverall {
-  date_unix: number;
-  gmcode: string;
-  infected_per_100k: number;
-  infected: number;
   date_of_insertion_unix: number;
 }
 export interface GmCollectionSewer {

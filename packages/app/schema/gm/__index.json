@@ -15,7 +15,6 @@
     "sewer_installation_measurement",
     "sewer_per_installation",
     "sewer",
-    "tested_overall",
     "vaccine_coverage_per_age_group",
     "vaccine_coverage_per_age_group_archived",
     "vaccine_coverage_per_age_group_archived_20220908",
@@ -45,9 +44,6 @@
     },
     "hospital_nice": {
       "$ref": "hospital_nice.json"
-    },
-    "tested_overall": {
-      "$ref": "tested_overall.json"
     },
     "sewer": {
       "$ref": "sewer.json"
