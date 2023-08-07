@@ -267,7 +267,7 @@ export interface NlReproductionValue {
   date_of_insertion_unix: number;
 }
 
-export type ArchivedVrCollectionId = 'ARCHIVED_VR_COLLECTION';
+export type ArchivedVrCollectionId = 'VR_COLLECTION';
 
 export interface ArchivedVrCollection {
   last_generated: string;
