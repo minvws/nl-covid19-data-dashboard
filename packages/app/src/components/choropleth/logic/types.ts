@@ -56,13 +56,13 @@ export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDa
   ? ArchivedVrCollection
   : never;
 
-export type VrDataCollection = VrCollectionDisabilityCareArchived_20230126[] | VrCollectionElderlyAtHomeArchived_20230126[] | VrCollectionVulnerableNursingHome[];
+export type VrDataCollection = VrCollectionDisabilityCareArchived_20230126[] | VrCollectionElderlyAtHomeArchived_20230126[];
 export type VrDataItem = VrDataCollection[number];
 
 export type GmDataCollection = GmCollectionHospitalNiceChoropleth[] | GmCollectionTestedOverall[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
 export type GmDataItem = GmDataCollection[number];
 
-export type ArchivedVrDataCollection = null[] | null[];
+export type ArchivedVrDataCollection = VrCollectionVulnerableNursingHome[];
 export type ArchivedVrDataItem = ArchivedVrDataCollection[number];
 
 /**
