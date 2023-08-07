@@ -7,7 +7,8 @@
     "last_generated",
     "proto_name",
     "name",
-    "code"
+    "code",
+    "vulnerable_nursing_home_archived_20230711"
   ],
   "properties": {
     "last_generated": {
@@ -21,6 +22,14 @@
     },
     "code": {
       "$ref": "#/$defs/archived_vr_collection_id"
+    },
+    "vulnerable_nursing_home_archived_20230711": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "vulnerable_nursing_home.json"
+      }
     }
   },
   "$defs": {
