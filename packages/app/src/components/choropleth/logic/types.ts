@@ -5,6 +5,7 @@ import type {
   GmCollectionTestedOverall,
   GmCollectionVaccineCoveragePerAgeGroup,
   VrCollection,
+  ArchivedVrCollection,
   VrCollectionDisabilityCareArchived_20230126,
   VrCollectionElderlyAtHomeArchived_20230126,
   VrCollectionVulnerableNursingHome,
@@ -34,30 +35,35 @@ export enum CHOROPLETH_ASPECT_RATIO {
  * gm - Municipality, indicates a map of the Netherlands that shows the different municipalities
  * vr - Safety region, indicates a map of the Netherlands that shows the different safety regions
  */
-export type MapType = 'gm' | 'vr' | 'archivedVr';
+export type MapType = 'gm' | 'vr';
 
 export type CodeProp = 'vrcode' | 'gmcode';
 
 export const mapToCodeType: Record<MapType, CodeProp> = {
   gm: 'gmcode',
   vr: 'vrcode',
-  archivedVr: 'vrcode'
 };
 
-export type ChoroplethCollection = GmCollection | VrCollection;
+export type ChoroplethCollection = GmCollection | VrCollection | ArchivedVrCollection;
 
-export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem ? 'gm' : T extends VrDataItem ? 'vr' : T extends ArchivedVrDataItem ? 'archivedVr' : never;
+export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem ? 'gm' : T extends VrDataItem | ArchivedVrDataItem ? 'vr' : never;
 
-export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem ? GmCollection : T extends VrDataItem ? VrCollection : T extends ArchivedVrDataItem ? ArchivedVrDataCollection : never;
-
-export type ArchivedVrDataCollection = VrCollectionVulnerableNursingHome[];
-export type ArchivedVrDataItem = ArchivedVrDataCollection[number];
+export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem
+  ? GmCollection
+  : T extends VrDataItem
+  ? VrCollection
+  : T extends ArchivedVrDataItem
+  ? ArchivedVrCollection
+  : never;
 
 export type VrDataCollection = VrCollectionDisabilityCareArchived_20230126[] | VrCollectionElderlyAtHomeArchived_20230126[];
 export type VrDataItem = VrDataCollection[number];
 
 export type GmDataCollection = GmCollectionHospitalNiceChoropleth[] | GmCollectionTestedOverall[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
 export type GmDataItem = GmDataCollection[number];
+
+export type ArchivedVrDataCollection = VrCollectionVulnerableNursingHome[];
+export type ArchivedVrDataItem = ArchivedVrDataCollection[number];
 
 /**
  * Here we map a MapType to a corresponding DataCollection type
@@ -69,7 +75,7 @@ export type MappedDataCollection<T extends MapType> = T extends 'gm' ? GmCollect
  */
 export type MappedDataItem<T extends MapType> = T extends 'gm' ? GmDataItem : T extends 'vr' ? VrDataItem : never;
 
-export type ChoroplethDataItem = GmDataItem | VrDataItem;
+export type ChoroplethDataItem = GmDataItem | VrDataItem | ArchivedVrDataItem;
 
 export type CodedGeoProperties = {
   code: string;

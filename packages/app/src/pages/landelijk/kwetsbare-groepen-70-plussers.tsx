@@ -27,14 +27,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import {
-  createGetArchivedChoroplethData,
-  createGetChoroplethData,
-  createGetContent,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectArchivedNlData
-} from '~/static-props/get-data';
+import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';

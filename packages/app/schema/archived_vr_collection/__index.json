@@ -31,7 +31,7 @@
   "$defs": {
     "archived_vr_collection_id": {
       "type": "string",
-      "enum": ["VR_COLLECTION"]
+      "enum": ["ARCHIVED_VR_COLLECTION"]
     }
   }
 }
