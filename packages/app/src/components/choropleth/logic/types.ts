@@ -7,7 +7,7 @@ import type {
   VrCollection,
   VrCollectionDisabilityCareArchived_20230126,
   VrCollectionElderlyAtHomeArchived_20230126,
-  VulnerableNursingHomeArchived_20230711,
+  VrCollectionVulnerableNursingHome,
 } from '@corona-dashboard/common';
 import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
 import type { Feature, FeatureCollection, MultiPolygon, Polygon } from 'geojson';
@@ -34,22 +34,26 @@ export enum CHOROPLETH_ASPECT_RATIO {
  * gm - Municipality, indicates a map of the Netherlands that shows the different municipalities
  * vr - Safety region, indicates a map of the Netherlands that shows the different safety regions
  */
-export type MapType = 'gm' | 'vr';
+export type MapType = 'gm' | 'vr' | 'archivedVr';
 
 export type CodeProp = 'vrcode' | 'gmcode';
 
 export const mapToCodeType: Record<MapType, CodeProp> = {
   gm: 'gmcode',
   vr: 'vrcode',
+  archivedVr: 'vrcode'
 };
 
 export type ChoroplethCollection = GmCollection | VrCollection;
 
-export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem ? 'gm' : T extends VrDataItem ? 'vr' : never;
+export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem ? 'gm' : T extends VrDataItem ? 'vr' : T extends ArchivedVrDataItem ? 'archivedVr' : never;
 
-export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem ? GmCollection : T extends VrDataItem ? VrCollection : never;
+export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem ? GmCollection : T extends VrDataItem ? VrCollection : T extends ArchivedVrDataItem ? ArchivedVrDataCollection : never;
 
-export type VrDataCollection = VrCollectionDisabilityCareArchived_20230126[] | VrCollectionElderlyAtHomeArchived_20230126[] | VulnerableNursingHomeArchived_20230711[];
+export type ArchivedVrDataCollection = VrCollectionVulnerableNursingHome[];
+export type ArchivedVrDataItem = ArchivedVrDataCollection[number];
+
+export type VrDataCollection = VrCollectionDisabilityCareArchived_20230126[] | VrCollectionElderlyAtHomeArchived_20230126[];
 export type VrDataItem = VrDataCollection[number];
 
 export type GmDataCollection = GmCollectionHospitalNiceChoropleth[] | GmCollectionTestedOverall[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];

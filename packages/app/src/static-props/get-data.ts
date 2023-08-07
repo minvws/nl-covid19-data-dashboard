@@ -1,4 +1,15 @@
-import { ArchivedGm, ArchivedNl, assert, Gm, GmCollection, gmData, Nl, sortTimeSeriesInDataInPlace, VrCollection } from '@corona-dashboard/common';
+import {
+  ArchivedGm, ArchivedGmCollection,
+  ArchivedNl,
+  ArchivedVrCollection,
+  assert,
+  Gm,
+  GmCollection,
+  gmData,
+  Nl,
+  sortTimeSeriesInDataInPlace,
+  VrCollection
+} from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import { get } from 'lodash';
 import set from 'lodash/set';
