@@ -65,16 +65,6 @@ export type GmDataItem = GmDataCollection[number];
 export type ArchivedVrDataCollection = null[] | null[];
 export type ArchivedVrDataItem = ArchivedVrDataCollection[number];
 
-/**
- * Here we map a MapType to a corresponding DataCollection type
- */
-export type MappedDataCollection<T extends MapType> = T extends 'gm' ? GmCollection : T extends 'vr' ? VrCollection : never;
-
-/**
- * Here we map a MapType to a corresponding DataItem type
- */
-export type MappedDataItem<T extends MapType> = T extends 'gm' ? GmDataItem : T extends 'vr' ? VrDataItem : never;
-
 export type ChoroplethDataItem = GmDataItem | VrDataItem | ArchivedVrDataItem;
 
 export type CodedGeoProperties = {
