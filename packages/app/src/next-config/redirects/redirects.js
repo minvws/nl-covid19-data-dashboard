@@ -71,9 +71,30 @@ async function redirects() {
       destination: `/landelijk/ziekenhuizen-en-zorg`,
       permanent: true,
     },
+    // Redirects for the archived pages (COR-1420)
+    {
+      source: '/landelijk/ziekenhuizen-en-zorg',
+      destination: `/landelijk/ziekenhuizen-in-beeld`,
+      permanent: true,
+    },
     {
       source: '/landelijk/intensive-care-opnames',
       destination: `/landelijk/ziekenhuizen-en-zorg`,
+      permanent: true,
+    },
+    {
+      source: '/landelijk/positief-geteste-mensen',
+      destination: `/landelijk/positieve-testen`,
+      permanent: true,
+    },
+    {
+      source: '/landelijk/thuiswonende-ouderen',
+      destination: `/landelijk/thuiswonende-70-plussers`,
+      permanent: true,
+    },
+    {
+      source: '/landelijk/verdenkingen-huisartsen',
+      destination: `/landelijk/klachten-bij-huisartsen`,
       permanent: true,
     },
   ];
