@@ -14,17 +14,9 @@
     },
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"
-    },
-    "deceased_rivm__covid_daily_archived_20221231": {
-      "$ref": "#/definitions/diff_integer"
     }
   },
-  "required": [
-    "tested_overall__infected_per_100k_moving_average",
-    "tested_overall__infected_moving_average",
-    "hospital_nice__admissions_on_date_of_reporting_moving_average",
-    "deceased_rivm__covid_daily_archived_20221231"
-  ],
+  "required": ["tested_overall__infected_per_100k_moving_average", "tested_overall__infected_moving_average", "hospital_nice__admissions_on_date_of_reporting_moving_average"],
   "additionalProperties": false,
   "definitions": {
     "diff_integer": {

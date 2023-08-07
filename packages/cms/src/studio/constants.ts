@@ -46,7 +46,7 @@ export const titleByMetricName: Partial<Record<MetricName, string>> = {
   vaccine_campaigns_archived_20220908: 'Vaccinatie campagnes (archief per 08-09-2022)',
   vaccine_campaigns: 'Vaccinatie campagnes',
   vaccine_coverage_per_age_group_archived_20220908: 'Vaccinatiegraad (per leeftijd) (archief per 08-09-2022)',
-  vaccine_coverage_per_age_group_archived: 'Vaccinatiegraad (per leeftijd) (archief)',
+  vaccine_coverage_per_age_group_archived_20220622: 'Vaccinatiegraad (per leeftijd) (archief)',
   vaccine_coverage_per_age_group_estimated_archived_20220908: 'Vaccinatiegraad berekend (per leeftijd) (archief 08-09-2022)',
   vaccine_coverage_per_age_group_estimated_autumn_2022: 'Vaccinatiegraad herfst 2022 booster berekend (per leeftijd)',
   vaccine_coverage_per_age_group_estimated_fully_vaccinated: 'Vaccinatiegraad basisserie berekend (per leeftijd)',

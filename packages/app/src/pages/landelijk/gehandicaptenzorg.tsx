@@ -21,7 +21,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
@@ -44,7 +44,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('disability_care_archived_20230126'),
+  selectArchivedNlData('disability_care_archived_20230126'),
   createGetChoroplethData({
     vr: ({ disability_care_archived_20230126 }) => ({ disability_care_archived_20230126 }),
   }),
@@ -72,7 +72,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, choropleth, lastGenerated, content } = props;
+  const { pageText, selectedArchivedNlData: data, choropleth, lastGenerated, content } = props;
 
   const [disabilityCareConfirmedCasesTimeframe, setDisabilityCareConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [disabilityCareInfectedLocationsTimeframe, setDisabilityCareInfectedLocationsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
