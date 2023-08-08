@@ -71,12 +71,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, selectedNlData: nonArchivedData, selectedArchivedNlData: archivedData, lastGenerated, content } = props;
+  const { pageText, selectedNlData: currentData, selectedArchivedNlData: archivedData, lastGenerated, content } = props;
 
   const [deceasedOverTimeTimeframe, setDeceasedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
-  const dataCbs = nonArchivedData.deceased_cbs;
+  const dataCbs = currentData.deceased_cbs;
   const dataRivm = archivedData.deceased_rivm_archived_20221231;
   const dataDeceasedPerAgeGroup = archivedData.deceased_rivm_per_age_group_archived_20221231;
 

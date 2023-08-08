@@ -132,7 +132,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
-  const { content, choropleth, selectedNlData: nonArchivedData, selectedArchivedNlData: archivedData, lastGenerated, administrationData } = props;
+  const { content, choropleth, selectedNlData: currentData, selectedArchivedNlData: archivedData, lastGenerated, administrationData } = props;
   const { commonTexts, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
 
@@ -146,8 +146,8 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
     description: textNl.metadata.description,
   };
 
-  const vaccineCoverageEstimatedFullyVaccinated = nonArchivedData.vaccine_coverage_per_age_group_estimated_fully_vaccinated.last_value;
-  const vaccineCoverageEstimatedAutumn2022 = nonArchivedData.vaccine_coverage_per_age_group_estimated_autumn_2022.last_value;
+  const vaccineCoverageEstimatedFullyVaccinated = currentData.vaccine_coverage_per_age_group_estimated_fully_vaccinated.last_value;
+  const vaccineCoverageEstimatedAutumn2022 = currentData.vaccine_coverage_per_age_group_estimated_autumn_2022.last_value;
 
   const vaccineCoverageEstimatedArchivedLastValue = archivedData.vaccine_coverage_per_age_group_estimated_archived_20220908.last_value;
 
@@ -159,11 +159,11 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   assert(boosterCoverage18PlusArchivedValue, `[${VaccinationPage.name}] Missing value for booster_coverage 18+`);
   assert(boosterCoverage12PlusArchivedValue, `[${VaccinationPage.name}] Missing value for booster_coverage 12+`);
 
-  const repeatingShotAdministeredLastValue = nonArchivedData.repeating_shot_administered?.last_value;
+  const repeatingShotAdministeredLastValue = currentData.repeating_shot_administered?.last_value;
 
   const hasActiveWarningTile = textNl.belangrijk_bericht && !isEmpty(textNl.belangrijk_bericht);
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(nonArchivedData, pageMetrics);
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(currentData, pageMetrics);
 
   const variables = {
     regio: commonTexts.choropleth.choropleth_vaccination_coverage.nl,
@@ -181,7 +181,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             description={textNl.information_block.description}
             metadata={{
               datumsText: textNl.dates,
-              dateOrRange: nonArchivedData.vaccine_administered_total.last_value.date_unix,
+              dateOrRange: currentData.vaccine_administered_total.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
             }}
@@ -258,11 +258,11 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             description={textNl.vaccine_campaigns.description}
             descriptionFooter={textNl.vaccine_campaigns.description_footer}
             headers={textNl.vaccine_campaigns.headers}
-            campaigns={nonArchivedData.vaccine_campaigns.vaccine_campaigns}
+            campaigns={currentData.vaccine_campaigns.vaccine_campaigns}
             campaignDescriptions={textNl.vaccine_campaigns.campaigns}
             metadata={{
               datumsText: textNl.dates,
-              date: nonArchivedData.vaccine_campaigns.date_unix,
+              date: currentData.vaccine_campaigns.date_unix,
               source: textNl.vaccine_campaigns.bronnen.rivm,
             }}
           />
@@ -270,11 +270,11 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           <VaccinationsPerSupplierOverLastTimeframeTile
             title={textNl.vaccinations_per_supplier_over_last_timeframe.title}
             description={textNl.vaccinations_per_supplier_over_last_timeframe.description}
-            data={nonArchivedData.vaccine_administered_last_timeframe.vaccine_types}
+            data={currentData.vaccine_administered_last_timeframe.vaccine_types}
             metadata={{
               source: textShared.bronnen.rivm,
-              date: [nonArchivedData.vaccine_administered_last_timeframe.date_start_unix, nonArchivedData.vaccine_administered_last_timeframe.date_end_unix],
-              obtainedAt: nonArchivedData.vaccine_administered_last_timeframe.date_of_insertion_unix,
+              date: [currentData.vaccine_administered_last_timeframe.date_start_unix, currentData.vaccine_administered_last_timeframe.date_end_unix],
+              obtainedAt: currentData.vaccine_administered_last_timeframe.date_of_insertion_unix,
             }}
           />
 
@@ -295,10 +295,10 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             sortingOrder={['80+', '70-79', '60-69', '50-59', '40-49', '30-39', '18-29', '12-17', '5-11']}
             metadata={{
               datumsText: textNl.dates,
-              date: nonArchivedData.vaccine_coverage_per_age_group.values[0].date_unix,
+              date: currentData.vaccine_coverage_per_age_group.values[0].date_unix,
               source: textNl.vaccination_coverage.bronnen.rivm,
             }}
-            values={nonArchivedData.vaccine_coverage_per_age_group.values}
+            values={currentData.vaccine_coverage_per_age_group.values}
           />
 
           {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
@@ -389,9 +389,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
               <VaccinationsOverTimeTile
                 text={textNl}
-                coverageData={nonArchivedData.vaccine_coverage}
+                coverageData={currentData.vaccine_coverage}
                 administrationData={administrationData}
-                vaccineAdministeredPlannedLastValue={nonArchivedData.vaccine_administered_planned.last_value}
+                vaccineAdministeredPlannedLastValue={currentData.vaccine_administered_planned.last_value}
                 timelineEvents={{
                   coverage: getTimelineEvents(content.elements.timeSeries, 'vaccine_coverage'),
                   deliveryAndAdministration: getTimelineEvents(content.elements.timeSeries, 'vaccine_administered'),
@@ -448,16 +448,16 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 values={archivedData.vaccine_coverage_per_age_group_archived_20220622.values}
               />
 
-              <VaccineDeliveryBarChart data={nonArchivedData.vaccine_delivery_per_supplier} text={textNl} />
+              <VaccineDeliveryBarChart data={currentData.vaccine_delivery_per_supplier} text={textNl} />
 
-              <VaccineStockPerSupplierChart values={nonArchivedData.vaccine_stock.values} text={textNl} />
+              <VaccineStockPerSupplierChart values={currentData.vaccine_stock.values} text={textNl} />
 
               <ChartTile
                 title={textNl.grafiek_draagvlak.titel}
                 description={textNl.grafiek_draagvlak.omschrijving}
                 metadata={{
                   datumsText: textNl.grafiek_draagvlak.metadata_tekst,
-                  date: [nonArchivedData.vaccine_vaccinated_or_support.last_value.date_start_unix, nonArchivedData.vaccine_vaccinated_or_support.last_value.date_end_unix],
+                  date: [currentData.vaccine_vaccinated_or_support.last_value.date_start_unix, currentData.vaccine_vaccinated_or_support.last_value.date_end_unix],
                 }}
               >
                 <TimeSeriesChart
@@ -465,7 +465,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                     key: 'vaccines_support_over_time_chart',
                   }}
                   tooltipTitle={textNl.grafiek_draagvlak.titel}
-                  values={nonArchivedData.vaccine_vaccinated_or_support.values}
+                  values={currentData.vaccine_vaccinated_or_support.values}
                   numGridLines={20}
                   tickValues={[0, 25, 50, 75, 100]}
                   dataOptions={{

@@ -74,7 +74,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, choropleth, municipalityName, selectedGmData: nonArchivedData, selectedArchivedGmData: archivedData, content, lastGenerated } = props;
+  const { pageText, choropleth, municipalityName, selectedGmData: currentData, selectedArchivedGmData: archivedData, content, lastGenerated } = props;
   const { commonTexts } = useIntl();
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
@@ -93,8 +93,8 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
   };
 
   const filteredVaccination = {
-    primarySeries: nonArchivedData.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'primary_series'),
-    autumn2022: nonArchivedData.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'autumn_2022'),
+    primarySeries: currentData.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'primary_series'),
+    autumn2022: currentData.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'autumn_2022'),
   };
 
   assert(filteredVaccination.primarySeries, `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the primary series`);
@@ -112,11 +112,11 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
     archivedData.vaccine_coverage_per_age_group_archived_20220908.values.find((x) => x.age_group_range === '12+') ||
     emptyCoverageData.vaccine_coverage_per_age_group_archived_20220908.values[1];
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(nonArchivedData, pageMetrics);
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(currentData, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <GmLayout code={nonArchivedData.code} municipalityName={municipalityName}>
+      <GmLayout code={currentData.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.actions_to_take.title}
@@ -203,7 +203,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
           />
           <VaccineCoverageChoropleth
             data={choropleth.gm.vaccine_coverage_per_age_group}
-            dataOptions={{ getLink: reverseRouter.gm.vaccinaties, selectedCode: nonArchivedData.code, isPercentage: true }}
+            dataOptions={{ getLink: reverseRouter.gm.vaccinaties, selectedCode: currentData.code, isPercentage: true }}
             text={{
               title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.title, { municipalityName: municipalityName }),
               description: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.description, { municipalityName: municipalityName }),

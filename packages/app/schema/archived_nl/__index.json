@@ -55,26 +55,26 @@
     "behavior_per_age_group_archived_20230411": {
       "$ref": "behavior/behavior_per_age_group.json"
     },
-    "deceased_rivm_archived_20221231": {
-      "$ref": "deceased_rivm_archived_20221231.json"
-    },
     "booster_shot_administered_archived_20220904": {
-      "$ref": "booster_shot_administered_archived_20220904.json"
+      "$ref": "booster_shot_administered.json"
     },
     "booster_coverage_archived_20220904": {
-      "$ref": "booster_coverage_archived_20220904.json"
+      "$ref": "booster_coverage.json"
+    },
+    "deceased_rivm_archived_20221231": {
+      "$ref": "deceased_rivm.json"
     },
     "deceased_rivm_per_age_group_archived_20221231": {
-      "$ref": "deceased_rivm_per_age_group_archived_20221231.json"
+      "$ref": "deceased_rivm_per_age_group.json"
     },
     "doctor_archived_20210903": {
       "$ref": "doctor.json"
     },
     "disability_care_archived_20230126": {
-      "$ref": "disability_care_archived_20230126.json"
+      "$ref": "disability_care.json"
     },
     "elderly_at_home_archived_20230126": {
-      "$ref": "elderly_at_home_archived_20230126.json"
+      "$ref": "elderly_at_home.json"
     },
     "nursing_home_archived_20230126": {
       "$ref": "nursing_home.json"
@@ -83,19 +83,19 @@
       "$ref": "sewer.json"
     },
     "vaccine_campaigns_archived_20220908": {
-      "$ref": "vaccine_campaigns_archived_20220908.json"
+      "$ref": "vaccine_campaigns.json"
     },
     "vaccine_planned_archived_20220908": {
-      "$ref": "vaccine_planned_archived_20220908.json"
+      "$ref": "vaccine_planned.json"
     },
     "vaccine_coverage_per_age_group_archived_20220622": {
-      "$ref": "vaccine_coverage_per_age_group_archived_20220622.json"
+      "$ref": "vaccine_coverage_per_age_group.json"
     },
     "vaccine_coverage_per_age_group_archived_20220908": {
-      "$ref": "vaccine_coverage_per_age_group_archived_20220908.json"
+      "$ref": "vaccine_coverage_per_age_group_with_booster_shot.json"
     },
     "vaccine_coverage_per_age_group_estimated_archived_20220908": {
-      "$ref": "vaccine_coverage_per_age_group_estimated_archived_20220908.json"
+      "$ref": "vaccine_coverage_per_age_group_estimated.json"
     },
     "vulnerable_nursing_home_archived_20230711": {
       "$ref": "vulnerable_nursing_home.json"
