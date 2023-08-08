@@ -68,12 +68,40 @@ async function redirects() {
     // Redirects for the NL pages
     {
       source: '/landelijk/ziekenhuis-opnames',
-      destination: `/landelijk/ziekenhuizen-en-zorg`,
+      destination: '/landelijk/ziekenhuizen-in-beeld',
+      permanent: true,
+    },
+    // Redirects for the archived pages (COR-1420)
+    // NL level
+    {
+      source: '/landelijk/intensive-care-opnames',
+      destination: '/landelijk/ziekenhuizen-in-beeld',
       permanent: true,
     },
     {
-      source: '/landelijk/intensive-care-opnames',
-      destination: `/landelijk/ziekenhuizen-en-zorg`,
+      source: '/landelijk/ziekenhuizen-en-zorg',
+      destination: '/landelijk/ziekenhuizen-in-beeld',
+      permanent: true,
+    },
+    {
+      source: '/landelijk/positief-geteste-mensen',
+      destination: '/landelijk/positieve-testen',
+      permanent: true,
+    },
+    {
+      source: '/landelijk/thuiswonende-ouderen',
+      destination: '/landelijk/thuiswonende-70-plussers',
+      permanent: true,
+    },
+    {
+      source: '/landelijk/verdenkingen-huisartsen',
+      destination: '/landelijk/klachten-bij-huisartsen',
+      permanent: true,
+    },
+    // GM level
+    {
+      source: '/gemeente/:code/positief-geteste-mensen',
+      destination: '/gemeente/:code/positieve-testen',
       permanent: true,
     },
   ];
