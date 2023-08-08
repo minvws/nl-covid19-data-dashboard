@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_elderly_at_home_archived_20230126",
+  "title": "nl_elderly_at_home",
   "type": "object",
   "properties": {
     "values": {

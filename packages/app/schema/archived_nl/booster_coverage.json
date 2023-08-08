@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_booster_coverage_archived_20220904",
+  "title": "nl_booster_coverage",
   "type": "object",
   "properties": {
     "values": {
@@ -21,10 +21,7 @@
       "properties": {
         "age_group": {
           "type": "string",
-          "enum": [
-            "12+",
-            "18+"
-          ]
+          "enum": ["12+", "18+"]
         },
         "percentage": {
           "type": "number"

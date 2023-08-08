@@ -1,14 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_planned_archived_20220908",
+  "title": "nl_vaccine_planned",
   "type": "object",
-  "required": [
-    "doses",
-    "date_unix",
-    "date_start_unix",
-    "date_end_unix",
-    "date_of_insertion_unix"
-  ],
+  "required": ["doses", "date_unix", "date_start_unix", "date_end_unix", "date_of_insertion_unix"],
   "additionalProperties": false,
   "properties": {
     "doses": {
