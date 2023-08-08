@@ -52,7 +52,7 @@ export const commonPreview = {
  * choropleth and maybe even introducing a specific icon for each element type.
  */
 const titleByMetricName: Partial<Record<MetricName, string>> = {
-  tested_overall: 'Positief geteste mensen',
+  tested_overall_archived_20230331: 'Positief geteste mensen',
   sewer: 'Rioolwater metingen',
   hospital_nice: 'Ziekenhuisopnames',
   intensive_care_nice: 'IC-opnames',
@@ -68,7 +68,7 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   deceased_rivm_archived_20221231: 'Sterfte (RIVM)',
   intensive_care_nice_per_age_group: 'IC-opnames (per leeftijd)',
   hospital_nice_per_age_group: 'Ziekenhuisopnames (per leeftijd)',
-  tested_per_age_group: 'Positief getest (per leeftijd)',
+  tested_per_age_group_archived_20230331: 'Positief getest (per leeftijd)',
   elderly_at_home_archived_20230126: '70-plussers',
   self_test_overall: 'Zelfgerapporteerde positieve coronatestuitslagen',
 };

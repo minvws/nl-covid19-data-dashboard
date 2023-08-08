@@ -29,6 +29,7 @@ const promptForElement = async (): Promise<Element | undefined> => {
     { title: 'National', value: 'nl' },
     { title: 'National (archived)', value: 'archived_nl' },
     { title: 'Municipal', value: 'gm' },
+    { title: 'Municipal (archived)', value: 'archived_gm' },
   ];
 
   const scopeResponse = (await prompts({

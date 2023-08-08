@@ -15,15 +15,19 @@
     "corona_melder_app_warning_archived_20220421",
     "corona_melder_app_download_archived_20220421",
     "doctor_archived_20210903",
+    "g_number_archived_20220307",
     "nursing_home_archived_20230126",
     "infectious_people_archived_20210709",
     "sewer_archived_20230623",
+    "tested_ggd_archived_20230321",
+    "tested_overall_archived_20230331",
+    "tested_per_age_group_archived_20230331",
     "vulnerable_hospital_admissions_archived_20230711",
     "vulnerable_nursing_home_archived_20230711",
-    "reproduction_archived_20230711",
     "vaccine_delivery_per_supplier_archived_20211101",
     "vaccine_stock_archived_20211024",
-    "vaccine_vaccinated_or_support_archived_20230411"
+    "vaccine_vaccinated_or_support_archived_20230411",
+    "reproduction_archived_20230711"
   ],
   "additionalProperties": false,
   "properties": {
@@ -63,11 +67,23 @@
     "doctor_archived_20210903": {
       "$ref": "doctor.json"
     },
+    "g_number_archived_20220307": {
+      "$ref": "positive_tests/g_number.json"
+    },
     "nursing_home_archived_20230126": {
       "$ref": "nursing_home.json"
     },
     "infectious_people_archived_20210709": {
       "$ref": "infectious_people.json"
+    },
+    "tested_ggd_archived_20230321": {
+      "$ref": "positive_tests/tested_ggd.json"
+    },
+    "tested_overall_archived_20230331": {
+      "$ref": "positive_tests/tested_overall.json"
+    },
+    "tested_per_age_group_archived_20230331": {
+      "$ref": "positive_tests/tested_per_age_group.json"
     },
     "sewer_archived_20230623": {
       "$ref": "sewer.json"

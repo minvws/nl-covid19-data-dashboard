@@ -1,45 +1,15 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_difference",
+  "title": "archived_gm_difference",
   "type": "object",
   "properties": {
-    "infectious_people__estimate": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "hospital_nice__admissions_on_date_of_reporting_moving_average": {
+    "tested_overall__infected_moving_average_archived_20230331": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "hospital_lcps__beds_occupied_covid": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "intensive_care_nice__admissions_on_date_of_reporting_moving_average": {
+    "tested_overall__infected_per_100k_moving_average_archived_20230331": {
       "$ref": "#/definitions/diff_decimal"
-    },
-    "intensive_care_lcps__beds_occupied_covid": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "sewer__average": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "reproduction__index_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "vulnerable_hospital_admissions": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "deceased_rivm__covid_daily_archived_20221231": {
-      "$ref": "#/definitions/diff_integer"
     }
   },
-  "required": [
-    "hospital_nice__admissions_on_date_of_reporting_moving_average",
-    "hospital_lcps__beds_occupied_covid",
-    "infectious_people__estimate",
-    "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
-    "intensive_care_lcps__beds_occupied_covid",
-    "sewer__average",
-    "deceased_rivm__covid_daily_archived_20221231"
-  ],
   "additionalProperties": false,
   "definitions": {
     "diff_integer": {

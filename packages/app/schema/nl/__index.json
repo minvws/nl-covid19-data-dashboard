@@ -13,7 +13,6 @@
     "named_difference",
     "disability_care_archived_20230126",
     "elderly_at_home_archived_20230126",
-    "g_number",
     "hospital_lcps",
     "hospital_nice",
     "hospital_nice_per_age_group",
@@ -25,9 +24,6 @@
     "proto_name",
     "self_test_overall",
     "sewer",
-    "tested_ggd",
-    "tested_overall",
-    "tested_per_age_group",
     "vaccine_campaigns",
     "vaccine_campaigns_archived_20220908",
     "vaccine_planned_archived_20220908",
@@ -72,20 +68,11 @@
     "booster_coverage_archived_20220904": {
       "$ref": "booster_coverage_archived_20220904.json"
     },
-    "g_number": {
-      "$ref": "g_number.json"
-    },
     "intensive_care_nice": {
       "$ref": "intensive_care_nice.json"
     },
     "intensive_care_nice_per_age_group": {
       "$ref": "intensive_care_nice_per_age_group.json"
-    },
-    "tested_overall": {
-      "$ref": "tested_overall.json"
-    },
-    "tested_per_age_group": {
-      "$ref": "tested_per_age_group.json"
     },
     "sewer": {
       "$ref": "sewer.json"
@@ -101,9 +88,6 @@
     },
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
-    },
-    "tested_ggd": {
-      "$ref": "tested_ggd.json"
     },
     "disability_care_archived_20230126": {
       "$ref": "disability_care_archived_20230126.json"

@@ -3,8 +3,14 @@
  * This file is generated based on the JSON schema's by yarn generate-data-structures in the cli package.
  */
 export const dataStructure = {
-  archived_gm: { sewer_archived_20230623: ['average', 'total_number_of_samples', 'sampled_installation_count', 'total_installation_count', 'data_is_outdated'] },
-  archived_gm_collection: { sewer_archived_20230623: ['average', 'total_installation_count', 'data_is_outdated'] },
+  archived_gm: {
+    sewer_archived_20230623: ['average', 'total_number_of_samples', 'sampled_installation_count', 'total_installation_count', 'data_is_outdated'],
+    tested_overall_archived_20230331: ['infected', 'infected_moving_average', 'infected_moving_average_rounded', 'infected_per_100k', 'infected_per_100k_moving_average'],
+  },
+  archived_gm_collection: {
+    sewer_archived_20230623: ['average', 'total_installation_count', 'data_is_outdated'],
+    tested_overall_archived_20230331: ['infected_per_100k', 'infected'],
+  },
   archived_nl: {
     behavior_archived_20230411: [
       'number_of_participants',
@@ -70,6 +76,7 @@ export const dataStructure = {
     corona_melder_app_warning_archived_20220421: ['count'],
     corona_melder_app_download_archived_20220421: ['count'],
     doctor_archived_20210903: ['covid_symptoms_per_100k', 'covid_symptoms'],
+    g_number_archived_20220307: ['g_number'],
     nursing_home_archived_20230126: [
       'newly_infected_people',
       'newly_infected_people_moving_average',
@@ -79,7 +86,6 @@ export const dataStructure = {
       'infected_locations_total',
       'infected_locations_percentage',
     ],
-    infectious_people_archived_20210709: ['margin_low', 'estimate', 'margin_high'],
     sewer_archived_20230623: ['average'],
     vulnerable_nursing_home_archived_20230711: ['newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage'],
     reproduction_archived_20230711: ['index_low', 'index_average', 'index_high'],
@@ -123,7 +129,6 @@ export const dataStructure = {
       'admissions_on_date_of_admission_moving_average_rounded',
       'admissions_on_date_of_reporting',
     ],
-    tested_overall: ['infected', 'infected_moving_average', 'infected_moving_average_rounded', 'infected_per_100k', 'infected_per_100k_moving_average'],
     sewer: ['average', 'data_is_outdated'],
     vaccine_coverage_per_age_group: [
       'vaccination_type',
@@ -159,7 +164,6 @@ export const dataStructure = {
   },
   gm_collection: {
     hospital_nice_choropleth: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
-    tested_overall: ['infected_per_100k', 'infected'],
     sewer: ['average', 'data_is_outdated'],
     vaccine_coverage_per_age_group: [
       'vaccination_type',
@@ -178,6 +182,7 @@ export const dataStructure = {
     booster_shot_administered_archived_20220904: ['administered_total', 'ggd_administered_total', 'others_administered_total'],
     booster_coverage_archived_20220904: ['age_group', 'percentage'],
     g_number: ['g_number'],
+    infectious_people: ['margin_low', 'estimate', 'margin_high'],
     intensive_care_nice: [
       'admissions_on_date_of_admission',
       'admissions_on_date_of_admission_moving_average',
@@ -195,20 +200,6 @@ export const dataStructure = {
       'admissions_age_80_89_per_million',
       'admissions_age_90_plus_per_million',
       'admissions_overall_per_million',
-    ],
-    tested_overall: ['infected', 'infected_moving_average', 'infected_moving_average_rounded', 'infected_per_100k', 'infected_per_100k_moving_average'],
-    tested_per_age_group: [
-      'infected_age_0_9_per_100k',
-      'infected_age_10_19_per_100k',
-      'infected_age_20_29_per_100k',
-      'infected_age_30_39_per_100k',
-      'infected_age_40_49_per_100k',
-      'infected_age_50_59_per_100k',
-      'infected_age_60_69_per_100k',
-      'infected_age_70_79_per_100k',
-      'infected_age_80_89_per_100k',
-      'infected_age_90_plus_per_100k',
-      'infected_overall_per_100k',
     ],
     sewer: ['average'],
     hospital_nice: [
@@ -231,15 +222,6 @@ export const dataStructure = {
     ],
     hospital_lcps: ['beds_occupied_covid', 'influx_covid_patients', 'influx_covid_patients_moving_average'],
     intensive_care_lcps: ['beds_occupied_covid', 'beds_occupied_covid_percentage', 'influx_covid_patients', 'influx_covid_patients_moving_average'],
-    tested_ggd: [
-      'infected',
-      'infected_moving_average',
-      'infected_percentage',
-      'infected_percentage_moving_average',
-      'tested_total',
-      'tested_total_moving_average',
-      'tested_total_moving_average_rounded',
-    ],
     disability_care_archived_20230126: [
       'newly_infected_people',
       'newly_infected_people_moving_average',
