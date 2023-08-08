@@ -26,7 +26,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethArchivedData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
+import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { space } from '~/style/theme';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -50,8 +50,8 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectArchivedNlData('g_number_archived_20220307', 'tested_ggd_archived_20230321', 'tested_overall_archived_20230331', 'tested_per_age_group_archived_20230331'),
-  createGetChoroplethArchivedData({
-    archivedGm: ({ tested_overall_archived_20230331 }) => ({ tested_overall_archived_20230331 }),
+  createGetArchivedChoroplethData({
+    gm: ({ tested_overall_archived_20230331 }) => ({ tested_overall_archived_20230331 }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -332,7 +332,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   },
                 }}
                 dataOptions={{
-                  getLink: reverseRouter.gm.positiefGetesteMensen,
+                  getLink: reverseRouter.gm.positiefTesten,
                 }}
               />
             </ChoroplethTile>

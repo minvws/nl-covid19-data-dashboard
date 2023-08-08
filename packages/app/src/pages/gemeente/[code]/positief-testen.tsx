@@ -26,7 +26,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethArchivedData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData } from '~/static-props/get-data';
+import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData } from '~/static-props/get-data';
 import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
@@ -50,8 +50,8 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmData('code', 'static_values.population_count'),
   selectArchivedGmData('tested_overall_archived_20230331'),
-  createGetChoroplethArchivedData({
-    archivedGm: ({ tested_overall_archived_20230331 }, context) => ({
+  createGetArchivedChoroplethData({
+    gm: ({ tested_overall_archived_20230331 }, context) => ({
       tested_overall_archived_20230331: filterByRegionMunicipalities(tested_overall_archived_20230331, context),
     }),
   }),
@@ -253,7 +253,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 dataOptions={{
                   selectedCode: data.code,
                   highlightSelection: true,
-                  getLink: reverseRouter.gm.positiefGetesteMensen,
+                  getLink: reverseRouter.gm.positiefTesten,
                 }}
               />
             </ChoroplethTile>
