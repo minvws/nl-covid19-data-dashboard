@@ -102,4 +102,4 @@ export const DAYS_OF_THE_WEEK_LIST = [
   },
 ];
 
-export const RELATIVE_SCHEMA_PATH = '../../../app/schema';
+export const RELATIVE_SCHEMA_PATH = '../../../../app/schema';
