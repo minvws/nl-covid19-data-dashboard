@@ -3,7 +3,7 @@
   "type": "object",
   "title": "gm_collection",
   "additionalProperties": false,
-  "required": ["last_generated", "proto_name", "name", "code", "hospital_nice", "hospital_nice_choropleth", "sewer", "vaccine_coverage_per_age_group"],
+  "required": ["last_generated", "proto_name", "name", "code", "hospital_nice_choropleth", "sewer", "vaccine_coverage_per_age_group"],
   "properties": {
     "last_generated": {
       "type": "string"
@@ -17,20 +17,12 @@
     "code": {
       "$ref": "#/$defs/gm_collection_id"
     },
-    "hospital_nice": {
-      "type": "array",
-      "minItems": 342,
-      "maxItems": 342,
-      "items": {
-        "$ref": "hospital_nice.json"
-      }
-    },
     "hospital_nice_choropleth": {
       "type": "array",
       "minItems": 342,
       "maxItems": 342,
       "items": {
-        "$ref": "hospital_nice.json"
+        "$ref": "hospital_nice_choropleth.json"
       }
     },
     "sewer": {

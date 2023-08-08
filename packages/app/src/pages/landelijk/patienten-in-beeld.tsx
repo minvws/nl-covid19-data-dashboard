@@ -1,4 +1,4 @@
-import { colors, GmCollectionHospitalNice, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors, GmCollectionHospitalNiceChoropleth, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -117,7 +117,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
-  const choroplethDataGm: GmCollectionHospitalNice[] = choropleth.gm.hospital_nice_choropleth;
+  const choroplethDataGm: GmCollectionHospitalNiceChoropleth[] = choropleth.gm.hospital_nice_choropleth;
 
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
