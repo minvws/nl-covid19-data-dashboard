@@ -14,7 +14,7 @@ export function useDataSitemap(base: 'nl' | 'gm', code?: string, data?: Pick<Nl,
         links: [
           {
             text: commonTexts.sidebar.metrics.positive_tests.title,
-            href: reverseRouter.gm.positiefGetesteMensen(code),
+            href: reverseRouter.gm.positiefTesten(code),
           },
           {
             text: commonTexts.sidebar.metrics.mortality.title,
@@ -58,7 +58,7 @@ export function useDataSitemap(base: 'nl' | 'gm', code?: string, data?: Pick<Nl,
       links: [
         {
           text: commonTexts.sidebar.metrics.positive_tests.title,
-          href: reverseRouter.nl.positiefGetesteMensen(),
+          href: reverseRouter.nl.positiefTesten(),
         },
         {
           text: commonTexts.sidebar.metrics.reproduction_number.title,
@@ -96,7 +96,7 @@ export function useDataSitemap(base: 'nl' | 'gm', code?: string, data?: Pick<Nl,
         },
         {
           text: commonTexts.sidebar.metrics.elderly_at_home.title,
-          href: reverseRouter.nl.thuiswonendeOuderen(),
+          href: reverseRouter.nl.thuiswonende70Plussers(),
         },
       ],
     },
@@ -118,7 +118,7 @@ export function useDataSitemap(base: 'nl' | 'gm', code?: string, data?: Pick<Nl,
         },
         {
           text: commonTexts.sidebar.metrics.general_practitioner_suspicions.title,
-          href: reverseRouter.nl.verdenkingenHuisartsen(),
+          href: reverseRouter.nl.klachtenBijHuisartsen(),
         },
         {
           text: commonTexts.sidebar.metrics.coronamelder_app.title,
