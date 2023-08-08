@@ -311,7 +311,7 @@ export function createGetArchivedChoroplethData<T1, T2>(settings?: {
     const filterGm = settings?.gm ?? NOOP;
 
     return {
-      choropleth: {
+      archivedChoropleth: {
         vr: filterVr(json.archived.vrCollection, context) as T1,
         gm: filterGm(json.archived.gmCollection, context) as T2,
       },

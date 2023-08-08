@@ -7,8 +7,7 @@
     "last_generated",
     "proto_name",
     "name",
-    "code",
-    "vulnerable_nursing_home_archived_20230711"
+    "code"
   ],
   "properties": {
     "last_generated": {
@@ -22,20 +21,12 @@
     },
     "code": {
       "$ref": "#/$defs/archived_vr_collection_id"
-    },
-    "vulnerable_nursing_home_archived_20230711": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "vulnerable_nursing_home.json"
-      }
     }
   },
   "$defs": {
     "archived_vr_collection_id": {
       "type": "string",
-      "enum": ["ARCHIVED_VR_COLLECTION"]
+      "enum": ["VR_COLLECTION"]
     }
   }
 }

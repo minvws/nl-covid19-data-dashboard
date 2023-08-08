@@ -401,6 +401,15 @@ export interface VrCollectionVulnerableNursingHome {
   vrcode: string;
 }
 
+export type ArchivedVrCollectionId = 'VR_COLLECTION';
+
+export interface ArchivedVrCollection {
+  last_generated: string;
+  proto_name: ArchivedVrCollectionId;
+  name: ArchivedVrCollectionId;
+  code: ArchivedVrCollectionId;
+}
+
 export type GmCode = string;
 
 export interface Gm {
