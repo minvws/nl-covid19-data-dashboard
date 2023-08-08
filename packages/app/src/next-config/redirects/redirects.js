@@ -68,14 +68,14 @@ async function redirects() {
     // Redirects for the NL pages
     {
       source: '/landelijk/ziekenhuis-opnames',
-      destination: '/landelijk/ziekenhuizen-en-zorg',
+      destination: '/landelijk/ziekenhuizen-in-beeld',
       permanent: true,
     },
     // Redirects for the archived pages (COR-1420)
     // NL level
     {
       source: '/landelijk/intensive-care-opnames',
-      destination: '/landelijk/ziekenhuizen-en-zorg',
+      destination: '/landelijk/ziekenhuizen-in-beeld',
       permanent: true,
     },
     {
