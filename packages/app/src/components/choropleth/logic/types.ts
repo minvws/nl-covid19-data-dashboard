@@ -1,4 +1,5 @@
 import type {
+  ArchivedGmCollection,
   GmCollection,
   GmCollectionHospitalNice,
   GmCollectionSewer,
@@ -44,12 +45,14 @@ export const mapToCodeType: Record<MapType, CodeProp> = {
   vr: 'vrcode',
 };
 
-export type ChoroplethCollection = GmCollection | VrCollection;
+export type ChoroplethCollection = GmCollection | ArchivedGmCollection | VrCollection;
 
-export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem ? 'gm' : T extends VrDataItem | ArchivedVrDataItem ? 'vr' : never;
+export type InferedMapType<T extends ChoroplethDataItem> = T extends GmDataItem | ArchivedGmDataItem ? 'gm' : T extends VrDataItem | ArchivedVrDataItem ? 'vr' : never;
 
 export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDataItem
   ? GmCollection
+  : T extends ArchivedGmDataItem
+  ? ArchivedGmCollection
   : T extends VrDataItem
   ? VrCollection
   : T extends ArchivedVrDataItem
@@ -59,13 +62,16 @@ export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDa
 export type VrDataCollection = VrCollectionDisabilityCareArchived_20230126[] | VrCollectionElderlyAtHomeArchived_20230126[] | VrCollectionVulnerableNursingHome[];
 export type VrDataItem = VrDataCollection[number];
 
-export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionTestedOverall[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
+export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
 export type GmDataItem = GmDataCollection[number];
+
+export type ArchivedGmDataCollection = GmCollectionTestedOverall[];
+export type ArchivedGmDataItem = ArchivedGmDataCollection[number];
 
 export type ArchivedVrDataCollection = [];
 export type ArchivedVrDataItem = ArchivedVrDataCollection[number];
 
-export type ChoroplethDataItem = GmDataItem | VrDataItem | ArchivedVrDataItem;
+export type ChoroplethDataItem = GmDataItem | ArchivedGmDataItem | VrDataItem | ArchivedVrDataItem;
 
 export type CodedGeoProperties = {
   code: string;
