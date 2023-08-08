@@ -90,7 +90,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedArchivedNlData: data, choropleth, lastGenerated, content } = props;
+  const { pageText, selectedArchivedNlData: data, archivedChoropleth, lastGenerated, content } = props;
 
   const [nursingHomeConfirmedCasesTimeframe, setNursingHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
@@ -195,7 +195,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'nursing_home_infected_people_choropleth',
               }}
-              data={choropleth.vr.vulnerable_nursing_home_archived_20230711}
+              data={archivedChoropleth.vr.vulnerable_nursing_home_archived_20230711}
               dataConfig={{
                 metricName: 'vulnerable_nursing_home_archived_20230711',
                 metricProperty: 'infected_locations_percentage',

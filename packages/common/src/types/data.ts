@@ -383,7 +383,7 @@ export interface NlVaccineVaccinatedOrSupportValue {
   date_of_insertion_unix: number;
 }
 
-export type ArchivedVrCollectionId = 'ARCHIVED_VR_COLLECTION';
+export type ArchivedVrCollectionId = 'VR_COLLECTION';
 
 export interface ArchivedVrCollection {
   last_generated: string;
@@ -399,15 +399,6 @@ export interface VrCollectionVulnerableNursingHome {
   date_of_insertion_unix: number;
   date_unix: number;
   vrcode: string;
-}
-
-export type ArchivedVrCollectionId = 'VR_COLLECTION';
-
-export interface ArchivedVrCollection {
-  last_generated: string;
-  proto_name: ArchivedVrCollectionId;
-  name: ArchivedVrCollectionId;
-  code: ArchivedVrCollectionId;
 }
 
 export type GmCode = string;
