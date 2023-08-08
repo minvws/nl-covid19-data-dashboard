@@ -60,9 +60,9 @@ export type VrDataCollection = VrCollectionDisabilityCareArchived_20230126[] | V
 export type VrDataItem = VrDataCollection[number];
 
 export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
-export type ArchivedGmDataCollection = GmCollectionTestedOverall[];
-
 export type GmDataItem = GmDataCollection[number];
+
+export type ArchivedGmDataCollection = GmCollectionTestedOverall[];
 export type ArchivedGmDataItem = ArchivedGmDataCollection[number];
 
 export type ChoroplethDataItem = GmDataItem | ArchivedGmDataItem | VrDataItem;

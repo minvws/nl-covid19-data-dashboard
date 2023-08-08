@@ -84,7 +84,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const reverseRouter = useReverseRouter();
   const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const lastValue = archived_data.tested_overall_archived_20230331.last_value;
+  const archivedLastValue = archived_data.tested_overall_archived_20230331.last_value;
   const populationCount = data.static_values.population_count;
   const metadata = {
     ...commonTexts.gemeente_index.metadata,
@@ -111,7 +111,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             description={textGm.pagina_toelichting}
             metadata={{
               datumsText: textGm.datums,
-              dateOrRange: lastValue.date_unix,
+              dateOrRange: archivedLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
             }}
@@ -129,11 +129,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             <KpiTile
               title={textGm.infected_kpi.title}
               metadata={{
-                date: lastValue.date_unix,
+                date: archivedLastValue.date_unix,
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue absolute={lastValue.infected_moving_average_rounded} isAmount />
+              <KpiValue absolute={archivedLastValue.infected_moving_average_rounded} isAmount />
               <Text>
                 {replaceComponentsInText(commonTexts.gemeente_index.population_count, {
                   municipalityName,
@@ -145,8 +145,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               <Box spacing={3}>
                 <Markdown
                   content={replaceVariablesInText(textGm.infected_kpi.last_value_text, {
-                    infected: formatNumber(lastValue.infected),
-                    dateTo: formatDateFromSeconds(lastValue.date_unix, 'weekday-long'),
+                    infected: formatNumber(archivedLastValue.infected),
+                    dateTo: formatDateFromSeconds(archivedLastValue.date_unix, 'weekday-long'),
                   })}
                 />
                 {textGm.infected_kpi.link_cta && <Markdown content={textGm.infected_kpi.link_cta} />}
@@ -156,18 +156,18 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             <KpiTile
               title={textGm.barscale_titel}
               metadata={{
-                date: lastValue.date_unix,
+                date: archivedLastValue.date_unix,
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue absolute={lastValue.infected_per_100k_moving_average} isAmount />
+              <KpiValue absolute={archivedLastValue.infected_per_100k_moving_average} isAmount />
               <Text>{textGm.barscale_toelichting}</Text>
 
               <CollapsibleContent label={commonTexts.gemeente_index.population_count_explanation_title}>
                 <Text>
                   {replaceComponentsInText(textGm.population_count_explanation, {
                     municipalityName: <strong>{municipalityName}</strong>,
-                    value: <strong>{formatNumber(lastValue.infected_per_100k_moving_average)}</strong>,
+                    value: <strong>{formatNumber(archivedLastValue.infected_per_100k_moving_average)}</strong>,
                   })}
                 </Text>
               </CollapsibleContent>
@@ -221,7 +221,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   <Markdown content={textGm.map_toelichting} />
                   <Markdown
                     content={replaceVariablesInText(textGm.map_last_value_text, {
-                      infected_per_100k: formatNumber(lastValue.infected_per_100k),
+                      infected_per_100k: formatNumber(archivedLastValue.infected_per_100k),
                       municipality: municipalityName,
                     })}
                   />
@@ -232,7 +232,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 title: textShared.chloropleth_legenda_titel,
               }}
               metadata={{
-                date: lastValue.date_unix,
+                date: archivedLastValue.date_unix,
                 source: textGm.bronnen.rivm,
               }}
             >

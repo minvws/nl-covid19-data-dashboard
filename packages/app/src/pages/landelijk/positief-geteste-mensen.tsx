@@ -104,8 +104,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
     },
   ];
 
-  const dataOverallLastValue = data.tested_overall_archived_20230331.last_value;
-  const dataGgdLastValue = data.tested_ggd_archived_20230321.last_value;
+  const archivedDataOverallLastValue = data.tested_overall_archived_20230331.last_value;
+  const archivedDataGgdLastValue = data.tested_ggd_archived_20230321.last_value;
 
   const metadata = {
     ...metadataTexts,
@@ -127,7 +127,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,
-              dateOrRange: dataOverallLastValue.date_unix,
+              dateOrRange: archivedDataOverallLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
             }}
@@ -142,9 +142,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
           <ChartTile
             title={textNl.linechart_titel}
             description={replaceVariablesInText(textNl.linechart_toelichting, {
-              date: formatDateFromSeconds(dataOverallLastValue.date_unix, 'weekday-long'),
-              administered_total: formatNumber(dataOverallLastValue.infected),
-              infected_total: formatNumber(dataOverallLastValue.infected_moving_average_rounded),
+              date: formatDateFromSeconds(archivedDataOverallLastValue.date_unix, 'weekday-long'),
+              administered_total: formatNumber(archivedDataOverallLastValue.infected),
+              infected_total: formatNumber(archivedDataOverallLastValue.infected_moving_average_rounded),
             })}
             metadata={{
               source: textNl.bronnen.rivm,
@@ -191,9 +191,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 timeframeOptions={TimeframeOptionsList}
                 title={textNl.ggd.linechart_percentage_titel}
                 description={replaceVariablesInText(textNl.ggd.linechart_percentage_toelichting, {
-                  date: formatDateFromSeconds(dataGgdLastValue.date_unix, 'weekday-long'),
-                  tested_total: formatNumber(dataGgdLastValue.tested_total),
-                  infected_total: formatNumber(dataGgdLastValue.infected),
+                  date: formatDateFromSeconds(archivedDataGgdLastValue.date_unix, 'weekday-long'),
+                  tested_total: formatNumber(archivedDataGgdLastValue.tested_total),
+                  infected_total: formatNumber(archivedDataGgdLastValue.infected),
                 })}
                 metadata={{
                   date: getLastInsertionDateOfPage(data, ['tested_ggd']),
@@ -230,9 +230,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 timeframeOptions={TimeframeOptionsList}
                 title={textNl.ggd.linechart_totaltests_titel}
                 description={replaceVariablesInText(textNl.ggd.linechart_totaltests_toelichting, {
-                  date: formatDateFromSeconds(dataGgdLastValue.date_unix, 'weekday-long'),
-                  tested_total: formatNumber(dataGgdLastValue.tested_total),
-                  infected_total: formatNumber(dataGgdLastValue.infected),
+                  date: formatDateFromSeconds(archivedDataGgdLastValue.date_unix, 'weekday-long'),
+                  tested_total: formatNumber(archivedDataGgdLastValue.tested_total),
+                  infected_total: formatNumber(archivedDataGgdLastValue.infected),
                 })}
                 metadata={{
                   source: textNl.ggd.bronnen.rivm,
@@ -298,7 +298,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             <ChoroplethTile
               title={textNl.map_titel}
               metadata={{
-                date: dataOverallLastValue.date_unix,
+                date: archivedDataOverallLastValue.date_unix,
                 source: textNl.bronnen.rivm,
               }}
               description={
@@ -306,8 +306,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   <Markdown content={textNl.map_toelichting} />
                   <Box marginBottom={space[3]}>
                     {replaceComponentsInText(textNl.map_last_value_text, {
-                      infected_per_100k: <BoldText>{`${formatNumber(dataOverallLastValue.infected_per_100k)}`}</BoldText>,
-                      dateTo: formatDateFromSeconds(dataOverallLastValue.date_unix, 'weekday-long'),
+                      infected_per_100k: <BoldText>{`${formatNumber(archivedDataOverallLastValue.infected_per_100k)}`}</BoldText>,
+                      dateTo: formatDateFromSeconds(archivedDataOverallLastValue.date_unix, 'weekday-long'),
                     })}
                   </Box>
                 </>
