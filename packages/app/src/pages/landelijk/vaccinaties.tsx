@@ -35,7 +35,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery, getRichTextParts } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, getNlData, selectNlData, selectArchivedNlData } from '~/static-props/get-data';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, getNlData, selectArchivedNlData, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -50,17 +50,17 @@ const pageMetrics = [
   'vaccine_administered_total',
   'vaccine_administered_last_timeframe',
   'vaccine_coverage_per_age_group',
-  'vaccine_coverage',
-  'vaccine_delivery_per_supplier',
-  'vaccine_stock',
-  'vaccine_vaccinated_or_support',
+  'vaccine_coverage_archived_20220518',
+  'vaccine_delivery_per_supplier_archived_20211101',
+  'vaccine_stock_archived_20211024',
+  'vaccine_vaccinated_or_support_archived_20230411',
   'vaccine_coverage_per_age_group_estimated_fully_vaccinated',
   'vaccine_coverage_per_age_group_estimated_autumn_2022',
   'vaccine_campaigns',
   'vaccine_planned_archived_20220908',
   'booster_coverage_archived_20220904',
   'booster_shot_administered_archived_20220904',
-  'repeating_shot_administered',
+  'repeating_shot_administered_20220713',
 ];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
@@ -81,10 +81,6 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_total',
     'vaccine_administered_last_timeframe',
     'vaccine_coverage_per_age_group',
-    'vaccine_coverage',
-    'vaccine_delivery_per_supplier',
-    'vaccine_stock',
-    'vaccine_vaccinated_or_support',
     'vaccine_coverage_per_age_group_estimated_fully_vaccinated',
     'vaccine_coverage_per_age_group_estimated_autumn_2022',
     'vaccine_campaigns',
@@ -96,8 +92,13 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_campaigns_archived_20220908',
     'vaccine_planned_archived_20220908',
     'booster_coverage_archived_20220904',
+    'vaccine_coverage_per_age_group_estimated_archived_20220908',
     'booster_shot_administered_archived_20220904',
-    'vaccine_coverage_per_age_group_estimated_archived_20220908'
+    'repeating_shot_administered_20220713',
+    'vaccine_coverage_archived_20220518',
+    'vaccine_delivery_per_supplier_archived_20211101',
+    'vaccine_stock_archived_20211024',
+    'vaccine_vaccinated_or_support_archived_20230411'
   ),
   () => selectAdministrationData(getNlData().data.vaccine_administered),
   async (context: GetStaticPropsContext) => {
@@ -107,7 +108,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       return `{
         "parts": ${getPagePartsQuery('vaccinations_page')},
-        "elements": ${getElementsQuery('nl', ['vaccine_coverage', 'vaccine_administered'], context.locale)}
+        "elements": ${getElementsQuery('nl', ['vaccine_coverage_archived_20220518', 'vaccine_administered'], context.locale)}
       }`;
     })(context);
 
@@ -159,7 +160,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   assert(boosterCoverage18PlusArchivedValue, `[${VaccinationPage.name}] Missing value for booster_coverage 18+`);
   assert(boosterCoverage12PlusArchivedValue, `[${VaccinationPage.name}] Missing value for booster_coverage 12+`);
 
-  const repeatingShotAdministeredLastValue = currentData.repeating_shot_administered?.last_value;
+  const repeatingShotAdministeredLastValue = archivedData.repeating_shot_administered_20220713?.last_value;
 
   const hasActiveWarningTile = textNl.belangrijk_bericht && !isEmpty(textNl.belangrijk_bericht);
 
@@ -389,11 +390,11 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
               <VaccinationsOverTimeTile
                 text={textNl}
-                coverageData={currentData.vaccine_coverage}
+                coverageData={archivedData.vaccine_coverage_archived_20220518}
                 administrationData={administrationData}
                 vaccineAdministeredPlannedLastValue={currentData.vaccine_administered_planned.last_value}
                 timelineEvents={{
-                  coverage: getTimelineEvents(content.elements.timeSeries, 'vaccine_coverage'),
+                  coverage: getTimelineEvents(content.elements.timeSeries, 'vaccine_coverage_archived_20220518'),
                   deliveryAndAdministration: getTimelineEvents(content.elements.timeSeries, 'vaccine_administered'),
                 }}
               />
@@ -448,16 +449,19 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 values={archivedData.vaccine_coverage_per_age_group_archived_20220622.values}
               />
 
-              <VaccineDeliveryBarChart data={currentData.vaccine_delivery_per_supplier} text={textNl} />
+              <VaccineDeliveryBarChart data={archivedData.vaccine_delivery_per_supplier_archived_20211101} text={textNl} />
 
-              <VaccineStockPerSupplierChart values={currentData.vaccine_stock.values} text={textNl} />
+              <VaccineStockPerSupplierChart values={archivedData.vaccine_stock_archived_20211024.values} text={textNl} />
 
               <ChartTile
                 title={textNl.grafiek_draagvlak.titel}
                 description={textNl.grafiek_draagvlak.omschrijving}
                 metadata={{
                   datumsText: textNl.grafiek_draagvlak.metadata_tekst,
-                  date: [currentData.vaccine_vaccinated_or_support.last_value.date_start_unix, currentData.vaccine_vaccinated_or_support.last_value.date_end_unix],
+                  date: [
+                    archivedData.vaccine_vaccinated_or_support_archived_20230411.last_value.date_start_unix,
+                    archivedData.vaccine_vaccinated_or_support_archived_20230411.last_value.date_end_unix,
+                  ],
                 }}
               >
                 <TimeSeriesChart
@@ -465,7 +469,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                     key: 'vaccines_support_over_time_chart',
                   }}
                   tooltipTitle={textNl.grafiek_draagvlak.titel}
-                  values={currentData.vaccine_vaccinated_or_support.values}
+                  values={archivedData.vaccine_vaccinated_or_support_archived_20230411.values}
                   numGridLines={20}
                   tickValues={[0, 25, 50, 75, 100]}
                   dataOptions={{

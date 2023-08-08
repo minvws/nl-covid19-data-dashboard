@@ -59,7 +59,7 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   reproduction_archived_20230711: 'Reproductiegetal',
   vaccine_coverage_per_age_group: 'Vaccinatiegraad (per leeftijd)',
   vaccine_administered: 'Gezette prikken',
-  vaccine_coverage: 'Vaccinatiegraad',
+  vaccine_coverage_archived_20220518: 'Vaccinatiegraad',
   vaccine_coverage_per_age_group_estimated_fully_vaccinated: 'Vaccinatiegraad basisserie berekend (per leeftijd)',
   vaccine_coverage_per_age_group_estimated_autumn_2022: 'Vaccinatiegraad herfst 2022 booster berekend (per leeftijd)',
   vaccine_administered_total: 'Totaal gezette prikken',

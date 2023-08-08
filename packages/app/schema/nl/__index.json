@@ -3,19 +3,13 @@
   "type": "object",
   "title": "nl",
   "required": [
-    "repeating_shot_administered",
     "code",
-    "corona_melder_app_download",
-    "corona_melder_app_warning",
     "deceased_cbs",
     "difference",
     "named_difference",
-    "disability_care_archived_20230126",
-    "elderly_at_home_archived_20230126",
     "hospital_lcps",
     "hospital_nice",
     "hospital_nice_per_age_group",
-    "infectious_people",
     "intensive_care_lcps",
     "intensive_care_nice",
     "intensive_care_nice_per_age_group",
@@ -25,7 +19,6 @@
     "self_test_overall",
     "sewer",
     "vaccine_campaigns",
-    "vaccine_vaccinated_or_support",
     "vaccine_administered",
     "vaccine_administered_doctors",
     "vaccine_administered_ggd_ghor",
@@ -34,8 +27,6 @@
     "vaccine_administered_total",
     "vaccine_administered_planned",
     "vaccine_administered_last_timeframe",
-    "vaccine_stock",
-    "vaccine_delivery_per_supplier",
     "vaccine_coverage_per_age_group",
     "vaccine_coverage_per_age_group_estimated_autumn_2022",
     "vaccine_coverage_per_age_group_estimated_fully_vaccinated"
@@ -60,12 +51,6 @@
     "named_difference": {
       "$ref": "__named_difference.json"
     },
-    "repeating_shot_administered": {
-      "$ref": "repeating_shot_administered.json"
-    },
-    "infectious_people": {
-      "$ref": "infectious_people.json"
-    },
     "intensive_care_nice": {
       "$ref": "intensive_care_nice.json"
     },
@@ -89,21 +74,6 @@
     },
     "deceased_cbs": {
       "$ref": "deceased_cbs.json"
-    },
-    "vaccine_vaccinated_or_support": {
-      "$ref": "vaccine_vaccinated_or_support.json"
-    },
-    "corona_melder_app_download": {
-      "$ref": "corona_melder_app_download.json"
-    },
-    "corona_melder_app_warning": {
-      "$ref": "corona_melder_app_warning.json"
-    },
-    "vaccine_coverage": {
-      "$ref": "vaccine_coverage.json"
-    },
-    "vaccine_delivery_per_supplier": {
-      "$ref": "vaccine_delivery_per_supplier.json"
     },
     "vaccine_administered": {
       "$ref": "vaccine_administered.json"
@@ -140,9 +110,6 @@
     },
     "vaccine_coverage_per_age_group_estimated_fully_vaccinated": {
       "$ref": "vaccine_coverage_per_age_group_estimated_fully_vaccinated.json"
-    },
-    "vaccine_stock": {
-      "$ref": "vaccine_stock.json"
     },
     "variants": {
       "$ref": "variants.json"
