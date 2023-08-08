@@ -13,7 +13,8 @@
     "proto_name",
     "name",
     "vaccine_coverage_per_age_group_archived_20220622",
-    "vaccine_coverage_per_age_group_archived_20220908"
+    "vaccine_coverage_per_age_group_archived_20220908",
+    "tested_overall_archived_20230331"
   ],
   "properties": {
     "difference": {
@@ -45,6 +46,9 @@
     },
     "sewer_archived_20230623": {
       "$ref": "sewer.json"
+    },
+    "tested_overall_archived_20230331": {
+      "$ref": "positive_tests/tested_overall.json"
     }
   },
   "$defs": {

@@ -10,7 +10,8 @@
     "deceased_cbs",
     "difference",
     "named_difference",
-    "g_number",
+    "disability_care_archived_20230126",
+    "elderly_at_home_archived_20230126",
     "hospital_lcps",
     "hospital_nice",
     "hospital_nice_per_age_group",
@@ -23,9 +24,6 @@
     "proto_name",
     "self_test_overall",
     "sewer",
-    "tested_ggd",
-    "tested_overall",
-    "tested_per_age_group",
     "vaccine_campaigns",
     "vaccine_vaccinated_or_support",
     "vaccine_administered",
@@ -65,9 +63,6 @@
     "repeating_shot_administered": {
       "$ref": "repeating_shot_administered.json"
     },
-    "g_number": {
-      "$ref": "g_number.json"
-    },
     "infectious_people": {
       "$ref": "infectious_people.json"
     },
@@ -76,12 +71,6 @@
     },
     "intensive_care_nice_per_age_group": {
       "$ref": "intensive_care_nice_per_age_group.json"
-    },
-    "tested_overall": {
-      "$ref": "tested_overall.json"
-    },
-    "tested_per_age_group": {
-      "$ref": "tested_per_age_group.json"
     },
     "sewer": {
       "$ref": "sewer.json"
@@ -97,9 +86,6 @@
     },
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
-    },
-    "tested_ggd": {
-      "$ref": "tested_ggd.json"
     },
     "deceased_cbs": {
       "$ref": "deceased_cbs.json"

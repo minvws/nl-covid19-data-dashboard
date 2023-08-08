@@ -1,11 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export function loadJsonFromDataFile<T>(
-  filename: string,
-  jsonFolder = 'json',
-  dontFailOnNotFound = false
-): T {
+export function loadJsonFromDataFile<T>(filename: string, jsonFolder = 'json', dontFailOnNotFound = false): T {
   const filePath = path.join(process.cwd(), 'public', jsonFolder, filename);
   try {
     const fileContents = fs.readFileSync(filePath, 'utf8');

@@ -17,7 +17,7 @@ export const titleByMetricName: Partial<Record<MetricName, string>> = {
   disability_care_archived_20230126: 'Gehandicaptenzorg',
   doctor_archived_20210903: 'Huisartsen',
   elderly_at_home_archived_20230126: '70-plussers',
-  g_number: 'Ontwikkeling aantal positieve testen',
+  g_number_archived_20220307: 'Ontwikkeling aantal positieve testen',
   hospital_lcps: 'Ziekenhuisopnames (LCPS)',
   hospital_nice_per_age_group: 'Ziekenhuisopnames (per leeftijd) (NICE)',
   hospital_nice: 'Ziekenhuisopnames (NICE)',
@@ -33,9 +33,9 @@ export const titleByMetricName: Partial<Record<MetricName, string>> = {
   sewer_per_installation: 'Virusdeeltjes in rioolwater',
   sewer: 'Rioolwater metingen',
   static_values: 'Statische waarden',
-  tested_ggd: "Positief geteste mensen (GGD'en)",
-  tested_overall: 'Positief geteste mensen',
-  tested_per_age_group: 'Positief getest (per leeftijd)',
+  tested_ggd_archived_20230321: "Positief geteste mensen (GGD'en)",
+  tested_overall_archived_20230331: 'Positief geteste mensen',
+  tested_per_age_group_archived_20230331: 'Positief getest (per leeftijd)',
   vaccine_administered_doctors: 'Gezette prikken (huisartsen)',
   vaccine_administered_ggd_ghor: "Gezette prikken (GGD'en)",
   vaccine_administered_ggd: "Gezette prikken (GGD'en)",
@@ -102,4 +102,4 @@ export const DAYS_OF_THE_WEEK_LIST = [
   },
 ];
 
-export const RELATIVE_SCHEMA_PATH = '../../../app/schema';
+export const RELATIVE_SCHEMA_PATH = '../../../../app/schema';
