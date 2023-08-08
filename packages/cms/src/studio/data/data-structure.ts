@@ -114,6 +114,7 @@ export const dataStructure = {
     ],
     vaccine_vaccinated_or_support_archived_20230411: ['percentage_average', 'percentage_70_plus', 'percentage_55_69', 'percentage_40_54', 'percentage_25_39', 'percentage_16_24'],
   },
+  archived_vr_collection: { vulnerable_nursing_home_archived_20230711: ['newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage'] },
   gm: {
     deceased_rivm_archived_20221231: ['covid_daily', 'covid_daily_moving_average', 'covid_total'],
     hospital_nice: [
@@ -157,7 +158,6 @@ export const dataStructure = {
     booster_coverage_archived_20220904: ['age_group', 'percentage', 'percentage_label'],
   },
   gm_collection: {
-    hospital_nice: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
     hospital_nice_choropleth: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
     tested_overall: ['infected_per_100k', 'infected'],
     sewer: ['average', 'data_is_outdated'],
@@ -317,6 +317,5 @@ export const dataStructure = {
   vr_collection: {
     disability_care_archived_20230126: ['newly_infected_people', 'newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage', 'deceased_daily'],
     elderly_at_home_archived_20230126: ['positive_tested_daily', 'positive_tested_daily_per_100k', 'deceased_daily'],
-    vulnerable_nursing_home: ['newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage'],
   },
 };
