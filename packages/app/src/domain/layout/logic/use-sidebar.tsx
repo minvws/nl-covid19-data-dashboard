@@ -28,7 +28,7 @@ const mapKeysToReverseRouter = {
   // Still the nursing home care name is used because of legacy naming inside of sanity's lokalize texts.
   nursing_home_care: 'kwetsbareGroepen',
   patients: 'patientenInBeeld',
-  positive_tests: 'positiefTesten',
+  positive_tests: 'positieveTesten',
   reproduction_number: 'reproductiegetal',
   sewage_measurement: 'rioolwater',
   tests: 'testen',

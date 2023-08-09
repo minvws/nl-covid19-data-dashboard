@@ -17,7 +17,7 @@ export function getReverseRouter(isMobile: boolean) {
     nl: {
       index: () => (isMobile ? '/landelijk' : reverseRouter.nl.rioolwater()),
       vaccinaties: () => '/landelijk/vaccinaties',
-      positiefTesten: () => '/landelijk/positief-testen',
+      positieveTesten: () => '/landelijk/positieve-testen',
       testen: () => '/landelijk/testen',
       besmettelijkeMensen: () => '/landelijk/besmettelijke-mensen',
       reproductiegetal: () => '/landelijk/reproductiegetal',
@@ -39,7 +39,7 @@ export function getReverseRouter(isMobile: boolean) {
 
     gm: {
       index: (code?: string) => (code ? (isMobile ? `/gemeente/${code}` : reverseRouter.gm.rioolwater(code)) : '/gemeente'),
-      positiefTesten: (code: string) => `/gemeente/${code}/positief-testen`,
+      positieveTesten: (code: string) => `/gemeente/${code}/positieve-testen`,
       sterfte: (code: string) => `/gemeente/${code}/sterfte`,
       ziekenhuisopnames: (code: string) => `/gemeente/${code}/ziekenhuis-opnames`,
       rioolwater: (code: string) => `/gemeente/${code}/rioolwater`,

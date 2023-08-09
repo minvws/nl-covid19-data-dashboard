@@ -332,7 +332,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   },
                 }}
                 dataOptions={{
-                  getLink: reverseRouter.gm.positiefTesten,
+                  getLink: reverseRouter.gm.positieveTesten,
                 }}
               />
             </ChoroplethTile>
