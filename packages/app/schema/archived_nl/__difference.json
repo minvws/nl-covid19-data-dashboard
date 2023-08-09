@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "archived_nl_difference",
+  "title": "nl_difference",
   "type": "object",
   "properties": {
     "deceased_rivm__covid_daily_archived_20221231": {

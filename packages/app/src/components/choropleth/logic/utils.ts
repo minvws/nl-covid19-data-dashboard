@@ -1,13 +1,7 @@
 import type { ParsedFeature } from '@visx/geo/lib/projections/Projection';
 import type { Feature, MultiPolygon, Polygon } from 'geojson';
 import { isPresent } from 'ts-is-present';
-import type {
-  CodedGeoProperties,
-  CodeProp,
-  GmDataItem,
-  ParsedFeatureWithPath,
-  VrDataItem,
-} from './types';
+import type { CodedGeoProperties, CodeProp, GmDataItem, ParsedFeatureWithPath, ArchivedVrDataItem } from './types';
 
 export function isCodedValueType(codeType: CodeProp) {
   switch (codeType) {
@@ -22,13 +16,11 @@ export function isGmData(item: any): item is GmDataItem {
   return 'gmcode' in item;
 }
 
-export function isVrData(item: any): item is VrDataItem {
+export function isVrData(item: any): item is ArchivedVrDataItem {
   return 'vrcode' in item;
 }
 
-export function featureHasPath(
-  value: ParsedFeature<Feature<MultiPolygon | Polygon, CodedGeoProperties>>
-): value is ParsedFeatureWithPath {
+export function featureHasPath(value: ParsedFeature<Feature<MultiPolygon | Polygon, CodedGeoProperties>>): value is ParsedFeatureWithPath {
   return isPresent(value.path);
 }
 
@@ -40,9 +32,6 @@ export function featureHasPath(
 export function truncatePathCoordinates(feature: ParsedFeatureWithPath) {
   return {
     ...feature,
-    path: feature.path.replace(
-      /\d+\.\d+/g,
-      (x) => Math.round(parseFloat(x)) + ''
-    ),
+    path: feature.path.replace(/\d+\.\d+/g, (x) => Math.round(parseFloat(x)) + ''),
   };
 }
