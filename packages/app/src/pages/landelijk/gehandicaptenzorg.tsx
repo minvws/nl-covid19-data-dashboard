@@ -21,7 +21,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
+import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
@@ -45,7 +45,7 @@ export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectArchivedNlData('disability_care_archived_20230126'),
-  createGetChoroplethData({
+  createGetArchivedChoroplethData({
     vr: ({ disability_care_archived_20230126 }) => ({ disability_care_archived_20230126 }),
   }),
   async (context: GetStaticPropsContext) => {
@@ -72,7 +72,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedArchivedNlData: data, choropleth, lastGenerated, content } = props;
+  const { pageText, selectedArchivedNlData: data, archivedChoropleth, lastGenerated, content } = props;
 
   const [disabilityCareConfirmedCasesTimeframe, setDisabilityCareConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [disabilityCareInfectedLocationsTimeframe, setDisabilityCareInfectedLocationsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -193,7 +193,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'disability_care_infected_people_choropleth',
               }}
-              data={choropleth.vr.disability_care_archived_20230126}
+              data={archivedChoropleth.vr.disability_care_archived_20230126}
               dataConfig={{
                 metricName: 'disability_care_archived_20230126',
                 metricProperty: 'infected_locations_percentage',

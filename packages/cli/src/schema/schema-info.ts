@@ -25,7 +25,6 @@ export function getSchemaInfo(jsonDirectory: string = defaultJsonDirectory): Sch
       files: ['NL.json'],
       basePath: jsonDirectory,
     },
-    vr_collection: { files: ['VR_COLLECTION.json'], basePath: jsonDirectory },
     gm: {
       files: getFileNames(fileList, /^GM[0-9]+.json$/),
       basePath: jsonDirectory,
@@ -46,6 +45,10 @@ export function getSchemaInfo(jsonDirectory: string = defaultJsonDirectory): Sch
     },
     archived_gm_collection: {
       files: ['GM_COLLECTION.json'],
+      basePath: path.join(jsonDirectory, 'archived'),
+    },
+    archived_vr_collection: {
+      files: ['VR_COLLECTION.json'],
       basePath: path.join(jsonDirectory, 'archived'),
     },
   };

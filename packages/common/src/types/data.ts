@@ -1209,32 +1209,3 @@ export interface NlSelfTestOverallValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-
-export type VrCollectionId = 'VR_COLLECTION';
-
-export interface VrCollection {
-  last_generated: string;
-  proto_name: VrCollectionId;
-  name: VrCollectionId;
-  code: VrCollectionId;
-  disability_care_archived_20230126: VrCollectionDisabilityCareArchived_20230126[];
-  elderly_at_home_archived_20230126: VrCollectionElderlyAtHomeArchived_20230126[];
-}
-export interface VrCollectionDisabilityCareArchived_20230126 {
-  newly_infected_people: number;
-  newly_infected_locations: number;
-  infected_locations_total: number;
-  infected_locations_percentage: number;
-  deceased_daily: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-  vrcode: string;
-}
-export interface VrCollectionElderlyAtHomeArchived_20230126 {
-  positive_tested_daily: number;
-  positive_tested_daily_per_100k: number;
-  deceased_daily: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-  vrcode: string;
-}
