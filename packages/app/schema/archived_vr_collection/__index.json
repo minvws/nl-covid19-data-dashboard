@@ -8,7 +8,9 @@
     "proto_name",
     "name",
     "code",
-    "vulnerable_nursing_home_archived_20230711"
+    "vulnerable_nursing_home_archived_20230711",
+    "elderly_at_home_archived_20230126",
+    "disability_care_archived_20230126"
   ],
   "properties": {
     "last_generated": {
@@ -29,6 +31,22 @@
       "maxItems": 25,
       "items": {
         "$ref": "vulnerable_nursing_home.json"
+      }
+    },
+    "disability_care_archived_20230126": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "disability_care.json"
+      }
+    },
+    "elderly_at_home_archived_20230126": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "elderly_at_home.json"
       }
     }
   },

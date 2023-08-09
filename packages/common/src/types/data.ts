@@ -7,7 +7,7 @@
 export type ArchivedGmCode = string;
 
 export interface ArchivedGm {
-  difference: ArchivedGmDifference;
+  difference: GmDifference;
   deceased_rivm_archived_20221231: GmDeceasedRivm;
   last_generated: string;
   proto_name: ArchivedGmCode;
@@ -19,7 +19,7 @@ export interface ArchivedGm {
   sewer_archived_20230623: GmSewer;
   tested_overall_archived_20230331: GmTestedOverall;
 }
-export interface ArchivedGmDifference {
+export interface GmDifference {
   tested_overall__infected_moving_average_archived_20230331: DifferenceDecimal;
   tested_overall__infected_per_100k_moving_average_archived_20230331: DifferenceDecimal;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
@@ -147,7 +147,7 @@ export interface ArchivedNl {
   proto_name: ArchivedNlId;
   name: ArchivedNlId;
   code: ArchivedNlId;
-  difference: ArchivedNlDifference;
+  difference: NlDifference;
   behavior_archived_20230411: NlBehavior;
   behavior_annotations_archived_20230412: NlBehaviorAnnotations;
   behavior_per_age_group_archived_20230411: NlBehaviorPerAgeGroup;
@@ -181,7 +181,7 @@ export interface ArchivedNl {
   corona_melder_app_download_archived_20220421: NlCoronaMelderAppDownload;
   infectious_people_archived_20210709: NlInfectiousPeople;
 }
-export interface ArchivedNlDifference {
+export interface NlDifference {
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
   nursing_home__deceased_daily_archived_20230126: DifferenceInteger;
   nursing_home__newly_infected_people_archived_20230126: DifferenceInteger;
@@ -698,6 +698,8 @@ export interface ArchivedVrCollection {
   name: ArchivedVrCollectionId;
   code: ArchivedVrCollectionId;
   vulnerable_nursing_home_archived_20230711: VrCollectionVulnerableNursingHome[];
+  disability_care_archived_20230126: VrCollectionDisabilityCare[];
+  elderly_at_home_archived_20230126: VrCollectionElderlyAtHome[];
 }
 export interface VrCollectionVulnerableNursingHome {
   newly_infected_locations: number;
@@ -705,6 +707,24 @@ export interface VrCollectionVulnerableNursingHome {
   infected_locations_percentage: number;
   date_of_insertion_unix: number;
   date_unix: number;
+  vrcode: string;
+}
+export interface VrCollectionDisabilityCare {
+  newly_infected_people: number;
+  newly_infected_locations: number;
+  infected_locations_total: number;
+  infected_locations_percentage: number;
+  deceased_daily: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+}
+export interface VrCollectionElderlyAtHome {
+  positive_tested_daily: number;
+  positive_tested_daily_per_100k: number;
+  deceased_daily: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
   vrcode: string;
 }
 
@@ -1188,33 +1208,4 @@ export interface NlSelfTestOverallValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
-}
-
-export type VrCollectionId = 'VR_COLLECTION';
-
-export interface VrCollection {
-  last_generated: string;
-  proto_name: VrCollectionId;
-  name: VrCollectionId;
-  code: VrCollectionId;
-  disability_care_archived_20230126: VrCollectionDisabilityCareArchived_20230126[];
-  elderly_at_home_archived_20230126: VrCollectionElderlyAtHomeArchived_20230126[];
-}
-export interface VrCollectionDisabilityCareArchived_20230126 {
-  newly_infected_people: number;
-  newly_infected_locations: number;
-  infected_locations_total: number;
-  infected_locations_percentage: number;
-  deceased_daily: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-  vrcode: string;
-}
-export interface VrCollectionElderlyAtHomeArchived_20230126 {
-  positive_tested_daily: number;
-  positive_tested_daily_per_100k: number;
-  deceased_daily: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-  vrcode: string;
 }

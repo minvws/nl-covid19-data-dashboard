@@ -1,16 +1,4 @@
-import {
-  ArchivedGm,
-  ArchivedGmCollection,
-  ArchivedNl,
-  ArchivedVrCollection,
-  assert,
-  Gm,
-  GmCollection,
-  gmData,
-  Nl,
-  sortTimeSeriesInDataInPlace,
-  VrCollection,
-} from '@corona-dashboard/common';
+import { ArchivedGm, ArchivedGmCollection, ArchivedNl, ArchivedVrCollection, assert, Gm, GmCollection, gmData, Nl, sortTimeSeriesInDataInPlace } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import { get } from 'lodash';
 import set from 'lodash/set';
@@ -56,12 +44,11 @@ type DataShape<T extends string, D extends Nl | Gm | ArchivedNl | ArchivedGm> = 
 
 const json = {
   nl: initializeFeatureFlaggedData<Nl>(loadJsonFromDataFile<Nl>('NL.json'), 'nl'),
-  vrCollection: initializeFeatureFlaggedData<VrCollection>(loadJsonFromDataFile<VrCollection>('VR_COLLECTION.json'), 'vr_collection'),
   gmCollection: initializeFeatureFlaggedData<GmCollection>(loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'), 'gm_collection'),
   archived: {
     nl: initializeFeatureFlaggedData<ArchivedNl>(loadJsonFromDataFile<ArchivedNl>('NL.json', 'json/archived'), 'nl'),
-    vrCollection: initializeFeatureFlaggedData<ArchivedVrCollection>(loadJsonFromDataFile<ArchivedVrCollection>('VR_COLLECTION.json', 'json/archived'), 'vr_collection'),
-    gmCollection: initializeFeatureFlaggedData<ArchivedGmCollection>(loadJsonFromDataFile<ArchivedGmCollection>('GM_COLLECTION.json', 'json/archived'), 'gm_collection'),
+    vrCollection: initializeFeatureFlaggedData<ArchivedVrCollection>(loadJsonFromDataFile<ArchivedVrCollection>('VR_COLLECTION.json', 'json/archived'), 'archived_vr_collection'),
+    gmCollection: initializeFeatureFlaggedData<ArchivedGmCollection>(loadJsonFromDataFile<ArchivedGmCollection>('GM_COLLECTION.json', 'json/archived'), 'archived_gm_collection'),
   },
 };
 
@@ -285,18 +272,13 @@ function getArchivedGmData(context: GetStaticPropsContext) {
 
 const NOOP = () => null;
 
-export function createGetChoroplethData<T1, T2>(settings?: {
-  vr?: (collection: VrCollection, context: GetStaticPropsContext) => T1;
-  gm?: (collection: GmCollection, context: GetStaticPropsContext) => T2;
-}) {
+export function createGetChoroplethData<T1>(settings?: { gm?: (collection: GmCollection, context: GetStaticPropsContext) => T1 }) {
   return (context: GetStaticPropsContext) => {
-    const filterVr = settings?.vr ?? NOOP;
     const filterGm = settings?.gm ?? NOOP;
 
     return {
       choropleth: {
-        vr: filterVr(json.vrCollection, context) as T1,
-        gm: filterGm(json.gmCollection, context) as T2,
+        gm: filterGm(json.gmCollection, context) as T1,
       },
     };
   };
