@@ -196,7 +196,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   infected_total: formatNumber(archivedDataGgdLastValue.infected),
                 })}
                 metadata={{
-                  date: getLastInsertionDateOfPage(data, ['tested_ggd']),
+                  date: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230321']),
                   source: textNl.ggd.bronnen.rivm,
                 }}
                 onSelectTimeframe={setConfirmedCasesInfectedPercentageTimeframe}
