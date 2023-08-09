@@ -14,7 +14,7 @@ export function useDataSitemap(base: 'nl' | 'gm', code?: string, data?: Pick<Nl,
         links: [
           {
             text: commonTexts.sidebar.metrics.positive_tests.title,
-            href: reverseRouter.gm.positiefTesten(code),
+            href: reverseRouter.gm.positieveTesten(code),
           },
           {
             text: commonTexts.sidebar.metrics.mortality.title,
@@ -58,7 +58,7 @@ export function useDataSitemap(base: 'nl' | 'gm', code?: string, data?: Pick<Nl,
       links: [
         {
           text: commonTexts.sidebar.metrics.positive_tests.title,
-          href: reverseRouter.nl.positiefTesten(),
+          href: reverseRouter.nl.positieveTesten(),
         },
         {
           text: commonTexts.sidebar.metrics.reproduction_number.title,
