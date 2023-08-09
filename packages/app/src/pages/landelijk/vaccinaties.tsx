@@ -311,11 +311,13 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           )}
 
           <Divider />
+
           <PageInformationBlock
             title={textNl.section_archived.title}
             description={textNl.section_archived.description}
             isArchivedHidden={hasHideArchivedCharts}
             onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
+            headingLevel={3}
           />
           {hasHideArchivedCharts && (
             <>
