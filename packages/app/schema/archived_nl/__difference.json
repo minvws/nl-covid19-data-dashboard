@@ -3,6 +3,9 @@
   "title": "archived_nl_difference",
   "type": "object",
   "properties": {
+    "deceased_rivm__covid_daily_archived_20221231": {
+      "$ref": "#/definitions/diff_integer"
+    },
     "nursing_home__deceased_daily_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
@@ -32,6 +35,7 @@
     }
   },
   "required": [
+    "deceased_rivm__covid_daily_archived_20221231",
     "nursing_home__deceased_daily_archived_20230126",
     "nursing_home__newly_infected_people_archived_20230126",
     "reproduction__index_average_archived_20230711",

@@ -9,15 +9,11 @@
     "code",
     "difference",
     "static_values",
-    "booster_coverage_archived_20220904",
-    "deceased_rivm_archived_20221231",
     "hospital_nice",
     "sewer_installation_measurement",
     "sewer_per_installation",
     "sewer",
     "vaccine_coverage_per_age_group",
-    "vaccine_coverage_per_age_group_archived",
-    "vaccine_coverage_per_age_group_archived_20220908",
     "last_generated"
   ],
   "properties": {
@@ -36,9 +32,6 @@
     "static_values": {
       "$ref": "__static_values.json"
     },
-    "deceased_rivm_archived_20221231": {
-      "$ref": "deceased_rivm_archived_20221231.json"
-    },
     "difference": {
       "$ref": "__difference.json"
     },
@@ -56,15 +49,6 @@
     },
     "vaccine_coverage_per_age_group": {
       "$ref": "vaccine_coverage_per_age_group.json"
-    },
-    "vaccine_coverage_per_age_group_archived": {
-      "$ref": "vaccine_coverage_per_age_group_archived.json"
-    },
-    "vaccine_coverage_per_age_group_archived_20220908": {
-      "$ref": "vaccine_coverage_per_age_group_archived_20220908.json"
-    },
-    "booster_coverage_archived_20220904": {
-      "$ref": "booster_coverage_archived_20220904.json"
     }
   },
   "$defs": {

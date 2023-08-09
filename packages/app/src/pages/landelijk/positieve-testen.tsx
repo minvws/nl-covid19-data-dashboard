@@ -36,7 +36,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-const pageMetrics = ['g_number_archived_20220307', 'tested_ggd_archived_20230321', 'tested_overall_archived_20230331', 'tested_per_age_group_archived_20230331'];
+const pageMetrics = ['g_number_archived_20220607', 'tested_ggd_archived_20230321', 'tested_overall_archived_20230331', 'tested_per_age_group_archived_20230331'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -49,7 +49,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectArchivedNlData('g_number_archived_20220307', 'tested_ggd_archived_20230321', 'tested_overall_archived_20230331', 'tested_per_age_group_archived_20230331'),
+  selectArchivedNlData('g_number_archived_20220607', 'tested_ggd_archived_20230321', 'tested_overall_archived_20230331', 'tested_per_age_group_archived_20230331'),
   createGetArchivedChoroplethData({
     gm: ({ tested_overall_archived_20230331 }) => ({ tested_overall_archived_20230331 }),
   }),
@@ -339,7 +339,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
           </InView>
 
           <InView rootMargin="400px">
-            <GNumberBarChartTile data={data.g_number_archived_20220307} />
+            <GNumberBarChartTile data={data.g_number_archived_20220607} />
           </InView>
 
           {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}

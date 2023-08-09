@@ -26,9 +26,6 @@
     },
     "vulnerable_hospital_admissions": {
       "$ref": "#/definitions/diff_integer"
-    },
-    "deceased_rivm__covid_daily_archived_20221231": {
-      "$ref": "#/definitions/diff_integer"
     }
   },
   "required": [
@@ -37,8 +34,7 @@
     "infectious_people__estimate",
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
     "intensive_care_lcps__beds_occupied_covid",
-    "sewer__average",
-    "deceased_rivm__covid_daily_archived_20221231"
+    "sewer__average"
   ],
   "additionalProperties": false,
   "definitions": {

@@ -76,7 +76,7 @@ export const dataStructure = {
     corona_melder_app_warning_archived_20220421: ['count'],
     corona_melder_app_download_archived_20220421: ['count'],
     doctor_archived_20210903: ['covid_symptoms_per_100k', 'covid_symptoms'],
-    g_number_archived_20220307: ['g_number'],
+    g_number_archived_20220607: ['g_number'],
     nursing_home_archived_20230126: [
       'newly_infected_people',
       'newly_infected_people_moving_average',

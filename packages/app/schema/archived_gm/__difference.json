@@ -2,12 +2,20 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "archived_gm_difference",
   "type": "object",
+  "required": [
+    "tested_overall__infected_moving_average_archived_20230331",
+    "tested_overall__infected_per_100k_moving_average_archived_20230331",
+    "deceased_rivm__covid_daily_archived_20221231"
+  ],
   "properties": {
     "tested_overall__infected_moving_average_archived_20230331": {
       "$ref": "#/definitions/diff_decimal"
     },
     "tested_overall__infected_per_100k_moving_average_archived_20230331": {
       "$ref": "#/definitions/diff_decimal"
+    },
+    "deceased_rivm__covid_daily_archived_20221231": {
+      "$ref": "#/definitions/diff_integer"
     }
   },
   "additionalProperties": false,

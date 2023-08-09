@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_coverage_per_age_group_estimated_archived_20220908",
+      "title": "nl_vaccine_coverage_per_age_group_estimated",
       "type": "object",
       "required": [
         "age_18_plus_fully_vaccinated",
