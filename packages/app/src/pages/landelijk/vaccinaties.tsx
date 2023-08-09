@@ -319,6 +319,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
             headingLevel={3}
           />
+
           {hasHideArchivedCharts && (
             <>
               <BoosterShotCoveragePerAgeGroup

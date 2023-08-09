@@ -226,6 +226,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             description={textNl.section_archived.description}
             isArchivedHidden={hasHideArchivedCharts}
             onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
+            headingLevel={3}
           />
           {hasHideArchivedCharts && (
             <>
