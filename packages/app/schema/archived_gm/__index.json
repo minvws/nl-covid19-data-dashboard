@@ -4,13 +4,25 @@
   "title": "archived_gm",
   "additionalProperties": false,
   "required": [
+    "booster_coverage_archived_20220904",
+    "code",
+    "sewer_archived_20230623",
+    "difference",
+    "deceased_rivm_archived_20221231",
     "last_generated",
     "proto_name",
     "name",
-    "code",
-    "sewer_archived_20230623"
+    "vaccine_coverage_per_age_group_archived_20220622",
+    "vaccine_coverage_per_age_group_archived_20220908",
+    "tested_overall_archived_20230331"
   ],
   "properties": {
+    "difference": {
+      "$ref": "__difference.json"
+    },
+    "deceased_rivm_archived_20221231": {
+      "$ref": "deceased_rivm.json"
+    },
     "last_generated": {
       "type": "string"
     },
@@ -23,8 +35,20 @@
     "code": {
       "$ref": "#/$defs/archived_gm_code"
     },
+    "vaccine_coverage_per_age_group_archived_20220622": {
+      "$ref": "vaccine_coverage_per_age_group.json"
+    },
+    "vaccine_coverage_per_age_group_archived_20220908": {
+      "$ref": "vaccine_coverage_per_age_group_with_booster_shot.json"
+    },
+    "booster_coverage_archived_20220904": {
+      "$ref": "booster_coverage.json"
+    },
     "sewer_archived_20230623": {
       "$ref": "sewer.json"
+    },
+    "tested_overall_archived_20230331": {
+      "$ref": "positive_tests/tested_overall.json"
     }
   },
   "$defs": {

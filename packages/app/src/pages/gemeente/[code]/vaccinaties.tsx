@@ -19,7 +19,7 @@ import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { assert, replaceVariablesInText, useFormatLokalizePercentage, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -41,13 +41,8 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData(
-    'code',
-    'vaccine_coverage_per_age_group',
-    'vaccine_coverage_per_age_group_archived',
-    'vaccine_coverage_per_age_group_archived_20220908',
-    'booster_coverage_archived_20220904'
-  ),
+  selectGmData('code', 'vaccine_coverage_per_age_group'),
+  selectArchivedGmData('vaccine_coverage_per_age_group_archived_20220622', 'vaccine_coverage_per_age_group_archived_20220908', 'booster_coverage_archived_20220904'),
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }, ctx) => {
       if (!isDefined(vaccine_coverage_per_age_group)) {
@@ -79,7 +74,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, choropleth, municipalityName, selectedGmData: data, content, lastGenerated } = props;
+  const { pageText, choropleth, municipalityName, selectedGmData: currentData, selectedArchivedGmData: archivedData, content, lastGenerated } = props;
   const { commonTexts } = useIntl();
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
@@ -98,30 +93,30 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
   };
 
   const filteredVaccination = {
-    primarySeries: data.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'primary_series'),
-    autumn2022: data.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'autumn_2022'),
+    primarySeries: currentData.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'primary_series'),
+    autumn2022: currentData.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'autumn_2022'),
   };
 
   assert(filteredVaccination.primarySeries, `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the primary series`);
   assert(filteredVaccination.autumn2022, `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the autumn 2022 series`);
 
   const boosterCoverage18PlusArchivedValue =
-    data.booster_coverage_archived_20220904?.values?.find((v) => v.age_group === '18+') || emptyCoverageData.booster_coverage_archived_20220904.values[1];
+    archivedData.booster_coverage_archived_20220904?.values?.find((v) => v.age_group === '18+') || emptyCoverageData.booster_coverage_archived_20220904.values[1];
   const boosterCoverage12PlusArchivedValue =
-    data.booster_coverage_archived_20220904?.values?.find((v) => v.age_group === '12+') || emptyCoverageData.booster_coverage_archived_20220904.values[0];
+    archivedData.booster_coverage_archived_20220904?.values?.find((v) => v.age_group === '12+') || emptyCoverageData.booster_coverage_archived_20220904.values[0];
 
   const filteredArchivedAgeGroup18Plus =
-    data.vaccine_coverage_per_age_group_archived_20220908.values.find((x) => x.age_group_range === '18+') ||
+    archivedData.vaccine_coverage_per_age_group_archived_20220908.values.find((x) => x.age_group_range === '18+') ||
     emptyCoverageData.vaccine_coverage_per_age_group_archived_20220908.values[0];
   const filteredArchivedAgeGroup12Plus =
-    data.vaccine_coverage_per_age_group_archived_20220908.values.find((x) => x.age_group_range === '12+') ||
+    archivedData.vaccine_coverage_per_age_group_archived_20220908.values.find((x) => x.age_group_range === '12+') ||
     emptyCoverageData.vaccine_coverage_per_age_group_archived_20220908.values[1];
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(currentData, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <GmLayout code={data.code} municipalityName={municipalityName}>
+      <GmLayout code={currentData.code} municipalityName={municipalityName}>
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.actions_to_take.title}
@@ -208,7 +203,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
           />
           <VaccineCoverageChoropleth
             data={choropleth.gm.vaccine_coverage_per_age_group}
-            dataOptions={{ getLink: reverseRouter.gm.vaccinaties, selectedCode: data.code, isPercentage: true }}
+            dataOptions={{ getLink: reverseRouter.gm.vaccinaties, selectedCode: currentData.code, isPercentage: true }}
             text={{
               title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.title, { municipalityName: municipalityName }),
               description: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.description, { municipalityName: municipalityName }),
@@ -267,10 +262,12 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
                 description={textGm.vaccination_coverage.description}
                 sortingOrder={['18+', '12+']}
                 metadata={{
-                  date: data.vaccine_coverage_per_age_group_archived.values.length ? data.vaccine_coverage_per_age_group_archived.values[0].date_unix : undefined,
+                  date: archivedData.vaccine_coverage_per_age_group_archived_20220622.values.length
+                    ? archivedData.vaccine_coverage_per_age_group_archived_20220622.values[0].date_unix
+                    : undefined,
                   source: textGm.vaccination_coverage.bronnen.rivm,
                 }}
-                values={data.vaccine_coverage_per_age_group_archived.values}
+                values={archivedData.vaccine_coverage_per_age_group_archived_20220622.values}
                 text={textNl}
               />
             </>

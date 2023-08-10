@@ -25,7 +25,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData, selectArchivedNlData } from '~/static-props/get-data';
 import { space } from '~/style/theme';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -45,7 +45,8 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('deceased_cbs', 'deceased_rivm_per_age_group_archived_20221231', 'deceased_rivm_archived_20221231', 'difference.deceased_rivm__covid_daily_archived_20221231'),
+  selectNlData('deceased_cbs'),
+  selectArchivedNlData('deceased_rivm_per_age_group_archived_20221231', 'deceased_rivm_archived_20221231', 'difference.deceased_rivm__covid_daily_archived_20221231'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -70,14 +71,14 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, selectedNlData: data, lastGenerated, content } = props;
+  const { pageText, selectedNlData: currentData, selectedArchivedNlData: archivedData, lastGenerated, content } = props;
 
   const [deceasedOverTimeTimeframe, setDeceasedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
-  const dataCbs = data.deceased_cbs;
-  const dataRivm = data.deceased_rivm_archived_20221231;
-  const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group_archived_20221231;
+  const dataCbs = currentData.deceased_cbs;
+  const dataRivm = archivedData.deceased_rivm_archived_20221231;
+  const dataDeceasedPerAgeGroup = archivedData.deceased_rivm_per_age_group_archived_20221231;
 
   const { commonTexts, formatPercentage } = useIntl();
   const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -90,9 +91,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const hasActiveWarningTile = !!textShared.notification.message;
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
 
-  const lastdeceasedPerAgeGroupInsertionDate = getLastInsertionDateOfPage(data, ['deceased_rivm_per_age_group_archived_20221231']);
+  const lastdeceasedPerAgeGroupInsertionDate = getLastInsertionDateOfPage(archivedData, ['deceased_rivm_per_age_group_archived_20221231']);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -163,7 +164,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                     source: textNl.section_deceased_rivm.bronnen.rivm,
                   }}
                 >
-                  <KpiValue absolute={dataRivm.last_value.covid_daily} difference={data.difference.deceased_rivm__covid_daily_archived_20221231} isAmount />
+                  <KpiValue absolute={dataRivm.last_value.covid_daily} difference={archivedData.difference.deceased_rivm__covid_daily_archived_20221231} isAmount />
                   <Markdown content={textNl.section_deceased_rivm.kpi_covid_daily_description} />
                 </KpiTile>
                 <KpiTile

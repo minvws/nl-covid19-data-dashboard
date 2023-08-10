@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "vr_collection_disability_care_archived_20230126",
+  "title": "vr_collection_disability_care",
   "type": "object",
   "properties": {
     "newly_infected_people": {

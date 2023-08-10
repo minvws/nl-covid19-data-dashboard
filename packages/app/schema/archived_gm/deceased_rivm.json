@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_tested_ggd_archived",
+  "title": "gm_deceased_rivm",
   "type": "object",
   "properties": {
     "values": {
@@ -17,14 +17,17 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_tested_ggd_archived_value",
+      "title": "gm_deceased_rivm_archived_20221231_value",
       "type": "object",
       "properties": {
-        "infected_percentage": {
-          "type": "number"
+        "covid_daily": {
+          "type": "integer"
         },
-        "infected_percentage_moving_average": {
+        "covid_daily_moving_average": {
           "type": ["number", "null"]
+        },
+        "covid_total": {
+          "type": "integer"
         },
         "date_unix": {
           "type": "integer"
@@ -33,12 +36,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "infected_percentage",
-        "infected_percentage_moving_average",
-        "date_unix",
-        "date_of_insertion_unix"
-      ],
+      "required": ["covid_daily", "covid_daily_moving_average", "covid_total", "date_unix", "date_of_insertion_unix"],
       "additionalProperties": false
     }
   }

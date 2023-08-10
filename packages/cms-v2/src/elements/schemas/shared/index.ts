@@ -52,14 +52,14 @@ export const commonPreview = {
  * choropleth and maybe even introducing a specific icon for each element type.
  */
 const titleByMetricName: Partial<Record<MetricName, string>> = {
-  tested_overall: 'Positief geteste mensen',
+  tested_overall_archived_20230331: 'Positief geteste mensen',
   sewer: 'Rioolwater metingen',
   hospital_nice: 'Ziekenhuisopnames',
   intensive_care_nice: 'IC-opnames',
   reproduction_archived_20230711: 'Reproductiegetal',
   vaccine_coverage_per_age_group: 'Vaccinatiegraad (per leeftijd)',
   vaccine_administered: 'Gezette prikken',
-  vaccine_coverage: 'Vaccinatiegraad',
+  vaccine_coverage_archived_20220518: 'Vaccinatiegraad',
   vaccine_coverage_per_age_group_estimated_fully_vaccinated: 'Vaccinatiegraad basisserie berekend (per leeftijd)',
   vaccine_coverage_per_age_group_estimated_autumn_2022: 'Vaccinatiegraad herfst 2022 booster berekend (per leeftijd)',
   vaccine_administered_total: 'Totaal gezette prikken',
@@ -68,7 +68,7 @@ const titleByMetricName: Partial<Record<MetricName, string>> = {
   deceased_rivm_archived_20221231: 'Sterfte (RIVM)',
   intensive_care_nice_per_age_group: 'IC-opnames (per leeftijd)',
   hospital_nice_per_age_group: 'Ziekenhuisopnames (per leeftijd)',
-  tested_per_age_group: 'Positief getest (per leeftijd)',
+  tested_per_age_group_archived_20230331: 'Positief getest (per leeftijd)',
   elderly_at_home_archived_20230126: '70-plussers',
   self_test_overall: 'Zelfgerapporteerde positieve coronatestuitslagen',
 };

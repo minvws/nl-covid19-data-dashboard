@@ -3,18 +3,6 @@
   "title": "nl_difference",
   "type": "object",
   "properties": {
-    "tested_overall__infected_per_100k_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "tested_overall__infected_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "tested_ggd__tested_total_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "tested_ggd__infected_percentage_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
     "infectious_people__estimate": {
       "$ref": "#/definitions/diff_integer"
     },
@@ -33,32 +21,20 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"
     },
-    "vulnerable_tested_per_age_group": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "reproduction__index_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "vulnerable_hospital_admissions": {
       "$ref": "#/definitions/diff_integer"
-    },
-    "deceased_rivm__covid_daily_archived_20221231": {
-      "$ref": "#/definitions/diff_integer"
     }
   },
   "required": [
-    "tested_overall__infected_per_100k_moving_average",
-    "tested_overall__infected_moving_average",
     "hospital_nice__admissions_on_date_of_reporting_moving_average",
     "hospital_lcps__beds_occupied_covid",
-    "tested_ggd__tested_total_moving_average",
-    "tested_ggd__infected_percentage_moving_average",
     "infectious_people__estimate",
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
     "intensive_care_lcps__beds_occupied_covid",
-    "sewer__average",
-    "vulnerable_tested_per_age_group",
-    "deceased_rivm__covid_daily_archived_20221231"
+    "sewer__average"
   ],
   "additionalProperties": false,
   "definitions": {
