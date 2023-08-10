@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "gm_vaccine_coverage_per_age_group_archived",
+  "title": "gm_vaccine_coverage_per_age_group_archived_20220622",
   "type": "object",
   "required": ["values"],
   "additionalProperties": false,

@@ -21,7 +21,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedGmData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -42,7 +42,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData('difference.deceased_rivm__covid_daily_archived_20221231', 'deceased_rivm_archived_20221231', 'code'),
+  selectArchivedGmData('difference.deceased_rivm__covid_daily_archived_20221231', 'deceased_rivm_archived_20221231', 'code'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -67,7 +67,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, municipalityName, selectedGmData: data, content, lastGenerated } = props;
+  const { pageText, municipalityName, selectedArchivedGmData: data, content, lastGenerated } = props;
 
   const [deceasedMunicipalTimeframe, setDeceasedMunicipalTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 

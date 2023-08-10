@@ -1,4 +1,4 @@
-import { ArchivedGm, ArchivedNl, Gm, Nl } from '.';
+import { ArchivedGm, ArchivedGmCollection, ArchivedNl, Gm, GmCollection, Nl, ArchivedVrCollection } from '.';
 
 /**
  * All possible datascopes. Can be used to access the types of a scope based on
@@ -7,8 +7,11 @@ import { ArchivedGm, ArchivedNl, Gm, Nl } from '.';
 export type ScopedData = {
   gm: Gm;
   nl: Nl;
-  archived_gm: ArchivedGm;
+  gm_collection: GmCollection;
   archived_nl: ArchivedNl;
+  archived_gm: ArchivedGm;
+  archived_gm_collection: ArchivedGmCollection;
+  archived_vr_collection: ArchivedVrCollection;
 };
 
 export type ScopedRouterData = Omit<ScopedData, 'archived_nl' | 'archived_gm'>;

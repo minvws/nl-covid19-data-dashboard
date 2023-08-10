@@ -6,6 +6,7 @@ import { client } from '../client';
 import { onState } from '../utils/abort-process';
 import { getSchemaMetricProperties } from '../utils/get-schema-metric-properties';
 import { getSchemaMetrics } from '../utils/get-schema-metrics';
+import { initialiseEnvironmentVariables } from '../../lokalize/utils/initialise-environment-variables';
 
 type Element = {
   scope: DataScopeKey;
@@ -14,9 +15,6 @@ type Element = {
   _type: 'timeSeries';
   _id: string;
 };
-
-const developmentClient = client.withConfig({ dataset: 'development' });
-const productionClient = client.withConfig({ dataset: 'production' });
 
 const promptForElement = async (): Promise<Element | undefined> => {
   const element: Element = {
@@ -31,6 +29,7 @@ const promptForElement = async (): Promise<Element | undefined> => {
     { title: 'National', value: 'nl' },
     { title: 'National (archived)', value: 'archived_nl' },
     { title: 'Municipal', value: 'gm' },
+    { title: 'Municipal (archived)', value: 'archived_gm' },
   ];
 
   const scopeResponse = (await prompts({
@@ -126,6 +125,9 @@ const isNewElement = async (element: Element) => {
     *[_type == '${_type}' && _id == '${_id}'][0]
   `;
 
+  const developmentClient = client.withConfig({ dataset: 'development' });
+  const productionClient = client.withConfig({ dataset: 'production' });
+
   const developmentDocument = await developmentClient.fetch(query);
   const productionDocument = await productionClient.fetch(query);
 
@@ -135,13 +137,20 @@ const isNewElement = async (element: Element) => {
 const elementToId = (element: Element) =>
   `${element.scope}__${element.metricName}__${snakeCase(element._type)}${isDefined(element.metricProperty) ? `__${element.metricProperty}` : ''}`;
 
-const saveElement = async (element: Element) => Promise.all([developmentClient.create(element), productionClient.create(element)]);
+const saveElement = async (element: Element, developmentClient: any, productionClient: any) => {
+  return Promise.all([developmentClient.create(element), productionClient.create(element)]);
+};
 
 (async () => {
+  await initialiseEnvironmentVariables();
+
+  const developmentClient = client.withConfig({ dataset: 'development', token: process.env.SANITY_API_TOKEN });
+  const productionClient = client.withConfig({ dataset: 'production', token: process.env.SANITY_API_TOKEN });
+
   const element = await promptForElement();
 
   if (isDefined(element)) {
-    await saveElement(element);
+    await saveElement(element, developmentClient, productionClient);
   }
 
   console.log('Have a swell day, friend. Goodluck and godspeed in all your endevours!');

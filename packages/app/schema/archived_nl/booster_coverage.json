@@ -1,33 +1,30 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "gm_deceased_rivm_archived_20221231",
+  "title": "nl_booster_coverage",
   "type": "object",
   "properties": {
     "values": {
       "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
       "items": {
         "$ref": "#/definitions/value"
       }
-    },
-    "last_value": {
-      "$ref": "#/definitions/value"
     }
   },
-  "required": ["values", "last_value"],
+  "required": ["values"],
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "gm_deceased_rivm_archived_20221231_value",
+      "title": "nl_booster_coverage_archived_20220904_value",
       "type": "object",
       "properties": {
-        "covid_daily": {
-          "type": "integer"
+        "age_group": {
+          "type": "string",
+          "enum": ["12+", "18+"]
         },
-        "covid_daily_moving_average": {
-          "type": ["number", "null"]
-        },
-        "covid_total": {
-          "type": "integer"
+        "percentage": {
+          "type": "number"
         },
         "date_unix": {
           "type": "integer"
@@ -36,7 +33,7 @@
           "type": "integer"
         }
       },
-      "required": ["covid_daily", "covid_daily_moving_average", "covid_total", "date_unix", "date_of_insertion_unix"],
+      "required": ["percentage", "date_unix", "date_of_insertion_unix"],
       "additionalProperties": false
     }
   }

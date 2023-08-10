@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_coverage_per_age_group_archived",
+  "title": "nl_vaccine_coverage_per_age_group_archived_20220622",
   "type": "object",
   "required": ["values"],
   "additionalProperties": false,
@@ -33,17 +33,7 @@
       "properties": {
         "age_group_range": {
           "type": "string",
-          "enum": [
-            "5-11",
-            "12-17",
-            "18-30",
-            "31-40",
-            "41-50",
-            "51-60",
-            "61-70",
-            "71-80",
-            "81+"
-          ]
+          "enum": ["5-11", "12-17", "18-30", "31-40", "41-50", "51-60", "61-70", "71-80", "81+"]
         },
         "age_group_percentage": {
           "type": "number"

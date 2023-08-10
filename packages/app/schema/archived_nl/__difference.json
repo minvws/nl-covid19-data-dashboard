@@ -1,30 +1,50 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "archived_nl_difference",
+  "title": "nl_difference",
   "type": "object",
   "properties": {
-    "nursing_home__deceased_daily_archived_20230126": {
+    "deceased_rivm__covid_daily_archived_20221231": {
       "$ref": "#/definitions/diff_integer"
     },
-    "vulnerable_nursing_home__infected_locations_total_archived_20230711": {
+    "nursing_home__deceased_daily_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
     "nursing_home__newly_infected_people_archived_20230126": {
       "$ref": "#/definitions/diff_integer"
     },
-    "vulnerable_hospital_admissions_archived_20230711": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "reproduction__index_average_archived_20230711": {
       "$ref": "#/definitions/diff_decimal"
+    },
+    "tested_ggd__infected_percentage_moving_average_archived_20230321": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "tested_ggd__tested_total_moving_average_archived_20230321": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "tested_overall__infected_moving_average_archived_20230331": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "tested_overall__infected_per_100k_moving_average_archived_20230331": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "vulnerable_nursing_home__infected_locations_total_archived_20230711": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "vulnerable_hospital_admissions_archived_20230711": {
+      "$ref": "#/definitions/diff_integer"
     }
   },
   "required": [
+    "deceased_rivm__covid_daily_archived_20221231",
     "nursing_home__deceased_daily_archived_20230126",
-    "vulnerable_nursing_home__infected_locations_total_archived_20230711",
     "nursing_home__newly_infected_people_archived_20230126",
+    "reproduction__index_average_archived_20230711",
+    "tested_ggd__infected_percentage_moving_average_archived_20230321",
+    "tested_ggd__tested_total_moving_average_archived_20230321",
+    "tested_overall__infected_moving_average_archived_20230331",
+    "tested_overall__infected_per_100k_moving_average_archived_20230331",
     "vulnerable_hospital_admissions_archived_20230711",
-    "reproduction__index_average_archived_20230711"
+    "vulnerable_nursing_home__infected_locations_total_archived_20230711"
   ],
   "additionalProperties": false,
   "definitions": {

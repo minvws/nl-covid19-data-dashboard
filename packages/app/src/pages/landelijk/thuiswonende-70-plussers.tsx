@@ -21,14 +21,14 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
-const pageMetrics = ['elderly_at_home'];
+const pageMetrics = ['elderly_at_home_archived_20230126'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -40,8 +40,8 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('elderly_at_home_archived_20230126'),
-  createGetChoroplethData({
+  selectArchivedNlData('elderly_at_home_archived_20230126'),
+  createGetArchivedChoroplethData({
     vr: ({ elderly_at_home_archived_20230126 }) => ({ elderly_at_home_archived_20230126 }),
   }),
   async (context: GetStaticPropsContext) => {
@@ -68,7 +68,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, choropleth, lastGenerated, content } = props;
+  const { pageText, selectedArchivedNlData: data, archivedChoropleth, lastGenerated, content } = props;
   const [elderlyAtHomeConfirmedCasesTimeframe, setElderlyAtHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const [elderlyAtHomeConfirmedCasesOverTimeTimeframe, setElderlyAtHomeConfirmedCasesOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -175,7 +175,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'elderly_at_home_infected_people_choropleth',
               }}
-              data={choropleth.vr.elderly_at_home_archived_20230126}
+              data={archivedChoropleth.vr.elderly_at_home_archived_20230126}
               dataConfig={{
                 metricName: 'elderly_at_home_archived_20230126',
                 metricProperty: 'positive_tested_daily_per_100k',
