@@ -132,7 +132,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             </InView>
           )}
 
-          <Divider />
+          <Divider style={{ marginBottom: space[3] }} />
 
           <PageInformationBlock
             title={textNl.section_archived.title}
