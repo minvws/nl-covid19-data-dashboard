@@ -110,8 +110,10 @@ export function PageInformationBlock({
               <Box flex="1" display="flex" flexDirection="column" spacing={3}>
                 {pageInformationHeader.dataExplained && (
                   <PageInformationButton href={pageInformationHeader.dataExplained.link}>
-                    <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
-                    <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
+                    <Box pr={3}>
+                      <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
+                      <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
+                    </Box>
 
                     <ChevronRight />
                   </PageInformationButton>
@@ -119,8 +121,10 @@ export function PageInformationBlock({
 
                 {pageInformationHeader.faq && (
                   <PageInformationButton href={`#${pageInformationHeader.faq.link}`}>
-                    <BoldText>{pageInformationHeader.faq.button.header}</BoldText>
-                    <RichContent blocks={pageInformationHeader.faq.button.text} />
+                    <Box pr={2}>
+                      <BoldText>{pageInformationHeader.faq.button.header}</BoldText>
+                      <RichContent blocks={pageInformationHeader.faq.button.text} />
+                    </Box>
 
                     <ChevronDown />
                   </PageInformationButton>
