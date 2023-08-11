@@ -231,14 +231,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             />
           </ChartTile>
 
-          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
-
-          {content.articles && content.articles.articles?.length > 0 && (
-            <InView rootMargin="400px">
-              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
-            </InView>
-          )}
-
           <Box spacing={5}>
             <TwoKpiSection>
               <KpiTile
@@ -370,6 +362,14 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               />
             </ChartTile>
           </Box>
+
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
       </NlLayout>
     </Layout>
