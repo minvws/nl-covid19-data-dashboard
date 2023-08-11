@@ -21,7 +21,7 @@
 7. Once ready, merge the release branch to `master` using a **merge commit.
    Never use a squash and merge action, since this will erase/rewrite the commit
    history.**
-8. Hit the publish button in the GitHub release draft. This should tag the
+8. After completing step 7, change the target of the release draft to `master` and hit the publish button in the GitHub release draft. This should tag the
    correct commit in `master`.
 9. Important before running the next step is building the common package to avoid any typescript errors,
    so run `yarn build:common`.
