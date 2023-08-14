@@ -221,7 +221,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             </InView>
           )}
 
-          <Divider marginTop={space[3]} marginBottom={space[8]} style={{ marginBottom: `0px` }} />
+          <Divider marginBottom={space[4]} />
 
           <PageInformationBlock
             title={textNl.section_archived.title}

@@ -13,13 +13,12 @@ import { space } from '~/style/theme';
 
 export const Divider = styled.div<{
   marginBottom?: any;
-  marginTop?: any;
-}>(({ marginBottom, marginTop }) =>
+}>(({ marginBottom }) =>
   css({
     width: '100%',
-    borderTop: `solid 2px ${colors.green3}`,
-    marginTop: marginTop,
-    marginBottom: marginBottom,
+    borderTop: `solid 2px ${colors.gray2}`,
+    marginTop: space[2],
+    marginBottom: `${marginBottom} !important`,
     paddingY: space[2],
   })
 );
