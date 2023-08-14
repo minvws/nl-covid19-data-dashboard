@@ -221,7 +221,8 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             </InView>
           )}
 
-          <Divider style={{ marginBottom: space[3] }} />
+          <Divider marginTop={space[3]} marginBottom={space[8]} style={{ marginBottom: `0px` }} />
+
           <PageInformationBlock
             title={textNl.section_archived.title}
             description={textNl.section_archived.description}
@@ -229,6 +230,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
             headingLevel={3}
           />
+
           {hasHideArchivedCharts && (
             <>
               <VaccineCoverageToggleTile

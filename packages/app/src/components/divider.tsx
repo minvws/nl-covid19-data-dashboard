@@ -11,11 +11,15 @@ import { space } from '~/style/theme';
  * top margin and bottom padding to add the correct spacing.
  */
 
-export const Divider = styled.div(
+export const Divider = styled.div<{
+  marginBottom?: any;
+  marginTop?: any;
+}>(({ marginBottom, marginTop }) =>
   css({
     width: '100%',
-    borderTop: `solid 2px ${colors.gray2}`,
-    marginTop: space[2],
+    borderTop: `solid 2px ${colors.green3}`,
+    marginTop: marginTop,
+    marginBottom: marginBottom,
     paddingY: space[2],
   })
 );

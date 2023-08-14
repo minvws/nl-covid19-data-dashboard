@@ -20,7 +20,7 @@ type HeaderProps = {
   level?: HeadingLevel;
 };
 
-export function Header({ icon, title, category, screenReaderCategory, level }: HeaderProps) {
+export function Header({ icon, title, category, screenReaderCategory, level = 1 }: HeaderProps) {
   const breakpoints = useBreakpoints();
   const isMediumScreen = breakpoints.md;
 
@@ -36,7 +36,7 @@ export function Header({ icon, title, category, screenReaderCategory, level }: H
         </Box>
       )}
       {icon && isMediumScreen && <Icon gridArea="sideIcon">{icon}</Icon>}
-      <Heading level={level ? level : 1} hyphens="auto" css={css({ gridArea: 'title' })}>
+      <Heading level={level} hyphens="auto" css={css({ gridArea: 'title' })}>
         {title}
       </Heading>
     </GridLayout>
