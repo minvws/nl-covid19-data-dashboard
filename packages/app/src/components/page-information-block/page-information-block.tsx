@@ -110,12 +110,10 @@ export function PageInformationBlock({
               <Box flex="1" display="flex" flexDirection="column" spacing={3}>
                 {pageInformationHeader.dataExplained && (
                   <PageInformationButton href={pageInformationHeader.dataExplained.link}>
-                    <Box pr={5}>
-                      <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
-                      <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
-                    </Box>
+                    <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
+                    <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
 
-                    <ChevronRight />
+                    <ChevronRight class="arrow" />
                   </PageInformationButton>
                 )}
 
@@ -189,17 +187,50 @@ const PageInformationButton = styled(Anchor)`
   border: 1px solid ${colors.gray3};
   color: ${colors.black};
   cursor: pointer;
-  padding: ${space[3]} ${space[4]};
+  padding: ${space[3]} ${space[3]} ${space[3]} ${space[4]};
   position: relative;
   text-align: left;
+  display: inline-grid;
+  grid-template-columns: 3fr 3fr 1.25fr;
+  grid-template-rows: 1fr;
+  column-gap: ${space[5]};
+
+  
+  @media ${mediaQueries.xs} {
+    grid-template-columns: 4fr 4fr 1fr;
+
+  }
+
+
+  @media ${mediaQueries.sm} {
+    grid-template-columns: 5fr 5fr 0.75fr;
+
+  }
+
+  @media ${mediaQueries.md} {
+    grid-template-columns: 3fr 3fr 2.25fr;
+
+  }
+
+  @media ${mediaQueries.lg} {
+    grid-template-columns: 4fr 4fr 1.5fr;
+
+  }
+
+
+  p, strong {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
 
   svg {
     color: ${colors.primary};
-    position: absolute;
-    right: ${space[2]};
-    top: 50%;
-    transform: translate(-50%, -50%);
+    grid-column-start: 3;
+    grid-column-end: 3;
     width: 24px;
+    transform: translate(-10%, -50%);
+    display: block;
+    margin-top: auto:
   }
 
   .underline {
