@@ -23,6 +23,9 @@
         "beds_occupied_covid": {
           "type": ["integer", "null"]
         },
+        "beds_occupied_covid_moving_average": {
+          "type": ["integer", "null"]
+        },
         "beds_occupied_covid_percentage": {
           "type": ["number", "null"]
         },
@@ -41,6 +44,7 @@
       },
       "required": [
         "beds_occupied_covid",
+        "beds_occupied_covid_moving_average",
         "beds_occupied_covid_percentage",
         "influx_covid_patients",
         "influx_covid_patients_moving_average",
