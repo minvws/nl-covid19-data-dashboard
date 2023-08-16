@@ -113,7 +113,7 @@ export function PageInformationBlock({
                     <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
                     <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
 
-                    <ChevronRight class="arrow" />
+                    <ChevronRight />
                   </PageInformationButton>
                 )}
 
@@ -195,30 +195,27 @@ const PageInformationButton = styled(Anchor)`
   grid-template-rows: 1fr;
   column-gap: ${space[5]};
 
-  
   @media ${mediaQueries.xs} {
-    grid-template-columns: 4fr 4fr 1fr;
-
+    grid-template-columns: 3fr 3fr 1.25fr;
+    padding-right: ${space[1]};
   }
 
-
   @media ${mediaQueries.sm} {
-    grid-template-columns: 5fr 5fr 0.75fr;
-
+    grid-template-columns: 4fr 4fr 0.75fr;
+    padding-right: ${space[1]};
   }
 
   @media ${mediaQueries.md} {
     grid-template-columns: 3fr 3fr 2.25fr;
-
+    padding-right: ${space[1]};
   }
 
   @media ${mediaQueries.lg} {
     grid-template-columns: 4fr 4fr 1.5fr;
-
   }
 
-
-  p, strong {
+  p,
+  strong {
     grid-column-start: 1;
     grid-column-end: 3;
   }
@@ -230,7 +227,6 @@ const PageInformationButton = styled(Anchor)`
     width: 24px;
     transform: translate(-10%, -50%);
     display: block;
-    margin-top: auto:
   }
 
   .underline {
