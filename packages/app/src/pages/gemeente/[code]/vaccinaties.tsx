@@ -25,7 +25,6 @@ import { assert, replaceVariablesInText, useFormatLokalizePercentage, useReverse
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
-import { space } from '~/style/theme';
 
 const pageMetrics = ['vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'booster_coverage_archived_20220904'];
 
@@ -221,7 +220,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             </InView>
           )}
 
-          <Divider marginBottom={space[4]} />
+          <Divider />
 
           <PageInformationBlock
             title={textNl.section_archived.title}

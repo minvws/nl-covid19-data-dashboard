@@ -42,7 +42,6 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { space } from '~/style/theme';
 
 const pageMetrics = [
   'vaccine_administered_doctors',
@@ -311,7 +310,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             </InView>
           )}
 
-          <Divider style={{ marginBottom: space[3] }} />
+          <Divider hasPageInfoBlock />
 
           <PageInformationBlock
             title={textNl.section_archived.title}

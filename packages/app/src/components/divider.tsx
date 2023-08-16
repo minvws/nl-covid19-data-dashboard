@@ -12,13 +12,13 @@ import { space } from '~/style/theme';
  */
 
 export const Divider = styled.div<{
-  marginBottom?: any;
-}>(({ marginBottom }) =>
+  hasPageInfoBlock: boolean;
+}>(({ hasPageInfoBlock }) =>
   css({
     width: '100%',
     borderTop: `solid 2px ${colors.gray2}`,
     marginTop: space[2],
-    marginBottom: `${marginBottom} !important`,
+    marginBottom: hasPageInfoBlock ? space[8] : space[3],
     paddingY: space[2],
   })
 );
