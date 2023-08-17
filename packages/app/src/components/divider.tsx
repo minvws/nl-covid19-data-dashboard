@@ -12,7 +12,7 @@ import { space } from '~/style/theme';
  */
 
 export const Divider = styled.div<{
-  hasPageInfoBlock: boolean;
+  hasPageInfoBlock?: boolean;
 }>(({ hasPageInfoBlock }) =>
   css({
     width: '100%',

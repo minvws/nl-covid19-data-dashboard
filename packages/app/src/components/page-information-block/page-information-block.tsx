@@ -67,7 +67,6 @@ export function PageInformationBlock({
   warning,
   isArchivedHidden,
   pageInformationHeader,
-  headingLevel,
   onToggleArchived,
 }: InformationBlockProps) {
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
@@ -95,8 +94,14 @@ export function PageInformationBlock({
   ) : null;
 
   return (
-    <Box as="header" id={id} spacing={{ _: 3, md: 4 }}>
-      {title && <Header level={headingLevel} icon={icon} title={title} category={category} screenReaderCategory={screenReaderCategory} />}
+    <Box
+      as="header"
+      id={id}
+      spacing={{ _: 3, md: 4 }}
+      borderTop={showArchivedToggleButton ? `solid 2px ${colors.gray2}` : undefined}
+      paddingTop={showArchivedToggleButton ? space[4] : undefined}
+    >
+      {title && <Header level={showArchivedToggleButton ? 3 : undefined} icon={icon} title={title} category={category} screenReaderCategory={screenReaderCategory} />}
       {scopedWarning && <WarningTile variant="emphasis" message={scopedWarning} icon={Warning} isFullWidth />}
 
       {description && (
