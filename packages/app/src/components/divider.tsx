@@ -11,14 +11,11 @@ import { space } from '~/style/theme';
  * top margin and bottom padding to add the correct spacing.
  */
 
-export const Divider = styled.div<{
-  hasPageInfoBlock?: boolean;
-}>(({ hasPageInfoBlock }) =>
+export const Divider = styled.div(
   css({
     width: '100%',
     borderTop: `solid 2px ${colors.gray2}`,
     marginTop: space[2],
-    marginBottom: hasPageInfoBlock ? space[8] : space[3],
     paddingY: space[2],
   })
 );
