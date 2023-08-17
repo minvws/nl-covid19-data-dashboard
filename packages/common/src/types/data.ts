@@ -899,6 +899,7 @@ export interface Nl {
   vaccine_coverage_per_age_group_estimated_fully_vaccinated: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinatedValue;
   variants?: NlVariants;
   self_test_overall: NlSelfTestOverall;
+  infection_radar_symptoms_per_age_group: NlInfectionRadarSymptomsPerAgeGroup;
 }
 export interface NlDifference {
   infectious_people__estimate: DifferenceInteger;
@@ -1208,4 +1209,21 @@ export interface NlSelfTestOverallValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
+}
+export interface NlInfectionRadarSymptomsPerAgeGroup {
+  values: NlInfectionRadarSymptomsPerAgeGroupValue[];
+  last_value: NlInfectionRadarSymptomsPerAgeGroupValue;
+}
+export interface NlInfectionRadarSymptomsPerAgeGroupValue {
+  date_of_insertion_unix: number;
+  date_of_report_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  percentage_0_24: number;
+  percentage_25_39: number;
+  percentage_40_49: number;
+  percentage_50_59: number;
+  percentage_60_69: number;
+  percentage_70_plus: number;
+  percentage_average: number;
 }
