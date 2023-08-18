@@ -79,6 +79,7 @@ export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibi
         minHeight={breakpoints.md ? 300 : 250}
         formatTooltip={(data) => <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />}
         dataOptions={{
+          isPercentage: true,
           valueAnnotation: text.infected_per_age_group.value_annotation,
           timespanAnnotations: [
             {

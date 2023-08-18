@@ -138,6 +138,7 @@ const InfectieRadar = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.chart_infectie_radar_age_groups.title}
             description={textNl.chart_infectie_radar_age_groups.description}
             timeframeOptions={TimeframeOptionsList}
+            timeframeInitialValue={TimeframeOption.THREE_MONTHS}
             metadata={{
               source: textNl.chart_infectie_radar_age_groups.source.rivm,
             }}
