@@ -28,6 +28,7 @@ export const dataStructure = {
     tested_overall_archived_20230331: ['infected', 'infected_moving_average', 'infected_moving_average_rounded', 'infected_per_100k', 'infected_per_100k_moving_average'],
   },
   archived_gm_collection: {
+    hospital_nice_choropleth_20230905: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
     sewer_archived_20230623: ['average', 'total_installation_count', 'data_is_outdated'],
     tested_overall_archived_20230331: ['infected_per_100k', 'infected'],
   },
@@ -243,7 +244,7 @@ export const dataStructure = {
     ],
   },
   gm_collection: {
-    hospital_nice_choropleth: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
+    hospital_nice_choropleth: ['admissions_in_the_last_7_days_per_100000'],
     sewer: ['average', 'data_is_outdated'],
     vaccine_coverage_per_age_group: [
       'vaccination_type',
@@ -321,5 +322,15 @@ export const dataStructure = {
     vaccine_coverage_per_age_group_estimated_fully_vaccinated: ['age_12_plus_birthyear', 'age_12_plus_vaccinated', 'age_18_plus_birthyear', 'age_18_plus_vaccinated'],
     variants: ['variant_code', 'values', 'last_value'],
     self_test_overall: ['infected_percentage'],
+    infection_radar_symptoms_trend_per_age_group_weekly: [
+      'date_of_report_unix',
+      'percentage_0_24',
+      'percentage_25_39',
+      'percentage_40_49',
+      'percentage_50_59',
+      'percentage_60_69',
+      'percentage_70_plus',
+      'percentage_average',
+    ],
   },
 };

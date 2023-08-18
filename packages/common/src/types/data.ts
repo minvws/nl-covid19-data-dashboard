@@ -120,7 +120,7 @@ export interface ArchivedGmCollection {
   proto_name: ArchivedGmCollectionId;
   name: ArchivedGmCollectionId;
   code: ArchivedGmCollectionId;
-  hospital_nice_choropleth_20230905?: GmCollectionHospitalNiceChoropleth[];
+  hospital_nice_choropleth_20230905: GmCollectionHospitalNiceChoropleth[];
   sewer_archived_20230623: GmCollectionSewer[];
   tested_overall_archived_20230331: GmCollectionTestedOverall[];
 }
@@ -782,6 +782,7 @@ export interface GmHospitalNiceValue {
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_admission_moving_average_rounded: number | null;
   admissions_on_date_of_reporting: number;
+  admissions_in_the_last_7_days: number;
   date_of_insertion_unix: number;
 }
 export interface GmSewer {

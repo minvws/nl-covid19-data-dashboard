@@ -142,7 +142,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue absolute={lastValue.admissions_on_date_of_admission_moving_average_rounded} isAmount isMovingAverageDifference />
+              <KpiValue absolute={lastValue.admissions_in_the_last_7_days} isAmount isMovingAverageDifference />
             </KpiTile>
           </TwoKpiSection>
 
@@ -199,7 +199,8 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             description={textGm.map_toelichting}
             legend={{
               title: textGm.chloropleth_legenda.titel,
-              thresholds: thresholds.gm.admissions_on_date_of_admission,
+              thresholds: thresholds.gm.admissions_in_the_last_7_days_per_100000,
+              firstValueIsSingle: true,
             }}
           >
             <DynamicChoropleth
@@ -210,7 +211,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               data={choropleth.gm.hospital_nice_choropleth}
               dataConfig={{
                 metricName: 'hospital_nice_choropleth',
-                metricProperty: 'admissions_on_date_of_admission_per_100000',
+                metricProperty: 'admissions_in_the_last_7_days_per_100000',
               }}
               dataOptions={{
                 selectedCode: data.code,

@@ -147,8 +147,9 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.choropleth.title}
             description={textNl.choropleth.description}
             legend={{
-              thresholds: thresholds.gm.admissions_on_date_of_admission_per_100000,
+              thresholds: thresholds.gm.admissions_in_the_last_7_days_per_100000,
               title: textNl.choropleth.legend_title,
+              firstValueIsSingle: true,
             }}
             metadata={{
               date: choropleth.gm.hospital_nice_choropleth[choropleth.gm.hospital_nice_choropleth.length - 1].date_unix,

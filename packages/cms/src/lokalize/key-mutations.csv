@@ -45,3 +45,8 @@ timestamp,action,key,document_id,move_to
 2023-08-17T14:43:09.729Z,add,pages.infectie_radar_page.nl.infected_per_age_group.value_annotation,jnRBBkraje744C8PaO0KrH,__
 2023-08-17T14:43:10.885Z,add,pages.infectie_radar_page.nl.infected_per_age_group.line_chart_legend_inaccurate_label,jnRBBkraje744C8PaO0L2S,__
 2023-08-17T14:43:12.103Z,add,pages.infectie_radar_page.nl.infected_per_age_group.tooltip_labels.inaccurate,ZmGr7z0dpqDTcKeIJx2fab,__
+2023-08-18T10:02:33.947Z,add,common.choropleth_tooltip.gm.admissions_in_the_last_7_days_per_100000.content,jnRBBkraje744C8PaQ1fzO,__
+2023-08-18T10:02:34.932Z,add,common.choropleth_tooltip.gm.admissions_in_the_last_7_days_per_100000.subject,y0YNHvmj0Rc826uxTTWWkI,__
+2023-08-18T10:02:34.933Z,delete,common.choropleth_tooltip.gm.admissions_on_date_of_admission_per_100000.content,Hx8hkeSw0pqyYojKtfA6sV,__
+2023-08-18T10:02:34.933Z,delete,common.choropleth_tooltip.gm.admissions_on_date_of_admission_per_100000.subject,xNELI4GNAeXqkWZzsGHq9R,__
+2023-08-18T10:35:37.343Z,add,common.common.value_single,y0YNHvmj0Rc826uxTTWz0r,__

@@ -148,7 +148,34 @@ const vrHospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
-const hospitalAdmissionsPer100000Thresholds: ChoroplethThresholdsValue[] = [
+const hospitalAdmissionsPerMunicipality: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.gray2,
+    threshold: 0,
+  },
+  {
+    color: colors.scale.blue[0],
+    threshold: 0.1,
+  },
+  {
+    color: colors.scale.blue[1],
+    threshold: 0.3,
+  },
+  {
+    color: colors.scale.blue[2],
+    threshold: 0.5,
+  },
+  {
+    color: colors.scale.blue[3],
+    threshold: 0.9,
+  },
+  {
+    color: colors.scale.blue[4],
+    threshold: 1.5,
+  },
+];
+
+const admissionsInTheLast7DaysPerMunicipality: ChoroplethThresholdsValue[] = [
   {
     color: colors.gray2,
     threshold: 0,
@@ -310,7 +337,8 @@ type Thresholds = Record<MapType, Record<string, ChoroplethThresholdsValue[]>>;
 export const thresholds: Thresholds = {
   gm: {
     infected_per_100k: positiveTestedThresholds,
-    admissions_on_date_of_admission_per_100000: hospitalAdmissionsPer100000Thresholds,
+    admissions_in_the_last_7_days_per_100000: hospitalAdmissionsPerMunicipality,
+    admissions_in_the_last_7_days: admissionsInTheLast7DaysPerMunicipality,
     admissions_on_date_of_admission: hospitalAdmissionsThresholds,
     elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,

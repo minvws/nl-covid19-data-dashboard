@@ -13,23 +13,27 @@ interface ChoroplethLegendaProps {
   valueAnnotation?: string;
   pageType?: string;
   outdatedDataLabel?: string;
+  firstValueIsSingle?: boolean;
 }
 
-export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType, outdatedDataLabel }: ChoroplethLegendaProps) {
+export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType, outdatedDataLabel, firstValueIsSingle = false }: ChoroplethLegendaProps) {
   const { commonTexts } = useIntl();
   const breakpoints = useBreakpoints(true);
 
   const legendItems = thresholds.map(
     (x: ChoroplethThresholdsValue, i) =>
       ({
-        label: thresholds[i + 1]
-          ? replaceVariablesInText(commonTexts.common.value_until_value, {
-              value_1: x.threshold,
-              value_2: thresholds[i + 1].threshold,
-            })
-          : replaceVariablesInText(commonTexts.common.value_and_higher, {
-              value: x.threshold,
-            }),
+        label:
+          firstValueIsSingle && thresholds[i] && i == 0
+            ? replaceVariablesInText(commonTexts.common.value_single, { value: x.threshold })
+            : thresholds[i + 1]
+            ? replaceVariablesInText(commonTexts.common.value_until_value, {
+                value_1: x.threshold,
+                value_2: thresholds[i + 1].threshold,
+              })
+            : replaceVariablesInText(commonTexts.common.value_and_higher, {
+                value: x.threshold,
+              }),
         shape: 'square',
         color: x.color,
       } as LegendItem)

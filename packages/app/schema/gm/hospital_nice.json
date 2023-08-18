@@ -9,6 +9,7 @@
         "admissions_on_date_of_admission_moving_average",
         "admissions_on_date_of_admission_moving_average_rounded",
         "admissions_on_date_of_reporting",
+        "admissions_in_the_last_7_days",
         "date_unix",
         "date_of_insertion_unix"
       ],
@@ -26,6 +27,9 @@
           "type": ["integer", "null"]
         },
         "admissions_on_date_of_reporting": {
+          "type": "integer"
+        },
+        "admissions_in_the_last_7_days": {
           "type": "integer"
         },
         "date_of_insertion_unix": {

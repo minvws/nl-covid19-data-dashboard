@@ -17,6 +17,7 @@ type ChoroplethTileProps = {
     title: string;
     thresholds: ChoroplethThresholdsValue[];
     outdatedDataLabel?: string;
+    firstValueIsSingle?: boolean;
   };
   metadata?: MetadataProps;
   valueAnnotation?: string;
@@ -49,7 +50,14 @@ export function ChoroplethTile({
   const breakpoints = useBreakpoints(true);
   const legendaComponent = legend && (
     <Box maxWidth="300px" width="100%">
-      <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} valueAnnotation={valueAnnotation} pageType={pageType} outdatedDataLabel={legend.outdatedDataLabel} />
+      <ChoroplethLegenda
+        firstValueIsSingle={legend.firstValueIsSingle}
+        thresholds={legend.thresholds}
+        title={legend.title}
+        valueAnnotation={valueAnnotation}
+        pageType={pageType}
+        outdatedDataLabel={legend.outdatedDataLabel}
+      />
     </Box>
   );
 
