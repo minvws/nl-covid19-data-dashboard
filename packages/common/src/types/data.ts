@@ -120,8 +120,17 @@ export interface ArchivedGmCollection {
   proto_name: ArchivedGmCollectionId;
   name: ArchivedGmCollectionId;
   code: ArchivedGmCollectionId;
+  hospital_nice_choropleth_20230905?: GmCollectionHospitalNiceChoropleth[];
   sewer_archived_20230623: GmCollectionSewer[];
   tested_overall_archived_20230331: GmCollectionTestedOverall[];
+}
+export interface GmCollectionHospitalNiceChoropleth {
+  date_unix: number;
+  gmcode: string;
+  admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_per_100000: number;
+  admissions_on_date_of_reporting: number;
+  date_of_insertion_unix: number;
 }
 export interface GmCollectionSewer {
   date_start_unix: number;
@@ -839,9 +848,7 @@ export interface GmCollection {
 export interface GmCollectionHospitalNiceChoropleth {
   date_unix: number;
   gmcode: string;
-  admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_per_100000: number;
-  admissions_on_date_of_reporting: number;
+  admissions_in_the_last_7_days_per_100000: number;
   date_of_insertion_unix: number;
 }
 export interface GmCollectionSewer {

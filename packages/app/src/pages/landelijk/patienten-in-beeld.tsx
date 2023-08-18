@@ -163,7 +163,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               data={choroplethDataGm}
               dataConfig={{
                 metricName: 'hospital_nice_choropleth',
-                metricProperty: 'admissions_on_date_of_admission_per_100000',
+                metricProperty: 'admissions_in_the_last_7_days_per_100000',
               }}
               dataOptions={{
                 getLink: reverseRouter.gm.ziekenhuisopnames,
