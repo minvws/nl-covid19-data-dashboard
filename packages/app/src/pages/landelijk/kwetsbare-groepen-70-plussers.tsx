@@ -162,7 +162,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             title={textNl.kpi_tiles.infected_locations.title}
             description={textNl.kpi_tiles.infected_locations.description}
             source={infectedLocationsText.bronnen.rivm}
-            dateUnix={vulnerableNursingHomeDataLastValue.date_unix}
+            dataRangeUnix={vulnerableNursingHomeDataLastValue.date_unix}
             tilesData={[
               {
                 value: vulnerableNursingHomeDataLastValue.infected_locations_total,

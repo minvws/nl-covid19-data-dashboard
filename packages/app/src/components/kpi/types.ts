@@ -11,7 +11,7 @@ export type TileData = {
 };
 
 export interface BorderedKpiSectionProps {
-  dateUnix: number | [number, number];
+  dataRangeUnix: number | [number, number];
   description: string;
   source: {
     href: string;

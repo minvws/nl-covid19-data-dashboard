@@ -168,7 +168,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
                   },
                 },
               ]}
-              dateUnix={filteredVaccination.autumn2022.date_unix}
+              dataRangeUnix={filteredVaccination.autumn2022.date_unix}
             />
           )}
           <BorderedKpiSection
@@ -199,7 +199,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
                 },
               },
             ]}
-            dateUnix={filteredVaccination.primarySeries.date_unix}
+            dataRangeUnix={filteredVaccination.primarySeries.date_unix}
           />
           <VaccineCoverageChoropleth
             data={choropleth.gm.vaccine_coverage_per_age_group}

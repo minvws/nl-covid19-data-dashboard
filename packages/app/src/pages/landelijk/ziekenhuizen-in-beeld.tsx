@@ -139,7 +139,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.kpi_tiles.occupancies.title}
             description={textNl.kpi_tiles.occupancies.description}
             source={textNl.sources.lnaz}
-            dateUnix={[borderedKpiPeriod.old_date_unix, borderedKpiPeriod.new_date_unix]}
+            dataRangeUnix={[borderedKpiPeriod.old_date_unix, borderedKpiPeriod.new_date_unix]}
             tilesData={[
               {
                 value: hospitalLastValue.beds_occupied_covid_moving_average,
@@ -264,7 +264,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.kpi_tiles.influxes.title}
             description={textNl.kpi_tiles.influxes.description}
             source={textNl.sources.lnaz}
-            dateUnix={mostRecentDateUnix}
+            dataRangeUnix={mostRecentDateUnix}
             tilesData={[
               {
                 value: hospitalLastValue.influx_covid_patients,
