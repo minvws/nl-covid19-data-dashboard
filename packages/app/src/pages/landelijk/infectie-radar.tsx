@@ -11,6 +11,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
+import { InfectionRadarSymptomsPerAgeGroup } from '~/domain/infection_radar/infection-radar-per-age-group';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
@@ -22,11 +23,11 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 
-const pageMetrics = ['self_test_overall'];
+const pageMetrics = ['self_test_overall', 'infection_radar_symptoms_per_age_group'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-  textNl: siteText.pages.tests_page.nl,
+  textNl: siteText.pages.infectie_radar_page.nl,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -34,7 +35,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('self_test_overall'),
+  selectNlData('self_test_overall', 'infection_radar_symptoms_trend_per_age_group_weekly'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -57,10 +58,12 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const Tests = (props: StaticProps<typeof getStaticProps>) => {
+const InfectieRadar = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
 
   const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
+
+  const [confirmedCasesCovidSimptomsPerAgeTimeFrame, setConfirmedCasesCovidSimptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
 
@@ -131,6 +134,26 @@ const Tests = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
+          <ChartTile
+            title={textNl.chart_infectie_radar_age_groups.title}
+            description={textNl.chart_infectie_radar_age_groups.description}
+            timeframeOptions={TimeframeOptionsList}
+            metadata={{
+              source: textNl.chart_infectie_radar_age_groups.source.rivm,
+            }}
+            onSelectTimeframe={setConfirmedCasesCovidSimptomsPerAgeTimeFrame}
+          >
+            <InfectionRadarSymptomsPerAgeGroup
+              accessibility={{
+                key: 'reported_cases_covid_19_like_symptoms_time_chart',
+              }}
+              values={data.infection_radar_symptoms_trend_per_age_group_weekly.values}
+              timeframe={confirmedCasesCovidSimptomsPerAgeTimeFrame}
+              timelineEvents={getTimelineEvents(content.elements.timeSeries, 'tested_per_age_group_archived_20230331')}
+              text={textNl}
+            />
+          </ChartTile>
+
           {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 
           {content.articles && content.articles.articles?.length > 0 && (
@@ -144,4 +167,4 @@ const Tests = (props: StaticProps<typeof getStaticProps>) => {
   );
 };
 
-export default Tests;
+export default InfectieRadar;
