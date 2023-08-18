@@ -196,10 +196,6 @@ const PageInformationButton = styled(Anchor)`
   display: flex;
   justify-content: space-between;
 
-  div {
-    margin-right: ${space[5]};
-  }
-
   @media ${mediaQueries.md} {
     div {
       margin-right: ${space[4]};
