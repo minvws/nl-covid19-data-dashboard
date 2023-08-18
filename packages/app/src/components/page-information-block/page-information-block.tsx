@@ -110,8 +110,10 @@ export function PageInformationBlock({
               <Box flex="1" display="flex" flexDirection="column" spacing={3}>
                 {pageInformationHeader.dataExplained && (
                   <PageInformationButton href={pageInformationHeader.dataExplained.link}>
-                    <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
-                    <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
+                    <div>
+                      <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
+                      <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
+                    </div>
 
                     <ChevronRight />
                   </PageInformationButton>
@@ -119,8 +121,10 @@ export function PageInformationBlock({
 
                 {pageInformationHeader.faq && (
                   <PageInformationButton href={`#${pageInformationHeader.faq.link}`}>
-                    <BoldText>{pageInformationHeader.faq.button.header}</BoldText>
-                    <RichContent blocks={pageInformationHeader.faq.button.text} />
+                    <div>
+                      <BoldText>{pageInformationHeader.faq.button.header}</BoldText>
+                      <RichContent blocks={pageInformationHeader.faq.button.text} />
+                    </div>
 
                     <ChevronDown />
                   </PageInformationButton>
@@ -187,46 +191,25 @@ const PageInformationButton = styled(Anchor)`
   border: 1px solid ${colors.gray3};
   color: ${colors.black};
   cursor: pointer;
-  padding: ${space[3]} ${space[3]} ${space[3]} ${space[4]};
-  position: relative;
+  padding: ${space[3]} ${space[4]};
   text-align: left;
-  display: inline-grid;
-  grid-template-columns: 3fr 3fr 1.25fr;
-  grid-template-rows: 1fr;
-  column-gap: ${space[5]};
+  display: flex;
+  justify-content: space-between;
 
-  @media ${mediaQueries.xs} {
-    grid-template-columns: 3fr 3fr 1.25fr;
-    padding-right: ${space[1]};
-  }
-
-  @media ${mediaQueries.sm} {
-    grid-template-columns: 4fr 4fr 0.75fr;
-    padding-right: ${space[1]};
+  div {
+    margin-right: ${space[5]};
   }
 
   @media ${mediaQueries.md} {
-    grid-template-columns: 3fr 3fr 2.25fr;
-    padding-right: ${space[1]};
-  }
-
-  @media ${mediaQueries.lg} {
-    grid-template-columns: 4fr 4fr 1.5fr;
-  }
-
-  p,
-  strong {
-    grid-column-start: 1;
-    grid-column-end: 3;
+    div {
+      margin-right: ${space[4]};
+    }
   }
 
   svg {
     color: ${colors.primary};
-    grid-column-start: 3;
-    grid-column-end: 3;
     width: 24px;
-    transform: translate(-10%, -50%);
-    display: block;
+    flex-shrink: 0;
   }
 
   .underline {
