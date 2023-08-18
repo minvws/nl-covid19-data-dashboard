@@ -42,3 +42,6 @@ timestamp,action,key,document_id,move_to
 2023-08-16T14:39:45.675Z,add,pages.infectie_radar_page.nl.infected_per_age_group.legend.percentage_70_plus,xT2YXVOH9b7Mo5ggz8E3NC,__
 2023-08-16T14:39:46.677Z,add,pages.infectie_radar_page.nl.infected_per_age_group.legend.percentage_average,ZmGr7z0dpqDTcKeIJuu46l,__
 2023-08-16T14:39:47.702Z,add,pages.infectie_radar_page.nl.infected_per_age_group.legend_help_text,dWl2HBRH8M14dMBmGGsW2l,__
+2023-08-17T14:43:09.729Z,add,pages.infectie_radar_page.nl.infected_per_age_group.value_annotation,jnRBBkraje744C8PaO0KrH,__
+2023-08-17T14:43:10.885Z,add,pages.infectie_radar_page.nl.infected_per_age_group.line_chart_legend_inaccurate_label,jnRBBkraje744C8PaO0L2S,__
+2023-08-17T14:43:12.103Z,add,pages.infectie_radar_page.nl.infected_per_age_group.tooltip_labels.inaccurate,ZmGr7z0dpqDTcKeIJx2fab,__

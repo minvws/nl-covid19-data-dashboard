@@ -11,7 +11,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group/infected-per-age-group';
+import { InfectionRadarSymptomsPerAgeGroup } from '~/domain/infection_radar/infection-radar-per-age-group';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
@@ -35,7 +35,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('self_test_overall', 'infection_radar_symptoms_per_age_group'),
+  selectNlData('self_test_overall', 'infection_radar_symptoms_trend_per_age_group_weekly'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -143,11 +143,11 @@ const InfectieRadar = (props: StaticProps<typeof getStaticProps>) => {
             }}
             onSelectTimeframe={setConfirmedCasesCovidSimptomsPerAgeTimeFrame}
           >
-            <InfectedPerAgeGroup
+            <InfectionRadarSymptomsPerAgeGroup
               accessibility={{
                 key: 'reported_cases_covid_19_like_symptoms_time_chart',
               }}
-              values={data.infection_radar_symptoms_per_age_group.values}
+              values={data.infection_radar_symptoms_trend_per_age_group_weekly.values}
               timeframe={confirmedCasesCovidSimptomsPerAgeTimeFrame}
               timelineEvents={getTimelineEvents(content.elements.timeSeries, 'tested_per_age_group_archived_20230331')}
               text={textNl}

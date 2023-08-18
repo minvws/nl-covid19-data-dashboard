@@ -1,4 +1,4 @@
-import { NlTestedPerAgeGroupValue, TimeframeOption } from '@corona-dashboard/common';
+import { NlInfectionRadarSymptomsTrendPerAgeGroupWeeklyValue, TimeframeOption } from '@corona-dashboard/common';
 import { Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
@@ -16,19 +16,19 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
 
-interface InfectedPerAgeGroup {
+interface InfectionRadarSymptomsPerAgeGroup {
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
    * graph with a label and description.
    */
   accessibility: AccessibilityDefinition;
-  values: NlTestedPerAgeGroupValue[];
+  values: NlInfectionRadarSymptomsTrendPerAgeGroupWeeklyValue[];
   timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
-  text: SiteText['pages']['positive_tests_page']['nl'];
+  text: SiteText['pages']['infectie_radar_page']['nl'];
 }
 
-export function InfectedPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text }: InfectedPerAgeGroup) {
+export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text }: InfectionRadarSymptomsPerAgeGroup) {
   const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
@@ -36,7 +36,7 @@ export function InfectedPerAgeGroup({ values, timeframe, accessibility, timeline
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
 
   /* Enrich config with dynamic data / locale */
-  const seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] = BASE_SERIES_CONFIG.map((baseAgeGroup) => {
+  const seriesConfig: LineSeriesDefinition<NlInfectionRadarSymptomsTrendPerAgeGroupWeeklyValue>[] = BASE_SERIES_CONFIG.map((baseAgeGroup) => {
     const label = baseAgeGroup.metricProperty in text.infected_per_age_group.legend ? text.infected_per_age_group.legend[baseAgeGroup.metricProperty] : baseAgeGroup.metricProperty;
 
     const ariaLabel = replaceVariablesInText(commonTexts.aria_labels.age_old, {
