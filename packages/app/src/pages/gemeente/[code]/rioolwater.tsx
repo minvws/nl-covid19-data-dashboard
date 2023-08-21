@@ -121,7 +121,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={textGm.barscale_titel}
               metadata={{
-                date: [sewerAverages.last_value.date_start_unix, sewerAverages.last_value.date_end_unix],
+                date: { start: sewerAverages.last_value.date_start_unix, end: sewerAverages.last_value.date_end_unix },
                 source: textGm.bronnen.rivm,
               }}
             >
@@ -145,7 +145,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title={textGm.total_measurements_title}
               description={textGm.total_measurements_description}
               metadata={{
-                date: [sewerInstallationMeasurement.date_start_unix, sewerInstallationMeasurement.date_end_unix],
+                date: { start: sewerInstallationMeasurement.date_start_unix, end: sewerInstallationMeasurement.date_end_unix },
                 source: textGm.bronnen.rivm,
               }}
             >

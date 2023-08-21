@@ -35,11 +35,6 @@ export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, m
       ? replaceVariablesInText(commonTexts.common.metadata.date, {
           date: formatDateFromSeconds(date, 'weekday-long'),
         })
-      : Array.isArray(date)
-      ? replaceVariablesInText(commonTexts.common.metadata.date_from_to, {
-          startDate: formatDateFromSeconds(date[0], 'weekday-long'),
-          endDate: formatDateFromSeconds(date[1], 'weekday-long'),
-        })
       : typeof date === 'string'
       ? date
       : date && date.start && date.end

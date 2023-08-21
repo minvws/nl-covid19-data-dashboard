@@ -138,7 +138,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                 dateEnd: formatDateFromSeconds(sevenDayAverageDates[1], 'weekday-long'),
               })}
               metadata={{
-                date: sevenDayAverageDates,
+                date: { start: sevenDayAverageDates[0], end: sevenDayAverageDates[1] },
                 source: textGm.bronnen.rivm,
               }}
             >
