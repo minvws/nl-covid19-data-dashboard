@@ -43,27 +43,27 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-        "parts": ${getPagePartsQuery('tests_page')},
+        "parts": ${getPagePartsQuery('infection_radar_page')},
         "elements": ${getElementsQuery('nl', ['self_test_overall'], locale)}
       }`;
     })(context);
     return {
       content: {
-        articles: getArticleParts(content.parts.pageParts, 'testsPageArticles'),
-        faqs: getFaqParts(content.parts.pageParts, 'testsPageFAQs'),
-        dataExplained: getDataExplainedParts(content.parts.pageParts, 'testsPageDataExplained'),
+        articles: getArticleParts(content.parts.pageParts, 'infectionRadarPageArticles'),
+        faqs: getFaqParts(content.parts.pageParts, 'infectionRadarPageFAQs'),
+        dataExplained: getDataExplainedParts(content.parts.pageParts, 'infectionRadarPageDataExplained'),
         elements: content.elements,
       },
     };
   }
 );
 
-const InfectieRadar = (props: StaticProps<typeof getStaticProps>) => {
+const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
 
   const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
 
-  const [confirmedCasesCovidSimptomsPerAgeTimeFrame, setConfirmedCasesCovidSimptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [confirmedCasesCovidSymptomsPerAgeTimeFrame, setConfirmedCasesCovidSymptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
 
@@ -142,14 +142,14 @@ const InfectieRadar = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.chart_infectie_radar_age_groups.source.rivm,
             }}
-            onSelectTimeframe={setConfirmedCasesCovidSimptomsPerAgeTimeFrame}
+            onSelectTimeframe={setConfirmedCasesCovidSymptomsPerAgeTimeFrame}
           >
             <InfectionRadarSymptomsPerAgeGroup
               accessibility={{
                 key: 'reported_cases_covid_19_like_symptoms_time_chart',
               }}
               values={data.infection_radar_symptoms_trend_per_age_group_weekly.values}
-              timeframe={confirmedCasesCovidSimptomsPerAgeTimeFrame}
+              timeframe={confirmedCasesCovidSymptomsPerAgeTimeFrame}
               timelineEvents={getTimelineEvents(content.elements.timeSeries, 'tested_per_age_group_archived_20230331')}
               text={textNl}
             />
@@ -168,4 +168,4 @@ const InfectieRadar = (props: StaticProps<typeof getStaticProps>) => {
   );
 };
 
-export default InfectieRadar;
+export default InfectionRadar;

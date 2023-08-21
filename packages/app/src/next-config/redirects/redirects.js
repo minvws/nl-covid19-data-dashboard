@@ -107,7 +107,7 @@ async function redirects() {
     // Redirect for COR-1705
     {
       source: '/landelijk/testen',
-      destination: '/landelijk/infectie-radar',
+      destination: '/landelijk/infectieradar',
       permanent: true,
     },
   ];
