@@ -221,7 +221,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 },
               },
             ]}
-            dataRangeUnix={vaccineCoverageEstimatedAutumn2022.date_unix}
+            dateOrRange={vaccineCoverageEstimatedAutumn2022.date_unix}
           />
           <BorderedKpiSection
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
@@ -251,7 +251,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 },
               },
             ]}
-            dataRangeUnix={vaccineCoverageEstimatedFullyVaccinated.date_unix}
+            dateOrRange={vaccineCoverageEstimatedFullyVaccinated.date_unix}
           />
 
           <VaccineCampaignsTile

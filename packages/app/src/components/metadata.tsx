@@ -11,8 +11,14 @@ type source = {
   href: string;
   aria_text?: string;
 };
+
+interface DateRange {
+  start: number;
+  end: number;
+}
+
 export interface MetadataProps extends MarginBottomProps {
-  date?: number | [number, number] | string;
+  date?: number | DateRange | string;
   source?: source;
   dataSources?: source[];
   obtainedAt?: number;
@@ -36,6 +42,11 @@ export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, m
         })
       : typeof date === 'string'
       ? date
+      : date && date.start && date.end
+      ? replaceVariablesInText(commonTexts.common.metadata.date_from_to, {
+          startDate: formatDateFromSeconds(date.start, 'weekday-long'),
+          endDate: formatDateFromSeconds(date.end, 'weekday-long'),
+        })
       : null;
 
   const intervalString =
