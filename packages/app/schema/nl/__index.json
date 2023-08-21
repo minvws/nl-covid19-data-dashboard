@@ -17,7 +17,7 @@
     "name",
     "proto_name",
     "self_test_overall",
-    "infection_radar_symptoms_trend_per_age_group_weekly",
+    "infectionradar_symptoms_trend_per_age_group_weekly",
     "sewer",
     "vaccine_campaigns",
     "vaccine_administered",
@@ -118,8 +118,8 @@
     "self_test_overall": {
       "$ref": "self_test_overall.json"
     },
-    "infection_radar_symptoms_trend_per_age_group_weekly": {
-      "$ref": "infection_radar_symptoms_trend_per_age_group_weekly.json"
+    "infectionradar_symptoms_trend_per_age_group_weekly": {
+      "$ref": "infectionradar_symptoms_trend_per_age_group_weekly.json"
     }
   },
   "$defs": {

@@ -27,7 +27,7 @@ const pageMetrics = ['self_test_overall', 'infection_radar_symptoms_per_age_grou
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-  textNl: siteText.pages.infectie_radar_page.nl,
+  textNl: siteText.pages.infection_radar_page.nl,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -35,7 +35,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('self_test_overall', 'infection_radar_symptoms_trend_per_age_group_weekly'),
+  selectNlData('self_test_overall', 'infectionradar_symptoms_trend_per_age_group_weekly'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -63,7 +63,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
 
   const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
 
-  const [confirmedCasesCovidSymptomsPerAgeTimeFrame, setConfirmedCasesCovidSymptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [confirmedCasesCovidSymptomsPerAgeTimeFrame, setConfirmedCasesCovidSymptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
 
   const { commonTexts } = useIntl();
 
@@ -138,7 +138,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.chart_infectie_radar_age_groups.title}
             description={textNl.chart_infectie_radar_age_groups.description}
             timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={TimeframeOption.THREE_MONTHS}
+            timeframeInitialValue={confirmedCasesCovidSymptomsPerAgeTimeFrame}
             metadata={{
               source: textNl.chart_infectie_radar_age_groups.source.rivm,
             }}
@@ -148,7 +148,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
               accessibility={{
                 key: 'reported_cases_covid_19_like_symptoms_time_chart',
               }}
-              values={data.infection_radar_symptoms_trend_per_age_group_weekly.values}
+              values={data.infectionradar_symptoms_trend_per_age_group_weekly.values}
               timeframe={confirmedCasesCovidSymptomsPerAgeTimeFrame}
               timelineEvents={getTimelineEvents(content.elements.timeSeries, 'tested_per_age_group_archived_20230331')}
               text={textNl}

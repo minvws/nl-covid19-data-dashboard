@@ -18,7 +18,7 @@ export function getReverseRouter(isMobile: boolean) {
       index: () => (isMobile ? '/landelijk' : reverseRouter.nl.rioolwater()),
       vaccinaties: () => '/landelijk/vaccinaties',
       positieveTesten: () => '/landelijk/positieve-testen',
-      infectionRadar: () => '/landelijk/infectieradar',
+      infectieRadar: () => '/landelijk/infectieradar',
       besmettelijkeMensen: () => '/landelijk/besmettelijke-mensen',
       reproductiegetal: () => '/landelijk/reproductiegetal',
       sterfte: () => '/landelijk/sterfte',
