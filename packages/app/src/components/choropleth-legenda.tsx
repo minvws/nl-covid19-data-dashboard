@@ -33,7 +33,7 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
       label = commonTexts.common.no_virus_particles_measured;
     }
     if (pageType === 'sewer' && i === 1) {
-      label = replaceVariablesInText(commonTexts.common.greate_than_value, {
+      label = replaceVariablesInText(commonTexts.common.greater_than_value, {
         value_1: x.threshold,
         value_2: thresholds[i + 1].threshold,
       });
