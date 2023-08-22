@@ -1,4 +1,4 @@
-import { NlInfectionRadarSymptomsTrendPerAgeGroupWeeklyValue, TimeframeOption } from '@corona-dashboard/common';
+import { NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue, TimeframeOption } from '@corona-dashboard/common';
 import { Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
@@ -22,10 +22,10 @@ interface InfectionRadarSymptomsPerAgeGroup {
    * graph with a label and description.
    */
   accessibility: AccessibilityDefinition;
-  values: NlInfectionRadarSymptomsTrendPerAgeGroupWeeklyValue[];
+  values: NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue[];
   timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
-  text: SiteText['pages']['infectie_radar_page']['nl'];
+  text: SiteText['pages']['infection_radar_page']['nl'];
 }
 
 export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text }: InfectionRadarSymptomsPerAgeGroup) {
@@ -36,7 +36,7 @@ export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibi
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
 
   /* Enrich config with dynamic data / locale */
-  const seriesConfig: LineSeriesDefinition<NlInfectionRadarSymptomsTrendPerAgeGroupWeeklyValue>[] = BASE_SERIES_CONFIG.map((baseAgeGroup) => {
+  const seriesConfig: LineSeriesDefinition<NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue>[] = BASE_SERIES_CONFIG.map((baseAgeGroup) => {
     const label = baseAgeGroup.metricProperty in text.infected_per_age_group.legend ? text.infected_per_age_group.legend[baseAgeGroup.metricProperty] : baseAgeGroup.metricProperty;
 
     const ariaLabel = replaceVariablesInText(commonTexts.aria_labels.age_old, {
