@@ -64,7 +64,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   const sewerAverages = data.sewer;
   const sewerInstallationMeasurement = data.sewer_installation_measurement;
-  const populationCountConnectedToRwzis = data.static_values.population_count_connected_to_rwzis;
+  const populationCountConnectedToRWZIS = data.static_values.population_count_connected_to_rwzis;
 
   if (!sewerAverages) {
     /**
@@ -132,9 +132,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
               <Text>
-                {replaceComponentsInText(commonTexts.gemeente_index.population_count, {
+                {replaceComponentsInText(commonTexts.gemeente_index.population_count_connected_to_rwzis, {
                   municipalityName: municipalityName,
-                  populationCount: <strong>{formatNumber(populationCountConnectedToRwzis)}</strong>,
+                  populationCountConnectedToRWZIS: <strong>{formatNumber(populationCountConnectedToRWZIS)}</strong>,
                 })}
               </Text>
 
