@@ -110,7 +110,7 @@ export function PageInformationBlock({
               <Box flex="1" display="flex" flexDirection="column" spacing={3}>
                 {pageInformationHeader.dataExplained && (
                   <PageInformationButton href={pageInformationHeader.dataExplained.link}>
-                    <Box marginRight={space[5]}>
+                    <Box>
                       <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
                       <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
                     </Box>
@@ -121,7 +121,7 @@ export function PageInformationBlock({
 
                 {pageInformationHeader.faq && (
                   <PageInformationButton href={`#${pageInformationHeader.faq.link}`}>
-                    <Box marginRight={space[5]}>
+                    <Box>
                       <BoldText>{pageInformationHeader.faq.button.header}</BoldText>
                       <RichContent blocks={pageInformationHeader.faq.button.text} />
                     </Box>
@@ -195,6 +195,10 @@ const PageInformationButton = styled(Anchor)`
   text-align: left;
   display: flex;
   justify-content: space-between;
+
+  @media ${mediaQueries.md} {
+    gap: ${space[4]};
+  }
 
   svg {
     color: ${colors.primary};
