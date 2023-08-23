@@ -58,7 +58,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
+const Infectionradar = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
 
   const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
@@ -168,4 +168,4 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
   );
 };
 
-export default InfectionRadar;
+export default Infectionradar;

@@ -899,7 +899,7 @@ export interface Nl {
   vaccine_coverage_per_age_group_estimated_fully_vaccinated: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinatedValue;
   variants?: NlVariants;
   self_test_overall: NlSelfTestOverall;
-  infection_radar_symptoms_trend_per_age_group_weekly: NlInfectionRadarSymptomsTrendPerAgeGroupWeekly;
+  infectionradar_symptoms_trend_per_age_group_weekly: NlInfectionradarSymptomsTrendPerAgeGroupWeekly;
 }
 export interface NlDifference {
   infectious_people__estimate: DifferenceInteger;
@@ -1210,11 +1210,11 @@ export interface NlSelfTestOverallValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlInfectionRadarSymptomsTrendPerAgeGroupWeekly {
-  values: NlInfectionRadarSymptomsTrendPerAgeGroupWeeklyValue[];
-  last_value: NlInfectionRadarSymptomsTrendPerAgeGroupWeeklyValue;
+export interface NlInfectionradarSymptomsTrendPerAgeGroupWeekly {
+  values: NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue[];
+  last_value: NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue;
 }
-export interface NlInfectionRadarSymptomsTrendPerAgeGroupWeeklyValue {
+export interface NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue {
   date_of_insertion_unix: number;
   date_of_report_unix: number;
   date_start_unix: number;
