@@ -1,4 +1,5 @@
 timestamp,action,key,document_id,move_to
+<<<<<<< HEAD
 2023-08-22T10:02:41.476Z,delete,pages.infectie_radar_page.nl.chart_infectie_radar_age_groups.description,ZmGr7z0dpqDTcKeIJulxUI,__
 2023-08-22T10:02:41.477Z,delete,pages.infectie_radar_page.nl.chart_infectie_radar_age_groups.source,ZmGr7z0dpqDTcKeIJutJsZ,__
 2023-08-22T10:02:41.478Z,delete,pages.infectie_radar_page.nl.chart_infectie_radar_age_groups.source.rivm.download,xT2YXVOH9b7Mo5ggz8DopY,__
@@ -49,3 +50,6 @@ timestamp,action,key,document_id,move_to
 2023-08-22T10:02:41.494Z,delete,pages.infection_radar_page.nl.sources.self_test.href,mg2gRtT3wcSeqm3tS0LcFp,__
 2023-08-22T10:02:41.494Z,delete,pages.infection_radar_page.nl.sources.self_test.text,NXSglZrybYX4NidHhc6sqn,__
 2023-08-22T10:02:41.494Z,delete,pages.infection_radar_page.nl.title,J4TD0W3ViFgya1T3RhD7vX,__
+=======
+2023-08-18T14:03:05.481Z,add,common.gemeente_index.population_count_connected_to_rwzis,jnRBBkraje744C8PaQGbfi,__
+>>>>>>> develop
