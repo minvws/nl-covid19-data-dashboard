@@ -31,7 +31,7 @@ const mapKeysToReverseRouter = {
   positive_tests: 'positieveTesten',
   reproduction_number: 'reproductiegetal',
   sewage_measurement: 'rioolwater',
-  infection_radar: 'infectieRadar',
+  infection_radar: 'infectieradar',
   vaccinations: 'vaccinaties',
   variants: 'varianten',
 } as const;
