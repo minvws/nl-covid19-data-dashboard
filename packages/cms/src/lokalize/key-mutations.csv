@@ -58,3 +58,5 @@ timestamp,action,key,document_id,move_to
 2023-08-23T10:14:49.954Z,add,common.accessibility.charts.reported_cases_covid_19_like_symptoms_time_chart.label,3wzwGuQ73UdAvQOvNcO8Dj,__
 2023-08-23T10:14:49.954Z,delete,common.accessibility.charts.reported_cases_covid_19_like_symptoms.description,dWl2HBRH8M14dMBmGGsF1L,__
 2023-08-23T10:14:49.955Z,delete,common.accessibility.charts.reported_cases_covid_19_like_symptoms.label,jnRBBkraje744C8PaLq9fo,__
+2023-08-23T10:23:05.335Z,add,common.sidebar.metrics.infection_radar.title,3wzwGuQ73UdAvQOvNcOG3s,__
+2023-08-23T10:23:05.336Z,delete,common.sidebar.metrics.infectie_radar.title,jnRBBkraje744C8PaLeYPd,__
