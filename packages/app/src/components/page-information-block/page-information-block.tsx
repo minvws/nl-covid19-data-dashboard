@@ -195,10 +195,7 @@ const PageInformationButton = styled(Anchor)`
   text-align: left;
   display: flex;
   justify-content: space-between;
-
-  @media ${mediaQueries.md} {
-    gap: ${space[4]};
-  }
+  gap: ${space[4]};
 
   svg {
     color: ${colors.primary};
