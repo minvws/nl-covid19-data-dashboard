@@ -903,9 +903,9 @@ export interface Nl {
 export interface NlDifference {
   infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
-  hospital_lcps__beds_occupied_covid: DifferenceInteger;
+  hospital_lcps__beds_occupied_covid: DifferenceDecimal;
   intensive_care_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
-  intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
+  intensive_care_lcps__beds_occupied_covid: DifferenceDecimal;
   sewer__average: DifferenceInteger;
   reproduction__index_average?: DifferenceDecimal;
   vulnerable_hospital_admissions?: DifferenceInteger;
@@ -1014,6 +1014,8 @@ export interface NlHospitalLcpsValue {
   influx_covid_patients_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface NlIntensiveCareLcps {
   values: NlIntensiveCareLcpsValue[];
@@ -1027,6 +1029,8 @@ export interface NlIntensiveCareLcpsValue {
   influx_covid_patients_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface NlDeceasedCbs {
   values: NlDeceasedCbsValue[];

@@ -106,8 +106,6 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const hospitalLastValue = getLastFilledValue(data.hospital_lcps);
   const icuLastValue = getLastFilledValue(data.intensive_care_lcps);
 
-  const borderedKpiPeriod = data.difference.hospital_lcps__beds_occupied_covid;
-
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
   const mostRecentDateUnix = Math.max(hospitalLastValue.date_unix, icuLastValue.date_unix);
 
@@ -139,7 +137,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.kpi_tiles.occupancies.title}
             description={textNl.kpi_tiles.occupancies.description}
             source={textNl.sources.lnaz}
-            dateOrRange={{ start: borderedKpiPeriod.old_date_unix, end: borderedKpiPeriod.new_date_unix }}
+            dateOrRange={{ start: hospitalLastValue.date_start_unix, end: hospitalLastValue.date_end_unix }}
             tilesData={[
               {
                 value: hospitalLastValue.beds_occupied_covid_moving_average,
