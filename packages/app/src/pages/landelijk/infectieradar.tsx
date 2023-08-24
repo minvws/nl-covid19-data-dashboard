@@ -44,7 +44,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('infection_radar_page')},
-        "elements": ${getElementsQuery('nl', ['self_test_overall'], locale)}
+        "elements": ${getElementsQuery('nl', ['self_test_overall', 'infectionradar_symptoms_trend_per_age_group_weekly'], locale)}
       }`;
     })(context);
     return {
@@ -58,7 +58,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const Infectionradar = (props: StaticProps<typeof getStaticProps>) => {
+const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
 
   const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
@@ -150,7 +150,7 @@ const Infectionradar = (props: StaticProps<typeof getStaticProps>) => {
               }}
               values={data.infectionradar_symptoms_trend_per_age_group_weekly.values}
               timeframe={confirmedCasesCovidSymptomsPerAgeTimeFrame}
-              timelineEvents={getTimelineEvents(content.elements.timeSeries, 'tested_per_age_group_archived_20230331')}
+              timelineEvents={getTimelineEvents(content.elements.timeSeries, 'infectionradar_symptoms_trend_per_age_group_weekly')}
               text={textNl}
             />
           </ChartTile>
@@ -168,4 +168,4 @@ const Infectionradar = (props: StaticProps<typeof getStaticProps>) => {
   );
 };
 
-export default Infectionradar;
+export default InfectionRadar;
