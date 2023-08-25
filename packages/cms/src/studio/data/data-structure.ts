@@ -321,5 +321,15 @@ export const dataStructure = {
     vaccine_coverage_per_age_group_estimated_fully_vaccinated: ['age_12_plus_birthyear', 'age_12_plus_vaccinated', 'age_18_plus_birthyear', 'age_18_plus_vaccinated'],
     variants: ['variant_code', 'values', 'last_value'],
     self_test_overall: ['infected_percentage'],
+    infectionradar_symptoms_trend_per_age_group_weekly: [
+      'date_of_report_unix',
+      'percentage_0_24',
+      'percentage_25_39',
+      'percentage_40_49',
+      'percentage_50_59',
+      'percentage_60_69',
+      'percentage_70_plus',
+      'percentage_average',
+    ],
   },
 };
