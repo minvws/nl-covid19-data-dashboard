@@ -150,7 +150,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               title={ElderlyPeopleText.hospital_admissions.kpi_titel}
               description={ElderlyPeopleText.hospital_admissions.kpi_toelichting}
               metadata={{
-                date: [vulnerableHospitalAdmissionsData.date_start_unix, vulnerableHospitalAdmissionsData.date_end_unix],
+                date: { start: vulnerableHospitalAdmissionsData.date_start_unix, end: vulnerableHospitalAdmissionsData.date_end_unix },
                 source: ElderlyPeopleText.bronnen.rivm,
               }}
             >
@@ -162,7 +162,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             title={textNl.kpi_tiles.infected_locations.title}
             description={textNl.kpi_tiles.infected_locations.description}
             source={infectedLocationsText.bronnen.rivm}
-            dateUnix={vulnerableNursingHomeDataLastValue.date_unix}
+            dateOrRange={vulnerableNursingHomeDataLastValue.date_unix}
             tilesData={[
               {
                 value: vulnerableNursingHomeDataLastValue.infected_locations_total,

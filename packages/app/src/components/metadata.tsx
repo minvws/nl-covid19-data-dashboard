@@ -11,8 +11,14 @@ type source = {
   href: string;
   aria_text?: string;
 };
+
+interface DateRange {
+  start: number;
+  end: number;
+}
+
 export interface MetadataProps extends MarginBottomProps {
-  date?: number | [number, number] | string;
+  date?: number | DateRange | string;
   source?: source;
   dataSources?: source[];
   obtainedAt?: number;
@@ -29,13 +35,13 @@ export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, m
       ? replaceVariablesInText(commonTexts.common.metadata.date, {
           date: formatDateFromSeconds(date, 'weekday-long'),
         })
-      : Array.isArray(date)
-      ? replaceVariablesInText(commonTexts.common.metadata.date_from_to, {
-          startDate: formatDateFromSeconds(date[0], 'weekday-long'),
-          endDate: formatDateFromSeconds(date[1], 'weekday-long'),
-        })
       : typeof date === 'string'
       ? date
+      : date && date.start && date.end
+      ? replaceVariablesInText(commonTexts.common.metadata.date_from_to, {
+          startDate: formatDateFromSeconds(date.start, 'weekday-long'),
+          endDate: formatDateFromSeconds(date.end, 'weekday-long'),
+        })
       : null;
 
   const intervalString =

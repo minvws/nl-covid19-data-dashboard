@@ -220,7 +220,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 },
               },
             ]}
-            dateUnix={vaccineCoverageEstimatedAutumn2022.date_unix}
+            dateOrRange={vaccineCoverageEstimatedAutumn2022.date_unix}
           />
           <BorderedKpiSection
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
@@ -250,7 +250,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 },
               },
             ]}
-            dateUnix={vaccineCoverageEstimatedFullyVaccinated.date_unix}
+            dateOrRange={vaccineCoverageEstimatedFullyVaccinated.date_unix}
           />
 
           <VaccineCampaignsTile
@@ -273,7 +273,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             data={currentData.vaccine_administered_last_timeframe.vaccine_types}
             metadata={{
               source: textShared.bronnen.rivm,
-              date: [currentData.vaccine_administered_last_timeframe.date_start_unix, currentData.vaccine_administered_last_timeframe.date_end_unix],
+              date: { start: currentData.vaccine_administered_last_timeframe.date_start_unix, end: currentData.vaccine_administered_last_timeframe.date_end_unix },
               obtainedAt: currentData.vaccine_administered_last_timeframe.date_of_insertion_unix,
             }}
           />
@@ -457,10 +457,10 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 description={textNl.grafiek_draagvlak.omschrijving}
                 metadata={{
                   datumsText: textNl.grafiek_draagvlak.metadata_tekst,
-                  date: [
-                    archivedData.vaccine_vaccinated_or_support_archived_20230411.last_value.date_start_unix,
-                    archivedData.vaccine_vaccinated_or_support_archived_20230411.last_value.date_end_unix,
-                  ],
+                  date: {
+                    start: archivedData.vaccine_vaccinated_or_support_archived_20230411.last_value.date_start_unix,
+                    end: archivedData.vaccine_vaccinated_or_support_archived_20230411.last_value.date_end_unix,
+                  },
                 }}
               >
                 <TimeSeriesChart
