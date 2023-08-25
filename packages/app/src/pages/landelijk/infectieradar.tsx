@@ -83,7 +83,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
         <TileList>
           <PageInformationBlock
             category={commonTexts.sidebar.categories.development_of_the_virus.title}
-            screenReaderCategory={commonTexts.sidebar.metrics.positive_tests.title}
+            screenReaderCategory={commonTexts.sidebar.metrics.infection_radar.title}
             title={textNl.title}
             icon={<GgdTesten aria-hidden="true" />}
             description={textNl.description}
