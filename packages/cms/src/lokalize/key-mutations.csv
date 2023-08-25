@@ -54,3 +54,9 @@ timestamp,action,key,document_id,move_to
 2023-08-22T10:02:41.494Z,delete,pages.infection_radar_page.nl.sources.self_test.text,NXSglZrybYX4NidHhc6sqn,__
 2023-08-22T10:02:41.494Z,delete,pages.infection_radar_page.nl.title,J4TD0W3ViFgya1T3RhD7vX,__
 2023-08-18T14:03:05.481Z,add,common.gemeente_index.population_count_connected_to_rwzis,jnRBBkraje744C8PaQGbfi,__
+2023-08-24T13:36:49.315Z,add,pages.patients_page.nl.section_archived.description,NMSA8CUHhzxbsw88WVXCPv,__
+2023-08-24T13:36:50.327Z,add,pages.patients_page.nl.section_archived.title,NMSA8CUHhzxbsw88WVXCX8,__
+2023-08-18T10:02:33.947Z,add,common.choropleth_tooltip.gm.admissions_in_the_last_7_days_per_100000.content,jnRBBkraje744C8PaQ1fzO,__
+2023-08-18T10:02:34.932Z,add,common.choropleth_tooltip.gm.admissions_in_the_last_7_days_per_100000.subject,y0YNHvmj0Rc826uxTTWWkI,__
+2023-08-25T14:42:02.461Z,add,common.accessibility.charts.admissions_in_the_last_7_days_per_100000.content,NMSA8CUHhzxbsw88WW7oqT,__
+2023-08-25T14:42:03.415Z,add,common.accessibility.charts.admissions_in_the_last_7_days_per_100000.subject,NMSA8CUHhzxbsw88WW7oxg,__

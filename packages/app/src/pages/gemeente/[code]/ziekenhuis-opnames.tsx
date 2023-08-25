@@ -45,8 +45,8 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmData('hospital_nice', 'code'),
   createGetChoroplethData({
-    gm: ({ hospital_nice_choropleth }, context) => ({
-      hospital_nice_choropleth: filterByRegionMunicipalities(hospital_nice_choropleth, context),
+    gm: ({ hospital_nice }, context) => ({
+      hospital_nice: filterByRegionMunicipalities(hospital_nice, context),
     }),
   }),
   async (context: GetStaticPropsContext) => {
@@ -83,7 +83,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
   const { textGm } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const lastValue = data.hospital_nice.last_value;
-  const lastValueChoropleth = last(choropleth.gm.hospital_nice_choropleth) || lastValue;
+  const lastValueChoropleth = last(choropleth.gm.hospital_nice) || lastValue;
 
   const underReportedRange = getBoundaryDateStartUnix(
     data.hospital_nice.values,
@@ -142,7 +142,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                 source: textGm.bronnen.rivm,
               }}
             >
-              <KpiValue absolute={lastValue.admissions_on_date_of_admission_moving_average_rounded} isAmount isMovingAverageDifference />
+              <KpiValue absolute={lastValue.admissions_in_the_last_7_days} isAmount isMovingAverageDifference />
             </KpiTile>
           </TwoKpiSection>
 
@@ -207,10 +207,10 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
-              data={choropleth.gm.hospital_nice_choropleth}
+              data={choropleth.gm.hospital_nice}
               dataConfig={{
-                metricName: 'hospital_nice_choropleth',
-                metricProperty: 'admissions_on_date_of_admission_per_100000',
+                metricName: 'hospital_nice',
+                metricProperty: 'admissions_in_the_last_7_days_per_100000',
               }}
               dataOptions={{
                 selectedCode: data.code,

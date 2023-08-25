@@ -1,7 +1,8 @@
 import type {
   ArchivedGmCollection,
+  ArchivedGmCollectionHospitalNice,
   GmCollection,
-  GmCollectionHospitalNiceChoropleth,
+  GmCollectionHospitalNice,
   GmCollectionSewer,
   GmCollectionTestedOverall,
   GmCollectionVaccineCoveragePerAgeGroup,
@@ -56,10 +57,10 @@ export type InferedDataCollection<T extends ChoroplethDataItem> = T extends GmDa
   ? ArchivedVrCollection
   : never;
 
-export type GmDataCollection = GmCollectionHospitalNiceChoropleth[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
+export type GmDataCollection = GmCollectionHospitalNice[] | GmCollectionSewer[] | GmCollectionVaccineCoveragePerAgeGroup[];
 export type GmDataItem = GmDataCollection[number];
 
-export type ArchivedGmDataCollection = GmCollectionTestedOverall[];
+export type ArchivedGmDataCollection = GmCollectionTestedOverall[] | ArchivedGmCollectionHospitalNice[];
 export type ArchivedGmDataItem = ArchivedGmDataCollection[number];
 
 export type ArchivedVrDataCollection = VrCollectionVulnerableNursingHome[] | VrCollectionElderlyAtHome[] | VrCollectionDisabilityCare[];
