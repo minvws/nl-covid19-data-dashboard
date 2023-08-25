@@ -115,3 +115,13 @@ timestamp,action,key,document_id,move_to
 2023-08-22T10:02:41.494Z,delete,pages.infection_radar_page.nl.sources.self_test.text,NXSglZrybYX4NidHhc6sqn,__
 2023-08-22T10:02:41.494Z,delete,pages.infection_radar_page.nl.title,J4TD0W3ViFgya1T3RhD7vX,__
 2023-08-18T14:03:05.481Z,add,common.gemeente_index.population_count_connected_to_rwzis,jnRBBkraje744C8PaQGbfi,__
+2023-08-25T09:25:07.075Z,add,pages.infection_radar_page.nl.chart_infection_radar_age_groups.description,wJsqoXQkxXB7L62AucKIES,__
+2023-08-25T09:25:08.066Z,add,pages.infection_radar_page.nl.chart_infection_radar_age_groups.source.rivm.download,uHFfJYJkKtXC1Rsty3F8yT,__
+2023-08-25T09:25:09.049Z,add,pages.infection_radar_page.nl.chart_infection_radar_age_groups.source.rivm.href,eMbA161XQE47KFPnazYbY4,__
+2023-08-25T09:25:10.075Z,add,pages.infection_radar_page.nl.chart_infection_radar_age_groups.source.rivm.text,NMSA8CUHhzxbsw88WW5WCb,__
+2023-08-25T09:25:11.078Z,add,pages.infection_radar_page.nl.chart_infection_radar_age_groups.title,LWiFeXKdw2GKCaPW8IXMfE,__
+2023-08-25T09:25:11.079Z,delete,pages.infection_radar_page.nl.chart_infectie_radar_age_groups.description,J4TD0W3ViFgya1T3RkPJG6,__
+2023-08-25T09:25:11.079Z,delete,pages.infection_radar_page.nl.chart_infectie_radar_age_groups.source.rivm.download,VlbjYO9GDKwaUp5hRXovPL,__
+2023-08-25T09:25:11.080Z,delete,pages.infection_radar_page.nl.chart_infectie_radar_age_groups.source.rivm.href,NXSglZrybYX4NidHheFmx0,__
+2023-08-25T09:25:11.080Z,delete,pages.infection_radar_page.nl.chart_infectie_radar_age_groups.source.rivm.text,eurTV2Hx3hDhUozYyj4p6N,__
+2023-08-25T09:25:11.080Z,delete,pages.infection_radar_page.nl.chart_infectie_radar_age_groups.title,3wzwGuQ73UdAvQOvNcO5FR,__
