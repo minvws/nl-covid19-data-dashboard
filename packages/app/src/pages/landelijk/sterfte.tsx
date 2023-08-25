@@ -136,7 +136,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             description={textNl.section_archived.description}
             isArchivedHidden={isArchivedContentShown}
             onToggleArchived={() => setIsArchivedContentShown(!isArchivedContentShown)}
-            headingLevel={3}
           />
 
           {isArchivedContentShown && (
