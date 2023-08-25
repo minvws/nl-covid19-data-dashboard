@@ -110,8 +110,10 @@ export function PageInformationBlock({
               <Box flex="1" display="flex" flexDirection="column" spacing={3}>
                 {pageInformationHeader.dataExplained && (
                   <PageInformationButton href={pageInformationHeader.dataExplained.link}>
-                    <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
-                    <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
+                    <Box>
+                      <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
+                      <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
+                    </Box>
 
                     <ChevronRight />
                   </PageInformationButton>
@@ -119,8 +121,10 @@ export function PageInformationBlock({
 
                 {pageInformationHeader.faq && (
                   <PageInformationButton href={`#${pageInformationHeader.faq.link}`}>
-                    <BoldText>{pageInformationHeader.faq.button.header}</BoldText>
-                    <RichContent blocks={pageInformationHeader.faq.button.text} />
+                    <Box>
+                      <BoldText>{pageInformationHeader.faq.button.header}</BoldText>
+                      <RichContent blocks={pageInformationHeader.faq.button.text} />
+                    </Box>
 
                     <ChevronDown />
                   </PageInformationButton>
@@ -188,16 +192,15 @@ const PageInformationButton = styled(Anchor)`
   color: ${colors.black};
   cursor: pointer;
   padding: ${space[3]} ${space[4]};
-  position: relative;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+  gap: ${space[4]};
 
   svg {
     color: ${colors.primary};
-    position: absolute;
-    right: ${space[2]};
-    top: 50%;
-    transform: translate(-50%, -50%);
     width: 24px;
+    flex-shrink: 0;
   }
 
   .underline {
