@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Markdown } from '~/components/markdown';
-import { Anchor, BoldText, HeadingLevel } from '~/components/typography';
+import { Anchor, BoldText } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { useIntl } from '~/intl';
 import { mediaQueries, radii, space } from '~/style/theme';
@@ -25,7 +25,6 @@ interface InformationBlockProps {
         href: string;
       }[]
     | null;
-  headingLevel?: HeadingLevel;
   metadata?: MetadataProps;
   referenceLink?: string;
   id?: string;
@@ -94,8 +93,14 @@ export function PageInformationBlock({
   ) : null;
 
   return (
-    <Box as="header" id={id} spacing={{ _: 3, md: 4 }}>
-      {title && <Header icon={icon} title={title} category={category} screenReaderCategory={screenReaderCategory} />}
+    <Box
+      as="header"
+      id={id}
+      spacing={{ _: 3, md: 4 }}
+      borderTop={showArchivedToggleButton ? `solid 2px ${colors.gray2}` : undefined}
+      paddingTop={showArchivedToggleButton ? space[4] : undefined}
+    >
+      {title && <Header level={showArchivedToggleButton ? 3 : undefined} icon={icon} title={title} category={category} screenReaderCategory={screenReaderCategory} />}
       {scopedWarning && <WarningTile variant="emphasis" message={scopedWarning} icon={Warning} isFullWidth />}
 
       {description && (

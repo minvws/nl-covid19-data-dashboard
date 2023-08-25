@@ -4,7 +4,6 @@ import { isEmpty } from 'lodash';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { ChartTile } from '~/components/chart-tile';
-import { Divider } from '~/components/divider';
 import { InView } from '~/components/in-view';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
@@ -310,13 +309,13 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             </InView>
           )}
 
-          <Divider />
           <PageInformationBlock
             title={textNl.section_archived.title}
             description={textNl.section_archived.description}
             isArchivedHidden={hasHideArchivedCharts}
             onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
           />
+
           {hasHideArchivedCharts && (
             <>
               <BoosterShotCoveragePerAgeGroup

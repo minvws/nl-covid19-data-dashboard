@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { AgeDemographic } from '~/components/age-demographic';
 import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
-import { Divider } from '~/components/divider';
 import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -131,8 +130,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
             </InView>
           )}
-
-          <Divider />
 
           <PageInformationBlock
             title={textNl.section_archived.title}

@@ -3,7 +3,6 @@ import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { Divider } from '~/components/divider';
 import { InView } from '~/components/in-view';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
@@ -220,13 +219,13 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             </InView>
           )}
 
-          <Divider />
           <PageInformationBlock
             title={textNl.section_archived.title}
             description={textNl.section_archived.description}
             isArchivedHidden={hasHideArchivedCharts}
             onToggleArchived={() => setHideArchivedCharts(!hasHideArchivedCharts)}
           />
+
           {hasHideArchivedCharts && (
             <>
               <VaccineCoverageToggleTile

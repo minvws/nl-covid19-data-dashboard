@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import React from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { Heading } from '~/components/typography';
+import { Heading, HeadingLevel } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { space } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -17,9 +17,10 @@ type HeaderProps = {
   icon?: JSX.Element;
   category?: string;
   screenReaderCategory?: string;
+  level?: HeadingLevel;
 };
 
-export function Header({ icon, title, category, screenReaderCategory }: HeaderProps) {
+export function Header({ icon, title, category, screenReaderCategory, level = 1 }: HeaderProps) {
   const breakpoints = useBreakpoints();
   const isMediumScreen = breakpoints.md;
 
@@ -35,7 +36,7 @@ export function Header({ icon, title, category, screenReaderCategory }: HeaderPr
         </Box>
       )}
       {icon && isMediumScreen && <Icon gridArea="sideIcon">{icon}</Icon>}
-      <Heading level={1} hyphens="auto" css={css({ gridArea: 'title' })}>
+      <Heading level={level} hyphens="auto" css={css({ gridArea: 'title' })}>
         {title}
       </Heading>
     </GridLayout>
