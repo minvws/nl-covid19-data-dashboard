@@ -135,12 +135,12 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTile>
 
           <ChartTile
-            title={textNl.chart_infectie_radar_age_groups.title}
-            description={textNl.chart_infectie_radar_age_groups.description}
+            title={textNl.chart_infection_radar_age_groups.title}
+            description={textNl.chart_infection_radar_age_groups.description}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={confirmedCasesCovidSymptomsPerAgeTimeFrame}
             metadata={{
-              source: textNl.chart_infectie_radar_age_groups.source.rivm,
+              source: textNl.chart_infection_radar_age_groups.source.rivm,
             }}
             onSelectTimeframe={setConfirmedCasesCovidSymptomsPerAgeTimeFrame}
           >
