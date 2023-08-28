@@ -25,7 +25,7 @@ interface InfectionRadarSymptomsPerAgeGroup {
   values: NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue[];
   timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
-  text: SiteText['pages']['infection_radar_page']['nl'];
+  text: SiteText['pages']['infectie_radar_page']['nl'];
 }
 
 export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text }: InfectionRadarSymptomsPerAgeGroup) {
