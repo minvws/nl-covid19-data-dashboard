@@ -25,7 +25,7 @@ interface InfectionRadarSymptomsPerAgeGroup {
   values: NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue[];
   timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
-  text: SiteText['pages']['infection_radar_page']['nl'];
+  text: SiteText['pages']['infectie_radar_page']['nl'];
 }
 
 export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text }: InfectionRadarSymptomsPerAgeGroup) {
@@ -37,7 +37,10 @@ export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibi
 
   /* Enrich config with dynamic data / locale */
   const seriesConfig: LineSeriesDefinition<NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue>[] = BASE_SERIES_CONFIG.map((baseAgeGroup) => {
-    const label = baseAgeGroup.metricProperty in text.infected_per_age_group.legend ? text.infected_per_age_group.legend[baseAgeGroup.metricProperty] : baseAgeGroup.metricProperty;
+    const label =
+      baseAgeGroup.metricProperty in text.infection_radar_infected_per_age_group.legend
+        ? text.infection_radar_infected_per_age_group.legend[baseAgeGroup.metricProperty]
+        : baseAgeGroup.metricProperty;
 
     const ariaLabel = replaceVariablesInText(commonTexts.aria_labels.age_old, {
       age: label,
@@ -68,7 +71,13 @@ export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibi
 
   return (
     <ErrorBoundary>
-      <InteractiveLegend helpText={text.infected_per_age_group.legend_help_text} selectOptions={interactiveLegendOptions} selection={list} onToggleItem={toggle} onReset={clear} />
+      <InteractiveLegend
+        helpText={text.infection_radar_infected_per_age_group.legend_help_text}
+        selectOptions={interactiveLegendOptions}
+        selection={list}
+        onToggleItem={toggle}
+        onReset={clear}
+      />
       <Spacer marginBottom={space[2]} />
       <TimeSeriesChart
         forceLegend
@@ -80,13 +89,13 @@ export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibi
         formatTooltip={(data) => <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />}
         dataOptions={{
           isPercentage: true,
-          valueAnnotation: text.infected_per_age_group.value_annotation,
+          valueAnnotation: text.infection_radar_infected_per_age_group.value_annotation,
           timespanAnnotations: [
             {
               start: underReportedDateStart,
               end: Infinity,
-              label: text.infected_per_age_group.line_chart_legend_inaccurate_label,
-              shortLabel: text.infected_per_age_group.tooltip_labels.inaccurate,
+              label: text.infection_radar_infected_per_age_group.line_chart_legend_inaccurate_label,
+              shortLabel: text.infection_radar_infected_per_age_group.tooltip_labels.inaccurate,
             },
           ],
           timelineEvents,

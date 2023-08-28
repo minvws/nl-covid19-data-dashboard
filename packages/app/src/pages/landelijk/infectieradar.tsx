@@ -27,7 +27,7 @@ const pageMetrics = ['self_test_overall', 'infection_radar_symptoms_per_age_grou
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-  textNl: siteText.pages.infection_radar_page.nl,
+  textNl: siteText.pages.infectie_radar_page.nl,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
