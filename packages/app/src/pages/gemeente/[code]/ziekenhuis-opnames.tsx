@@ -90,7 +90,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
     countTrailingNullValues(data.hospital_nice.values, 'admissions_on_date_of_admission_moving_average')
   );
 
-  const sevenDayAverageDates: [number, number] = [underReportedRange - WEEK_IN_SECONDS, underReportedRange - DAY_IN_SECONDS];
+  const sevenDayAverageDates = { start: underReportedRange - WEEK_IN_SECONDS, end: underReportedRange - DAY_IN_SECONDS };
 
   const metadata = {
     ...commonTexts.gemeente_index.metadata,
@@ -134,8 +134,8 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             <KpiTile
               title={textGm.barscale_titel}
               description={replaceVariablesInText(textGm.extra_uitleg, {
-                dateStart: formatDateFromSeconds(sevenDayAverageDates[0], 'weekday-long'),
-                dateEnd: formatDateFromSeconds(sevenDayAverageDates[1], 'weekday-long'),
+                dateStart: formatDateFromSeconds(sevenDayAverageDates.start, 'weekday-long'),
+                dateEnd: formatDateFromSeconds(sevenDayAverageDates.end, 'weekday-long'),
               })}
               metadata={{
                 date: sevenDayAverageDates,

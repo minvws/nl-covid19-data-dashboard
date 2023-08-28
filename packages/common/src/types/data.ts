@@ -851,6 +851,8 @@ export interface GmCollectionHospitalNice {
   gmcode: string;
   admissions_in_the_last_7_days_per_100000: number;
   date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface GmCollectionSewer {
   date_start_unix: number;

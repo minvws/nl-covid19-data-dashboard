@@ -9,9 +9,9 @@ import { Text } from '../typography';
 import { KpiContent } from './components/kpi-content';
 import { BorderedKpiSectionProps } from './types';
 
-export const BorderedKpiSection = ({ title, description, source, dateUnix, tilesData }: BorderedKpiSectionProps) => {
+export const BorderedKpiSection = ({ title, description, source, dateOrRange, tilesData }: BorderedKpiSectionProps) => {
   const metadata: MetadataProps = {
-    date: dateUnix,
+    date: dateOrRange,
     source: source,
   };
 

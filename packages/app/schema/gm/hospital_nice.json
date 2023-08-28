@@ -11,7 +11,9 @@
         "admissions_in_the_last_7_days",
         "admissions_on_date_of_reporting",
         "date_unix",
-        "date_of_insertion_unix"
+        "date_of_insertion_unix",
+        "date_start_unix",
+        "date_end_unix"
       ],
       "properties": {
         "date_unix": {
@@ -33,6 +35,12 @@
           "type": "integer"
         },
         "date_of_insertion_unix": {
+          "type": "integer"
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
           "type": "integer"
         }
       }

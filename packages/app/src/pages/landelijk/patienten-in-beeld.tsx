@@ -160,7 +160,10 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               outdatedDataLabel: textNl.choropleth_legend_outdated_data_label,
             }}
             metadata={{
-              date: choropleth.gm.hospital_nice[choropleth.gm.hospital_nice.length - 1].date_unix,
+              date: {
+                start: choropleth.gm.hospital_nice[choropleth.gm.hospital_nice.length - 1].date_start_unix,
+                end: choropleth.gm.hospital_nice[choropleth.gm.hospital_nice.length - 1].date_end_unix,
+              },
               source: textNl.sources.nice,
             }}
             pageType="patienten-in-beeld"
