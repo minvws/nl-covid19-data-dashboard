@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - 'bugfix/**'
 
 jobs:
   sync-after-feature:
