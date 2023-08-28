@@ -117,7 +117,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             description={textGm.pagina_toelichting}
             metadata={{
               datumsText: textGm.datums,
-              dateOrRange: lastValue.date_unix,
+              dateOrRange: { start: lastValue.date_start_unix, end: lastValue.date_end_unix },
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
             }}
