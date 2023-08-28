@@ -162,6 +162,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               date: choropleth.gm.hospital_nice[choropleth.gm.hospital_nice.length - 1].date_unix,
               source: textNl.sources.nice,
             }}
+            pageType="patienten-in-beeld"
           >
             <DynamicChoropleth
               accessibility={{

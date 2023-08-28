@@ -29,10 +29,10 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
       : replaceVariablesInText(commonTexts.common.value_and_higher, {
           value: formatNumber(x.threshold),
         });
-    if (pageType === 'sewer' && i === 0 && x.threshold === 0) {
+    if ((pageType === 'sewer' || pageType === 'patienten-in-beeld') && i === 0 && x.threshold === 0) {
       label = commonTexts.common.no_virus_particles_measured;
     }
-    if (pageType === 'sewer' && i === 1) {
+    if ((pageType === 'sewer' || pageType === 'patienten-in-beeld') && i === 1) {
       label = replaceVariablesInText(commonTexts.common.greater_than_value, {
         value_1: x.threshold,
         value_2: thresholds[i + 1].threshold,
@@ -45,7 +45,7 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
     } as LegendItem;
   });
 
-  if (pageType === 'sewer') {
+  if (pageType === 'sewer' || pageType === 'patienten-in-beeld') {
     legendItems.unshift({
       label: outdatedDataLabel,
       shape: 'square',
