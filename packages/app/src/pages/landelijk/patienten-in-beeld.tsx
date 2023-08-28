@@ -157,6 +157,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               thresholds: thresholds.gm.admissions_in_the_last_7_days_per_100000,
               title: textNl.choropleth.legend_title,
+              outdatedDataLabel: textNl.choropleth_legend_outdated_data_label,
             }}
             metadata={{
               date: choropleth.gm.hospital_nice[choropleth.gm.hospital_nice.length - 1].date_unix,
