@@ -1,4 +1,4 @@
-import { colors, GmCollectionHospitalNice, ArchivedGmCollectionHospitalNice, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors, GmCollectionHospitalNiceChoropleth, ArchivedGmCollectionHospitalNiceChoropleth, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -44,10 +44,10 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlData('hospital_nice_per_age_group', 'intensive_care_nice_per_age_group', 'hospital_nice', 'intensive_care_nice'),
   createGetChoroplethData({
-    gm: ({ hospital_nice }) => ({ hospital_nice }),
+    gm: ({ hospital_nice_choropleth }) => ({ hospital_nice_choropleth }),
   }),
   createGetArchivedChoroplethData({
-    gm: ({ hospital_nice_archived_20230905 }) => ({ hospital_nice_archived_20230905 }),
+    gm: ({ hospital_nice_choropleth_archived_20230830 }) => ({ hospital_nice_choropleth_archived_20230830 }),
   }),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
@@ -124,8 +124,8 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
-  const choroplethDataGm: GmCollectionHospitalNice[] = choropleth.gm.hospital_nice;
-  const archivedChoroplethDataGm: ArchivedGmCollectionHospitalNice[] = archivedChoropleth.gm.hospital_nice_archived_20230905;
+  const choroplethDataGm: GmCollectionHospitalNiceChoropleth[] = choropleth.gm.hospital_nice_choropleth;
+  const archivedChoroplethDataGm: ArchivedGmCollectionHospitalNiceChoropleth[] = archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830;
 
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
@@ -161,8 +161,8 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
             metadata={{
               date: {
-                start: choropleth.gm.hospital_nice[choropleth.gm.hospital_nice.length - 1].date_start_unix,
-                end: choropleth.gm.hospital_nice[choropleth.gm.hospital_nice.length - 1].date_end_unix,
+                start: choropleth.gm.hospital_nice_choropleth[choropleth.gm.hospital_nice_choropleth.length - 1].date_start_unix,
+                end: choropleth.gm.hospital_nice_choropleth[choropleth.gm.hospital_nice_choropleth.length - 1].date_end_unix,
               },
               source: textNl.sources.nice,
             }}
@@ -175,7 +175,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               map="gm"
               data={choroplethDataGm}
               dataConfig={{
-                metricName: 'hospital_nice',
+                metricName: 'hospital_nice_choropleth',
                 metricProperty: 'admissions_in_the_last_7_days_per_100000',
               }}
               dataOptions={{
@@ -368,7 +368,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   title: textNl.choropleth.legend_title,
                 }}
                 metadata={{
-                  date: archivedChoropleth.gm.hospital_nice_archived_20230905[archivedChoropleth.gm.hospital_nice_archived_20230905.length - 1].date_unix,
+                  date: archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830[archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830.length - 1].date_unix,
                   source: textNl.sources.nice,
                 }}
               >
@@ -379,7 +379,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   map="gm"
                   data={archivedChoroplethDataGm}
                   dataConfig={{
-                    metricName: 'hospital_nice_archived_20230905',
+                    metricName: 'hospital_nice_choropleth_archived_20230830',
                     metricProperty: 'admissions_on_date_of_admission_per_100000',
                   }}
                   dataOptions={{

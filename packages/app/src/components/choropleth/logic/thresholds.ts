@@ -208,6 +208,14 @@ const admissions_in_the_last_7_days_per_100000: ChoroplethThresholdsValue[] = [
     color: colors.scale.blueDetailed[4],
     threshold: 15,
   },
+  {
+    color: colors.scale.blueDetailed[5],
+    threshold: 25,
+  },
+  {
+    color: colors.scale.blueDetailed[6],
+    threshold: 50,
+  },
 ];
 
 const infectedLocationsPercentageThresholds: ChoroplethThresholdsValue[] = [
