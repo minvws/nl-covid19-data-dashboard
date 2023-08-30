@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "gm_collection_hospital_nice",
+  "title": "gm_collection_hospital_nice_choropleth",
   "additionalProperties": false,
   "required": ["date_unix", "gmcode", "admissions_in_the_last_7_days_per_100000", "date_of_insertion_unix", "date_start_unix", "date_end_unix"],
   "properties": {

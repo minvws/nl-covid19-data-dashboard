@@ -17,12 +17,12 @@
     "code": {
       "$ref": "#/$defs/gm_collection_id"
     },
-    "hospital_nice": {
+    "hospital_nice_choropleth": {
       "type": "array",
       "minItems": 342,
       "maxItems": 342,
       "items": {
-        "$ref": "hospital_nice.json"
+        "$ref": "hospital_nice_choropleth.json"
       }
     },
     "sewer": {
