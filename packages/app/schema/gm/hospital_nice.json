@@ -29,7 +29,7 @@
           "type": ["integer", "null"]
         },
         "admissions_in_the_last_7_days": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "admissions_on_date_of_reporting": {
           "type": "integer"
