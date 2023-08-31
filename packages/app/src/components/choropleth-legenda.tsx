@@ -15,7 +15,7 @@ interface ChoroplethLegendaProps {
   outdatedDataLabel?: string;
 }
 
-export type PageType = 'sewer' | 'patienten-in-beeld' | 'ziekenhuis-opnames';
+type PageType = 'sewer' | 'patienten-in-beeld' | 'ziekenhuis-opnames';
 
 export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType, outdatedDataLabel }: ChoroplethLegendaProps) {
   const { commonTexts, formatNumber } = useIntl();
@@ -47,7 +47,7 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
     } as LegendItem;
   });
 
-  if (pageType) {
+  if (pageType === 'sewer') {
     legendItems.unshift({
       label: outdatedDataLabel,
       shape: 'square',
