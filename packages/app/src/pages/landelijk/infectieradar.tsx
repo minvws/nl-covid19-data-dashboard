@@ -136,7 +136,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
 
           <ChartTile
             title={textNl.chart_infection_radar_age_groups.title}
-            description={textNl.chart_infection_radar_age_groups.description}
+            description={textNl.chart_infection_radar_age_groups.chart_description}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={confirmedCasesCovidSymptomsPerAgeTimeFrame}
             metadata={{
