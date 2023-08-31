@@ -183,6 +183,41 @@ const hospitalAdmissionsPer100000Thresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const admissionsInTheLast7DaysPer100000: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.gray2,
+    threshold: 0,
+  },
+  {
+    color: colors.scale.blueDetailed[0],
+    threshold: 0,
+  },
+  {
+    color: colors.scale.blueDetailed[1],
+    threshold: 2.5,
+  },
+  {
+    color: colors.scale.blueDetailed[2],
+    threshold: 5,
+  },
+  {
+    color: colors.scale.blueDetailed[3],
+    threshold: 10,
+  },
+  {
+    color: colors.scale.blueDetailed[4],
+    threshold: 15,
+  },
+  {
+    color: colors.scale.blueDetailed[5],
+    threshold: 25,
+  },
+  {
+    color: colors.scale.blueDetailed[6],
+    threshold: 50,
+  },
+];
+
 const infectedLocationsPercentageThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.gray2,
@@ -319,6 +354,7 @@ export const thresholds: Thresholds = {
   gm: {
     infected_per_100k: positiveTestedThresholds,
     admissions_on_date_of_admission_per_100000: hospitalAdmissionsPer100000Thresholds,
+    admissions_in_the_last_7_days_per_100000: admissionsInTheLast7DaysPer100000,
     admissions_on_date_of_admission: hospitalAdmissionsThresholds,
     elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,

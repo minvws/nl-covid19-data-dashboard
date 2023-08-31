@@ -31,8 +31,11 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
         });
     if (pageType === 'sewer' && i === 0 && x.threshold === 0) {
       label = commonTexts.common.no_virus_particles_measured;
+    } else if (pageType === 'patienten-in-beeld' || (pageType === 'ziekenhuis-opnames' && i === 0 && x.threshold === 0)) {
+      label = commonTexts.common.no_notifications;
     }
-    if (pageType === 'sewer' && i === 1) {
+
+    if (pageType && i === 1) {
       label = replaceVariablesInText(commonTexts.common.greater_than_value, {
         value_1: x.threshold,
         value_2: thresholds[i + 1].threshold,

@@ -23,6 +23,7 @@ export interface GmDifference {
   tested_overall__infected_moving_average_archived_20230331: DifferenceDecimal;
   tested_overall__infected_per_100k_moving_average_archived_20230331: DifferenceDecimal;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
+  hospital_nice__admissions_on_date_of_reporting_moving_average_archived_20230830: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -120,8 +121,17 @@ export interface ArchivedGmCollection {
   proto_name: ArchivedGmCollectionId;
   name: ArchivedGmCollectionId;
   code: ArchivedGmCollectionId;
+  hospital_nice_choropleth_archived_20230830: ArchivedGmCollectionHospitalNiceChoropleth[];
   sewer_archived_20230623: GmCollectionSewer[];
   tested_overall_archived_20230331: GmCollectionTestedOverall[];
+}
+export interface ArchivedGmCollectionHospitalNiceChoropleth {
+  date_unix: number;
+  gmcode: string;
+  admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_per_100000: number;
+  admissions_on_date_of_reporting: number;
+  date_of_insertion_unix: number;
 }
 export interface GmCollectionSewer {
   date_start_unix: number;
@@ -772,8 +782,11 @@ export interface GmHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_admission_moving_average_rounded: number | null;
+  admissions_in_the_last_7_days: number | null;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface GmSewer {
   values: GmSewerValue[];
@@ -839,10 +852,10 @@ export interface GmCollection {
 export interface GmCollectionHospitalNiceChoropleth {
   date_unix: number;
   gmcode: string;
-  admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_per_100000: number;
-  admissions_on_date_of_reporting: number;
+  admissions_in_the_last_7_days_per_100000: number;
   date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface GmCollectionSewer {
   date_start_unix: number;
