@@ -183,7 +183,7 @@ const hospitalAdmissionsPer100000Thresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
-const admissions_in_the_last_7_days_per_100000: ChoroplethThresholdsValue[] = [
+const admissionsInTheLast7DaysPer100000: ChoroplethThresholdsValue[] = [
   {
     color: colors.gray2,
     threshold: 0,
@@ -354,7 +354,7 @@ export const thresholds: Thresholds = {
   gm: {
     infected_per_100k: positiveTestedThresholds,
     admissions_on_date_of_admission_per_100000: hospitalAdmissionsPer100000Thresholds,
-    admissions_in_the_last_7_days_per_100000: admissions_in_the_last_7_days_per_100000,
+    admissions_in_the_last_7_days_per_100000: admissionsInTheLast7DaysPer100000,
     admissions_on_date_of_admission: hospitalAdmissionsThresholds,
     elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,
