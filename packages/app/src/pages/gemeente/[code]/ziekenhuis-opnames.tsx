@@ -143,7 +143,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                 dateEnd: formatDateFromSeconds(lastValue.date_end_unix, 'weekday-long'),
               })}
               metadata={{
-                date: { start: sevenDayAverageDates[0], end: sevenDayAverageDates[1] },
+                date: { start: sevenDayAverageDates.start, end: sevenDayAverageDates.end },
                 source: textGm.bronnen.rivm,
               }}
             >
@@ -208,6 +208,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               outdatedDataLabel: textGm.choropleth_legend_outdated_data_label,
             }}
             pageType="ziekenhuis-opnames"
+            notification={textGm.choropleth_update_notification}
           >
             <DynamicChoropleth
               map="gm"

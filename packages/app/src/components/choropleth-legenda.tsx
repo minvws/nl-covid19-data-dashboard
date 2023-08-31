@@ -11,11 +11,9 @@ interface ChoroplethLegendaProps {
   title: string;
   thresholds: ChoroplethThresholdsValue[];
   valueAnnotation?: string;
-  pageType?: PageType;
+  pageType?: string;
   outdatedDataLabel?: string;
 }
-
-type PageType = 'sewer' | 'patienten-in-beeld' | 'ziekenhuis-opnames';
 
 export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType, outdatedDataLabel }: ChoroplethLegendaProps) {
   const { commonTexts, formatNumber } = useIntl();
@@ -31,9 +29,12 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
       : replaceVariablesInText(commonTexts.common.value_and_higher, {
           value: formatNumber(x.threshold),
         });
-    if (pageType && i === 0 && x.threshold === 0) {
+    if (pageType === 'sewer' && i === 0 && x.threshold === 0) {
       label = commonTexts.common.no_virus_particles_measured;
+    } else if (pageType === 'patienten-in-beeld' || (pageType === 'ziekenhuis-opnames' && i === 0 && x.threshold === 0)) {
+      label = commonTexts.common.no_notifications;
     }
+
     if (pageType && i === 1) {
       label = replaceVariablesInText(commonTexts.common.greater_than_value, {
         value_1: x.threshold,

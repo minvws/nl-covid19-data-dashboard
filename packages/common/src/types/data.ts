@@ -23,7 +23,7 @@ export interface GmDifference {
   tested_overall__infected_moving_average_archived_20230331: DifferenceDecimal;
   tested_overall__infected_per_100k_moving_average_archived_20230331: DifferenceDecimal;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
-  hospital_nice__admissions_on_date_of_reporting_moving_average_archived_20230905?: DifferenceInteger;
+  hospital_nice__admissions_on_date_of_reporting_moving_average_archived_20230830: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;

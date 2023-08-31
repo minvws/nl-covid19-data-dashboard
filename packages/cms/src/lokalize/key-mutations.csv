@@ -222,3 +222,5 @@ timestamp,action,key,document_id,move_to
 2023-08-28T10:03:56.821Z,delete,pages.infectie_radar_page.nl.infected_per_age_group.line_chart_legend_inaccurate_label,wJsqoXQkxXB7L62Auea2cC,__
 2023-08-28T10:03:56.821Z,delete,pages.infectie_radar_page.nl.infected_per_age_group.tooltip_labels.inaccurate,LWiFeXKdw2GKCaPW8KhWMK,__
 2023-08-28T10:03:56.821Z,delete,pages.infectie_radar_page.nl.infected_per_age_group.value_annotation,wJsqoXQkxXB7L62Auea2n2,__
+2023-08-31T12:05:58.216Z,add,common.common.no_notifications,4jHB9OOu4875vLc5LFSd9I,__
+2023-08-31T14:01:09.102Z,add,pages.hospital_page.gm.choropleth_update_notification,Shr9oQOD992CCgY8rdIL7k,__
