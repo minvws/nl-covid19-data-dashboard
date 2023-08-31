@@ -63,12 +63,14 @@ export function ChoroplethTile({
 
           {typeof description === 'string' ? <Text>{description}</Text> : description}
 
-          <Box display="flex" alignItems={'center'}>
-            <CalendarGear />
-            <Box marginLeft={space[2]}>
-              <Text>{notification}</Text>
+          {notification && (
+            <Box display="flex" alignItems={'center'}>
+              <CalendarGear />
+              <Box marginLeft={space[2]}>
+                <Text>{notification}</Text>
+              </Box>
             </Box>
-          </Box>
+          )}
 
           {onChartRegionChange && chartRegion && (
             <Box display="flex" justifyContent="flex-start" paddingTop={space[4]}>
