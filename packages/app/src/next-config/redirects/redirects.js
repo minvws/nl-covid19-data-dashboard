@@ -104,6 +104,12 @@ async function redirects() {
       destination: '/gemeente/:code/positieve-testen',
       permanent: true,
     },
+    // Redirect for COR-1705
+    {
+      source: '/landelijk/testen',
+      destination: '/landelijk/infectieradar',
+      permanent: true,
+    },
   ];
 }
 

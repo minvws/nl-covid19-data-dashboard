@@ -64,7 +64,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   const sewerAverages = data.sewer;
   const sewerInstallationMeasurement = data.sewer_installation_measurement;
-  const populationCountConnectedToRwzis = data.static_values.population_count_connected_to_rwzis;
+  const populationCountConnectedToRWZIS = data.static_values.population_count_connected_to_rwzis;
 
   if (!sewerAverages) {
     /**
@@ -121,7 +121,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={textGm.barscale_titel}
               metadata={{
-                date: [sewerAverages.last_value.date_start_unix, sewerAverages.last_value.date_end_unix],
+                date: { start: sewerAverages.last_value.date_start_unix, end: sewerAverages.last_value.date_end_unix },
                 source: textGm.bronnen.rivm,
               }}
             >
@@ -132,9 +132,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 isAmount
               />
               <Text>
-                {replaceComponentsInText(commonTexts.gemeente_index.population_count, {
+                {replaceComponentsInText(commonTexts.gemeente_index.population_count_connected_to_rwzis, {
                   municipalityName: municipalityName,
-                  populationCount: <strong>{formatNumber(populationCountConnectedToRwzis)}</strong>,
+                  populationCountConnectedToRWZIS: <strong>{formatNumber(populationCountConnectedToRWZIS)}</strong>,
                 })}
               </Text>
 
@@ -145,7 +145,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title={textGm.total_measurements_title}
               description={textGm.total_measurements_description}
               metadata={{
-                date: [sewerInstallationMeasurement.date_start_unix, sewerInstallationMeasurement.date_end_unix],
+                date: { start: sewerInstallationMeasurement.date_start_unix, end: sewerInstallationMeasurement.date_end_unix },
                 source: textGm.bronnen.rivm,
               }}
             >

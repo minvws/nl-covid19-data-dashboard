@@ -150,7 +150,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               title={ElderlyPeopleText.hospital_admissions.kpi_titel}
               description={ElderlyPeopleText.hospital_admissions.kpi_toelichting}
               metadata={{
-                date: [vulnerableHospitalAdmissionsData.date_start_unix, vulnerableHospitalAdmissionsData.date_end_unix],
+                date: { start: vulnerableHospitalAdmissionsData.date_start_unix, end: vulnerableHospitalAdmissionsData.date_end_unix },
                 source: ElderlyPeopleText.bronnen.rivm,
               }}
             >
@@ -162,7 +162,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             title={textNl.kpi_tiles.infected_locations.title}
             description={textNl.kpi_tiles.infected_locations.description}
             source={infectedLocationsText.bronnen.rivm}
-            dateUnix={vulnerableNursingHomeDataLastValue.date_unix}
+            dateOrRange={vulnerableNursingHomeDataLastValue.date_unix}
             tilesData={[
               {
                 value: vulnerableNursingHomeDataLastValue.infected_locations_total,
@@ -230,14 +230,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               forceLegend
             />
           </ChartTile>
-
-          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
-
-          {content.articles && content.articles.articles?.length > 0 && (
-            <InView rootMargin="400px">
-              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
-            </InView>
-          )}
 
           <Box spacing={5}>
             <TwoKpiSection>
@@ -370,6 +362,14 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               />
             </ChartTile>
           </Box>
+
+          {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
+
+          {content.articles && content.articles.articles?.length > 0 && (
+            <InView rootMargin="400px">
+              <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
+            </InView>
+          )}
         </TileList>
       </NlLayout>
     </Layout>

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Markdown } from '~/components/markdown';
-import { Anchor, BoldText, HeadingLevel } from '~/components/typography';
+import { Anchor, BoldText } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { useIntl } from '~/intl';
 import { mediaQueries, radii, space } from '~/style/theme';
@@ -25,7 +25,6 @@ interface InformationBlockProps {
         href: string;
       }[]
     | null;
-  headingLevel?: HeadingLevel;
   metadata?: MetadataProps;
   referenceLink?: string;
   id?: string;
@@ -94,8 +93,14 @@ export function PageInformationBlock({
   ) : null;
 
   return (
-    <Box as="header" id={id} spacing={{ _: 3, md: 4 }}>
-      {title && <Header icon={icon} title={title} category={category} screenReaderCategory={screenReaderCategory} />}
+    <Box
+      as="header"
+      id={id}
+      spacing={{ _: 3, md: 4 }}
+      borderTop={showArchivedToggleButton ? `solid 2px ${colors.gray2}` : undefined}
+      paddingTop={showArchivedToggleButton ? space[4] : undefined}
+    >
+      {title && <Header level={showArchivedToggleButton ? 3 : undefined} icon={icon} title={title} category={category} screenReaderCategory={screenReaderCategory} />}
       {scopedWarning && <WarningTile variant="emphasis" message={scopedWarning} icon={Warning} isFullWidth />}
 
       {description && (
@@ -110,8 +115,10 @@ export function PageInformationBlock({
               <Box flex="1" display="flex" flexDirection="column" spacing={3}>
                 {pageInformationHeader.dataExplained && (
                   <PageInformationButton href={pageInformationHeader.dataExplained.link}>
-                    <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
-                    <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
+                    <Box>
+                      <BoldText>{pageInformationHeader.dataExplained.button.header}</BoldText>
+                      <RichContent blocks={pageInformationHeader.dataExplained.button.text} />
+                    </Box>
 
                     <ChevronRight />
                   </PageInformationButton>
@@ -119,8 +126,10 @@ export function PageInformationBlock({
 
                 {pageInformationHeader.faq && (
                   <PageInformationButton href={`#${pageInformationHeader.faq.link}`}>
-                    <BoldText>{pageInformationHeader.faq.button.header}</BoldText>
-                    <RichContent blocks={pageInformationHeader.faq.button.text} />
+                    <Box>
+                      <BoldText>{pageInformationHeader.faq.button.header}</BoldText>
+                      <RichContent blocks={pageInformationHeader.faq.button.text} />
+                    </Box>
 
                     <ChevronDown />
                   </PageInformationButton>
@@ -188,16 +197,15 @@ const PageInformationButton = styled(Anchor)`
   color: ${colors.black};
   cursor: pointer;
   padding: ${space[3]} ${space[4]};
-  position: relative;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+  gap: ${space[4]};
 
   svg {
     color: ${colors.primary};
-    position: absolute;
-    right: ${space[2]};
-    top: 50%;
-    transform: translate(-50%, -50%);
     width: 24px;
+    flex-shrink: 0;
   }
 
   .underline {

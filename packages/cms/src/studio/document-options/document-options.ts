@@ -32,9 +32,11 @@ export const actions = (prev: DocumentActionComponent[], context: DocumentAction
     case 'notFoundPageItem':
     case 'notFoundPageLinks':
     case 'pageArticles':
+    case 'pageFAQs':
     case 'pageHighlightedItems':
     case 'pageIdentifier':
     case 'pageLinks':
+    case 'pageDataExplained':
     case 'pageRichText':
     case 'themeTile':
     case 'veelgesteldeVragen':

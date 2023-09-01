@@ -81,6 +81,7 @@ const colorDefinitions = {
   magenta2: '#9515AA',
   magenta3: '#cd005a',
   magenta4: '#aa004b',
+  magenta5: '#6200AF',
   //transparent
   transparent: 'transparent',
 };

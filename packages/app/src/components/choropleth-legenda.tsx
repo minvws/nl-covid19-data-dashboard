@@ -16,27 +16,40 @@ interface ChoroplethLegendaProps {
 }
 
 export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType, outdatedDataLabel }: ChoroplethLegendaProps) {
-  const { commonTexts } = useIntl();
+  const { commonTexts, formatNumber } = useIntl();
+
   const breakpoints = useBreakpoints(true);
 
-  const legendItems = thresholds.map(
-    (x: ChoroplethThresholdsValue, i) =>
-      ({
-        label: thresholds[i + 1]
-          ? replaceVariablesInText(commonTexts.common.value_until_value, {
-              value_1: x.threshold,
-              value_2: thresholds[i + 1].threshold,
-            })
-          : replaceVariablesInText(commonTexts.common.value_and_higher, {
-              value: x.threshold,
-            }),
-        shape: 'square',
-        color: x.color,
-      } as LegendItem)
-  );
+  const legendItems = thresholds.map((x: ChoroplethThresholdsValue, i) => {
+    let label = thresholds[i + 1]
+      ? replaceVariablesInText(commonTexts.common.value_until_value, {
+          value_1: formatNumber(x.threshold),
+          value_2: formatNumber(thresholds[i + 1].threshold),
+        })
+      : replaceVariablesInText(commonTexts.common.value_and_higher, {
+          value: formatNumber(x.threshold),
+        });
+    if (pageType === 'sewer' && i === 0 && x.threshold === 0) {
+      label = commonTexts.common.no_virus_particles_measured;
+    } else if (pageType === 'patienten-in-beeld' || (pageType === 'ziekenhuis-opnames' && i === 0 && x.threshold === 0)) {
+      label = commonTexts.common.no_notifications;
+    }
+
+    if (pageType && i === 1) {
+      label = replaceVariablesInText(commonTexts.common.greater_than_value, {
+        value_1: x.threshold,
+        value_2: thresholds[i + 1].threshold,
+      });
+    }
+    return {
+      label: label,
+      shape: 'square',
+      color: x.color,
+    } as LegendItem;
+  });
 
   if (pageType === 'sewer') {
-    legendItems.push({
+    legendItems.unshift({
       label: outdatedDataLabel,
       shape: 'square',
       color: colors.yellow1,
@@ -48,7 +61,6 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
       {title && <Text variant="subtitle1">{title}</Text>}
 
       <Legend items={legendItems} columns={breakpoints.lg ? 1 : 2} />
-
       <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
     </Box>
   );
