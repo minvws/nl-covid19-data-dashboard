@@ -31,7 +31,7 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
         });
     if (pageType === 'sewer' && i === 0 && x.threshold === 0) {
       label = commonTexts.common.no_virus_particles_measured;
-    } else if (pageType === 'patienten-in-beeld' || (pageType === 'ziekenhuis-opnames' && i === 0 && x.threshold === 0)) {
+    } else if ((pageType === 'patienten-in-beeld' || pageType === 'ziekenhuis-opnames') && i === 0 && x.threshold === 0) {
       label = commonTexts.common.no_notifications;
     }
 
