@@ -40,7 +40,16 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
           });
         }
         break;
-      case 'patienten-in-beeld' || 'ziekenhuis-opnames':
+      case 'patienten-in-beeld':
+        if (i === 0 && x.threshold === 0) {
+          label = commonTexts.common.no_notifications;
+        } else if (i === 1) {
+          label = replaceVariablesInText(commonTexts.common.bigger_than_zero_and_less_than_value, {
+            value_1: formatNumber(thresholds[i + 1].threshold),
+          });
+        }
+        break;
+      case 'ziekenhuis-opnames':
         if (i === 0 && x.threshold === 0) {
           label = commonTexts.common.no_notifications;
         } else if (i === 1) {
