@@ -90,6 +90,10 @@ const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+/*
+  This threshold contains a value of 0.001 because we need to display "Higher than 0 and lower than VALUE" based on the business rules.
+  If we use two zero's in the threshold, the color will get overwritten and the color of the first zero won't be considered.
+*/
 const sewerThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.gray2,
@@ -183,6 +187,10 @@ const hospitalAdmissionsPer100000Thresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+/*
+  This threshold contains a value of 0.001 because we need to display "Higher than 0 and lower than VALUE" based on the business rules.
+  If we use two zero's in the threshold, the color will get overwritten and the color of the first zero won't be considered. 
+*/
 const admissionsInTheLast7DaysPer100000: ChoroplethThresholdsValue[] = [
   {
     color: colors.gray2,

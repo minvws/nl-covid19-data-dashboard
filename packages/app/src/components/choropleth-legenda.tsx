@@ -49,8 +49,6 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
           });
         }
         break;
-      default:
-        break;
     }
     return {
       label: label,
