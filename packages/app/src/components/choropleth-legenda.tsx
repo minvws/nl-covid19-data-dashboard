@@ -29,17 +29,26 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
       : replaceVariablesInText(commonTexts.common.value_and_higher, {
           value: formatNumber(x.threshold),
         });
-    if (pageType === 'sewer' && i === 0 && x.threshold === 0) {
-      label = commonTexts.common.no_virus_particles_measured;
-    } else if ((pageType === 'patienten-in-beeld' || pageType === 'ziekenhuis-opnames') && i === 0 && x.threshold === 0) {
-      label = commonTexts.common.no_notifications;
-    }
 
-    if (pageType && i === 1) {
-      label = replaceVariablesInText(commonTexts.common.greater_than_value, {
-        value_1: x.threshold,
-        value_2: thresholds[i + 1].threshold,
-      });
+    switch (pageType) {
+      case 'sewer':
+        if (i === 0 && x.threshold === 0) {
+          label = commonTexts.common.no_virus_particles_measured;
+        } else if (i === 1) {
+          label = replaceVariablesInText(commonTexts.common.bigger_than_zero_and_less_than_value, {
+            value_1: formatNumber(thresholds[i + 1].threshold),
+          });
+        }
+        break;
+      case 'patienten-in-beeld' || 'ziekenhuis-opnames':
+        if (i === 0 && x.threshold === 0) {
+          label = commonTexts.common.no_notifications;
+        } else if (i === 1) {
+          label = replaceVariablesInText(commonTexts.common.bigger_than_zero_and_less_than_value, {
+            value_1: formatNumber(thresholds[i + 1].threshold),
+          });
+        }
+        break;
     }
     return {
       label: label,
