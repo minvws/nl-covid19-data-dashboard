@@ -226,3 +226,5 @@ timestamp,action,key,document_id,move_to
 2023-08-31T14:01:09.102Z,add,pages.hospital_page.gm.choropleth_update_notification,Shr9oQOD992CCgY8rdIL7k,__
 2023-08-31T14:55:30.266Z,add,pages.infectie_radar_page.nl.chart_infection_radar_age_groups.chart_description,cSNaYG44vMm4ih7aUQbTmj,__
 2023-08-31T14:55:30.266Z,delete,pages.infectie_radar_page.nl.chart_infection_radar_age_groups.description,uHFfJYJkKtXC1Rsty6jOAv,__
+2023-09-04T09:13:35.958Z,delete,pages.infectie_radar_page.nl.infection_radar_infected_per_age_group.line_chart_legend_inaccurate_label,UeL7Fz3Aoju4f93F3Kg848,__
+2023-09-04T09:13:35.959Z,delete,pages.infectie_radar_page.nl.infection_radar_infected_per_age_group.tooltip_labels.inaccurate,uHFfJYJkKtXC1Rsty6jbUj,__
