@@ -232,3 +232,4 @@ timestamp,action,key,document_id,move_to
 2023-09-04T11:31:13.192Z,add,common.common.bigger_than_zero_and_less_than,7mqZKk3oOclGeLPuxBqbZQ,__
 2023-09-04T11:32:09.252Z,add,common.common.bigger_than_zero_and_less_than_value,vUuNcfkyVCkqkunexpfbtq,__
 2023-09-04T11:32:09.253Z,delete,common.common.bigger_than_zero_and_less_than,7mqZKk3oOclGeLPuxBqbZQ,__
+2023-09-04T11:43:50.872Z,delete,common.common.greater_than_value,VlbjYO9GDKwaUp5hRVukdB,__
