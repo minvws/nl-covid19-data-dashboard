@@ -10,13 +10,13 @@
       "$ref": "#/definitions/diff_decimal"
     },
     "hospital_lcps__beds_occupied_covid": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "intensive_care_lcps__beds_occupied_covid": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"

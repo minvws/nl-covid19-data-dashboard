@@ -3,14 +3,11 @@
   "title": "gm_difference",
   "type": "object",
   "properties": {
-    "hospital_nice__admissions_on_date_of_reporting_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
     "sewer__average": {
       "$ref": "#/definitions/diff_integer"
     }
   },
-  "required": ["hospital_nice__admissions_on_date_of_reporting_moving_average"],
+  "required": ["sewer__average"],
   "additionalProperties": false,
   "definitions": {
     "diff_integer": {

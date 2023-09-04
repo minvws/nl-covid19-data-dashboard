@@ -312,13 +312,15 @@ export function createGetArchivedChoroplethData<T1, T2>(settings?: {
 function replaceInaccurateLastValue(data: any) {
   const metricsInaccurateItems = ['intensive_care_nice', 'hospital_nice'];
 
-  const inaccurateMetricProperty = 'admissions_on_date_of_admission_moving_average_rounded';
+  const inaccurateMetricProperties = ['admissions_on_date_of_admission_moving_average_rounded', 'admissions_in_the_last_7_days'];
 
   const metricsWithInaccurateData = metricsInaccurateItems.filter((m) => m in data) as (keyof typeof data & keyof typeof metricsInaccurateItems)[];
 
   metricsWithInaccurateData.forEach((m) => {
     if (isValuesWithLastValue(data[m])) {
-      data[m] = adjustDataToLastAccurateValue(data[m], inaccurateMetricProperty);
+      for(const prop in inaccurateMetricProperties) {
+        data[m] = adjustDataToLastAccurateValue(data[m], inaccurateMetricProperties[prop]);
+      }
     }
   });
 }

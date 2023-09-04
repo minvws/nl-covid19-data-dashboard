@@ -8,9 +8,12 @@
         "admissions_on_date_of_admission",
         "admissions_on_date_of_admission_moving_average",
         "admissions_on_date_of_admission_moving_average_rounded",
+        "admissions_in_the_last_7_days",
         "admissions_on_date_of_reporting",
         "date_unix",
-        "date_of_insertion_unix"
+        "date_of_insertion_unix",
+        "date_start_unix",
+        "date_end_unix"
       ],
       "properties": {
         "date_unix": {
@@ -25,10 +28,19 @@
         "admissions_on_date_of_admission_moving_average_rounded": {
           "type": ["integer", "null"]
         },
+        "admissions_in_the_last_7_days": {
+          "type": ["integer", "null"]
+        },
         "admissions_on_date_of_reporting": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
+          "type": "integer"
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
           "type": "integer"
         }
       }

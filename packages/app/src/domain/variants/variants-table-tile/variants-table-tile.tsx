@@ -86,7 +86,7 @@ function VariantsTableTileWithData({
   const { formatDateSpan } = useIntl();
 
   const metadata: MetadataProps = {
-    date: [dates.date_start_unix, dates.date_end_unix],
+    date: { start: dates.date_start_unix, end: dates.date_end_unix },
     source,
     obtainedAt: dates.date_of_report_unix,
   };

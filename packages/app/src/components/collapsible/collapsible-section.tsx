@@ -64,7 +64,7 @@ export const CollapsibleSection = ({
   return (
     <Box as="section" borderTop={hideBorder ? undefined : `1px solid ${borderColor}`} id={id} ref={section} className={`${className} ${collapsible.isOpen ? 'open' : ''}`}>
       <Summary color={textColor} onClick={() => collapsible.toggle()} fontSize={fontSize}>
-        <Box width="100%" position="relative">
+        <Box width="100%" position="relative" pr={space[5]}>
           {summary}
           {id && (
             <StyledAnchor aria-hidden="true" tabIndex={-1} onClick={(event) => event.stopPropagation()} href={`#${id}`}>

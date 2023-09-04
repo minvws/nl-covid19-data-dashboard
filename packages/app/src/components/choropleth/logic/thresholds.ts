@@ -90,34 +90,46 @@ const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+/*
+  This threshold contains a value of 0.001 because we need to display "Higher than 0 and lower than VALUE" based on the business rules.
+  If we use two zero's in the threshold, the color will get overwritten and the color of the first zero won't be considered.
+*/
 const sewerThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.gray2,
     threshold: 0,
   },
   {
-    color: colors.scale.blue[0],
-    threshold: 0.01,
+    color: colors.scale.blueDetailed[0],
+    threshold: 0.001,
   },
   {
-    color: colors.scale.blue[1],
+    color: colors.scale.blueDetailed[1],
     threshold: 50,
   },
   {
-    color: colors.scale.blue[2],
+    color: colors.scale.blueDetailed[2],
     threshold: 250,
   },
   {
-    color: colors.scale.blue[3],
+    color: colors.scale.blueDetailed[3],
     threshold: 500,
   },
   {
-    color: colors.scale.blue[4],
+    color: colors.scale.blueDetailed[4],
     threshold: 750,
   },
   {
-    color: colors.scale.blue[5],
+    color: colors.scale.blueDetailed[5],
     threshold: 1000,
+  },
+  {
+    color: colors.scale.blueDetailed[6],
+    threshold: 1500,
+  },
+  {
+    color: colors.scale.blueDetailed[8],
+    threshold: 2000,
   },
 ];
 
@@ -172,6 +184,45 @@ const hospitalAdmissionsPer100000Thresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.scale.blue[4],
     threshold: 1.5,
+  },
+];
+
+/*
+  This threshold contains a value of 0.001 because we need to display "Higher than 0 and lower than VALUE" based on the business rules.
+  If we use two zero's in the threshold, the color will get overwritten and the color of the first zero won't be considered. 
+*/
+const admissionsInTheLast7DaysPer100000: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.gray2,
+    threshold: 0,
+  },
+  {
+    color: colors.scale.blueDetailed[0],
+    threshold: 0.001,
+  },
+  {
+    color: colors.scale.blueDetailed[1],
+    threshold: 2.5,
+  },
+  {
+    color: colors.scale.blueDetailed[2],
+    threshold: 5,
+  },
+  {
+    color: colors.scale.blueDetailed[3],
+    threshold: 10,
+  },
+  {
+    color: colors.scale.blueDetailed[4],
+    threshold: 15,
+  },
+  {
+    color: colors.scale.blueDetailed[5],
+    threshold: 25,
+  },
+  {
+    color: colors.scale.blueDetailed[6],
+    threshold: 50,
   },
 ];
 
@@ -311,6 +362,7 @@ export const thresholds: Thresholds = {
   gm: {
     infected_per_100k: positiveTestedThresholds,
     admissions_on_date_of_admission_per_100000: hospitalAdmissionsPer100000Thresholds,
+    admissions_in_the_last_7_days_per_100000: admissionsInTheLast7DaysPer100000,
     admissions_on_date_of_admission: hospitalAdmissionsThresholds,
     elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,

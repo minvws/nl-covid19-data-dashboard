@@ -16,7 +16,7 @@ export type PageIdentifier =
   | 'reproduction_page'
   | 'sewer_page'
   | 'situations_page'
-  | 'tests_page'
+  | 'infection_radar_page'
   | 'topical_page'
   | 'vaccinations_page'
   | 'variants_page'
