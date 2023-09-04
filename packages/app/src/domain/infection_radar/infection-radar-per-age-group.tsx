@@ -9,7 +9,6 @@ import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
