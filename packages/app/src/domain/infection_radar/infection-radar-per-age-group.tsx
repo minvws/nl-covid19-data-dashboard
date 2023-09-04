@@ -33,8 +33,6 @@ export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibi
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
 
-  const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
-
   /* Enrich config with dynamic data / locale */
   const seriesConfig: LineSeriesDefinition<NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue>[] = BASE_SERIES_CONFIG.map((baseAgeGroup) => {
     const label =
@@ -90,14 +88,6 @@ export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibi
         dataOptions={{
           isPercentage: true,
           valueAnnotation: text.infection_radar_infected_per_age_group.value_annotation,
-          timespanAnnotations: [
-            {
-              start: underReportedDateStart,
-              end: Infinity,
-              label: text.infection_radar_infected_per_age_group.line_chart_legend_inaccurate_label,
-              shortLabel: text.infection_radar_infected_per_age_group.tooltip_labels.inaccurate,
-            },
-          ],
           timelineEvents,
         }}
       />
