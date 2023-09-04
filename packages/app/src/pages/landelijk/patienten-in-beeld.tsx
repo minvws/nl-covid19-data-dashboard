@@ -167,6 +167,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               source: textNl.sources.nice,
             }}
             pageType="patienten-in-beeld"
+            notification={textNl.choropleth_update_notification}
           >
             <DynamicChoropleth
               accessibility={{

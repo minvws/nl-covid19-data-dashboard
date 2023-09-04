@@ -97,7 +97,7 @@ const sewerThresholds: ChoroplethThresholdsValue[] = [
   },
   {
     color: colors.scale.blueDetailed[0],
-    threshold: 0,
+    threshold: 0.001,
   },
   {
     color: colors.scale.blueDetailed[1],
@@ -190,7 +190,7 @@ const admissionsInTheLast7DaysPer100000: ChoroplethThresholdsValue[] = [
   },
   {
     color: colors.scale.blueDetailed[0],
-    threshold: 0,
+    threshold: 0.001,
   },
   {
     color: colors.scale.blueDetailed[1],
