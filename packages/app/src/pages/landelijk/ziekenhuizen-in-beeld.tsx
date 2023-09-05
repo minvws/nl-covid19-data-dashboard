@@ -107,7 +107,6 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const icuLastValue = getLastFilledValue(data.intensive_care_lcps);
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
-  const mostRecentDateUnix = Math.max(hospitalLastValue.date_unix, icuLastValue.date_unix);
 
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
@@ -262,7 +261,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.kpi_tiles.influxes.title}
             description={textNl.kpi_tiles.influxes.description}
             source={textNl.sources.lnaz}
-            dateOrRange={mostRecentDateUnix}
+            dateOrRange={{ start: hospitalLastValue.date_start_unix, end: hospitalLastValue.date_end_unix }}
             tilesData={[
               {
                 value: hospitalLastValue.influx_covid_patients,
