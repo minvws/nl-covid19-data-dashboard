@@ -233,3 +233,16 @@ timestamp,action,key,document_id,move_to
 2023-09-04T11:32:09.252Z,add,common.common.bigger_than_zero_and_less_than_value,vUuNcfkyVCkqkunexpfbtq,__
 2023-09-04T11:32:09.253Z,delete,common.common.bigger_than_zero_and_less_than,7mqZKk3oOclGeLPuxBqbZQ,__
 2023-09-04T11:43:50.872Z,delete,common.common.greater_than_value,VlbjYO9GDKwaUp5hRVukdB,__
+2023-09-05T08:55:25.113Z,add,pages.patients_page.nl.section_archived.archived_choropleth.description,7mqZKk3oOclGeLPuxCl7Id,__
+2023-09-05T08:55:26.215Z,add,pages.patients_page.nl.section_archived.archived_choropleth.legend_title,Sm7hGjgDle6bM01i5dPMd6,__
+2023-09-05T08:55:27.137Z,add,pages.patients_page.nl.section_archived.archived_choropleth.title,Sm7hGjgDle6bM01i5dPMou,__
+2023-09-05T09:12:15.347Z,add,pages.hospital_page.gm.section_archived.archived_choropleth.bronnen.rivm.download,SxdKlDKWt7aq9ypXTEB1ph,__
+2023-09-05T09:12:16.280Z,add,pages.hospital_page.gm.section_archived.archived_choropleth.bronnen.rivm.href,Sm7hGjgDle6bM01i5dPUsi,__
+2023-09-05T09:12:17.354Z,add,pages.hospital_page.gm.section_archived.archived_choropleth.bronnen.rivm.text,vUuNcfkyVCkqkunexqOAIO,__
+2023-09-05T09:12:18.372Z,add,pages.hospital_page.gm.section_archived.archived_choropleth.map_toelichting,1452tQMqUMIbBQeIQgxZR9,__
+2023-09-05T09:12:19.387Z,add,pages.hospital_page.gm.section_archived.archived_choropleth.map_titel,7mqZKk3oOclGeLPuxClEnO,__
+2023-09-05T09:12:20.346Z,add,pages.hospital_page.gm.section_archived.archived_choropleth.titel,XoR5r8EDfwqTaR05z6dmdc,__
+2023-09-05T09:12:21.380Z,add,pages.hospital_page.gm.section_archived.archived_choropleth.choropleth_legend_outdated_data_label,vUuNcfkyVCkqkunexqOASY,__
+2023-09-05T09:12:22.407Z,add,pages.hospital_page.gm.section_archived.archived_choropleth.choropleth_update_notification,Sm7hGjgDle6bM01i5dPV4W,__
+2023-09-05T09:17:35.301Z,delete,pages.hospital_page.gm.section_archived.archived_choropleth.choropleth_legend_outdated_data_label,vUuNcfkyVCkqkunexqOASY,__
+2023-09-05T09:17:35.302Z,delete,pages.hospital_page.gm.section_archived.archived_choropleth.choropleth_update_notification,Sm7hGjgDle6bM01i5dPV4W,__

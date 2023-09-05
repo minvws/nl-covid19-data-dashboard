@@ -362,11 +362,11 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
           {isArchivedContentShown && (
             <Box spacing={5} paddingTop={space[4]}>
               <ChoroplethTile
-                title={textNl.choropleth.title}
-                description={textNl.choropleth.description}
+                title={textNl.section_archived.archived_choropleth.title}
+                description={textNl.section_archived.archived_choropleth.description}
                 legend={{
                   thresholds: thresholds.gm.admissions_on_date_of_admission_per_100000,
-                  title: textNl.choropleth.legend_title,
+                  title: textNl.section_archived.archived_choropleth.legend_title,
                 }}
                 metadata={{
                   date: archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830[archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830.length - 1].date_unix,
