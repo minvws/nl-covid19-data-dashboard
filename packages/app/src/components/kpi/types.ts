@@ -10,8 +10,13 @@ export type TileData = {
   differenceValue?: DifferenceInteger;
 };
 
+interface DateRange {
+  start: number;
+  end: number;
+}
+
 export interface BorderedKpiSectionProps {
-  dateUnix: number;
+  dateOrRange: number | DateRange;
   description: string;
   source: {
     href: string;

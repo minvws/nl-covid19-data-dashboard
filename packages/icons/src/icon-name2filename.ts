@@ -23,6 +23,7 @@ export type IconName =
   | 'Binnensportlocaties'
   | 'Boosterprik'
   | 'Calendar'
+  | 'CalendarGear'
   | 'Check'
   | 'Checked'
   | 'ChevronDown'
@@ -160,6 +161,7 @@ export const iconName2filename: Record<IconName, string> = {
   Binnensportlocaties: 'binnensportlocaties.svg',
   Boosterprik: 'boosterprik.svg',
   Calendar: 'calendar.svg',
+  CalendarGear: 'calendar_gear.svg',
   Check: 'check.svg',
   Checked: 'checked.svg',
   ChevronDown: 'chevron_down.svg',

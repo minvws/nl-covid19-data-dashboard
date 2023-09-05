@@ -8,7 +8,7 @@ import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-
+import { CalendarGear } from '@corona-dashboard/icons';
 type ChoroplethTileProps = {
   title: string;
   description?: string | React.ReactNode;
@@ -22,6 +22,7 @@ type ChoroplethTileProps = {
   valueAnnotation?: string;
   hasPadding?: boolean;
   pageType?: string;
+  notification?: string;
 } & (
   | {
       onChartRegionChange: (v: RegionControlOption) => void;
@@ -44,6 +45,7 @@ export function ChoroplethTile({
   valueAnnotation,
   hasPadding,
   pageType,
+  notification,
   ...dataProps
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints(true);
@@ -60,6 +62,15 @@ export function ChoroplethTile({
           <Heading level={3}>{title}</Heading>
 
           {typeof description === 'string' ? <Text>{description}</Text> : description}
+
+          {notification && (
+            <Box display="flex" alignItems={'center'}>
+              <CalendarGear />
+              <Box marginLeft={space[2]}>
+                <Text>{notification}</Text>
+              </Box>
+            </Box>
+          )}
 
           {onChartRegionChange && chartRegion && (
             <Box display="flex" justifyContent="flex-start" paddingTop={space[4]}>

@@ -5,7 +5,8 @@
   "required": [
     "tested_overall__infected_moving_average_archived_20230331",
     "tested_overall__infected_per_100k_moving_average_archived_20230331",
-    "deceased_rivm__covid_daily_archived_20221231"
+    "deceased_rivm__covid_daily_archived_20221231",
+    "hospital_nice__admissions_on_date_of_reporting_moving_average_archived_20230830"
   ],
   "properties": {
     "tested_overall__infected_moving_average_archived_20230331": {
@@ -15,6 +16,9 @@
       "$ref": "#/definitions/diff_decimal"
     },
     "deceased_rivm__covid_daily_archived_20221231": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "hospital_nice__admissions_on_date_of_reporting_moving_average_archived_20230830": {
       "$ref": "#/definitions/diff_integer"
     }
   },
