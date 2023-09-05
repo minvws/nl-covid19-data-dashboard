@@ -191,7 +191,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
           <BehaviorLineChartTile
             values={behaviorValues}
             metadata={{
-              date: [behaviorLastValue.date_start_unix, behaviorLastValue.date_end_unix],
+              date: { start: behaviorLastValue.date_start_unix, end: behaviorLastValue.date_end_unix },
               source: textNl.bronnen.rivm,
             }}
             {...timelineProp}

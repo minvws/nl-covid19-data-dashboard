@@ -23,6 +23,7 @@ export interface GmDifference {
   tested_overall__infected_moving_average_archived_20230331: DifferenceDecimal;
   tested_overall__infected_per_100k_moving_average_archived_20230331: DifferenceDecimal;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
+  hospital_nice__admissions_on_date_of_reporting_moving_average_archived_20230830: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -120,8 +121,17 @@ export interface ArchivedGmCollection {
   proto_name: ArchivedGmCollectionId;
   name: ArchivedGmCollectionId;
   code: ArchivedGmCollectionId;
+  hospital_nice_choropleth_archived_20230830: ArchivedGmCollectionHospitalNiceChoropleth[];
   sewer_archived_20230623: GmCollectionSewer[];
   tested_overall_archived_20230331: GmCollectionTestedOverall[];
+}
+export interface ArchivedGmCollectionHospitalNiceChoropleth {
+  date_unix: number;
+  gmcode: string;
+  admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_per_100000: number;
+  admissions_on_date_of_reporting: number;
+  date_of_insertion_unix: number;
 }
 export interface GmCollectionSewer {
   date_start_unix: number;
@@ -772,8 +782,11 @@ export interface GmHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_admission_moving_average_rounded: number | null;
+  admissions_in_the_last_7_days: number | null;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface GmSewer {
   values: GmSewerValue[];
@@ -839,10 +852,10 @@ export interface GmCollection {
 export interface GmCollectionHospitalNiceChoropleth {
   date_unix: number;
   gmcode: string;
-  admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_per_100000: number;
-  admissions_on_date_of_reporting: number;
+  admissions_in_the_last_7_days_per_100000: number;
   date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface GmCollectionSewer {
   date_start_unix: number;
@@ -899,13 +912,14 @@ export interface Nl {
   vaccine_coverage_per_age_group_estimated_fully_vaccinated: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinatedValue;
   variants?: NlVariants;
   self_test_overall: NlSelfTestOverall;
+  infectionradar_symptoms_trend_per_age_group_weekly: NlInfectionradarSymptomsTrendPerAgeGroupWeekly;
 }
 export interface NlDifference {
   infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
-  hospital_lcps__beds_occupied_covid: DifferenceInteger;
+  hospital_lcps__beds_occupied_covid: DifferenceDecimal;
   intensive_care_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
-  intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
+  intensive_care_lcps__beds_occupied_covid: DifferenceDecimal;
   sewer__average: DifferenceInteger;
   reproduction__index_average?: DifferenceDecimal;
   vulnerable_hospital_admissions?: DifferenceInteger;
@@ -1009,10 +1023,13 @@ export interface NlHospitalLcps {
 }
 export interface NlHospitalLcpsValue {
   beds_occupied_covid: number | null;
+  beds_occupied_covid_moving_average: number | null;
   influx_covid_patients: number | null;
   influx_covid_patients_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface NlIntensiveCareLcps {
   values: NlIntensiveCareLcpsValue[];
@@ -1020,11 +1037,14 @@ export interface NlIntensiveCareLcps {
 }
 export interface NlIntensiveCareLcpsValue {
   beds_occupied_covid: number | null;
+  beds_occupied_covid_moving_average: number | null;
   beds_occupied_covid_percentage: number | null;
   influx_covid_patients: number | null;
   influx_covid_patients_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface NlDeceasedCbs {
   values: NlDeceasedCbsValue[];
@@ -1208,4 +1228,21 @@ export interface NlSelfTestOverallValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
+}
+export interface NlInfectionradarSymptomsTrendPerAgeGroupWeekly {
+  values: NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue[];
+  last_value: NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue;
+}
+export interface NlInfectionradarSymptomsTrendPerAgeGroupWeeklyValue {
+  date_of_insertion_unix: number;
+  date_of_report_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  percentage_0_24: number;
+  percentage_25_39: number;
+  percentage_40_49: number;
+  percentage_50_59: number;
+  percentage_60_69: number;
+  percentage_70_plus: number;
+  percentage_average: number;
 }

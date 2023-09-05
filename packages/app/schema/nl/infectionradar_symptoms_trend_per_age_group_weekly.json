@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_infectionradar_symptoms_trend_per_age_group_weekly",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "nl_infectionradar_symptoms_trend_per_age_group_weekly_value",
+      "type": "object",
+      "properties": {
+        "date_of_insertion_unix": {
+          "type": "integer"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
+          "type": "integer"
+        },
+        "percentage_0_24": {
+          "type": "number"
+        },
+        "percentage_25_39": {
+          "type": "number"
+        },
+        "percentage_40_49": {
+          "type": "number"
+        },
+        "percentage_50_59": {
+          "type": "number"
+        },
+        "percentage_60_69": {
+          "type": "number"
+        },
+        "percentage_70_plus": {
+          "type": "number"
+        },
+        "percentage_average": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "date_of_insertion_unix",
+        "date_of_report_unix",
+        "date_start_unix",
+        "date_end_unix",
+        "percentage_0_24",
+        "percentage_25_39",
+        "percentage_40_49",
+        "percentage_50_59",
+        "percentage_60_69",
+        "percentage_70_plus",
+        "percentage_average"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

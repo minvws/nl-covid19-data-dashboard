@@ -28,6 +28,7 @@ See below an overview of all the available icons in this package. This file is g
 | Binnensportlocaties                    | <div style="background-color: white;"><img src="./src/svg/binnensportlocaties.svg" alt="Binnensportlocaties" /></div>                                          |
 | Boosterprik                            | <div style="background-color: white;"><img src="./src/svg/boosterprik.svg" alt="Boosterprik" /></div>                                                          |
 | Calendar                               | <div style="background-color: white;"><img src="./src/svg/calendar.svg" alt="Calendar" /></div>                                                                |
+| CalendarGear                           | <div style="background-color: white;"><img src="./src/svg/calendar_gear.svg" alt="CalendarGear" /></div>                                                       |
 | Check                                  | <div style="background-color: white;"><img src="./src/svg/check.svg" alt="Check" /></div>                                                                      |
 | Checked                                | <div style="background-color: white;"><img src="./src/svg/checked.svg" alt="Checked" /></div>                                                                  |
 | ChevronDown                            | <div style="background-color: white;"><img src="./src/svg/chevron_down.svg" alt="ChevronDown" /></div>                                                         |

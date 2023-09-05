@@ -21,8 +21,7 @@
 7. Once ready, merge the release branch to `master` using a **merge commit.
    Never use a squash and merge action, since this will erase/rewrite the commit
    history.**
-8. Hit the publish button in the GitHub release draft. This should tag the
-   correct commit in `master`.
+8. Upon finishing step 7, modify the release draft's target to `master`, and then press the `publish` button within the GitHub release draft interface. This will effectively apply a tag to the `master` branch, marking it as the latest release.
 9. Important before running the next step is building the common package to avoid any typescript errors,
    so run `yarn build:common`.
 10. After the release has been deployed to production,

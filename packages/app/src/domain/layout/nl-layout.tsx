@@ -37,7 +37,7 @@ export function NlLayout(props: NlLayoutProps) {
   const items = useSidebar({
     layout: 'nl',
     map: [
-      ['development_of_the_virus', ['sewage_measurement', 'tests', 'variants', 'mortality']],
+      ['development_of_the_virus', ['sewage_measurement', 'infection_radar', 'variants', 'mortality']],
       ['consequences_for_healthcare', ['hospitals_and_care', 'patients']],
       ['actions_to_take', ['vaccinations']],
       [
