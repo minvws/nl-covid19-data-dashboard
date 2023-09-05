@@ -249,16 +249,16 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
           {isArchivedContentShown && (
             <Box spacing={5} paddingTop={space[4]}>
               <ChoroplethTile
-                title={replaceVariablesInText(textGm.map_titel, {
+                title={replaceVariablesInText(textGm.section_archived.archived_choropleth.map_titel, {
                   municipality: municipalityName,
                 })}
                 metadata={{
                   date: lastValueChoropleth.date_unix,
-                  source: textGm.bronnen.rivm,
+                  source: textGm.section_archived.archived_choropleth.bronnen.rivm,
                 }}
-                description={textGm.map_toelichting}
+                description={textGm.section_archived.archived_choropleth.map_toelichting}
                 legend={{
-                  title: textGm.chloropleth_legenda.titel,
+                  title: textGm.section_archived.archived_choropleth.titel,
                   thresholds: thresholds.gm.admissions_on_date_of_admission,
                 }}
               >
