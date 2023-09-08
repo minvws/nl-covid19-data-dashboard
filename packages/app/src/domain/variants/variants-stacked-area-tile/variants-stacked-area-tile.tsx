@@ -94,7 +94,7 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
             ...context,
             config: [
               ...context.config.filter((value) => !hasMetricProperty(value) || filteredValues[value.metricProperty] || hasSelectedMetrics),
-              context.config.find((value) => hasMetricProperty(value) && value.metricProperty === 'other_graph_percentage'),
+              context.config.find((value) => hasMetricProperty(value) && value.metricProperty === 'other_variants_percentage'),
             ].filter(isDefined),
             value: !hasSelectedMetrics ? filteredValues : context.value,
           };
@@ -124,7 +124,7 @@ const useFilteredSeriesConfig = (
 ) => {
   return useMemo(() => {
     return [otherConfig, ...seriesConfig].filter(
-      (item) => item.metricProperty !== 'other_graph_percentage' && (compareList.includes(item.metricProperty) || compareList.length === alwaysEnabled.length)
+      (item) => item.metricProperty !== 'other_variants_percentage' && (compareList.includes(item.metricProperty) || compareList.length === alwaysEnabled.length)
     );
   }, [seriesConfig, otherConfig, compareList]);
 };
@@ -134,7 +134,7 @@ const useSeriesConfig = (text: VariantsStackedAreaTileText, values: VariantChart
     const baseVariantsFiltered = values
       .flatMap((x) => Object.keys(x))
       .filter((x, index, array) => array.indexOf(x) === index) // de-dupe
-      .filter((x) => x.endsWith('_percentage') && x !== 'other_graph_percentage')
+      .filter((x) => x.endsWith('_percentage') && x !== 'other_variants_percentage')
       .reverse(); // Reverse to be in an alphabetical order
 
     /* Enrich config with dynamic data / locale */
@@ -166,12 +166,12 @@ const useSeriesConfig = (text: VariantsStackedAreaTileText, values: VariantChart
 
     const otherConfig = {
       type: 'gapped-area',
-      metricProperty: 'other_graph_percentage',
+      metricProperty: 'other_variants_percentage',
+      color: colors.gray5,
       label: text.tooltip_labels.other_percentage,
+      strokeWidth: 2,
       fillOpacity: 0.2,
       shape: 'square',
-      color: colors.gray5,
-      strokeWidth: 2,
       mixBlendMode: 'multiply',
     } as GappedAreaSeriesDefinition<VariantChartValue>;
 
