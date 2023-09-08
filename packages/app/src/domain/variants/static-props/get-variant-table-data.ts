@@ -13,6 +13,12 @@ export type VariantRow = {
 
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
+/**
+ *  Return values to populate the variants table on the variants page
+ * @param variants
+ * @param namedDifference
+ * @param variantColors
+ */
 export function getVariantTableData(variants: NlVariants | undefined, namedDifference: NlNamedDifference, variantColors: ColorMatch[]) {
   const emptyValues = {
     variantTable: null,
@@ -27,6 +33,10 @@ export function getVariantTableData(variants: NlVariants | undefined, namedDiffe
     return emptyValues;
   }
 
+  /**
+   *  Find the difference property of the named difference key with a matching variant code and return
+   * @param name
+   */
   function findDifference(name: string) {
     if (isPresent(namedDifference.variants__percentage)) {
       const difference = namedDifference.variants__percentage.find((x) => x.variant_code === name);
@@ -38,6 +48,11 @@ export function getVariantTableData(variants: NlVariants | undefined, namedDiffe
       return difference;
     }
   }
+
+  /**
+   *  Find the property with a matching variant code in the 'variant' key of the NL json and return
+   * @param namedDifferenceVariantCode
+   */
 
   const firstLastValue = first<NlVariantsVariant>(variants.values);
 
