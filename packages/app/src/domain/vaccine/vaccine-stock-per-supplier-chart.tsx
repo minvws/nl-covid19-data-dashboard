@@ -1,4 +1,4 @@
-import { colors, getValuesInTimeframe, NlVaccineStockValue, TimeframeOption } from '@corona-dashboard/common';
+import { colors, getValuesInTimeframe, ArchivedNlVaccineStockValue, TimeframeOption } from '@corona-dashboard/common';
 import { pick } from 'lodash';
 import { useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
@@ -12,7 +12,7 @@ import { useCurrentDate } from '~/utils/current-date-context';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 interface VaccineStockPerSupplierChartProps {
-  values: NlVaccineStockValue[];
+  values: ArchivedNlVaccineStockValue[];
   text: SiteText['pages']['vaccinations_page']['nl'];
 }
 
@@ -60,10 +60,10 @@ export function VaccineStockPerSupplierChart({ values, text }: VaccineStockPerSu
 
   const selectedConfig = optionsConfig.find((x) => x.metricProperty === selected) ?? optionsConfig[0];
 
-  const seriesConfig: SeriesConfig<NlVaccineStockValue> = [
+  const seriesConfig: SeriesConfig<ArchivedNlVaccineStockValue> = [
     {
       type: 'area',
-      metricProperty: `${selected}_available` as keyof NlVaccineStockValue,
+      metricProperty: `${selected}_available` as keyof ArchivedNlVaccineStockValue,
       label: replaceVariablesInText(text.stock_per_supplier_chart.legend.available, {
         vaccineName: selectedConfig.label,
       }),
@@ -73,7 +73,7 @@ export function VaccineStockPerSupplierChart({ values, text }: VaccineStockPerSu
     },
     {
       type: 'line',
-      metricProperty: `${selected}_total` as keyof NlVaccineStockValue,
+      metricProperty: `${selected}_total` as keyof ArchivedNlVaccineStockValue,
       label: replaceVariablesInText(text.stock_per_supplier_chart.legend.total, {
         vaccineName: selectedConfig.label,
       }),
@@ -111,7 +111,7 @@ export function VaccineStockPerSupplierChart({ values, text }: VaccineStockPerSu
   );
 }
 
-function getMaximumPropertyValueInTimeframe(values: NlVaccineStockValue[], timeframe: TimeframeOption, today: Date) {
+function getMaximumPropertyValueInTimeframe(values: ArchivedNlVaccineStockValue[], timeframe: TimeframeOption, today: Date) {
   const valuesInTimeframe = getValuesInTimeframe(values, timeframe, today);
 
   return valuesInTimeframe.reduce(

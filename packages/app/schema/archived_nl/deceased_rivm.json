@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_deceased_rivm",
+  "title": "archived_nl_deceased_rivm",
   "type": "object",
   "properties": {
     "values": {

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_behavior_per_age_group",
+  "title": "archived_nl_behavior_per_age_group",
   "type": "object",
   "properties": {
     "keep_distance_compliance": { "$ref": "#/definitions/value" },
@@ -32,7 +32,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_behavior_per_age_group_value",
+      "title": "archived_nl_behavior_per_age_group_value",
       "type": "object",
       "properties": {
         "16_24": { "type": ["integer", "null"] },

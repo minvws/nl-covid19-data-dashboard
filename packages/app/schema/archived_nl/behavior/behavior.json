@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_behavior",
+  "title": "archived_nl_behavior",
   "type": "object",
   "properties": {
     "values": {
@@ -28,7 +28,7 @@
       ]
     },
     "value": {
-      "title": "nl_behavior_value",
+      "title": "archived_nl_behavior_value",
       "type": "object",
       "properties": {
         "number_of_participants": {

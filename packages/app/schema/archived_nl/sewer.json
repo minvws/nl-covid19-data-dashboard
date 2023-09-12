@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_sewer_value",
+      "title": "archived_nl_sewer_value",
       "type": "object",
       "required": ["average", "date_of_insertion_unix", "date_unix"],
       "additionalProperties": false,
@@ -19,7 +19,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_sewer",
+  "title": "archived_nl_sewer",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

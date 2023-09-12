@@ -1,4 +1,4 @@
-import { colors, NlReproduction, NlReproductionValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors, ArchivedNlReproduction, ArchivedNlReproductionValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { last } from 'lodash';
 import { isPresent } from 'ts-is-present';
@@ -8,7 +8,7 @@ import { TimelineEventConfig } from '~/components/time-series-chart/components/t
 import { SiteText } from '~/locale';
 
 interface ReproductionChartTileProps {
-  data: NlReproduction;
+  data: ArchivedNlReproduction;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
@@ -34,7 +34,7 @@ export const ReproductionChartTile = ({
     0,
     data.values.findIndex((x) => !isPresent(x.index_average))
   );
-  const last_value = last(values) as NlReproductionValue;
+  const last_value = last(values) as ArchivedNlReproductionValue;
 
   return (
     <ChartTile
