@@ -7,19 +7,19 @@
 export type ArchivedGmCode = string;
 
 export interface ArchivedGm {
-  difference: GmDifference;
-  deceased_rivm_archived_20221231: GmDeceasedRivm;
+  difference: ArchivedGmDifference;
+  deceased_rivm_archived_20221231: ArchivedGmDeceasedRivm;
   last_generated: string;
   proto_name: ArchivedGmCode;
   name: ArchivedGmCode;
   code: ArchivedGmCode;
-  vaccine_coverage_per_age_group_archived_20220622: GmVaccineCoveragePerAgeGroupArchived_20220622;
-  vaccine_coverage_per_age_group_archived_20220908: GmVaccineCoveragePerAgeGroupWithBoosterShot;
-  booster_coverage_archived_20220904: GmBoosterCoverage;
-  sewer_archived_20230623: GmSewer;
-  tested_overall_archived_20230331: GmTestedOverall;
+  vaccine_coverage_per_age_group_archived_20220622: ArchivedGmVaccineCoveragePerAgeGroupArchived_20220622;
+  vaccine_coverage_per_age_group_archived_20220908: ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShot;
+  booster_coverage_archived_20220904: ArchivedGmBoosterCoverage;
+  sewer_archived_20230623: ArchivedGmSewer;
+  tested_overall_archived_20230331: ArchivedGmTestedOverall;
 }
-export interface GmDifference {
+export interface ArchivedGmDifference {
   tested_overall__infected_moving_average_archived_20230331: DifferenceDecimal;
   tested_overall__infected_per_100k_moving_average_archived_20230331: DifferenceDecimal;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
@@ -37,7 +37,7 @@ export interface DifferenceInteger {
   old_date_unix: number;
   new_date_unix: number;
 }
-export interface GmDeceasedRivm {
+export interface ArchivedGmDeceasedRivm {
   values: GmDeceasedRivmArchived_20221231Value[];
   last_value: GmDeceasedRivmArchived_20221231Value;
 }
@@ -48,7 +48,7 @@ export interface GmDeceasedRivmArchived_20221231Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface GmVaccineCoveragePerAgeGroupArchived_20220622 {
+export interface ArchivedGmVaccineCoveragePerAgeGroupArchived_20220622 {
   values: GmVaccineCoveragePerAgeGroupArchivedValue[];
 }
 export interface GmVaccineCoveragePerAgeGroupArchivedValue {
@@ -61,7 +61,7 @@ export interface GmVaccineCoveragePerAgeGroupArchivedValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface GmVaccineCoveragePerAgeGroupWithBoosterShot {
+export interface ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShot {
   values: GmVaccineCoveragePerAgeGroupArchived_20220908Value[];
 }
 export interface GmVaccineCoveragePerAgeGroupArchived_20220908Value {
@@ -76,7 +76,7 @@ export interface GmVaccineCoveragePerAgeGroupArchived_20220908Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface GmBoosterCoverage {
+export interface ArchivedGmBoosterCoverage {
   values: GmBoosterCoverageArchived_20220904Value[];
 }
 export interface GmBoosterCoverageArchived_20220904Value {
@@ -86,11 +86,11 @@ export interface GmBoosterCoverageArchived_20220904Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface GmSewer {
-  values: GmSewerValue[];
-  last_value: GmSewerValue;
+export interface ArchivedGmSewer {
+  values: ArchivedGmSewerValue[];
+  last_value: ArchivedGmSewerValue;
 }
-export interface GmSewerValue {
+export interface ArchivedGmSewerValue {
   date_start_unix: number;
   date_end_unix: number;
   average: number;
@@ -100,11 +100,11 @@ export interface GmSewerValue {
   date_of_insertion_unix: number;
   data_is_outdated: boolean;
 }
-export interface GmTestedOverall {
-  values: GmTestedOverallValue[];
-  last_value: GmTestedOverallValue;
+export interface ArchivedGmTestedOverall {
+  values: ArchivedGmTestedOverallValue[];
+  last_value: ArchivedGmTestedOverallValue;
 }
-export interface GmTestedOverallValue {
+export interface ArchivedGmTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_moving_average: number | null;
@@ -758,14 +758,7 @@ export interface GmStaticValues {
   population_count_connected_to_rwzis: number;
 }
 export interface GmDifference {
-  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
-  sewer__average?: DifferenceInteger;
-}
-export interface DifferenceDecimal {
-  old_value: number;
-  difference: number;
-  old_date_unix: number;
-  new_date_unix: number;
+  sewer__average: DifferenceInteger;
 }
 export interface DifferenceInteger {
   old_value: number;
