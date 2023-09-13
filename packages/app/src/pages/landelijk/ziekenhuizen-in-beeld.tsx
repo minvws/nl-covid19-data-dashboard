@@ -106,6 +106,8 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const hospitalLastValue = getLastFilledValue(data.hospital_lcps);
   const icuLastValue = getLastFilledValue(data.intensive_care_lcps);
 
+  const valuesWithoutDateRange = data.hospital_lcps.values.map((value) => ({ ...value, date_end_unix: undefined, date_start_unix: undefined }));
+
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
@@ -171,7 +173,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{
                   key: 'hospital_beds_occupied_over_time_chart',
                 }}
-                values={data.hospital_lcps.values}
+                values={valuesWithoutDateRange}
                 timeframe={hospitalBedsOccupiedOverTimeTimeframe}
                 forceLegend
                 seriesConfig={[
@@ -294,7 +296,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{
                   key: 'hospital_patient_influx_over_time_chart',
                 }}
-                values={trimLeadingNullValues(data.hospital_lcps.values, 'influx_covid_patients')}
+                values={trimLeadingNullValues(valuesWithoutDateRange, 'influx_covid_patients')}
                 timeframe={hospitalPatientInfluxOverTimeTimeframe}
                 seriesConfig={[
                   {
