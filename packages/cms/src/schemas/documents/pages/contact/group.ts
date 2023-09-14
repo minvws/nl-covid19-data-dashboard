@@ -20,6 +20,7 @@ export const contactPageGroup = defineType({
       type: 'array',
       description: 'Voeg items toe aan deze groep.',
       of: [defineArrayMember({ type: 'reference', to: { type: 'contactPageGroupItem' } })],
+      validation: (rule) => rule.required(),
     }),
   ],
   preview: {
