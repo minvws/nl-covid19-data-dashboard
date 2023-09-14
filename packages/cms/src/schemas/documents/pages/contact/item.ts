@@ -1,4 +1,4 @@
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import { ValidationContext, defineArrayMember, defineField, defineType } from 'sanity';
 import { localeValidation } from '../../../../studio/validation/locale-validation';
 
 export const contactPageGroupItem = defineType({
@@ -46,7 +46,12 @@ export const contactPageGroupItem = defineType({
       name: 'linkType',
       type: 'linkType',
       fieldset: 'titleConfiguration',
-      validation: (rule) => rule.required(),
+      validation: (rule) =>
+        rule.custom((value, context: ValidationContext) => {
+          const parent = context.parent as { itemTitleUrl: string };
+          return 'itemTitleUrl' in parent && parent.itemTitleUrl.length && value === undefined ? 'Dit veld is verplicht als uw titel een link bevat' : true;
+        }),
+      hidden: ({ parent }) => !('itemTitleUrl' in parent && parent.itemTitleUrl.length),
     }),
     defineField({
       name: 'description',
