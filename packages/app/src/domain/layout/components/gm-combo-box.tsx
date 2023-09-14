@@ -16,6 +16,7 @@ export function GmComboBox(props: GmComboBoxProps) {
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();
+  const expStr = new RegExp(["'s-"].join(' | '), 'g');
 
   return (
     <ComboBox
@@ -24,6 +25,7 @@ export function GmComboBox(props: GmComboBoxProps) {
       onSelect={({ gemcode }) => {
         router.push(typeof getLink === 'function' ? getLink(gemcode) : reverseRouter.gm.index(gemcode));
       }}
+      sorter={(a, b) => a.name.replace(expStr, '').localeCompare(b.name.replace(expStr, ''))}
       selectedOption={gmData.find((gm) => gm.gemcode === selectedGmCode)}
       shouldFocusInput={shouldFocusInput}
     />
