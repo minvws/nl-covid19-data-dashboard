@@ -23,27 +23,27 @@ export function getVariantChartData(variants: NlVariants | undefined) {
     return EMPTY_VALUES;
   }
 
-  const variantsOfConcern = variants.values.sort((a, b) => b.last_value.order - a.last_value.order);
+  const sortedVariants = variants.values.sort((a, b) => b.last_value.order - a.last_value.order);
 
-  const firstVariant = variantsOfConcern.shift();
+  const firstVariant = sortedVariants.shift();
 
   if (!isDefined(firstVariant)) {
     return EMPTY_VALUES;
   }
 
   const values = firstVariant.values.map<VariantChartValue>((value, index) => {
-    const item = {
+    const variantItem = {
       is_reliable: true,
       date_start_unix: value.date_start_unix,
       date_end_unix: value.date_end_unix,
       [`${firstVariant.variant_code}_percentage`]: value.percentage,
     } as VariantChartValue;
 
-    variantsOfConcern.forEach((variant) => {
-      (item as unknown as Record<string, number>)[`${variant.variant_code}_percentage`] = variant.values[index].percentage;
+    sortedVariants.forEach((variant) => {
+      (variantItem as unknown as Record<string, number>)[`${variant.variant_code}_percentage`] = variant.values[index].percentage;
     });
 
-    return item;
+    return variantItem;
   });
 
   return {
