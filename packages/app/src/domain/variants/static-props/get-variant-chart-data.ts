@@ -23,7 +23,7 @@ export function getVariantChartData(variants: NlVariants | undefined) {
     return EMPTY_VALUES;
   }
 
-  const variantsOfConcern = variants.values.filter((variant) => variant.variant_code !== 'other_variants').sort((a, b) => b.last_value.order - a.last_value.order);
+  const variantsOfConcern = variants.values.sort((a, b) => b.last_value.order - a.last_value.order);
 
   const firstVariant = variantsOfConcern.shift();
 
