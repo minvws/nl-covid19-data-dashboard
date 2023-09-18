@@ -28,6 +28,7 @@ export const dataStructure = {
     tested_overall_archived_20230331: ['infected', 'infected_moving_average', 'infected_moving_average_rounded', 'infected_per_100k', 'infected_per_100k_moving_average'],
   },
   archived_gm_collection: {
+    hospital_nice_choropleth_archived_20230830: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
     sewer_archived_20230623: ['average', 'total_installation_count', 'data_is_outdated'],
     tested_overall_archived_20230331: ['infected_per_100k', 'infected'],
   },
@@ -226,6 +227,7 @@ export const dataStructure = {
       'admissions_on_date_of_admission',
       'admissions_on_date_of_admission_moving_average',
       'admissions_on_date_of_admission_moving_average_rounded',
+      'admissions_in_the_last_7_days',
       'admissions_on_date_of_reporting',
     ],
     sewer: ['average', 'data_is_outdated'],
@@ -243,7 +245,7 @@ export const dataStructure = {
     ],
   },
   gm_collection: {
-    hospital_nice_choropleth: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
+    hospital_nice_choropleth: ['admissions_in_the_last_7_days_per_100000'],
     sewer: ['average', 'data_is_outdated'],
     vaccine_coverage_per_age_group: [
       'vaccination_type',

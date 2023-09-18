@@ -15,6 +15,7 @@ export interface ArchivedGm {
   code: ArchivedGmCode;
   vaccine_coverage_per_age_group_archived_20220622: GmVaccineCoveragePerAgeGroupArchived_20220622;
   vaccine_coverage_per_age_group_archived_20220908: GmVaccineCoveragePerAgeGroupWithBoosterShot;
+  vaccine_coverage_per_age_group_archived_202310xx: GmVaccineCampaignCoveragePerAgeGroup;
   booster_coverage_archived_20220904: GmBoosterCoverage;
   sewer_archived_20230623: GmSewer;
   tested_overall_archived_20230331: GmTestedOverall;
@@ -76,6 +77,23 @@ export interface GmVaccineCoveragePerAgeGroupArchived_20220908Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
+export interface GmVaccineCampaignCoveragePerAgeGroup {
+  values: GmVaccineCampaignCoveragePerAgeGroupValue[];
+}
+export interface GmVaccineCampaignCoveragePerAgeGroupValue {
+  vaccination_type: string;
+  birthyear_range_12_plus: string;
+  birthyear_range_18_plus: string;
+  birthyear_range_60_plus: string | null;
+  vaccinated_percentage_12_plus: number | null;
+  vaccinated_percentage_12_plus_label: string | null;
+  vaccinated_percentage_18_plus: number | null;
+  vaccinated_percentage_18_plus_label: string | null;
+  vaccinated_percentage_60_plus: number | null;
+  vaccinated_percentage_60_plus_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface GmBoosterCoverage {
   values: GmBoosterCoverageArchived_20220904Value[];
 }
@@ -124,6 +142,7 @@ export interface ArchivedGmCollection {
   hospital_nice_choropleth_archived_20230830: ArchivedGmCollectionHospitalNiceChoropleth[];
   sewer_archived_20230623: GmCollectionSewer[];
   tested_overall_archived_20230331: GmCollectionTestedOverall[];
+  vaccine_coverage_per_age_group_choropleth_archived_202310xx: ArchivedGmCollectionVaccineCoveragePerAgeGroup[];
 }
 export interface ArchivedGmCollectionHospitalNiceChoropleth {
   date_unix: number;
@@ -147,6 +166,21 @@ export interface GmCollectionTestedOverall {
   gmcode: string;
   infected_per_100k: number;
   infected: number;
+  date_of_insertion_unix: number;
+}
+export interface ArchivedGmCollectionVaccineCoveragePerAgeGroup {
+  gmcode: string;
+  vaccination_type: string;
+  birthyear_range_12_plus: string;
+  birthyear_range_18_plus: string;
+  birthyear_range_60_plus: string | null;
+  vaccinated_percentage_12_plus: number | null;
+  vaccinated_percentage_12_plus_label: string | null;
+  vaccinated_percentage_18_plus: number | null;
+  vaccinated_percentage_18_plus_label: string | null;
+  vaccinated_percentage_60_plus: number | null;
+  vaccinated_percentage_60_plus_label: string | null;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 
@@ -751,21 +785,13 @@ export interface Gm {
   sewer: GmSewer;
   sewer_per_installation: GmSewerPerInstallation;
   sewer_installation_measurement: GmSewerInstallationMeasurement;
-  vaccine_coverage_per_age_group: GmVaccineCoveragePerAgeGroup;
 }
 export interface GmStaticValues {
   population_count: number;
   population_count_connected_to_rwzis: number;
 }
 export interface GmDifference {
-  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
-  sewer__average?: DifferenceInteger;
-}
-export interface DifferenceDecimal {
-  old_value: number;
-  difference: number;
-  old_date_unix: number;
-  new_date_unix: number;
+  sewer__average: DifferenceInteger;
 }
 export interface DifferenceInteger {
   old_value: number;
@@ -820,23 +846,6 @@ export interface GmSewerInstallationMeasurement {
   total_installation_count: number;
   date_of_insertion_unix: number;
 }
-export interface GmVaccineCoveragePerAgeGroup {
-  values: GmVaccineCoveragePerAgeGroupValue[];
-}
-export interface GmVaccineCoveragePerAgeGroupValue {
-  vaccination_type: string;
-  birthyear_range_12_plus: string;
-  birthyear_range_18_plus: string;
-  birthyear_range_60_plus: string | null;
-  vaccinated_percentage_12_plus: number | null;
-  vaccinated_percentage_12_plus_label: string | null;
-  vaccinated_percentage_18_plus: number | null;
-  vaccinated_percentage_18_plus_label: string | null;
-  vaccinated_percentage_60_plus: number | null;
-  vaccinated_percentage_60_plus_label: string | null;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
 
 export type GmCollectionId = 'GM_COLLECTION';
 
@@ -847,7 +856,6 @@ export interface GmCollection {
   code: GmCollectionId;
   hospital_nice_choropleth: GmCollectionHospitalNiceChoropleth[];
   sewer: GmCollectionSewer[];
-  vaccine_coverage_per_age_group: GmCollectionVaccineCoveragePerAgeGroup[];
 }
 export interface GmCollectionHospitalNiceChoropleth {
   date_unix: number;
@@ -864,21 +872,6 @@ export interface GmCollectionSewer {
   average: number;
   date_of_insertion_unix: number;
   data_is_outdated: boolean;
-}
-export interface GmCollectionVaccineCoveragePerAgeGroup {
-  gmcode: string;
-  vaccination_type: string;
-  birthyear_range_12_plus: string;
-  birthyear_range_18_plus: string;
-  birthyear_range_60_plus: string | null;
-  vaccinated_percentage_12_plus: number | null;
-  vaccinated_percentage_12_plus_label: string | null;
-  vaccinated_percentage_18_plus: number | null;
-  vaccinated_percentage_18_plus_label: string | null;
-  vaccinated_percentage_60_plus: number | null;
-  vaccinated_percentage_60_plus_label: string | null;
-  date_unix: number;
-  date_of_insertion_unix: number;
 }
 
 export type NlId = 'NL';

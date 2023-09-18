@@ -3,7 +3,16 @@
   "type": "object",
   "title": "archived_gm_collection",
   "additionalProperties": false,
-  "required": ["last_generated", "proto_name", "name", "code", "hospital_nice_choropleth_archived_20230830", "sewer_archived_20230623", "tested_overall_archived_20230331"],
+  "required": [
+    "last_generated",
+    "proto_name",
+    "name",
+    "code",
+    "hospital_nice_choropleth_archived_20230830",
+    "sewer_archived_20230623",
+    "tested_overall_archived_20230331",
+    "vaccine_coverage_per_age_group_choropleth_archived_202310xx"
+  ],
   "properties": {
     "last_generated": {
       "type": "string"
@@ -39,6 +48,14 @@
       "maxItems": 342,
       "items": {
         "$ref": "positive_tests/tested_overall.json"
+      }
+    },
+    "vaccine_coverage_per_age_group_choropleth_archived_202310xx": {
+      "type": "array",
+      "minItems": 684,
+      "maxItems": 684,
+      "items": {
+        "$ref": "vaccine_coverage_per_age_group_choropleth.json"
       }
     }
   },

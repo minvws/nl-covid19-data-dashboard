@@ -14,6 +14,7 @@
     "name",
     "vaccine_coverage_per_age_group_archived_20220622",
     "vaccine_coverage_per_age_group_archived_20220908",
+    "vaccine_coverage_per_age_group_archived_202310xx",
     "tested_overall_archived_20230331"
   ],
   "properties": {
@@ -40,6 +41,9 @@
     },
     "vaccine_coverage_per_age_group_archived_20220908": {
       "$ref": "vaccine_coverage_per_age_group_with_booster_shot.json"
+    },
+    "vaccine_coverage_per_age_group_archived_202310xx": {
+      "$ref": "vaccinaties/vaccine_campaign_coverage_per_age_group.json"
     },
     "booster_coverage_archived_20220904": {
       "$ref": "booster_coverage.json"

@@ -1,1 +1,4 @@
 timestamp,action,key,document_id,move_to
+2023-09-11T09:17:19.215Z,add,pages.vaccinations_page.shared.warning,MlD8yElsvTVffFUh16iULJ,__
+2023-09-11T10:30:31.950Z,add,common.choropleth.choropleth_vaccination_coverage.gm.archived.description,MlD8yElsvTVffFUh16ktPd,__
+2023-09-11T10:30:32.940Z,add,common.choropleth.choropleth_vaccination_coverage.gm.archived.title,uYp87y9X4zO2L2HWNEril1,__
