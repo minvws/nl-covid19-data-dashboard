@@ -59,9 +59,6 @@
         "percentage": {
           "type": "number"
         },
-        "has_historical_significance": {
-          "type": "boolean"
-        },
         "sample_size": {
           "type": "integer"
         },
