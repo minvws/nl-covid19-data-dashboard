@@ -22,11 +22,10 @@ export interface GroupItem extends Base {
   linkType?: LinkType;
 }
 
-interface PageGroups extends Base {
+export interface PageGroup extends Base {
   items: GroupItem[];
 }
 
 export interface ContactPage {
-  groups: PageGroups[];
-  pageTitle?: string | null;
+  groups: PageGroup[];
 }

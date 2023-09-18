@@ -1,13 +1,15 @@
 import Head from 'next/head';
-import { Box } from '~/components/base/box';
-import { ContactPageGroupItem } from '~/components/contact/item';
+import styled from 'styled-components';
+import { VisuallyHidden } from '~/components';
+import { ContactPageGroup } from '~/components/contact/contact-page-group';
 import { ContactPage } from '~/components/contact/types';
 import { Heading } from '~/components/typography';
+import { ContentLayout } from '~/domain/layout/content-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate } from '~/static-props/get-data';
-import { sizes, space } from '~/style/theme';
+import { mediaQueries, space } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -16,7 +18,6 @@ export const getStaticProps = createGetStaticProps(
 
     return `// groq
     *[_type == 'contact'] {
-      'title': title.${locale},
       'groups': contactPageGroups[]->{
         'id': _id,
         'title': title.${locale},
@@ -42,9 +43,13 @@ export const getStaticProps = createGetStaticProps(
 const Contact = (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts } = useIntl();
   const {
-    content: { pageTitle, groups },
+    content: { groups },
     lastGenerated,
   } = props;
+
+  const middleIndexOfGroups = Math.ceil(groups.length / 2);
+  const firstHalf = groups.slice(0, middleIndexOfGroups);
+  const secondHalf = groups.slice(middleIndexOfGroups);
 
   return (
     <Layout {...commonTexts.contact_metadata} lastGenerated={lastGenerated}>
@@ -53,28 +58,25 @@ const Contact = (props: StaticProps<typeof getStaticProps>) => {
         <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
       </Head>
 
-      {/* The dimensions of this box are duplicated on the FAQ and about page, abstract if possible */}
-      <Box margin={`${space[4]} auto`} maxWidth={`${sizes.maxWidth}px`} padding={`0 ${space[3]}`}>
-        {pageTitle && (
-          <Heading marginBottom={space[4]} level={1}>
-            {pageTitle}
-          </Heading>
-        )}
+      <VisuallyHidden>
+        <Heading level={1}>Contact</Heading>
+      </VisuallyHidden>
 
-        {groups.map(({ id, title, items }) => (
-          <div key={id}>
-            <Heading marginBottom={space[3]} level={2}>
-              {title}
-            </Heading>
-
-            {items.map((item, index) => (
-              <ContactPageGroupItem key={item.id} item={item} index={index} groupItemsLength={items.length} />
-            ))}
-          </div>
-        ))}
-      </Box>
+      <ContentLayout>
+        <ContactLayout>
+          <ContactPageGroup groups={firstHalf} />
+          <ContactPageGroup groups={secondHalf} />
+        </ContactLayout>
+      </ContentLayout>
     </Layout>
   );
 };
+
+const ContactLayout = styled.div`
+  @media ${mediaQueries.sm} {
+    display: flex;
+    gap: ${space[4]} ${space[5]};
+  }
+`;
 
 export default Contact;
