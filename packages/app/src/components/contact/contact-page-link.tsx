@@ -2,6 +2,7 @@ import { ChevronRight, External, Telephone } from '@corona-dashboard/icons';
 import styled from 'styled-components';
 import { ExternalLink } from '~/components/external-link';
 import { space } from '~/style/theme';
+import { formatLinkAccordingToType } from '~/utils/format-link-according-to-type';
 import { isInternalUrl } from '~/utils/is-internal-url';
 import { Link } from '~/utils/link';
 import { LinkType } from './types';
@@ -13,17 +14,6 @@ interface ContactPageLinkProps {
 }
 
 export const ContactPageLink = ({ href, label, linkType }: ContactPageLinkProps) => {
-  const formatLinkAccordingToType = (href: string, linkType: LinkType | undefined) => {
-    switch (linkType) {
-      case 'email':
-        return `mailto:${href}`;
-      case 'phone':
-        return `tel:${href.replace(/\s/g, '').replace('-', '')}`;
-      default:
-        return href;
-    }
-  };
-
   if (isInternalUrl(href)) {
     return (
       <LinkWrapper iconMargin={`0 0 0 ${space[2]}`}>
