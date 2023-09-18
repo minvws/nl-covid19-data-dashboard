@@ -5,7 +5,6 @@ import { GetStaticPropsContext } from 'next';
 import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -124,6 +123,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 date: { start: sewerAverages.last_value.date_start_unix, end: sewerAverages.last_value.date_end_unix },
                 source: textGm.bronnen.rivm,
               }}
+              description={textGm.extra_uitleg}
             >
               <KpiValue
                 absolute={sewerAverages.last_value.average}
@@ -137,8 +137,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                   populationCountConnectedToRWZIS: <strong>{formatNumber(populationCountConnectedToRWZIS)}</strong>,
                 })}
               </Text>
-
-              <Markdown content={textGm.extra_uitleg} />
             </KpiTile>
 
             <KpiTile
