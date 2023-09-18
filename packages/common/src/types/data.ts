@@ -758,14 +758,7 @@ export interface GmStaticValues {
   population_count_connected_to_rwzis: number;
 }
 export interface GmDifference {
-  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
-  sewer__average?: DifferenceInteger;
-}
-export interface DifferenceDecimal {
-  old_value: number;
-  difference: number;
-  old_date_unix: number;
-  new_date_unix: number;
+  sewer__average: DifferenceInteger;
 }
 export interface DifferenceInteger {
   old_value: number;
@@ -1209,8 +1202,7 @@ export interface NlVariantsVariantValue {
   order: number;
   occurrence: number;
   percentage: number;
-  is_variant_of_concern: boolean;
-  has_historical_significance: boolean;
+  has_historical_significance?: boolean;
   sample_size: number;
   date_start_unix: number;
   date_end_unix: number;
