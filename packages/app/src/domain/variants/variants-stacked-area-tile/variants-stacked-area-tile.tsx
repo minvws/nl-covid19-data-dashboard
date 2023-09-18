@@ -92,7 +92,10 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
 
           const reorderContext = {
             ...context,
-            config: context.config.filter((value) => !hasMetricProperty(value) || filteredValues[value.metricProperty] || hasSelectedMetrics).filter(isDefined),
+            config: [
+              // Destructuring so as to not interact with the object directly and eliminate the possibility of introducing inconsistencies
+              ...context.config.filter((value) => !hasMetricProperty(value) || filteredValues[value.metricProperty] || hasSelectedMetrics),
+            ].filter(isDefined),
             value: !hasSelectedMetrics ? filteredValues : context.value,
           };
 
