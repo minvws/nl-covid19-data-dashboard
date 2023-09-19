@@ -14,7 +14,7 @@
   },
   "definitions": {
     "value": {
-      "title": "gm_vaccine_coverage_per_age_group_archived_20220908_value",
+      "title": "archived_gm_vaccine_coverage_per_age_group_with_booster_shot_value",
       "additionalProperties": false,
       "type": "object",
       "required": [

@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "gm_deceased_rivm_archived_20221231_value",
+      "title": "archived_gm_deceased_rivm_value",
       "type": "object",
       "properties": {
         "covid_daily": {

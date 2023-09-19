@@ -15,7 +15,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "gm_booster_coverage_archived_20220904_value",
+      "title": "archived_gm_booster_coverage_value",
       "type": "object",
       "properties": {
         "age_group": {

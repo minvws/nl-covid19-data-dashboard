@@ -13,7 +13,7 @@ export interface ArchivedGm {
   proto_name: ArchivedGmCode;
   name: ArchivedGmCode;
   code: ArchivedGmCode;
-  vaccine_coverage_per_age_group_archived_20220622: ArchivedGmVaccineCoveragePerAgeGroupArchived_20220622;
+  vaccine_coverage_per_age_group_archived_20220622: ArchivedGmVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived_20220908: ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShot;
   booster_coverage_archived_20220904: ArchivedGmBoosterCoverage;
   sewer_archived_20230623: ArchivedGmSewer;
@@ -38,20 +38,20 @@ export interface DifferenceInteger {
   new_date_unix: number;
 }
 export interface ArchivedGmDeceasedRivm {
-  values: GmDeceasedRivmArchived_20221231Value[];
-  last_value: GmDeceasedRivmArchived_20221231Value;
+  values: ArchivedGmDeceasedRivmValue[];
+  last_value: ArchivedGmDeceasedRivmValue;
 }
-export interface GmDeceasedRivmArchived_20221231Value {
+export interface ArchivedGmDeceasedRivmValue {
   covid_daily: number;
   covid_daily_moving_average: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface ArchivedGmVaccineCoveragePerAgeGroupArchived_20220622 {
-  values: GmVaccineCoveragePerAgeGroupArchivedValue[];
+export interface ArchivedGmVaccineCoveragePerAgeGroup {
+  values: ArchivedGmVaccineCoveragePerAgeGroupValue[];
 }
-export interface GmVaccineCoveragePerAgeGroupArchivedValue {
+export interface ArchivedGmVaccineCoveragePerAgeGroupValue {
   age_group_range: '12+' | '18+';
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
@@ -62,9 +62,9 @@ export interface GmVaccineCoveragePerAgeGroupArchivedValue {
   date_of_insertion_unix: number;
 }
 export interface ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShot {
-  values: GmVaccineCoveragePerAgeGroupArchived_20220908Value[];
+  values: ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShotValue[];
 }
-export interface GmVaccineCoveragePerAgeGroupArchived_20220908Value {
+export interface ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShotValue {
   age_group_range: '12+' | '18+';
   fully_vaccinated_percentage: number | null;
   booster_shot_percentage: number | null;
@@ -77,9 +77,9 @@ export interface GmVaccineCoveragePerAgeGroupArchived_20220908Value {
   date_of_insertion_unix: number;
 }
 export interface ArchivedGmBoosterCoverage {
-  values: GmBoosterCoverageArchived_20220904Value[];
+  values: ArchivedGmBoosterCoverageValue[];
 }
-export interface GmBoosterCoverageArchived_20220904Value {
+export interface ArchivedGmBoosterCoverageValue {
   age_group?: '12+' | '18+';
   percentage: number;
   percentage_label: string | null;
@@ -793,9 +793,9 @@ export interface GmSewerValue {
   data_is_outdated: boolean;
 }
 export interface GmSewerPerInstallation {
-  values: MunicipalSewerPerInstallationInstallation[];
+  values: MunicipalSewerPerInstallation[];
 }
-export interface MunicipalSewerPerInstallationInstallation {
+export interface MunicipalSewerPerInstallation {
   rwzi_awzi_name: string;
   values: GmSewerPerInstallationValue[];
   last_value: GmSewerPerInstallationValue;
