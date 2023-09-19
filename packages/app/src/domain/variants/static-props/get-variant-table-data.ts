@@ -64,7 +64,7 @@ export function getVariantTableData(variants: NlVariants | undefined, namedDiffe
 
       return {
         variantCode: namedDifferenceEntry.variant_code,
-        order: variant!.variant_code === 'other_variants' ? -1 : variant!.last_value.order,
+        order: variant!.variant_code === 'other_variants' ? -1 : variant!.last_value.order, // Force order of Other Variants to -1 so Other Variants take the bottom row in the table
         percentage: variant!.last_value!.percentage,
         difference: findDifference(namedDifferenceEntry.variant_code),
         color: variantColors.find((variantColor) => variantColor.variant === namedDifferenceEntry.variant_code)?.color || colors.gray5,
