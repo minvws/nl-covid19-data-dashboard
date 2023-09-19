@@ -22,20 +22,30 @@
     "nursing_home_archived_20230126",
     "reproduction_archived_20230711",
     "sewer_archived_20230623",
-    "vaccine_campaigns_archived_20220908",
-    "vaccine_planned_archived_20220908",
+    "vaccine_administered_archived_20220914",
+    "vaccine_administered_doctors_archived_20220324",
+    "vaccine_administered_ggd_archived_20220324",
+    "vaccine_administered_ggd_ghor_archived_20220324",
+    "vaccine_administered_hospitals_and_care_institutions_archived_20220324",
+    "vaccine_administered_planned_archived_20220518",
+    "vaccine_administered_total_archived_20220324",
+    "vaccine_coverage_archived_20220518",
     "vaccine_coverage_per_age_group_archived_20220622",
     "vaccine_coverage_per_age_group_archived_20220908",
+    "vaccine_coverage_per_age_group_archived_202310xx",
     "vaccine_coverage_per_age_group_estimated_archived_20220908",
+    "vaccine_coverage_per_age_group_estimated_autumn_2022_archived_202310xx",
+    "vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_202310xx",
+    "vaccine_campaigns_archived_20220908",
+    "vaccine_planned_archived_20220908",
+    "vaccine_vaccinated_or_support_archived_20230411",
+    "vaccine_delivery_per_supplier_archived_20211101",
+    "vaccine_stock_archived_20211024",
     "tested_ggd_archived_20230321",
     "tested_overall_archived_20230331",
     "tested_per_age_group_archived_20230331",
     "vulnerable_hospital_admissions_archived_20230711",
     "vulnerable_nursing_home_archived_20230711",
-    "vaccine_vaccinated_or_support_archived_20230411",
-    "vaccine_coverage_archived_20220518",
-    "vaccine_delivery_per_supplier_archived_20211101",
-    "vaccine_stock_archived_20211024",
     "repeating_shot_administered_20220713",
     "corona_melder_app_warning_archived_20220421",
     "corona_melder_app_download_archived_20220421",
@@ -109,6 +119,9 @@
     "vaccine_campaigns_archived_20220908": {
       "$ref": "vaccine_campaigns.json"
     },
+    "vaccine_campaigns_archived_202310xx": {
+      "$ref": "vaccine_campaigns_archived_202310xx.json"
+    },
     "vaccine_planned_archived_20220908": {
       "$ref": "vaccine_planned.json"
     },
@@ -133,8 +146,38 @@
     "vaccine_vaccinated_or_support_archived_20230411": {
       "$ref": "vaccine_vaccinated_or_support.json"
     },
+    "vaccine_administered_archived_20220914": {
+      "$ref": "vaccine_administered.json"
+    },
+    "vaccine_administered_doctors_archived_20220324": {
+      "$ref": "vaccine_administered_doctors.json"
+    },
+    "vaccine_administered_ggd_ghor_archived_20220324": {
+      "$ref": "vaccine_administered_ggd_ghor.json"
+    },
+    "vaccine_administered_ggd_archived_20220324": {
+      "$ref": "vaccine_administered_ggd.json"
+    },
+    "vaccine_administered_hospitals_and_care_institutions_archived_20220324": {
+      "$ref": "vaccine_administered_hospitals_and_care_institutions.json"
+    },
+    "vaccine_administered_total_archived_20220324": {
+      "$ref": "vaccine_administered_total.json"
+    },
+    "vaccine_administered_planned_archived_20220518": {
+      "$ref": "vaccine_administered_planned.json"
+    },
     "vaccine_coverage_archived_20220518": {
       "$ref": "vaccine_coverage.json"
+    },
+    "vaccine_coverage_per_age_group_archived_202310xx": {
+      "$ref": "vaccine_coverage_per_age_group_archived_20231012.json"
+    },
+    "vaccine_coverage_per_age_group_estimated_autumn_2022_archived_202310xx": {
+      "$ref": "vaccine_coverage_per_age_group_estimated_autumn_2022.json"
+    },
+    "vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_202310xx": {
+      "$ref": "vaccine_coverage_per_age_group_estimated_fully_vaccinated.json"
     },
     "vaccine_delivery_per_supplier_archived_20211101": {
       "$ref": "vaccine_delivery_per_supplier.json"

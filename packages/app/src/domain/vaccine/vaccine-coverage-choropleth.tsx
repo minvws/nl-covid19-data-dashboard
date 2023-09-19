@@ -79,7 +79,7 @@ export const VaccineCoverageChoropleth = ({ data, dataOptions, text, isPrimarySe
         accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
         data={choroplethDataGm}
         dataConfig={{
-          metricName: 'vaccine_coverage_per_age_group_choropleth_archived_202310xx',
+          metricName: 'vaccine_coverage_per_age_group_archived_202310xx',
           metricProperty: `vaccinated_percentage_${selectedAgeGroup}_plus`,
         }}
         dataOptions={dataOptions}

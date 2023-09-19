@@ -124,13 +124,6 @@ export function selectNlData<T extends keyof Nl | F.AutoPath<Nl, keyof Nl, '.'>>
   return () => {
     const { data } = getNlData();
 
-    /**
-     * Instead of getting the full timeseries we are getting the latest value only per age group.
-     */
-    if (isDefined(data.vaccine_coverage_per_age_group)) {
-      data.vaccine_coverage_per_age_group.values = getCoveragePerAgeGroupLatestValues(data.vaccine_coverage_per_age_group.values);
-    }
-
     const selectedNlData = metrics.reduce(
       (acc, p) =>
         set(
@@ -169,6 +162,13 @@ export function getNlData() {
 export function selectArchivedNlData<T extends keyof ArchivedNl | F.AutoPath<ArchivedNl, keyof ArchivedNl, '.'>>(...metrics: T[]) {
   return () => {
     const { data } = getArchivedNlData();
+
+    /**
+     * Instead of getting the full timeseries we are getting the latest value only per age group.
+     */
+    if (isDefined(data.vaccine_coverage_per_age_group_archived_202310xx)) {
+      data.vaccine_coverage_per_age_group_archived_202310xx.values = getCoveragePerAgeGroupLatestValues(data.vaccine_coverage_per_age_group_archived_202310xx.values);
+    }
 
     const selectedArchivedNlData = metrics.reduce(
       (acc, p) =>
@@ -318,7 +318,7 @@ function replaceInaccurateLastValue(data: any) {
 
   metricsWithInaccurateData.forEach((m) => {
     if (isValuesWithLastValue(data[m])) {
-      for(const prop in inaccurateMetricProperties) {
+      for (const prop in inaccurateMetricProperties) {
         data[m] = adjustDataToLastAccurateValue(data[m], inaccurateMetricProperties[prop]);
       }
     }
