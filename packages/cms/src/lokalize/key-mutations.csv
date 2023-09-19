@@ -1,4 +1,14 @@
 timestamp,action,key,document_id,move_to
+2023-09-12T09:25:11.961Z,add,pages.vaccinations_page.nl.kpi_vaccinaties_de_coronaprik.titel,MlD8yElsvTVffFUh17v9QX,__
+2023-09-12T09:25:12.951Z,add,pages.vaccinations_page.nl.kpi_vaccinaties_de_coronaprik.omschrijving,Ruz0yC4w36r8d89kKBqr9l,__
 2023-09-11T09:17:19.215Z,add,pages.vaccinations_page.shared.warning,MlD8yElsvTVffFUh16iULJ,__
 2023-09-11T10:30:31.950Z,add,common.choropleth.choropleth_vaccination_coverage.gm.archived.description,MlD8yElsvTVffFUh16ktPd,__
 2023-09-11T10:30:32.940Z,add,common.choropleth.choropleth_vaccination_coverage.gm.archived.title,uYp87y9X4zO2L2HWNEril1,__
+2023-09-18T14:01:37.076Z,add,pages.vaccinations_page.nl.kpi_vaccinaties_de_coronaprik.tile_amount_administered.omschrijving,OkMYDzh72BFc2hr3nJ2Lkw,__
+2023-09-18T14:01:38.040Z,add,pages.vaccinations_page.nl.kpi_vaccinaties_de_coronaprik.tile_amount_administered.title,DteE6ilYiKYImFm3VTFImC,__
+2023-09-18T14:01:38.994Z,add,pages.vaccinations_page.nl.kpi_vaccinaties_de_coronaprik.tile_explanation.titel,DteE6ilYiKYImFm3VTFIyO,__
+2023-09-18T14:01:40.012Z,add,pages.vaccinations_page.nl.kpi_vaccinaties_de_coronaprik.tile_explanation.omschrijving,zScV1rsnyM5v6J5UlmYwqT,__
+2023-09-18T14:01:40.013Z,delete,pages.vaccinations_page.nl.kpi_vaccinaties_de_coronaprik.omschrijving,Ruz0yC4w36r8d89kKBqr9l,__
+2023-09-18T14:01:40.013Z,delete,pages.vaccinations_page.nl.kpi_vaccinaties_de_coronaprik.titel,MlD8yElsvTVffFUh17v9QX,__
+2023-09-18T14:32:26.195Z,add,pages.vaccinations_page.nl.section_basisserie.title,OkMYDzh72BFc2hr3nJ2TOA,__
+2023-09-18T14:32:27.172Z,add,pages.vaccinations_page.nl.section_basisserie.description,zScV1rsnyM5v6J5UlmZFS1,__
