@@ -1,6 +1,6 @@
 import { colors, NlNamedDifference, NlVariants, NlVariantsVariant, NamedDifferenceDecimal } from '@corona-dashboard/common';
 import { first } from 'lodash';
-import { isDefined, isPresent } from 'ts-is-present';
+import { isDefined } from 'ts-is-present';
 import { ColorMatch } from './get-variant-order-colors';
 import { VariantCode } from '../static-props';
 
@@ -34,14 +34,6 @@ export function getVariantTableData(variants: NlVariants | undefined, namedDiffe
     return emptyValues;
   }
 
-  function findDifference(name: string) {
-    if (isPresent(namedDifference.variants__percentage)) {
-      const difference = namedDifference.variants__percentage.find((x) => x.variant_code === name);
-
-      return difference ?? null;
-    }
-  }
-
   const firstLastValue = first<NlVariantsVariant>(variants.values);
 
   if (!isDefined(firstLastValue)) {
@@ -60,18 +52,23 @@ export function getVariantTableData(variants: NlVariants | undefined, namedDiffe
   const variantTable = namedDifference.variants__percentage
     .map<VariantRow>((namedDifferenceEntry) => {
       // There is ALWAYS a corresponding variant to a namedDifference entry.
-      const variant = variants.values.find((x) => x.variant_code === namedDifferenceEntry.variant_code);
+      const variant = variants.values.find((x) => x.variant_code === namedDifferenceEntry.variant_code)!;
 
       return {
         variantCode: namedDifferenceEntry.variant_code,
-        order: variant!.variant_code === 'other_variants' ? -1 : variant!.last_value.order, // Force order of Other Variants to -1 so Other Variants take the bottom row in the table
-        percentage: variant!.last_value!.percentage,
-        difference: findDifference(namedDifferenceEntry.variant_code),
+        order: variant.last_value.order,
+        percentage: variant.last_value.percentage,
+        difference: namedDifferenceEntry,
         color: variantColors.find((variantColor) => variantColor.variant === namedDifferenceEntry.variant_code)?.color || colors.gray5,
       };
     })
     .filter((variantRow) => variantRow !== null)
-    .sort((a, b) => b!.order - a!.order);
+    .sort((a, b) => {
+      // Other Variants must always take the bottom row in the table
+      if (a.variantCode === 'other_variants') return 1;
+      if (b.variantCode === 'other_variants') return -1;
+      return b.order - a.order;
+    });
 
   return { variantTable, dates };
 }
