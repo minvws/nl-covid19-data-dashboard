@@ -17,15 +17,6 @@ export const thermometer = defineType({
         collapsed: true,
       },
     },
-    {
-      title: 'Titel van standen informatie',
-      name: 'level-information',
-      description: 'Klik op het label om de velden te tonen.',
-      options: {
-        collapsible: true,
-        collapsed: true,
-      },
-    },
   ],
   fields: [
     defineField({
@@ -94,12 +85,6 @@ export const thermometer = defineType({
       name: 'collapsibleTitle',
       type: 'localeString',
       validation: localeStringValidation((rule) => rule.required()),
-    }),
-    defineField({
-      title: 'Titel van standen informatie',
-      name: 'trendIcon',
-      type: 'thermometerTrendIcon',
-      fieldset: 'level-information',
     }),
     defineField({
       title: 'Tijdlijn',

@@ -74,10 +74,6 @@ export function getTopicalStructureQuery(locale: string) {
         'sourceLabel': sourceLabel.${locale},
         'articleReference': articleReference.${locale},
         'collapsibleTitle': collapsibleTitle.${locale},
-        'trendIcon': {
-          'color': trendIcon.color,
-          'direction': trendIcon.direction,
-        },
         'timeline': {
           'title': timeline.title.${locale},
           'tooltipLabel': timeline.tooltipCurrentEstimationLabel.${locale},

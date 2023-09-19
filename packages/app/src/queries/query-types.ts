@@ -22,7 +22,6 @@ export interface ThermometerConfig {
   sourceLabel: string;
   articleReference: PortableTextEntry[];
   collapsibleTitle: string;
-  trendIcon: TrendIcon;
   thermometerLevels: ThermometerLevel[];
   timeline: ThermometerTimeLine;
 }
