@@ -62,7 +62,6 @@ export function getVariantTableData(variants: NlVariants | undefined, namedDiffe
         color: variantColors.find((variantColor) => variantColor.variant === namedDifferenceEntry.variant_code)?.color || colors.gray5,
       };
     })
-    .filter((variantRow) => variantRow !== null)
     .sort((a, b) => {
       // Other Variants must always take the bottom row in the table
       if (a.variantCode === 'other_variants') return 1;
