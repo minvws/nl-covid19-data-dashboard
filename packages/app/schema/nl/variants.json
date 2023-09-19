@@ -41,8 +41,6 @@
         "order",
         "occurrence",
         "percentage",
-        "is_variant_of_concern",
-        "has_historical_significance",
         "sample_size",
         "date_start_unix",
         "date_end_unix",
@@ -60,12 +58,6 @@
         },
         "percentage": {
           "type": "number"
-        },
-        "is_variant_of_concern": {
-          "type": "boolean"
-        },
-        "has_historical_significance": {
-          "type": "boolean"
         },
         "sample_size": {
           "type": "integer"
