@@ -13,6 +13,12 @@ export type VariantRow = {
 
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
+/**
+ * Return values to populate the variants table
+ * @param variants
+ * @param namedDifference
+ * @param variantColors
+ */
 export function getVariantTableData(variants: NlVariants | undefined, namedDifference: NlNamedDifference, variantColors: ColorMatch[]) {
   const emptyValues = {
     variantTable: null,
@@ -31,12 +37,12 @@ export function getVariantTableData(variants: NlVariants | undefined, namedDiffe
     if (isPresent(namedDifference.variants__percentage)) {
       const difference = namedDifference.variants__percentage.find((x) => x.variant_code === name);
 
-      if (!difference) {
-        return null;
-      }
-
-      return difference;
+      return difference ?? null;
     }
+  }
+
+  function mapVariantToNamedDifference(namedDifferenceVariantCode: string) {
+    return variants?.values.find((x) => x.variant_code === namedDifferenceVariantCode) ?? null;
   }
 
   const firstLastValue = first<NlVariantsVariant>(variants.values);
@@ -50,16 +56,16 @@ export function getVariantTableData(variants: NlVariants | undefined, namedDiffe
     date_of_report_unix: firstLastValue.last_value.date_of_report_unix,
   };
 
-  const variantTable = variants.values
-    .filter((variant) => variant.variant_code !== 'other_graph' && !variant.last_value.has_historical_significance)
-    .sort((a, b) => b.last_value.order - a.last_value.order)
-    .map<VariantRow>((variant) => {
-      const color = variantColors.find((variantColor) => variantColor.variant === variant.variant_code)?.color || colors.gray5;
+  const variantTable = namedDifference.variants__percentage
+    .filter((namedDifferencePercentage) => mapVariantToNamedDifference(namedDifferencePercentage.variant_code) !== null)
+    .sort((a, b) => mapVariantToNamedDifference(b.variant_code)!.last_value.order - mapVariantToNamedDifference(a.variant_code)!.last_value.order)
+    .map<VariantRow>((namedDifferenceEntry) => {
+      const color = variantColors.find((variantColor) => variantColor.variant === namedDifferenceEntry.variant_code)?.color || colors.gray5;
 
       return {
-        variantCode: variant.variant_code,
-        percentage: variant.last_value.percentage,
-        difference: findDifference(variant.variant_code),
+        variantCode: namedDifferenceEntry.variant_code,
+        percentage: mapVariantToNamedDifference(namedDifferenceEntry.variant_code)?.last_value.percentage as unknown as number,
+        difference: findDifference(namedDifferenceEntry.variant_code),
         color,
       };
     });
