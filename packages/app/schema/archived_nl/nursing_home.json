@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_nursing_home_archived_20230126_value",
+      "title": "archived_nl_nursing_home_value",
       "type": "object",
       "properties": {
         "newly_infected_people": {

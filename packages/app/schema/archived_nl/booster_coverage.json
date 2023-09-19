@@ -16,7 +16,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_booster_coverage_archived_20220904_value",
+      "title": "archived_nl_booster_coverage_value",
       "type": "object",
       "properties": {
         "age_group": {

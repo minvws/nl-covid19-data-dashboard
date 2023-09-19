@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_elderly_at_home_archived_20230126_value",
+      "title": "archived_nl_elderly_at_home_value",
       "type": "object",
       "properties": {
         "positive_tested_daily": {

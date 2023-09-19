@@ -19,7 +19,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_booster_shot_administered_archived_20220904_value",
+      "title": "archived_nl_booster_shot_administered_value",
       "type": "object",
       "properties": {
         "administered_total": {
