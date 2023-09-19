@@ -16,7 +16,7 @@
           "type": "string"
         },
         "vaccine_administered_total": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "vaccine_administered_last_timeframe": {
           "type": "integer"
