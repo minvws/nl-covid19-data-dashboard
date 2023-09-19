@@ -5,7 +5,6 @@ import { mediaQueries, space } from '~/style/theme';
 import { KpiTile } from '../kpi-tile';
 import { Metadata, MetadataProps } from '../metadata';
 import { TwoKpiSection } from '../two-kpi-section';
-import { Text } from '../typography';
 import { KpiContent } from './components/kpi-content';
 import { BorderedKpiSectionProps } from './types';
 
@@ -17,7 +16,7 @@ export const BorderedKpiSection = ({ title, description, source, dateOrRange, ti
 
   return (
     <KpiTile title={title} hasNoPaddingBottom>
-      <Text>{description}</Text>
+      <Box maxWidth="maxWidthText">{description}</Box>
       <TwoKpiSection spacing={5}>
         <KpiContentContainer>
           {tilesData.map((tile, index) => (
