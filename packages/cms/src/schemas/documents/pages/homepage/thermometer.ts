@@ -9,15 +9,6 @@ export const thermometer = defineType({
   name: 'thermometer',
   fieldsets: [
     {
-      title: 'De beschrijving boven de thermometer',
-      name: 'description',
-      description: 'Klik op het label om de velden te tonen.',
-      options: {
-        collapsible: true,
-        collapsed: true,
-      },
-    },
-    {
       title: 'Artikel referentie',
       name: 'artikel-referentie',
       description: 'Klik op het label om de velden te tonen.',
@@ -51,12 +42,6 @@ export const thermometer = defineType({
       name: 'title',
       type: 'localeString',
       validation: localeStringValidation((rule) => rule.required()),
-    }),
-    defineField({
-      title: 'De beschrijving boven de thermometer',
-      name: 'subTitle',
-      type: 'localeRichContentBlock',
-      fieldset: 'description',
     }),
     defineField({
       title: 'De titel binnen de thermometer tegel',

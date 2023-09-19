@@ -15,7 +15,6 @@ export interface TopicalSanityData {
 export interface ThermometerConfig {
   icon: TopicalIcon;
   title: string;
-  subTitle: PortableTextEntry[] | null;
   tileTitle: string | null;
   currentLevel: SeverityLevel;
   datesLabel: string;
