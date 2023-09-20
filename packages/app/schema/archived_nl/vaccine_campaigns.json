@@ -1,7 +1,7 @@
 {
   "definitions": {
     "vaccine_campaign": {
-      "title": "nl_vaccine_campaigns",
+      "title": "nl_vaccine_campaigns_archived_20220908",
       "type": "object",
       "required": ["vaccine_campaign_order", "vaccine_campaign_name_nl", "vaccine_campaign_name_en", "vaccine_administered_total", "vaccine_administered_last_week"],
       "additionalProperties": false,

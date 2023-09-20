@@ -540,13 +540,13 @@ export interface NlSewerValue {
   date_unix: number;
 }
 export interface NlVaccineCampaignsArchived_20220908 {
-  vaccine_campaigns: NlVaccineCampaigns[];
+  vaccine_campaigns: NlVaccineCampaignsArchived_202209081[];
   date_unix: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineCampaigns {
+export interface NlVaccineCampaignsArchived_202209081 {
   vaccine_campaign_order: number;
   vaccine_campaign_name_nl: string;
   vaccine_campaign_name_en: string;
@@ -1030,7 +1030,7 @@ export interface Nl {
   intensive_care_lcps: NlIntensiveCareLcps;
   deceased_cbs: NlDeceasedCbs;
   vaccine_administered_last_timeframe: NlVaccineAdministeredLastTimeframe;
-  vaccine_campaigns: NlVaccineCampaigns;
+  vaccine_campaigns: NlVaccineCampaign;
   variants?: NlVariants;
   self_test_overall: NlSelfTestOverall;
   infectionradar_symptoms_trend_per_age_group_weekly: NlInfectionradarSymptomsTrendPerAgeGroupWeekly;
@@ -1191,14 +1191,14 @@ export interface NlVaccineType {
   vaccine_type_name: string;
   vaccine_type_value: number;
 }
-export interface NlVaccineCampaigns {
-  vaccine_campaigns: NlVaccineCampaign[];
+export interface NlVaccineCampaign {
+  vaccine_campaigns: NlVaccineCampaigns[];
   date_unix: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineCampaign {
+export interface NlVaccineCampaigns {
   vaccine_campaign_order: number;
   vaccine_campaign_name_nl: string;
   vaccine_campaign_name_en: string;

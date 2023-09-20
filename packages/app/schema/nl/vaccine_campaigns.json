@@ -1,7 +1,7 @@
 {
   "definitions": {
     "vaccine_campaign": {
-      "title": "nl_vaccine_campaign",
+      "title": "nl_vaccine_campaigns",
       "type": "object",
       "required": ["vaccine_campaign_order", "vaccine_campaign_name_nl", "vaccine_campaign_name_en", "vaccine_administered_total", "vaccine_administered_last_timeframe"],
       "additionalProperties": false,
@@ -25,7 +25,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_campaigns",
+  "title": "nl_vaccine_campaign",
   "type": "object",
   "required": ["vaccine_campaigns", "date_unix", "date_start_unix", "date_end_unix", "date_of_insertion_unix"],
   "additionalProperties": false,
