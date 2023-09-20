@@ -9,6 +9,9 @@ import { links } from './documents/page-parts/links';
 import { about } from './documents/pages/about';
 import { accessibility } from './documents/pages/accessibility';
 import { contact } from './documents/pages/contact';
+import { contactPageGroup } from './documents/pages/contact/group';
+import { contactPageGroupItem } from './documents/pages/contact/item';
+import { contactPageItemLink } from './documents/pages/contact/link';
 import { dataExplained } from './documents/pages/data-explained';
 import { dataExplainedGroups } from './documents/pages/data-explained/groups';
 import { dataExplainedItem } from './documents/pages/data-explained/item';
@@ -37,19 +40,23 @@ import { timeSeries } from './elements/time-series';
 import { timelineEvent } from './elements/timeline-event';
 import { timelineEventCollection } from './elements/timeline-event-collection';
 import { block } from './locale/block';
+import { image } from './locale/image';
 import { richContentBlock } from './locale/rich-content-block';
 import { string } from './locale/string';
 import { text } from './locale/text';
-import { image } from './locale/image';
 import { inlineBlock } from './objects/inline-block';
 import { inlineCollapsible } from './objects/inline-collapsible';
 import { link } from './objects/link';
+import { linkType } from './objects/link-type';
 
 const localeSpecificSchemas = [block, richContentBlock, string, text, image];
 const richContentSchemas = [inlineBlock, inlineCollapsible];
 const documentSchemas = [
   advice,
   article,
+  contactPageGroup,
+  contactPageGroupItem,
+  contactPageItemLink,
   dataExplainedGroups,
   dataExplainedItem,
   faqGroups,
@@ -75,6 +82,6 @@ const documentSchemas = [
 const pageSchemas = [about, accessibility, contact, dataExplained, faq, homepage, notFound];
 const pagePartSchemas = [articles, dataExplainedParts, faqParts, highlights, links];
 const elementSchemas = [timelineEvent, timelineEventCollection, timeSeries];
-const objectSchemas = [link];
+const objectSchemas = [link, linkType];
 
 export const schemaTypes = [...localeSpecificSchemas, ...richContentSchemas, ...documentSchemas, ...elementSchemas, ...pageSchemas, ...pagePartSchemas, ...objectSchemas];
