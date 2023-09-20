@@ -1,11 +1,12 @@
 import { colors, NlNamedDifference, NlVariants, NlVariantsVariant, NamedDifferenceDecimal } from '@corona-dashboard/common';
 import { first } from 'lodash';
-import { isDefined, isPresent } from 'ts-is-present';
+import { isDefined } from 'ts-is-present';
 import { ColorMatch } from './get-variant-order-colors';
 import { VariantCode } from '../static-props';
 
 export type VariantRow = {
   variantCode: VariantCode;
+  order: number;
   percentage: number | null;
   difference?: NamedDifferenceDecimal | null;
   color: string;
@@ -13,6 +14,12 @@ export type VariantRow = {
 
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
+/**
+ * Return values to populate the variants table
+ * @param variants
+ * @param namedDifference
+ * @param variantColors
+ */
 export function getVariantTableData(variants: NlVariants | undefined, namedDifference: NlNamedDifference, variantColors: ColorMatch[]) {
   const emptyValues = {
     variantTable: null,
@@ -27,18 +34,6 @@ export function getVariantTableData(variants: NlVariants | undefined, namedDiffe
     return emptyValues;
   }
 
-  function findDifference(name: string) {
-    if (isPresent(namedDifference.variants__percentage)) {
-      const difference = namedDifference.variants__percentage.find((x) => x.variant_code === name);
-
-      if (!difference) {
-        return null;
-      }
-
-      return difference;
-    }
-  }
-
   const firstLastValue = first<NlVariantsVariant>(variants.values);
 
   if (!isDefined(firstLastValue)) {
@@ -50,18 +45,28 @@ export function getVariantTableData(variants: NlVariants | undefined, namedDiffe
     date_of_report_unix: firstLastValue.last_value.date_of_report_unix,
   };
 
-  const variantTable = variants.values
-    .filter((variant) => variant.variant_code !== 'other_graph' && !variant.last_value.has_historical_significance)
-    .sort((a, b) => b.last_value.order - a.last_value.order)
-    .map<VariantRow>((variant) => {
-      const color = variantColors.find((variantColor) => variantColor.variant === variant.variant_code)?.color || colors.gray5;
+  /**
+   * Reverse order of variants to what is received from the master table
+   * Move 'other variants' all the way to the bottom of the table
+   */
+  const variantTable = namedDifference.variants__percentage
+    .map<VariantRow>((namedDifferenceEntry) => {
+      // There is ALWAYS a corresponding variant to a namedDifference entry.
+      const variant = variants.values.find((x) => x.variant_code === namedDifferenceEntry.variant_code)!;
 
       return {
-        variantCode: variant.variant_code,
+        variantCode: namedDifferenceEntry.variant_code,
+        order: variant.last_value.order,
         percentage: variant.last_value.percentage,
-        difference: findDifference(variant.variant_code),
-        color,
+        difference: namedDifferenceEntry,
+        color: variantColors.find((variantColor) => variantColor.variant === namedDifferenceEntry.variant_code)?.color || colors.gray5,
       };
+    })
+    .sort((a, b) => {
+      // Other Variants must always take the bottom row in the table
+      if (a.variantCode === 'other_variants') return 1;
+      if (b.variantCode === 'other_variants') return -1;
+      return b.order - a.order;
     });
 
   return { variantTable, dates };
