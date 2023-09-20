@@ -20,7 +20,7 @@ export interface BaseTableData {
 }
 
 export interface SingleCoverageTableData extends BaseTableData {
-  percentage: number;
+  percentage: number | null;
   percentageTrend?: BehaviorTrendType;
 }
 

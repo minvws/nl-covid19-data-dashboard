@@ -6,7 +6,7 @@ import { useGetSingleCoveragePercentageData } from '~/components/tables/logic/us
 import { NarrowTable } from '~/components/tables/narrow-table';
 import { SingleCoverageTableData } from '~/components/tables/types';
 import { WideTable } from '~/components/tables/wide-table';
-import { COLOR_AUTUMN_2022_SHOT, COLOR_FULLY_VACCINATED } from '~/domain/vaccine/common';
+import { COLOR_FULLY_VACCINATED } from '~/domain/vaccine/common';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { getSortingOrder } from '../logic/get-sorting-order';
@@ -35,9 +35,9 @@ export const PrimarySeriesShotCoveragePerAgeGroup = ({ title, description, metad
   });
 
   const sortedData = requiredData.sort((a, b) => getSortingOrder(a.ageGroupRange, sortingOrder, componentName) - getSortingOrder(b.ageGroupRange, sortingOrder, componentName));
-  const percentageTitles = { first: text.headers.autumn_2022_shot, second: text.headers.fully_vaccinated };
-  const percentageColors = { first: COLOR_AUTUMN_2022_SHOT, second: COLOR_FULLY_VACCINATED };
-  const percentageFormattingRules = { first: { shouldFormat: true }, second: { shouldFormat: true } };
+  const percentageTitles = text.headers.fully_vaccinated;
+  const percentageColors = COLOR_FULLY_VACCINATED;
+  const percentageFormattingRules = { shouldFormat: true };
   const percentageData = useGetSingleCoveragePercentageData(sortedData, percentageTitles, percentageColors, percentageFormattingRules);
 
   return (
