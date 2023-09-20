@@ -172,10 +172,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(currentData, pageMetrics);
 
-  const variables = {
-    regio: commonTexts.choropleth.choropleth_vaccination_coverage.nl,
-  };
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -275,12 +271,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             data={archivedChoropleth.gm}
             dataOptions={{ getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode), isPercentage: true }}
             text={{
-              title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.title, variables),
-              description: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.nl.description, variables),
+              title: commonTexts.choropleth.choropleth_vaccination_coverage.nl.archived.fully_vaccinated.title,
+              description: commonTexts.choropleth.choropleth_vaccination_coverage.nl.archived.fully_vaccinated.description,
               vaccinationKindLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_vaccination_coverage_kind_select,
               ageGroupLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_age_group_select,
             }}
+            isPrimarySeries
           />
+
           <PrimarySeriesShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}
@@ -342,6 +340,17 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 dateOrRange={vaccineCoverageEstimatedAutumn2022.date_unix}
               />
 
+              <VaccineCoverageChoropleth
+                data={archivedChoropleth.gm}
+                dataOptions={{ getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode), isPercentage: true }}
+                text={{
+                  title: commonTexts.choropleth.choropleth_vaccination_coverage.nl.archived.autumn_2022.title,
+                  description: commonTexts.choropleth.choropleth_vaccination_coverage.nl.archived.autumn_2022.description,
+                  vaccinationKindLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_vaccination_coverage_kind_select,
+                  ageGroupLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_age_group_select,
+                }}
+              />
+
               <Autumn2022ShotCoveragePerAgeGroup
                 text={textNl.vaccination_coverage}
                 title={textNl.vaccination_coverage.title}
@@ -378,6 +387,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 age12PlusToggleText={textNl.vaccination_grade_toggle_tile.age_12_plus}
                 age18PlusToggleText={textNl.vaccination_grade_toggle_tile.age_18_plus}
               />
+
               <VaccineCampaignsTile
                 title={textNl.vaccine_campaigns.title}
                 description={replaceVariablesInText(textNl.vaccine_campaigns.description_archived, {

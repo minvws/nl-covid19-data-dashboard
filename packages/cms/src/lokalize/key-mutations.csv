@@ -12,3 +12,14 @@ timestamp,action,key,document_id,move_to
 2023-09-18T14:01:40.013Z,delete,pages.vaccinations_page.nl.kpi_vaccinaties_de_coronaprik.titel,MlD8yElsvTVffFUh17v9QX,__
 2023-09-18T14:32:26.195Z,add,pages.vaccinations_page.nl.section_basisserie.title,OkMYDzh72BFc2hr3nJ2TOA,__
 2023-09-18T14:32:27.172Z,add,pages.vaccinations_page.nl.section_basisserie.description,zScV1rsnyM5v6J5UlmZFS1,__
+2023-09-20T12:54:18.463Z,add,common.choropleth.choropleth_vaccination_coverage.nl.archived.title,22Xg3hRGtxwin2PlG9NMPZ,__
+2023-09-20T12:54:19.482Z,add,common.choropleth.choropleth_vaccination_coverage.nl.archived.description,VHsF191hipdqXYgC9N3exS,__
+2023-09-20T12:54:20.436Z,add,pages.vaccinations_page.nl.vaccine_campaigns.campaigns.corona_shot_description,rSp4S739bAmLxyOsipsZex,__
+2023-09-20T12:54:20.437Z,delete,common.choropleth.choropleth_vaccination_coverage.nl.title,G6M7GhzH8XbtdKiRrez1Og,__
+2023-09-20T12:55:03.414Z,delete,common.choropleth.choropleth_vaccination_coverage.nl.title,G6M7GhzH8XbtdKiRrez1Og,__
+2023-09-20T12:58:51.350Z,add,common.choropleth.choropleth_vaccination_coverage.nl.archived.fully_vaccinated.description,22Xg3hRGtxwin2PlG9NYgS,__
+2023-09-20T12:58:52.372Z,add,common.choropleth.choropleth_vaccination_coverage.nl.archived.fully_vaccinated.title,rSp4S739bAmLxyOsipsmGD,__
+2023-09-20T12:58:53.410Z,add,common.choropleth.choropleth_vaccination_coverage.nl.archived.autumn_2022.title,22Xg3hRGtxwin2PlG9NYpP,__
+2023-09-20T12:58:54.472Z,add,common.choropleth.choropleth_vaccination_coverage.nl.archived.autumn_2022.description,TJ9Rmz8PFNgDMUrCLNzcFS,__
+2023-09-20T12:58:54.472Z,delete,common.choropleth.choropleth_vaccination_coverage.nl.archived.description,VHsF191hipdqXYgC9N3exS,__
+2023-09-20T12:58:54.473Z,delete,common.choropleth.choropleth_vaccination_coverage.nl.archived.title,22Xg3hRGtxwin2PlG9NMPZ,__
