@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { PercentageData } from './components/wide-percentage-data';
 import { Cell, HeaderCell, Table, TableHead } from './components/shared-styled-components';
-import { CommonTableProps } from './types';
+import { CommonTableProps, BaseCoverageTable } from './types';
 
 export const tableColumnWidths = {
   labelColumn: '30%',
@@ -11,27 +11,33 @@ export const tableColumnWidths = {
   percentageBarColumn: '30%',
 };
 
-interface WideTableProps extends CommonTableProps {
+interface WideTableProps<T extends BaseCoverageTable> extends CommonTableProps<T> {
   headerText: { [key: string]: string };
 }
 
 // Component shown for tables on wide screens.
-export const WideTable = ({ tableData, headerText, percentageData }: WideTableProps) => {
+export const WideTable = <T extends BaseCoverageTable>({ tableData, headerText, percentageData }: WideTableProps<T>) => {
   return (
     <Box overflow="auto">
       <Table>
         <TableHead>
           <Row>
-            <HeaderCell minWidth="300px" width={tableColumnWidths.labelColumn}>
-              {headerText.firstColumn}
-            </HeaderCell>
-            <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>
-              {headerText.secondColumn}
-            </HeaderCell>
-            <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>
-              {headerText.thirdColumn}
-            </HeaderCell>
-            <HeaderCell width={tableColumnWidths.percentageBarColumn}>{headerText.fourthColumn}</HeaderCell>
+            {headerText.firstColumn !== undefined && (
+              <HeaderCell minWidth="300px" width={tableColumnWidths.labelColumn}>
+                {headerText.firstColumn}
+              </HeaderCell>
+            )}
+            {headerText.secondColumn !== undefined && (
+              <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>
+                {headerText.secondColumn}
+              </HeaderCell>
+            )}
+            {headerText.thirdColumn !== undefined && (
+              <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>
+                {headerText.thirdColumn}
+              </HeaderCell>
+            )}
+            {headerText.fourthColumn !== undefined && <HeaderCell width={tableColumnWidths.percentageBarColumn}>{headerText.fourthColumn}</HeaderCell>}
           </Row>
         </TableHead>
 

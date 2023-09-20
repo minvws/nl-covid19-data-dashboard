@@ -50,6 +50,7 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { KpiTile, KpiValue, TwoKpiSection } from '~/components';
+import { PrimarySeriesShotCoveragePerAgeGroup } from '~/domain/vaccine/primary-series-coverage-per-age-group';
 
 const pageMetrics = [
   'vaccine_administered_doctors_archived_20220324',
@@ -281,7 +282,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               ageGroupLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_age_group_select,
             }}
           />
-          <Autumn2022ShotCoveragePerAgeGroup
+          <PrimarySeriesShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
             title={textNl.vaccination_coverage.title}
             description={textNl.vaccination_coverage.description_autumn_2022_shot}
@@ -341,6 +342,20 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 ]}
                 dateOrRange={vaccineCoverageEstimatedAutumn2022.date_unix}
               />
+
+              <Autumn2022ShotCoveragePerAgeGroup
+                text={textNl.vaccination_coverage}
+                title={textNl.vaccination_coverage.title}
+                description={textNl.vaccination_coverage.description_autumn_2022_shot}
+                sortingOrder={['80+', '70-79', '60-69', '50-59', '40-49', '30-39', '18-29', '12-17', '5-11']}
+                metadata={{
+                  datumsText: textNl.dates,
+                  date: archivedData.vaccine_coverage_per_age_group_archived_202310xx.values[0].date_unix,
+                  source: textNl.vaccination_coverage.bronnen.rivm,
+                }}
+                values={archivedData.vaccine_coverage_per_age_group_archived_202310xx.values}
+              />
+
               <BoosterShotCoveragePerAgeGroup
                 text={textNl}
                 title={textNl.vaccination_coverage.title}
