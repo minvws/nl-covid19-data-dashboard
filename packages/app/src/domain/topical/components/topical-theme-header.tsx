@@ -1,33 +1,23 @@
-import { Box } from '~/components/base';
-import styled from 'styled-components';
-import { Heading } from '~/components/typography';
-import { RichContent } from '~/components/cms/rich-content';
 import { IconName as TopicalIcon } from '@corona-dashboard/icons/src/icon-name2filename';
+import styled from 'styled-components';
+import { Box } from '~/components/base';
 import DynamicIcon from '~/components/get-icon-by-name';
+import { Heading } from '~/components/typography';
 import theme from '~/style/theme';
-import { PortableTextEntry } from '@sanity/block-content-to-react';
-import { fontSizes } from '~/style/theme';
 
 interface TopicalThemeHeaderProps {
   title: string;
-  subtitle?: PortableTextEntry[] | null;
   icon: TopicalIcon;
 }
 
-export const TopicalThemeHeader = ({ title, subtitle, icon }: TopicalThemeHeaderProps) => {
+export const TopicalThemeHeader = ({ title, icon }: TopicalThemeHeaderProps) => {
   return (
-    <Box spacing={3}>
-      <Box display="flex" justifyContent="start" alignItems="center">
-        <StyledTopicalThemeHeaderIcon>
-          <DynamicIcon name={icon} aria-hidden="true" />
-        </StyledTopicalThemeHeaderIcon>
-        <Heading level={2}>{title}</Heading>
-      </Box>
-      {subtitle && (
-        <Box fontSize={fontSizes[3]}>
-          <RichContent blocks={subtitle} />
-        </Box>
-      )}
+    <Box display="flex" alignItems="center">
+      <StyledTopicalThemeHeaderIcon>
+        <DynamicIcon name={icon} aria-hidden="true" />
+      </StyledTopicalThemeHeaderIcon>
+
+      <Heading level={2}>{title}</Heading>
     </Box>
   );
 };

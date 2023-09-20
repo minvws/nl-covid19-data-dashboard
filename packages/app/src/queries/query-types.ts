@@ -58,7 +58,6 @@ interface KpiThemes {
 }
 interface Theme {
   title: string;
-  subTitle: PortableTextEntry[] | null;
   themeIcon: TopicalIcon;
 }
 

@@ -26,7 +26,6 @@ export function getTopicalStructureQuery(locale: string) {
       ][0]{
         'themes': themes[]->{
           'title':title.${locale},
-          'subTitle':subTitle.${locale},
           themeIcon,
           'linksLabelMobile': labelMobile.${locale},
           'linksLabelDesktop': labelDesktop.${locale},
