@@ -8,14 +8,12 @@ import { ChartTile } from '~/components/chart-tile';
 import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { DeceasedMonitorSection } from '~/domain/deceased';
 import { Layout, NlLayout } from '~/domain/layout';
@@ -160,9 +158,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                     date: dataRivm.last_value.date_unix,
                     source: textNl.section_deceased_rivm.bronnen.rivm,
                   }}
+                  description={textNl.section_deceased_rivm.kpi_covid_daily_description}
                 >
                   <KpiValue absolute={dataRivm.last_value.covid_daily} difference={archivedData.difference.deceased_rivm__covid_daily_archived_20221231} isAmount />
-                  <Markdown content={textNl.section_deceased_rivm.kpi_covid_daily_description} />
                 </KpiTile>
                 <KpiTile
                   title={textNl.section_deceased_rivm.kpi_covid_total_title}
@@ -170,9 +168,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                     date: dataRivm.last_value.date_unix,
                     source: textNl.section_deceased_rivm.bronnen.rivm,
                   }}
+                  description={textNl.section_deceased_rivm.kpi_covid_total_description}
                 >
                   <KpiValue absolute={dataRivm.last_value.covid_total} />
-                  <Text>{textNl.section_deceased_rivm.kpi_covid_total_description}</Text>
                 </KpiTile>
               </TwoKpiSection>
 

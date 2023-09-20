@@ -106,8 +106,9 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const hospitalLastValue = getLastFilledValue(data.hospital_lcps);
   const icuLastValue = getLastFilledValue(data.intensive_care_lcps);
 
+  const valuesWithoutDateRange = data.hospital_lcps.values.map((value) => ({ ...value, date_end_unix: undefined, date_start_unix: undefined }));
+
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
-  const mostRecentDateUnix = Math.max(hospitalLastValue.date_unix, icuLastValue.date_unix);
 
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
@@ -172,7 +173,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{
                   key: 'hospital_beds_occupied_over_time_chart',
                 }}
-                values={data.hospital_lcps.values}
+                values={valuesWithoutDateRange}
                 timeframe={hospitalBedsOccupiedOverTimeTimeframe}
                 forceLegend
                 seriesConfig={[
@@ -262,7 +263,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.kpi_tiles.influxes.title}
             description={textNl.kpi_tiles.influxes.description}
             source={textNl.sources.lnaz}
-            dateOrRange={mostRecentDateUnix}
+            dateOrRange={{ start: hospitalLastValue.date_start_unix, end: hospitalLastValue.date_end_unix }}
             tilesData={[
               {
                 value: hospitalLastValue.influx_covid_patients,
@@ -295,7 +296,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{
                   key: 'hospital_patient_influx_over_time_chart',
                 }}
-                values={trimLeadingNullValues(data.hospital_lcps.values, 'influx_covid_patients')}
+                values={trimLeadingNullValues(valuesWithoutDateRange, 'influx_covid_patients')}
                 timeframe={hospitalPatientInfluxOverTimeTimeframe}
                 seriesConfig={[
                   {

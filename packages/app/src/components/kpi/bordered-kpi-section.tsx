@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { mediaQueries, space } from '~/style/theme';
 import { KpiTile } from '../kpi-tile';
-import { Metadata, MetadataProps } from '../metadata';
+import { MetadataProps } from '../metadata';
 import { TwoKpiSection } from '../two-kpi-section';
 import { KpiContent } from './components/kpi-content';
 import { BorderedKpiSectionProps } from './types';
+import { Markdown } from '../markdown';
 
 export const BorderedKpiSection = ({ title, description, source, dateOrRange, tilesData }: BorderedKpiSectionProps) => {
   const metadata: MetadataProps = {
@@ -15,8 +16,10 @@ export const BorderedKpiSection = ({ title, description, source, dateOrRange, ti
   };
 
   return (
-    <KpiTile title={title} hasNoPaddingBottom>
-      <Box maxWidth="maxWidthText">{description}</Box>
+    <KpiTile title={title} hasNoPaddingBottom metadata={metadata}>
+      <Box maxWidth="maxWidthText">
+        <Markdown content={description} />
+      </Box>
       <TwoKpiSection spacing={5}>
         <KpiContentContainer>
           {tilesData.map((tile, index) => (
@@ -24,7 +27,6 @@ export const BorderedKpiSection = ({ title, description, source, dateOrRange, ti
           ))}
         </KpiContentContainer>
       </TwoKpiSection>
-      <Metadata {...metadata} isTileFooter />
     </KpiTile>
   );
 };

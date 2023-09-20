@@ -1,4 +1,4 @@
-import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useMemo, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Spacer } from '~/components/base';
@@ -35,9 +35,9 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
 
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
 
-  const [seriesConfig, otherConfig, selectOptions] = useSeriesConfig(text, values, variantColors);
+  const [seriesConfig, selectOptions] = useSeriesConfig(text, values, variantColors);
 
-  const filteredConfig = useFilteredSeriesConfig(seriesConfig, otherConfig, list);
+  const filteredConfig = useFilteredSeriesConfig(seriesConfig, list);
 
   /* Static legend contains only the inaccurate item */
   const staticLegendItems: LegendItem[] = [];
@@ -93,8 +93,8 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
           const reorderContext = {
             ...context,
             config: [
+              // Destructuring so as to not interact with the object directly and eliminate the possibility of introducing inconsistencies
               ...context.config.filter((value) => !hasMetricProperty(value) || filteredValues[value.metricProperty] || hasSelectedMetrics),
-              context.config.find((value) => hasMetricProperty(value) && value.metricProperty === 'other_graph_percentage'),
             ].filter(isDefined),
             value: !hasSelectedMetrics ? filteredValues : context.value,
           };
@@ -117,16 +117,10 @@ const hasMetricProperty = (config: any): config is { metricProperty: string } =>
   return 'metricProperty' in config;
 };
 
-const useFilteredSeriesConfig = (
-  seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[],
-  otherConfig: GappedAreaSeriesDefinition<VariantChartValue>,
-  compareList: (keyof VariantChartValue)[]
-) => {
+const useFilteredSeriesConfig = (seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[], compareList: (keyof VariantChartValue)[]) => {
   return useMemo(() => {
-    return [otherConfig, ...seriesConfig].filter(
-      (item) => item.metricProperty !== 'other_graph_percentage' && (compareList.includes(item.metricProperty) || compareList.length === alwaysEnabled.length)
-    );
-  }, [seriesConfig, otherConfig, compareList]);
+    return seriesConfig.filter((item) => compareList.includes(item.metricProperty) || compareList.length === alwaysEnabled.length);
+  }, [seriesConfig, compareList]);
 };
 
 const useSeriesConfig = (text: VariantsStackedAreaTileText, values: VariantChartValue[], variantColors: ColorMatch[]) => {
@@ -134,7 +128,7 @@ const useSeriesConfig = (text: VariantsStackedAreaTileText, values: VariantChart
     const baseVariantsFiltered = values
       .flatMap((x) => Object.keys(x))
       .filter((x, index, array) => array.indexOf(x) === index) // de-dupe
-      .filter((x) => x.endsWith('_percentage') && x !== 'other_graph_percentage')
+      .filter((x) => x.endsWith('_percentage'))
       .reverse(); // Reverse to be in an alphabetical order
 
     /* Enrich config with dynamic data / locale */
@@ -146,7 +140,7 @@ const useSeriesConfig = (text: VariantsStackedAreaTileText, values: VariantChart
 
       const variantDynamicLabel = text.variantCodes[variantCode];
 
-      const color = variantColors.find((variantColors) => variantColors.variant === variantCode)?.color || colors.gray5;
+      const color = variantColors.find((variantColors) => variantColors.variant === variantCode)?.color;
 
       if (variantDynamicLabel) {
         const newConfig = {
@@ -164,19 +158,8 @@ const useSeriesConfig = (text: VariantsStackedAreaTileText, values: VariantChart
       }
     });
 
-    const otherConfig = {
-      type: 'gapped-area',
-      metricProperty: 'other_graph_percentage',
-      label: text.tooltip_labels.other_percentage,
-      fillOpacity: 0.2,
-      shape: 'square',
-      color: colors.gray5,
-      strokeWidth: 2,
-      mixBlendMode: 'multiply',
-    } as GappedAreaSeriesDefinition<VariantChartValue>;
-
     const selectOptions = [...seriesConfig];
 
-    return [seriesConfig, otherConfig, selectOptions] as const;
+    return [seriesConfig, selectOptions] as const;
   }, [values, text.tooltip_labels.other_percentage, text.variantCodes, variantColors]);
 };

@@ -3,14 +3,7 @@
   "type": "object",
   "title": "gm_collection_hospital_nice_choropleth",
   "additionalProperties": false,
-  "required": [
-    "date_unix",
-    "gmcode",
-    "admissions_on_date_of_admission",
-    "admissions_on_date_of_admission_per_100000",
-    "admissions_on_date_of_reporting",
-    "date_of_insertion_unix"
-  ],
+  "required": ["date_unix", "gmcode", "admissions_in_the_last_7_days_per_100000", "date_of_insertion_unix", "date_start_unix", "date_end_unix"],
   "properties": {
     "date_unix": {
       "type": "integer"
@@ -19,16 +12,16 @@
       "type": "string",
       "pattern": "^GM[0-9]+$"
     },
-    "admissions_on_date_of_admission": {
-      "type": "integer"
-    },
-    "admissions_on_date_of_admission_per_100000": {
+    "admissions_in_the_last_7_days_per_100000": {
       "type": "number"
     },
-    "admissions_on_date_of_reporting": {
+    "date_of_insertion_unix": {
       "type": "integer"
     },
-    "date_of_insertion_unix": {
+    "date_start_unix": {
+      "type": "integer"
+    },
+    "date_end_unix": {
       "type": "integer"
     }
   }
