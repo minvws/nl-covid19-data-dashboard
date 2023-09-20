@@ -11,9 +11,10 @@ interface NarrowVaccineCampaignTableProps {
   campaigns: VaccineCampaign[];
   campaignDescriptions: VaccineCampaignDescriptions;
   headers: VaccineCampaignHeaders;
+  hideTotals: boolean;
 }
 
-export const NarrowVaccineCampaignTable = ({ campaigns, campaignDescriptions, headers }: NarrowVaccineCampaignTableProps) => {
+export const NarrowVaccineCampaignTable = ({ campaigns, campaignDescriptions, headers, hideTotals }: NarrowVaccineCampaignTableProps) => {
   return (
     <StyledTable>
       <thead>
@@ -24,7 +25,14 @@ export const NarrowVaccineCampaignTable = ({ campaigns, campaignDescriptions, he
 
       <tbody>
         {campaigns.map((campaign, index) => (
-          <VaccineCampaignRow key={campaign.vaccine_campaign_order} campaign={campaign} campaignDescriptions={campaignDescriptions} headers={headers} isFirst={index === 0} />
+          <VaccineCampaignRow
+            key={campaign.vaccine_campaign_order}
+            campaign={campaign}
+            campaignDescriptions={campaignDescriptions}
+            headers={headers}
+            isFirst={index === 0}
+            hideTotals={hideTotals}
+          />
         ))}
       </tbody>
     </StyledTable>
@@ -36,9 +44,10 @@ interface VaccineCampaignRowProps {
   campaignDescriptions: VaccineCampaignDescriptions;
   headers: VaccineCampaignHeaders;
   isFirst: boolean;
+  hideTotals: boolean;
 }
 
-const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst }: VaccineCampaignRowProps) => {
+const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst, hideTotals }: VaccineCampaignRowProps) => {
   const { formatNumber } = useIntl();
   const collapsible = useCollapsible({ isOpen: isFirst });
   const { locale = 'nl' } = useRouter();
@@ -64,7 +73,7 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst }
 
             <tr>
               <StyledCell paddingY="0" isMobile>
-                {headers.last_week}:{' '}
+                {headers.last_week} :{' '}
                 {isOpen ? (
                   <BoldText>{formatNumber(campaign.vaccine_administered_last_week || campaign.vaccine_administered_last_timeframe)}</BoldText>
                 ) : (
@@ -73,11 +82,15 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst }
               </StyledCell>
             </tr>
 
-            <tr>
-              <StyledCell paddingY="0" isMobile>
-                {headers.total}: {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_total)}</BoldText> : formatNumber(campaign.vaccine_administered_total)}
-              </StyledCell>
-            </tr>
+            {hideTotals ? (
+              <></>
+            ) : (
+              <tr>
+                <StyledCell paddingY="0" isMobile>
+                  {headers.total} : {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_total)}</BoldText> : formatNumber(campaign.vaccine_administered_total)}
+                </StyledCell>
+              </tr>
+            )}
 
             <tr>
               <StyledCell paddingBottom={collapsible.isOpen ? space[3] : space[2]} colSpan={2} isMobile>

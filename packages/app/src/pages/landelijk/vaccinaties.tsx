@@ -161,6 +161,8 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const boosterCoverage18PlusArchivedValue = archivedData.booster_coverage_archived_20220904.values.find((v) => v.age_group === '18+');
   const boosterCoverage12PlusArchivedValue = archivedData.booster_coverage_archived_20220904.values.find((v) => v.age_group === '12+');
 
+  const vaccineCampaignAutumn2023 = currentData.vaccine_campaigns.vaccine_campaigns;
+
   assert(boosterCoverage18PlusArchivedValue, `[${VaccinationPage.name}] Missing value for booster_coverage 18+`);
   assert(boosterCoverage12PlusArchivedValue, `[${VaccinationPage.name}] Missing value for booster_coverage 12+`);
 
@@ -227,7 +229,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             description={textNl.vaccine_campaigns.description}
             descriptionFooter={textNl.vaccine_campaigns.description_footer}
             headers={textNl.vaccine_campaigns.headers}
-            campaigns={archivedData.vaccine_campaigns_archived_20220908.vaccine_campaigns}
+            campaigns={vaccineCampaignAutumn2023}
             campaignDescriptions={textNl.vaccine_campaigns.campaigns}
             metadata={{
               datumsText: textNl.dates,
@@ -383,6 +385,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 headers={textNl.vaccine_campaigns.headers}
                 campaigns={archivedData.vaccine_campaigns_archived_20220908.vaccine_campaigns}
                 campaignDescriptions={textNl.vaccine_campaigns.campaigns}
+                campaignOptions={{
+                  hide_campaigns: [3],
+                }}
                 metadata={{
                   datumsText: textNl.dates,
                   date: archivedData.vaccine_campaigns_archived_20220908.date_unix,
