@@ -15,7 +15,6 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout, NlLayout } from '~/domain/layout';
 import {
   Autumn2022ShotCoveragePerAgeGroup,
-  BoosterShotCoveragePerAgeGroup,
   VaccinationsKpiHeader,
   VaccinationsOverTimeTile,
   VaccinationsShotKpiSection,
@@ -356,18 +355,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 values={archivedData.vaccine_coverage_per_age_group_archived_202310xx.values}
               />
 
-              <BoosterShotCoveragePerAgeGroup
-                text={textNl}
-                title={textNl.vaccination_coverage.title}
-                description={textNl.archived.vaccination_coverage.top_level_description_booster_shot}
-                sortingOrder={['80+', '70-79', '60-69', '50-59', '40-49', '30-39', '18-29', '12-17', '5-11']}
-                metadata={{
-                  datumsText: textNl.datums,
-                  date: archivedData.vaccine_coverage_per_age_group_archived_20220908.values[0].date_unix,
-                  source: textNl.vaccination_coverage.bronnen.rivm,
-                }}
-                values={archivedData.vaccine_coverage_per_age_group_archived_20220908.values}
-              />
               <VaccineCoverageToggleTile
                 labelTexts={textNl.vaccination_grade_toggle_tile.top_labels}
                 title={textNl.vaccination_grade_toggle_tile.title}
