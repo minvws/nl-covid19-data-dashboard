@@ -1,4 +1,4 @@
-import { colors, NlBehaviorValue } from '@corona-dashboard/common';
+import { colors, ArchivedNlBehaviorValue } from '@corona-dashboard/common';
 import React, { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -20,7 +20,7 @@ import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
 interface BehaviorTableTileProps {
   title: string;
   description: string;
-  value: NlBehaviorValue;
+  value: ArchivedNlBehaviorValue;
   annotation: string;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   scrollRef: { current: HTMLDivElement | null };
@@ -30,7 +30,7 @@ interface BehaviorTableTileProps {
 
 export const BehaviorTableTile = ({ title, description, value, annotation, setCurrentId, scrollRef, text, metadata }: BehaviorTableTileProps) => {
   const breakpoints = useBreakpoints(true);
-  const behaviorsTableData: TableData[] = useBehaviorTableData(value as NlBehaviorValue, { scrollRef, setCurrentId });
+  const behaviorsTableData: TableData[] = useBehaviorTableData(value as ArchivedNlBehaviorValue, { scrollRef, setCurrentId });
   const titles = { first: text.basisregels.rules_followed, second: text.basisregels.rules_supported };
   const colorValues = { first: colors.blue6, second: colors.yellow3 };
   const percentageData = useGetPercentageData(behaviorsTableData, titles, colorValues);
@@ -79,7 +79,7 @@ export const BehaviorTableTile = ({ title, description, value, annotation, setCu
   );
 };
 
-function useBehaviorTableData(value: NlBehaviorValue, onClickConfig: OnClickConfig) {
+function useBehaviorTableData(value: ArchivedNlBehaviorValue, onClickConfig: OnClickConfig) {
   const behaviorLookupKeys = useBehaviorLookupKeys();
 
   return useMemo(() => {

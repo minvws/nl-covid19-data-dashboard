@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_g_number",
+  "title": "archived_nl_g_number",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_g_number_value",
+      "title": "archived_nl_g_number_value",
       "type": "object",
       "properties": {
         "g_number": {

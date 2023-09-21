@@ -82,8 +82,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group',
     'vaccine_coverage_per_age_group_estimated_fully_vaccinated',
     'vaccine_coverage_per_age_group_estimated_autumn_2022',
-    'vaccine_campaigns',
-    'repeating_shot_administered'
+    'vaccine_campaigns'
   ),
   selectArchivedNlData(
     'vaccine_coverage_per_age_group_archived_20220908',
