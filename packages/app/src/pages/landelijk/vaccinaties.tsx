@@ -28,6 +28,7 @@ import {
 } from '~/domain/vaccine';
 import { VaccinationsPerSupplierOverLastTimeframeTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-timeframe-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
+import { CampaignBanner } from '~/domain/vaccine/campaign-banner';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
@@ -233,6 +234,8 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               source: textNl.vaccine_campaigns.bronnen.rivm,
             }}
           />
+
+          <CampaignBanner title="Hello there" description="This is a description" />
 
           <PageInformationBlock title={textNl.section_basisserie.title} description={textNl.section_basisserie.description} icon={<VaccinatieIcon aria-hidden="true" />} />
 
