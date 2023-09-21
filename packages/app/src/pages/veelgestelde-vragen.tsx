@@ -5,6 +5,7 @@ import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
 import { FaqSection } from '~/components/faq/faq-section';
 import { Heading } from '~/components/typography';
+import { ContentLayout } from '~/domain/layout/content-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
@@ -68,7 +69,7 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...commonTexts.veelgestelde_vragen_metadata} lastGenerated={lastGenerated}>
-      <Box margin={`${space[5]} auto`} maxWidth={`${sizes.maxWidth}px`} padding={` 0 ${space[4]}`}>
+      <ContentLayout>
         <Head>
           <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" />
           <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
@@ -87,7 +88,7 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
           <FaqSection section={firstHalf} />
           <FaqSection section={secondHalf} />
         </FaqLayout>
-      </Box>
+      </ContentLayout>
     </Layout>
   );
 };

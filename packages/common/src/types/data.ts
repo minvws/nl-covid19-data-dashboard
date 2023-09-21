@@ -7,19 +7,19 @@
 export type ArchivedGmCode = string;
 
 export interface ArchivedGm {
-  difference: GmDifference;
-  deceased_rivm_archived_20221231: GmDeceasedRivm;
+  difference: ArchivedGmDifference;
+  deceased_rivm_archived_20221231: ArchivedGmDeceasedRivm;
   last_generated: string;
   proto_name: ArchivedGmCode;
   name: ArchivedGmCode;
   code: ArchivedGmCode;
-  vaccine_coverage_per_age_group_archived_20220622: GmVaccineCoveragePerAgeGroupArchived_20220622;
-  vaccine_coverage_per_age_group_archived_20220908: GmVaccineCoveragePerAgeGroupWithBoosterShot;
-  booster_coverage_archived_20220904: GmBoosterCoverage;
-  sewer_archived_20230623: GmSewer;
-  tested_overall_archived_20230331: GmTestedOverall;
+  vaccine_coverage_per_age_group_archived_20220622: ArchivedGmVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group_archived_20220908: ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShot;
+  booster_coverage_archived_20220904: ArchivedGmBoosterCoverage;
+  sewer_archived_20230623: ArchivedGmSewer;
+  tested_overall_archived_20230331: ArchivedGmTestedOverall;
 }
-export interface GmDifference {
+export interface ArchivedGmDifference {
   tested_overall__infected_moving_average_archived_20230331: DifferenceDecimal;
   tested_overall__infected_per_100k_moving_average_archived_20230331: DifferenceDecimal;
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
@@ -37,21 +37,21 @@ export interface DifferenceInteger {
   old_date_unix: number;
   new_date_unix: number;
 }
-export interface GmDeceasedRivm {
-  values: GmDeceasedRivmArchived_20221231Value[];
-  last_value: GmDeceasedRivmArchived_20221231Value;
+export interface ArchivedGmDeceasedRivm {
+  values: ArchivedGmDeceasedRivmValue[];
+  last_value: ArchivedGmDeceasedRivmValue;
 }
-export interface GmDeceasedRivmArchived_20221231Value {
+export interface ArchivedGmDeceasedRivmValue {
   covid_daily: number;
   covid_daily_moving_average: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface GmVaccineCoveragePerAgeGroupArchived_20220622 {
-  values: GmVaccineCoveragePerAgeGroupArchivedValue[];
+export interface ArchivedGmVaccineCoveragePerAgeGroup {
+  values: ArchivedGmVaccineCoveragePerAgeGroupValue[];
 }
-export interface GmVaccineCoveragePerAgeGroupArchivedValue {
+export interface ArchivedGmVaccineCoveragePerAgeGroupValue {
   age_group_range: '12+' | '18+';
   fully_vaccinated_percentage: number | null;
   has_one_shot_percentage: number | null;
@@ -61,10 +61,10 @@ export interface GmVaccineCoveragePerAgeGroupArchivedValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface GmVaccineCoveragePerAgeGroupWithBoosterShot {
-  values: GmVaccineCoveragePerAgeGroupArchived_20220908Value[];
+export interface ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShot {
+  values: ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShotValue[];
 }
-export interface GmVaccineCoveragePerAgeGroupArchived_20220908Value {
+export interface ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShotValue {
   age_group_range: '12+' | '18+';
   fully_vaccinated_percentage: number | null;
   booster_shot_percentage: number | null;
@@ -76,21 +76,21 @@ export interface GmVaccineCoveragePerAgeGroupArchived_20220908Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface GmBoosterCoverage {
-  values: GmBoosterCoverageArchived_20220904Value[];
+export interface ArchivedGmBoosterCoverage {
+  values: ArchivedGmBoosterCoverageValue[];
 }
-export interface GmBoosterCoverageArchived_20220904Value {
+export interface ArchivedGmBoosterCoverageValue {
   age_group?: '12+' | '18+';
   percentage: number;
   percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface GmSewer {
-  values: GmSewerValue[];
-  last_value: GmSewerValue;
+export interface ArchivedGmSewer {
+  values: ArchivedGmSewerValue[];
+  last_value: ArchivedGmSewerValue;
 }
-export interface GmSewerValue {
+export interface ArchivedGmSewerValue {
   date_start_unix: number;
   date_end_unix: number;
   average: number;
@@ -100,11 +100,11 @@ export interface GmSewerValue {
   date_of_insertion_unix: number;
   data_is_outdated: boolean;
 }
-export interface GmTestedOverall {
-  values: GmTestedOverallValue[];
-  last_value: GmTestedOverallValue;
+export interface ArchivedGmTestedOverall {
+  values: ArchivedGmTestedOverallValue[];
+  last_value: ArchivedGmTestedOverallValue;
 }
-export interface GmTestedOverallValue {
+export interface ArchivedGmTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_moving_average: number | null;
@@ -122,8 +122,8 @@ export interface ArchivedGmCollection {
   name: ArchivedGmCollectionId;
   code: ArchivedGmCollectionId;
   hospital_nice_choropleth_archived_20230830: ArchivedGmCollectionHospitalNiceChoropleth[];
-  sewer_archived_20230623: GmCollectionSewer[];
-  tested_overall_archived_20230331: GmCollectionTestedOverall[];
+  sewer_archived_20230623: ArchivedGmCollectionSewer[];
+  tested_overall_archived_20230331: ArchivedGmCollectionTestedOverall[];
 }
 export interface ArchivedGmCollectionHospitalNiceChoropleth {
   date_unix: number;
@@ -133,7 +133,7 @@ export interface ArchivedGmCollectionHospitalNiceChoropleth {
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
-export interface GmCollectionSewer {
+export interface ArchivedGmCollectionSewer {
   date_start_unix: number;
   date_end_unix: number;
   gmcode: string;
@@ -142,7 +142,7 @@ export interface GmCollectionSewer {
   date_of_insertion_unix: number;
   data_is_outdated: boolean;
 }
-export interface GmCollectionTestedOverall {
+export interface ArchivedGmCollectionTestedOverall {
   date_unix: number;
   gmcode: string;
   infected_per_100k: number;
@@ -157,41 +157,41 @@ export interface ArchivedNl {
   proto_name: ArchivedNlId;
   name: ArchivedNlId;
   code: ArchivedNlId;
-  difference: NlDifference;
-  behavior_archived_20230411: NlBehavior;
-  behavior_annotations_archived_20230412: NlBehaviorAnnotations;
-  behavior_per_age_group_archived_20230411: NlBehaviorPerAgeGroup;
-  booster_shot_administered_archived_20220904: NlBoosterShotAdministered;
-  booster_coverage_archived_20220904: NlBoosterCoverage;
-  deceased_rivm_archived_20221231: NlDeceasedRivm;
-  deceased_rivm_per_age_group_archived_20221231: NlDeceasedRivmPerAgeGroup;
-  doctor_archived_20210903: NlDoctor;
-  disability_care_archived_20230126: NlDisabilityCare;
-  elderly_at_home_archived_20230126: NlElderlyAtHome;
-  g_number_archived_20220607: NlGNumber;
-  nursing_home_archived_20230126: NlNursingHome;
-  tested_ggd_archived_20230321: NlTestedGgd;
-  tested_overall_archived_20230331: NlTestedOverall;
-  tested_per_age_group_archived_20230331: NlTestedPerAgeGroup;
-  sewer_archived_20230623: NlSewer;
-  vaccine_campaigns_archived_20220908: NlVaccineCampaignsArchived_20220908;
-  vaccine_planned_archived_20220908: NlVaccinePlanned;
-  vaccine_coverage_per_age_group_archived_20220622: NlVaccineCoveragePerAgeGroupArchived_20220622;
-  vaccine_coverage_per_age_group_archived_20220908: NlVaccineCoveragePerAgeGroupWithBoosterShot;
+  difference: ArchivedNlDifference;
+  behavior_archived_20230411: ArchivedNlBehavior;
+  behavior_annotations_archived_20230412: ArchivedNlBehaviorAnnotations;
+  behavior_per_age_group_archived_20230411: ArchivedNlBehaviorPerAgeGroup;
+  booster_shot_administered_archived_20220904: ArchivedNlBoosterShotAdministered;
+  booster_coverage_archived_20220904: ArchivedNlBoosterCoverage;
+  deceased_rivm_archived_20221231: ArchivedNlDeceasedRivm;
+  deceased_rivm_per_age_group_archived_20221231: ArchivedNlDeceasedRivmPerAgeGroup;
+  doctor_archived_20210903: ArchivedNlDoctor;
+  disability_care_archived_20230126: ArchivedNlDisabilityCare;
+  elderly_at_home_archived_20230126: ArchivedNlElderlyAtHome;
+  g_number_archived_20220607: ArchivedNlGNumber;
+  nursing_home_archived_20230126: ArchivedNlNursingHome;
+  tested_ggd_archived_20230321: ArchivedNlTestedGgd;
+  tested_overall_archived_20230331: ArchivedNlTestedOverall;
+  tested_per_age_group_archived_20230331: ArchivedNlTestedPerAgeGroup;
+  sewer_archived_20230623: ArchivedNlSewer;
+  vaccine_campaigns_archived_20220908: ArchivedNlVaccineCampaigns;
+  vaccine_planned_archived_20220908: ArchivedNlVaccinePlanned;
+  vaccine_coverage_per_age_group_archived_20220622: ArchivedNlVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group_archived_20220908: ArchivedNlVaccineCoveragePerAgeGroupWithBoosterShot;
   vaccine_coverage_per_age_group_estimated_archived_20220908: NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908Value;
-  vulnerable_nursing_home_archived_20230711: NlVulnerableNursingHome;
-  vulnerable_hospital_admissions_archived_20230711: NlVulnerableHospitalAdmissions;
-  reproduction_archived_20230711: NlReproduction;
-  vaccine_vaccinated_or_support_archived_20230411: NlVaccineVaccinatedOrSupport;
-  vaccine_coverage_archived_20220518: NlVaccineCoverage;
-  vaccine_delivery_per_supplier_archived_20211101: NlVaccineDeliveryPerSupplier;
-  vaccine_stock_archived_20211024: NlVaccineStock;
-  repeating_shot_administered_20220713: NlRepeatingShotAdministered;
-  corona_melder_app_warning_archived_20220421: NlCoronaMelderAppWarning;
-  corona_melder_app_download_archived_20220421: NlCoronaMelderAppDownload;
-  infectious_people_archived_20210709: NlInfectiousPeople;
+  vulnerable_nursing_home_archived_20230711: ArchivedNlVulnerableNursingHome;
+  vulnerable_hospital_admissions_archived_20230711: ArchivedNlVulnerableHospitalAdmissions;
+  reproduction_archived_20230711: ArchivedNlReproduction;
+  vaccine_vaccinated_or_support_archived_20230411: ArchivedNlVaccineVaccinatedOrSupport;
+  vaccine_coverage_archived_20220518: ArchivedNlVaccineCoverage;
+  vaccine_delivery_per_supplier_archived_20211101: ArchivedNlVaccineDeliveryPerSupplier;
+  vaccine_stock_archived_20211024: ArchivedNlVaccineStock;
+  repeating_shot_administered_20220713: ArchivedNlRepeatingShotAdministered;
+  corona_melder_app_warning_archived_20220421: ArchivedNlCoronaMelderAppWarning;
+  corona_melder_app_download_archived_20220421: ArchivedNlCoronaMelderAppDownload;
+  infectious_people_archived_20210709: ArchivedNlInfectiousPeople;
 }
-export interface NlDifference {
+export interface ArchivedNlDifference {
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
   nursing_home__deceased_daily_archived_20230126: DifferenceInteger;
   nursing_home__newly_infected_people_archived_20230126: DifferenceInteger;
@@ -215,11 +215,11 @@ export interface DifferenceDecimal {
   old_date_unix: number;
   new_date_unix: number;
 }
-export interface NlBehavior {
-  values: NlBehaviorValue[];
-  last_value: NlBehaviorValue;
+export interface ArchivedNlBehavior {
+  values: ArchivedNlBehaviorValue[];
+  last_value: ArchivedNlBehaviorValue;
 }
-export interface NlBehaviorValue {
+export interface ArchivedNlBehaviorValue {
   number_of_participants: number;
   curfew_compliance?: number | null;
   curfew_compliance_trend: ('up' | 'down' | 'equal') | null;
@@ -281,10 +281,10 @@ export interface NlBehaviorValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlBehaviorAnnotations {
-  values: NlBehaviorAnnotations1[];
+export interface ArchivedNlBehaviorAnnotations {
+  values: NlBehaviorAnnotations[];
 }
-export interface NlBehaviorAnnotations1 {
+export interface NlBehaviorAnnotations {
   behavior_indicator:
     | 'wash_hands'
     | 'curfew'
@@ -308,89 +308,89 @@ export interface NlBehaviorAnnotations1 {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlBehaviorPerAgeGroup {
-  keep_distance_compliance?: NlBehaviorPerAgeGroupValue;
-  keep_distance_support?: NlBehaviorPerAgeGroupValue;
-  sneeze_cough_elbow_compliance?: NlBehaviorPerAgeGroupValue;
-  sneeze_cough_elbow_support?: NlBehaviorPerAgeGroupValue;
-  wash_hands_compliance?: NlBehaviorPerAgeGroupValue;
-  wash_hands_support?: NlBehaviorPerAgeGroupValue;
-  work_from_home_compliance?: NlBehaviorPerAgeGroupValue;
-  work_from_home_support?: NlBehaviorPerAgeGroupValue;
-  ventilate_home_compliance?: NlBehaviorPerAgeGroupValue;
-  ventilate_home_support?: NlBehaviorPerAgeGroupValue;
-  selftest_visit_compliance?: NlBehaviorPerAgeGroupValue;
-  selftest_visit_support?: NlBehaviorPerAgeGroupValue;
-  posttest_isolation_compliance?: NlBehaviorPerAgeGroupValue;
-  posttest_isolation_support?: NlBehaviorPerAgeGroupValue;
+export interface ArchivedNlBehaviorPerAgeGroup {
+  keep_distance_compliance?: ArchivedNlBehaviorPerAgeGroupValue;
+  keep_distance_support?: ArchivedNlBehaviorPerAgeGroupValue;
+  sneeze_cough_elbow_compliance?: ArchivedNlBehaviorPerAgeGroupValue;
+  sneeze_cough_elbow_support?: ArchivedNlBehaviorPerAgeGroupValue;
+  wash_hands_compliance?: ArchivedNlBehaviorPerAgeGroupValue;
+  wash_hands_support?: ArchivedNlBehaviorPerAgeGroupValue;
+  work_from_home_compliance?: ArchivedNlBehaviorPerAgeGroupValue;
+  work_from_home_support?: ArchivedNlBehaviorPerAgeGroupValue;
+  ventilate_home_compliance?: ArchivedNlBehaviorPerAgeGroupValue;
+  ventilate_home_support?: ArchivedNlBehaviorPerAgeGroupValue;
+  selftest_visit_compliance?: ArchivedNlBehaviorPerAgeGroupValue;
+  selftest_visit_support?: ArchivedNlBehaviorPerAgeGroupValue;
+  posttest_isolation_compliance?: ArchivedNlBehaviorPerAgeGroupValue;
+  posttest_isolation_support?: ArchivedNlBehaviorPerAgeGroupValue;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
 }
-export interface NlBehaviorPerAgeGroupValue {
+export interface ArchivedNlBehaviorPerAgeGroupValue {
   '16_24': number | null;
   '25_39': number | null;
   '40_54': number | null;
   '55_69': number | null;
   '70_plus': number | null;
 }
-export interface NlBoosterShotAdministered {
-  values: NlBoosterShotAdministeredArchived_20220904Value[];
-  last_value: NlBoosterShotAdministeredArchived_20220904Value;
+export interface ArchivedNlBoosterShotAdministered {
+  values: ArchivedNlBoosterShotAdministeredValue[];
+  last_value: ArchivedNlBoosterShotAdministeredValue;
 }
-export interface NlBoosterShotAdministeredArchived_20220904Value {
+export interface ArchivedNlBoosterShotAdministeredValue {
   administered_total: number;
   ggd_administered_total: number;
   others_administered_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlBoosterCoverage {
-  values: NlBoosterCoverageArchived_20220904Value[];
+export interface ArchivedNlBoosterCoverage {
+  values: ArchivedNlBoosterCoverageValue[];
 }
-export interface NlBoosterCoverageArchived_20220904Value {
+export interface ArchivedNlBoosterCoverageValue {
   age_group?: '12+' | '18+';
   percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlDeceasedRivm {
-  values: NlDeceasedRivmArchived_20221231Value[];
-  last_value: NlDeceasedRivmArchived_20221231Value;
+export interface ArchivedNlDeceasedRivm {
+  values: ArchivedNlDeceasedRivmValue[];
+  last_value: ArchivedNlDeceasedRivmValue;
 }
-export interface NlDeceasedRivmArchived_20221231Value {
+export interface ArchivedNlDeceasedRivmValue {
   covid_daily: number;
   covid_daily_moving_average: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlDeceasedRivmPerAgeGroup {
-  values: NlDeceasedRivmPerAgeGroupArchived_20221231Value[];
+export interface ArchivedNlDeceasedRivmPerAgeGroup {
+  values: ArchivedNlDeceasedRivmPerAgeGroupValue[];
 }
-export interface NlDeceasedRivmPerAgeGroupArchived_20221231Value {
+export interface ArchivedNlDeceasedRivmPerAgeGroupValue {
   age_group_range: string;
   age_group_percentage: number;
   covid_percentage: number;
   date_unix?: number;
   date_of_insertion_unix: number;
 }
-export interface NlDoctor {
-  values: NlDoctorValue[];
-  last_value: NlDoctorValue;
+export interface ArchivedNlDoctor {
+  values: ArchivedNlDoctorValue[];
+  last_value: ArchivedNlDoctorValue;
 }
-export interface NlDoctorValue {
+export interface ArchivedNlDoctorValue {
   date_start_unix: number;
   date_end_unix: number;
   covid_symptoms_per_100k: number;
   covid_symptoms: number;
   date_of_insertion_unix: number;
 }
-export interface NlDisabilityCare {
-  values: NlDisabilityCareArchived_20230126Value[];
-  last_value: NlDisabilityCareArchived_20230126Value;
+export interface ArchivedNlDisabilityCare {
+  values: ArchivedNlDisabilityCareValue[];
+  last_value: ArchivedNlDisabilityCareValue;
 }
-export interface NlDisabilityCareArchived_20230126Value {
+export interface ArchivedNlDisabilityCareValue {
   newly_infected_people: number;
   newly_infected_people_moving_average: number | null;
   deceased_daily: number;
@@ -401,11 +401,11 @@ export interface NlDisabilityCareArchived_20230126Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlElderlyAtHome {
-  values: NlElderlyAtHomeArchived_20230126Value[];
-  last_value: NlElderlyAtHomeArchived_20230126Value;
+export interface ArchivedNlElderlyAtHome {
+  values: ArchivedNlElderlyAtHomeValue[];
+  last_value: ArchivedNlElderlyAtHomeValue;
 }
-export interface NlElderlyAtHomeArchived_20230126Value {
+export interface ArchivedNlElderlyAtHomeValue {
   positive_tested_daily: number;
   positive_tested_daily_moving_average: number | null;
   positive_tested_daily_per_100k: number;
@@ -414,20 +414,20 @@ export interface NlElderlyAtHomeArchived_20230126Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlGNumber {
-  values: NlGNumberValue[];
-  last_value: NlGNumberValue;
+export interface ArchivedNlGNumber {
+  values: ArchivedNlGNumberValue[];
+  last_value: ArchivedNlGNumberValue;
 }
-export interface NlGNumberValue {
+export interface ArchivedNlGNumberValue {
   g_number: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlNursingHome {
-  values: NlNursingHomeArchived_20230126Value[];
-  last_value: NlNursingHomeArchived_20230126Value;
+export interface ArchivedNlNursingHome {
+  values: ArchivedNlNursingHomeValue[];
+  last_value: ArchivedNlNursingHomeValue;
 }
-export interface NlNursingHomeArchived_20230126Value {
+export interface ArchivedNlNursingHomeValue {
   newly_infected_people: number;
   newly_infected_people_moving_average: number | null;
   deceased_daily: number;
@@ -438,11 +438,11 @@ export interface NlNursingHomeArchived_20230126Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlTestedGgd {
-  values: NlTestedGgdValue[];
-  last_value: NlTestedGgdValue;
+export interface ArchivedNlTestedGgd {
+  values: ArchivedNlTestedGgdValue[];
+  last_value: ArchivedNlTestedGgdValue;
 }
-export interface NlTestedGgdValue {
+export interface ArchivedNlTestedGgdValue {
   infected: number;
   infected_moving_average: number | null;
   infected_percentage: number;
@@ -453,11 +453,11 @@ export interface NlTestedGgdValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlTestedOverall {
-  values: NlTestedOverallValue[];
-  last_value: NlTestedOverallValue;
+export interface ArchivedNlTestedOverall {
+  values: ArchivedNlTestedOverallValue[];
+  last_value: ArchivedNlTestedOverallValue;
 }
-export interface NlTestedOverallValue {
+export interface ArchivedNlTestedOverallValue {
   infected: number;
   infected_moving_average: number | null;
   infected_moving_average_rounded: number | null;
@@ -466,11 +466,11 @@ export interface NlTestedOverallValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlTestedPerAgeGroup {
-  values: NlTestedPerAgeGroupValue[];
-  last_value: NlTestedPerAgeGroupValue;
+export interface ArchivedNlTestedPerAgeGroup {
+  values: ArchivedNlTestedPerAgeGroupValue[];
+  last_value: ArchivedNlTestedPerAgeGroupValue;
 }
-export interface NlTestedPerAgeGroupValue {
+export interface ArchivedNlTestedPerAgeGroupValue {
   infected_age_0_9_per_100k: number;
   infected_age_10_19_per_100k: number;
   infected_age_20_29_per_100k: number;
@@ -485,40 +485,40 @@ export interface NlTestedPerAgeGroupValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlSewer {
-  values: NlSewerValue[];
-  last_value: NlSewerValue;
+export interface ArchivedNlSewer {
+  values: ArchivedNlSewerValue[];
+  last_value: ArchivedNlSewerValue;
 }
-export interface NlSewerValue {
+export interface ArchivedNlSewerValue {
   average: number | null;
   date_of_insertion_unix: number;
   date_unix: number;
 }
-export interface NlVaccineCampaignsArchived_20220908 {
-  vaccine_campaigns: NlVaccineCampaigns[];
+export interface ArchivedNlVaccineCampaigns {
+  vaccine_campaigns: ArchivedNlVaccineCampaigns1[];
   date_unix: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineCampaigns {
+export interface ArchivedNlVaccineCampaigns1 {
   vaccine_campaign_order: number;
   vaccine_campaign_name_nl: string;
   vaccine_campaign_name_en: string;
   vaccine_administered_total: number;
   vaccine_administered_last_week: number;
 }
-export interface NlVaccinePlanned {
+export interface ArchivedNlVaccinePlanned {
   doses: number;
   date_unix: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineCoveragePerAgeGroupArchived_20220622 {
-  values: NlVaccineCoveragePerAgeGroupArchivedValue[];
+export interface ArchivedNlVaccineCoveragePerAgeGroup {
+  values: ArchivedNlVaccineCoveragePerAgeGroupValue[];
 }
-export interface NlVaccineCoveragePerAgeGroupArchivedValue {
+export interface ArchivedNlVaccineCoveragePerAgeGroupValue {
   age_group_range: '5-11' | '12-17' | '18-30' | '31-40' | '41-50' | '51-60' | '61-70' | '71-80' | '81+';
   age_group_percentage: number;
   age_group_total: number;
@@ -531,10 +531,10 @@ export interface NlVaccineCoveragePerAgeGroupArchivedValue {
   date_of_report_unix: number;
   birthyear_range: string;
 }
-export interface NlVaccineCoveragePerAgeGroupWithBoosterShot {
-  values: NlVaccineCoveragePerAgeGroupArchived_20220908Value[];
+export interface ArchivedNlVaccineCoveragePerAgeGroupWithBoosterShot {
+  values: ArchivedNlVaccineCoveragePerAgeGroupWithBoosterShotValue[];
 }
-export interface NlVaccineCoveragePerAgeGroupArchived_20220908Value {
+export interface ArchivedNlVaccineCoveragePerAgeGroupWithBoosterShotValue {
   age_group_range: '5-11' | '12-17' | '18-29' | '30-39' | '40-49' | '50-59' | '60-69' | '70-79' | '80+';
   age_group_percentage: number;
   age_group_total: number;
@@ -550,10 +550,10 @@ export interface NlVaccineCoveragePerAgeGroupArchived_20220908Value {
   birthyear_range: string;
 }
 export interface NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908Value {
-  values: NlVaccineCoveragePerAgeGroupEstimated[];
-  last_value: NlVaccineCoveragePerAgeGroupEstimated;
+  values: ArchivedNlVaccineCoveragePerAgeGroupEstimated[];
+  last_value: ArchivedNlVaccineCoveragePerAgeGroupEstimated;
 }
-export interface NlVaccineCoveragePerAgeGroupEstimated {
+export interface ArchivedNlVaccineCoveragePerAgeGroupEstimated {
   age_18_plus_fully_vaccinated: number;
   age_18_plus_has_one_shot: number;
   age_18_plus_birthyear: string;
@@ -563,39 +563,39 @@ export interface NlVaccineCoveragePerAgeGroupEstimated {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVulnerableNursingHome {
-  values: NlVulnerableNursingHomeValue[];
-  last_value: NlVulnerableNursingHomeValue;
+export interface ArchivedNlVulnerableNursingHome {
+  values: ArchivedNlVulnerableNursingHomeValue[];
+  last_value: ArchivedNlVulnerableNursingHomeValue;
 }
-export interface NlVulnerableNursingHomeValue {
+export interface ArchivedNlVulnerableNursingHomeValue {
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVulnerableHospitalAdmissions {
+export interface ArchivedNlVulnerableHospitalAdmissions {
   admissions_age_70_plus: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlReproduction {
-  values: NlReproductionValue[];
-  last_value: NlReproductionValue;
+export interface ArchivedNlReproduction {
+  values: ArchivedNlReproductionValue[];
+  last_value: ArchivedNlReproductionValue;
 }
-export interface NlReproductionValue {
+export interface ArchivedNlReproductionValue {
   index_low: number | null;
   index_average: number | null;
   index_high: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineVaccinatedOrSupport {
-  values: NlVaccineVaccinatedOrSupportValue[];
-  last_value: NlVaccineVaccinatedOrSupportValue;
+export interface ArchivedNlVaccineVaccinatedOrSupport {
+  values: ArchivedNlVaccineVaccinatedOrSupportValue[];
+  last_value: ArchivedNlVaccineVaccinatedOrSupportValue;
 }
-export interface NlVaccineVaccinatedOrSupportValue {
+export interface ArchivedNlVaccineVaccinatedOrSupportValue {
   percentage_average: number;
   percentage_70_plus: number | null;
   percentage_55_69: number | null;
@@ -606,11 +606,11 @@ export interface NlVaccineVaccinatedOrSupportValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineCoverage {
-  values: NlVaccineCoverageValue[];
-  last_value: NlVaccineCoverageValue;
+export interface ArchivedNlVaccineCoverage {
+  values: ArchivedNlVaccineCoverageValue[];
+  last_value: ArchivedNlVaccineCoverageValue;
 }
-export interface NlVaccineCoverageValue {
+export interface ArchivedNlVaccineCoverageValue {
   booster_vaccinated: number;
   partially_vaccinated: number;
   fully_vaccinated: number;
@@ -620,11 +620,11 @@ export interface NlVaccineCoverageValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineDeliveryPerSupplier {
-  values: NlVaccineDeliveryPerSupplierValue[];
-  last_value: NlVaccineDeliveryPerSupplierValue;
+export interface ArchivedNlVaccineDeliveryPerSupplier {
+  values: ArchivedNlVaccineDeliveryPerSupplierValue[];
+  last_value: ArchivedNlVaccineDeliveryPerSupplierValue;
 }
-export interface NlVaccineDeliveryPerSupplierValue {
+export interface ArchivedNlVaccineDeliveryPerSupplierValue {
   total: number;
   bio_n_tech_pfizer: number;
   moderna: number;
@@ -639,11 +639,11 @@ export interface NlVaccineDeliveryPerSupplierValue {
   date_end_unix: number;
   date_of_report_unix: number;
 }
-export interface NlVaccineStock {
-  values: NlVaccineStockValue[];
-  last_value: NlVaccineStockValue;
+export interface ArchivedNlVaccineStock {
+  values: ArchivedNlVaccineStockValue[];
+  last_value: ArchivedNlVaccineStockValue;
 }
-export interface NlVaccineStockValue {
+export interface ArchivedNlVaccineStockValue {
   total_available: number | null;
   total_not_available: number | null;
   bio_n_tech_pfizer_available: number | null;
@@ -661,38 +661,38 @@ export interface NlVaccineStockValue {
   date_of_insertion_unix: number;
   date_unix: number;
 }
-export interface NlRepeatingShotAdministered {
-  values: NlRepeatingShotAdministeredValue[];
-  last_value: NlRepeatingShotAdministeredValue;
+export interface ArchivedNlRepeatingShotAdministered {
+  values: ArchivedNlRepeatingShotAdministeredValue[];
+  last_value: ArchivedNlRepeatingShotAdministeredValue;
 }
-export interface NlRepeatingShotAdministeredValue {
+export interface ArchivedNlRepeatingShotAdministeredValue {
   ggd_administered_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlCoronaMelderAppWarning {
-  values: NlCoronaMelderAppWarningValue[];
-  last_value: NlCoronaMelderAppWarningValue;
+export interface ArchivedNlCoronaMelderAppWarning {
+  values: ArchivedNlCoronaMelderAppWarningValue[];
+  last_value: ArchivedNlCoronaMelderAppWarningValue;
 }
-export interface NlCoronaMelderAppWarningValue {
+export interface ArchivedNlCoronaMelderAppWarningValue {
   count: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlCoronaMelderAppDownload {
-  values: NlCoronaMelderAppDownloadValue[];
-  last_value: NlCoronaMelderAppDownloadValue;
+export interface ArchivedNlCoronaMelderAppDownload {
+  values: ArchivedNlCoronaMelderAppDownloadValue[];
+  last_value: ArchivedNlCoronaMelderAppDownloadValue;
 }
-export interface NlCoronaMelderAppDownloadValue {
+export interface ArchivedNlCoronaMelderAppDownloadValue {
   count: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlInfectiousPeople {
-  values: NlInfectiousPeopleValue[];
-  last_value: NlInfectiousPeopleValue;
+export interface ArchivedNlInfectiousPeople {
+  values: ArchivedNlInfectiousPeopleValue[];
+  last_value: ArchivedNlInfectiousPeopleValue;
 }
-export interface NlInfectiousPeopleValue {
+export interface ArchivedNlInfectiousPeopleValue {
   margin_low: number;
   estimate: number | null;
   margin_high: number;
@@ -793,9 +793,9 @@ export interface GmSewerValue {
   data_is_outdated: boolean;
 }
 export interface GmSewerPerInstallation {
-  values: MunicipalSewerPerInstallationInstallation[];
+  values: MunicipalSewerPerInstallation[];
 }
-export interface MunicipalSewerPerInstallationInstallation {
+export interface MunicipalSewerPerInstallation {
   rwzi_awzi_name: string;
   values: GmSewerPerInstallationValue[];
   last_value: GmSewerPerInstallationValue;

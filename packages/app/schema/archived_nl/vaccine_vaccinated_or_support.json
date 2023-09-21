@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_vaccinated_or_support",
+  "title": "archived_nl_vaccine_vaccinated_or_support",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_vaccine_vaccinated_or_support_value",
+      "title": "archived_nl_vaccine_vaccinated_or_support_value",
       "type": "object",
       "properties": {
         "percentage_average": {

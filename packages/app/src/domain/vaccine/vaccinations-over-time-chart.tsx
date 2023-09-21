@@ -1,86 +1,41 @@
-import {
-  assert,
-  colors,
-  DateValue,
-  NlVaccineCoverage,
-  NlVaccineCoverageValue,
-} from '@corona-dashboard/common';
+import { assert, colors, DateValue, ArchivedNlVaccineCoverage, ArchivedNlVaccineCoverageValue } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { RadioGroup, RadioGroupItem } from '~/components/radio-group';
-import {
-  SeriesConfig,
-  TimeSeriesChart,
-  TimeSeriesChartProps,
-} from '~/components/time-series-chart';
+import { SeriesConfig, TimeSeriesChart, TimeSeriesChartProps } from '~/components/time-series-chart';
 import { TooltipData } from '~/components/time-series-chart/components';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
-import {
-  DataOptions,
-  StackedAreaSeriesDefinition,
-} from '~/components/time-series-chart/logic';
+import { DataOptions, StackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-delivery-and-administrations-tooltip';
-import {
-  AdministrationData,
-  VaccineAdministrationsValue,
-} from './data-selection/select-administration-data';
+import { AdministrationData, VaccineAdministrationsValue } from './data-selection/select-administration-data';
 
 export type ActiveVaccinationChart = 'coverage' | 'deliveryAndAdministration';
 
 interface VaccinationsOverTimeChartProps {
-  coverageData?: NlVaccineCoverage;
+  coverageData?: ArchivedNlVaccineCoverage;
   administrationData: AdministrationData;
   activeChart: ActiveVaccinationChart;
-  timelineEvents: Partial<
-    Record<ActiveVaccinationChart, TimelineEventConfig[]>
-  >;
+  timelineEvents: Partial<Record<ActiveVaccinationChart, TimelineEventConfig[]>>;
   text: SiteText['pages']['vaccinations_page']['nl'];
 }
 
-const vaccines = [
-  'pfizer',
-  'moderna',
-  'astra_zeneca',
-  'janssen',
-  'novavax',
-] as const;
-vaccines.forEach((x) =>
-  assert(
-    colors.vaccines[x],
-    `[${VaccinationsOverTimeChart.name}] missing vaccine color for vaccine ${x}`
-  )
-);
+const vaccines = ['pfizer', 'moderna', 'astra_zeneca', 'janssen', 'novavax'] as const;
+vaccines.forEach((x) => assert(colors.vaccines[x], `[${VaccinationsOverTimeChart.name}] missing vaccine color for vaccine ${x}`));
 
-export function VaccinationsOverTimeChart(
-  props: VaccinationsOverTimeChartProps
-) {
-  const {
-    coverageData,
-    administrationData,
-    activeChart,
-    timelineEvents,
-    text,
-  } = props;
+export function VaccinationsOverTimeChart(props: VaccinationsOverTimeChartProps) {
+  const { coverageData, administrationData, activeChart, timelineEvents, text } = props;
   const { commonTexts, formatNumber } = useIntl();
   const breakpoints = useBreakpoints(true);
 
   const firstValue = first(administrationData.values);
-  const vaccineNames = useMemo(
-    () => vaccines.filter((x) => firstValue?.[x] !== undefined).reverse(),
-    [firstValue]
-  );
+  const vaccineNames = useMemo(() => vaccines.filter((x) => firstValue?.[x] !== undefined).reverse(), [firstValue]);
 
-  const coverageChartConfiguration:
-    | TimeSeriesChartProps<
-        DailyNlVaccineCoverageValue,
-        SeriesConfig<DailyNlVaccineCoverageValue>
-      >
-    | undefined = useMemo(() => {
+  const coverageChartConfiguration: TimeSeriesChartProps<DailyNlVaccineCoverageValue, SeriesConfig<DailyNlVaccineCoverageValue>> | undefined = useMemo(() => {
     return isDefined(coverageData)
       ? ({
           accessibility: { key: 'vaccine_coverage_over_time_chart' },
@@ -88,17 +43,13 @@ export function VaccinationsOverTimeChart(
           minHeight: breakpoints.md ? 400 : 250,
           formatTickValue: (x: number) => `${x / 1_000_000}`,
           dataOptions: {
-            valueAnnotation:
-              text.grafiek_gevaccineerd_door_de_tijd_heen.waarde_annotatie,
+            valueAnnotation: text.grafiek_gevaccineerd_door_de_tijd_heen.waarde_annotatie,
             timelineEvents: timelineEvents.coverage,
           } as DataOptions,
           seriesConfig: [
             {
-              label:
-                text.grafiek_gevaccineerd_door_de_tijd_heen.label_gedeeltelijk,
-              shortLabel:
-                text.grafiek_gevaccineerd_door_de_tijd_heen
-                  .tooltip_label_gedeeltelijk,
+              label: text.grafiek_gevaccineerd_door_de_tijd_heen.label_gedeeltelijk,
+              shortLabel: text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_gedeeltelijk,
               type: 'stacked-area',
               metricProperty: 'partially_vaccinated',
               color: colors.blue4,
@@ -107,9 +58,7 @@ export function VaccinationsOverTimeChart(
             },
             {
               label: text.grafiek_gevaccineerd_door_de_tijd_heen.label_volledig,
-              shortLabel:
-                text.grafiek_gevaccineerd_door_de_tijd_heen
-                  .tooltip_label_volledig,
+              shortLabel: text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_volledig,
               type: 'stacked-area',
               metricProperty: 'fully_vaccinated',
               color: colors.primary,
@@ -117,12 +66,8 @@ export function VaccinationsOverTimeChart(
               fillOpacity: 1,
             },
             {
-              label:
-                text.grafiek_gevaccineerd_door_de_tijd_heen
-                  .label_booster_vaccinated,
-              shortLabel:
-                text.grafiek_gevaccineerd_door_de_tijd_heen
-                  .tooltip_label_booster_vaccinated,
+              label: text.grafiek_gevaccineerd_door_de_tijd_heen.label_booster_vaccinated,
+              shortLabel: text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_booster_vaccinated,
               type: 'stacked-area',
               metricProperty: 'booster_vaccinated',
               color: colors.blue10,
@@ -131,18 +76,13 @@ export function VaccinationsOverTimeChart(
             },
             {
               label: text.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal,
-              shortLabel:
-                text.grafiek_gevaccineerd_door_de_tijd_heen
-                  .tooltip_label_totaal,
+              shortLabel: text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_totaal,
               type: 'line',
               metricProperty: 'partially_or_fully_vaccinated',
               color: 'black',
             },
           ],
-        } as TimeSeriesChartProps<
-          DailyNlVaccineCoverageValue,
-          SeriesConfig<DailyNlVaccineCoverageValue>
-        >)
+        } as TimeSeriesChartProps<DailyNlVaccineCoverageValue, SeriesConfig<DailyNlVaccineCoverageValue>>)
       : undefined;
   }, [
     coverageData,
@@ -154,8 +94,7 @@ export function VaccinationsOverTimeChart(
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_gedeeltelijk,
     text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_volledig,
     text.grafiek_gevaccineerd_door_de_tijd_heen.label_booster_vaccinated,
-    text.grafiek_gevaccineerd_door_de_tijd_heen
-      .tooltip_label_booster_vaccinated,
+    text.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_booster_vaccinated,
     timelineEvents.coverage,
     breakpoints,
   ]);
@@ -176,21 +115,14 @@ export function VaccinationsOverTimeChart(
       values: administrationData.values,
       numGridLines: 6,
       formatTickValue: (x: number) => formatNumber(x / 1000000),
-      formatTooltip: (x: TooltipData<VaccineAdministrationsValue>) => (
-        <VaccineDeliveryAndAdministrationsTooltip data={x} />
-      ),
+      formatTooltip: (x: TooltipData<VaccineAdministrationsValue>) => <VaccineDeliveryAndAdministrationsTooltip data={x} />,
       seriesConfig: [
-        ...vaccineNames.map<
-          StackedAreaSeriesDefinition<VaccineAdministrationsValue>
-        >((x) => ({
+        ...vaccineNames.map<StackedAreaSeriesDefinition<VaccineAdministrationsValue>>((x) => ({
           metricProperty: x as keyof VaccineAdministrationsValue,
           type: 'stacked-area',
-          label: replaceVariablesInText(
-            text.data.vaccination_chart.legend_label,
-            {
-              name: text.data.vaccination_chart.product_names[x],
-            }
-          ),
+          label: replaceVariablesInText(text.data.vaccination_chart.legend_label, {
+            name: text.data.vaccination_chart.product_names[x],
+          }),
           shortLabel: text.data.vaccination_chart.product_names[x],
           color: colors.vaccines[x],
           mixBlendMode: 'multiply',
@@ -203,10 +135,7 @@ export function VaccinationsOverTimeChart(
           label: text.data.vaccination_chart.doses_administered,
         },
       ],
-    } as TimeSeriesChartProps<
-      VaccineAdministrationsValue,
-      SeriesConfig<VaccineAdministrationsValue>
-    >;
+    } as TimeSeriesChartProps<VaccineAdministrationsValue, SeriesConfig<VaccineAdministrationsValue>>;
   }, [
     administrationData,
     commonTexts.waarde_annotaties.x_miljoen,
@@ -219,23 +148,14 @@ export function VaccinationsOverTimeChart(
     timelineEvents.deliveryAndAdministration,
   ]);
 
-  const chartProps =
-    activeChart === 'coverage'
-      ? coverageChartConfiguration
-      : deliveryAndAdministrationChartConfiguration;
+  const chartProps = activeChart === 'coverage' ? coverageChartConfiguration : deliveryAndAdministrationChartConfiguration;
 
-  return isDefined(chartProps) ? (
-    <TimeSeriesChart {...(chartProps as any)} />
-  ) : null;
+  return isDefined(chartProps) ? <TimeSeriesChart {...(chartProps as any)} /> : null;
 }
 
-type DailyNlVaccineCoverageValue = Omit<
-  NlVaccineCoverageValue,
-  'date_start_unix' | 'date_end_unix'
-> &
-  DateValue;
+type DailyNlVaccineCoverageValue = Omit<ArchivedNlVaccineCoverageValue, 'date_start_unix' | 'date_end_unix'> & DateValue;
 
-function transformToDayTimestamps(values: NlVaccineCoverageValue[]) {
+function transformToDayTimestamps(values: ArchivedNlVaccineCoverageValue[]) {
   return values.map<DailyNlVaccineCoverageValue>((x) => {
     const newValue = {
       ...x,
@@ -262,9 +182,7 @@ export function VaccinationChartControls(props: VaccinationChartControlsProps) {
       value: 'coverage',
     },
     {
-      label:
-        commonTexts.charts.vaccination_coverage_controls
-          .delivery_and_administration,
+      label: commonTexts.charts.vaccination_coverage_controls.delivery_and_administration,
       value: 'deliveryAndAdministration',
     },
   ];

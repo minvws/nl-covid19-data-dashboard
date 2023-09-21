@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_coverage_value",
+      "title": "archived_nl_vaccine_coverage_value",
       "type": "object",
       "required": [
         "booster_vaccinated",
@@ -43,7 +43,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_coverage",
+  "title": "archived_nl_vaccine_coverage",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

@@ -18,7 +18,7 @@
       }
     },
     "installation": {
-      "title": "municipal_sewer_per_installation_installation",
+      "title": "municipal_sewer_per_installation",
       "type": "object",
       "additionalProperties": false,
       "required": ["rwzi_awzi_name", "values", "last_value"],

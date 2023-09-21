@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_stock_value",
+      "title": "archived_nl_vaccine_stock_value",
       "type": "object",
       "required": [
         "total_available",
@@ -75,7 +75,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_stock",
+  "title": "archived_nl_vaccine_stock",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
