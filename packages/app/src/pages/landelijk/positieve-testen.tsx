@@ -1,4 +1,4 @@
-import { colors, NlTestedOverallValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors, ArchivedNlTestedOverallValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { GgdTesten } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -178,7 +178,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 outOfBoundsConfig: {
                   label: textNl.labels.infected_out_of_bounds,
                   tooltipLabel: textNl.tooltip_labels.annotations,
-                  checkIsOutofBounds: (x: NlTestedOverallValue, max: number) => x.infected > max,
+                  checkIsOutofBounds: (x: ArchivedNlTestedOverallValue, max: number) => x.infected > max,
                 },
                 timelineEvents: getTimelineEvents(content.elements.timeSeries, 'tested_overall_archived_20230331'),
               }}

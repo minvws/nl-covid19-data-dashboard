@@ -1,4 +1,4 @@
-import { NlTestedPerAgeGroupValue, TimeframeOption } from '@corona-dashboard/common';
+import { ArchivedNlTestedPerAgeGroupValue, TimeframeOption } from '@corona-dashboard/common';
 import { Spacer } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
@@ -22,7 +22,7 @@ interface InfectedPerAgeGroup {
    * graph with a label and description.
    */
   accessibility: AccessibilityDefinition;
-  values: NlTestedPerAgeGroupValue[];
+  values: ArchivedNlTestedPerAgeGroupValue[];
   timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
   text: SiteText['pages']['positive_tests_page']['nl'];
@@ -36,7 +36,7 @@ export function InfectedPerAgeGroup({ values, timeframe, accessibility, timeline
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
 
   /* Enrich config with dynamic data / locale */
-  const seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] = BASE_SERIES_CONFIG.map((baseAgeGroup) => {
+  const seriesConfig: LineSeriesDefinition<ArchivedNlTestedPerAgeGroupValue>[] = BASE_SERIES_CONFIG.map((baseAgeGroup) => {
     const label = baseAgeGroup.metricProperty in text.infected_per_age_group.legend ? text.infected_per_age_group.legend[baseAgeGroup.metricProperty] : baseAgeGroup.metricProperty;
 
     const ariaLabel = replaceVariablesInText(commonTexts.aria_labels.age_old, {
