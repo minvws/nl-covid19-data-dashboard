@@ -15,6 +15,7 @@ export interface ArchivedGm {
   code: ArchivedGmCode;
   vaccine_coverage_per_age_group_archived_20220622: ArchivedGmVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived_20220908: ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShot;
+  vaccine_coverage_per_age_group_archived_202310xx: GmVaccineCampaignCoveragePerAgeGroup;
   booster_coverage_archived_20220904: ArchivedGmBoosterCoverage;
   sewer_archived_20230623: ArchivedGmSewer;
   tested_overall_archived_20230331: ArchivedGmTestedOverall;
@@ -76,6 +77,23 @@ export interface ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShotValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
+export interface GmVaccineCampaignCoveragePerAgeGroup {
+  values: GmVaccineCampaignCoveragePerAgeGroupValue[];
+}
+export interface GmVaccineCampaignCoveragePerAgeGroupValue {
+  vaccination_type: string;
+  birthyear_range_12_plus: string;
+  birthyear_range_18_plus: string;
+  birthyear_range_60_plus: string | null;
+  vaccinated_percentage_12_plus: number | null;
+  vaccinated_percentage_12_plus_label: string | null;
+  vaccinated_percentage_18_plus: number | null;
+  vaccinated_percentage_18_plus_label: string | null;
+  vaccinated_percentage_60_plus: number | null;
+  vaccinated_percentage_60_plus_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface ArchivedGmBoosterCoverage {
   values: ArchivedGmBoosterCoverageValue[];
 }
@@ -124,6 +142,7 @@ export interface ArchivedGmCollection {
   hospital_nice_choropleth_archived_20230830: ArchivedGmCollectionHospitalNiceChoropleth[];
   sewer_archived_20230623: ArchivedGmCollectionSewer[];
   tested_overall_archived_20230331: ArchivedGmCollectionTestedOverall[];
+  vaccine_coverage_per_age_group_archived_202310xx: ArchivedGmCollectionVaccineCoveragePerAgeGroup[];
 }
 export interface ArchivedGmCollectionHospitalNiceChoropleth {
   date_unix: number;
@@ -190,6 +209,7 @@ export interface ArchivedNl {
   tested_per_age_group_archived_20230331: ArchivedNlTestedPerAgeGroup;
   sewer_archived_20230623: ArchivedNlSewer;
   vaccine_campaigns_archived_20220908: ArchivedNlVaccineCampaigns;
+  vaccine_campaigns_archived_202310xx?: NlVaccineCampaignsArchived_202310Xx;
   vaccine_planned_archived_20220908: ArchivedNlVaccinePlanned;
   vaccine_coverage_per_age_group_archived_20220622: ArchivedNlVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived_20220908: ArchivedNlVaccineCoveragePerAgeGroupWithBoosterShot;
@@ -198,7 +218,17 @@ export interface ArchivedNl {
   vulnerable_hospital_admissions_archived_20230711: ArchivedNlVulnerableHospitalAdmissions;
   reproduction_archived_20230711: ArchivedNlReproduction;
   vaccine_vaccinated_or_support_archived_20230411: ArchivedNlVaccineVaccinatedOrSupport;
+  vaccine_administered_archived_20220914: NlVaccineAdministered;
+  vaccine_administered_doctors_archived_20220324: NlVaccineAdministeredDoctors;
+  vaccine_administered_ggd_ghor_archived_20220324: NlVaccineAdministeredGgdGhor;
+  vaccine_administered_ggd_archived_20220324: NlVaccineAdministeredGgd;
+  vaccine_administered_hospitals_and_care_institutions_archived_20220324: NlVaccineAdministeredHospitalsAndCareInstitutions;
+  vaccine_administered_total_archived_20220324: NlVaccineAdministeredTotal;
+  vaccine_administered_planned_archived_20220518: NlVaccineAdministeredPlanned;
   vaccine_coverage_archived_20220518: ArchivedNlVaccineCoverage;
+  vaccine_coverage_per_age_group_archived_202310xx: NlVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group_estimated_autumn_2022_archived_202310xx: NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022Value;
+  vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_202310xx: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinatedValue;
   vaccine_delivery_per_supplier_archived_20211101: ArchivedNlVaccineDeliveryPerSupplier;
   vaccine_stock_archived_20211024: ArchivedNlVaccineStock;
   repeating_shot_administered_20220713: ArchivedNlRepeatingShotAdministered;
@@ -523,6 +553,20 @@ export interface ArchivedNlVaccineCampaigns1 {
   vaccine_administered_total: number;
   vaccine_administered_last_week: number;
 }
+export interface NlVaccineCampaignsArchived_202310Xx {
+  vaccine_campaigns: Archived_202310XxNlVaccineCampaign[];
+  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface Archived_202310XxNlVaccineCampaign {
+  vaccine_campaign_order: number;
+  vaccine_campaign_name_nl: string;
+  vaccine_campaign_name_en: string;
+  vaccine_administered_total: number;
+  vaccine_administered_last_timeframe: number;
+}
 export interface ArchivedNlVaccinePlanned {
   doses: number;
   date_unix: number;
@@ -621,6 +665,79 @@ export interface ArchivedNlVaccineVaccinatedOrSupportValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlVaccineAdministered {
+  values: NlVaccineAdministeredValue[];
+  last_value: NlVaccineAdministeredValue;
+}
+export interface NlVaccineAdministeredValue {
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  cure_vac?: number;
+  janssen?: number;
+  sanofi?: number;
+  novavax: number;
+  total: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlVaccineAdministeredDoctors {
+  values: NlVaccineAdministeredDoctorsValue[];
+  last_value: NlVaccineAdministeredDoctorsValue;
+}
+export interface NlVaccineAdministeredDoctorsValue {
+  estimated: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredGgdGhor {
+  values: NlVaccineAdministeredGgdGhorValue[];
+  last_value: NlVaccineAdministeredGgdGhorValue;
+}
+export interface NlVaccineAdministeredGgdGhorValue {
+  reported: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredGgd {
+  values: NlVaccineAdministeredGgdValue[];
+  last_value: NlVaccineAdministeredGgdValue;
+}
+export interface NlVaccineAdministeredGgdValue {
+  estimated: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredHospitalsAndCareInstitutions {
+  values: NlVaccineAdministeredHospitalsAndCareInstitutionsValue[];
+  last_value: NlVaccineAdministeredHospitalsAndCareInstitutionsValue;
+}
+export interface NlVaccineAdministeredHospitalsAndCareInstitutionsValue {
+  estimated: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredTotal {
+  values: NlVaccineAdministeredTotalValue[];
+  last_value: NlVaccineAdministeredTotalValue;
+}
+export interface NlVaccineAdministeredTotalValue {
+  estimated: number;
+  reported: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredPlanned {
+  values: NlVaccineAdministeredPlannedValue[];
+  last_value: NlVaccineAdministeredPlannedValue;
+}
+export interface NlVaccineAdministeredPlannedValue {
+  doses: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface ArchivedNlVaccineCoverage {
   values: ArchivedNlVaccineCoverageValue[];
   last_value: ArchivedNlVaccineCoverageValue;
@@ -632,6 +749,46 @@ export interface ArchivedNlVaccineCoverageValue {
   partially_or_fully_vaccinated: number;
   date_start_unix: number;
   date_end_unix: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineCoveragePerAgeGroup {
+  values: NlVaccineCoveragePerAgeGroupValue[];
+}
+export interface NlVaccineCoveragePerAgeGroupValue {
+  age_group_range: '5-11' | '12-17' | '18-29' | '30-39' | '40-49' | '50-59' | '60-69' | '70-79' | '80+';
+  age_group_percentage: number;
+  age_group_total: number;
+  autumn_2022_vaccinated: number | null;
+  fully_vaccinated: number;
+  autumn_2022_vaccinated_percentage: number | null;
+  fully_vaccinated_percentage: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+  date_of_report_unix: number;
+  birthyear_range: string;
+}
+export interface NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022Value {
+  values: NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022[];
+  last_value: NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022;
+}
+export interface NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022 {
+  age_12_plus_birthyear: string;
+  age_12_plus_vaccinated: number;
+  age_60_plus_birthyear: string;
+  age_60_plus_vaccinated: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinatedValue {
+  values: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinated[];
+  last_value: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinated;
+}
+export interface NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinated {
+  age_12_plus_birthyear: string;
+  age_12_plus_vaccinated: number;
+  age_18_plus_birthyear: string;
+  age_18_plus_vaccinated: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
