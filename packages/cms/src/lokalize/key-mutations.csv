@@ -23,3 +23,5 @@ timestamp,action,key,document_id,move_to
 2023-09-20T12:58:54.472Z,add,common.choropleth.choropleth_vaccination_coverage.nl.archived.autumn_2022.description,TJ9Rmz8PFNgDMUrCLNzcFS,__
 2023-09-20T12:58:54.472Z,delete,common.choropleth.choropleth_vaccination_coverage.nl.archived.description,VHsF191hipdqXYgC9N3exS,__
 2023-09-20T12:58:54.473Z,delete,common.choropleth.choropleth_vaccination_coverage.nl.archived.title,22Xg3hRGtxwin2PlG9NMPZ,__
+2023-09-22T14:30:49.450Z,add,pages.vaccinations_page.nl.vaccine_campaigns.autumn_2023.campaign_banner.title,fQMSbwQpEgDbjt4uWGfKig,__
+2023-09-22T14:30:50.432Z,add,pages.vaccinations_page.nl.vaccine_campaigns.autumn_2023.campaign_banner.description,nX27LJrkVpILF9ToyJf7OI,__
