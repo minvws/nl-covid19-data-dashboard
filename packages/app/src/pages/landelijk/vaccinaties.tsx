@@ -25,6 +25,7 @@ import {
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
   selectAdministrationData,
+  BoosterShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
 import { VaccinationsPerSupplierOverLastTimeframeTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-timeframe-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
@@ -235,7 +236,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }}
           />
 
-          <CampaignBanner title="Hello there" description="This is a description" />
+          <CampaignBanner title={textNl.vaccine_campaigns.autumn_2023.campaign_banner.title} description={textNl.vaccine_campaigns.autumn_2023.campaign_banner.description} />
 
           <PageInformationBlock title={textNl.section_basisserie.title} description={textNl.section_basisserie.description} icon={<VaccinatieIcon aria-hidden="true" />} />
 
@@ -365,6 +366,19 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                   source: textNl.vaccination_coverage.bronnen.rivm,
                 }}
                 values={archivedData.vaccine_coverage_per_age_group_archived_202310xx.values}
+              />
+
+              <BoosterShotCoveragePerAgeGroup
+                text={textNl}
+                title={textNl.vaccination_coverage.title}
+                description={textNl.archived.vaccination_coverage.top_level_description_booster_shot}
+                sortingOrder={['80+', '70-79', '60-69', '50-59', '40-49', '30-39', '18-29', '12-17', '5-11']}
+                metadata={{
+                  datumsText: textNl.datums,
+                  date: archivedData.vaccine_coverage_per_age_group_archived_20220908.values[0].date_unix,
+                  source: textNl.vaccination_coverage.bronnen.rivm,
+                }}
+                values={archivedData.vaccine_coverage_per_age_group_archived_20220908.values}
               />
 
               <VaccineCoverageToggleTile
