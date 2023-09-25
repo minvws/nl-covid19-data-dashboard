@@ -69,7 +69,7 @@ export const themeTile = defineType({
     }),
     defineField({
       title: 'Source label',
-      description: 'Bij {{date}} wordt de tekst geplaatst van het tegeldatumveld. Deze kan handmatig overschreven worden.',
+      description: 'Deze velden krijgen hun input van de bron.   Deze kan handmatig overschreven worden.',
       name: 'sourceLabel',
       type: 'localeString',
     }),

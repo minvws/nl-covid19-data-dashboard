@@ -24,7 +24,7 @@ interface TopicalTileProps {
   hideTrendIcon: boolean;
   kpiValue: string | null;
   sourceLabel: string | null;
-  dateLabel: string | null;
+  dateLabel?: string | null;
   tileIcon: TopicalIcon;
   title: string;
   trendIcon: TrendIconType;
