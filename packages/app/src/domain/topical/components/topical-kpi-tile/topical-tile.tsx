@@ -23,8 +23,8 @@ interface TopicalTileProps {
   description: PortableTextEntry[];
   hideTrendIcon: boolean;
   kpiValue: string | null;
-  sourceLabel: string | null;
-  dateLabel?: string | null;
+  sourceLabel?: string;
+  dateLabel?: string;
   tileIcon: TopicalIcon;
   title: string;
   trendIcon: TrendIconType;

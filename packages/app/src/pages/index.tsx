@@ -114,7 +114,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       marginBottom={{ _: space[4], sm: space[5] }}
                     >
                       {theme.tiles.map((themeTile) => {
-                        const dateLabel = themeTile.dateLabel ? replaceVariablesInText(themeTile.dateLabel, { date: themeTile.tileDate }) : null;
+                        const dateLabel = themeTile.dateLabel ? replaceVariablesInText(themeTile.dateLabel, { date: themeTile.tileDate }) : undefined;
                         return (
                           <TopicalTile
                             hideTrendIcon={themeTile.hideTrendIcon}
