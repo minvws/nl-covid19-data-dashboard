@@ -1202,7 +1202,6 @@ export interface NlVariantsVariantValue {
   order: number;
   occurrence: number;
   percentage: number;
-  has_historical_significance?: boolean;
   sample_size: number;
   date_start_unix: number;
   date_end_unix: number;

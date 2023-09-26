@@ -3,9 +3,10 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { Box } from './base';
-import { Legend, LegendItem } from './legend';
-import { Text } from './typography';
+import { Box } from '../../base';
+import { Legend, LegendItem } from '../../legend';
+import { Text } from '../../typography';
+import { getLabelPerPageType } from '../logic/get-label-per-page-type';
 
 interface ChoroplethLegendaProps {
   title: string;
@@ -30,35 +31,10 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
           value: formatNumber(x.threshold),
         });
 
-    switch (pageType) {
-      case 'sewer':
-        if (i === 0 && x.threshold === 0) {
-          label = commonTexts.common.no_virus_particles_measured;
-        } else if (i === 1) {
-          label = replaceVariablesInText(commonTexts.common.bigger_than_zero_and_less_than_value, {
-            value_1: formatNumber(thresholds[i + 1].threshold),
-          });
-        }
-        break;
-      case 'patienten-in-beeld':
-        if (i === 0 && x.threshold === 0) {
-          label = commonTexts.common.no_notifications;
-        } else if (i === 1) {
-          label = replaceVariablesInText(commonTexts.common.bigger_than_zero_and_less_than_value, {
-            value_1: formatNumber(thresholds[i + 1].threshold),
-          });
-        }
-        break;
-      case 'ziekenhuis-opnames':
-        if (i === 0 && x.threshold === 0) {
-          label = commonTexts.common.no_notifications;
-        } else if (i === 1) {
-          label = replaceVariablesInText(commonTexts.common.bigger_than_zero_and_less_than_value, {
-            value_1: formatNumber(thresholds[i + 1].threshold),
-          });
-        }
-        break;
+    if ((i === 0 || i === 1) && pageType) {
+      label = getLabelPerPageType(i, x, thresholds, pageType, commonTexts, formatNumber);
     }
+
     return {
       label: label,
       shape: 'square',

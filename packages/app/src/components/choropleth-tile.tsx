@@ -1,6 +1,6 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { space } from '~/style/theme';
-import { ChoroplethLegenda } from '~/components/choropleth-legenda';
+import { ChoroplethLegenda } from '~/components/choropleth/components/choropleth-legenda';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Box } from './base';
 import { ChartRegionControls, RegionControlOption } from './chart-region-controls';
