@@ -21,24 +21,24 @@ export function ChoroplethLegenda({ title, thresholds, valueAnnotation, pageType
 
   const breakpoints = useBreakpoints(true);
 
-  const legendItems = thresholds.map((x: ChoroplethThresholdsValue, i) => {
-    let label = thresholds[i + 1]
+  const legendItems = thresholds.map((thresholdValue: ChoroplethThresholdsValue, index) => {
+    let label = thresholds[index + 1]
       ? replaceVariablesInText(commonTexts.common.value_until_value, {
-          value_1: formatNumber(x.threshold),
-          value_2: formatNumber(thresholds[i + 1].threshold),
+          value_1: formatNumber(thresholdValue.threshold),
+          value_2: formatNumber(thresholds[index + 1].threshold),
         })
       : replaceVariablesInText(commonTexts.common.value_and_higher, {
-          value: formatNumber(x.threshold),
+          value: formatNumber(thresholdValue.threshold),
         });
 
-    if ((i === 0 || i === 1) && pageType) {
-      label = getLabelPerPageType(i, x, thresholds, pageType, commonTexts, formatNumber);
+    if ((index === 0 || index === 1) && pageType) {
+      label = getLabelPerPageType(index, thresholdValue, thresholds, pageType, commonTexts, formatNumber);
     }
 
     return {
       label: label,
       shape: 'square',
-      color: x.color,
+      color: thresholdValue.color,
     } as LegendItem;
   });
 

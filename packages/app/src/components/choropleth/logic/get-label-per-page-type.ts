@@ -3,8 +3,8 @@ import { SiteText } from '~/locale';
 import { replaceVariablesInText } from '~/utils';
 
 export function getLabelPerPageType(
-  i: number,
-  x: ChoroplethThresholdsValue,
+  index: number,
+  thresholdValue: ChoroplethThresholdsValue,
   thresholds: ChoroplethThresholdsValue[],
   pageType: string,
   commonTexts: SiteText['common'],
@@ -12,7 +12,7 @@ export function getLabelPerPageType(
 ) {
   let label = '';
 
-  if (i === 0 && x.threshold === 0) {
+  if (index === 0 && thresholdValue.threshold === 0) {
     if (pageType === 'sewer') {
       label = commonTexts.common.no_virus_particles_measured;
     }
@@ -21,9 +21,9 @@ export function getLabelPerPageType(
     }
   }
 
-  if (i === 1) {
+  if (index === 1) {
     label = replaceVariablesInText(commonTexts.common.bigger_than_zero_and_less_than_value, {
-      value_1: formatNumber(thresholds[i + 1].threshold),
+      value_1: formatNumber(thresholds[index + 1].threshold),
     });
   }
 
