@@ -9,7 +9,7 @@ export const lokalizeStructureItem = (S: StructureBuilder, context: StructureRes
   return (
     S.listItem()
       .id('lokalize')
-      .title('Lokalize')
+      .title('Lokalize keys')
       .icon(BsTranslate)
       // @ts-expect-error - The below code works like a charm and creates list items accordingly.
       // The old CMS would also face challenges here, but does not report this as such given the TS implementation.

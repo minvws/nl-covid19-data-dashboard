@@ -5,7 +5,7 @@ import { addStructureItem } from '../utils';
 export const homepageStructureItem = (S: StructureBuilder) => {
   return S.listItem()
     .id('topicalPage')
-    .title('Samenvattingspagina')
+    .title('Topical page')
     .icon(BsHouse)
     .child(
       S.list()
