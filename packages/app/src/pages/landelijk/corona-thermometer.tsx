@@ -11,11 +11,11 @@ import { SeverityLevel } from '~/components/severity-indicator-tile/types';
 import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
 import { IndicatorLevelDescription } from '~/domain/topical/components/indicator-level-description';
 import { TrendIcon } from '~/domain/topical/types';
-import { getThermometerEvents, getTopicalStructureQuery } from '~/queries/get-topical-structure-query';
+import { getThermometerEvents, getThermometerStructureQuery } from '~/queries/get-thermometer-structure-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
-import { TopicalSanityData } from '~/queries/query-types';
+import { ThermometerSanityData } from '~/queries/query-types';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
@@ -42,12 +42,12 @@ export const getStaticProps = createGetStaticProps(
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
-      topicalStructure: TopicalSanityData;
+      thermometerStructure: ThermometerSanityData;
     }>((context) => {
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('coronathermometer_page')},
-        "topicalStructure": ${getTopicalStructureQuery(locale)}
+        "thermometerStructure": ${getThermometerStructureQuery(locale)}
       }`;
     })(context);
     return {
@@ -55,7 +55,7 @@ export const getStaticProps = createGetStaticProps(
         articles: getArticleParts(content.parts.pageParts, 'coronathermometerPageArticles'),
         dataExplained: getDataExplainedParts(content.parts.pageParts, 'coronathermometerPageDataExplained'),
         faqs: getFaqParts(content.parts.pageParts, 'coronathermometerPageFAQs'),
-        topicalStructure: content.topicalStructure,
+        thermometerStructure: content.thermometerStructure,
       },
     };
   }
@@ -64,9 +64,9 @@ export const getStaticProps = createGetStaticProps(
 const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, lastGenerated } = props;
 
-  const { topicalStructure } = content;
+  const { thermometerStructure } = content;
 
-  const { thermometer } = topicalStructure;
+  const { thermometer } = thermometerStructure;
 
   const { textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 

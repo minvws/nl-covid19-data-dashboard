@@ -44,12 +44,14 @@ import { image } from './locale/image';
 import { inlineBlock } from './objects/inline-block';
 import { inlineCollapsible } from './objects/inline-collapsible';
 import { link } from './objects/link';
+import { coronaThermometer } from './documents/pages/corona-thermometer';
 
 const localeSpecificSchemas = [block, richContentBlock, string, text, image];
 const richContentSchemas = [inlineBlock, inlineCollapsible];
 const documentSchemas = [
   advice,
   article,
+  coronaThermometer,
   dataExplainedGroups,
   dataExplainedItem,
   faqGroups,

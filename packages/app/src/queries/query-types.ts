@@ -8,8 +8,11 @@ export interface TopicalSanityData {
   topicalConfig: TopicalConfig;
   weeklySummary: WeeklySummary;
   kpiThemes: KpiThemes;
-  thermometer: ThermometerConfig;
   advice: Advice;
+}
+
+export interface ThermometerSanityData {
+  thermometer: ThermometerConfig;
 }
 
 export interface ThermometerConfig {

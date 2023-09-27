@@ -10,6 +10,7 @@ import { lokalizeStructureItem } from './lokalize-structure-item';
 import { notFoundPageStructureItem } from './not-found-page-structure-item';
 import { pagePartsStructureItem } from './page-parts-structure-item';
 import { pagesStructureItem } from './pages-structure-item';
+import { coronaThermometerStructureItem } from './corona-thermometer-structure-item';
 
 export const deskStructure = (S: StructureBuilder, context: StructureResolverContext) =>
   S.list()
@@ -26,6 +27,7 @@ export const deskStructure = (S: StructureBuilder, context: StructureResolverCon
       addStructureItem(S, BsMailbox, 'Contact', 'contact'),
 
       S.divider(),
+      coronaThermometerStructureItem(S),
 
       homepageStructureItem(S),
 

@@ -57,42 +57,6 @@ export function getTopicalStructureQuery(locale: string) {
           },
         },
       },
-      'thermometer': *[
-        _type == 'thermometer' && !(_id in path('drafts.**'))
-      ][0]{
-        icon,
-        'title': title.${locale},
-        'subTitle': subTitle.${locale},
-        'tileTitle':tileTitle.${locale},
-        currentLevel,
-        'thermometerLevels': thermometerLevels[]->{
-          'level': level,
-          'label': label.${locale},
-          'description': description.${locale},
-        },
-        'datesLabel': datesLabel.${locale},
-        'levelDescription': levelDescription.${locale},
-        'sourceLabel': sourceLabel.${locale},
-        'articleReference': articleReference.${locale},
-        'collapsibleTitle': collapsibleTitle.${locale},
-        'trendIcon': {
-          'color': trendIcon.color,
-          'direction': trendIcon.direction,
-        },
-        'timeline': {
-          'title': timeline.title.${locale},
-          'tooltipLabel': timeline.tooltipCurrentEstimationLabel.${locale},
-          'todayLabel': timeline.todayLabel.${locale},
-          'legendLabel': timeline.legendLabel.${locale},
-          'ThermometerTimelineEvents': timeline.thermometerTimelineEvents[]->{
-            'title': title.${locale},
-            'description': description.${locale},
-            level,
-            date,
-            dateEnd
-          },
-      },
-    },
     'advice': *[
       _type == 'advice' && !(_id in path('drafts.**'))
     ][0]{
