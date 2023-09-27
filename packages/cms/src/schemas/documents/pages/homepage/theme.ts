@@ -10,15 +10,6 @@ export const theme = defineType({
   icon: BsFileEarmark,
   fieldsets: [
     {
-      title: 'Ondertitel',
-      description: 'Klik op het label om de velden te tonen.',
-      name: 'ondertitel',
-      options: {
-        collapsible: true,
-        collapsed: true,
-      },
-    },
-    {
       title: 'Links',
       description: 'Klik op het label om de velden te tonen.',
       name: 'links',
@@ -34,12 +25,6 @@ export const theme = defineType({
       name: 'title',
       type: 'localeString',
       validation: localeStringValidation((rule) => rule.required()),
-    }),
-    defineField({
-      title: 'Ondertitel',
-      name: 'subTitle',
-      type: 'localeRichContentBlock',
-      fieldset: 'ondertitel',
     }),
     defineField({
       title: 'Thema icoon',

@@ -1,34 +1,33 @@
-import { Languages, SiteText } from '~/locale';
 import { colors } from '@corona-dashboard/common';
-import styled from 'styled-components';
-import { Box } from '~/components/base';
+import { Coronathermometer } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
+import styled from 'styled-components';
+import { ChartTile, InView, PageInformationBlock, TileList, WarningTile } from '~/components';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { Box } from '~/components/base';
+import { PageFaqTile } from '~/components/page-faq-tile';
 import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic';
 import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
 import { SEVERITY_LEVELS_LIST, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '~/components/severity-indicator-tile/constants';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
 import { SeverityLevel } from '~/components/severity-indicator-tile/types';
 import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
-import { IndicatorLevelDescription } from '~/domain/topical/components/indicator-level-description';
-import { TrendIcon } from '~/domain/topical/types';
-import { getThermometerEvents, getTopicalStructureQuery } from '~/queries/get-topical-structure-query';
-import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
-import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
-import { TopicalSanityData } from '~/queries/query-types';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { ChartTile, InView, PageInformationBlock, TileList, WarningTile } from '~/components';
-import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { space } from '~/style/theme';
-import { Coronathermometer } from '@corona-dashboard/icons';
+import { IndicatorLevelDescription } from '~/domain/topical/components/indicator-level-description';
 import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { Languages, SiteText } from '~/locale';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getThermometerEvents, getTopicalStructureQuery } from '~/queries/get-topical-structure-query';
+import { TopicalSanityData } from '~/queries/query-types';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
+import { space } from '~/style/theme';
+import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
-import { PageFaqTile } from '~/components/page-faq-tile';
-import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { getThermometerSeverityLevels } from '~/utils/get-thermometer-severity-level';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.corona_thermometer_page.nl,
@@ -131,7 +130,6 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
                   sourceLabel={thermometer.sourceLabel}
                   datesLabel={thermometer.datesLabel}
                   levelDescription={thermometer.levelDescription}
-                  trendIcon={thermometer.trendIcon as TrendIcon}
                 />
                 {thermometerEvents && thermometerEvents.length && (
                   <Timeline

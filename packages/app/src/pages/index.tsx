@@ -103,7 +103,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               return (
                 <Box key={theme.title}>
                   <Box marginBottom={space[4]}>
-                    <TopicalThemeHeader title={theme.title} subtitle={theme.subTitle} icon={getFilenameToIconName(theme.themeIcon) as TopicalIcon} />
+                    <TopicalThemeHeader title={theme.title} icon={getFilenameToIconName(theme.themeIcon) as TopicalIcon} />
                   </Box>
                   {theme.tiles && (
                     <Box

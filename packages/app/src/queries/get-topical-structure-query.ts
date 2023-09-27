@@ -26,7 +26,6 @@ export function getTopicalStructureQuery(locale: string) {
       ][0]{
         'themes': themes[]->{
           'title':title.${locale},
-          'subTitle':subTitle.${locale},
           themeIcon,
           'linksLabelMobile': labelMobile.${locale},
           'linksLabelDesktop': labelDesktop.${locale},
@@ -62,7 +61,6 @@ export function getTopicalStructureQuery(locale: string) {
       ][0]{
         icon,
         'title': title.${locale},
-        'subTitle': subTitle.${locale},
         'tileTitle':tileTitle.${locale},
         currentLevel,
         'thermometerLevels': thermometerLevels[]->{
@@ -75,10 +73,6 @@ export function getTopicalStructureQuery(locale: string) {
         'sourceLabel': sourceLabel.${locale},
         'articleReference': articleReference.${locale},
         'collapsibleTitle': collapsibleTitle.${locale},
-        'trendIcon': {
-          'color': trendIcon.color,
-          'direction': trendIcon.direction,
-        },
         'timeline': {
           'title': timeline.title.${locale},
           'tooltipLabel': timeline.tooltipCurrentEstimationLabel.${locale},
