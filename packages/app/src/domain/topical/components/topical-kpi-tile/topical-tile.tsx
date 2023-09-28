@@ -82,7 +82,7 @@ export const TopicalTile = ({ title, tileIcon, trendIcon, description, kpiValue,
       </Box>
 
       {dateLabel && (
-        <Box padding={{ _: `0 ${space[3]} ${space[3]}`, xs: `0 ${space[4]} ${space[1]}` }}>
+        <Box padding={{ _: `0 ${space[3]} ${space[1]}`, xs: `0 ${space[4]} ${space[1]}` }}>
           <InlineText color={colors.gray7}>{dateLabel}</InlineText>
         </Box>
       )}
