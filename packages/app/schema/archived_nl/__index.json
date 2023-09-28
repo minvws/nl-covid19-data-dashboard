@@ -32,10 +32,10 @@
     "vaccine_coverage_archived_20220518",
     "vaccine_coverage_per_age_group_archived_20220622",
     "vaccine_coverage_per_age_group_archived_20220908",
-    "vaccine_coverage_per_age_group_archived_202310xx",
+    "vaccine_coverage_per_age_group_archived_20231004",
     "vaccine_coverage_per_age_group_estimated_archived_20220908",
-    "vaccine_coverage_per_age_group_estimated_autumn_2022_archived_202310xx",
-    "vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_202310xx",
+    "vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004",
+    "vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004",
     "vaccine_campaigns_archived_20220908",
     "vaccine_planned_archived_20220908",
     "vaccine_vaccinated_or_support_archived_20230411",
@@ -119,8 +119,8 @@
     "vaccine_campaigns_archived_20220908": {
       "$ref": "vaccine_campaigns.json"
     },
-    "vaccine_campaigns_archived_202310xx": {
-      "$ref": "vaccine_campaigns_archived_202310xx.json"
+    "vaccine_campaigns_archived_20231004": {
+      "$ref": "vaccine_campaigns_archived_20231004.json"
     },
     "vaccine_planned_archived_20220908": {
       "$ref": "vaccine_planned.json"
@@ -170,13 +170,13 @@
     "vaccine_coverage_archived_20220518": {
       "$ref": "vaccine_coverage.json"
     },
-    "vaccine_coverage_per_age_group_archived_202310xx": {
+    "vaccine_coverage_per_age_group_archived_20231004": {
       "$ref": "vaccine_coverage_per_age_group_archived_20231012.json"
     },
-    "vaccine_coverage_per_age_group_estimated_autumn_2022_archived_202310xx": {
+    "vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004": {
       "$ref": "vaccine_coverage_per_age_group_estimated_autumn_2022.json"
     },
-    "vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_202310xx": {
+    "vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004": {
       "$ref": "vaccine_coverage_per_age_group_estimated_fully_vaccinated.json"
     },
     "vaccine_delivery_per_supplier_archived_20211101": {

@@ -166,8 +166,8 @@ export function selectArchivedNlData<T extends keyof ArchivedNl | F.AutoPath<Arc
     /**
      * Instead of getting the full timeseries we are getting the latest value only per age group.
      */
-    if (isDefined(data.vaccine_coverage_per_age_group_archived_202310xx)) {
-      data.vaccine_coverage_per_age_group_archived_202310xx.values = getCoveragePerAgeGroupLatestValues(data.vaccine_coverage_per_age_group_archived_202310xx.values);
+    if (isDefined(data.vaccine_coverage_per_age_group_archived_20231004)) {
+      data.vaccine_coverage_per_age_group_archived_20231004.values = getCoveragePerAgeGroupLatestValues(data.vaccine_coverage_per_age_group_archived_20231004.values);
     }
 
     const selectedArchivedNlData = metrics.reduce(

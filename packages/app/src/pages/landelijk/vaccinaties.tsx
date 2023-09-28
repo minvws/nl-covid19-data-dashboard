@@ -56,7 +56,7 @@ import { KpiTile, KpiValue, TwoKpiSection } from '~/components';
 const pageMetrics = [
   'vaccine_administered_doctors_archived_20220324',
   'vaccine_administered_hospitals_and_care_institutions',
-  'vaccine_administered_planned_archived_202310xx',
+  'vaccine_administered_planned_archived_20231004',
   'vaccine_administered_total_archived_20220324',
   'vaccine_administered_last_timeframe',
   'vaccine_coverage_per_age_group',
@@ -92,9 +92,9 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_total_archived_20220324',
     'vaccine_coverage_per_age_group_archived_20220908',
     'vaccine_coverage_per_age_group_archived_20220622',
-    'vaccine_coverage_per_age_group_archived_202310xx',
-    'vaccine_coverage_per_age_group_estimated_autumn_2022_archived_202310xx',
-    'vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_202310xx',
+    'vaccine_coverage_per_age_group_archived_20231004',
+    'vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004',
+    'vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004',
     'vaccine_campaigns_archived_20220908',
     'vaccine_planned_archived_20220908',
     'booster_coverage_archived_20220904',
@@ -134,7 +134,7 @@ export const getStaticProps = createGetStaticProps(
     };
   },
   createGetArchivedChoroplethData({
-    gm: ({ vaccine_coverage_per_age_group_choropleth_archived_202310xx }) => vaccine_coverage_per_age_group_choropleth_archived_202310xx ?? null,
+    gm: ({ vaccine_coverage_per_age_group_choropleth_archived_20231004 }) => vaccine_coverage_per_age_group_choropleth_archived_20231004 ?? null,
   })
 );
 
@@ -153,8 +153,8 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
     description: textNl.metadata.description,
   };
 
-  const vaccineCoverageEstimatedFullyVaccinated = archivedData.vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_202310xx.last_value;
-  const vaccineCoverageEstimatedAutumn2022 = archivedData.vaccine_coverage_per_age_group_estimated_autumn_2022_archived_202310xx.last_value;
+  const vaccineCoverageEstimatedFullyVaccinated = archivedData.vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004.last_value;
+  const vaccineCoverageEstimatedAutumn2022 = archivedData.vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004.last_value;
 
   const vaccineCoverageEstimatedArchivedLastValue = archivedData.vaccine_coverage_per_age_group_estimated_archived_20220908.last_value;
 
@@ -290,10 +290,10 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             sortingOrder={['80+', '70-79', '60-69', '50-59', '40-49', '30-39', '18-29', '12-17', '5-11']}
             metadata={{
               datumsText: textNl.dates,
-              date: archivedData.vaccine_coverage_per_age_group_archived_202310xx.values[0].date_unix,
+              date: archivedData.vaccine_coverage_per_age_group_archived_20231004.values[0].date_unix,
               source: textNl.vaccination_coverage.bronnen.rivm,
             }}
-            values={archivedData.vaccine_coverage_per_age_group_archived_202310xx.values}
+            values={archivedData.vaccine_coverage_per_age_group_archived_20231004.values}
           />
 
           {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
@@ -362,10 +362,10 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 sortingOrder={['80+', '70-79', '60-69', '50-59', '40-49', '30-39', '18-29', '12-17', '5-11']}
                 metadata={{
                   datumsText: textNl.dates,
-                  date: archivedData.vaccine_coverage_per_age_group_archived_202310xx.values[0].date_unix,
+                  date: archivedData.vaccine_coverage_per_age_group_archived_20231004.values[0].date_unix,
                   source: textNl.vaccination_coverage.bronnen.rivm,
                 }}
-                values={archivedData.vaccine_coverage_per_age_group_archived_202310xx.values}
+                values={archivedData.vaccine_coverage_per_age_group_archived_20231004.values}
               />
 
               <BoosterShotCoveragePerAgeGroup

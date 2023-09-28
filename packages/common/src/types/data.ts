@@ -15,7 +15,7 @@ export interface ArchivedGm {
   code: ArchivedGmCode;
   vaccine_coverage_per_age_group_archived_20220622: ArchivedGmVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived_20220908: ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShot;
-  vaccine_coverage_per_age_group_archived_202310xx: GmVaccineCampaignCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group_archived_20231004: GmVaccineCampaignCoveragePerAgeGroup;
   booster_coverage_archived_20220904: ArchivedGmBoosterCoverage;
   sewer_archived_20230623: ArchivedGmSewer;
   tested_overall_archived_20230331: ArchivedGmTestedOverall;
@@ -142,7 +142,7 @@ export interface ArchivedGmCollection {
   hospital_nice_choropleth_archived_20230830: ArchivedGmCollectionHospitalNiceChoropleth[];
   sewer_archived_20230623: ArchivedGmCollectionSewer[];
   tested_overall_archived_20230331: ArchivedGmCollectionTestedOverall[];
-  vaccine_coverage_per_age_group_choropleth_archived_202310xx: ArchivedGmCollectionVaccineCoveragePerAgeGroup[];
+  vaccine_coverage_per_age_group_choropleth_archived_20231004: ArchivedGmCollectionVaccineCoveragePerAgeGroup[];
 }
 export interface ArchivedGmCollectionHospitalNiceChoropleth {
   date_unix: number;
@@ -209,7 +209,7 @@ export interface ArchivedNl {
   tested_per_age_group_archived_20230331: ArchivedNlTestedPerAgeGroup;
   sewer_archived_20230623: ArchivedNlSewer;
   vaccine_campaigns_archived_20220908: ArchivedNlVaccineCampaigns;
-  vaccine_campaigns_archived_202310xx?: NlVaccineCampaignsArchived_202310Xx;
+  vaccine_campaigns_archived_20231004?: NlVaccineCampaignsArchived_20231004;
   vaccine_planned_archived_20220908: ArchivedNlVaccinePlanned;
   vaccine_coverage_per_age_group_archived_20220622: ArchivedNlVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived_20220908: ArchivedNlVaccineCoveragePerAgeGroupWithBoosterShot;
@@ -226,9 +226,9 @@ export interface ArchivedNl {
   vaccine_administered_total_archived_20220324: NlVaccineAdministeredTotal;
   vaccine_administered_planned_archived_20220518: NlVaccineAdministeredPlanned;
   vaccine_coverage_archived_20220518: ArchivedNlVaccineCoverage;
-  vaccine_coverage_per_age_group_archived_202310xx: NlVaccineCoveragePerAgeGroup;
-  vaccine_coverage_per_age_group_estimated_autumn_2022_archived_202310xx: NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022Value;
-  vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_202310xx: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinatedValue;
+  vaccine_coverage_per_age_group_archived_20231004: NlVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004: NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022Value;
+  vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinatedValue;
   vaccine_delivery_per_supplier_archived_20211101: ArchivedNlVaccineDeliveryPerSupplier;
   vaccine_stock_archived_20211024: ArchivedNlVaccineStock;
   repeating_shot_administered_20220713: ArchivedNlRepeatingShotAdministered;
@@ -553,14 +553,14 @@ export interface ArchivedNlVaccineCampaigns1 {
   vaccine_administered_total: number;
   vaccine_administered_last_week: number;
 }
-export interface NlVaccineCampaignsArchived_202310Xx {
-  vaccine_campaigns: Archived_202310XxNlVaccineCampaign[];
+export interface NlVaccineCampaignsArchived_20231004 {
+  vaccine_campaigns: Archived_20231004NlVaccineCampaign[];
   date_unix: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface Archived_202310XxNlVaccineCampaign {
+export interface Archived_20231004NlVaccineCampaign {
   vaccine_campaign_order: number;
   vaccine_campaign_name_nl: string;
   vaccine_campaign_name_en: string;
