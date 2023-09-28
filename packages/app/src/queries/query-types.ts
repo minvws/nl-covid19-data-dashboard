@@ -80,7 +80,8 @@ export interface BaseTile {
 
 interface TopicalTile extends BaseTile {
   title: string;
-  sourceLabel: string | null;
+  dateLabel?: string;
+  sourceLabel?: string;
   tileDate: string;
   kpiValue: string | null;
   cta: Cta;

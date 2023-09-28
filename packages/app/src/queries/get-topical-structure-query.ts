@@ -40,6 +40,7 @@ export function getTopicalStructureQuery(locale: string) {
             'description':description.${locale},
             tileIcon,
             'title':title.${locale},
+            'dateLabel':dateLabel.${locale},
             'sourceLabel':sourceLabel.${locale},
             'tileDate': tileDate.${locale},
             'kpiValue': kpiValue.${locale},

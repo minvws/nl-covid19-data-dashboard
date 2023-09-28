@@ -72,7 +72,13 @@ export const themeTile = defineType({
     }),
     defineField({
       title: 'Metadata label',
-      description: 'Bij {{date}} wordt de tekst geplaatst van het tegeldatumveld. Deze kan handmatig overschreven worden.',
+      description: 'Bij {{date}} is de tekst van het tegeldatumveld optioneel',
+      name: 'dateLabel',
+      type: 'localeString',
+    }),
+    defineField({
+      title: 'Source label',
+      description: 'Deze velden zijn optionele broninformatie.',
       name: 'sourceLabel',
       type: 'localeString',
     }),
