@@ -49,8 +49,8 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group_archived_202310xx'
   ),
   createGetArchivedChoroplethData({
-    gm: ({ vaccine_coverage_per_age_group_archived_202310xx }, ctx) => {
-      if (!isDefined(vaccine_coverage_per_age_group_archived_202310xx)) {
+    gm: ({ vaccine_coverage_per_age_group_choropleth_archived_202310xx }, ctx) => {
+      if (!isDefined(vaccine_coverage_per_age_group_choropleth_archived_202310xx)) {
         return {
           vaccine_coverage_per_age_group_choropleth_archived_202310xx: null as unknown as ArchivedGmCollectionVaccineCoveragePerAgeGroup[],
         };
@@ -59,8 +59,8 @@ export const getStaticProps = createGetStaticProps(
 
       return {
         vaccine_coverage_per_age_group_choropleth_archived_202310xx: isDefined(vrCode)
-          ? vaccine_coverage_per_age_group_archived_202310xx.filter((vaccineCoveragePerAgeGroup) => gmCodesByVrCode[vrCode].includes(vaccineCoveragePerAgeGroup.gmcode))
-          : vaccine_coverage_per_age_group_archived_202310xx,
+          ? vaccine_coverage_per_age_group_choropleth_archived_202310xx.filter((vaccineCoveragePerAgeGroup) => gmCodesByVrCode[vrCode].includes(vaccineCoveragePerAgeGroup.gmcode))
+          : vaccine_coverage_per_age_group_choropleth_archived_202310xx,
       };
     },
   }),
