@@ -15,6 +15,7 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout, NlLayout } from '~/domain/layout';
 import {
   Autumn2022ShotCoveragePerAgeGroup,
+  CampaignBanner,
   VaccinationsKpiHeader,
   VaccinationsOverTimeTile,
   VaccinationsShotKpiSection,
@@ -26,10 +27,10 @@ import {
   VaccineStockPerSupplierChart,
   selectAdministrationData,
   BoosterShotCoveragePerAgeGroup,
+  PrimarySeriesShotCoveragePerAgeGroup,
 } from '~/domain/vaccine';
 import { VaccinationsPerSupplierOverLastTimeframeTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-timeframe-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
-import { CampaignBanner } from '~/domain/vaccine/campaign-banner';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
@@ -51,7 +52,6 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { KpiTile, KpiValue, TwoKpiSection } from '~/components';
-import { PrimarySeriesShotCoveragePerAgeGroup } from '~/domain/vaccine/primary-series-coverage-per-age-group';
 
 const pageMetrics = [
   'vaccine_administered_doctors_archived_20220324',
@@ -134,7 +134,7 @@ export const getStaticProps = createGetStaticProps(
     };
   },
   createGetArchivedChoroplethData({
-    gm: ({ vaccine_coverage_per_age_group_archived_202310xx }) => vaccine_coverage_per_age_group_archived_202310xx ?? null,
+    gm: ({ vaccine_coverage_per_age_group_choropleth_archived_202310xx }) => vaccine_coverage_per_age_group_choropleth_archived_202310xx ?? null,
   })
 );
 
