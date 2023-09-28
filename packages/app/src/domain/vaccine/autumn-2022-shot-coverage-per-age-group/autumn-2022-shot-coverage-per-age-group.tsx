@@ -43,7 +43,7 @@ export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
       {breakpoints.lg ? (
-        <WideTable<SingleCoverageTableData>
+        <WideTable
           headerText={{
             firstColumn: text.headers.agegroup,
             secondColumn: text.headers.autumn_2022_shot,

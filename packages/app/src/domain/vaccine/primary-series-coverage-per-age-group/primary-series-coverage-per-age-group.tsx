@@ -43,7 +43,7 @@ export const PrimarySeriesShotCoveragePerAgeGroup = ({ title, description, metad
   return (
     <ChartTile title={title} description={description} metadata={metadata}>
       {breakpoints.lg ? (
-        <WideTable<SingleCoverageTableData>
+        <WideTable
           headerText={{
             firstColumn: text.headers.agegroup,
             secondColumn: text.headers.fully_vaccinated,
@@ -53,7 +53,7 @@ export const PrimarySeriesShotCoveragePerAgeGroup = ({ title, description, metad
           percentageData={percentageData}
         />
       ) : (
-        <NarrowTable<SingleCoverageTableData> headerText={text.headers.agegroup} tableData={sortedData} percentageData={percentageData} />
+        <NarrowTable headerText={text.headers.agegroup} tableData={sortedData} percentageData={percentageData} />
       )}
     </ChartTile>
   );
