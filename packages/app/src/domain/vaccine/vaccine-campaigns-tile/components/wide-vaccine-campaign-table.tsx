@@ -22,7 +22,7 @@ export const WideVaccineCampaignTable = ({ campaigns, campaignDescriptions, head
         <tr>
           <StyledHeaderCell>{headers.vaccine}</StyledHeaderCell>
           <StyledHeaderCell>{headers.last_week}</StyledHeaderCell>
-          {hideTotals ? <></> : <StyledHeaderCell>{headers.total}</StyledHeaderCell>}
+          {!hideTotals ?? <StyledHeaderCell>{headers.total}</StyledHeaderCell>}
         </tr>
       </thead>
 
