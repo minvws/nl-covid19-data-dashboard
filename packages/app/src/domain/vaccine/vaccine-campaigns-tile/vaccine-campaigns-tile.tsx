@@ -25,7 +25,7 @@ export const VaccineCampaignsTile = ({ title, headers, campaigns, campaignDescri
     .filter((c) => !campaignOptions?.hide_campaigns?.includes(c.vaccine_campaign_order))
     .sort((campaignA, campaignB) => campaignA.vaccine_campaign_order - campaignB.vaccine_campaign_order);
 
-  const containsEmptyTotals = sortedCampaigns.some((camp) => (camp.vaccine_administered_total !== null ? false : true));
+  const containsEmptyTotals = sortedCampaigns.some((camp) => camp.vaccine_administered_total);
 
   return (
     <>
