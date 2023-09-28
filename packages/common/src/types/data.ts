@@ -142,7 +142,7 @@ export interface ArchivedGmCollection {
   hospital_nice_choropleth_archived_20230830: ArchivedGmCollectionHospitalNiceChoropleth[];
   sewer_archived_20230623: ArchivedGmCollectionSewer[];
   tested_overall_archived_20230331: ArchivedGmCollectionTestedOverall[];
-  vaccine_coverage_per_age_group_archived_202310xx: ArchivedGmCollectionVaccineCoveragePerAgeGroup[];
+  vaccine_coverage_per_age_group_choropleth_archived_202310xx: ArchivedGmCollectionVaccineCoveragePerAgeGroup[];
 }
 export interface ArchivedGmCollectionHospitalNiceChoropleth {
   date_unix: number;
