@@ -42,7 +42,7 @@ export const KpiContent = ({ title, description, value, bar, birthyear, differen
             : description
         }
       />
-      <Metadata {...metadata} isTileFooter marginBottom={space[2]} />
+      {metadata && <Metadata {...metadata} isTileFooter marginBottom={space[2]} />}
     </Box>
   );
 };
