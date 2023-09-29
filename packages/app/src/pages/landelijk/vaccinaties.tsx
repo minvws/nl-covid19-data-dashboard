@@ -72,14 +72,6 @@ const pageMetrics = [
   'repeating_shot_administered_20220713',
 ];
 
-const selectLokalizeTexts = (siteText: SiteText) => ({
-  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
-  textNl: siteText.pages.vaccinations_page.nl,
-  textShared: siteText.pages.vaccinations_page.shared,
-});
-
-type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
-
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
@@ -136,6 +128,14 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ vaccine_coverage_per_age_group_choropleth_archived_20231004 }) => vaccine_coverage_per_age_group_choropleth_archived_20231004 ?? null,
   })
 );
+
+const selectLokalizeTexts = (siteText: SiteText) => ({
+  metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  textNl: siteText.pages.vaccinations_page.nl,
+  textShared: siteText.pages.vaccinations_page.shared,
+});
+
+type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const { content, archivedChoropleth, selectedNlData: currentData, selectedArchivedNlData: archivedData, lastGenerated, administrationData } = props;
@@ -235,7 +235,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.dates_archived,
               dateOrRange: archivedData.vaccine_administered_total_archived_20220324.last_value.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertionUnix: archivedData.vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004.last_value.date_unix,
               dataSources: [textShared.bronnen.rivm],
             }}
           />
