@@ -51,6 +51,7 @@ const colorDefinitions = {
   //Orange scales
   orange1: '#E37321',
   orange2: '#A14E00',
+  orange3: '#F65234',
   //Yellow scales
   yellow1: '#FFF4C1',
   yellow2: '#fee670',
@@ -120,16 +121,16 @@ export const colors = {
   },
 
   vaccines: {
-    bio_n_tech_pfizer: colorDefinitions.blue6,
+    bio_n_tech_pfizer: colorDefinitions.blue7,
     moderna: colorDefinitions.yellow3,
-    astra_zeneca: colorDefinitions.green2,
+    astra_zeneca: colorDefinitions.green1,
     cure_vac: colorDefinitions.magenta1,
-    janssen: colorDefinitions.orange1,
+    janssen: colorDefinitions.orange3,
     sanofi: colorDefinitions.blue9,
-    novavax: colorDefinitions.magenta2,
+    novavax: colorDefinitions.magenta1,
 
     // @TODO remove when data is updated to new name
-    pfizer: colorDefinitions.blue6,
+    pfizer: colorDefinitions.blue7,
 
     /**
      * The below list are duplicates of the above entries, because BE is
@@ -137,10 +138,10 @@ export const colors = {
      * data entry IDs. This has been introduced as part of COR-938.
      * @TODO - remove duplicates when/if BE is able to provide IDs.
      */
-    'BioNTech/Pfizer': colorDefinitions.blue6,
+    'BioNTech/Pfizer': colorDefinitions.blue7,
     Moderna: colorDefinitions.yellow3,
-    AstraZeneca: colorDefinitions.green2,
-    Janssen: colorDefinitions.orange1,
-    Novavax: colorDefinitions.magenta2,
+    AstraZeneca: colorDefinitions.green1,
+    Janssen: colorDefinitions.orange3,
+    Novavax: colorDefinitions.magenta1,
   },
 } as const;

@@ -2,14 +2,14 @@ import { Box } from '~/components/base';
 import { space } from '~/style/theme';
 import { PercentageData } from './components/narrow-percentage-data';
 import { Cell, HeaderCell, Row, Table } from './components/shared-styled-components';
-import { CommonTableProps } from './types';
+import { CommonTableProps, BaseCoverageTable } from './types';
 
-interface NarrowTableProps extends CommonTableProps {
+interface NarrowTableProps<T extends BaseCoverageTable> extends CommonTableProps<T> {
   headerText: string;
 }
 
 // Component shown for tables on narrow screens.
-export const NarrowTable = ({ tableData, headerText, percentageData }: NarrowTableProps) => {
+export const NarrowTable = <T extends BaseCoverageTable>({ tableData, headerText, percentageData }: NarrowTableProps<T>) => {
   return (
     <Box overflow="auto">
       <Table>
