@@ -22,7 +22,7 @@ export const VaccineCampaignsTile = ({ title, headers, campaigns, campaignDescri
   const breakpoints = useBreakpoints();
 
   const sortedCampaigns = campaigns
-    .filter((c) => !campaignOptions?.hide_campaigns?.includes(c.vaccine_campaign_order))
+    .filter((vaccineCampaign) => !campaignOptions?.hide_campaigns?.includes(vaccineCampaign.vaccine_campaign_order))
     .sort((campaignA, campaignB) => campaignA.vaccine_campaign_order - campaignB.vaccine_campaign_order);
 
   const totalsAvailable = sortedCampaigns.some((camp) => camp.vaccine_administered_total);
