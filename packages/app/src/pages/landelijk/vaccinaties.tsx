@@ -228,7 +228,19 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
           <CampaignBanner title={textNl.vaccine_campaigns.autumn_2023.campaign_banner.title} description={textNl.vaccine_campaigns.autumn_2023.campaign_banner.description} />
 
-          <PageInformationBlock title={textNl.section_basisserie.title} description={textNl.section_basisserie.description} icon={<VaccinatieIcon aria-hidden="true" />} />
+          <PageInformationBlock
+            title={textNl.section_basisserie.title}
+            description={textNl.section_basisserie.description}
+            icon={<VaccinatieIcon aria-hidden="true" />}
+            metadata={{
+              datumsText: textNl.dates_archived,
+              dateOrRange: archivedData.vaccine_administered_total_archived_20220324.last_value.date_unix,
+              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dataSources: [textShared.bronnen.rivm],
+            }}
+          />
+
+          <WarningTile message={textNl.basisserie_niet_bijgewerkt} variant="informational" isFullWidth />
 
           <BorderedKpiSection
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
