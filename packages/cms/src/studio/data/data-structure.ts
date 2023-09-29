@@ -23,7 +23,7 @@ export const dataStructure = {
       'booster_shot_percentage_label',
       'has_one_shot_percentage_label',
     ],
-    vaccine_coverage_per_age_group_archived_202310xx: [
+    vaccine_coverage_per_age_group_archived_20231004: [
       'vaccination_type',
       'birthyear_range_12_plus',
       'birthyear_range_18_plus',
@@ -43,7 +43,7 @@ export const dataStructure = {
     hospital_nice_choropleth_archived_20230830: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
     sewer_archived_20230623: ['average', 'total_installation_count', 'data_is_outdated'],
     tested_overall_archived_20230331: ['infected_per_100k', 'infected'],
-    vaccine_coverage_per_age_group_archived_202310xx: [
+    vaccine_coverage_per_age_group_choropleth_archived_20231004: [
       'vaccination_type',
       'birthyear_range_12_plus',
       'birthyear_range_18_plus',
@@ -215,7 +215,7 @@ export const dataStructure = {
     vaccine_administered_total_archived_20220324: ['estimated', 'reported'],
     vaccine_administered_planned_archived_20220518: ['doses'],
     vaccine_coverage_archived_20220518: ['booster_vaccinated', 'partially_vaccinated', 'fully_vaccinated', 'partially_or_fully_vaccinated'],
-    vaccine_coverage_per_age_group_archived_202310xx: [
+    vaccine_coverage_per_age_group_archived_20231004: [
       'age_group_range',
       'age_group_percentage',
       'age_group_total',
@@ -226,8 +226,8 @@ export const dataStructure = {
       'date_of_report_unix',
       'birthyear_range',
     ],
-    vaccine_coverage_per_age_group_estimated_autumn_2022_archived_202310xx: ['age_12_plus_birthyear', 'age_12_plus_vaccinated', 'age_60_plus_birthyear', 'age_60_plus_vaccinated'],
-    vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_202310xx: [
+    vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004: ['age_12_plus_birthyear', 'age_12_plus_vaccinated', 'age_60_plus_birthyear', 'age_60_plus_vaccinated'],
+    vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004: [
       'age_12_plus_birthyear',
       'age_12_plus_vaccinated',
       'age_18_plus_birthyear',

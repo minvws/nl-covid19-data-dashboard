@@ -11,10 +11,10 @@ interface NarrowVaccineCampaignTableProps {
   campaigns: VaccineCampaign[];
   campaignDescriptions: VaccineCampaignDescriptions;
   headers: VaccineCampaignHeaders;
-  hideTotals: boolean;
+  showTotals: boolean;
 }
 
-export const NarrowVaccineCampaignTable = ({ campaigns, campaignDescriptions, headers, hideTotals }: NarrowVaccineCampaignTableProps) => {
+export const NarrowVaccineCampaignTable = ({ campaigns, campaignDescriptions, headers, showTotals }: NarrowVaccineCampaignTableProps) => {
   return (
     <StyledTable>
       <thead>
@@ -31,7 +31,7 @@ export const NarrowVaccineCampaignTable = ({ campaigns, campaignDescriptions, he
             campaignDescriptions={campaignDescriptions}
             headers={headers}
             isFirst={index === 0}
-            hideTotals={hideTotals}
+            showTotals={showTotals}
           />
         ))}
       </tbody>
@@ -44,10 +44,10 @@ interface VaccineCampaignRowProps {
   campaignDescriptions: VaccineCampaignDescriptions;
   headers: VaccineCampaignHeaders;
   isFirst: boolean;
-  hideTotals: boolean;
+  showTotals: boolean;
 }
 
-const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst, hideTotals }: VaccineCampaignRowProps) => {
+const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst, showTotals }: VaccineCampaignRowProps) => {
   const { formatNumber } = useIntl();
   const collapsible = useCollapsible({ isOpen: isFirst });
   const { locale = 'nl' } = useRouter();
@@ -82,12 +82,14 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst, 
               </StyledCell>
             </tr>
 
-            {!hideTotals ?? (
+            {showTotals ? (
               <tr>
                 <StyledCell paddingY="0" isMobile>
                   {headers.total} : {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_total)}</BoldText> : formatNumber(campaign.vaccine_administered_total)}
                 </StyledCell>
               </tr>
+            ) : (
+              <></>
             )}
 
             <tr>

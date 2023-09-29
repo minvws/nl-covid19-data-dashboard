@@ -12,23 +12,23 @@ interface WideVaccineCampaignTableProps {
   campaigns: VaccineCampaign[];
   campaignDescriptions: VaccineCampaignDescriptions;
   headers: VaccineCampaignHeaders;
-  hideTotals: boolean;
+  showTotals: boolean;
 }
 
-export const WideVaccineCampaignTable = ({ campaigns, campaignDescriptions, headers, hideTotals }: WideVaccineCampaignTableProps) => {
+export const WideVaccineCampaignTable = ({ campaigns, campaignDescriptions, headers, showTotals }: WideVaccineCampaignTableProps) => {
   return (
     <StyledTable>
       <thead>
         <tr>
           <StyledHeaderCell>{headers.vaccine}</StyledHeaderCell>
           <StyledHeaderCell>{headers.last_week}</StyledHeaderCell>
-          {hideTotals ? <></> : <StyledHeaderCell>{headers.total}</StyledHeaderCell>}
+          {showTotals ? <StyledHeaderCell>{headers.total}</StyledHeaderCell> : <></>}
         </tr>
       </thead>
 
       <tbody>
         {campaigns.map((campaign, index) => (
-          <VaccineCampaignRow key={index} campaign={campaign} campaignDescriptions={campaignDescriptions} isFirst={index === 0} hideTotals={hideTotals} />
+          <VaccineCampaignRow key={index} campaign={campaign} campaignDescriptions={campaignDescriptions} isFirst={index === 0} hideTotals={showTotals} />
         ))}
       </tbody>
     </StyledTable>
@@ -65,23 +65,6 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, isFirst, hideTotal
                 <>
                   <StyledCell>
                     {isOpen ? (
-                      <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <BoldText>{formatNumber(campaign.vaccine_administered_last_week || campaign.vaccine_administered_last_timeframe)}</BoldText>
-
-                        {collapsible.button()}
-                      </Box>
-                    ) : (
-                      <Box display="flex" justifyContent="space-between" alignItems="center">
-                        {formatNumber(campaign.vaccine_administered_last_week || campaign.vaccine_administered_last_timeframe)}
-                        {collapsible.button()}
-                      </Box>
-                    )}
-                  </StyledCell>
-                </>
-              ) : (
-                <>
-                  <StyledCell>
-                    {isOpen ? (
                       <BoldText>{formatNumber(campaign.vaccine_administered_last_week || campaign.vaccine_administered_last_timeframe)}</BoldText>
                     ) : (
                       formatNumber(campaign.vaccine_administered_last_week || campaign.vaccine_administered_last_timeframe)
@@ -94,6 +77,23 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, isFirst, hideTotal
 
                       {collapsible.button()}
                     </Box>
+                  </StyledCell>
+                </>
+              ) : (
+                <>
+                  <StyledCell>
+                    {isOpen ? (
+                      <Box display="flex" justifyContent="space-between" alignItems="center">
+                        <BoldText>{formatNumber(campaign.vaccine_administered_last_week || campaign.vaccine_administered_last_timeframe)}</BoldText>
+
+                        {collapsible.button()}
+                      </Box>
+                    ) : (
+                      <Box display="flex" justifyContent="space-between" alignItems="center">
+                        {formatNumber(campaign.vaccine_administered_last_week || campaign.vaccine_administered_last_timeframe)}
+                        {collapsible.button()}
+                      </Box>
+                    )}
                   </StyledCell>
                 </>
               )}

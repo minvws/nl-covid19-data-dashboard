@@ -51,7 +51,6 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { KpiTile, KpiValue, TwoKpiSection } from '~/components';
 
 const pageMetrics = [
   'vaccine_administered_doctors_archived_20220324',
@@ -163,8 +162,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const boosterCoverage18PlusArchivedValue = archivedData.booster_coverage_archived_20220904.values.find((v) => v.age_group === '18+');
   const boosterCoverage12PlusArchivedValue = archivedData.booster_coverage_archived_20220904.values.find((v) => v.age_group === '12+');
 
-  const vaccineCampaignAutumn2023 = currentData.vaccine_campaigns.vaccine_campaigns;
-
   assert(boosterCoverage18PlusArchivedValue, `[${VaccinationPage.name}] Missing value for booster_coverage 18+`);
   assert(boosterCoverage12PlusArchivedValue, `[${VaccinationPage.name}] Missing value for booster_coverage 12+`);
 
@@ -197,19 +194,26 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             })}
           />
 
-          <TwoKpiSection>
-            <KpiTile
-              title={textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered.title}
-              description={textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered.omschrijving}
-              metadata={{
-                date: { start: currentData.vaccine_campaigns.date_start_unix, end: currentData.vaccine_campaigns.date_end_unix },
+          <BorderedKpiSection
+            title={textNl.kpi_vaccinaties_de_coronaprik.title}
+            description={textNl.kpi_vaccinaties_de_coronaprik.description}
+            tilesData={[
+              {
+                title: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_last_timeframe.title,
+                description: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_last_timeframe.omschrijving,
+                value: currentData.vaccine_campaigns.vaccine_campaigns[0].vaccine_administered_last_timeframe,
+                dateOrRange: { start: currentData.vaccine_campaigns.date_start_unix, end: currentData.vaccine_campaigns.date_end_unix },
                 source: textShared.bronnen.rivm,
-              }}
-            >
-              <KpiValue absolute={currentData.vaccine_campaigns.vaccine_campaigns[0].vaccine_administered_total} isAmount isMovingAverageDifference />
-            </KpiTile>
-            <KpiTile title={textNl.kpi_vaccinaties_de_coronaprik.tile_explanation.titel} description={textNl.kpi_vaccinaties_de_coronaprik.tile_explanation.omschrijving} />
-          </TwoKpiSection>
+              },
+              {
+                title: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_total.title,
+                description: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_total.omschrijving,
+                value: currentData.vaccine_campaigns.vaccine_campaigns[0].vaccine_administered_total,
+                dateOrRange: currentData.vaccine_campaigns.date_of_insertion_unix,
+                source: textShared.bronnen.rivm,
+              },
+            ]}
+          />
 
           <VaccinationsPerSupplierOverLastTimeframeTile
             title={textNl.vaccinations_per_supplier_over_last_timeframe.title}
@@ -219,20 +223,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               source: textShared.bronnen.rivm,
               date: { start: currentData.vaccine_administered_last_timeframe.date_start_unix, end: currentData.vaccine_administered_last_timeframe.date_end_unix },
               obtainedAt: currentData.vaccine_administered_last_timeframe.date_of_insertion_unix,
-            }}
-          />
-
-          <VaccineCampaignsTile
-            title={textNl.vaccine_campaigns.title}
-            description={textNl.vaccine_campaigns.description}
-            descriptionFooter={textNl.vaccine_campaigns.description_footer}
-            headers={textNl.vaccine_campaigns.headers}
-            campaigns={vaccineCampaignAutumn2023}
-            campaignDescriptions={textNl.vaccine_campaigns.campaigns}
-            metadata={{
-              datumsText: textNl.dates,
-              date: currentData.vaccine_campaigns.date_unix,
-              source: textNl.vaccine_campaigns.bronnen.rivm,
             }}
           />
 
@@ -344,6 +334,25 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 dateOrRange={vaccineCoverageEstimatedAutumn2022.date_unix}
               />
 
+              <VaccineCampaignsTile
+                title={textNl.vaccine_campaigns.title}
+                description={replaceVariablesInText(textNl.vaccine_campaigns.description_archived, {
+                  vaccinePlanned: formatNumber(archivedData.vaccine_planned_archived_20220908.doses),
+                })}
+                descriptionFooter={textNl.vaccine_campaigns.description_footer}
+                headers={textNl.vaccine_campaigns.headers}
+                campaigns={archivedData.vaccine_campaigns_archived_20220908.vaccine_campaigns}
+                campaignDescriptions={textNl.vaccine_campaigns.campaigns}
+                campaignOptions={{
+                  hide_campaigns: [3],
+                }}
+                metadata={{
+                  datumsText: textNl.dates,
+                  date: archivedData.vaccine_campaigns_archived_20220908.date_unix,
+                  source: textNl.vaccine_campaigns.bronnen.rivm,
+                }}
+              />
+
               <VaccineCoverageChoropleth
                 data={archivedChoropleth.gm}
                 dataOptions={{ getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode), isPercentage: true }}
@@ -405,24 +414,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 age18PlusToggleText={textNl.vaccination_grade_toggle_tile.age_18_plus}
               />
 
-              <VaccineCampaignsTile
-                title={textNl.vaccine_campaigns.title}
-                description={replaceVariablesInText(textNl.vaccine_campaigns.description_archived, {
-                  vaccinePlanned: formatNumber(archivedData.vaccine_planned_archived_20220908.doses),
-                })}
-                descriptionFooter={textNl.vaccine_campaigns.description_footer}
-                headers={textNl.vaccine_campaigns.headers}
-                campaigns={archivedData.vaccine_campaigns_archived_20220908.vaccine_campaigns}
-                campaignDescriptions={textNl.vaccine_campaigns.campaigns}
-                campaignOptions={{
-                  hide_campaigns: [3],
-                }}
-                metadata={{
-                  datumsText: textNl.dates,
-                  date: archivedData.vaccine_campaigns_archived_20220908.date_unix,
-                  source: textNl.vaccine_campaigns.bronnen.rivm,
-                }}
-              />
               <VaccinationsKpiHeader
                 text={textNl.repeating_shot_information_block}
                 dateUnix={boosterShotAdministeredArchivedLastValue.date_unix}
