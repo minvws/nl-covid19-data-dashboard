@@ -15,7 +15,7 @@ export interface ArchivedGm {
   code: ArchivedGmCode;
   vaccine_coverage_per_age_group_archived_20220622: GmVaccineCoveragePerAgeGroupArchived_20220622;
   vaccine_coverage_per_age_group_archived_20220908: GmVaccineCoveragePerAgeGroupWithBoosterShot;
-  vaccine_coverage_per_age_group_archived_20231004: GmVaccineCampaignCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group_archived_20231004: ArchivedGmVaccineCampaignCoveragePerAgeGroup;
   booster_coverage_archived_20220904: GmBoosterCoverage;
   sewer_archived_20230623: GmSewer;
   tested_overall_archived_20230331: GmTestedOverall;
@@ -77,10 +77,10 @@ export interface GmVaccineCoveragePerAgeGroupArchived_20220908Value {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface GmVaccineCampaignCoveragePerAgeGroup {
-  values: GmVaccineCampaignCoveragePerAgeGroupValue[];
+export interface ArchivedGmVaccineCampaignCoveragePerAgeGroup {
+  values: ArchivedGmVaccineCampaignCoveragePerAgeGroupValue[];
 }
-export interface GmVaccineCampaignCoveragePerAgeGroupValue {
+export interface ArchivedGmVaccineCampaignCoveragePerAgeGroupValue {
   vaccination_type: string;
   birthyear_range_12_plus: string;
   birthyear_range_18_plus: string;
@@ -142,7 +142,7 @@ export interface ArchivedGmCollection {
   hospital_nice_choropleth_archived_20230830: ArchivedGmCollectionHospitalNiceChoropleth[];
   sewer_archived_20230623: GmCollectionSewer[];
   tested_overall_archived_20230331: GmCollectionTestedOverall[];
-  vaccine_coverage_per_age_group_choropleth_archived_20231004: ArchivedGmCollectionVaccineCoveragePerAgeGroup[];
+  vaccine_coverage_per_age_group_choropleth_archived_20231004: ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth[];
 }
 export interface ArchivedGmCollectionHospitalNiceChoropleth {
   date_unix: number;
@@ -168,7 +168,7 @@ export interface GmCollectionTestedOverall {
   infected: number;
   date_of_insertion_unix: number;
 }
-export interface ArchivedGmCollectionVaccineCoveragePerAgeGroup {
+export interface ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth {
   gmcode: string;
   vaccination_type: string;
   birthyear_range_12_plus: string;

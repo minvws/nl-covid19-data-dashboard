@@ -1,4 +1,4 @@
-import { colors, ArchivedGmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
+import { colors, ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth } from '@corona-dashboard/common';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -46,21 +46,21 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group_archived_20220622',
     'vaccine_coverage_per_age_group_archived_20220908',
     'booster_coverage_archived_20220904',
-    'vaccine_coverage_per_age_group_archived_202310xx'
+    'vaccine_coverage_per_age_group_archived_20231004'
   ),
   createGetArchivedChoroplethData({
-    gm: ({ vaccine_coverage_per_age_group_choropleth_archived_202310xx }, ctx) => {
-      if (!isDefined(vaccine_coverage_per_age_group_choropleth_archived_202310xx)) {
+    gm: ({ vaccine_coverage_per_age_group_choropleth_archived_20231004 }, ctx) => {
+      if (!isDefined(vaccine_coverage_per_age_group_choropleth_archived_20231004)) {
         return {
-          vaccine_coverage_per_age_group_choropleth_archived_202310xx: null as unknown as ArchivedGmCollectionVaccineCoveragePerAgeGroup[],
+          vaccine_coverage_per_age_group_choropleth_archived_20231004: null as unknown as ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth[],
         };
       }
       const vrCode = isPresent(ctx.params?.code) ? vrCodeByGmCode[ctx.params?.code as 'string'] : undefined;
 
       return {
-        vaccine_coverage_per_age_group_choropleth_archived_202310xx: isDefined(vrCode)
-          ? vaccine_coverage_per_age_group_choropleth_archived_202310xx.filter((vaccineCoveragePerAgeGroup) => gmCodesByVrCode[vrCode].includes(vaccineCoveragePerAgeGroup.gmcode))
-          : vaccine_coverage_per_age_group_choropleth_archived_202310xx,
+        vaccine_coverage_per_age_group_choropleth_archived_20231004: isDefined(vrCode)
+          ? vaccine_coverage_per_age_group_choropleth_archived_20231004.filter((vaccineCoveragePerAgeGroup) => gmCodesByVrCode[vrCode].includes(vaccineCoveragePerAgeGroup.gmcode))
+          : vaccine_coverage_per_age_group_choropleth_archived_20231004,
       };
     },
   }),
@@ -97,8 +97,8 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
   };
 
   const filteredVaccination = {
-    primarySeries: archivedData.vaccine_coverage_per_age_group_archived_202310xx.values.find((item) => item.vaccination_type === 'primary_series'),
-    autumn2022: archivedData.vaccine_coverage_per_age_group_archived_202310xx.values.find((item) => item.vaccination_type === 'autumn_2022'),
+    primarySeries: archivedData.vaccine_coverage_per_age_group_archived_20231004.values.find((item) => item.vaccination_type === 'primary_series'),
+    autumn2022: archivedData.vaccine_coverage_per_age_group_archived_20231004.values.find((item) => item.vaccination_type === 'autumn_2022'),
   };
 
   assert(filteredVaccination.primarySeries, `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the primary series`);
@@ -177,7 +177,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             dateOrRange={filteredVaccination.primarySeries.date_unix}
           />
           <VaccineCoverageChoropleth
-            data={archivedChoropleth.gm.vaccine_coverage_per_age_group_choropleth_archived_202310xx}
+            data={archivedChoropleth.gm.vaccine_coverage_per_age_group_choropleth_archived_20231004}
             dataOptions={{ getLink: reverseRouter.gm.vaccinaties, selectedCode: currentData.code, isPercentage: true }}
             text={{
               title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.title, { municipalityName: municipalityName }),
@@ -238,7 +238,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
                 />
               )}
               <VaccineCoverageChoropleth
-                data={archivedChoropleth.gm.vaccine_coverage_per_age_group_choropleth_archived_202310xx}
+                data={archivedChoropleth.gm.vaccine_coverage_per_age_group_choropleth_archived_20231004}
                 dataOptions={{ getLink: reverseRouter.gm.vaccinaties, selectedCode: currentData.code, isPercentage: true }}
                 text={{
                   title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.archived.title, { municipalityName: municipalityName }),

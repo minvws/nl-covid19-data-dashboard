@@ -1,4 +1,4 @@
-import { colors, ArchivedGmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
+import { colors, ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
 import { matchingAgeGroups, VaccineCoverageData, DataPerAgeGroup, BirthyearRangeKeysOfAgeGroups, PercentageKeysOfAgeGroups, PercentageLabelKeysOfAgeGroups } from './common';
 import css from '@styled-system/css';
@@ -19,7 +19,7 @@ import { CoverageKindProperty } from './components/vaccination-coverage-kind-sel
 import { parseVaccinatedPercentageLabel } from './logic/parse-vaccinated-percentage-label';
 
 interface VaccineCoverageChoroplethProps {
-  data: ArchivedGmCollectionVaccineCoveragePerAgeGroup[];
+  data: ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth[];
   dataOptions: DataOptions;
   text: {
     title: string;
@@ -35,7 +35,7 @@ export const VaccineCoverageChoropleth = ({ data, dataOptions, text, isPrimarySe
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>(isPrimarySeries ? '18' : '60');
   const selectedCoverageKind: CoverageKindProperty = isPrimarySeries ? 'primary_series' : 'autumn_2022';
 
-  const choroplethDataGm: ArchivedGmCollectionVaccineCoveragePerAgeGroup[] = data.filter(
+  const choroplethDataGm: ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth[] = data.filter(
     (choroplethDataSingleGM) => choroplethDataSingleGM.vaccination_type === selectedCoverageKind
   );
 
@@ -70,7 +70,7 @@ export const VaccineCoverageChoropleth = ({ data, dataOptions, text, isPrimarySe
       }}
       metadata={{
         source: commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
-        date: data.find((item: ArchivedGmCollectionVaccineCoveragePerAgeGroup) => item.vaccination_type === selectedCoverageKind)?.date_unix,
+        date: data.find((item: ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth) => item.vaccination_type === selectedCoverageKind)?.date_unix,
       }}
       hasPadding
     >
@@ -79,7 +79,7 @@ export const VaccineCoverageChoropleth = ({ data, dataOptions, text, isPrimarySe
         accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
         data={choroplethDataGm}
         dataConfig={{
-          metricName: 'vaccine_coverage_per_age_group_choropleth_archived_202310xx',
+          metricName: 'vaccine_coverage_per_age_group_choropleth_archived_20231004',
           metricProperty: `vaccinated_percentage_${selectedAgeGroup}_plus`,
         }}
         dataOptions={dataOptions}

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "gm_vaccine_campaign_coverage_per_age_group",
+  "title": "archived_gm_vaccine_campaign_coverage_per_age_group",
   "type": "object",
   "required": ["values"],
   "additionalProperties": false,
@@ -14,7 +14,7 @@
   },
   "definitions": {
     "value": {
-      "title": "gm_vaccine_campaign_coverage_per_age_group_value",
+      "title": "archived_gm_vaccine_campaign_coverage_per_age_group_value",
       "additionalProperties": false,
       "type": "object",
       "required": [
