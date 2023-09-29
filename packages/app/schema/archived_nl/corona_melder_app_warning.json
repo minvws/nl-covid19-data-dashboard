@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_corona_melder_app_warning",
+  "title": "archived_nl_corona_melder_app_warning",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_corona_melder_app_warning_value",
+      "title": "archived_nl_corona_melder_app_warning_value",
       "type": "object",
       "properties": {
         "count": {

@@ -115,6 +115,7 @@ export type IconName =
   | 'Stap1WinkelsOpen'
   | 'Stopwatch'
   | 'Taxi'
+  | 'Telephone'
   | 'Testbewijs'
   | 'Toegangsbewijzen'
   | 'Town'
@@ -254,6 +255,7 @@ export const iconName2filename: Record<IconName, string> = {
   Stap1WinkelsOpen: 'stap_1_winkels_open.svg',
   Stopwatch: 'stopwatch.svg',
   Taxi: 'taxi.svg',
+  Telephone: 'telephone.svg',
   Testbewijs: 'testbewijs.svg',
   Toegangsbewijzen: 'toegangsbewijzen.svg',
   Town: 'town.svg',

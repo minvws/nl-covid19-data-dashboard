@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_repeating_shot_administered",
+  "title": "archived_nl_repeating_shot_administered",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_repeating_shot_administered_value",
+      "title": "archived_nl_repeating_shot_administered_value",
       "type": "object",
       "properties": {
         "ggd_administered_total": {
@@ -30,11 +30,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "ggd_administered_total",
-        "date_unix",
-        "date_of_insertion_unix"
-      ],
+      "required": ["ggd_administered_total", "date_unix", "date_of_insertion_unix"],
       "additionalProperties": false
     }
   }

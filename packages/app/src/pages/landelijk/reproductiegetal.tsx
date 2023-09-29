@@ -3,7 +3,6 @@ import { Reproductiegetal } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { InView } from '~/components/in-view';
 import { IllustrationTile } from '~/components/illustration-tile';
-import { Markdown } from '~/components/markdown';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -114,6 +113,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
                 obtainedAt: reproductionLastValue.date_of_insertion_unix,
               }}
               hasNoBorder
+              description={textNl.barscale_toelichting}
             >
               <KpiValue
                 absolute={reproductionLastValue.index_average}
@@ -122,7 +122,6 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
                 showOldDateUnixForDifference
                 isAmount
               />
-              <Markdown content={textNl.barscale_toelichting} />
             </KpiTile>
 
             <IllustrationTile image={'/images/reproductie-explainer.svg'} alt={textNl.reproductie_explainer_alt} description={textNl.extra_uitleg} hasNoBorder />

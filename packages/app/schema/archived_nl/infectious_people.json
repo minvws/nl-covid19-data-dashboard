@@ -1,16 +1,10 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_infectious_people_value",
+      "title": "archived_nl_infectious_people_value",
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "margin_low",
-        "estimate",
-        "margin_high",
-        "date_unix",
-        "date_of_insertion_unix"
-      ],
+      "required": ["margin_low", "estimate", "margin_high", "date_unix", "date_of_insertion_unix"],
       "properties": {
         "margin_low": {
           "type": "integer"
@@ -32,7 +26,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_infectious_people",
+  "title": "archived_nl_infectious_people",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

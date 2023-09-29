@@ -103,7 +103,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               return (
                 <Box key={theme.title}>
                   <Box marginBottom={space[4]}>
-                    <TopicalThemeHeader title={theme.title} subtitle={theme.subTitle} icon={getFilenameToIconName(theme.themeIcon) as TopicalIcon} />
+                    <TopicalThemeHeader title={theme.title} icon={getFilenameToIconName(theme.themeIcon) as TopicalIcon} />
                   </Box>
                   {theme.tiles && (
                     <Box
@@ -114,7 +114,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       marginBottom={{ _: space[4], sm: space[5] }}
                     >
                       {theme.tiles.map((themeTile) => {
-                        const sourceLabel = themeTile.sourceLabel ? replaceVariablesInText(themeTile.sourceLabel, { date: themeTile.tileDate }) : null;
+                        const dateLabel = themeTile.dateLabel ? replaceVariablesInText(themeTile.dateLabel, { date: themeTile.tileDate }) : undefined;
                         return (
                           <TopicalTile
                             hideTrendIcon={themeTile.hideTrendIcon}
@@ -125,7 +125,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                             cta={themeTile.cta}
                             key={themeTile.title}
                             kpiValue={themeTile.kpiValue}
-                            sourceLabel={sourceLabel}
+                            sourceLabel={themeTile.sourceLabel}
+                            dateLabel={dateLabel}
                           />
                         );
                       })}

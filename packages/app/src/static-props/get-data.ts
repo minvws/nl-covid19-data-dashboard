@@ -318,7 +318,7 @@ function replaceInaccurateLastValue(data: any) {
 
   metricsWithInaccurateData.forEach((m) => {
     if (isValuesWithLastValue(data[m])) {
-      for(const prop in inaccurateMetricProperties) {
+      for (const prop in inaccurateMetricProperties) {
         data[m] = adjustDataToLastAccurateValue(data[m], inaccurateMetricProperties[prop]);
       }
     }

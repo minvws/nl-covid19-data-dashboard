@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_behavior_annotations",
+  "title": "archived_nl_behavior_annotations",
   "type": "object",
   "properties": {
     "values": {
@@ -50,7 +50,7 @@
         "message_desc_en": {
           "minLength": 1,
           "type": "string"
-        },  
+        },
         "date_start_unix": {
           "type": "integer"
         },

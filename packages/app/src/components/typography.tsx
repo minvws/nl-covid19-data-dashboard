@@ -3,7 +3,14 @@ import css, { CSSProperties } from '@styled-system/css';
 import styled, { DefaultTheme } from 'styled-components';
 import { Preset, preset } from '~/style/preset';
 
-export interface TextProps {
+interface AllMarginProps {
+  margin?: CSSProperties['margin'];
+  marginRight?: CSSProperties['marginRight'];
+  marginBottom?: CSSProperties['marginBottom'];
+  marginLeft?: CSSProperties['marginLeft'];
+}
+
+export interface TextProps extends AllMarginProps {
   variant?: keyof Preset['typography'];
   fontWeight?: keyof DefaultTheme['fontWeights'];
   textTransform?: CSSProperties['textTransform'];
@@ -32,6 +39,10 @@ export const textStyle = (props: TextProps & { as?: string }) => {
     ...(props.textTransform ? { textTransform: props.textTransform } : undefined),
     ...(props.textAlign ? { textAlign: props.textAlign } : undefined),
     ...(props.hyphens ? { hyphens: props.hyphens } : undefined),
+    ...(props.margin ? { margin: props.margin } : undefined),
+    ...(props.marginRight ? { marginRight: props.marginRight } : undefined),
+    ...(props.marginBottom ? { marginBottom: props.marginBottom } : undefined),
+    ...(props.marginLeft ? { marginLeft: props.marginLeft } : undefined),
   });
 };
 

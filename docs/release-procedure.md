@@ -66,7 +66,7 @@ By making a commit to develop first, you prevent getting merge conflicts in
 later releases and the flow of the commit history is one-directional and
 easy to follow.
 
-1. Create a topic branch based on `develop`.
+1. Create a hotfix branch based on `develop`.
 2. Commit changes and create a PR on `develop` just like a normal feature
    branch.
 3. Merged the branch to `develop` using **squash and merge**.
