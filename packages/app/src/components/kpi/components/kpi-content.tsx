@@ -8,10 +8,16 @@ import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils';
 import { TileData as KpiContentProps } from '../types';
+import { Metadata, MetadataProps } from '~/components';
 
-export const KpiContent = ({ title, description, value, bar, birthyear, differenceValue, isPercentage = false }: KpiContentProps) => {
+export const KpiContent = ({ title, description, value, bar, birthyear, differenceValue, isPercentage = false, dateOrRange, source }: KpiContentProps) => {
   const { commonTexts } = useIntl();
   const parsedBirthyearRange = birthyear ? parseBirthyearRange(birthyear) : null;
+
+  const metadata: MetadataProps = {
+    date: dateOrRange,
+    source: source,
+  };
 
   return (
     <Box>
@@ -36,6 +42,7 @@ export const KpiContent = ({ title, description, value, bar, birthyear, differen
             : description
         }
       />
+      {metadata && <Metadata {...metadata} isTileFooter marginBottom={space[2]} />}
     </Box>
   );
 };

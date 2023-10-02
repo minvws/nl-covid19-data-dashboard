@@ -12,18 +12,28 @@ export type PercentageDataPoint = {
   };
 };
 
-export interface TableData {
+export interface BaseTableData {
   id: string;
   firstColumnLabel: React.ReactNode;
-  firstPercentage: number | null;
-  secondPercentage: number | null;
-  firstPercentageTrend?: TrendDirection;
-  secondPercentageTrend?: TrendDirection;
   description?: string;
   ageGroupRange?: string;
 }
 
+export interface SingleCoverageTableData extends BaseTableData {
+  firstPercentage: number | null;
+  firstPercentageTrend?: BehaviorTrendType;
+}
+
+export interface TableData extends BaseTableData {
+  firstPercentage: number | null;
+  secondPercentage: number | null;
+  firstPercentageTrend?: TrendDirection;
+  secondPercentageTrend?: TrendDirection;
+}
+
+export type BaseCoverageTable = BaseTableData;
+
 export interface CommonTableProps {
-  tableData: TableData[];
+  tableData: SingleCoverageTableData[] | TableData[];
   percentageData: PercentageDataPoint[][];
 }

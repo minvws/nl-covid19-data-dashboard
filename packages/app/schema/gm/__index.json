@@ -3,19 +3,7 @@
   "type": "object",
   "title": "gm",
   "additionalProperties": false,
-  "required": [
-    "name",
-    "proto_name",
-    "code",
-    "difference",
-    "static_values",
-    "hospital_nice",
-    "sewer_installation_measurement",
-    "sewer_per_installation",
-    "sewer",
-    "vaccine_coverage_per_age_group",
-    "last_generated"
-  ],
+  "required": ["name", "proto_name", "code", "difference", "static_values", "hospital_nice", "sewer_installation_measurement", "sewer_per_installation", "sewer", "last_generated"],
   "properties": {
     "last_generated": {
       "type": "string"
@@ -46,9 +34,6 @@
     },
     "sewer_installation_measurement": {
       "$ref": "sewer_installation_measurement.json"
-    },
-    "vaccine_coverage_per_age_group": {
-      "$ref": "vaccine_coverage_per_age_group.json"
     }
   },
   "$defs": {

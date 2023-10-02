@@ -20,17 +20,7 @@
     "infectionradar_symptoms_trend_per_age_group_weekly",
     "sewer",
     "vaccine_campaigns",
-    "vaccine_administered",
-    "vaccine_administered_doctors",
-    "vaccine_administered_ggd_ghor",
-    "vaccine_administered_ggd",
-    "vaccine_administered_hospitals_and_care_institutions",
-    "vaccine_administered_total",
-    "vaccine_administered_planned",
-    "vaccine_administered_last_timeframe",
-    "vaccine_coverage_per_age_group",
-    "vaccine_coverage_per_age_group_estimated_autumn_2022",
-    "vaccine_coverage_per_age_group_estimated_fully_vaccinated"
+    "vaccine_administered_last_timeframe"
   ],
   "additionalProperties": false,
   "properties": {
@@ -76,41 +66,11 @@
     "deceased_cbs": {
       "$ref": "deceased_cbs.json"
     },
-    "vaccine_administered": {
-      "$ref": "vaccine_administered.json"
-    },
-    "vaccine_administered_doctors": {
-      "$ref": "vaccine_administered_doctors.json"
-    },
-    "vaccine_administered_ggd_ghor": {
-      "$ref": "vaccine_administered_ggd_ghor.json"
-    },
-    "vaccine_administered_ggd": {
-      "$ref": "vaccine_administered_ggd.json"
-    },
-    "vaccine_administered_hospitals_and_care_institutions": {
-      "$ref": "vaccine_administered_hospitals_and_care_institutions.json"
-    },
-    "vaccine_administered_total": {
-      "$ref": "vaccine_administered_total.json"
-    },
-    "vaccine_administered_planned": {
-      "$ref": "vaccine_administered_planned.json"
-    },
     "vaccine_administered_last_timeframe": {
       "$ref": "vaccine_administered_last_timeframe.json"
     },
     "vaccine_campaigns": {
       "$ref": "vaccine_campaigns.json"
-    },
-    "vaccine_coverage_per_age_group": {
-      "$ref": "vaccine_coverage_per_age_group.json"
-    },
-    "vaccine_coverage_per_age_group_estimated_autumn_2022": {
-      "$ref": "vaccine_coverage_per_age_group_estimated_autumn_2022.json"
-    },
-    "vaccine_coverage_per_age_group_estimated_fully_vaccinated": {
-      "$ref": "vaccine_coverage_per_age_group_estimated_fully_vaccinated.json"
     },
     "variants": {
       "$ref": "variants.json"
