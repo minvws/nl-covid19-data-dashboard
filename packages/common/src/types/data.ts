@@ -208,8 +208,8 @@ export interface ArchivedNl {
   tested_overall_archived_20230331: ArchivedNlTestedOverall;
   tested_per_age_group_archived_20230331: ArchivedNlTestedPerAgeGroup;
   sewer_archived_20230623: ArchivedNlSewer;
-  vaccine_campaigns_archived_20220908: ArchivedNlVaccineCampaigns;
-  vaccine_campaigns_archived_20231004?: NlVaccineCampaignsArchived_20231004;
+  vaccine_campaigns_archived_20220908: ArchivedNlVaccineCampaigns_2022;
+  vaccine_campaigns_archived_20231004: ArchivedNlVaccineCampaign_2023;
   vaccine_planned_archived_20220908: ArchivedNlVaccinePlanned;
   vaccine_coverage_per_age_group_archived_20220622: ArchivedNlVaccineCoveragePerAgeGroup;
   vaccine_coverage_per_age_group_archived_20220908: ArchivedNlVaccineCoveragePerAgeGroupWithBoosterShot;
@@ -539,28 +539,28 @@ export interface ArchivedNlSewerValue {
   date_of_insertion_unix: number;
   date_unix: number;
 }
-export interface ArchivedNlVaccineCampaigns {
-  vaccine_campaigns: ArchivedNlVaccineCampaigns1[];
+export interface ArchivedNlVaccineCampaigns_2022 {
+  vaccine_campaigns: ArchivedNlVaccineCampaigns_20221[];
   date_unix: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface ArchivedNlVaccineCampaigns1 {
+export interface ArchivedNlVaccineCampaigns_20221 {
   vaccine_campaign_order: number;
   vaccine_campaign_name_nl: string;
   vaccine_campaign_name_en: string;
   vaccine_administered_total: number;
   vaccine_administered_last_week: number;
 }
-export interface NlVaccineCampaignsArchived_20231004 {
-  vaccine_campaigns: Archived_20231004NlVaccineCampaign[];
+export interface ArchivedNlVaccineCampaign_2023 {
+  vaccine_campaigns: ArchivedNlVaccineCampaign_20231[];
   date_unix: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface Archived_20231004NlVaccineCampaign {
+export interface ArchivedNlVaccineCampaign_20231 {
   vaccine_campaign_order: number;
   vaccine_campaign_name_nl: string;
   vaccine_campaign_name_en: string;

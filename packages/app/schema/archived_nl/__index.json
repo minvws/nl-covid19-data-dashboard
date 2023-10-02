@@ -37,6 +37,7 @@
     "vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004",
     "vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004",
     "vaccine_campaigns_archived_20220908",
+    "vaccine_campaigns_archived_20231004",
     "vaccine_planned_archived_20220908",
     "vaccine_vaccinated_or_support_archived_20230411",
     "vaccine_delivery_per_supplier_archived_20211101",
@@ -117,10 +118,10 @@
       "$ref": "sewer.json"
     },
     "vaccine_campaigns_archived_20220908": {
-      "$ref": "vaccine_campaigns.json"
+      "$ref": "vaccine_campaigns_2022.json"
     },
     "vaccine_campaigns_archived_20231004": {
-      "$ref": "vaccine_campaigns_archived_20231004.json"
+      "$ref": "vaccine_campaigns_2023.json"
     },
     "vaccine_planned_archived_20220908": {
       "$ref": "vaccine_planned.json"

@@ -1,9 +1,9 @@
 {
   "definitions": {
     "vaccine_campaign": {
-      "title": "archived_nl_vaccine_campaigns",
+      "title": "archived_nl_vaccine_campaign_2023",
       "type": "object",
-      "required": ["vaccine_campaign_order", "vaccine_campaign_name_nl", "vaccine_campaign_name_en", "vaccine_administered_total", "vaccine_administered_last_week"],
+      "required": ["vaccine_campaign_order", "vaccine_campaign_name_nl", "vaccine_campaign_name_en", "vaccine_administered_total", "vaccine_administered_last_timeframe"],
       "additionalProperties": false,
       "properties": {
         "vaccine_campaign_order": {
@@ -18,14 +18,14 @@
         "vaccine_administered_total": {
           "type": "integer"
         },
-        "vaccine_administered_last_week": {
+        "vaccine_administered_last_timeframe": {
           "type": "integer"
         }
       }
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "archived_nl_vaccine_campaigns",
+  "title": "archived_nl_vaccine_campaign_2023",
   "type": "object",
   "required": ["vaccine_campaigns", "date_unix", "date_start_unix", "date_end_unix", "date_of_insertion_unix"],
   "additionalProperties": false,
