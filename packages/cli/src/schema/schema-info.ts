@@ -29,7 +29,7 @@ export function getSchemaInfo(jsonDirectory: string = defaultJsonDirectory): Sch
       files: getFileNames(fileList, /^GM[0-9]+.json$/),
       basePath: jsonDirectory,
       customValidations: [
-        createChoroplethValidation(path.join(defaultJsonDirectory, 'GM_COLLECTION.json'), 'gmcode', ['vaccine_coverage_per_age_group_archived_202310xx']),
+        createChoroplethValidation(path.join(defaultJsonDirectory, 'GM_COLLECTION.json'), 'gmcode', ['vaccine_coverage_per_age_group_archived_20231004']),
         validateMovingAverages,
       ],
     },
@@ -42,7 +42,7 @@ export function getSchemaInfo(jsonDirectory: string = defaultJsonDirectory): Sch
       files: getFileNames(archivedFileList, /^GM[0-9]+.json$/),
       basePath: path.join(jsonDirectory, 'archived'),
       customValidations: [
-        createChoroplethValidation(path.join(defaultJsonDirectory, 'archived', 'GM_COLLECTION.json'), 'gmcode', ['vaccine_coverage_per_age_group_archived_202310xx']),
+        createChoroplethValidation(path.join(defaultJsonDirectory, 'archived', 'GM_COLLECTION.json'), 'gmcode', ['vaccine_coverage_per_age_group_archived_20231004']),
         validateMovingAverages,
       ],
     },
