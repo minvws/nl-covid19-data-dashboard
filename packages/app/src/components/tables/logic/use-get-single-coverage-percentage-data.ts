@@ -20,10 +20,10 @@ export const useGetSingleCoveragePercentageData = (
     return [
       {
         title: title,
-        trendDirection: 'firstPercentageTrend' in datasetItem ? datasetItem['percentageTrend'] : null,
+        trendDirection: 'firstPercentageTrend' in datasetItem ? datasetItem['firstPercentageTrend'] : null,
         percentage: {
           color: color,
-          value: getFormattedPercentageValue(datasetItem.percentage, percentageFormattingRules?.shouldFormat ?? false),
+          value: getFormattedPercentageValue(datasetItem.firstPercentage, percentageFormattingRules?.shouldFormat ?? false),
         },
       },
     ];

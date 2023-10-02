@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { PercentageData } from './components/wide-percentage-data';
 import { Cell, HeaderCell, Table, TableHead } from './components/shared-styled-components';
-import { CommonTableProps, BaseCoverageTable } from './types';
+import { CommonTableProps } from './types';
 
 export const tableColumnWidths = {
   labelColumn: '30%',
@@ -11,12 +11,12 @@ export const tableColumnWidths = {
   percentageBarColumn: '30%',
 };
 
-interface WideTableProps<T extends BaseCoverageTable> extends CommonTableProps<T> {
+interface WideTableProps extends CommonTableProps {
   headerText: { [key: string]: string };
 }
 
 // Component shown for tables on wide screens.
-export const WideTable = <T extends BaseCoverageTable>({ tableData, headerText, percentageData }: WideTableProps<T>) => {
+export const WideTable = ({ tableData, headerText, percentageData }: WideTableProps) => {
   return (
     <Box overflow="auto">
       <Table>

@@ -20,8 +20,8 @@ export interface BaseTableData {
 }
 
 export interface SingleCoverageTableData extends BaseTableData {
-  percentage: number | null;
-  percentageTrend?: BehaviorTrendType;
+  firstPercentage: number | null;
+  firstPercentageTrend?: BehaviorTrendType;
 }
 
 export interface TableData extends BaseTableData {
@@ -33,7 +33,7 @@ export interface TableData extends BaseTableData {
 
 export type BaseCoverageTable = BaseTableData;
 
-export interface CommonTableProps<T extends BaseCoverageTable> {
-  tableData: T[];
+export interface CommonTableProps {
+  tableData: SingleCoverageTableData[] | TableData[];
   percentageData: PercentageDataPoint[][];
 }

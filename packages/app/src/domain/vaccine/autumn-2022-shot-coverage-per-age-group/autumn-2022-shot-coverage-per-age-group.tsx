@@ -26,7 +26,7 @@ export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata
   const requiredData: SingleCoverageTableData[] = values.map((value) => {
     return {
       id: `${componentName}-${value.age_group_range}`,
-      percentage: value.autumn_2022_vaccinated_percentage,
+      firstPercentage: value.autumn_2022_vaccinated_percentage,
       ageGroupRange: value.age_group_range,
       firstColumnLabel: (
         <AgeGroup peopleInAgeGroup={'age_group_total' in value ? value.age_group_total : undefined} range={value.age_group_range} birthYearRange={value.birthyear_range} />
