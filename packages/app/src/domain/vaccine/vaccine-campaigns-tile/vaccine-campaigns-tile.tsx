@@ -21,8 +21,9 @@ interface VaccineCampaignsTileProps {
 export const VaccineCampaignsTile = ({ title, headers, campaigns, campaignDescriptions, description, descriptionFooter, metadata, campaignOptions }: VaccineCampaignsTileProps) => {
   const breakpoints = useBreakpoints();
 
+  // Display only the campaigns that are not hidden in the campaignOptions prop
   const sortedCampaigns = campaigns
-    .filter((vaccineCampaign) => !campaignOptions?.hide_campaigns?.includes(vaccineCampaign.vaccine_campaign_order))
+    .filter((vaccineCampaign) => campaignOptions && !campaignOptions.hide_campaigns.includes(vaccineCampaign.vaccine_campaign_order))
     .sort((campaignA, campaignB) => campaignA.vaccine_campaign_order - campaignB.vaccine_campaign_order);
 
   const totalsAvailable = sortedCampaigns.some((camp) => camp.vaccine_administered_total);

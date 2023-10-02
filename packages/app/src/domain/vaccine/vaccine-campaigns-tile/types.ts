@@ -9,7 +9,7 @@ export type VaccineCampaign = {
 }>;
 
 interface VaccineCampaignOptionProps {
-  hide_campaigns?: number[];
+  hide_campaigns: number[];
 }
 
 export type VaccineCampaignDescriptions = Record<string, string>;
