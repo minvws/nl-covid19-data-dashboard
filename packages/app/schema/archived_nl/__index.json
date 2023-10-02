@@ -172,7 +172,7 @@
       "$ref": "vaccine_coverage.json"
     },
     "vaccine_coverage_per_age_group_archived_20231004": {
-      "$ref": "vaccine_coverage_per_age_group_archived_20231012.json"
+      "$ref": "vaccinaties/vaccine_coverage_per_age_group.json"
     },
     "vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004": {
       "$ref": "vaccine_coverage_per_age_group_estimated_autumn_2022.json"

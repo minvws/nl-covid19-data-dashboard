@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_coverage_per_age_group",
+  "title": "archived_nl_vaccine_coverage_per_age_group_autumn_2022",
   "type": "object",
   "required": ["values"],
   "additionalProperties": false,
@@ -14,7 +14,7 @@
   },
   "definitions": {
     "value": {
-      "title": "nl_vaccine_coverage_per_age_group_value",
+      "title": "archived_nl_vaccine_coverage_per_age_group_value",
       "additionalProperties": false,
       "type": "object",
       "required": [
@@ -33,17 +33,7 @@
       "properties": {
         "age_group_range": {
           "type": "string",
-          "enum": [
-            "5-11",
-            "12-17",
-            "18-29",
-            "30-39",
-            "40-49",
-            "50-59",
-            "60-69",
-            "70-79",
-            "80+"
-          ]
+          "enum": ["5-11", "12-17", "18-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80+"]
         },
         "age_group_percentage": {
           "type": "number"
@@ -52,7 +42,7 @@
           "type": "integer"
         },
         "autumn_2022_vaccinated": {
-          "type":["integer", "null"]
+          "type": ["integer", "null"]
         },
         "fully_vaccinated": {
           "type": "integer"
