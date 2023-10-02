@@ -82,14 +82,12 @@ const VaccineCampaignRow = ({ campaign, campaignDescriptions, headers, isFirst, 
               </StyledCell>
             </tr>
 
-            {showTotals ? (
+            {showTotals && (
               <tr>
                 <StyledCell paddingY="0" isMobile>
                   {headers.total} : {isOpen ? <BoldText>{formatNumber(campaign.vaccine_administered_total)}</BoldText> : formatNumber(campaign.vaccine_administered_total)}
                 </StyledCell>
               </tr>
-            ) : (
-              <></>
             )}
 
             <tr>
