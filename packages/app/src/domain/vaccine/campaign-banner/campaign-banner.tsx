@@ -9,17 +9,18 @@ import { Image } from '~/components/image';
 interface CampaignBannerProps {
   title: string;
   description: string;
+  altText: string;
 }
 
-export const CampaignBanner = ({ title, description }: CampaignBannerProps) => (
+export const CampaignBanner = ({ title, description, altText }: CampaignBannerProps) => (
   <Tile>
     <Box backgroundColor={colors.blue1} marginY={space[4]}>
       <MaxWidth
         alignItems={{ _: 'flex-start', sm: 'center' }}
         display="flex"
-        flexDirection={{ _: 'column', sm: 'row' }}
+        flexDirection={{ _: 'column', md: 'row' }}
         justifyContent="center"
-        gridColumnGap={space[4]}
+        gridColumnGap={{ _: space[4], md: space[2] }}
         paddingX={{ _: space[3], sm: space[4] }}
         paddingY={space[4]}
       >
@@ -29,7 +30,7 @@ export const CampaignBanner = ({ title, description }: CampaignBannerProps) => (
           flexDirection="column"
           justifyContent="space-between"
           gridRowGap={space[4]}
-          paddingX={{ sm: space[3], md: space[5] }}
+          paddingX={{ md: space[4], lg: space[5] }}
           paddingY={space[4]}
         >
           <Heading level={2} variant="h2">
@@ -38,8 +39,8 @@ export const CampaignBanner = ({ title, description }: CampaignBannerProps) => (
 
           <Markdown content={description} />
         </Box>
-        <Box paddingX={{ sm: space[5], md: space[2] }} alignSelf={{ _: 'center', sm: 'left' }}>
-          <CampaignImage src={'/images/Najaarsronde-coronaprik-hero.svg'} extension="svg" />
+        <Box paddingX={{ sm: space[5], md: space[4] }} alignSelf={{ _: 'center', sm: 'left' }}>
+          <CampaignImage src={'/images/Najaarsronde-coronaprik-hero.svg'} extension="svg" alt={altText} />
         </Box>
       </MaxWidth>
     </Box>

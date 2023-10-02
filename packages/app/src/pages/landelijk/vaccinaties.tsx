@@ -226,7 +226,11 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             }}
           />
 
-          <CampaignBanner title={textNl.vaccine_campaigns.autumn_2023.campaign_banner.title} description={textNl.vaccine_campaigns.autumn_2023.campaign_banner.description} />
+          <CampaignBanner
+            title={textNl.vaccine_campaigns.autumn_2023.campaign_banner.title}
+            description={textNl.vaccine_campaigns.autumn_2023.campaign_banner.description}
+            altText={textNl.vaccine_campaigns.autumn_2023.campaign_banner.alt}
+          />
 
           <PageInformationBlock
             title={textNl.section_basisserie.title}
