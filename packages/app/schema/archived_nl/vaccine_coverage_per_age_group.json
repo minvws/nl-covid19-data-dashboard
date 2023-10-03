@@ -14,7 +14,7 @@
   },
   "definitions": {
     "value": {
-      "title": "archived_nl_vaccine_coverage_per_age_group_value",
+      "title": "archived_nl_vaccine_coverage_per_age_group_primary_series_and_booster_value",
       "additionalProperties": false,
       "type": "object",
       "required": [

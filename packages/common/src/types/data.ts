@@ -211,7 +211,7 @@ export interface ArchivedNl {
   vaccine_campaigns_archived_20220908: ArchivedNlVaccineCampaigns_2022;
   vaccine_campaigns_archived_20231004: ArchivedNlVaccineCampaign_2023;
   vaccine_planned_archived_20220908: ArchivedNlVaccinePlanned;
-  vaccine_coverage_per_age_group_archived_20220622: ArchivedNlVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group_archived_20220622: ArchivedNlVaccineCoveragePerAgeGroupPrimarySeriesAndBooster;
   vaccine_coverage_per_age_group_archived_20220908: ArchivedNlVaccineCoveragePerAgeGroupWithBoosterShot;
   vaccine_coverage_per_age_group_estimated_archived_20220908: NlVaccineCoveragePerAgeGroupEstimatedArchived_20220908Value;
   vulnerable_nursing_home_archived_20230711: ArchivedNlVulnerableNursingHome;
@@ -226,7 +226,7 @@ export interface ArchivedNl {
   vaccine_administered_total_archived_20220324: NlVaccineAdministeredTotal;
   vaccine_administered_planned_archived_20220518: NlVaccineAdministeredPlanned;
   vaccine_coverage_archived_20220518: ArchivedNlVaccineCoverage;
-  vaccine_coverage_per_age_group_archived_20231004: NlVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group_archived_20231004: ArchivedNlVaccineCoveragePerAgeGroupAutumn_2022;
   vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004: NlVaccineCoveragePerAgeGroupEstimatedAutumn_2022Value;
   vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinatedValue;
   vaccine_delivery_per_supplier_archived_20211101: ArchivedNlVaccineDeliveryPerSupplier;
@@ -574,10 +574,10 @@ export interface ArchivedNlVaccinePlanned {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface ArchivedNlVaccineCoveragePerAgeGroup {
-  values: ArchivedNlVaccineCoveragePerAgeGroupValue[];
+export interface ArchivedNlVaccineCoveragePerAgeGroupPrimarySeriesAndBooster {
+  values: ArchivedNlVaccineCoveragePerAgeGroupPrimarySeriesAndBoosterValue[];
 }
-export interface ArchivedNlVaccineCoveragePerAgeGroupValue {
+export interface ArchivedNlVaccineCoveragePerAgeGroupPrimarySeriesAndBoosterValue {
   age_group_range: '5-11' | '12-17' | '18-30' | '31-40' | '41-50' | '51-60' | '61-70' | '71-80' | '81+';
   age_group_percentage: number;
   age_group_total: number;
@@ -752,10 +752,10 @@ export interface ArchivedNlVaccineCoverageValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineCoveragePerAgeGroup {
-  values: NlVaccineCoveragePerAgeGroupValue[];
+export interface ArchivedNlVaccineCoveragePerAgeGroupAutumn_2022 {
+  values: ArchivedNlVaccineCoveragePerAgeGroupAutumn_2022Value[];
 }
-export interface NlVaccineCoveragePerAgeGroupValue {
+export interface ArchivedNlVaccineCoveragePerAgeGroupAutumn_2022Value {
   age_group_range: '5-11' | '12-17' | '18-29' | '30-39' | '40-49' | '50-59' | '60-69' | '70-79' | '80+';
   age_group_percentage: number;
   age_group_total: number;

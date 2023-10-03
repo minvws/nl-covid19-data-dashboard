@@ -1,4 +1,4 @@
-import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
+import { ArchivedNlVaccineCoveragePerAgeGroupAutumn_2022Value } from '@corona-dashboard/common';
 import { AgeGroup } from '~/components/age-groups/age-group';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
@@ -16,7 +16,7 @@ interface Autumn2022ShotCoveragePerAgeGroupProps {
   description: string;
   metadata: MetadataProps;
   sortingOrder: string[];
-  values: NlVaccineCoveragePerAgeGroupValue[];
+  values: ArchivedNlVaccineCoveragePerAgeGroupAutumn_2022Value[];
   text: SiteText['pages']['vaccinations_page']['nl']['vaccination_coverage'];
 }
 
