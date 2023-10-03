@@ -71,7 +71,7 @@ export function VaccineCoverageToggleTile({
   };
 
   return (
-    <KpiTile title={title} metadata={metadata}>
+    <KpiTile title={title}>
       <Box css={css({ '& div': { justifyContent: 'flex-start' } })} marginBottom={space[3]}>
         <RadioGroup
           value={selectedTab}
