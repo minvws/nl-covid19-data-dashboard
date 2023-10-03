@@ -116,7 +116,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
     archivedData.vaccine_coverage_per_age_group_archived_20220908.values.find((x) => x.age_group_range === '12+') ||
     emptyCoverageData.vaccine_coverage_per_age_group_archived_20220908.values[1];
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(currentData, pageMetrics);
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
