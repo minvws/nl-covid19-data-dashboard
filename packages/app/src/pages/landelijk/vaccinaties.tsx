@@ -28,6 +28,7 @@ import {
   selectAdministrationData,
   BoosterShotCoveragePerAgeGroup,
   PrimarySeriesShotCoveragePerAgeGroup,
+  PrimarySeriesKpiHeader,
 } from '~/domain/vaccine';
 import { VaccinationsPerSupplierOverLastTimeframeTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-timeframe-tile';
 import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
@@ -233,10 +234,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             altText={textNl.vaccine_campaigns.autumn_2023.campaign_banner.alt}
           />
 
-          <PageInformationBlock
+          <PrimarySeriesKpiHeader
             title={textNl.section_basisserie.title}
             description={textNl.section_basisserie.description}
-            icon={<VaccinatieIcon aria-hidden="true" />}
             metadata={{
               datumsText: textNl.dates_archived,
               dateOrRange: archivedData.vaccine_administered_total_archived_20220324.last_value.date_unix,
