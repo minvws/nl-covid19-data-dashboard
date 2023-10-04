@@ -22,9 +22,7 @@ export const VaccineCampaignsTile = ({ title, headers, campaigns, campaignDescri
   const breakpoints = useBreakpoints();
 
   // Display only the campaigns that are not hidden in the campaignOptions prop
-  const filteredCampaigns = campaignOptions?.hide_campaigns
-    ? campaigns.filter((vaccineCampaign) => campaignOptions && !campaignOptions.hide_campaigns.includes(vaccineCampaign.vaccine_campaign_order))
-    : campaigns;
+  const filteredCampaigns = campaignOptions ? campaigns.filter((vaccineCampaign) => !campaignOptions.hide_campaigns.includes(vaccineCampaign.vaccine_campaign_order)) : campaigns;
 
   const sortedAndFilteredCampaigns = filteredCampaigns.sort((campaignA, campaignB) => campaignA.vaccine_campaign_order - campaignB.vaccine_campaign_order);
 
