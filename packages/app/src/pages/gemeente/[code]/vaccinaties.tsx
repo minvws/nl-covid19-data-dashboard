@@ -26,7 +26,12 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { WarningTile } from '~/components/warning-tile';
 
-const pageMetrics = ['vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'booster_coverage_archived_20220904'];
+const pageMetrics = [
+  'vaccine_coverage_per_age_group',
+  'vaccine_coverage_per_age_group_archived',
+  'booster_coverage_archived_20220904',
+  'vaccine_coverage_per_age_group_archived_20231004',
+];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textGm: siteText.pages.vaccinations_page.gm,
