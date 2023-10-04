@@ -429,6 +429,20 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 age18PlusToggleText={textNl.vaccination_grade_toggle_tile.age_18_plus}
               />
 
+              <VaccineCampaignsTile
+                title={textNl.vaccine_campaigns.title}
+                description={textNl.vaccine_campaigns.description_archived}
+                descriptionFooter={textNl.vaccine_campaigns.description_footer}
+                headers={textNl.vaccine_campaigns.headers}
+                campaigns={archivedData.vaccine_campaigns_archived_20220908.vaccine_campaigns}
+                campaignDescriptions={textNl.vaccine_campaigns.campaigns}
+                metadata={{
+                  datumsText: textNl.dates,
+                  date: archivedData.vaccine_campaigns_archived_20220908.date_unix,
+                  source: textNl.vaccine_campaigns.bronnen.rivm,
+                }}
+              />
+
               <VaccinationsKpiHeader
                 text={textNl.repeating_shot_information_block}
                 dateUnix={boosterShotAdministeredArchivedLastValue.date_unix}
