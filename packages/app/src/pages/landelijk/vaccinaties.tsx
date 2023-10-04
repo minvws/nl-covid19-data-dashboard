@@ -87,6 +87,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004',
     'vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004',
     'vaccine_campaigns_archived_20220908',
+    'vaccine_campaigns_archived_20231004',
     'vaccine_planned_archived_20220908',
     'booster_coverage_archived_20220904',
     'vaccine_coverage_per_age_group_estimated_archived_20220908',
@@ -139,7 +140,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const { content, archivedChoropleth, selectedNlData: currentData, selectedArchivedNlData: archivedData, lastGenerated, administrationData } = props;
-  const { commonTexts, formatNumber } = useIntl();
+  const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
 
   const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(props.pageText, selectLokalizeTexts);
@@ -351,13 +352,11 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               />
 
               <VaccineCampaignsTile
-                title={textNl.vaccine_campaigns.title}
-                description={replaceVariablesInText(textNl.vaccine_campaigns.description_archived, {
-                  vaccinePlanned: formatNumber(archivedData.vaccine_planned_archived_20220908.doses),
-                })}
+                title={textNl.vaccine_campaigns.autumn_2022.title}
+                description={textNl.vaccine_campaigns.autumn_2022.description}
                 descriptionFooter={textNl.vaccine_campaigns.description_footer}
                 headers={textNl.vaccine_campaigns.headers}
-                campaigns={archivedData.vaccine_campaigns_archived_20220908.vaccine_campaigns}
+                campaigns={archivedData.vaccine_campaigns_archived_20231004.vaccine_campaigns}
                 campaignDescriptions={textNl.vaccine_campaigns.campaigns}
                 campaignOptions={{
                   hide_campaigns: [3],

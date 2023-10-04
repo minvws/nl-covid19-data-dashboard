@@ -39,3 +39,9 @@ timestamp,action,key,document_id,move_to
 2023-09-29T14:03:48.346Z,delete,__root.test_123,0hrRKce5hYl5O3WpoZ6oAl,__
 2023-09-29T14:03:48.347Z,delete,__root.test_key_345,0hrRKce5hYl5O3WpoZ6nXX,__
 2023-10-02T12:06:06.749Z,add,pages.vaccinations_page.nl.vaccine_campaigns.autumn_2023.campaign_banner.alt,fQMSbwQpEgDbjt4uWKBe2g,__
+2023-10-04T06:45:00.447Z,add,pages.vaccinations_page.nl.vaccine_campaigns.atuumn_2022.title,uM9i5K7TlE0aLwmg4eRLuC,__
+2023-10-04T06:45:01.740Z,add,pages.vaccinations_page.nl.vaccine_campaigns.atuumn_2022.description,fQMSbwQpEgDbjt4uWKxuMY,__
+2023-10-04T06:46:57.761Z,add,pages.vaccinations_page.nl.vaccine_campaigns.autumn_2022.description,C32lwRDGVQp5utRyR51ePz,__
+2023-10-04T06:46:58.690Z,add,pages.vaccinations_page.nl.vaccine_campaigns.autumn_2022.title,22Xg3hRGtxwin2PlGEkt4Q,__
+2023-10-04T06:46:58.690Z,delete,pages.vaccinations_page.nl.vaccine_campaigns.atuumn_2022.description,fQMSbwQpEgDbjt4uWKxuMY,__
+2023-10-04T06:46:58.691Z,delete,pages.vaccinations_page.nl.vaccine_campaigns.atuumn_2022.title,uM9i5K7TlE0aLwmg4eRLuC,__
