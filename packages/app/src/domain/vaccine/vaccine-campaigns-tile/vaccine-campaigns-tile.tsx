@@ -22,19 +22,19 @@ export const VaccineCampaignsTile = ({ title, headers, campaigns, campaignDescri
   const breakpoints = useBreakpoints();
 
   // Display only the campaigns that are not hidden in the campaignOptions prop
-  const sortedCampaigns = campaigns
-    .filter((vaccineCampaign) => campaignOptions && !campaignOptions.hide_campaigns.includes(vaccineCampaign.vaccine_campaign_order))
-    .sort((campaignA, campaignB) => campaignA.vaccine_campaign_order - campaignB.vaccine_campaign_order);
+  const filteredCampaigns = campaignOptions ? campaigns.filter((vaccineCampaign) => !campaignOptions.hide_campaigns.includes(vaccineCampaign.vaccine_campaign_order)) : campaigns;
 
-  const totalsAvailable = sortedCampaigns.some((camp) => camp.vaccine_administered_total);
+  const sortedAndFilteredCampaigns = filteredCampaigns.sort((campaignA, campaignB) => campaignA.vaccine_campaign_order - campaignB.vaccine_campaign_order);
+
+  const totalsAvailable = sortedAndFilteredCampaigns.some((camp) => camp.vaccine_administered_total);
 
   return (
     <>
       <ChartTile title={title} description={description} metadata={metadata}>
         {breakpoints.sm ? (
-          <WideVaccineCampaignTable campaigns={sortedCampaigns} campaignDescriptions={campaignDescriptions} headers={headers} showTotals={totalsAvailable} />
+          <WideVaccineCampaignTable campaigns={sortedAndFilteredCampaigns} campaignDescriptions={campaignDescriptions} headers={headers} showTotals={totalsAvailable} />
         ) : (
-          <NarrowVaccineCampaignTable campaigns={sortedCampaigns} campaignDescriptions={campaignDescriptions} headers={headers} showTotals={totalsAvailable} />
+          <NarrowVaccineCampaignTable campaigns={sortedAndFilteredCampaigns} campaignDescriptions={campaignDescriptions} headers={headers} showTotals={totalsAvailable} />
         )}
         <Box marginTop={space[3]}>
           <Text variant="label1" color="gray7">

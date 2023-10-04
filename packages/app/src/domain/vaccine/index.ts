@@ -13,3 +13,4 @@ export { VaccineStockPerSupplierChart } from './vaccine-stock-per-supplier-chart
 export { ChoroplethTooltip } from './vaccine-coverage-choropleth';
 export { CampaignBanner } from './campaign-banner/campaign-banner';
 export { PrimarySeriesShotCoveragePerAgeGroup } from './primary-series-coverage-per-age-group/primary-series-coverage-per-age-group';
+export { PrimarySeriesKpiHeader } from './primary-series-kpi-header';
