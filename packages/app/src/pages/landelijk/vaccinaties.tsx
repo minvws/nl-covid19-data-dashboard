@@ -358,12 +358,9 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 headers={textNl.vaccine_campaigns.headers}
                 campaigns={archivedData.vaccine_campaigns_archived_20231004.vaccine_campaigns}
                 campaignDescriptions={textNl.vaccine_campaigns.campaigns}
-                campaignOptions={{
-                  hide_campaigns: [3],
-                }}
                 metadata={{
                   datumsText: textNl.dates,
-                  date: archivedData.vaccine_campaigns_archived_20220908.date_unix,
+                  date: archivedData.vaccine_campaigns_archived_20231004.date_unix,
                   source: textNl.vaccine_campaigns.bronnen.rivm,
                 }}
               />
