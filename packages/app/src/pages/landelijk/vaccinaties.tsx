@@ -211,7 +211,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 title: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_total.title,
                 description: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_total.omschrijving,
                 value: currentData.vaccine_campaigns.vaccine_campaigns[0].vaccine_administered_total,
-                dateOrRange: currentData.vaccine_campaigns.date_of_insertion_unix,
+                dateOrRange: currentData.vaccine_campaigns.date_unix,
                 source: textShared.bronnen.rivm,
               },
             ]}
