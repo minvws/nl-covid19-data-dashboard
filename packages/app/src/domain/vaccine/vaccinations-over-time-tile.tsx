@@ -1,4 +1,4 @@
-import { NlVaccineAdministeredPlannedValue, NlVaccineCoverage } from '@corona-dashboard/common';
+import { NlVaccineAdministeredPlannedValue, ArchivedNlVaccineCoverage } from '@corona-dashboard/common';
 import React, { Dispatch, SetStateAction, useState, useMemo } from 'react';
 import { Box } from '~/components/base';
 import { isDefined } from 'ts-is-present';
@@ -32,7 +32,7 @@ function useTileData(activeChart: ActiveVaccinationChart, text: SiteText['pages'
 }
 
 interface VaccinationsOverTimeTileProps {
-  coverageData?: NlVaccineCoverage;
+  coverageData?: ArchivedNlVaccineCoverage;
   administrationData: AdministrationData;
   vaccineAdministeredPlannedLastValue: NlVaccineAdministeredPlannedValue;
   timelineEvents: Partial<Record<ActiveVaccinationChart, TimelineEventConfig[]>>;

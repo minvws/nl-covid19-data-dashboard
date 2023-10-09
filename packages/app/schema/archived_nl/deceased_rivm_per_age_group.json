@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_deceased_rivm_per_age_group",
+  "title": "archived_nl_deceased_rivm_per_age_group",
   "type": "object",
   "required": ["values"],
   "additionalProperties": false,
@@ -14,7 +14,7 @@
   },
   "definitions": {
     "value": {
-      "title": "nl_deceased_rivm_per_age_group_archived_20221231_value",
+      "title": "archived_nl_deceased_rivm_per_age_group_value",
       "type": "object",
       "required": ["age_group_range", "age_group_percentage", "covid_percentage", "date_of_insertion_unix"],
       "additionalProperties": false,

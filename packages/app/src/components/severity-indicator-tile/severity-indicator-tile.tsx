@@ -1,18 +1,14 @@
 import { colors } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import styled from 'styled-components';
-import { space } from '~/style/theme';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
 import { InlineText } from '~/components/typography';
-import { TrendIcon, TrendIconColor } from '~/domain/topical/types';
-import { SeverityIndicatorLabel } from './components/severity-indicator-label';
+import { space } from '~/style/theme';
 import { SeverityIndicator } from './components/severity-indicator';
+import { SeverityIndicatorLabel } from './components/severity-indicator-label';
 import { SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH } from './constants';
 import { getSeverityColor } from './logic/get-severity-color';
 import { SeverityLevel } from './types';
-import { mapStringToColors } from './logic/map-string-to-colors';
-import { setTrendIcon } from '~/components/severity-indicator-tile/logic/set-trend-icon';
 
 interface SeverityIndicatorTileProps {
   description: string;
@@ -22,13 +18,9 @@ interface SeverityIndicatorTileProps {
   sourceLabel: string;
   datesLabel: string;
   levelDescription: string;
-  trendIcon: TrendIcon;
 }
 
-export const SeverityIndicatorTile = ({ description, label, level, title, datesLabel, sourceLabel, levelDescription, trendIcon }: SeverityIndicatorTileProps) => {
-  const hasIconProps = trendIcon?.direction && trendIcon?.color;
-  const iconColor = trendIcon?.color?.toUpperCase() as TrendIconColor;
-
+export const SeverityIndicatorTile = ({ description, label, level, title, datesLabel, sourceLabel, levelDescription }: SeverityIndicatorTileProps) => {
   return (
     <Box
       alignItems="flex-start"
@@ -54,8 +46,7 @@ export const SeverityIndicatorTile = ({ description, label, level, title, datesL
 
       <Box flexGrow={1} width={`min(${SEVERITY_INDICATOR_TILE_COLUMN_MIN_WIDTH}px, 50%)`} as="figcaption">
         {description && <Markdown content={description} />}
-        <Box display={hasIconProps ? 'flex' : 'block'} alignItems="center" marginTop={space[3]} css={css({ gap: space[2] })}>
-          {trendIcon?.direction && iconColor && hasIconProps && <TrendIconWrapper color={mapStringToColors(iconColor)}>{setTrendIcon(trendIcon.direction)}</TrendIconWrapper>}
+        <Box display="block" alignItems="center" marginTop={space[3]} css={css({ gap: space[2] })}>
           {levelDescription && <Markdown content={levelDescription} />}
         </Box>
         <Box marginY={space[3]}>
@@ -65,9 +56,3 @@ export const SeverityIndicatorTile = ({ description, label, level, title, datesL
     </Box>
   );
 };
-
-const TrendIconWrapper = styled.span`
-  color: ${({ color }) => color};
-  flex-shrink: 0;
-  width: 20px;
-`;

@@ -23,13 +23,14 @@ interface TopicalTileProps {
   description: PortableTextEntry[];
   hideTrendIcon: boolean;
   kpiValue: string | null;
-  sourceLabel: string | null;
+  sourceLabel?: string;
+  dateLabel?: string;
   tileIcon: TopicalIcon;
   title: string;
   trendIcon: TrendIconType;
 }
 
-export const TopicalTile = ({ title, tileIcon, trendIcon, description, kpiValue, cta, sourceLabel, hideTrendIcon }: TopicalTileProps) => {
+export const TopicalTile = ({ title, tileIcon, trendIcon, description, kpiValue, cta, sourceLabel, dateLabel, hideTrendIcon }: TopicalTileProps) => {
   const { formatNumber } = useIntl();
 
   const formattedKpiValue = typeof kpiValue === 'number' ? formatNumber(kpiValue) : typeof kpiValue === 'string' ? kpiValue : false;
@@ -45,7 +46,7 @@ export const TopicalTile = ({ title, tileIcon, trendIcon, description, kpiValue,
 
   return (
     <TopicalTileWrapper cta={cta}>
-      <Box display="flex" flexDirection="column" justifyContent="start">
+      <Box display="flex" flexDirection="column" justifyContent="start" flexGrow={1}>
         <Box display="flex" justifyContent="space-between">
           <Box fontSize={{ _: fontSizes[6], xs: fontSizes[7] }} paddingLeft={{ _: space[3], xs: space[4] }} paddingTop={{ _: space[3], xs: space[4] }}>
             <StyledHeading level={3} color={colors.blue8}>
@@ -79,6 +80,12 @@ export const TopicalTile = ({ title, tileIcon, trendIcon, description, kpiValue,
           <RichContent blocks={description} elementAlignment="start" variableValue={formattedKpiValue} />
         </Box>
       </Box>
+
+      {dateLabel && (
+        <Box padding={{ _: `0 ${space[3]} ${space[1]}`, xs: `0 ${space[4]} ${space[1]}` }}>
+          <InlineText color={colors.gray7}>{dateLabel}</InlineText>
+        </Box>
+      )}
 
       {sourceLabel && (
         <Box padding={{ _: `0 ${space[3]} ${space[3]}`, xs: `0 ${space[4]} ${space[4]}` }}>

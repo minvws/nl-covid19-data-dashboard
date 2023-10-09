@@ -22,16 +22,22 @@ export const WideTable = ({ tableData, headerText, percentageData }: WideTablePr
       <Table>
         <TableHead>
           <Row>
-            <HeaderCell minWidth="300px" width={tableColumnWidths.labelColumn}>
-              {headerText.firstColumn}
-            </HeaderCell>
-            <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>
-              {headerText.secondColumn}
-            </HeaderCell>
-            <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>
-              {headerText.thirdColumn}
-            </HeaderCell>
-            <HeaderCell width={tableColumnWidths.percentageBarColumn}>{headerText.fourthColumn}</HeaderCell>
+            {headerText.firstColumn !== undefined && (
+              <HeaderCell minWidth="300px" width={tableColumnWidths.labelColumn}>
+                {headerText.firstColumn}
+              </HeaderCell>
+            )}
+            {headerText.secondColumn !== undefined && (
+              <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>
+                {headerText.secondColumn}
+              </HeaderCell>
+            )}
+            {headerText.thirdColumn !== undefined && (
+              <HeaderCell minWidth="150px" width={tableColumnWidths.percentageColumn}>
+                {headerText.thirdColumn}
+              </HeaderCell>
+            )}
+            {headerText.fourthColumn !== undefined && <HeaderCell width={tableColumnWidths.percentageBarColumn}>{headerText.fourthColumn}</HeaderCell>}
           </Row>
         </TableHead>
 

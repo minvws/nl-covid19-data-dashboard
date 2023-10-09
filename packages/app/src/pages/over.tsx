@@ -5,6 +5,7 @@ import { ContentImage } from '~/components/cms/content-image';
 import { RichContent } from '~/components/cms/rich-content';
 import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Heading } from '~/components/typography';
+import { ContentLayout } from '~/domain/layout/content-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
@@ -60,7 +61,7 @@ const Over = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...commonTexts.over_metadata} lastGenerated={lastGenerated}>
-      <Box margin={`${space[5]} auto`} maxWidth={`${sizes.maxWidth}px`} padding={` 0 ${space[4]}`}>
+      <ContentLayout>
         <Head>
           <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" />
           <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
@@ -85,7 +86,7 @@ const Over = (props: StaticProps<typeof getStaticProps>) => {
             </div>
           </TwoColumnLayout>
         </Box>
-      </Box>
+      </ContentLayout>
     </Layout>
   );
 };

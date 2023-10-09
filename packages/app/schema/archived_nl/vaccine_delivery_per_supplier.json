@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_delivery_per_supplier_value",
+      "title": "archived_nl_vaccine_delivery_per_supplier_value",
       "type": "object",
       "required": [
         "total",
@@ -60,7 +60,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_delivery_per_supplier",
+  "title": "archived_nl_vaccine_delivery_per_supplier",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

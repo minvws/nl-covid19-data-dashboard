@@ -1,4 +1,4 @@
-import { colors, NlVaccineDeliveryPerSupplier, NlVaccineDeliveryPerSupplierValue } from '@corona-dashboard/common';
+import { colors, ArchivedNlVaccineDeliveryPerSupplier, ArchivedNlVaccineDeliveryPerSupplierValue } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -10,14 +10,14 @@ import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
 
-export function VaccineDeliveryBarChart({ data, text }: { data: NlVaccineDeliveryPerSupplier; text: SiteText['pages']['vaccinations_page']['nl'] }) {
+export function VaccineDeliveryBarChart({ data, text }: { data: ArchivedNlVaccineDeliveryPerSupplier; text: SiteText['pages']['vaccinations_page']['nl'] }) {
   const { commonTexts } = useIntl();
   data.values = data.values.filter((x) => !x.is_estimate);
 
   const productNames = text.data.vaccination_chart.product_names;
 
-  const formatTooltip: TooltipFormatter<NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData> = (
-    context: TooltipData<NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData>
+  const formatTooltip: TooltipFormatter<ArchivedNlVaccineDeliveryPerSupplierValue & StackedBarTooltipData> = (
+    context: TooltipData<ArchivedNlVaccineDeliveryPerSupplierValue & StackedBarTooltipData>
   ) => {
     return <TooltipSeriesList data={context} />;
   };

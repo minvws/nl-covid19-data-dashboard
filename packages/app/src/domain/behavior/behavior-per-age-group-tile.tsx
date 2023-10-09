@@ -1,4 +1,4 @@
-import { colors, NlBehaviorPerAgeGroup } from '@corona-dashboard/common';
+import { colors, ArchivedNlBehaviorPerAgeGroup } from '@corona-dashboard/common';
 import React from 'react';
 import { AgeGroup } from '~/components/age-groups/age-group';
 import { Box } from '~/components/base';
@@ -23,7 +23,7 @@ const AGE_GROUPS_KEYS = ['70_plus', '55_69', '40_54', '25_39', '16_24'] as const
 interface BehaviorPerAgeGroupProps {
   title: string;
   description: string;
-  data: NlBehaviorPerAgeGroup;
+  data: ArchivedNlBehaviorPerAgeGroup;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   text: SiteText['pages']['behavior_page']['nl'];

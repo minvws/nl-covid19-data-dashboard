@@ -1,30 +1,29 @@
 import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard/common';
-import { Coronavirus } from '@corona-dashboard/icons';
+import { Coronavirus, External } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { AgeDemographic } from '~/components/age-demographic';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
+import { ExternalLink } from '~/components/external-link';
 import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
-import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
-import { DeceasedMonitorSection } from '~/domain/deceased';
 import { Layout, NlLayout } from '~/domain/layout';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData, selectArchivedNlData } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData, selectNlData } from '~/static-props/get-data';
 import { space } from '~/style/theme';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -53,9 +52,9 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       const { locale } = context;
       return `{
-      "parts": ${getPagePartsQuery('deceased_page')},
-      "elements": ${getElementsQuery('nl', ['deceased_rivm_archived_20221231'], locale)}
-     }`;
+        "parts": ${getPagePartsQuery('deceased_page')},
+        "elements": ${getElementsQuery('nl', ['deceased_rivm_archived_20221231'], locale)}
+      }`;
     })(context);
 
     return {
@@ -89,9 +88,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   };
 
   const hasActiveWarningTile = !!textShared.notification.message;
-
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
-
   const lastdeceasedPerAgeGroupInsertionDate = getLastInsertionDateOfPage(archivedData, ['deceased_rivm_per_age_group_archived_20221231']);
 
   return (
@@ -121,7 +118,58 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="informational" />}
 
-          <DeceasedMonitorSection data={dataCbs} text={textNl.section_sterftemonitor} showCauseMessage />
+          <ChartTile
+            metadata={{ source: textNl.section_sterftemonitor.bronnen.cbs }}
+            title={textNl.section_sterftemonitor.deceased_monitor_chart_title}
+            description={textNl.section_sterftemonitor.deceased_monitor_chart_description}
+          >
+            <TimeSeriesChart
+              accessibility={{
+                key: 'deceased_monitor',
+              }}
+              tooltipTitle={textNl.section_sterftemonitor.deceased_monitor_chart_title}
+              values={dataCbs.values}
+              seriesConfig={[
+                {
+                  type: 'line',
+                  metricProperty: 'expected',
+                  label: textNl.section_sterftemonitor.deceased_monitor_chart_legenda_expected,
+                  shortLabel: textNl.section_sterftemonitor.deceased_monitor_chart_legenda_expected_short,
+                  color: colors.primary,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'registered',
+                  label: textNl.section_sterftemonitor.deceased_monitor_chart_legenda_registered,
+                  shortLabel: textNl.section_sterftemonitor.deceased_monitor_chart_legenda_registered_short,
+                  color: colors.orange1,
+                },
+                {
+                  type: 'range',
+                  metricPropertyLow: 'expected_min',
+                  metricPropertyHigh: 'expected_max',
+                  label: textNl.section_sterftemonitor.deceased_monitor_chart_legenda_expected_margin,
+                  shortLabel: textNl.section_sterftemonitor.deceased_monitor_chart_legenda_expected_margin_short,
+                  color: colors.blue2,
+                },
+              ]}
+            />
+          </ChartTile>
+
+          <ChartTile title={textNl.section_sterftemonitor.cause_message.title} disableFullscreen>
+            <Box maxWidth="maxWidthText">
+              <Markdown content={textNl.section_sterftemonitor.cause_message.message}></Markdown>
+
+              {textNl.section_sterftemonitor.cause_message.link.url && (
+                <ExternalLink href={textNl.section_sterftemonitor.cause_message.link.url}>
+                  <Box display="flex" alignItems="center">
+                    <External />
+                    {textNl.section_sterftemonitor.cause_message.link.text}
+                  </Box>
+                </ExternalLink>
+              )}
+            </Box>
+          </ChartTile>
 
           {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 
@@ -160,9 +208,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                     date: dataRivm.last_value.date_unix,
                     source: textNl.section_deceased_rivm.bronnen.rivm,
                   }}
+                  description={textNl.section_deceased_rivm.kpi_covid_daily_description}
                 >
                   <KpiValue absolute={dataRivm.last_value.covid_daily} difference={archivedData.difference.deceased_rivm__covid_daily_archived_20221231} isAmount />
-                  <Markdown content={textNl.section_deceased_rivm.kpi_covid_daily_description} />
                 </KpiTile>
                 <KpiTile
                   title={textNl.section_deceased_rivm.kpi_covid_total_title}
@@ -170,9 +218,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                     date: dataRivm.last_value.date_unix,
                     source: textNl.section_deceased_rivm.bronnen.rivm,
                   }}
+                  description={textNl.section_deceased_rivm.kpi_covid_total_description}
                 >
                   <KpiValue absolute={dataRivm.last_value.covid_total} />
-                  <Text>{textNl.section_deceased_rivm.kpi_covid_total_description}</Text>
                 </KpiTile>
               </TwoKpiSection>
 
