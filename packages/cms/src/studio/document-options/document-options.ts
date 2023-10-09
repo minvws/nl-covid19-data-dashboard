@@ -4,15 +4,11 @@ import { PublishOrAcceptAction } from './custom-actions/publish-or-accept';
 
 // Removes lokalize from the global "create new" interface at the top left of the navigation bar.
 export const newDocumentOptions = (prev: TemplateResponse[], { creationContext }: { creationContext: NewDocumentCreationContext }) => {
-  if (creationContext.type === 'structure') {
-    return prev.filter((templateItem) => templateItem.templateId !== 'lokalizeText');
-  }
-  if (creationContext.type === 'global') {
-    // Removes the button visually from the header
+  // Removes the button visually from the header
+  window.document.querySelector('style')?.append('[data-ui="Navbar"] button[aria-label^="Create new document"] {display: none}');
 
-    window.document.querySelector('style')?.append('[data-ui="Navbar"] button[aria-label^="Create new document"] {display: none}');
-    // Removes the functionality from the button in the header
-    return [];
+  if (creationContext.type === 'structure' || creationContext.type === 'global') {
+    return prev.filter((templateItem) => templateItem.templateId !== 'lokalizeText');
   }
 
   return prev;
