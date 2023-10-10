@@ -116,7 +116,6 @@ export const getStaticProps = createGetStaticProps(
         articles: getArticleParts(content.parts.pageParts, 'vaccinationsPageArticles'),
         faqs: getFaqParts(content.parts.pageParts, 'vaccinationsPageFAQs'),
         dataExplained: getDataExplainedParts(content.parts.pageParts, 'vaccinationsPageDataExplained'),
-        links: getLinkParts(content.parts.pageParts, 'vaccinationsPageLinks'),
         boosterArticles: getArticleParts(content.parts.pageParts, 'vaccineBoosterArticles'),
         thirdShotArticles: getArticleParts(content.parts.pageParts, 'vaccineThirdShotArticles'),
         boosterLinks: getLinkParts(content.parts.pageParts, 'vaccinationsBoosterPageLinks'),
@@ -189,7 +188,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
             }}
-            pageLinks={content.links}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,
               faq: content.faqs,
