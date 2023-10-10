@@ -45,3 +45,9 @@ timestamp,action,key,document_id,move_to
 2023-10-04T06:46:58.690Z,add,pages.vaccinations_page.nl.vaccine_campaigns.autumn_2022.title,22Xg3hRGtxwin2PlGEkt4Q,__
 2023-10-04T06:46:58.690Z,delete,pages.vaccinations_page.nl.vaccine_campaigns.atuumn_2022.description,fQMSbwQpEgDbjt4uWKxuMY,__
 2023-10-04T06:46:58.691Z,delete,pages.vaccinations_page.nl.vaccine_campaigns.atuumn_2022.title,uM9i5K7TlE0aLwmg4eRLuC,__
+2023-10-10T12:55:03.940Z,add,pages.vaccinations_page.nl.vaccination_coverage.description_primary_shot,rohM7ceZTOpkR9JaOOFLxH,__
+2023-10-10T12:55:04.767Z,add,pages.vaccinations_page.nl.vaccination_coverage.description_archived,kfsdp23RRJLNMtloMWl01t,__
+2023-10-10T12:55:05.790Z,add,pages.vaccinations_page.nl.vaccination_coverage.title_primary_series,ISH0YLnLyUv5o4crieNScU,__
+2023-10-10T12:55:06.790Z,add,pages.vaccinations_page.nl.vaccination_coverage.title_autumn_2022_shot,Lfn0X6iH0v4r6Hw7fQhx7Z,__
+2023-10-10T12:55:07.777Z,add,pages.vaccinations_page.nl.vaccination_coverage.title_archived,rohM7ceZTOpkR9JaOOFM43,__
+2023-10-10T12:55:07.777Z,delete,pages.vaccinations_page.nl.vaccination_coverage.title,jF33EuwumlGuwav2FD464K,__

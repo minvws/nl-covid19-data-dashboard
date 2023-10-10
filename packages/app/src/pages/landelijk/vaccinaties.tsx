@@ -116,7 +116,6 @@ export const getStaticProps = createGetStaticProps(
         articles: getArticleParts(content.parts.pageParts, 'vaccinationsPageArticles'),
         faqs: getFaqParts(content.parts.pageParts, 'vaccinationsPageFAQs'),
         dataExplained: getDataExplainedParts(content.parts.pageParts, 'vaccinationsPageDataExplained'),
-        links: getLinkParts(content.parts.pageParts, 'vaccinationsPageLinks'),
         boosterArticles: getArticleParts(content.parts.pageParts, 'vaccineBoosterArticles'),
         thirdShotArticles: getArticleParts(content.parts.pageParts, 'vaccineThirdShotArticles'),
         boosterLinks: getLinkParts(content.parts.pageParts, 'vaccinationsBoosterPageLinks'),
@@ -189,7 +188,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
             }}
-            pageLinks={content.links}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,
               faq: content.faqs,
@@ -292,8 +290,8 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
           <PrimarySeriesShotCoveragePerAgeGroup
             text={textNl.vaccination_coverage}
-            title={textNl.vaccination_coverage.title}
-            description={textNl.vaccination_coverage.description_autumn_2022_shot}
+            title={textNl.vaccination_coverage.title_primary_series}
+            description={textNl.vaccination_coverage.description_primary_shot}
             sortingOrder={['80+', '70-79', '60-69', '50-59', '40-49', '30-39', '18-29', '12-17', '5-11']}
             metadata={{
               datumsText: textNl.dates,
@@ -378,7 +376,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
               <Autumn2022ShotCoveragePerAgeGroup
                 text={textNl.vaccination_coverage}
-                title={textNl.vaccination_coverage.title}
+                title={textNl.vaccination_coverage.title_autumn_2022_shot}
                 description={textNl.vaccination_coverage.description_autumn_2022_shot}
                 sortingOrder={['80+', '70-79', '60-69', '50-59', '40-49', '30-39', '18-29', '12-17', '5-11']}
                 metadata={{
@@ -391,8 +389,8 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
               <BoosterShotCoveragePerAgeGroup
                 text={textNl}
-                title={textNl.vaccination_coverage.title}
-                description={textNl.archived.vaccination_coverage.top_level_description_booster_shot}
+                title={textNl.vaccination_coverage.title_archived}
+                description={textNl.vaccination_coverage.description_archived}
                 sortingOrder={['80+', '70-79', '60-69', '50-59', '40-49', '30-39', '18-29', '12-17', '5-11']}
                 metadata={{
                   datumsText: textNl.datums,

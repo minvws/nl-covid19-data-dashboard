@@ -16,7 +16,7 @@ import { VaccineCoveragePerAgeGroup, VaccineCoverageToggleTile } from '~/domain/
 import { VaccineCoverageChoropleth } from '~/domain/vaccine/vaccine-coverage-choropleth';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData, createGetArchivedChoroplethData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
@@ -77,7 +77,6 @@ export const getStaticProps = createGetStaticProps(
         articles: getArticleParts(content.pageParts, 'vaccinationsPageArticles'),
         faqs: getFaqParts(content.pageParts, 'vaccinationsPageFAQs'),
         dataExplained: getDataExplainedParts(content.pageParts, 'vaccinationsPageDataExplained'),
-        links: getLinkParts(content.pageParts, 'vaccinationsPageLinks'),
       },
     };
   }
@@ -140,7 +139,6 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
             }}
-            pageLinks={content.links}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}
             pageInformationHeader={getPageInformationHeaderContent({
