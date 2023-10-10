@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "gm_collection_tested_overall",
+  "title": "archived_gm_collection_tested_overall",
   "additionalProperties": false,
   "required": ["date_unix", "gmcode", "infected", "infected_per_100k", "date_of_insertion_unix"],
   "properties": {

@@ -1,4 +1,4 @@
-import { colors, GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
+import { colors, ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth } from '@corona-dashboard/common';
 import { SiteText } from '~/locale';
 import { matchingAgeGroups, VaccineCoverageData, DataPerAgeGroup, BirthyearRangeKeysOfAgeGroups, PercentageKeysOfAgeGroups, PercentageLabelKeysOfAgeGroups } from './common';
 import css from '@styled-system/css';
@@ -15,11 +15,11 @@ import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AgeGroup, AgeGroupSelect } from './components/age-group-select';
-import { CoverageKindProperty, VaccinationCoverageKindSelect } from './components/vaccination-coverage-kind-select';
+import { CoverageKindProperty } from './components/vaccination-coverage-kind-select';
 import { parseVaccinatedPercentageLabel } from './logic/parse-vaccinated-percentage-label';
 
 interface VaccineCoverageChoroplethProps {
-  data: GmCollectionVaccineCoveragePerAgeGroup[];
+  data: ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth[];
   dataOptions: DataOptions;
   text: {
     title: string;
@@ -27,25 +27,17 @@ interface VaccineCoverageChoroplethProps {
     vaccinationKindLabel?: string;
     ageGroupLabel?: string;
   };
+  isPrimarySeries?: boolean;
 }
 
-export const VaccineCoverageChoropleth = ({ data, dataOptions, text }: VaccineCoverageChoroplethProps) => {
+export const VaccineCoverageChoropleth = ({ data, dataOptions, text, isPrimarySeries }: VaccineCoverageChoroplethProps) => {
   const { commonTexts } = useIntl();
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18');
-  const [selectedCoverageKind, setSelectedCoverageKind] = useState<CoverageKindProperty>('primary_series');
-  /**
-   * When changing between coverage kinds where the selected age group isn't available,
-   * the other coverage kind set the non-matching age group to a default one.
-   */
-  const setSelectedCoverageKindAndAge = (coverageKind: CoverageKindProperty) => {
-    if (coverageKind === selectedCoverageKind) return;
-    if (selectedAgeGroup !== '12') {
-      setSelectedAgeGroup(selectedAgeGroup === '18' ? '60' : '18');
-    }
-    setSelectedCoverageKind(coverageKind);
-  };
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>(isPrimarySeries ? '18' : '60');
+  const selectedCoverageKind: CoverageKindProperty = isPrimarySeries ? 'primary_series' : 'autumn_2022';
 
-  const choroplethDataGm: GmCollectionVaccineCoveragePerAgeGroup[] = data.filter((choroplethDataSingleGM) => choroplethDataSingleGM.vaccination_type === selectedCoverageKind);
+  const choroplethDataGm: ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth[] = data.filter(
+    (choroplethDataSingleGM) => choroplethDataSingleGM.vaccination_type === selectedCoverageKind
+  );
 
   return (
     <ChoroplethTile
@@ -63,12 +55,7 @@ export const VaccineCoverageChoropleth = ({ data, dataOptions, text }: VaccineCo
             >
               {commonTexts.choropleth.vaccination_coverage.shared.dropdowns_title}
             </BoldText>
-
             <Box display="grid" gridTemplateColumns={{ _: '1 fr', lg: 'repeat(2, 1fr)' }} gridGap={{ _: '24px', lg: space[2] }} margin={`${space[2]} 0`} minWidth="100%">
-              <Box>
-                {text.vaccinationKindLabel && <BoldText>{text.vaccinationKindLabel}</BoldText>}
-                <VaccinationCoverageKindSelect marginTop={space[2]} onChange={setSelectedCoverageKindAndAge} initialValue={selectedCoverageKind} />
-              </Box>
               <Box>
                 {text.ageGroupLabel && <BoldText>{text.ageGroupLabel}</BoldText>}
                 <AgeGroupSelect marginTop={space[2]} onChange={setSelectedAgeGroup} initialValue={selectedAgeGroup} shownAgeGroups={matchingAgeGroups[selectedCoverageKind]} />
@@ -83,7 +70,7 @@ export const VaccineCoverageChoropleth = ({ data, dataOptions, text }: VaccineCo
       }}
       metadata={{
         source: commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
-        date: data.find((item: GmCollectionVaccineCoveragePerAgeGroup) => item.vaccination_type === selectedCoverageKind)?.date_unix,
+        date: data.find((item: ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth) => item.vaccination_type === selectedCoverageKind)?.date_unix,
       }}
       hasPadding
     >
@@ -92,7 +79,7 @@ export const VaccineCoverageChoropleth = ({ data, dataOptions, text }: VaccineCo
         accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
         data={choroplethDataGm}
         dataConfig={{
-          metricName: 'vaccine_coverage_per_age_group',
+          metricName: 'vaccine_coverage_per_age_group_choropleth_archived_20231004',
           metricProperty: `vaccinated_percentage_${selectedAgeGroup}_plus`,
         }}
         dataOptions={dataOptions}

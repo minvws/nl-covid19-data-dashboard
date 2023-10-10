@@ -1,86 +1,82 @@
-import css from '@styled-system/css';
 import Head from 'next/head';
 import styled from 'styled-components';
-import { RichContent } from '~/components/cms/rich-content';
+import { VisuallyHidden } from '~/components';
+import { ContactPageGroup } from '~/components/contact/contact-page-group';
+import { ContactPage } from '~/components/contact/types';
 import { Heading } from '~/components/typography';
-import { Content } from '~/domain/layout/content';
+import { ContentLayout } from '~/domain/layout/content-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  createGetContent,
-  getLastGeneratedDate,
-} from '~/static-props/get-data';
-import { RichContentBlock } from '~/types/cms';
-
-interface ContactData {
-  title: string | null;
-  description: RichContentBlock[] | null;
-}
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
+import { createGetContent, getLastGeneratedDate } from '~/static-props/get-data';
+import { mediaQueries, space } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<ContactData>((context) => {
+  createGetContent<ContactPage>((context) => {
     const { locale } = context;
 
-    return `*[_type == 'contact']{
-      title,
-      "description": {
-        "_type": description._type,
-        "${locale}": [
-          ...description.${locale}[]
-          {
-            ...,
-            "asset": asset->
-           },
-        ]
+    return `// groq
+    *[_type == 'contact'] {
+      'groups': contactPageGroups[]->{
+        'id': _id,
+        'title': title.${locale},
+        'items': contactPageGroupItems[]->{
+          'id': _id,
+          'title': title.${locale},
+          'titleUrl': itemTitleUrl,
+          'linkType': linkType.linkType,
+          'description': description.${locale},
+          'links': contactPageItemLinks[] {
+            'id': _id,
+            'titleAboveLink': title.${locale},
+            'linkType': linkType.linkType,
+            'label': link.title.${locale},
+            'href': link.href      
+          }
+        }
       }
-    }[0]
-    `;
+    }[0]`;
   })
 );
 
 const Contact = (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts } = useIntl();
-  const { content, lastGenerated } = props;
+  const {
+    content: { groups },
+    lastGenerated,
+  } = props;
+
+  const middleIndexOfGroups = Math.ceil(groups.length / 2);
+  const firstHalf = groups.slice(0, middleIndexOfGroups);
+  const secondHalf = groups.slice(middleIndexOfGroups);
 
   return (
     <Layout {...commonTexts.contact_metadata} lastGenerated={lastGenerated}>
       <Head>
-        <link
-          key="dc-type"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/webpagina"
-        />
-        <link
-          key="dc-type-title"
-          rel="dcterms:type"
-          href="https://standaarden.overheid.nl/owms/terms/webpagina"
-          title="webpagina"
-        />
+        <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" />
+        <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
       </Head>
 
-      <Content>
-        {content.title && <Heading level={1}>{content.title}</Heading>}
-        {content.description && (
-          <RichContent
-            blocks={content.description}
-            contentWrapper={RichContentWrapper}
-          />
-        )}
-      </Content>
+      <VisuallyHidden>
+        <Heading level={1}>Contact</Heading>
+      </VisuallyHidden>
+
+      <ContentLayout>
+        <ContactLayout>
+          <ContactPageGroup groups={firstHalf} />
+          <ContactPageGroup groups={secondHalf} />
+        </ContactLayout>
+      </ContentLayout>
     </Layout>
   );
 };
 
-const RichContentWrapper = styled.div(
-  css({
-    maxWidth: 'maxWidthText',
-    width: '100%',
-  })
-);
+const ContactLayout = styled.div`
+  @media ${mediaQueries.sm} {
+    display: flex;
+    gap: ${space[4]} ${space[5]};
+  }
+`;
 
 export default Contact;

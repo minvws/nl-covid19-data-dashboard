@@ -14,7 +14,7 @@ export const homepageStructureItem = (S: StructureBuilder) => {
           addStructureItem(S, BsGear, 'Samenvattingspagina configuratie', 'topicalPageConfig'),
           addStructureItem(S, BsCardList, 'Weeksamenvatting', 'weeklySummary'),
           addStructureItem(S, BsThermometer, 'Thermometer', 'thermometer'),
-          addStructureItem(S, BsCardText, "Thema's", 'themeCollection'),
+          addStructureItem(S, BsCardText, "KPI thema's en tegels", 'themeCollection'),
           addStructureItem(S, BsCardText, 'Adviezen', 'advice'),
         ])
     );

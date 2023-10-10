@@ -120,6 +120,7 @@ See below an overview of all the available icons in this package. This file is g
 | Stap1WinkelsOpen                       | <div style="background-color: white;"><img src="./src/svg/stap_1_winkels_open.svg" alt="Stap1WinkelsOpen" /></div>                                             |
 | Stopwatch                              | <div style="background-color: white;"><img src="./src/svg/stopwatch.svg" alt="Stopwatch" /></div>                                                              |
 | Taxi                                   | <div style="background-color: white;"><img src="./src/svg/taxi.svg" alt="Taxi" /></div>                                                                        |
+| Telephone                              | <div style="background-color: white;"><img src="./src/svg/telephone.svg" alt="Telephone" /></div>                                                              |
 | Testbewijs                             | <div style="background-color: white;"><img src="./src/svg/testbewijs.svg" alt="Testbewijs" /></div>                                                            |
 | Toegangsbewijzen                       | <div style="background-color: white;"><img src="./src/svg/toegangsbewijzen.svg" alt="Toegangsbewijzen" /></div>                                                |
 | Town                                   | <div style="background-color: white;"><img src="./src/svg/town.svg" alt="Town" /></div>                                                                        |

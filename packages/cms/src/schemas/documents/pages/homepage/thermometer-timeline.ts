@@ -30,7 +30,7 @@ export const thermometerTimeline = defineType({
       title: 'Tooltip label',
       description: 'Extra beschrijving voor in de laatste gebeurtenis in de tijdlijn',
       name: 'tooltipCurrentEstimationLabel',
-      type: 'localeText',
+      type: 'localeString',
       validation: (rule) => rule.required(),
     }),
     defineField({

@@ -9,26 +9,8 @@ export const thermometer = defineType({
   name: 'thermometer',
   fieldsets: [
     {
-      title: 'De beschrijving boven de thermometer',
-      name: 'description',
-      description: 'Klik op het label om de velden te tonen.',
-      options: {
-        collapsible: true,
-        collapsed: true,
-      },
-    },
-    {
       title: 'Artikel referentie',
       name: 'artikel-referentie',
-      description: 'Klik op het label om de velden te tonen.',
-      options: {
-        collapsible: true,
-        collapsed: true,
-      },
-    },
-    {
-      title: 'Titel van standen informatie',
-      name: 'level-information',
       description: 'Klik op het label om de velden te tonen.',
       options: {
         collapsible: true,
@@ -51,12 +33,6 @@ export const thermometer = defineType({
       name: 'title',
       type: 'localeString',
       validation: localeStringValidation((rule) => rule.required()),
-    }),
-    defineField({
-      title: 'De beschrijving boven de thermometer',
-      name: 'subTitle',
-      type: 'localeRichContentBlock',
-      fieldset: 'description',
     }),
     defineField({
       title: 'De titel binnen de thermometer tegel',
@@ -109,12 +85,6 @@ export const thermometer = defineType({
       name: 'collapsibleTitle',
       type: 'localeString',
       validation: localeStringValidation((rule) => rule.required()),
-    }),
-    defineField({
-      title: 'Titel van standen informatie',
-      name: 'trendIcon',
-      type: 'thermometerTrendIcon',
-      fieldset: 'level-information',
     }),
     defineField({
       title: 'Tijdlijn',

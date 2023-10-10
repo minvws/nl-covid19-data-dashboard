@@ -1,4 +1,4 @@
-import { colors, GmCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
+import { colors, ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth } from '@corona-dashboard/common';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
@@ -16,16 +16,22 @@ import { VaccineCoveragePerAgeGroup, VaccineCoverageToggleTile } from '~/domain/
 import { VaccineCoverageChoropleth } from '~/domain/vaccine/vaccine-coverage-choropleth';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData, createGetArchivedChoroplethData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { assert, replaceVariablesInText, useFormatLokalizePercentage, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { WarningTile } from '~/components/warning-tile';
 
-const pageMetrics = ['vaccine_coverage_per_age_group', 'vaccine_coverage_per_age_group_archived', 'booster_coverage_archived_20220904'];
+const pageMetrics = [
+  'vaccine_coverage_per_age_group',
+  'vaccine_coverage_per_age_group_archived',
+  'booster_coverage_archived_20220904',
+  'vaccine_coverage_per_age_group_archived_20231004',
+];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textGm: siteText.pages.vaccinations_page.gm,
@@ -40,21 +46,26 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData('code', 'vaccine_coverage_per_age_group'),
-  selectArchivedGmData('vaccine_coverage_per_age_group_archived_20220622', 'vaccine_coverage_per_age_group_archived_20220908', 'booster_coverage_archived_20220904'),
-  createGetChoroplethData({
-    gm: ({ vaccine_coverage_per_age_group }, ctx) => {
-      if (!isDefined(vaccine_coverage_per_age_group)) {
+  selectGmData('code'),
+  selectArchivedGmData(
+    'vaccine_coverage_per_age_group_archived_20220622',
+    'vaccine_coverage_per_age_group_archived_20220908',
+    'booster_coverage_archived_20220904',
+    'vaccine_coverage_per_age_group_archived_20231004'
+  ),
+  createGetArchivedChoroplethData({
+    gm: ({ vaccine_coverage_per_age_group_choropleth_archived_20231004 }, ctx) => {
+      if (!isDefined(vaccine_coverage_per_age_group_choropleth_archived_20231004)) {
         return {
-          vaccine_coverage_per_age_group: null as unknown as GmCollectionVaccineCoveragePerAgeGroup[],
+          vaccine_coverage_per_age_group_choropleth_archived_20231004: null as unknown as ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth[],
         };
       }
       const vrCode = isPresent(ctx.params?.code) ? vrCodeByGmCode[ctx.params?.code as 'string'] : undefined;
 
       return {
-        vaccine_coverage_per_age_group: isDefined(vrCode)
-          ? vaccine_coverage_per_age_group.filter((vaccineCoveragePerAgeGroup) => gmCodesByVrCode[vrCode].includes(vaccineCoveragePerAgeGroup.gmcode))
-          : vaccine_coverage_per_age_group,
+        vaccine_coverage_per_age_group_choropleth_archived_20231004: isDefined(vrCode)
+          ? vaccine_coverage_per_age_group_choropleth_archived_20231004.filter((vaccineCoveragePerAgeGroup) => gmCodesByVrCode[vrCode].includes(vaccineCoveragePerAgeGroup.gmcode))
+          : vaccine_coverage_per_age_group_choropleth_archived_20231004,
       };
     },
   }),
@@ -66,19 +77,17 @@ export const getStaticProps = createGetStaticProps(
         articles: getArticleParts(content.pageParts, 'vaccinationsPageArticles'),
         faqs: getFaqParts(content.pageParts, 'vaccinationsPageFAQs'),
         dataExplained: getDataExplainedParts(content.pageParts, 'vaccinationsPageDataExplained'),
-        links: getLinkParts(content.pageParts, 'vaccinationsPageLinks'),
       },
     };
   }
 );
 
 export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { pageText, choropleth, municipalityName, selectedGmData: currentData, selectedArchivedGmData: archivedData, content, lastGenerated } = props;
+  const { pageText, archivedChoropleth, municipalityName, selectedGmData: currentData, selectedArchivedGmData: archivedData, content, lastGenerated } = props;
   const { commonTexts } = useIntl();
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
   const reverseRouter = useReverseRouter();
-
   const { textGm, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
@@ -92,8 +101,8 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
   };
 
   const filteredVaccination = {
-    primarySeries: currentData.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'primary_series'),
-    autumn2022: currentData.vaccine_coverage_per_age_group.values.find((item) => item.vaccination_type === 'autumn_2022'),
+    primarySeries: archivedData.vaccine_coverage_per_age_group_archived_20231004.values.find((item) => item.vaccination_type === 'primary_series'),
+    autumn2022: archivedData.vaccine_coverage_per_age_group_archived_20231004.values.find((item) => item.vaccination_type === 'autumn_2022'),
   };
 
   assert(filteredVaccination.primarySeries, `[${VaccinationsGmPage.name}] Could not find data for the vaccine coverage per age group for the primary series`);
@@ -111,7 +120,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
     archivedData.vaccine_coverage_per_age_group_archived_20220908.values.find((x) => x.age_group_range === '12+') ||
     emptyCoverageData.vaccine_coverage_per_age_group_archived_20220908.values[1];
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(currentData, pageMetrics);
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -130,7 +139,6 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
             }}
-            pageLinks={content.links}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}
             pageInformationHeader={getPageInformationHeaderContent({
@@ -138,38 +146,9 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               faq: content.faqs,
             })}
           />
-          {filteredVaccination.autumn2022.birthyear_range_60_plus && (
-            <BorderedKpiSection
-              title={textShared.vaccination_grade_tile.autumn_labels.title}
-              description={textShared.vaccination_grade_tile.autumn_labels.description}
-              source={textShared.vaccination_grade_tile.autumn_labels.source}
-              tilesData={[
-                {
-                  value: filteredVaccination.autumn2022.vaccinated_percentage_60_plus,
-                  isPercentage: true,
-                  birthyear: filteredVaccination.autumn2022.birthyear_range_60_plus,
-                  title: textShared.vaccination_grade_tile.age_group_labels.age_60_plus,
-                  description: textShared.vaccination_grade_tile.autumn_labels.description_60_plus,
-                  bar: {
-                    value: filteredVaccination.autumn2022.vaccinated_percentage_60_plus || 0,
-                    color: colors.scale.blueDetailed[8],
-                  },
-                },
-                {
-                  value: filteredVaccination.autumn2022.vaccinated_percentage_12_plus,
-                  isPercentage: true,
-                  birthyear: filteredVaccination.autumn2022.birthyear_range_12_plus,
-                  title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
-                  description: textShared.vaccination_grade_tile.autumn_labels.description_12_plus,
-                  bar: {
-                    value: filteredVaccination.autumn2022.vaccinated_percentage_12_plus || 0,
-                    color: colors.scale.blueDetailed[8],
-                  },
-                },
-              ]}
-              dateOrRange={filteredVaccination.autumn2022.date_unix}
-            />
-          )}
+
+          {!!textShared.warning && <WarningTile isFullWidth message={textShared.warning} variant="informational" />}
+
           <BorderedKpiSection
             title={textShared.vaccination_grade_tile.fully_vaccinated_labels.title}
             description={textShared.vaccination_grade_tile.fully_vaccinated_labels.description}
@@ -201,7 +180,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             dateOrRange={filteredVaccination.primarySeries.date_unix}
           />
           <VaccineCoverageChoropleth
-            data={choropleth.gm.vaccine_coverage_per_age_group}
+            data={archivedChoropleth.gm.vaccine_coverage_per_age_group_choropleth_archived_20231004}
             dataOptions={{ getLink: reverseRouter.gm.vaccinaties, selectedCode: currentData.code, isPercentage: true }}
             text={{
               title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.title, { municipalityName: municipalityName }),
@@ -209,6 +188,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               vaccinationKindLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_vaccination_coverage_kind_select,
               ageGroupLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_age_group_select,
             }}
+            isPrimarySeries
           />
 
           {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
@@ -228,6 +208,48 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
 
           {hasHideArchivedCharts && (
             <>
+              {filteredVaccination.autumn2022.birthyear_range_60_plus && (
+                <BorderedKpiSection
+                  title={textShared.vaccination_grade_tile.autumn_labels.title}
+                  description={textShared.vaccination_grade_tile.autumn_labels.description}
+                  source={textShared.vaccination_grade_tile.autumn_labels.source}
+                  tilesData={[
+                    {
+                      value: filteredVaccination.autumn2022.vaccinated_percentage_60_plus,
+                      isPercentage: true,
+                      birthyear: filteredVaccination.autumn2022.birthyear_range_60_plus,
+                      title: textShared.vaccination_grade_tile.age_group_labels.age_60_plus,
+                      description: textShared.vaccination_grade_tile.autumn_labels.description_60_plus,
+                      bar: {
+                        value: filteredVaccination.autumn2022.vaccinated_percentage_60_plus || 0,
+                        color: colors.scale.blueDetailed[8],
+                      },
+                    },
+                    {
+                      value: filteredVaccination.autumn2022.vaccinated_percentage_12_plus,
+                      isPercentage: true,
+                      birthyear: filteredVaccination.autumn2022.birthyear_range_12_plus,
+                      title: textShared.vaccination_grade_tile.age_group_labels.age_12_plus,
+                      description: textShared.vaccination_grade_tile.autumn_labels.description_12_plus,
+                      bar: {
+                        value: filteredVaccination.autumn2022.vaccinated_percentage_12_plus || 0,
+                        color: colors.scale.blueDetailed[8],
+                      },
+                    },
+                  ]}
+                  dateOrRange={filteredVaccination.autumn2022.date_unix}
+                />
+              )}
+              <VaccineCoverageChoropleth
+                data={archivedChoropleth.gm.vaccine_coverage_per_age_group_choropleth_archived_20231004}
+                dataOptions={{ getLink: reverseRouter.gm.vaccinaties, selectedCode: currentData.code, isPercentage: true }}
+                text={{
+                  title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.archived.title, { municipalityName: municipalityName }),
+                  description: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.archived.description, { municipalityName: municipalityName }),
+                  vaccinationKindLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_vaccination_coverage_kind_select,
+                  ageGroupLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_age_group_select,
+                }}
+              />
               <VaccineCoverageToggleTile
                 title={textGm.vaccination_grade_toggle_tile.title}
                 source={textGm.vaccination_grade_toggle_tile.source}

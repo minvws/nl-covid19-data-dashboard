@@ -24,6 +24,15 @@ export const themeTile = defineType({
         collapsed: true,
       },
     },
+    {
+      title: 'Link configuratie',
+      name: 'link-configuration',
+      description: 'Klik op het label om de velden te tonen.',
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
   ],
   fields: [
     defineField({
@@ -54,7 +63,7 @@ export const themeTile = defineType({
       fieldset: 'kpiValue',
     }),
     defineField({
-      title: 'Verberg trend icoon',
+      title: 'Toon geen pijlen',
       name: 'hideTrendIcon',
       type: 'boolean',
       description: 'Wanneer aangevinkt, wordt het trend icoon niet getoond bij de KPI waarde.',
@@ -63,7 +72,13 @@ export const themeTile = defineType({
     }),
     defineField({
       title: 'Metadata label',
-      description: 'Bij {{date}} wordt de tekst geplaatst van het tegeldatumveld. Deze kan handmatig overschreven worden.',
+      description: 'Bij {{date}} is de tekst van het tegeldatumveld optioneel',
+      name: 'dateLabel',
+      type: 'localeString',
+    }),
+    defineField({
+      title: 'Source label',
+      description: 'Deze velden zijn optionele broninformatie.',
       name: 'sourceLabel',
       type: 'localeString',
     }),
@@ -92,14 +107,16 @@ export const themeTile = defineType({
       fieldset: 'theme-tile-date-config',
     }),
     defineField({
-      title: 'Trend icon',
+      title: 'Trend pijlen',
       name: 'trendIcon',
       type: 'trendIcon',
     }),
     defineField({
       title: 'Link',
+      description: 'Vul hier de link in naar de juiste Landelijk pagina',
       name: 'cta',
       type: 'link',
+      fieldset: 'link-configuration',
     }),
   ],
   preview: {
