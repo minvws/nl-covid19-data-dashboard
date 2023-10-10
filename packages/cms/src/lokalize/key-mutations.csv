@@ -51,3 +51,4 @@ timestamp,action,key,document_id,move_to
 2023-10-10T12:55:06.790Z,add,pages.vaccinations_page.nl.vaccination_coverage.title_autumn_2022_shot,Lfn0X6iH0v4r6Hw7fQhx7Z,__
 2023-10-10T12:55:07.777Z,add,pages.vaccinations_page.nl.vaccination_coverage.title_archived,rohM7ceZTOpkR9JaOOFM43,__
 2023-10-10T12:55:07.777Z,delete,pages.vaccinations_page.nl.vaccination_coverage.title,jF33EuwumlGuwav2FD464K,__
+2023-10-10T14:25:44.020Z,add,pages.vaccinations_page.nl.vaccination_coverage.headers.autumn_2022_shot_bar,Lfn0X6iH0v4r6Hw7fQm9gU,__
