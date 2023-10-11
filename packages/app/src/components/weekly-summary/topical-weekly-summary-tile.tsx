@@ -36,7 +36,7 @@ export const TopicalWeeklySummaryTile = ({ label, level, title, summaryItems }: 
               <Box minWidth="25px" height="25px">
                 <DynamicIcon width="25px" name={getFilenameToIconName(summaryItem.tileIcon) as TopicalIcon} />
               </Box>
-              <Box display="flex">
+              <Box display="flex" flexDirection={{ _: 'column', sm: 'row' }}>
                 <RichContent blocks={summaryItem.description} />
                 {summaryItem.isThermometerMetric && label && (
                   <InlineText css={css({ whiteSpace: 'nowrap' })}>
