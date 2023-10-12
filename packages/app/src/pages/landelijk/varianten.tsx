@@ -136,7 +136,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               source={textNl.bronnen.rivm}
               dates={{
                 date_end_unix: dates.date_end_unix,
-                date_of_report_unix: dates.date_of_report_unix,
+                date_of_report_unix: getLastInsertionDateOfPage(data, ['variants']),
                 date_start_unix: dates.date_start_unix,
               }}
             />
