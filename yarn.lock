@@ -3954,7 +3954,7 @@ __metadata:
     node-mocks-http: ^1.11.0
     npm-run-all: ^4.1.5
     polished: ^4.1.3
-    postcss: ^8.4.4
+    postcss: ^8.4.31
     postcss-flexbugs-fixes: ^5.0.2
     postcss-preset-env: ^6.7.0
     react: ^17.0.2
@@ -26339,14 +26339,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.4":
-  version: 8.4.4
-  resolution: "postcss@npm:8.4.4"
+"postcss@npm:^8.4.31":
+  version: 8.4.31
+  resolution: "postcss@npm:8.4.31"
   dependencies:
-    nanoid: ^3.1.30
+    nanoid: ^3.3.6
     picocolors: ^1.0.0
-    source-map-js: ^1.0.1
-  checksum: 6cf3fe0ecdf5a0d2aeb5e8404938c7eab968704e2e29dc5421e90b4014eb1975c1c0ad828425f2428807ef6e3fcfadd71f988ab55cb06c28ac2866f22403255b
+    source-map-js: ^1.0.2
+  checksum: 1d8611341b073143ad90486fcdfeab49edd243377b1f51834dc4f6d028e82ce5190e4f11bb2633276864503654fb7cab28e67abdc0fbf9d1f88cad4a0ff0beea
   languageName: node
   linkType: hard
 
