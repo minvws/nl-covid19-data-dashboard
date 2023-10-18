@@ -80,7 +80,11 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
 
   const totalVariants = data.named_difference.variants__percentage.filter((namedDifferenceEntry) => namedDifferenceEntry.variant_code !== 'other_variants').length;
 
+  const sampleThresholdPassed = data.variants ? data.variants!.values[0].last_value.sample_size > 100 : false;
+
   const variantLabels: VariantDynamicLabels = {};
+
+  const variantenTableDescription = sampleThresholdPassed ? textNl.varianten_omschrijving : textNl.varianten_tabel.omschrijving_te_weinig_samples;
 
   data.variants?.values.forEach((variant) => {
     variantLabels[`${variant.variant_code}`] = locale === 'nl' ? variant.values[0].label_nl : variant.values[0].label_en;
@@ -157,8 +161,9 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               text={{
                 ...textNl.varianten_tabel,
                 variantCodes: variantLabels,
-                description: textNl.varianten_omschrijving,
+                description: variantenTableDescription,
               }}
+              sampleThresholdPassed={sampleThresholdPassed}
               source={textNl.bronnen.rivm}
               dates={{
                 date_end_unix: dates.date_end_unix,
