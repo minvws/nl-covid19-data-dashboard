@@ -1,4 +1,4 @@
-import { NlVariants } from '@corona-dashboard/common';
+import { ArchivedNlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 
 export type VariantCode = string;
@@ -10,7 +10,7 @@ export type VariantChartValue = {
 } & Record<string, number>;
 
 const EMPTY_VALUES = {
-  variantChart: null,
+  archivedVariantChart: null,
   dates: {
     date_of_report_unix: 0,
     date_start_unix: 0,
@@ -22,7 +22,7 @@ const EMPTY_VALUES = {
  * Returns values for variant timeseries chart
  * @param variants
  */
-export function getVariantChartData(variants: NlVariants | undefined) {
+export function getArchivedVariantChartData(variants: ArchivedNlVariants | undefined) {
   if (!isDefined(variants) || !isDefined(variants.values)) {
     return EMPTY_VALUES;
   }
@@ -51,7 +51,7 @@ export function getVariantChartData(variants: NlVariants | undefined) {
   });
 
   return {
-    variantChart: values,
+    archivedVariantChart: values,
     dates: {
       date_of_report_unix: firstVariantInList.last_value.date_of_report_unix,
       date_start_unix: firstVariantInList.last_value.date_start_unix,

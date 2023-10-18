@@ -1,5 +1,5 @@
 import { isDefined } from 'ts-is-present';
-import { GmSewerPerInstallationValue, NlVariantsVariantValue } from './types';
+import { ArchivedNlVariantsVariantValue, GmSewerPerInstallationValue, NlVariantsVariantValue } from './types';
 
 export type UnknownObject = Record<string, unknown>;
 
@@ -84,40 +84,49 @@ export function sortTimeSeriesInDataInPlace<T>(data: T, { setDatesToMiddleOfDay 
    * The variants data is structured similarly to sewer_per_installation as
    * shown above. @TODO unify/clean up validation of both.
    */
-  if (isDefined((data as UnknownObject).variants)) {
-    const nestedSeries = (data as UnknownObject).variants as VariantsData;
+  if (isDefined((data as UnknownObject).variants) || isDefined((data as UnknownObject).variants_archived_20231101)) {
+    let nestedSeries;
 
-    if (!nestedSeries.values) {
-      /**
-       * It can happen that we get incomplete json data and assuming that values
-       * exists here might crash the app
-       */
-      console.error('variants.values does not exist');
-      return;
+    if (isDefined((data as UnknownObject).variants)) {
+      nestedSeries = (data as UnknownObject).variants as VariantsData;
+    }
+    if (isDefined((data as UnknownObject).variants_archived_20231101)) {
+      nestedSeries = (data as UnknownObject).variants_archived_20231101 as VariantsData;
     }
 
-    nestedSeries.values = nestedSeries.values.map((x, index) => {
-      if (!x.values) {
+    if (nestedSeries) {
+      if (!nestedSeries.values) {
         /**
          * It can happen that we get incomplete json data and assuming that values
          * exists here might crash the app
          */
-        console.error(`variants.nestedSeries.values[${index}].values does not exist`);
-        return x;
+        console.error('variants.values does not exist');
+        return;
       }
 
-      x.values = sortTimeSeriesValues(x.values) as NlVariantsVariantValue[];
-
-      if (setDatesToMiddleOfDay) {
-        x.values = x.values.map(setValueDatesToMiddleOfDay);
-
-        if (x.last_value) {
-          x.last_value = setValueDatesToMiddleOfDay(x.last_value);
+      nestedSeries.values = nestedSeries.values.map((x, index) => {
+        if (!x.values) {
+          /**
+           * It can happen that we get incomplete json data and assuming that values
+           * exists here might crash the app
+           */
+          console.error(`variants.nestedSeries.values[${index}].values does not exist`);
+          return x;
         }
-      }
 
-      return x;
-    });
+        x.values = sortTimeSeriesValues(x.values) as ArchivedNlVariantsVariantValue[];
+
+        if (setDatesToMiddleOfDay) {
+          x.values = x.values.map(setValueDatesToMiddleOfDay);
+
+          if (x.last_value) {
+            x.last_value = setValueDatesToMiddleOfDay(x.last_value);
+          }
+        }
+
+        return x;
+      });
+    }
   }
 }
 

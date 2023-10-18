@@ -7,7 +7,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { getVariantChartData, getVariantOrderColors, getVariantTableData } from '~/domain/variants/static-props';
+import { getArchivedVariantChartData, getVariantOrderColors, getVariantTableData } from '~/domain/variants/static-props';
 import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { VariantDynamicLabels } from '~/domain/variants/variants-table-tile/types';
@@ -15,12 +15,13 @@ import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData, selectNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { useState } from 'react';
 
 const pageMetrics = ['variants', 'named_difference'];
 
@@ -37,16 +38,21 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   () => {
     const data = selectNlData('variants', 'named_difference')();
+    const archivedData = selectArchivedNlData('variants_archived_20231101')();
 
     const {
       selectedNlData: { variants },
     } = data;
 
+    const {
+      selectedArchivedNlData: { variants_archived_20231101 },
+    } = archivedData;
+
     const variantColors = getVariantOrderColors(variants);
 
     return {
       ...getVariantTableData(variants, data.selectedNlData.named_difference, variantColors),
-      ...getVariantChartData(variants),
+      ...getArchivedVariantChartData(variants_archived_20231101),
       variantColors,
     };
   },
@@ -65,10 +71,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 export default function CovidVariantenPage(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, lastGenerated, content, variantTable, variantChart, variantColors, dates } = props;
+  const { pageText, selectedNlData: data, lastGenerated, content, variantTable, archivedVariantChart, variantColors, dates } = props;
 
   const { commonTexts, locale } = useIntl();
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+
+  const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
   const metadata = {
     ...metadataTexts,
@@ -139,22 +147,6 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             ]}
           />
 
-          {variantChart && variantLabels && (
-            <VariantsStackedAreaTile
-              text={{
-                ...textNl.varianten_over_tijd_grafiek,
-                variantCodes: variantLabels as VariantDynamicLabels,
-              }}
-              values={variantChart}
-              variantColors={variantColors}
-              metadata={{
-                datumsText: textNl.datums,
-                date: getLastInsertionDateOfPage(data, ['variants']),
-                source: textNl.bronnen.rivm,
-              }}
-            />
-          )}
-
           {variantLabels && (
             <VariantsTableTile
               data={variantTable}
@@ -179,6 +171,33 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             <InView rootMargin="400px">
               <PageArticlesTile articles={content.articles.articles} title={content.articles.sectionTitle} />
             </InView>
+          )}
+
+          <PageInformationBlock
+            title={textNl.section_archived.title}
+            description={textNl.section_archived.description}
+            isArchivedHidden={isArchivedContentShown}
+            onToggleArchived={() => setIsArchivedContentShown(!isArchivedContentShown)}
+          />
+
+          {isArchivedContentShown && (
+            <>
+              {archivedVariantChart && variantLabels && (
+                <VariantsStackedAreaTile
+                  text={{
+                    ...textNl.varianten_over_tijd_grafiek,
+                    variantCodes: variantLabels as VariantDynamicLabels,
+                  }}
+                  values={archivedVariantChart}
+                  variantColors={variantColors}
+                  metadata={{
+                    datumsText: textNl.datums,
+                    date: getLastInsertionDateOfPage(data, ['variants']),
+                    source: textNl.bronnen.rivm,
+                  }}
+                />
+              )}
+            </>
           )}
         </TileList>
       </NlLayout>
