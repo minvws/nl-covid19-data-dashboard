@@ -9,10 +9,11 @@ import { KpiContent } from './components/kpi-content';
 import { BorderedKpiSectionProps } from './types';
 import { Markdown } from '../markdown';
 
-export const BorderedKpiSection = ({ title, description, source, dateOrRange, tilesData }: BorderedKpiSectionProps) => {
+export const BorderedKpiSection = ({ title, description, source, dateOrRange, tilesData, disclaimer }: BorderedKpiSectionProps) => {
   const metadata: MetadataProps = {
     date: dateOrRange,
     source: source,
+    disclaimer: disclaimer,
   };
 
   return (

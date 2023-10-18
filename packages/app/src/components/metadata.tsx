@@ -5,6 +5,7 @@ import { space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from './base';
 import { InlineText, Text } from './typography';
+import { Markdown } from '~/components/markdown';
 
 type source = {
   text: string;
@@ -25,9 +26,10 @@ export interface MetadataProps extends MarginBottomProps {
   isTileFooter?: boolean;
   datumsText?: string;
   intervalCount?: string;
+  disclaimer?: string;
 }
 
-export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, marginBottom, dataSources, intervalCount }: MetadataProps) {
+export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, marginBottom, dataSources, intervalCount, disclaimer }: MetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
 
   const dateString =
@@ -77,6 +79,11 @@ export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, m
               })
             ) : (
               <>
+                {disclaimer && (
+                  <Box paddingBottom={space[3]}>
+                    <Markdown content={disclaimer}></Markdown>
+                  </Box>
+                )}
                 {dateString}
                 {obtainedAt &&
                   ` ${replaceVariablesInText(commonTexts.common.metadata.obtained, {

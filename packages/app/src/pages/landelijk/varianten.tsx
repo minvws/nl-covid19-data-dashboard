@@ -20,6 +20,7 @@ import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 
 const pageMetrics = ['variants', 'named_difference'];
 
@@ -77,6 +78,8 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
+  const totalVariants = data.named_difference.variants__percentage.filter((namedDifferenceEntry) => namedDifferenceEntry.variant_code !== 'other_variants').length;
+
   const variantLabels: VariantDynamicLabels = {};
 
   data.variants?.values.forEach((variant) => {
@@ -107,6 +110,29 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               dataExplained: content.dataExplained,
               faq: content.faqs,
             })}
+          />
+
+          <BorderedKpiSection
+            title={textNl.kpi_amount_of_samples.kpi_tile_title}
+            description={textNl.kpi_amount_of_samples.kpi_tile_description}
+            source={textNl.bronnen.rivm}
+            disclaimer={textNl.kpi_amount_of_samples.disclaimer}
+            dateOrRange={{
+              start: dates.date_start_unix,
+              end: dates.date_end_unix,
+            }}
+            tilesData={[
+              {
+                value: data.variants ? data.variants!.values[0].last_value.sample_size : null,
+                title: textNl.kpi_amount_of_samples.tile_total_samples.title,
+                description: textNl.kpi_amount_of_samples.tile_total_samples.description,
+              },
+              {
+                value: totalVariants,
+                title: textNl.kpi_amount_of_samples.tile_total_variants.title,
+                description: textNl.kpi_amount_of_samples.tile_total_samples.description,
+              },
+            ]}
           />
 
           {variantChart && variantLabels && (
