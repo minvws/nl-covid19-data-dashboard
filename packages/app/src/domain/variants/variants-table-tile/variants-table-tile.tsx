@@ -15,14 +15,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { VariantsTable } from './components/variants-table';
 import { TableText } from './types';
 
-export function VariantsTableTile({
-  text,
-  noDataMessage = '',
-  source,
-  data,
-  dates,
-  children = null,
-}: {
+interface VariantsTableTileProps {
   text: TableText;
   noDataMessage?: ReactNode;
   data?: VariantRow[] | null;
@@ -37,7 +30,9 @@ export function VariantsTableTile({
     date_of_report_unix: number;
   };
   children?: ReactNode;
-}) {
+}
+
+export function VariantsTableTile({ text, noDataMessage = '', source, data, dates, children = null }: VariantsTableTileProps) {
   if (!isPresent(data) || !isPresent(dates)) {
     return (
       <FullscreenChartTile>
@@ -62,13 +57,7 @@ export function VariantsTableTile({
   );
 }
 
-function VariantsTableTileWithData({
-  text,
-  source,
-  data,
-  dates,
-  children = null,
-}: {
+interface VariantsTableTileWithDataProps {
   text: TableText;
   data: VariantRow[];
   source: {
@@ -82,7 +71,9 @@ function VariantsTableTileWithData({
     date_of_report_unix: number;
   };
   children?: ReactNode;
-}) {
+}
+
+function VariantsTableTileWithData({ text, source, data, dates, children = null }: VariantsTableTileWithDataProps) {
   const { formatDateSpan } = useIntl();
 
   const metadata: MetadataProps = {
