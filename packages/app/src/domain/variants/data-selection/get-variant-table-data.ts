@@ -1,18 +1,7 @@
-import { colors, NlNamedDifference, NlVariants, NlVariantsVariant, NamedDifferenceDecimal } from '@corona-dashboard/common';
+import { colors, NlNamedDifference, NlVariants, NlVariantsVariant } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { ColorMatch } from './get-variant-order-colors';
-import { VariantCode } from '../static-props';
-
-export type VariantRow = {
-  variantCode: VariantCode;
-  order: number;
-  percentage: number | null;
-  difference?: NamedDifferenceDecimal | null;
-  color: string;
-};
-
-export type VariantTableData = ReturnType<typeof getVariantTableData>;
+import { ColorMatch, VariantRow } from '~/domain/variants/data-selection/types';
 
 /**
  * Return values to populate the variants table

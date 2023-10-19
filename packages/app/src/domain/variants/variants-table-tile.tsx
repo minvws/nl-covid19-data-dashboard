@@ -8,13 +8,13 @@ import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
 import { MetadataProps } from '~/components/metadata';
 import { Heading } from '~/components/typography';
-import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { fontSizes, space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { VariantsTable } from './components/variants-table';
-import { TableText } from './types';
+import { VariantsTable } from './variants-table-tile/components/variants-table';
+import { TableText } from './variants-table-tile/types';
 import { Tile } from '~/components';
+import { VariantRow } from '~/domain/variants/data-selection/types';
 
 interface VariantsTableTileProps {
   text: TableText;

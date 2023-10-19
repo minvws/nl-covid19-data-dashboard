@@ -1,13 +1,6 @@
 import { ArchivedNlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
-
-export type VariantCode = string;
-
-export type VariantChartValue = {
-  date_start_unix: number;
-  date_end_unix: number;
-  is_reliable: boolean;
-} & Record<string, number>;
+import { VariantChartValue } from '~/domain/variants/data-selection/types';
 
 const EMPTY_VALUES = {
   archivedVariantChart: null,

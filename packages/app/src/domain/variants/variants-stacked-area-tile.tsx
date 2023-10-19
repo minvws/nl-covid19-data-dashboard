@@ -9,17 +9,10 @@ import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { GappedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
-import { VariantChartValue } from '~/domain/variants/static-props';
-import { SiteText } from '~/locale';
 import { useList } from '~/utils/use-list';
-import { ColorMatch } from '~/domain/variants/static-props';
-import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 import { space } from '~/style/theme';
-import { VariantDynamicLabels } from '../variants-table-tile/types';
-
-type VariantsStackedAreaTileText = {
-  variantCodes: VariantDynamicLabels;
-} & SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
+import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
+import { ColorMatch, VariantChartValue, VariantsStackedAreaTileText } from '~/domain/variants/data-selection/types';
 
 const alwaysEnabled: (keyof VariantChartValue)[] = [];
 

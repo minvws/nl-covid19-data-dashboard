@@ -7,9 +7,6 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { getArchivedVariantChartData, getVariantOrderColors, getVariantTableData } from '~/domain/variants/static-props';
-import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
-import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { VariantDynamicLabels } from '~/domain/variants/variants-table-tile/types';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
@@ -22,6 +19,8 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { useState } from 'react';
+import { getArchivedVariantChartData, getVariantOrderColors, getVariantTableData } from '~/domain/variants/data-selection';
+import { VariantsStackedAreaTile, VariantsTableTile } from '~/domain/variants';
 
 const pageMetrics = ['variants', 'named_difference'];
 

@@ -1,11 +1,6 @@
 import { NlVariants, colors } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
-import { VariantCode } from './';
-
-export type ColorMatch = {
-  variant: VariantCode;
-  color: string;
-};
+import { ColorMatch, VariantCode } from '~/domain/variants/data-selection/types';
 
 const getColorForVariant = (variantCode: VariantCode, index: number): string => {
   if (variantCode === 'other_variants') return colors.gray5;
