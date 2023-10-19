@@ -35,8 +35,8 @@ const hasMetricProperty = (config: any): config is { metricProperty: string } =>
 /**
  * Only variants that have a greater occurrence than 0 must be shown in the tooltip, except when the user narrows down
  * the total amount of visible variants by selecting one or more from the legend
- * @param context
- * @param selectionOptions
+ * @param context - Tooltip data context
+ * @param selectionOptions - Currently selected variants
  */
 const reorderAndFilter = (context: TooltipData<VariantChartValue & StackedBarTooltipData>, selectionOptions: StackedBarConfig<VariantChartValue>[]) => {
   const metricAmount = context.config.length;
