@@ -1,28 +1,80 @@
-import { ChartTile, Markdown, MetadataProps } from '~/components';
-import { Box } from '~/components/base';
-import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { ChartTile, MetadataProps } from '~/components';
+import { Spacer } from '~/components/base';
+import { TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
-import { ColorMatch, VariantChartValue, VariantsStackedAreaTileText } from '~/domain/variants/data-selection/types';
-import { StackedChart } from '~/components/stacked-chart';
-
-//const alwaysEnabled: (keyof VariantChartValue)[] = [];
+import { ColorMatch, StackedBarConfig, VariantChartValue, VariantsStackedAreaTileText } from '~/domain/variants/data-selection/types';
+import { StackedBarTooltipData, StackedChart } from '~/components/stacked-chart';
+import { useBarConfig } from '~/domain/variants/logic/use-bar-config';
+import { InteractiveLegend } from '~/components/interactive-legend';
+import { useList } from '~/utils/use-list';
+import { TooltipData } from '~/components/time-series-chart/components';
+import { isDefined, isPresent } from 'ts-is-present';
+import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
+import { space } from '~/style/theme';
 
 interface VariantsStackedBarChartTileProps {
   title: string;
   description: string;
-  _helpText: string;
+  helpText: string;
   values: VariantChartValue[];
-  _variantLabels: VariantsStackedAreaTileText;
-  _variantColors: ColorMatch[];
+  variantLabels: VariantsStackedAreaTileText;
+  variantColors: ColorMatch[];
   metadata: MetadataProps;
 }
 
-export const VariantsStackedBarChartTile = ({ title, description, _helpText, values, _variantLabels, _variantColors, metadata }: VariantsStackedBarChartTileProps) => {
-  //const {list, toggle, clear} = useList<keyof VariantChartValue>(alwaysEnabled);
+const alwaysEnabled: (keyof VariantChartValue)[] = [];
+
+/**
+ * Check if the key metricProperty exists
+ * @param config
+ */
+const hasMetricProperty = (config: any): config is { metricProperty: string } => {
+  return 'metricProperty' in config;
+};
+
+/**
+ * Only variants that have a greater occurrence than 0 must be shown in the tooltip, except when the user narrows down
+ * the total amount of visible variants by selecting one or more from the legend
+ * @param context
+ * @param selectionOptions
+ */
+const reorderAndFilter = (context: TooltipData<VariantChartValue & StackedBarTooltipData>, selectionOptions: StackedBarConfig<VariantChartValue>[]) => {
+  const metricAmount = context.config.length;
+  const totalMetricAmount = selectionOptions.length;
+  const hasSelectedMetrics = metricAmount !== totalMetricAmount;
+
+  const filteredValues = Object.fromEntries(
+    Object.entries(context.value).filter(([key, value]) => (key.includes('occurrence') ? value !== 0 && isPresent(value) && !isNaN(Number(value)) : value))
+  ) as VariantChartValue;
+
+  const reorderContext = {
+    ...context,
+    config: [...context.config.filter((value) => !hasMetricProperty(value) || filteredValues[value.metricProperty] || hasSelectedMetrics)].filter(isDefined),
+    value: !hasSelectedMetrics ? filteredValues : context.value,
+  };
+
+  return reorderContext as TooltipData<VariantChartValue & StackedBarTooltipData>;
+};
+
+/**
+ * Variant bar chart component
+ * @param title - Graph title
+ * @param description - Graph description text
+ * @param helpText - Explainer text above the interactive legend
+ * @param values - Data
+ * @param variantLabels - Mnemonic names for variants
+ * @param variantColors - Colors for variants
+ * @param metadata - Metadata block
+ * @constructor
+ */
+export const VariantsStackedBarChartTile = ({ title, description, helpText, values, variantLabels, variantColors, metadata }: VariantsStackedBarChartTileProps) => {
+  const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
 
   const [variantTimeFrame, setVariantTimeFrame] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
 
-  //const [seriesConfig, selectionOptions] = useSeriesConfig(variantLabels, values, variantColors);
+  const [barChartConfig, selectionOptions] = useBarConfig(values, list, variantLabels, variantColors);
+
+  const hasTwoColumns = list.length === 0 || list.length > 4;
 
   return (
     <ChartTile
@@ -33,30 +85,17 @@ export const VariantsStackedBarChartTile = ({ title, description, _helpText, val
       timeframeInitialValue={TimeframeOption.THREE_MONTHS}
       onSelectTimeframe={setVariantTimeFrame}
     >
-      <Box>
-        <Box>
-          <Markdown content="placeholder"></Markdown>
-        </Box>
-      </Box>
-      {/*<InteractiveLegend helpText={helpText} selectOptions={selectionOptions} selection={list} onToggleItem={toggle} onReset={clear} />*/}
+      <InteractiveLegend helpText={helpText} selectOptions={selectionOptions} selection={list} onToggleItem={toggle} onReset={clear} />
+      <Spacer marginBottom={space[2]} />
       <StackedChart
         accessibility={{
           key: 'variants_stacked_area_over_time_chart',
         }}
         values={values}
-        config={[
-          {
-            metricProperty: 'other_variants_percentage' as const,
-            color: colors.blue2,
-            label: 'hello',
-          },
-          {
-            metricProperty: 'eg5_percentage' as const,
-            color: colors.green1,
-            label: 'hi',
-          },
-        ]}
+        config={barChartConfig}
+        disableLegend
         timeframe={variantTimeFrame}
+        formatTooltip={(data) => <TooltipSeriesList data={reorderAndFilter(data, selectionOptions)} hasTwoColumns={hasTwoColumns} />}
       />
     </ChartTile>
   );

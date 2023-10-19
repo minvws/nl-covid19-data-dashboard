@@ -1,5 +1,5 @@
 import { SiteText } from '~/locale';
-import { NamedDifferenceDecimal } from '@corona-dashboard/common';
+import { NamedDifferenceDecimal, TimestampedValue } from '@corona-dashboard/common';
 import { getVariantTableData } from '~/domain/variants/data-selection/get-variant-table-data';
 
 export type VariantCode = string;
@@ -30,3 +30,9 @@ export type VariantDynamicLabels = Record<string, string>;
 export type VariantsStackedAreaTileText = {
   variantCodes: VariantDynamicLabels;
 } & SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
+
+export type StackedBarConfig<T extends TimestampedValue> = {
+  metricProperty: keyof T;
+  label: string;
+  color: string;
+};

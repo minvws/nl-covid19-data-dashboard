@@ -165,7 +165,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             />
           )}
 
-          {variantLabels && (
+          {variantChart && variantLabels && (
             <VariantsStackedBarChartTile
               title={textNl.varianten_barchart.titel}
               description={textNl.varianten_barchart.description}

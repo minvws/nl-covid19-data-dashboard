@@ -65,6 +65,7 @@ type StackedChartProps<T extends TimestampedValue> = {
   config: Config<T>[];
   valueAnnotation?: string;
   initialWidth?: number;
+  disableLegend?: boolean;
   expectedLabel?: string;
   formatTooltip?: TooltipFormatter<T & StackedBarTooltipData>;
   isPercentage?: boolean;
@@ -105,6 +106,7 @@ export function StackedChart<T extends TimestampedValue>(props: StackedChartProp
     config,
     initialWidth = 840,
     isPercentage,
+    disableLegend,
     expectedLabel,
     formatTickValue: formatYTickValue,
     formatTooltip,
@@ -461,9 +463,11 @@ export function StackedChart<T extends TimestampedValue>(props: StackedChartProp
           )}
         </ResponsiveContainer>
       </Box>
-      <Box paddingLeft={`${padding.left}px`}>
-        <Legend items={legendItems} />
-      </Box>
+      {!disableLegend && legendItems && (
+        <Box paddingLeft={`${padding.left}px`}>
+          <Legend items={legendItems} />
+        </Box>
+      )}
     </>
   );
 }
