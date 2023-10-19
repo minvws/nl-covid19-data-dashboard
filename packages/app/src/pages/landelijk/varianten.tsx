@@ -147,24 +147,6 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             ]}
           />
 
-          {variantLabels && (
-            <VariantsTableTile
-              data={variantTable}
-              text={{
-                ...textNl.varianten_tabel,
-                variantCodes: variantLabels,
-                description: variantenTableDescription,
-              }}
-              sampleThresholdPassed={sampleThresholdPassed}
-              source={textNl.bronnen.rivm}
-              dates={{
-                date_end_unix: dates.date_end_unix,
-                date_of_report_unix: getLastInsertionDateOfPage(data, ['variants']),
-                date_start_unix: dates.date_start_unix,
-              }}
-            />
-          )}
-
           {variantChart && variantLabels && (
             <VariantsStackedBarChartTile
               title={textNl.varianten_barchart.titel}
@@ -180,6 +162,24 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
                 datumsText: textNl.datums,
                 date: getLastInsertionDateOfPage(data, ['variants']),
                 source: textNl.bronnen.rivm,
+              }}
+            />
+          )}
+
+          {variantLabels && (
+            <VariantsTableTile
+              data={variantTable}
+              text={{
+                ...textNl.varianten_tabel,
+                variantCodes: variantLabels,
+                description: variantenTableDescription,
+              }}
+              sampleThresholdPassed={sampleThresholdPassed}
+              source={textNl.bronnen.rivm}
+              dates={{
+                date_end_unix: dates.date_end_unix,
+                date_of_report_unix: getLastInsertionDateOfPage(data, ['variants']),
+                date_start_unix: dates.date_start_unix,
               }}
             />
           )}

@@ -1,12 +1,36 @@
 import { ColorMatch, VariantChartValue, VariantsStackedAreaTileText, StackedBarConfig } from '~/domain/variants/data-selection/types';
 import { useMemo } from 'react';
+import { getValuesInTimeframe, TimeframeOption } from '@corona-dashboard/common';
+import { isPresent } from 'ts-is-present';
 
-export const useBarConfig = (values: VariantChartValue[], selectedOptions: (keyof VariantChartValue)[], text: VariantsStackedAreaTileText, colors: ColorMatch[]) => {
+const extractVariantNamesFromValues = (values: VariantChartValue[]) => {
+  return values
+    .flatMap((variantChartValue) => Object.keys(variantChartValue))
+    .filter((keyName, index, array) => array.indexOf(keyName) === index)
+    .filter((keyName) => keyName.endsWith('_occurrence'));
+};
+
+export const useBarConfig = (
+  values: VariantChartValue[],
+  selectedOptions: (keyof VariantChartValue)[],
+  text: VariantsStackedAreaTileText,
+  colors: ColorMatch[],
+  timeframe: TimeframeOption,
+  today: Date
+) => {
   return useMemo(() => {
-    const listOfVariantCodes = values
-      .flatMap((variantChartValue) => Object.keys(variantChartValue))
-      .filter((keyName, index, array) => array.indexOf(keyName) === index)
-      .filter((keyName) => keyName.endsWith('_occurrence'))
+    const valuesInTimeframe: VariantChartValue[] = getValuesInTimeframe(values, timeframe, today);
+
+    const activeVariantsInTimeframeValues: VariantChartValue[] = valuesInTimeframe.map((val) => {
+      return Object.fromEntries(
+        Object.entries(val).filter(([key, value]) => (key.includes('occurrence') ? value !== 0 && isPresent(value) && !isNaN(Number(value)) : value))
+      ) as VariantChartValue;
+    });
+
+    const activeVariantsInTimeframeNames: string[] = extractVariantNamesFromValues(activeVariantsInTimeframeValues);
+
+    const listOfVariantCodes: string[] = extractVariantNamesFromValues(valuesInTimeframe)
+      .filter((keyName) => activeVariantsInTimeframeNames.includes(keyName))
       .reverse();
 
     const barChartConfig: StackedBarConfig<VariantChartValue>[] = [];
@@ -40,5 +64,5 @@ export const useBarConfig = (values: VariantChartValue[], selectedOptions: (keyo
     } else {
       return [barChartConfig, selectOptions];
     }
-  }, [values, text.tooltip_labels.other_percentage, text.variantCodes, colors, selectedOptions]);
+  }, [values, text.tooltip_labels.other_percentage, text.variantCodes, colors, selectedOptions, timeframe]);
 };
