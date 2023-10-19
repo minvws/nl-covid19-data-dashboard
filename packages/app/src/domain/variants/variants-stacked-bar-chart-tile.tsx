@@ -73,13 +73,11 @@ export const VariantsStackedBarChartTile = ({ title, description, helpText, valu
 
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
 
-  const selectedOptions = list;
-
   const [variantTimeFrame, setVariantTimeFrame] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
 
-  const [barChartConfig, selectionOptions] = useBarConfig(values, selectedOptions, variantLabels, variantColors, variantTimeFrame, today);
+  const [barChartConfig, selectionOptions] = useBarConfig(values, list, variantLabels, variantColors, variantTimeFrame, today);
 
-  const hasTwoColumns = selectedOptions.length === 0 || selectedOptions.length > 4;
+  const hasTwoColumns = list.length === 0 || list.length > 4;
 
   return (
     <ChartTile
@@ -90,7 +88,7 @@ export const VariantsStackedBarChartTile = ({ title, description, helpText, valu
       timeframeInitialValue={TimeframeOption.THREE_MONTHS}
       onSelectTimeframe={setVariantTimeFrame}
     >
-      <InteractiveLegend helpText={helpText} selectOptions={selectionOptions} selection={selectedOptions} onToggleItem={toggle} onReset={clear} />
+      <InteractiveLegend helpText={helpText} selectOptions={selectionOptions} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer marginBottom={space[2]} />
       <StackedChart
         accessibility={{

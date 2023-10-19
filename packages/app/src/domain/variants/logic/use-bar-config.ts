@@ -9,7 +9,6 @@ const extractVariantNamesFromValues = (values: VariantChartValue[]) => {
     .filter((keyName, index, array) => array.indexOf(keyName) === index)
     .filter((keyName) => keyName.endsWith('_occurrence'));
 };
-
 export const useBarConfig = (
   values: VariantChartValue[],
   selectedOptions: (keyof VariantChartValue)[],
