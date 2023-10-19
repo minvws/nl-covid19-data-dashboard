@@ -1,4 +1,3 @@
-import { VariantDynamicLabels } from '~/domain/variants/variants-table-tile/types';
 import { SiteText } from '~/locale';
 import { NamedDifferenceDecimal } from '@corona-dashboard/common';
 import { getVariantTableData } from '~/domain/variants/data-selection/get-variant-table-data';
@@ -25,6 +24,8 @@ export type VariantRow = {
   difference?: NamedDifferenceDecimal | null;
   color: string;
 };
+
+export type VariantDynamicLabels = Record<string, string>;
 
 export type VariantsStackedAreaTileText = {
   variantCodes: VariantDynamicLabels;

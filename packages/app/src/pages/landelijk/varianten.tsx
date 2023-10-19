@@ -7,7 +7,6 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { VariantDynamicLabels } from '~/domain/variants/variants-table-tile/types';
 import { useIntl } from '~/intl';
 import { Languages, SiteText } from '~/locale';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
@@ -19,8 +18,9 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { useState } from 'react';
-import { getArchivedVariantChartData, getVariantOrderColors, getVariantTableData } from '~/domain/variants/data-selection';
-import { VariantsStackedAreaTile, VariantsTableTile } from '~/domain/variants';
+import { getArchivedVariantChartData, getVariantBarChartData, getVariantOrderColors, getVariantTableData } from '~/domain/variants/data-selection';
+import { VariantsStackedAreaTile, VariantsStackedBarChartTile, VariantsTableTile } from '~/domain/variants';
+import { VariantDynamicLabels } from '~/domain/variants/data-selection/types';
 
 const pageMetrics = ['variants', 'named_difference'];
 
@@ -51,6 +51,7 @@ export const getStaticProps = createGetStaticProps(
 
     return {
       ...getVariantTableData(variants, data.selectedNlData.named_difference, variantColors),
+      ...getVariantBarChartData(variants),
       ...getArchivedVariantChartData(variants_archived_20231101),
       variantColors,
     };
@@ -70,7 +71,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 export default function CovidVariantenPage(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, lastGenerated, content, variantTable, archivedVariantChart, variantColors, dates } = props;
+  const { pageText, selectedNlData: data, lastGenerated, content, variantTable, variantChart, archivedVariantChart, variantColors, dates } = props;
 
   const { commonTexts, locale } = useIntl();
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -160,6 +161,25 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
                 date_end_unix: dates.date_end_unix,
                 date_of_report_unix: getLastInsertionDateOfPage(data, ['variants']),
                 date_start_unix: dates.date_start_unix,
+              }}
+            />
+          )}
+
+          {variantLabels && (
+            <VariantsStackedBarChartTile
+              title={textNl.varianten_barchart.titel}
+              description={textNl.varianten_barchart.description}
+              helpText={textNl.varianten_over_tijd_grafiek.legend_help_tekst}
+              values={variantChart}
+              variantLabels={{
+                ...textNl.varianten_over_tijd_grafiek,
+                variantCodes: variantLabels,
+              }}
+              variantColors={variantColors}
+              metadata={{
+                datumsText: textNl.datums,
+                date: getLastInsertionDateOfPage(data, ['variants']),
+                source: textNl.bronnen.rivm,
               }}
             />
           )}
