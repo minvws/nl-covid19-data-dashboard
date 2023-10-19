@@ -86,7 +86,10 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
-  const totalVariants = data.named_difference.variants__percentage.filter((namedDifferenceEntry) => namedDifferenceEntry.variant_code !== 'other_variants').length;
+  //const totalVariants = data.named_difference.variants__percentage.filter((namedDifferenceEntry) => namedDifferenceEntry.variant_code !== 'other_variants').length;
+  const totalVariants = data.variants
+    ? data.variants!.values.reduce((accumulator, currentVariant) => (currentVariant.last_value.occurrence > 0 ? 1 + accumulator : accumulator), 0)
+    : NaN;
 
   const sampleThresholdPassed = data.variants ? data.variants!.values[0].last_value.sample_size > 100 : false;
 
@@ -142,7 +145,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               {
                 value: totalVariants,
                 title: textNl.kpi_amount_of_samples.tile_total_variants.title,
-                description: textNl.kpi_amount_of_samples.tile_total_samples.description,
+                description: textNl.kpi_amount_of_samples.tile_total_variants.description,
               },
             ]}
           />
