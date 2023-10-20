@@ -1,4 +1,4 @@
-import { ColorMatch, VariantChartValue, VariantsStackedAreaTileText, StackedBarConfig } from '~/domain/variants/data-selection/types';
+import { ColorMatch, VariantChartValue, StackedBarConfig, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
 import { useMemo } from 'react';
 import { getValuesInTimeframe, TimeframeOption } from '@corona-dashboard/common';
 import { isPresent } from 'ts-is-present';
@@ -9,10 +9,12 @@ const extractVariantNamesFromValues = (values: VariantChartValue[]) => {
     .filter((keyName, index, array) => array.indexOf(keyName) === index)
     .filter((keyName) => keyName.endsWith('_occurrence'));
 };
+
 export const useBarConfig = (
   values: VariantChartValue[],
   selectedOptions: (keyof VariantChartValue)[],
-  text: VariantsStackedAreaTileText,
+  variantLabels: VariantDynamicLabels,
+  tooltipLabels: VariantsOverTimeGraphText,
   colors: ColorMatch[],
   timeframe: TimeframeOption,
   today: Date
@@ -39,7 +41,7 @@ export const useBarConfig = (
 
       const variantMetricPropertyName = variantCodeName.concat('_occurrence');
 
-      const variantDynamicLabel = text.variantCodes[variantCodeName];
+      const variantDynamicLabel = variantLabels[variantCodeName];
 
       const color = colors.find((variantColors) => variantColors.variant === variantCodeName)?.color;
 
@@ -63,5 +65,5 @@ export const useBarConfig = (
     } else {
       return [barChartConfig, selectOptions];
     }
-  }, [values, text.tooltip_labels.other_percentage, text.variantCodes, colors, selectedOptions, timeframe]);
+  }, [values, tooltipLabels.tooltip_labels.other_percentage, variantLabels, colors, selectedOptions, timeframe, today]);
 };

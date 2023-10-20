@@ -27,6 +27,8 @@ export type VariantRow = {
 
 export type VariantDynamicLabels = Record<string, string>;
 
+export type VariantsOverTimeGraphText = SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];
+
 export type VariantsStackedAreaTileText = {
   variantCodes: VariantDynamicLabels;
 } & SiteText['pages']['variants_page']['nl']['varianten_over_tijd_grafiek'];

@@ -2,7 +2,7 @@ import { ChartTile, MetadataProps } from '~/components';
 import { Spacer } from '~/components/base';
 import { TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
-import { ColorMatch, StackedBarConfig, VariantChartValue, VariantsStackedAreaTileText } from '~/domain/variants/data-selection/types';
+import { ColorMatch, StackedBarConfig, VariantChartValue, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
 import { StackedBarTooltipData, StackedChart } from '~/components/stacked-chart';
 import { useBarConfig } from '~/domain/variants/logic/use-bar-config';
 import { InteractiveLegend } from '~/components/interactive-legend';
@@ -18,7 +18,8 @@ interface VariantsStackedBarChartTileProps {
   description: string;
   helpText: string;
   values: VariantChartValue[];
-  variantLabels: VariantsStackedAreaTileText;
+  tooltipLabels: VariantsOverTimeGraphText;
+  variantLabels: VariantDynamicLabels;
   variantColors: ColorMatch[];
   metadata: MetadataProps;
 }
@@ -42,12 +43,14 @@ const hasMetricProperty = (config: any): config is { metricProperty: string } =>
 const reorderAndFilter = (context: TooltipData<VariantChartValue & StackedBarTooltipData>, selectionOptions: StackedBarConfig<VariantChartValue>[]) => {
   const metricAmount = context.config.length;
   const totalMetricAmount = selectionOptions.length;
-  const hasSelectedMetrics = metricAmount !== totalMetricAmount;
+  const hasSelectedMetrics = metricAmount !== totalMetricAmount; // Check whether the user has selected any variants from the interactive legend.
 
+  /* Filter out any variants that have an occcurrence value of 0 */
   const filteredValues = Object.fromEntries(
     Object.entries(context.value).filter(([key, value]) => (key.includes('occurrence') ? value !== 0 && isPresent(value) && !isNaN(Number(value)) : value))
   ) as VariantChartValue;
 
+  /* Rebuild tooltip data context with filtered values */
   const reorderContext = {
     ...context,
     config: [...context.config.filter((value) => !hasMetricProperty(value) || filteredValues[value.metricProperty] || hasSelectedMetrics)].filter(isDefined),
@@ -68,14 +71,14 @@ const reorderAndFilter = (context: TooltipData<VariantChartValue & StackedBarToo
  * @param metadata - Metadata block
  * @constructor
  */
-export const VariantsStackedBarChartTile = ({ title, description, helpText, values, variantLabels, variantColors, metadata }: VariantsStackedBarChartTileProps) => {
+export const VariantsStackedBarChartTile = ({ title, description, helpText, tooltipLabels, values, variantLabels, variantColors, metadata }: VariantsStackedBarChartTileProps) => {
   const today = useCurrentDate();
 
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
 
   const [variantTimeFrame, setVariantTimeFrame] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
 
-  const [barChartConfig, selectionOptions] = useBarConfig(values, list, variantLabels, variantColors, variantTimeFrame, today);
+  const [barChartConfig, selectionOptions] = useBarConfig(values, list, variantLabels, tooltipLabels, variantColors, variantTimeFrame, today);
 
   const hasTwoColumns = list.length === 0 || list.length > 4;
 
