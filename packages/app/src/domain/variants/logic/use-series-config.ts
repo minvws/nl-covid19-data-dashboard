@@ -31,7 +31,7 @@ export const useSeriesConfig = (
       const variantCode = variantCodeFragments.join('_');
 
       // Match mnenonic variant name in lokalize to code-based variant name
-      const variantDynamicLabel = text.variantCodes[variantCode] + ' '; // THIS IS NECESSARY TO DIFFERENTIATE STATE BETWEEN THE TWO INTERACTIVE LEGENDS ON THE PAGE;
+      const variantDynamicLabel = text.variantCodes[variantCode];
 
       // Match appropriate variant color
       const color = colors.find((variantColors) => variantColors.variant === variantCode)?.color;

@@ -10,6 +10,16 @@ const extractVariantNamesFromValues = (values: VariantChartValue[]) => {
     .filter((keyName) => keyName.endsWith('_occurrence'));
 };
 
+/**
+ * Create configuration labels for interactive legend
+ * @param values
+ * @param selectedOptions
+ * @param variantLabels
+ * @param tooltipLabels
+ * @param colors
+ * @param timeframe
+ * @param today
+ */
 export const useBarConfig = (
   values: VariantChartValue[],
   selectedOptions: (keyof VariantChartValue)[],
