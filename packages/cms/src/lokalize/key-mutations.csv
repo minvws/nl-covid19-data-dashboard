@@ -13,3 +13,5 @@ timestamp,action,key,document_id,move_to
 2023-10-20T09:31:28.284Z,add,pages.variants_page.nl.kpi_amount_of_samples.tile_total_variants.description,hT5k3RDQ7JafeiQP6wRLio,__
 2023-10-20T09:31:29.643Z,add,pages.variants_page.nl.kpi_amount_of_samples.disclaimer,w5vHLm19hF0S5wj1e5Ryjx,__
 2023-10-20T09:31:30.622Z,add,pages.variants_page.nl.varianten_tabel.omschrijving_te_weinig_samples,w5vHLm19hF0S5wj1e5RyoG,__
+2023-10-23T15:10:02.545Z,add,common.sidebar.metrics.the_corona_vaccine.title,ZkwHqMQjnsmR1ekP50kkn5,__
+2023-10-23T15:10:02.545Z,delete,common.sidebar.metrics.vaccinations.title,wzQp83DAUqyqV3ewG9xYUn,__

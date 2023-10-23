@@ -278,7 +278,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
           <VaccineCoverageChoropleth
             data={archivedChoropleth.gm}
-            dataOptions={{ getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode), isPercentage: true }}
+            dataOptions={{ getLink: (gmcode) => reverseRouter.gm.deCoronaprik(gmcode), isPercentage: true }}
             text={{
               title: commonTexts.choropleth.choropleth_vaccination_coverage.nl.archived.fully_vaccinated.title,
               description: commonTexts.choropleth.choropleth_vaccination_coverage.nl.archived.fully_vaccinated.description,
@@ -365,7 +365,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
               <VaccineCoverageChoropleth
                 data={archivedChoropleth.gm}
-                dataOptions={{ getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode), isPercentage: true }}
+                dataOptions={{ getLink: (gmcode) => reverseRouter.gm.deCoronaprik(gmcode), isPercentage: true }}
                 text={{
                   title: commonTexts.choropleth.choropleth_vaccination_coverage.nl.archived.autumn_2022.title,
                   description: commonTexts.choropleth.choropleth_vaccination_coverage.nl.archived.autumn_2022.description,
