@@ -1,13 +1,6 @@
 import { NlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
-
-export type VariantCode = string;
-
-export type VariantChartValue = {
-  date_start_unix: number;
-  date_end_unix: number;
-  is_reliable: boolean;
-} & Record<string, number>;
+import { VariantChartValue } from '~/domain/variants/data-selection/types';
 
 const EMPTY_VALUES = {
   variantChart: null,
@@ -22,7 +15,7 @@ const EMPTY_VALUES = {
  * Returns values for variant timeseries chart
  * @param variants
  */
-export function getVariantChartData(variants: NlVariants | undefined) {
+export function getVariantBarChartData(variants: NlVariants) {
   if (!isDefined(variants) || !isDefined(variants.values)) {
     return EMPTY_VALUES;
   }
@@ -40,11 +33,11 @@ export function getVariantChartData(variants: NlVariants | undefined) {
       is_reliable: true,
       date_start_unix: value.date_start_unix,
       date_end_unix: value.date_end_unix,
-      [`${firstVariantInList.variant_code}_percentage`]: value.percentage,
+      [`${firstVariantInList.variant_code}_occurrence`]: value.occurrence,
     } as VariantChartValue;
 
     sortedVariants.forEach((variant) => {
-      (item as unknown as Record<string, number>)[`${variant.variant_code}_percentage`] = variant.values[index].percentage;
+      (item as unknown as Record<string, number>)[`${variant.variant_code}_occurrence`] = variant.values[index].occurrence;
     });
 
     return item;

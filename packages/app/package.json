@@ -139,7 +139,7 @@
     "bootstrap": "exit 0",
     "export": "next export",
     "dev": "yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/common build && run-p dev:common dev:next dev:lokalize",
-    "dev:next": "node next-server.js",
+    "dev:next": "cross-env NODE_OPTIONS='--inspect' node next-server.js",
     "dev:lokalize": "chokidar \"./src/locale/nl_export.json\" -c \"yarn workspace @corona-dashboard/cms lokalize:generate-types\"",
     "dev:common": "yarn workspace @corona-dashboard/common build:watch",
     "build": "cross-env NEXT_TELEMETRY_DISABLED=1 && next build",

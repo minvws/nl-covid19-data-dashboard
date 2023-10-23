@@ -352,7 +352,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               <VaccineCampaignsTile
                 title={textNl.vaccine_campaigns.autumn_2022.title}
                 description={textNl.vaccine_campaigns.autumn_2022.description}
-                descriptionFooter={textNl.vaccine_campaigns.description_footer}
                 headers={textNl.vaccine_campaigns.headers}
                 campaigns={archivedData.vaccine_campaigns_archived_20231004.vaccine_campaigns}
                 campaignDescriptions={textNl.vaccine_campaigns.campaigns}
@@ -360,6 +359,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                   datumsText: textNl.dates,
                   date: archivedData.vaccine_campaigns_archived_20231004.date_unix,
                   source: textNl.vaccine_campaigns.bronnen.rivm,
+                  disclaimer: textNl.vaccine_campaigns.description_footer,
                 }}
               />
 
@@ -427,7 +427,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               <VaccineCampaignsTile
                 title={textNl.vaccine_campaigns.title}
                 description={textNl.vaccine_campaigns.description_archived}
-                descriptionFooter={textNl.vaccine_campaigns.description_footer}
                 headers={textNl.vaccine_campaigns.headers}
                 campaigns={archivedData.vaccine_campaigns_archived_20220908.vaccine_campaigns}
                 campaignDescriptions={textNl.vaccine_campaigns.campaigns}
@@ -435,6 +434,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                   datumsText: textNl.dates,
                   date: archivedData.vaccine_campaigns_archived_20220908.date_unix,
                   source: textNl.vaccine_campaigns.bronnen.rivm,
+                  disclaimer: textNl.vaccine_campaigns.description_footer,
                 }}
               />
 

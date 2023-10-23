@@ -1,3 +1,15 @@
 timestamp,action,key,document_id,move_to
 2023-10-16T15:02:56.856Z,add,pages.vaccinations_page.nl.vaccine_campaigns.campaigns.autumn_round_corona_vaccination_2022_description,tWOr2ZtVUADiKBNT0r4Txl,__
 2023-10-16T15:02:56.857Z,delete,pages.vaccinations_page.nl.vaccine_campaigns.campaigns.repeat_vaccination_against_corona_description,DNO5adeD4mWNc516AbctlW,__
+2023-10-20T09:31:18.217Z,add,pages.variants_page.nl.section_archived.title,093FZrW2Ae4fRiIdZYDcnH,__
+2023-10-20T09:31:19.500Z,add,pages.variants_page.nl.section_archived.description,hT5k3RDQ7JafeiQP6wRLNE,__
+2023-10-20T09:31:20.726Z,add,pages.variants_page.nl.varianten_barchart.titel,093FZrW2Ae4fRiIdZYDd0v,__
+2023-10-20T09:31:21.806Z,add,pages.variants_page.nl.varianten_barchart.description,ZkwHqMQjnsmR1ekP50NJ35,__
+2023-10-20T09:31:22.794Z,add,pages.variants_page.nl.kpi_amount_of_samples.kpi_tile_title,ZkwHqMQjnsmR1ekP50NJ65,__
+2023-10-20T09:31:23.837Z,add,pages.variants_page.nl.kpi_amount_of_samples.kpi_tile_description,093FZrW2Ae4fRiIdZYDdEZ,__
+2023-10-20T09:31:24.874Z,add,pages.variants_page.nl.kpi_amount_of_samples.tile_total_samples.title,ZkwHqMQjnsmR1ekP50NJ95,__
+2023-10-20T09:31:25.881Z,add,pages.variants_page.nl.kpi_amount_of_samples.tile_total_samples.description,hT5k3RDQ7JafeiQP6wRLY1,__
+2023-10-20T09:31:26.938Z,add,pages.variants_page.nl.kpi_amount_of_samples.tile_total_variants.title,pmfpKotscgjR5sJqbeu52i,__
+2023-10-20T09:31:28.284Z,add,pages.variants_page.nl.kpi_amount_of_samples.tile_total_variants.description,hT5k3RDQ7JafeiQP6wRLio,__
+2023-10-20T09:31:29.643Z,add,pages.variants_page.nl.kpi_amount_of_samples.disclaimer,w5vHLm19hF0S5wj1e5Ryjx,__
+2023-10-20T09:31:30.622Z,add,pages.variants_page.nl.varianten_tabel.omschrijving_te_weinig_samples,w5vHLm19hF0S5wj1e5RyoG,__

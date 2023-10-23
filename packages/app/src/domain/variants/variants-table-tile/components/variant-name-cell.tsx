@@ -1,7 +1,7 @@
 import { BoldText } from '~/components/typography';
 import { Cell } from '.';
 import { TableText } from '../types';
-import { VariantCode } from '../../static-props';
+import { VariantCode } from '~/domain/variants/data-selection/types';
 
 type VariantNameCellProps = {
   variantCode: VariantCode;
