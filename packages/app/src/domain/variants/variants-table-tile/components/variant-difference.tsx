@@ -33,7 +33,7 @@ export const VariantDifference = ({ value, text, isWideTable }: VariantDifferenc
     {
       condition: value?.difference > 0,
       renderingValue: (
-        <Difference color={colors.black}>
+        <Difference color={colors.red2}>
           <TrendIcon trendDirection={TrendDirection.UP} />
           {formatPercentage(value.difference, options)} {text.verschil.meer}
         </Difference>
@@ -42,7 +42,7 @@ export const VariantDifference = ({ value, text, isWideTable }: VariantDifferenc
     {
       condition: value?.difference < 0,
       renderingValue: (
-        <Difference color={colors.black}>
+        <Difference color={colors.green1}>
           <TrendIcon trendDirection={TrendDirection.DOWN} />
           {formatPercentage(-value.difference, options)} {text.verschil.minder}
         </Difference>

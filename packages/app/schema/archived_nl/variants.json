@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "archived_nl_variants",
+  "required": ["values"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/variant"
+      }
+    }
+  },
+  "definitions": {
+    "variant": {
+      "type": "object",
+      "title": "archived_nl_variants_variant",
+      "additionalProperties": false,
+      "required": ["variant_code", "values", "last_value"],
+      "properties": {
+        "variant_code": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/value"
+          }
+        },
+        "last_value": {
+          "$ref": "#/definitions/value"
+        }
+      }
+    },
+    "value": {
+      "type": "object",
+      "title": "archived_nl_variants_variant_value",
+      "additionalProperties": false,
+      "required": [
+        "order",
+        "occurrence",
+        "percentage",
+        "sample_size",
+        "date_start_unix",
+        "date_end_unix",
+        "date_of_report_unix",
+        "date_of_insertion_unix",
+        "label_nl",
+        "label_en"
+      ],
+      "properties": {
+        "order": {
+          "type": "integer"
+        },
+        "occurrence": {
+          "type": "integer"
+        },
+        "percentage": {
+          "type": "number"
+        },
+        "sample_size": {
+          "type": "integer"
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "label_nl": {
+          "type": "string"
+        },
+        "label_en": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

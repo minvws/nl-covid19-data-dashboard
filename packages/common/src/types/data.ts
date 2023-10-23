@@ -231,6 +231,7 @@ export interface ArchivedNl {
   vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004: NlVaccineCoveragePerAgeGroupEstimatedFullyVaccinatedValue;
   vaccine_delivery_per_supplier_archived_20211101: ArchivedNlVaccineDeliveryPerSupplier;
   vaccine_stock_archived_20211024: ArchivedNlVaccineStock;
+  variants_archived_20231101: ArchivedNlVariants;
   repeating_shot_administered_20220713: ArchivedNlRepeatingShotAdministered;
   corona_melder_app_warning_archived_20220421: ArchivedNlCoronaMelderAppWarning;
   corona_melder_app_download_archived_20220421: ArchivedNlCoronaMelderAppDownload;
@@ -833,6 +834,26 @@ export interface ArchivedNlVaccineStockValue {
   date_of_insertion_unix: number;
   date_unix: number;
 }
+export interface ArchivedNlVariants {
+  values: ArchivedNlVariantsVariant[];
+}
+export interface ArchivedNlVariantsVariant {
+  variant_code: string;
+  values: ArchivedNlVariantsVariantValue[];
+  last_value: ArchivedNlVariantsVariantValue;
+}
+export interface ArchivedNlVariantsVariantValue {
+  order: number;
+  occurrence: number;
+  percentage: number;
+  sample_size: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+  date_of_report_unix: number;
+  label_nl: string;
+  label_en: string;
+}
 export interface ArchivedNlRepeatingShotAdministered {
   values: ArchivedNlRepeatingShotAdministeredValue[];
   last_value: ArchivedNlRepeatingShotAdministeredValue;
@@ -1031,7 +1052,7 @@ export interface Nl {
   deceased_cbs: NlDeceasedCbs;
   vaccine_administered_last_timeframe: NlVaccineAdministeredLastTimeframe;
   vaccine_campaigns: NlVaccineCampaign;
-  variants?: NlVariants;
+  variants: NlVariants;
   self_test_overall: NlSelfTestOverall;
   infectionradar_symptoms_trend_per_age_group_weekly: NlInfectionradarSymptomsTrendPerAgeGroupWeekly;
 }

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
@@ -12,6 +11,7 @@ import { useCollapsible } from '~/utils/use-collapsible';
 import { Cell, HeaderCell, PercentageBarWithNumber, StyledTable, VariantDifference, VariantNameCell } from '.';
 import { TableText } from '../types';
 import { NoPercentageData } from './no-percentage-data';
+import { VariantRow } from '~/domain/variants/data-selection/types';
 
 interface NarrowVariantsTableProps {
   rows: VariantRow[];

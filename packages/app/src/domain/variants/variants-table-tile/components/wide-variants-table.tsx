@@ -2,12 +2,12 @@ import { DifferenceDecimal } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { Cell, HeaderCell, PercentageBarWithNumber, StyledTable, VariantDifference, VariantNameCell } from '.';
 import { TableText } from '../types';
 import { NoPercentageData } from './no-percentage-data';
+import { VariantRow } from '~/domain/variants/data-selection/types';
 
 const columnKeys = ['variant_titel', 'percentage', 'vorige_meting'] as const;
 
