@@ -48,8 +48,8 @@ export function useDataSitemap(base: 'nl' | 'gm', code?: string, data?: Pick<Nl,
       header: commonTexts.sidebar.categories.vaccinations.title,
       links: [
         {
-          text: commonTexts.sidebar.metrics.vaccinations.title,
-          href: reverseRouter.nl.vaccinaties(),
+          text: commonTexts.sidebar.metrics.the_corona_vaccine.title,
+          href: reverseRouter.nl.deCoronaprik(),
         },
       ],
     },
