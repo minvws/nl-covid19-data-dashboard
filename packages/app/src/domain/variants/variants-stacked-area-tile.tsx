@@ -1,6 +1,5 @@
 import { TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useMemo, useState } from 'react';
-import { isDefined, isPresent } from 'ts-is-present';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { InteractiveLegend } from '~/components/interactive-legend';
@@ -14,6 +13,7 @@ import { space } from '~/style/theme';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 import { ColorMatch, VariantChartValue, VariantsStackedAreaTileText } from '~/domain/variants/data-selection/types';
 import { useSeriesConfig } from '~/domain/variants/logic/use-series-config';
+import { reorderAndFilter } from '~/domain/variants/logic/reorder-and-filter';
 
 const alwaysEnabled: (keyof VariantChartValue)[] = [];
 
@@ -37,6 +37,8 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
   const staticLegendItems: LegendItem[] = [];
 
   const timespanAnnotations = useUnreliableDataAnnotations(values, text.lagere_betrouwbaarheid);
+
+  const hasTwoColumns = list.length === 0 || list.length > 4;
 
   if (timespanAnnotations.length) {
     staticLegendItems.push({
@@ -71,44 +73,15 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
           timespanAnnotations,
           renderNullAsZero: true,
         }}
-        formatTooltip={(context) => {
-          /**
-           * Filter out zero values in value object, so it will be invisible in the tooltip.
-           * When a selection has been made, the zero values will be shown in the tooltip.
-           */
-          const metricAmount = context.config.length;
-          const totalMetricAmount = seriesConfig.length;
-          const hasSelectedMetrics = metricAmount !== totalMetricAmount;
-
-          const filteredValues = Object.fromEntries(
-            Object.entries(context.value).filter(([key, value]) => (key.includes('percentage') ? value !== 0 && isPresent(value) && !isNaN(Number(value)) : value))
-          ) as VariantChartValue;
-
-          const reorderContext = {
-            ...context,
-            config: [
-              // Destructuring so as to not interact with the object directly and eliminate the possibility of introducing inconsistencies
-              ...context.config.filter((value) => !hasMetricProperty(value) || filteredValues[value.metricProperty] || hasSelectedMetrics),
-            ].filter(isDefined),
-            value: !hasSelectedMetrics ? filteredValues : context.value,
-          };
-
-          const percentageValuesAmount = Object.keys(reorderContext.value).filter((key) => key.includes('percentage')).length;
-
-          const hasTwoColumns = !hasSelectedMetrics ? percentageValuesAmount > 4 : metricAmount > 4;
-
-          return <TooltipSeriesList data={reorderContext} hasTwoColumns={hasTwoColumns} />;
-        }}
+        formatTooltip={(data) => (
+          <TooltipSeriesList data={reorderAndFilter<VariantChartValue, GappedAreaSeriesDefinition<VariantChartValue>>(data, selectOptions)} hasTwoColumns={hasTwoColumns} />
+        )}
         numGridLines={0}
         tickValues={[0, 25, 50, 75, 100]}
       />
       <Legend items={staticLegendItems} />
     </ChartTile>
   );
-};
-
-const hasMetricProperty = (config: any): config is { metricProperty: string } => {
-  return 'metricProperty' in config;
 };
 
 const useFilteredSeriesConfig = (seriesConfig: GappedAreaSeriesDefinition<VariantChartValue>[], compareList: (keyof VariantChartValue)[]) => {
