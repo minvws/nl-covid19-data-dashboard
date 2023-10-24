@@ -15,3 +15,9 @@ timestamp,action,key,document_id,move_to
 2023-10-20T09:31:30.622Z,add,pages.variants_page.nl.varianten_tabel.omschrijving_te_weinig_samples,w5vHLm19hF0S5wj1e5RyoG,__
 2023-10-23T15:10:02.545Z,add,common.sidebar.metrics.the_corona_vaccine.title,ZkwHqMQjnsmR1ekP50kkn5,__
 2023-10-23T15:10:02.545Z,delete,common.sidebar.metrics.vaccinations.title,wzQp83DAUqyqV3ewG9xYUn,__
+2023-10-24T11:27:36.857Z,add,common.variants_page.legend_help_text,HZiiX43HLlkWORF4EMynAL,__
+2023-10-24T11:27:37.696Z,add,common.variants_page.bar_chart_legend_inaccurate,HZiiX43HLlkWORF4EMynLf,__
+2023-10-24T11:27:38.726Z,add,common.variants_page.tooltip_labels.innacurate,3Jkha9OztzmUWKfWeflWKk,__
+2023-10-24T11:27:38.726Z,delete,common.test_key:,itix6KXAqiuTrWiucCRIit,__
+2023-10-24T11:27:38.727Z,delete,__root.test_123,0hrRKce5hYl5O3WpoZ6oAl,__
+2023-10-24T11:27:38.727Z,delete,__root.test_key_345,0hrRKce5hYl5O3WpoZ6nXX,__
