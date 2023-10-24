@@ -17,9 +17,7 @@ const hasMetricProperty = (config: any): config is { metricProperty: string } =>
  * @param selectionOptions - Currently selected variants
  */
 export const reorderAndFilter = <T, P>(context: TooltipData<VariantChartValue & T>, selectionOptions: P[]) => {
-  const metricAmount = context.config.length;
-  const totalMetricAmount = selectionOptions.length;
-  const hasSelectedMetrics = metricAmount !== totalMetricAmount; // Check whether the user has selected any variants from the interactive legend.
+  const hasSelectedMetrics = context.config.length !== selectionOptions.length; // Check whether the user has selected any variants from the interactive legend.
 
   /* Filter out any variants that have an occcurrence value of 0 */
   const filteredValues = Object.fromEntries(

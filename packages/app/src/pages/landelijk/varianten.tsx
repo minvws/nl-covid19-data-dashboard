@@ -157,7 +157,6 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             <VariantsStackedBarChartTile
               title={textNl.varianten_barchart.titel}
               description={textNl.varianten_barchart.description}
-              helpText={textNl.varianten_over_tijd_grafiek.legend_help_tekst}
               tooltipLabels={textNl.varianten_over_tijd_grafiek}
               values={variantChart}
               variantLabels={variantLabels}
