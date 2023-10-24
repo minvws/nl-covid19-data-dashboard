@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { ColorMatch, StackedBarConfig, VariantChartValue, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
 import { StackedBarTooltipData, StackedChart } from '~/components/stacked-chart';
 import { useBarConfig } from '~/domain/variants/logic/use-bar-config';
-import { InteractiveLegend } from '~/components/interactive-legend';
+import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
 import { useList } from '~/utils/use-list';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { space } from '~/style/theme';
@@ -38,12 +38,13 @@ const alwaysEnabled: (keyof VariantChartValue)[] = [];
  */
 export const VariantsStackedBarChartTile = ({ title, description, helpText, tooltipLabels, values, variantLabels, variantColors, metadata }: VariantsStackedBarChartTileProps) => {
   const today = useCurrentDate();
-
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
+  const [variantTimeFrame, setVariantTimeFrame] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
+  const barSeriesConfig = useBarConfig(values, variantLabels, tooltipLabels, variantColors, variantTimeFrame, today);
 
-  const [variantTimeFrame, setVariantTimeFrame] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
+  const interactiveLegendOptions: SelectOption[] = barSeriesConfig;
 
-  const [barChartConfig, selectionOptions] = useBarConfig(values, list, variantLabels, tooltipLabels, variantColors, variantTimeFrame, today);
+  const filteredBarConfig = barSeriesConfig.filter((configItem) => list.includes(configItem.metricProperty) || list.length === 0);
 
   const hasTwoColumns = list.length === 0 || list.length > 4;
 
@@ -53,21 +54,21 @@ export const VariantsStackedBarChartTile = ({ title, description, helpText, tool
       description={description}
       metadata={metadata}
       timeframeOptions={TimeframeOptionsList}
-      timeframeInitialValue={TimeframeOption.THREE_MONTHS}
+      timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
       onSelectTimeframe={setVariantTimeFrame}
     >
-      <InteractiveLegend helpText={helpText} selectOptions={selectionOptions} selection={list} onToggleItem={toggle} onReset={clear} />
+      <InteractiveLegend helpText={helpText} selectOptions={interactiveLegendOptions} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer marginBottom={space[2]} />
       <StackedChart
         accessibility={{
           key: 'variants_stacked_area_over_time_chart',
         }}
         values={values}
-        config={barChartConfig}
+        config={filteredBarConfig}
         disableLegend
         timeframe={variantTimeFrame}
         formatTooltip={(data) => (
-          <TooltipSeriesList data={reorderAndFilter<StackedBarTooltipData, StackedBarConfig<VariantChartValue>>(data, selectionOptions)} hasTwoColumns={hasTwoColumns} />
+          <TooltipSeriesList data={reorderAndFilter<StackedBarTooltipData, StackedBarConfig<VariantChartValue>>(data, interactiveLegendOptions)} hasTwoColumns={hasTwoColumns} />
         )}
       />
     </ChartTile>

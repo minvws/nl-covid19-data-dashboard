@@ -12,17 +12,15 @@ const extractVariantNamesFromValues = (values: VariantChartValue[]) => {
 
 /**
  * Create configuration labels for interactive legend
- * @param values
- * @param selectedOptions
- * @param variantLabels
- * @param tooltipLabels
- * @param colors
- * @param timeframe
- * @param today
+ * @param values - Chart data
+ * @param variantLabels - Mnemonic labels for variants
+ * @param tooltipLabels - SiteText for other variants
+ * @param colors - Colors for variants
+ * @param timeframe - Selected timeframe
+ * @param today - Date of today
  */
 export const useBarConfig = (
   values: VariantChartValue[],
-  selectedOptions: (keyof VariantChartValue)[],
   variantLabels: VariantDynamicLabels,
   tooltipLabels: VariantsOverTimeGraphText,
   colors: ColorMatch[],
@@ -67,13 +65,6 @@ export const useBarConfig = (
       }
     });
 
-    const selectOptions: StackedBarConfig<VariantChartValue>[] = [...barChartConfig];
-
-    if (selectedOptions.length > 0) {
-      const selection = barChartConfig.filter((selectedConfig) => selectedOptions.includes(selectedConfig.metricProperty));
-      return [selection, selectOptions];
-    } else {
-      return [barChartConfig, selectOptions];
-    }
-  }, [values, tooltipLabels.tooltip_labels.other_percentage, variantLabels, colors, selectedOptions, timeframe, today]);
+    return barChartConfig;
+  }, [values, tooltipLabels.tooltip_labels.other_percentage, variantLabels, colors, timeframe, today]);
 };
