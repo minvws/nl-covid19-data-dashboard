@@ -1,7 +1,8 @@
-import { ColorMatch, VariantChartValue, StackedBarConfig, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
+import { ColorMatch, VariantChartValue, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
 import { useMemo } from 'react';
 import { getValuesInTimeframe, TimeframeOption } from '@corona-dashboard/common';
 import { isPresent } from 'ts-is-present';
+import { BarSeriesDefinition } from '~/components/time-series-chart/logic';
 
 const extractVariantNamesFromValues = (values: VariantChartValue[]) => {
   return values
@@ -12,17 +13,15 @@ const extractVariantNamesFromValues = (values: VariantChartValue[]) => {
 
 /**
  * Create configuration labels for interactive legend
- * @param values
- * @param selectedOptions
- * @param variantLabels
- * @param tooltipLabels
- * @param colors
- * @param timeframe
- * @param today
+ * @param values - Chart data
+ * @param variantLabels - Mnemonic labels for variants
+ * @param tooltipLabels - SiteText for other variants
+ * @param colors - Colors for variants
+ * @param timeframe - Selected timeframe
+ * @param today - Date of today
  */
 export const useBarConfig = (
   values: VariantChartValue[],
-  selectedOptions: (keyof VariantChartValue)[],
   variantLabels: VariantDynamicLabels,
   tooltipLabels: VariantsOverTimeGraphText,
   colors: ColorMatch[],
@@ -44,7 +43,7 @@ export const useBarConfig = (
       .filter((keyName) => activeVariantsInTimeframeNames.includes(keyName))
       .reverse();
 
-    const barChartConfig: StackedBarConfig<VariantChartValue>[] = [];
+    const barChartConfig: BarSeriesDefinition<VariantChartValue>[] = [];
 
     listOfVariantCodes.forEach((variantKey) => {
       const variantCodeName = variantKey.split('_').slice(0, -1).join('_');
@@ -57,23 +56,19 @@ export const useBarConfig = (
 
       if (variantDynamicLabel) {
         const barChartConfigEntry = {
+          type: 'bar',
           metricProperty: variantMetricPropertyName,
           color: color,
           label: variantDynamicLabel,
+          fillOpacity: 1,
           shape: 'gapped-area',
+          hideInLegend: true,
         };
 
-        barChartConfig.push(barChartConfigEntry as StackedBarConfig<VariantChartValue>);
+        barChartConfig.push(barChartConfigEntry as BarSeriesDefinition<VariantChartValue>);
       }
     });
 
-    const selectOptions: StackedBarConfig<VariantChartValue>[] = [...barChartConfig];
-
-    if (selectedOptions.length > 0) {
-      const selection = barChartConfig.filter((selectedConfig) => selectedOptions.includes(selectedConfig.metricProperty));
-      return [selection, selectOptions];
-    } else {
-      return [barChartConfig, selectOptions];
-    }
-  }, [values, tooltipLabels.tooltip_labels.other_percentage, variantLabels, colors, selectedOptions, timeframe, today]);
+    return barChartConfig;
+  }, [values, tooltipLabels.tooltip_labels.other_percentage, variantLabels, colors, timeframe, today]);
 };

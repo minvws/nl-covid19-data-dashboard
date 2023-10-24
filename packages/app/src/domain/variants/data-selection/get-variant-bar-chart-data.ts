@@ -28,8 +28,8 @@ export function getVariantBarChartData(variants: NlVariants) {
     return EMPTY_VALUES;
   }
 
-  const values = firstVariantInList.values.map<VariantChartValue>((value, index) => {
-    const item = {
+  const values: VariantChartValue[] = firstVariantInList.values.map<VariantChartValue>((value, index) => {
+    const item: VariantChartValue = {
       is_reliable: true,
       date_start_unix: value.date_start_unix,
       date_end_unix: value.date_end_unix,

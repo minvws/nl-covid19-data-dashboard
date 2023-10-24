@@ -21,6 +21,7 @@ import { useState } from 'react';
 import { getArchivedVariantChartData, getVariantBarChartData, getVariantOrderColors, getVariantTableData } from '~/domain/variants/data-selection';
 import { VariantsStackedAreaTile, VariantsStackedBarChartTile, VariantsTableTile } from '~/domain/variants';
 import { VariantDynamicLabels } from '~/domain/variants/data-selection/types';
+import { NlVariantsVariant } from '@corona-dashboard/common';
 
 const pageMetrics = ['variants', 'named_difference'];
 
@@ -75,7 +76,6 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
 
   const { commonTexts, locale } = useIntl();
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
-
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
   const metadata = {
@@ -86,9 +86,12 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
-  //const totalVariants = data.named_difference.variants__percentage.filter((namedDifferenceEntry) => namedDifferenceEntry.variant_code !== 'other_variants').length;
   const totalVariants = data.variants
-    ? data.variants!.values.reduce((accumulator, currentVariant) => (currentVariant.last_value.occurrence > 0 ? 1 + accumulator : accumulator), 0)
+    ? data.variants!.values.reduce(
+        (accumulator, currentVariant: NlVariantsVariant) =>
+          currentVariant.last_value.occurrence > 0 && currentVariant.variant_code !== 'other_variants' ? 1 + accumulator : accumulator,
+        0
+      )
     : NaN;
 
   const sampleThresholdPassed = data.variants ? data.variants!.values[0].last_value.sample_size > 100 : false;
@@ -154,7 +157,6 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             <VariantsStackedBarChartTile
               title={textNl.varianten_barchart.titel}
               description={textNl.varianten_barchart.description}
-              helpText={textNl.varianten_over_tijd_grafiek.legend_help_tekst}
               tooltipLabels={textNl.varianten_over_tijd_grafiek}
               values={variantChart}
               variantLabels={variantLabels}
