@@ -23,6 +23,7 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { KpiTile, KpiValue, TwoKpiSection } from '~/components';
+import { replaceVariablesInText } from '~/utils';
 
 const pageMetrics = ['self_test_overall', 'infection_radar_symptoms_per_age_group'];
 
@@ -70,6 +71,8 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
 
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
+  const totalInfectedPercentage = data.self_test_overall.last_value.infected_percentage ? data.self_test_overall.last_value.infected_percentage : 0;
+
   const metadata = {
     ...metadataTexts,
     title: textNl.metadata.title,
@@ -105,24 +108,26 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
 
           <TwoKpiSection>
             <KpiTile
-              title="Hello kpi tile 1"
+              title={textNl.kpi_tile.infected_participants_percentage.title}
               metadata={{
                 date: { start: data.self_test_overall.last_value.date_start_unix, end: data.self_test_overall.last_value.date_end_unix },
                 source: textNl.sources.self_test,
               }}
-              description="Description KPI tile 1"
+              description={replaceVariablesInText(textNl.kpi_tile.infected_participants_percentage.description, {
+                infectedPercentage: totalInfectedPercentage,
+              })}
             >
               <KpiValue percentage={data.self_test_overall.last_value.infected_percentage} differenceFractionDigits={1} difference={data.difference.self_test_overall} isAmount />
             </KpiTile>
             <KpiTile
-              title="Hello KPI tile 2"
+              title={textNl.kpi_tile.total_participants.title}
               metadata={{
                 date: { start: data.self_test_overall.last_value.date_start_unix, end: data.self_test_overall.last_value.date_end_unix },
                 source: textNl.sources.self_test,
               }}
-              description="Description kpi tile 2"
+              description={textNl.kpi_tile.total_participants.description}
             >
-              <KpiValue absolute={data.self_test_overall.last_value.n_participants_total_unfiltered} isAmount />
+              <KpiValue absolute={data.self_test_overall.last_value.n_participants_total_unfiltered} numFractionDigits={0} isAmount />
             </KpiTile>
           </TwoKpiSection>
 

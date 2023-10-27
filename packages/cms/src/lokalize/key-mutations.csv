@@ -21,3 +21,7 @@ timestamp,action,key,document_id,move_to
 2023-10-24T11:27:38.726Z,delete,common.test_key:,itix6KXAqiuTrWiucCRIit,__
 2023-10-24T11:27:38.727Z,delete,__root.test_123,0hrRKce5hYl5O3WpoZ6oAl,__
 2023-10-24T11:27:38.727Z,delete,__root.test_key_345,0hrRKce5hYl5O3WpoZ6nXX,__
+2023-10-27T14:07:39.563Z,add,pages.infectie_radar_page.nl.kpi_tile.infected_participants_percentage.title,5if6OpiB3iy3C5t2bwoaWw,__
+2023-10-27T14:07:40.526Z,add,pages.infectie_radar_page.nl.kpi_tile.infected_participants_percentage.description,pCa5dcpJ9eiic3eFSI81Ea,__
+2023-10-27T14:07:41.538Z,add,pages.infectie_radar_page.nl.kpi_tile.total_participants.title,XnRo9vzZlQx15CHPE0aA2y,__
+2023-10-27T14:07:42.530Z,add,pages.infectie_radar_page.nl.kpi_tile.total_participants.description,5if6OpiB3iy3C5t2bwoaba,__
