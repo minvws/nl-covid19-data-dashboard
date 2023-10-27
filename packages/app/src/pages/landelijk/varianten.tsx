@@ -117,8 +117,8 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: {
-                start: dates.date_start_unix,
-                end: dates.date_end_unix,
+                start: data.variants.values[0].last_value.date_start_unix,
+                end: data.variants.values[0].last_value.date_end_unix,
               },
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
@@ -136,8 +136,8 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             source={textNl.bronnen.rivm}
             disclaimer={textNl.kpi_amount_of_samples.disclaimer}
             dateOrRange={{
-              start: dates.date_start_unix,
-              end: dates.date_end_unix,
+              start: data.variants.values[0].last_value.date_start_unix,
+              end: data.variants.values[0].last_value.date_end_unix,
             }}
             tilesData={[
               {

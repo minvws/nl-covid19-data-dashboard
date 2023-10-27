@@ -1,6 +1,6 @@
-import { ChartTile, MetadataProps, TimeSeriesChart } from '~/components';
+import { ChartTile, MetadataProps } from '~/components';
 import { Spacer } from '~/components/base';
-import { DAY_IN_SECONDS, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { ColorMatch, VariantChartValue, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
 import { useBarConfig } from '~/domain/variants/logic/use-bar-config';
@@ -10,8 +10,8 @@ import { TooltipSeriesList } from '~/components/time-series-chart/components/too
 import { space } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { reorderAndFilter } from '~/domain/variants/logic/reorder-and-filter';
-import { getBoundaryDateStartUnix } from '~/utils';
 import { useIntl } from '~/intl';
+import { StackedBarTooltipData, StackedChart } from '~/components/stacked-chart';
 
 interface VariantsStackedBarChartTileProps {
   title: string;
@@ -49,8 +49,6 @@ export const VariantsStackedBarChartTile = ({ title, description, tooltipLabels,
 
   const filteredBarConfig = barSeriesConfig.filter((configItem) => list.includes(configItem.metricProperty) || list.length === 0);
 
-  const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
-
   const hasTwoColumns = list.length === 0 || list.length > 4;
 
   return (
@@ -64,25 +62,15 @@ export const VariantsStackedBarChartTile = ({ title, description, tooltipLabels,
     >
       <InteractiveLegend helpText={text.legend_help_text} selectOptions={interactiveLegendOptions} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer marginBottom={space[2]} />
-      <TimeSeriesChart
+      <StackedChart
         accessibility={{
           key: 'variants_stacked_area_over_time_chart',
         }}
-        forceLegend
         values={values}
-        seriesConfig={filteredBarConfig}
+        config={filteredBarConfig}
         timeframe={variantTimeFrame}
-        formatTooltip={(data) => <TooltipSeriesList data={reorderAndFilter<VariantChartValue, SelectOption>(data, interactiveLegendOptions)} hasTwoColumns={hasTwoColumns} />}
-        dataOptions={{
-          timespanAnnotations: [
-            {
-              start: underReportedDateStart + DAY_IN_SECONDS / 2,
-              end: Infinity,
-              label: text.bar_chart_legend_inaccurate,
-              shortLabel: text.tooltip_labels.innacurate,
-            },
-          ],
-        }}
+        disableLegend
+        formatTooltip={(data) => <TooltipSeriesList data={reorderAndFilter<StackedBarTooltipData, SelectOption>(data, interactiveLegendOptions)} hasTwoColumns={hasTwoColumns} />}
       />
     </ChartTile>
   );

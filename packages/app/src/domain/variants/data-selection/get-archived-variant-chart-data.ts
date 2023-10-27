@@ -4,7 +4,7 @@ import { VariantChartValue } from '~/domain/variants/data-selection/types';
 
 const EMPTY_VALUES = {
   archivedVariantChart: null,
-  dates: {
+  archivedDates: {
     date_of_report_unix: 0,
     date_start_unix: 0,
     date_end_unix: 0,
@@ -45,7 +45,7 @@ export function getArchivedVariantChartData(variants: ArchivedNlVariants | undef
 
   return {
     archivedVariantChart: values,
-    dates: {
+    archivedDates: {
       date_of_report_unix: firstVariantInList.last_value.date_of_report_unix,
       date_start_unix: firstVariantInList.last_value.date_start_unix,
       date_end_unix: firstVariantInList.last_value.date_end_unix,
