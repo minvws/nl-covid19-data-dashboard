@@ -26,6 +26,9 @@
     },
     "vulnerable_hospital_admissions": {
       "$ref": "#/definitions/diff_integer"
+    },
+    "self_test_overall": {
+      "$ref": "#/definitions/diff_decimal"
     }
   },
   "required": [
@@ -34,7 +37,8 @@
     "infectious_people__estimate",
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
     "intensive_care_lcps__beds_occupied_covid",
-    "sewer__average"
+    "sewer__average",
+    "self_test_overall"
   ],
   "additionalProperties": false,
   "definitions": {
