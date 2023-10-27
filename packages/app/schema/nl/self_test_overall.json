@@ -3,11 +3,14 @@
     "value": {
       "title": "nl_self_test_overall_value",
       "type": "object",
-      "required": ["infected_percentage", "date_start_unix", "date_end_unix", "date_of_insertion_unix"],
+      "required": ["infected_percentage", "n_participants_total_unfiltered", "date_start_unix", "date_end_unix", "date_of_insertion_unix"],
       "additionalProperties": false,
       "properties": {
         "infected_percentage": {
           "type": ["number", "null"]
+        },
+        "n_participants_total_unfiltered": {
+          "type": ["number"]
         },
         "date_start_unix": {
           "type": "integer"

@@ -1065,6 +1065,7 @@ export interface NlDifference {
   sewer__average: DifferenceInteger;
   reproduction__index_average?: DifferenceDecimal;
   vulnerable_hospital_admissions?: DifferenceInteger;
+  self_test_overall: DifferenceDecimal;
 }
 export interface DifferenceInteger {
   old_value: number;
@@ -1252,6 +1253,7 @@ export interface NlSelfTestOverall {
 }
 export interface NlSelfTestOverallValue {
   infected_percentage: number | null;
+  n_participants_total_unfiltered: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;

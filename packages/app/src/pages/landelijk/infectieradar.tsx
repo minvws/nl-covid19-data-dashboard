@@ -22,6 +22,7 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { KpiTile, KpiValue, TwoKpiSection } from '~/components';
 
 const pageMetrics = ['self_test_overall', 'infection_radar_symptoms_per_age_group'];
 
@@ -35,7 +36,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('self_test_overall', 'infectionradar_symptoms_trend_per_age_group_weekly'),
+  selectNlData('difference.self_test_overall', 'self_test_overall', 'infectionradar_symptoms_trend_per_age_group_weekly'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -101,6 +102,29 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
               faq: content.faqs,
             })}
           />
+
+          <TwoKpiSection>
+            <KpiTile
+              title="Hello kpi tile 1"
+              metadata={{
+                date: { start: data.self_test_overall.last_value.date_start_unix, end: data.self_test_overall.last_value.date_end_unix },
+                source: textNl.sources.self_test,
+              }}
+              description="Description KPI tile 1"
+            >
+              <KpiValue percentage={data.self_test_overall.last_value.infected_percentage} differenceFractionDigits={1} difference={data.difference.self_test_overall} isAmount />
+            </KpiTile>
+            <KpiTile
+              title="Hello KPI tile 2"
+              metadata={{
+                date: { start: data.self_test_overall.last_value.date_start_unix, end: data.self_test_overall.last_value.date_end_unix },
+                source: textNl.sources.self_test,
+              }}
+              description="Description kpi tile 2"
+            >
+              <KpiValue absolute={data.self_test_overall.last_value.n_participants_total_unfiltered} isAmount />
+            </KpiTile>
+          </TwoKpiSection>
 
           <ChartTile
             title={textNl.chart_self_tests.title}
