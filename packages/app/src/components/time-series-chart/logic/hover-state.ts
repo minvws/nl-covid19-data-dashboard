@@ -1,35 +1,14 @@
-import {
-  assert,
-  endOfDayInSeconds,
-  isDateSpanValue,
-  isDateValue,
-  startOfDayInSeconds,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { assert, endOfDayInSeconds, isDateSpanValue, isDateValue, startOfDayInSeconds, TimestampedValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
 import { isEmpty, pick, throttle } from 'lodash';
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { TimelineEventConfig } from '../components/timeline';
 import { Padding, TimespanAnnotationConfig } from './common';
-import {
-  isVisible,
-  SeriesConfig,
-  SeriesDoubleValue,
-  SeriesList,
-  SeriesSingleValue,
-} from './series';
+import { isVisible, SeriesConfig, SeriesDoubleValue, SeriesList, SeriesSingleValue } from './series';
 import { findSplitPointForValue } from './split';
 import { useKeyboardNavigation } from './use-keyboard-navigation';
 
@@ -60,6 +39,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
 interface HoverState<T> {
   valuesIndex: number;
   barPoints: HoveredPoint<T>[];
+  stackedBarPoints: HoveredPoint<T>[];
   linePoints: HoveredPoint<T>[];
   rangePoints: HoveredPoint<T>[];
   nearestPoint: HoveredPoint<T>;
@@ -84,11 +64,7 @@ export function useHoverState<T extends TimestampedValue>({
 }: UseHoverStateArgs<T>) {
   const [point, setPoint] = useState<Point>();
   const [valuesIndex, setValuesIndex] = useState<number>(0);
-  const keyboard = useKeyboardNavigation(
-    setValuesIndex,
-    values.length,
-    setIsTabInteractive
-  );
+  const keyboard = useKeyboardNavigation(setValuesIndex, values.length, setIsTabInteractive);
 
   useEffect(() => {
     isTabInteractive ? keyboard.enable() : keyboard.disable();
@@ -111,9 +87,7 @@ export function useHoverState<T extends TimestampedValue>({
   );
 
   const valuesWithInteractiveProperties = useMemo(() => {
-    return values.filter((x) =>
-      hasSomeFilledProperties(pick(x, interactiveMetricProperties))
-    );
+    return values.filter((x) => hasSomeFilledProperties(pick(x, interactiveMetricProperties)));
   }, [values, interactiveMetricProperties]);
 
   const interactiveValuesDateUnix = useMemo(
@@ -173,23 +147,13 @@ export function useHoverState<T extends TimestampedValue>({
 
       const date_unix = xScale.invert(xPosition);
 
-      const index = bisectCenter(
-        interactiveValuesDateUnix,
-        date_unix,
-        0,
-        interactiveValuesDateUnix.length
-      );
+      const index = bisectCenter(interactiveValuesDateUnix, date_unix, 0, interactiveValuesDateUnix.length);
 
       const timestamp = interactiveValuesDateUnix[index];
 
-      const indexInAllValues = allValuesDateUnix.findIndex(
-        (x) => x === timestamp
-      );
+      const indexInAllValues = allValuesDateUnix.findIndex((x) => x === timestamp);
 
-      assert(
-        indexInAllValues !== -1,
-        `[${bisect.name}] Failed to find the values index for interactive value timestamp ${timestamp}`
-      );
+      assert(indexInAllValues !== -1, `[${bisect.name}] Failed to find the values index for interactive value timestamp ${timestamp}`);
 
       return indexInAllValues;
     },
@@ -266,9 +230,7 @@ export function useHoverState<T extends TimestampedValue>({
       .filter(isVisible)
       .filter((x) => !x.nonInteractive)
       .map((config, index) => {
-        const seriesValue = seriesList[index][valuesIndex] as
-          | SeriesSingleValue
-          | undefined;
+        const seriesValue = seriesList[index][valuesIndex] as SeriesSingleValue | undefined;
 
         if (!isPresent(seriesValue)) {
           return;
@@ -311,9 +273,7 @@ export function useHoverState<T extends TimestampedValue>({
       .filter(isVisible)
       .filter((x) => !x.nonInteractive)
       .map((config, index) => {
-        const seriesValue = seriesList[index][valuesIndex] as
-          | SeriesSingleValue
-          | undefined;
+        const seriesValue = seriesList[index][valuesIndex] as SeriesSingleValue | undefined;
 
         if (!isPresent(seriesValue)) {
           return;
@@ -361,18 +321,11 @@ export function useHoverState<T extends TimestampedValue>({
       .filter(isDefined)
       .filter((x) => isPresent(x.seriesValue.__value));
 
-    /**
-     * Point markers on range data are rendered differently, so we split them
-     * out here, so we avoid having to create a union type and complicate
-     * things.
-     */
-    const rangePoints: HoveredPoint<T>[] = seriesConfig
+    const stackedBarPoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
       .filter((x) => !x.nonInteractive)
-      .flatMap((config, index) => {
-        const seriesValue = seriesList[index][valuesIndex] as
-          | SeriesDoubleValue
-          | undefined;
+      .map((config, index) => {
+        const seriesValue = seriesList[index][valuesIndex] as SeriesDoubleValue | undefined;
 
         if (!isPresent(seriesValue)) {
           return;
@@ -385,10 +338,48 @@ export function useHoverState<T extends TimestampedValue>({
         /**
          * Filter series without Y value on the current valuesIndex
          */
-        if (
-          (!isPresent(yValueA) || !isPresent(yValueB)) &&
-          config.type !== 'gapped-stacked-area'
-        ) {
+        if (!isPresent(yValueA) || !isPresent(yValueB)) {
+          return;
+        }
+
+        switch (config.type) {
+          case 'bar':
+            return {
+              seriesValue,
+              x: xScale(xValue),
+              y: isPresent(yValueB) ? yScale(yValueB) : 0,
+              color: config.color,
+              metricProperty: config.metricProperty,
+              seriesConfigIndex: index,
+            };
+        }
+      })
+      .filter(isDefined)
+      .filter((x) => isPresent(x.seriesValue.__value_a) && isPresent(x.seriesValue.__value_b));
+
+    /**
+     * Point markers on range data are rendered differently, so we split them
+     * out here, so we avoid having to create a union type and complicate
+     * things.
+     */
+    const rangePoints: HoveredPoint<T>[] = seriesConfig
+      .filter(isVisible)
+      .filter((x) => !x.nonInteractive)
+      .flatMap((config, index) => {
+        const seriesValue = seriesList[index][valuesIndex] as SeriesDoubleValue | undefined;
+
+        if (!isPresent(seriesValue)) {
+          return;
+        }
+
+        const xValue = seriesValue.__date_unix;
+        const yValueA = seriesValue.__value_a;
+        const yValueB = seriesValue.__value_b;
+
+        /**
+         * Filter series without Y value on the current valuesIndex
+         */
+        if ((!isPresent(yValueA) || !isPresent(yValueB)) && config.type !== 'gapped-stacked-area') {
           return;
         }
 
@@ -427,20 +418,16 @@ export function useHoverState<T extends TimestampedValue>({
         }
       })
       .filter(isDefined)
-      .filter(
-        (x) =>
-          isPresent(x.seriesValue.__value_a) &&
-          isPresent(x.seriesValue.__value_b)
-      );
+      .filter((x) => isPresent(x.seriesValue.__value_a) && isPresent(x.seriesValue.__value_b));
 
     /**
      * For nearest point calculation we only need to look at the y component of
      * the mouse, since all series originate from the same original value and
      * are thus aligned with the same timestamp.
      */
-    const nearestPoint = [...linePoints, ...rangePoints, ...barPoints].sort(
-      (a, b) => Math.abs(a.y - pointY) - Math.abs(b.y - pointY)
-    )[0] as HoveredPoint<T> | undefined;
+    const nearestPoint = [...linePoints, ...rangePoints, ...barPoints, ...stackedBarPoints].sort((a, b) => Math.abs(a.y - pointY) - Math.abs(b.y - pointY))[0] as
+      | HoveredPoint<T>
+      | undefined;
 
     /**
      * Empty hoverstate when there's no nearest point detected
@@ -449,60 +436,31 @@ export function useHoverState<T extends TimestampedValue>({
       return;
     }
 
-    const timespanAnnotationIndex = timespanAnnotations
-      ? findActiveTimespanAnnotationIndex(
-          values[valuesIndex],
-          timespanAnnotations
-        )
-      : undefined;
+    const timespanAnnotationIndex = timespanAnnotations ? findActiveTimespanAnnotationIndex(values[valuesIndex], timespanAnnotations) : undefined;
 
-    const timelineEventIndex = timelineEvents
-      ? findActiveTimelineEventIndex(values[valuesIndex], timelineEvents)
-      : undefined;
+    const timelineEventIndex = timelineEvents ? findActiveTimelineEventIndex(values[valuesIndex], timelineEvents) : undefined;
 
     const hoverState: HoverState<T> = {
       valuesIndex,
       barPoints,
-      linePoints: markNearestPointOnly
-        ? linePoints.filter((x) => x === nearestPoint)
-        : linePoints,
-      rangePoints: markNearestPointOnly
-        ? rangePoints.filter((x) => x === nearestPoint)
-        : rangePoints,
+      stackedBarPoints,
+      linePoints: markNearestPointOnly ? linePoints.filter((x) => x === nearestPoint) : linePoints,
+      rangePoints: markNearestPointOnly ? rangePoints.filter((x) => x === nearestPoint) : rangePoints,
       nearestPoint,
       timespanAnnotationIndex,
       timelineEventIndex,
     };
 
     return hoverState;
-  }, [
-    point,
-    isTabInteractive,
-    seriesConfig,
-    timespanAnnotations,
-    timelineEvents,
-    values,
-    valuesIndex,
-    markNearestPointOnly,
-    seriesList,
-    xScale,
-    yScale,
-  ]);
+  }, [point, isTabInteractive, seriesConfig, timespanAnnotations, timelineEvents, values, valuesIndex, markNearestPointOnly, seriesList, xScale, yScale]);
 
   return [hoverState, { handleHover }] as const;
 }
 
-function findActiveTimespanAnnotationIndex(
-  hoveredValue: TimestampedValue,
-  timespanAnnotations: TimespanAnnotationConfig[]
-) {
-  const valueSpanStart = isDateValue(hoveredValue)
-    ? hoveredValue.date_unix
-    : hoveredValue.date_start_unix;
+function findActiveTimespanAnnotationIndex(hoveredValue: TimestampedValue, timespanAnnotations: TimespanAnnotationConfig[]) {
+  const valueSpanStart = isDateValue(hoveredValue) ? hoveredValue.date_unix : hoveredValue.date_start_unix;
 
-  const valueSpanEnd = isDateValue(hoveredValue)
-    ? hoveredValue.date_unix
-    : hoveredValue.date_end_unix;
+  const valueSpanEnd = isDateValue(hoveredValue) ? hoveredValue.date_unix : hoveredValue.date_end_unix;
 
   /**
    * Loop over the annotations and see if the hovered value falls within its
@@ -519,21 +477,10 @@ function findActiveTimespanAnnotationIndex(
   }
 }
 
-function findActiveTimelineEventIndex(
-  hoveredValue: TimestampedValue,
-  timelineEvents: TimelineEventConfig[]
-) {
-  const valueSpanStartOfDay = startOfDayInSeconds(
-    isDateValue(hoveredValue)
-      ? hoveredValue.date_unix
-      : hoveredValue.date_start_unix
-  );
+function findActiveTimelineEventIndex(hoveredValue: TimestampedValue, timelineEvents: TimelineEventConfig[]) {
+  const valueSpanStartOfDay = startOfDayInSeconds(isDateValue(hoveredValue) ? hoveredValue.date_unix : hoveredValue.date_start_unix);
 
-  const valueSpanEndOfDay = endOfDayInSeconds(
-    isDateValue(hoveredValue)
-      ? hoveredValue.date_unix
-      : hoveredValue.date_end_unix
-  );
+  const valueSpanEndOfDay = endOfDayInSeconds(isDateValue(hoveredValue) ? hoveredValue.date_unix : hoveredValue.date_end_unix);
 
   /**
    * Loop over the timeline events and see if the hovered value falls within its

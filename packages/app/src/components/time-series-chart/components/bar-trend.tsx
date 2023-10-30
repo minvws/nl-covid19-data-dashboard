@@ -61,7 +61,7 @@ export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, ge
             const value = { __value: seriesMax, __date_unix: item.__date_unix };
             const x = getX(item) - barWidth / 2;
             const y = Math.min(zeroPosition, getY0(value));
-            const barHeight = Math.abs(zeroPosition - getY0(value));
+            const barHeight = Math.abs(getY0(value) - getY1(value));
 
             return (
               <React.Fragment key={`out-of-bounds-${index}`}>
