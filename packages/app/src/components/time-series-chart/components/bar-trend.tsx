@@ -7,6 +7,7 @@ import { isPresent } from 'ts-is-present';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Bounds, GetX, GetY0, GetY1, SeriesDoubleValue, SeriesSingleValue } from '../logic';
 import { AreaTrend } from './area-trend';
+import { transparentize } from 'polished';
 
 const DEFAULT_FILL_OPACITY = 0.2;
 
@@ -78,10 +79,10 @@ export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, ge
         <>
           {items.map((item, index) => {
             const x = getX(item) - barWidth / 2;
-            const y = Math.min(zeroPosition, getY0(item));
-            const barHeight = Math.abs(zeroPosition - getY0(item)) - getY1(item);
+            const y = Math.min(zeroPosition, getY1(item));
+            const barHeight = Math.abs(getY0(item) - getY1(item));
 
-            return <rect key={index} x={x} y={y} height={barHeight} width={barWidth} fill={color} id={`${id}_${index}`} />;
+            return <rect key={index} x={x} y={y} height={barHeight} width={barWidth} fill={transparentize(1 - fillOpacity, color)} id={`${id}_${index}`} />;
           })}
         </>
       ) : (

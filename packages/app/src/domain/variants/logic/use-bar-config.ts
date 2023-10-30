@@ -60,8 +60,7 @@ export const useBarConfig = (
           metricProperty: variantMetricPropertyName,
           color: color,
           label: variantDynamicLabel,
-          fillOpacity: 0.2,
-          mixBlendMode: 'multiply',
+          fillOpacity: 1,
           shape: 'gapped-area',
         };
 
