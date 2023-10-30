@@ -2,17 +2,7 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import { ScaleLinear } from 'd3-scale';
 import { memo } from 'react';
 import { AreaTrend, BarTrend, LineTrend, ScatterPlot, RangeTrend } from '.';
-import {
-  Bounds,
-  GetX,
-  GetY,
-  GetY0,
-  GetY1,
-  SeriesConfig,
-  SeriesDoubleValue,
-  SeriesList,
-  SeriesSingleValue,
-} from '../logic';
+import { Bounds, GetX, GetY, GetY0, GetY1, SeriesConfig, SeriesDoubleValue, SeriesList, SeriesSingleValue } from '../logic';
 import { GappedAreaTrend } from './gapped-area-trend';
 import { GappedLinedTrend } from './gapped-line-trend';
 import { GappedStackedAreaTrend } from './gapped-stacked-area-trend';
@@ -42,18 +32,7 @@ interface SeriesProps<T extends TimestampedValue> {
 
 export const Series = memo(SeriesUnmemoized) as typeof SeriesUnmemoized;
 
-function SeriesUnmemoized<T extends TimestampedValue>({
-  seriesConfig,
-  seriesList,
-  getX,
-  getY,
-  getY0,
-  getY1,
-  yScale,
-  bounds,
-  chartId,
-  seriesMax,
-}: SeriesProps<T>) {
+function SeriesUnmemoized<T extends TimestampedValue>({ seriesConfig, seriesList, getX, getY, getY0, getY1, yScale, bounds, chartId, seriesMax }: SeriesProps<T>) {
   return (
     <>
       {seriesList
@@ -94,16 +73,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                 />
               );
             case 'scatter-plot':
-              return (
-                <ScatterPlot
-                  key={index}
-                  series={series as SeriesSingleValue[]}
-                  color={config.color}
-                  getX={getX}
-                  getY={getY}
-                  id={id}
-                />
-              );
+              return <ScatterPlot key={index} series={series as SeriesSingleValue[]} color={config.color} getX={getX} getY={getY} id={id} />;
             case 'area':
               return (
                 <AreaTrend
@@ -139,11 +109,12 @@ function SeriesUnmemoized<T extends TimestampedValue>({
               return (
                 <BarTrend
                   key={index}
-                  series={series as SeriesSingleValue[]}
+                  series={series as SeriesDoubleValue[]}
                   color={config.color}
                   fillOpacity={config.fillOpacity}
                   getX={getX}
-                  getY={getY}
+                  getY0={getY0}
+                  getY1={getY1}
                   bounds={bounds}
                   yScale={yScale}
                   id={id}

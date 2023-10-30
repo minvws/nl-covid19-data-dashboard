@@ -6,17 +6,18 @@ import { transparentize } from 'polished';
 import React, { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { Bounds, GetX, GetY, SeriesSingleValue } from '../logic';
+import { Bounds, GetX, GetY0, GetY1, SeriesDoubleValue, SeriesSingleValue } from '../logic';
 import { AreaTrend } from './area-trend';
 
 const DEFAULT_FILL_OPACITY = 0.2;
 
 type BarTrendProps = {
-  series: SeriesSingleValue[];
+  series: SeriesDoubleValue[];
   color: string;
   fillOpacity?: number;
   getX: GetX;
-  getY: GetY;
+  getY0: GetY0;
+  getY1: GetY1;
   bounds: Bounds;
   bandPadding?: number;
   id: string;
@@ -24,8 +25,8 @@ type BarTrendProps = {
   seriesMax?: number;
 };
 
-export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, getX, getY, bounds, bandPadding = 0.2, id, yScale, seriesMax }: BarTrendProps) {
-  const nonNullSeries = useMemo(() => series.filter((x) => isPresent(x.__value)), [series]);
+export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, getX, getY0, getY1, bounds, bandPadding = 0.2, id, yScale, seriesMax }: BarTrendProps) {
+  const nonNullSeries = useMemo(() => series.filter((x) => isPresent(x.__value_a) && isPresent(x.__value_b)), [series]);
 
   const xScale = useMemo(
     () =>
@@ -43,12 +44,12 @@ export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, ge
    * mobile screens.
    */
   const barWidth = Math.max(xScale.bandwidth(), 1);
-  const zeroPosition = getY({ __value: 0, __date_unix: 0 });
+  const zeroPosition = getY1({ __value_a: 0, __value_b: 0, __date_unix: 0 });
 
   const outOfBoundsItems: SeriesSingleValue[] = [];
-  const items: SeriesSingleValue[] = [];
+  const items: SeriesDoubleValue[] = [];
   nonNullSeries.forEach((x) => {
-    const outOfBounds = undefined !== seriesMax && undefined !== x.__value && x.__value > seriesMax;
+    const outOfBounds = undefined !== seriesMax && undefined !== x.__value_a && x.__value_a > seriesMax;
     outOfBounds ? outOfBoundsItems.push(x) : items.push(x);
   });
 
@@ -59,8 +60,8 @@ export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, ge
           {outOfBoundsItems.map((item, index) => {
             const value = { __value: seriesMax, __date_unix: item.__date_unix };
             const x = getX(item) - barWidth / 2;
-            const y = Math.min(zeroPosition, getY(value));
-            const barHeight = Math.abs(zeroPosition - getY(value));
+            const y = Math.min(zeroPosition, getY0(value));
+            const barHeight = Math.abs(zeroPosition - getY0(value));
 
             return (
               <React.Fragment key={`out-of-bounds-${index}`}>
@@ -78,8 +79,8 @@ export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, ge
         <>
           {items.map((item, index) => {
             const x = getX(item) - barWidth / 2;
-            const y = Math.min(zeroPosition, getY(item));
-            const barHeight = Math.abs(zeroPosition - getY(item));
+            const y = Math.min(zeroPosition, getY0(item));
+            const barHeight = Math.abs(zeroPosition - getY0(item));
 
             return <rect key={index} x={x} y={y} height={barHeight} width={barWidth} fill={transparentize(1 - fillOpacity, color)} id={`${id}_${index}`} />;
           })}
@@ -87,13 +88,13 @@ export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, ge
       ) : (
         <>
           <AreaTrend
-            series={series.filter((x) => undefined !== seriesMax && undefined !== x.__value && x.__value < seriesMax)}
+            series={series.filter((x) => undefined !== seriesMax && undefined !== x.__value_a && x.__value_a < seriesMax)}
             color={color}
             fillOpacity={fillOpacity}
             strokeWidth={0}
             curve="step"
             getX={getX}
-            getY={getY}
+            getY={getY0}
             yScale={yScale}
             id={id}
           />

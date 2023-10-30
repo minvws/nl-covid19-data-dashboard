@@ -1,4 +1,4 @@
-import { ChartTile, MetadataProps } from '~/components';
+import { ChartTile, MetadataProps, TimeSeriesChart } from '~/components';
 import { Spacer } from '~/components/base';
 import { TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
@@ -11,7 +11,7 @@ import { space } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { reorderAndFilter } from '~/domain/variants/logic/reorder-and-filter';
 import { useIntl } from '~/intl';
-import { StackedBarTooltipData, StackedChart } from '~/components/stacked-chart';
+import { StackedBarTooltipData } from '~/components/stacked-chart';
 
 interface VariantsStackedBarChartTileProps {
   title: string;
@@ -62,12 +62,12 @@ export const VariantsStackedBarChartTile = ({ title, description, tooltipLabels,
     >
       <InteractiveLegend helpText={text.legend_help_text} selectOptions={interactiveLegendOptions} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer marginBottom={space[2]} />
-      <StackedChart
+      <TimeSeriesChart
         accessibility={{
           key: 'variants_stacked_area_over_time_chart',
         }}
         values={values}
-        config={filteredBarConfig}
+        seriesConfig={filteredBarConfig}
         timeframe={variantTimeFrame}
         disableLegend
         formatTooltip={(data) => <TooltipSeriesList data={reorderAndFilter<StackedBarTooltipData, SelectOption>(data, interactiveLegendOptions)} hasTwoColumns={hasTwoColumns} />}

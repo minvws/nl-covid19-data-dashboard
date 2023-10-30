@@ -1,7 +1,8 @@
-import { ColorMatch, StackedBarConfig, VariantChartValue, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
+import { ColorMatch, VariantChartValue, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
 import { useMemo } from 'react';
 import { getValuesInTimeframe, TimeframeOption } from '@corona-dashboard/common';
 import { isPresent } from 'ts-is-present';
+import { BarSeriesDefinition } from '~/components/time-series-chart/logic';
 
 const extractVariantNamesFromValues = (values: VariantChartValue[]) => {
   return values
@@ -42,7 +43,7 @@ export const useBarConfig = (
       .filter((keyName) => activeVariantsInTimeframeNames.includes(keyName))
       .reverse();
 
-    const barChartConfig: StackedBarConfig<VariantChartValue>[] = [];
+    const barChartConfig: BarSeriesDefinition<VariantChartValue>[] = [];
 
     listOfVariantCodes.forEach((variantKey) => {
       const variantCodeName = variantKey.split('_').slice(0, -1).join('_');
@@ -55,13 +56,16 @@ export const useBarConfig = (
 
       if (variantDynamicLabel) {
         const barChartConfigEntry = {
+          type: 'bar',
           metricProperty: variantMetricPropertyName,
           color: color,
           label: variantDynamicLabel,
+          fillOpacity: 0.2,
+          mixBlendMode: 'none',
           shape: 'gapped-area',
         };
 
-        barChartConfig.push(barChartConfigEntry as StackedBarConfig<VariantChartValue>);
+        barChartConfig.push(barChartConfigEntry as BarSeriesDefinition<VariantChartValue>);
       }
     });
 
