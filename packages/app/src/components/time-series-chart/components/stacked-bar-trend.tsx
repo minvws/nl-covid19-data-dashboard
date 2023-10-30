@@ -94,7 +94,7 @@ export function StackedBarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, co
             strokeWidth={0}
             curve="step"
             getX={getX}
-            getY={getY0}
+            getY={getY1}
             yScale={yScale}
             id={id}
           />
@@ -111,7 +111,7 @@ interface BarTrendIconProps {
   height?: number;
 }
 
-export function BarTrendIcon({ color, fillOpacity = DEFAULT_FILL_OPACITY, width = 15, height = 15 }: BarTrendIconProps) {
+export function StackedBarTrendIcon({ color, fillOpacity = DEFAULT_FILL_OPACITY, width = 15, height = 15 }: BarTrendIconProps) {
   const maskId = useUniqueId();
 
   return (
