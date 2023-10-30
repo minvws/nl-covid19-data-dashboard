@@ -35,6 +35,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   selectNlData('variants', 'named_difference'),
+  selectArchivedNlData('variants_archived_20231101'),
   getLastGeneratedDate,
   () => {
     const data = selectNlData('variants', 'named_difference')();
@@ -72,7 +73,18 @@ export const getStaticProps = createGetStaticProps(
 );
 
 export default function CovidVariantenPage(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedNlData: data, lastGenerated, content, variantTable, variantChart, archivedVariantChart, variantColors, dates } = props;
+  const {
+    pageText,
+    selectedNlData: data,
+    selectedArchivedNlData: archivedData,
+    lastGenerated,
+    content,
+    variantTable,
+    variantChart,
+    archivedVariantChart,
+    variantColors,
+    dates,
+  } = props;
 
   const { commonTexts, locale } = useIntl();
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -207,7 +219,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
                   variantColors={variantColors}
                   metadata={{
                     datumsText: textNl.datums,
-                    date: getLastInsertionDateOfPage(data, ['variants']),
+                    date: archivedData.variants_archived_20231101.values[0].last_value.date_of_report_unix,
                     source: textNl.bronnen.rivm,
                   }}
                 />
