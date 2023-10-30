@@ -61,7 +61,7 @@ export const useBarConfig = (
           color: color,
           label: variantDynamicLabel,
           fillOpacity: 0.2,
-          mixBlendMode: 'none',
+          mixBlendMode: 'multiply',
           shape: 'gapped-area',
         };
 

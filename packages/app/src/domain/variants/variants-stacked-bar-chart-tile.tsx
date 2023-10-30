@@ -11,7 +11,6 @@ import { space } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { reorderAndFilter } from '~/domain/variants/logic/reorder-and-filter';
 import { useIntl } from '~/intl';
-import { StackedBarTooltipData } from '~/components/stacked-chart';
 
 interface VariantsStackedBarChartTileProps {
   title: string;
@@ -70,7 +69,7 @@ export const VariantsStackedBarChartTile = ({ title, description, tooltipLabels,
         seriesConfig={filteredBarConfig}
         timeframe={variantTimeFrame}
         disableLegend
-        formatTooltip={(data) => <TooltipSeriesList data={reorderAndFilter<StackedBarTooltipData, SelectOption>(data, interactiveLegendOptions)} hasTwoColumns={hasTwoColumns} />}
+        formatTooltip={(data) => <TooltipSeriesList data={reorderAndFilter<VariantChartValue, SelectOption>(data, interactiveLegendOptions)} hasTwoColumns={hasTwoColumns} />}
       />
     </ChartTile>
   );

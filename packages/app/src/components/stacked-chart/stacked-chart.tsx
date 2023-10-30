@@ -419,7 +419,7 @@ export function StackedChart<T extends TimestampedValue>(props: StackedChartProp
                                * negative height is not allowed.
                                */
                               y={bar.y + (isTinyScreen ? 1 : 2)}
-                              height={Math.max(0, bar.height - (isTinyScreen ? 1 : 2))}
+                              height={bar.height}
                               width={bar.width}
                               fill={fillColor}
                               onMouseLeave={handleHoverWithBar}
@@ -436,7 +436,7 @@ export function StackedChart<T extends TimestampedValue>(props: StackedChartProp
                                  * negative height is not allowed.
                                  */
                                 y={bar.y + (isTinyScreen ? 1 : 2)}
-                                height={Math.max(0, bar.height - (isTinyScreen ? 1 : 2))}
+                                height={bar.height}
                                 width={bar.width}
                                 fill={breakpoints.lg ? 'url(#pattern-hatched)' : 'url(#pattern-hatched-small)'}
                                 onMouseLeave={handleHoverWithBar}

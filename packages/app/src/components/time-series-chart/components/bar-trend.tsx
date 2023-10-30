@@ -2,7 +2,6 @@ import { colors } from '@corona-dashboard/common';
 import { PatternLines } from '@visx/pattern';
 import { scaleBand } from '@visx/scale';
 import { PositionScale } from '@visx/shape/lib/types';
-import { transparentize } from 'polished';
 import React, { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useUniqueId } from '~/utils/use-unique-id';
@@ -44,7 +43,7 @@ export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, ge
    * mobile screens.
    */
   const barWidth = Math.max(xScale.bandwidth(), 1);
-  const zeroPosition = getY1({ __value_a: 0, __value_b: 0, __date_unix: 0 });
+  const zeroPosition = getY0({ __value_a: 0, __value_b: 0, __date_unix: 0 });
 
   const outOfBoundsItems: SeriesSingleValue[] = [];
   const items: SeriesDoubleValue[] = [];
@@ -80,9 +79,9 @@ export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, ge
           {items.map((item, index) => {
             const x = getX(item) - barWidth / 2;
             const y = Math.min(zeroPosition, getY0(item));
-            const barHeight = Math.abs(zeroPosition - getY0(item));
+            const barHeight = Math.abs(zeroPosition - getY0(item)) - getY1(item);
 
-            return <rect key={index} x={x} y={y} height={barHeight} width={barWidth} fill={transparentize(1 - fillOpacity, color)} id={`${id}_${index}`} />;
+            return <rect key={index} x={x} y={y} height={barHeight} width={barWidth} fill={color} id={`${id}_${index}`} />;
           })}
         </>
       ) : (
@@ -94,7 +93,7 @@ export function BarTrend({ series, fillOpacity = DEFAULT_FILL_OPACITY, color, ge
             strokeWidth={0}
             curve="step"
             getX={getX}
-            getY={getY0}
+            getY={getY1}
             yScale={yScale}
             id={id}
           />
