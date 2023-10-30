@@ -13,6 +13,7 @@ type SeriesConfigSingle<T extends TimestampedValue> =
   | RangeSeriesDefinition<T>
   | AreaSeriesDefinition<T>
   | StackedAreaSeriesDefinition<T>
+  | StackedBarSeriesDefinition<T>
   | BarSeriesDefinition<T>
   | BarOutOfBoundsSeriesDefinition<T>
   | SplitBarSeriesDefinition<T>
@@ -175,6 +176,15 @@ export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue> e
   fillOpacity?: number;
   strokeWidth?: number;
   mixBlendMode?: Property.MixBlendMode;
+}
+
+export interface StackedBarSeriesDefinition<T extends TimestampedValue> extends SeriesCommonDefinition {
+  type: 'stacked-bar';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  fillOpacity?: number;
 }
 
 /**
@@ -353,6 +363,8 @@ function getSeriesList<T extends TimestampedValue>(values: T[], seriesConfig: Se
       ? getGappedStackedAreaSeriesData(values, config.metricProperty, seriesConfig, dataOptions)
       : config.type === 'range'
       ? getRangeSeriesData(values, config.metricPropertyLow, config.metricPropertyHigh)
+      : config.type === 'stacked-bar'
+      ? getStackedBarSeriesData(values, config.metricProperty, seriesConfig)
       : /**
          * Cutting values based on annotation is only supported for single line series
          */
@@ -415,6 +427,40 @@ function getStackedAreaSeriesData<T extends TimestampedValue>(values: T[], metri
    * series's Y-value.
    */
   const stackedAreaDefinitions = seriesConfig.filter(hasValueAtKey('type', 'stacked-area' as const));
+
+  const seriesBelowCurrentSeries = getSeriesBelowCurrentSeries(stackedAreaDefinitions, metricProperty);
+
+  const seriesHigh = getSeriesData(values, metricProperty);
+  const seriesLow = getSeriesData(values, metricProperty);
+
+  seriesLow.forEach((seriesSingleValue, index) => {
+    /**
+     * The series are rendered from top to bottom. To get the low value of the
+     * current series, we will sum up all values of the
+     * `seriesBelowCurrentSeries`.
+     */
+    seriesSingleValue.__value = sumSeriesValues(seriesBelowCurrentSeries, values, index);
+  });
+
+  return seriesLow.map((low, index) => {
+    const valueLow = low.__value ?? 0;
+    const valueHigh = valueLow + (seriesHigh[index].__value ?? 0);
+
+    return {
+      __date_unix: low.__date_unix,
+      __value_a: valueLow,
+      __value_b: valueHigh,
+    };
+  });
+}
+
+function getStackedBarSeriesData<T extends TimestampedValue>(values: T[], metricProperty: keyof T, seriesConfig: SeriesConfig<T>) {
+  /**
+   * Stacked area series are rendered from top to bottom. The sum of a Y-value
+   * of all series below the current series equals the low value of a current
+   * series's Y-value.
+   */
+  const stackedAreaDefinitions = seriesConfig.filter(hasValueAtKey('type', 'stacked-bar' as const));
 
   const seriesBelowCurrentSeries = getSeriesBelowCurrentSeries(stackedAreaDefinitions, metricProperty);
 
