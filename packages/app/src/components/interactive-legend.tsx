@@ -37,7 +37,7 @@ export function InteractiveLegend<T = string>({ helpText, selectOptions, selecti
             const isSelected = selection.includes(item.metricProperty);
             return (
               <Item key={item.label}>
-                <StyledLabel htmlFor={`checkboxgroup-${item.label}`} isActive={hasSelection && isSelected} borderColor={item.color} data-text={item.label}>
+                <StyledLabel htmlFor={`checkboxgroup-${item.metricProperty}`} isActive={hasSelection && isSelected} borderColor={item.color} data-text={item.label}>
                   {item.label}
                   {item.shape === 'line' && <Line color={item.color} />}
                   {item.shape === 'dashed' && (
@@ -51,7 +51,7 @@ export function InteractiveLegend<T = string>({ helpText, selectOptions, selecti
                 </StyledLabel>
                 <StyledInput
                   type="checkbox"
-                  id={`checkboxgroup-${item.label}`}
+                  id={`checkboxgroup-${item.metricProperty}`}
                   value={item.label}
                   onClick={() => onToggleItem(item.metricProperty)}
                   aria-label={item.legendAriaLabel}

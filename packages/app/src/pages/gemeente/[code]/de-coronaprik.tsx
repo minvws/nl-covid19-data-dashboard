@@ -181,7 +181,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
           />
           <VaccineCoverageChoropleth
             data={archivedChoropleth.gm.vaccine_coverage_per_age_group_choropleth_archived_20231004}
-            dataOptions={{ getLink: reverseRouter.gm.vaccinaties, selectedCode: currentData.code, isPercentage: true }}
+            dataOptions={{ getLink: reverseRouter.gm.deCoronaprik, selectedCode: currentData.code, isPercentage: true }}
             text={{
               title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.title, { municipalityName: municipalityName }),
               description: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.description, { municipalityName: municipalityName }),
@@ -242,7 +242,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               )}
               <VaccineCoverageChoropleth
                 data={archivedChoropleth.gm.vaccine_coverage_per_age_group_choropleth_archived_20231004}
-                dataOptions={{ getLink: reverseRouter.gm.vaccinaties, selectedCode: currentData.code, isPercentage: true }}
+                dataOptions={{ getLink: reverseRouter.gm.deCoronaprik, selectedCode: currentData.code, isPercentage: true }}
                 text={{
                   title: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.archived.title, { municipalityName: municipalityName }),
                   description: replaceVariablesInText(commonTexts.choropleth.choropleth_vaccination_coverage.gm.archived.description, { municipalityName: municipalityName }),

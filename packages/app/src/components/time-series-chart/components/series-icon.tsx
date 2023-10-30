@@ -8,6 +8,7 @@ import { ScatterPlotIcon } from './scatter-plot';
 import { RangeTrendIcon } from './range-trend';
 import { SplitAreaTrendIcon } from './split-area-trend';
 import { StackedAreaTrendIcon } from './stacked-area-trend';
+import { StackedBarTrendIcon } from '~/components/time-series-chart/components/stacked-bar-trend';
 
 interface SeriesIconProps<T extends TimestampedValue> {
   config: SeriesConfig<T>[number];
@@ -20,47 +21,25 @@ interface SeriesIconProps<T extends TimestampedValue> {
   value?: number | null;
 }
 
-export function SeriesIcon<T extends TimestampedValue>({
-  config,
-  value,
-}: SeriesIconProps<T>) {
+export function SeriesIcon<T extends TimestampedValue>({ config, value }: SeriesIconProps<T>) {
   switch (config.type) {
     case 'line':
     case 'gapped-line':
-      return (
-        <LineTrendIcon
-          color={config.color}
-          strokeWidth={config.strokeWidth}
-          style={config.style}
-        />
-      );
+      return <LineTrendIcon color={config.color} strokeWidth={config.strokeWidth} style={config.style} />;
     case 'scatter-plot':
       return <ScatterPlotIcon color={config.color} />;
     case 'range':
-      return (
-        <RangeTrendIcon color={config.color} fillOpacity={config.fillOpacity} />
-      );
+      return <RangeTrendIcon color={config.color} fillOpacity={config.fillOpacity} />;
     case 'area':
     case 'gapped-area':
-      return (
-        <AreaTrendIcon
-          color={config.color}
-          fillOpacity={config.fillOpacity}
-          strokeWidth={config.strokeWidth}
-        />
-      );
+      return <AreaTrendIcon color={config.color} fillOpacity={config.fillOpacity} strokeWidth={config.strokeWidth} />;
     case 'stacked-area':
     case 'gapped-stacked-area':
-      return (
-        <StackedAreaTrendIcon
-          color={config.color}
-          fillOpacity={config.fillOpacity}
-        />
-      );
+      return <StackedAreaTrendIcon color={config.color} fillOpacity={config.fillOpacity} />;
     case 'bar':
-      return (
-        <BarTrendIcon color={config.color} fillOpacity={config.fillOpacity} />
-      );
+      return <BarTrendIcon color={config.color} fillOpacity={config.fillOpacity} />;
+    case 'stacked-bar':
+      return <StackedBarTrendIcon color={config.color} fillOpacity={config.fillOpacity}></StackedBarTrendIcon>;
     case 'split-area':
       /**
        * Here we return the icon even if there is no value, because it
@@ -71,20 +50,9 @@ export function SeriesIcon<T extends TimestampedValue>({
        *
        * @TODO Possibly we want this behavior for split-bar as well...
        */
-      return (
-        <SplitAreaTrendIcon
-          color={findSplitPointForValue(config.splitPoints, value).color}
-          fillOpacity={config.fillOpacity}
-          strokeWidth={config.strokeWidth}
-        />
-      );
+      return <SplitAreaTrendIcon color={findSplitPointForValue(config.splitPoints, value).color} fillOpacity={config.fillOpacity} strokeWidth={config.strokeWidth} />;
     case 'split-bar':
-      return isPresent(value) ? (
-        <BarTrendIcon
-          color={findSplitPointForValue(config.splitPoints, value).color}
-          fillOpacity={config.fillOpacity}
-        />
-      ) : null;
+      return isPresent(value) ? <BarTrendIcon color={findSplitPointForValue(config.splitPoints, value).color} fillOpacity={config.fillOpacity} /> : null;
     default:
       return null;
   }

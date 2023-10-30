@@ -61,7 +61,7 @@ export function GmLayout(props: GmLayoutProps) {
     map: [
       ['development_of_the_virus', ['sewage_measurement']],
       ['consequences_for_healthcare', ['hospital_admissions']],
-      ['actions_to_take', ['vaccinations']],
+      ['actions_to_take', ['the_corona_vaccine']],
       ['archived_metrics', ['positive_tests', 'mortality']],
     ],
   });

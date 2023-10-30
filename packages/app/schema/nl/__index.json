@@ -20,7 +20,8 @@
     "infectionradar_symptoms_trend_per_age_group_weekly",
     "sewer",
     "vaccine_campaigns",
-    "vaccine_administered_last_timeframe"
+    "vaccine_administered_last_timeframe",
+    "variants"
   ],
   "additionalProperties": false,
   "properties": {

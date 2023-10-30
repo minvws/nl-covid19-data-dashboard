@@ -1,4 +1,4 @@
-export type VariantDynamicLabels = Record<string, string>;
+import { VariantDynamicLabels } from '~/domain/variants/data-selection/types';
 
 export type TableText = {
   anderen_tooltip: string;

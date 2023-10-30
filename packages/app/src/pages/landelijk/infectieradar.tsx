@@ -22,6 +22,8 @@ import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { KpiTile, KpiValue, TwoKpiSection } from '~/components';
+import { replaceVariablesInText } from '~/utils';
 
 const pageMetrics = ['self_test_overall', 'infection_radar_symptoms_per_age_group'];
 
@@ -35,7 +37,7 @@ type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('self_test_overall', 'infectionradar_symptoms_trend_per_age_group_weekly'),
+  selectNlData('difference.self_test_overall', 'self_test_overall', 'infectionradar_symptoms_trend_per_age_group_weekly'),
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts>;
@@ -69,6 +71,8 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
 
   const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
+  const totalInfectedPercentage = data.self_test_overall.last_value.infected_percentage ? data.self_test_overall.last_value.infected_percentage : 0;
+
   const metadata = {
     ...metadataTexts,
     title: textNl.metadata.title,
@@ -101,6 +105,31 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
               faq: content.faqs,
             })}
           />
+
+          <TwoKpiSection>
+            <KpiTile
+              title={textNl.kpi_tile.infected_participants_percentage.title}
+              metadata={{
+                date: { start: data.self_test_overall.last_value.date_start_unix, end: data.self_test_overall.last_value.date_end_unix },
+                source: textNl.sources.self_test,
+              }}
+              description={replaceVariablesInText(textNl.kpi_tile.infected_participants_percentage.description, {
+                infectedPercentage: totalInfectedPercentage,
+              })}
+            >
+              <KpiValue percentage={data.self_test_overall.last_value.infected_percentage} differenceFractionDigits={1} difference={data.difference.self_test_overall} isAmount />
+            </KpiTile>
+            <KpiTile
+              title={textNl.kpi_tile.total_participants.title}
+              metadata={{
+                date: { start: data.self_test_overall.last_value.date_start_unix, end: data.self_test_overall.last_value.date_end_unix },
+                source: textNl.sources.self_test,
+              }}
+              description={textNl.kpi_tile.total_participants.description}
+            >
+              <KpiValue absolute={data.self_test_overall.last_value.n_participants_total_unfiltered} numFractionDigits={0} isAmount />
+            </KpiTile>
+          </TwoKpiSection>
 
           <ChartTile
             title={textNl.chart_self_tests.title}

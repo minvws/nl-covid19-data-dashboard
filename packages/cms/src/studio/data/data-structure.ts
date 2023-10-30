@@ -261,6 +261,7 @@ export const dataStructure = {
       'janssen_not_available',
       'janssen_total',
     ],
+    variants_archived_20231101: ['variant_code', 'values', 'last_value'],
     repeating_shot_administered_20220713: ['ggd_administered_total'],
     corona_melder_app_warning_archived_20220421: ['count'],
     corona_melder_app_download_archived_20220421: ['count'],
