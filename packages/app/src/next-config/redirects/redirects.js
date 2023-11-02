@@ -110,6 +110,12 @@ async function redirects() {
       destination: '/landelijk/infectieradar',
       permanent: true,
     },
+    // Redirect for COR-1830
+    {
+      source: '/landelijk/vaccinaties',
+      destination: '/landelijk/de-coronaprik',
+      permanent: true,
+    },
   ];
 }
 

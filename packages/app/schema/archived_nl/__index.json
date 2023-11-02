@@ -42,6 +42,7 @@
     "vaccine_vaccinated_or_support_archived_20230411",
     "vaccine_delivery_per_supplier_archived_20211101",
     "vaccine_stock_archived_20211024",
+    "variants_archived_20231101",
     "tested_ggd_archived_20230321",
     "tested_overall_archived_20230331",
     "tested_per_age_group_archived_20230331",
@@ -185,6 +186,9 @@
     },
     "vaccine_stock_archived_20211024": {
       "$ref": "vaccine_stock.json"
+    },
+    "variants_archived_20231101": {
+      "$ref": "variants.json"
     },
     "repeating_shot_administered_20220713": {
       "$ref": "repeating_shot_administered.json"

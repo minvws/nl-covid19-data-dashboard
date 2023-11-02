@@ -1,16 +1,11 @@
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { ChartTile, Markdown, MetadataProps } from '~/components';
-import { Text } from '~/components/typography';
+import { ChartTile, MetadataProps } from '~/components';
 import { NarrowVaccineCampaignTable } from './components/narrow-vaccine-campaign-table';
 import { WideVaccineCampaignTable } from './components/wide-vaccine-campaign-table';
 import { VaccineCampaign, VaccineCampaignDescriptions, VaccineCampaignHeaders, VaccineCampaignOptions } from './types';
-import { Box } from '~/components/base';
-import { space } from '~/style/theme';
-
 interface VaccineCampaignsTileProps {
   title: string;
   description: string;
-  descriptionFooter: string;
   metadata: MetadataProps;
   headers: VaccineCampaignHeaders;
   campaigns: VaccineCampaign[];
@@ -18,7 +13,7 @@ interface VaccineCampaignsTileProps {
   campaignOptions?: VaccineCampaignOptions;
 }
 
-export const VaccineCampaignsTile = ({ title, headers, campaigns, campaignDescriptions, description, descriptionFooter, metadata, campaignOptions }: VaccineCampaignsTileProps) => {
+export const VaccineCampaignsTile = ({ title, headers, campaigns, campaignDescriptions, description, metadata, campaignOptions }: VaccineCampaignsTileProps) => {
   const breakpoints = useBreakpoints();
 
   // Display only the campaigns that are not hidden in the campaignOptions prop
@@ -36,11 +31,6 @@ export const VaccineCampaignsTile = ({ title, headers, campaigns, campaignDescri
         ) : (
           <NarrowVaccineCampaignTable campaigns={sortedAndFilteredCampaigns} campaignDescriptions={campaignDescriptions} headers={headers} showTotals={totalsAvailable} />
         )}
-        <Box marginTop={space[3]}>
-          <Text variant="label1" color="gray7">
-            <Markdown content={descriptionFooter} />
-          </Text>
-        </Box>
       </ChartTile>
     </>
   );

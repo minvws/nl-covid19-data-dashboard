@@ -39,7 +39,7 @@ export function NlLayout(props: NlLayoutProps) {
     map: [
       ['development_of_the_virus', ['sewage_measurement', 'infection_radar', 'variants', 'mortality']],
       ['consequences_for_healthcare', ['hospitals_and_care', 'patients']],
-      ['actions_to_take', ['vaccinations']],
+      ['actions_to_take', ['the_corona_vaccine']],
       [
         'archived_metrics',
         [

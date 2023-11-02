@@ -2,7 +2,7 @@ export type Layout = 'nl' | 'gm' | 'custom';
 
 type SharedCategoryKeys = 'development_of_the_virus' | 'consequences_for_healthcare' | 'actions_to_take';
 
-export type GmItemKeys = 'hospital_admissions' | 'mortality' | 'positive_tests' | 'sewage_measurement' | 'vaccinations';
+export type GmItemKeys = 'hospital_admissions' | 'mortality' | 'positive_tests' | 'sewage_measurement' | 'the_corona_vaccine';
 
 export type GmCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 
@@ -22,7 +22,7 @@ export type NlItemKeys =
   | 'reproduction_number'
   | 'sewage_measurement'
   | 'infection_radar'
-  | 'vaccinations'
+  | 'the_corona_vaccine'
   | 'variants';
 
 export type NlCategoryKeys = SharedCategoryKeys | 'archived_metrics';

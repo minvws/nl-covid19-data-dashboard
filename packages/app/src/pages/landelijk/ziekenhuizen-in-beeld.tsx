@@ -106,7 +106,8 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const hospitalLastValue = getLastFilledValue(data.hospital_lcps);
   const icuLastValue = getLastFilledValue(data.intensive_care_lcps);
 
-  const valuesWithoutDateRange = data.hospital_lcps.values.map((value) => ({ ...value, date_end_unix: undefined, date_start_unix: undefined }));
+  const lcpsHospitalWithoutRange = data.hospital_lcps.values.map((value) => ({ ...value, date_end_unix: undefined, date_start_unix: undefined }));
+  const lcpsICWithoutRange = data.intensive_care_lcps.values.map((value) => ({ ...value, date_end_unix: undefined, date_start_unix: undefined }));
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
@@ -173,7 +174,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{
                   key: 'hospital_beds_occupied_over_time_chart',
                 }}
-                values={valuesWithoutDateRange}
+                values={lcpsHospitalWithoutRange}
                 timeframe={hospitalBedsOccupiedOverTimeTimeframe}
                 forceLegend
                 seriesConfig={[
@@ -225,7 +226,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{
                   key: 'intensive_care_beds_occupied_over_time_chart',
                 }}
-                values={data.intensive_care_lcps.values}
+                values={lcpsICWithoutRange}
                 timeframe={intensiveCareBedsTimeframe}
                 forceLegend
                 seriesConfig={[
@@ -254,6 +255,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                     },
                   ],
                   timelineEvents: getTimelineEvents(content.elements.timeSeries, 'intensive_care_lcps', 'beds_occupied_covid'),
+                  useDatesAsRange: false,
                 }}
               />
             </ChartTile>
@@ -296,7 +298,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{
                   key: 'hospital_patient_influx_over_time_chart',
                 }}
-                values={trimLeadingNullValues(valuesWithoutDateRange, 'influx_covid_patients')}
+                values={trimLeadingNullValues(lcpsHospitalWithoutRange, 'influx_covid_patients')}
                 timeframe={hospitalPatientInfluxOverTimeTimeframe}
                 seriesConfig={[
                   {
@@ -337,7 +339,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{
                   key: 'intensive_care_patient_influx_over_time_chart',
                 }}
-                values={trimLeadingNullValues(data.intensive_care_lcps.values, 'influx_covid_patients')}
+                values={trimLeadingNullValues(lcpsICWithoutRange, 'influx_covid_patients')}
                 timeframe={intensiveCarePatientInfluxOverTimeTimeframe}
                 seriesConfig={[
                   {

@@ -78,8 +78,8 @@ UseReverseRouter("indexes should 'redirect' to child pages", () => {
   const nlDiv = result.getByTestId('nl');
   const gmDiv = result.getByTestId('gm');
 
-  assert.equal(nlDiv.textContent?.endsWith('/vaccinaties'), true);
-  assert.equal(gmDiv.textContent?.endsWith('/vaccinaties'), true);
+  assert.equal(nlDiv.textContent?.endsWith('/deCoronaprik'), true);
+  assert.equal(gmDiv.textContent?.endsWith('/deCoronaprik'), true);
 });
 
 UseReverseRouter('GM routes should have the GM code in them', () => {

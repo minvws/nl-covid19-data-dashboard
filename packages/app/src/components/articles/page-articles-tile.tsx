@@ -77,7 +77,6 @@ const ArticleCard = styled(Anchor)`
   display: flex;
   flex-direction: column;
   gap: ${space[2]};
-  height: 100%;
   padding: ${space[3]};
 
   ${Text} {

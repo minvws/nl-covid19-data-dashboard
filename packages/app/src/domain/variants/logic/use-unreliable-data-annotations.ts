@@ -4,19 +4,14 @@ import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { TimespanAnnotationConfig } from '~/components/time-series-chart/logic';
 
-export function useUnreliableDataAnnotations(
-  values: (DateSpanValue & { is_reliable: boolean })[],
-  label: string
-) {
+export function useUnreliableDataAnnotations(values: (DateSpanValue & { is_reliable: boolean })[], label: string) {
   return useMemo(
     () =>
       values
         .reduce<TimespanAnnotationConfig[]>(
           (acc, x) => {
             if (!x.is_reliable) {
-              const annotation =
-                last(acc) ??
-                ({ label, fill: 'dotted' } as TimespanAnnotationConfig);
+              const annotation = last(acc) ?? ({ label, fill: 'dotted' } as TimespanAnnotationConfig);
               if (!isDefined(annotation.start)) {
                 annotation.start = x.date_start_unix;
                 annotation.end = x.date_end_unix;

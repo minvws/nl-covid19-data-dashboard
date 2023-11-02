@@ -29,6 +29,7 @@ export interface BorderedKpiSectionProps {
   };
   tilesData: [TileData, TileData];
   title: string;
+  disclaimer?: string;
 }
 
 type BarType = {

@@ -8,24 +8,19 @@ import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
 import { MetadataProps } from '~/components/metadata';
 import { Heading } from '~/components/typography';
-import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
+import { fontSizes, space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { VariantsTable } from './components/variants-table';
-import { TableText } from './types';
+import { VariantsTable } from './variants-table-tile/components/variants-table';
+import { TableText } from './variants-table-tile/types';
+import { Tile } from '~/components';
+import { VariantRow } from '~/domain/variants/data-selection/types';
 
-export function VariantsTableTile({
-  text,
-  noDataMessage = '',
-  source,
-  data,
-  dates,
-  children = null,
-}: {
+interface VariantsTableTileProps {
   text: TableText;
   noDataMessage?: ReactNode;
   data?: VariantRow[] | null;
+  sampleThresholdPassed: boolean;
   source: {
     download: string;
     href: string;
@@ -37,7 +32,9 @@ export function VariantsTableTile({
     date_of_report_unix: number;
   };
   children?: ReactNode;
-}) {
+}
+
+export function VariantsTableTile({ text, noDataMessage = '', sampleThresholdPassed, source, data, dates, children = null }: VariantsTableTileProps) {
   if (!isPresent(data) || !isPresent(dates)) {
     return (
       <FullscreenChartTile>
@@ -56,21 +53,16 @@ export function VariantsTableTile({
   }
 
   return (
-    <VariantsTableTileWithData text={text} source={source} data={data} dates={dates}>
+    <VariantsTableTileWithData text={text} sampleThresholdPassed={sampleThresholdPassed} source={source} data={data} dates={dates}>
       {children}
     </VariantsTableTileWithData>
   );
 }
 
-function VariantsTableTileWithData({
-  text,
-  source,
-  data,
-  dates,
-  children = null,
-}: {
+interface VariantsTableTileWithDataProps {
   text: TableText;
   data: VariantRow[];
+  sampleThresholdPassed: boolean;
   source: {
     download: string;
     href: string;
@@ -82,7 +74,9 @@ function VariantsTableTileWithData({
     date_of_report_unix: number;
   };
   children?: ReactNode;
-}) {
+}
+
+function VariantsTableTileWithData({ text, sampleThresholdPassed, source, data, dates, children = null }: VariantsTableTileWithDataProps) {
   const { formatDateSpan } = useIntl();
 
   const metadata: MetadataProps = {
@@ -99,12 +93,25 @@ function VariantsTableTileWithData({
   });
 
   return (
-    <ChartTile metadata={metadata} title={text.titel} description={descriptionText}>
-      {children}
-      <Box overflow="auto" marginBottom={space[3]} marginTop={space[4]}>
-        <VariantsTable rows={data} text={text} />
-      </Box>
-    </ChartTile>
+    <>
+      {sampleThresholdPassed ? (
+        <ChartTile metadata={metadata} title={text.titel} description={descriptionText}>
+          {children}
+          <Box overflow="auto" marginBottom={space[3]} marginTop={space[4]}>
+            <VariantsTable rows={data} text={text} />
+          </Box>
+        </ChartTile>
+      ) : (
+        <Tile>
+          <Box spacing={3}>
+            <Heading level={3}>{text.titel}</Heading>
+            <Box maxWidth="400px" fontSize={fontSizes[2]} lineHeight={2}>
+              <Markdown content={text.description} />
+            </Box>
+          </Box>
+        </Tile>
+      )}
+    </>
   );
 }
 
