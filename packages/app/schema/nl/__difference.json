@@ -3,9 +3,6 @@
   "title": "nl_difference",
   "type": "object",
   "properties": {
-    "infectious_people__estimate": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "hospital_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_decimal"
     },
@@ -27,7 +24,6 @@
   },
   "required": [
     "hospital_lcps__beds_occupied_covid",
-    "infectious_people__estimate",
     "intensive_care_lcps__beds_occupied_covid",
     "sewer__average",
     "self_test_overall"

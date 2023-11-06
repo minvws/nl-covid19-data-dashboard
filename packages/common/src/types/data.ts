@@ -1057,7 +1057,6 @@ export interface Nl {
   infectionradar_symptoms_trend_per_age_group_weekly: NlInfectionradarSymptomsTrendPerAgeGroupWeekly;
 }
 export interface NlDifference {
-  infectious_people__estimate: DifferenceInteger;
   hospital_lcps__beds_occupied_covid: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceDecimal;
   sewer__average: DifferenceInteger;
