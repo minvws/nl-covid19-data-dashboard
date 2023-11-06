@@ -331,7 +331,7 @@ export const dataStructure = {
     ],
     deceased_cbs: ['registered', 'expected', 'expected_min', 'expected_max'],
     variants: ['variant_code', 'values', 'last_value'],
-    self_test_overall: ['infected_percentage'],
+    self_test_overall: ['infected_percentage', 'n_participants_total_unfiltered'],
     infectionradar_symptoms_trend_per_age_group_weekly: [
       'date_of_report_unix',
       'percentage_0_24',
