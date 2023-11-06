@@ -1058,7 +1058,6 @@ export interface Nl {
 }
 export interface NlDifference {
   infectious_people__estimate: DifferenceInteger;
-  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   hospital_lcps__beds_occupied_covid: DifferenceDecimal;
   intensive_care_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceDecimal;
