@@ -9,9 +9,6 @@
     "hospital_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "intensive_care_nice__admissions_on_date_of_reporting_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
     "intensive_care_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_decimal"
     },
@@ -31,7 +28,6 @@
   "required": [
     "hospital_lcps__beds_occupied_covid",
     "infectious_people__estimate",
-    "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
     "intensive_care_lcps__beds_occupied_covid",
     "sewer__average",
     "self_test_overall"
