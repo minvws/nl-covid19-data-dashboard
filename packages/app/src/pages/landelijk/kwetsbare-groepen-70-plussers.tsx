@@ -74,7 +74,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
       "parts": ${getPagePartsQuery('nursing_home_page')},
-      "elements": ${getElementsQuery('nl', ['nursing_home_archived_20230126'], locale)}
+      "elements": ${getElementsQuery('archived_nl', ['nursing_home_archived_20230126'], locale)}
      }`;
     })(context);
 

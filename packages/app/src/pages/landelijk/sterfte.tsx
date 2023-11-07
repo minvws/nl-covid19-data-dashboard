@@ -53,7 +53,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('deceased_page')},
-        "elements": ${getElementsQuery('nl', ['deceased_rivm_archived_20221231'], locale)}
+        "elements": ${getElementsQuery('archived_nl', ['deceased_rivm_archived_20221231'], locale)}
       }`;
     })(context);
 
