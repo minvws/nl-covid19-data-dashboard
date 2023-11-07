@@ -56,7 +56,7 @@ export const getStaticProps = createGetStaticProps(
       const { locale } = context;
       return `{
       "parts": ${getPagePartsQuery('disability_care_page')},
-      "elements": ${getElementsQuery('nl', ['disability_care_archived_20230126'], locale)}
+      "elements": ${getElementsQuery('archived_nl', ['disability_care_archived_20230126'], locale)}
      }`;
     })(context);
 
