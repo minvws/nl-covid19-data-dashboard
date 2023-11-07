@@ -87,10 +87,8 @@ const promptForElement = async (): Promise<string | undefined> => {
 
   const isAbsent = await isExistingElement(element);
 
-  // TODO: Check if element has timeline collections linked to it
-
   if (isAbsent) {
-    const startOverResponse = await prompts([
+    const notExistsStartOverResponse = await prompts([
       {
         type: 'confirm',
         name: 'isConfirmed',
@@ -98,7 +96,29 @@ const promptForElement = async (): Promise<string | undefined> => {
         initial: false,
       },
     ]);
-    if (startOverResponse.isConfirmed) {
+    if (notExistsStartOverResponse.isConfirmed) {
+      process.stdout.write('\x1Bc');
+      return promptForElement();
+    } else {
+      console.log('Aborting...');
+      process.exit(0);
+    }
+  }
+
+  const containsNoEvents = await hasNoEventCollections(element);
+
+  if (!containsNoEvents) {
+    const eventCollectionsPresentStartOverResponse = await prompts([
+      {
+        type: 'confirm',
+        name: 'isConfirmed',
+        message: `The element ${elementToId(
+          element
+        )} still has timeline event collection(s) attached to it and cannot be removed, do you want to start over?\nChoosing no will exit this prompt.`,
+        initial: false,
+      },
+    ]);
+    if (eventCollectionsPresentStartOverResponse.isConfirmed) {
       process.stdout.write('\x1Bc');
       return promptForElement();
     } else {
@@ -123,6 +143,21 @@ const promptForElement = async (): Promise<string | undefined> => {
   }
 };
 
+const hasNoEventCollections = async (element: Element) => {
+  const { _type, _id } = element;
+  const query = `//groq
+    *[_type == '${_type}' && _id == '${_id}' && defined(timelineEventCollections)][0]
+  `;
+
+  const developmentClient = client.withConfig({ dataset: 'development' });
+  const productionClient = client.withConfig({ dataset: 'production' });
+
+  const developmentDocument = await developmentClient.fetch(query);
+  const productionDocument = await productionClient.fetch(query);
+
+  return developmentDocument === null && productionDocument === null;
+};
+
 const isExistingElement = async (element: Element) => {
   const { _type, _id } = element;
   const query = `//groq
@@ -130,28 +165,31 @@ const isExistingElement = async (element: Element) => {
   `;
 
   const developmentClient = client.withConfig({ dataset: 'development' });
+  const productionClient = client.withConfig({ dataset: 'production' });
 
   const developmentDocument = await developmentClient.fetch(query);
+  const productionDocument = await productionClient.fetch(query);
 
-  return developmentDocument === null;
+  return developmentDocument === null && productionDocument === null;
 };
 
 const elementToId = (element: Element) =>
   `${element.scope}__${element.metricName}__${snakeCase(element._type)}${isDefined(element.metricProperty) ? `__${element.metricProperty}` : ''}`;
 
-const removeElement = async (query: string, developmentClient: any) => {
-  return Promise.all([developmentClient.delete({ query: query })]);
+const removeElement = async (query: string, developmentClient: any, productionClient: any) => {
+  return Promise.all([developmentClient.delete({ query: query }), productionClient.delete({ query: query })]);
 };
 
 (async () => {
   await initialiseEnvironmentVariables();
 
   const developmentClient = client.withConfig({ dataset: 'development', token: process.env.SANITY_API_TOKEN });
+  const productionClient = client.withConfig({ dataset: 'production', token: process.env.SANITY_API_TOKEN });
 
   const query = await promptForElement();
 
   if (isDefined(query)) {
-    await removeElement(query, developmentClient);
+    await removeElement(query, developmentClient, productionClient);
   }
 
   console.log('Have a swell day, friend. Goodluck and godspeed in all your endevours!');
