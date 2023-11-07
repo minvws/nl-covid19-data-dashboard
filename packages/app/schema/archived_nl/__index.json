@@ -104,7 +104,7 @@
       "$ref": "positive_tests/g_number.json"
     },
     "nursing_home_archived_20230126": {
-      "$ref": "nursing_home.json"
+      "$ref": "nursing_home_archived_20230126.json"
     },
     "tested_ggd_archived_20230321": {
       "$ref": "positive_tests/tested_ggd.json"
