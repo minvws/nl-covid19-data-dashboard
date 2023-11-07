@@ -21,6 +21,7 @@
     "lokalize:sync-after-feature": "ts-node src/lokalize/scripts/sync-after-feature.ts",
     "lokalize:sync-prd-to-dev": "ts-node src/lokalize/scripts/sync-prd-to-dev.ts",
     "elements:add": "ts-node src/studio/scripts/add-chart.ts",
+    "elements:remove": "ts-node src/studio/scripts/remove-chart.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "keywords": [
