@@ -43,7 +43,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
-const pageMetrics = ['tested_overall'];
+const pageMetrics = ['tested_overall_archived_20230331'];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
@@ -78,13 +78,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedGmData: data, selectedArchivedGmData: archived_data, archivedChoropleth, municipalityName, content, lastGenerated } = props;
+  const { pageText, selectedGmData: data, selectedArchivedGmData: archivedData, archivedChoropleth, municipalityName, content, lastGenerated } = props;
   const [positivelyTestedPeopleTimeframe, setpositivelyTestedPeopleTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const archivedLastValue = archived_data.tested_overall_archived_20230331.last_value;
+  const archivedLastValue = archivedData.tested_overall_archived_20230331.last_value;
   const populationCount = data.static_values.population_count;
   const metadata = {
     ...commonTexts.gemeente_index.metadata,
@@ -96,7 +96,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
     }),
   };
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -188,7 +188,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'confirmed_cases_infected_over_time_chart',
               }}
-              values={archived_data.tested_overall_archived_20230331.values}
+              values={archivedData.tested_overall_archived_20230331.values}
               timeframe={positivelyTestedPeopleTimeframe}
               seriesConfig={[
                 {
