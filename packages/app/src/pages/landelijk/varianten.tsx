@@ -106,7 +106,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
       )
     : NaN;
 
-  const sampleThresholdPassed = data.variants ? data.variants!.values[0].last_value.sample_size > 100 : false;
+  const sampleThresholdPassed = data.variants ? data.variants!.values[0].last_value.sample_size > 0 : false; // Hack to set to 0 because we aim to match the variants page on RIVM.nl
 
   const variantLabels: VariantDynamicLabels = {};
 
