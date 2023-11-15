@@ -99,14 +99,14 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   const totalVariants = data.variants
-    ? data.variants!.values.reduce(
+    ? data.variants.values.reduce(
         (accumulator, currentVariant: NlVariantsVariant) =>
           currentVariant.last_value.occurrence > 0 && currentVariant.variant_code !== 'other_variants' ? 1 + accumulator : accumulator,
         0
       )
     : NaN;
 
-  const sampleThresholdPassed = data.variants ? data.variants!.values[0].last_value.sample_size > 0 : false; // Hack to set to 0 because we aim to match the variants page on RIVM.nl
+  const sampleThresholdPassed = data.variants ? data.variants.values[0].last_value.sample_size > 0 : false; // Hack to set to 0 because we aim to match the variants page on RIVM.nl
 
   const variantLabels: VariantDynamicLabels = {};
 
@@ -153,7 +153,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             }}
             tilesData={[
               {
-                value: data.variants ? data.variants!.values[0].last_value.sample_size : null,
+                value: data.variants ? data.variants.values[0].last_value.sample_size : null,
                 title: textNl.kpi_amount_of_samples.tile_total_samples.title,
                 description: textNl.kpi_amount_of_samples.tile_total_samples.description,
               },
