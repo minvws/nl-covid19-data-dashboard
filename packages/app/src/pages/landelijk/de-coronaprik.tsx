@@ -107,7 +107,7 @@ export const getStaticProps = createGetStaticProps(
     }>((context) => {
       return `{
         "parts": ${getPagePartsQuery('vaccinations_page')},
-        "elements": ${getElementsQuery('nl', ['vaccine_coverage_archived_20220518', 'vaccine_administered_archived_20220914'], context.locale)}
+        "elements": ${getElementsQuery('archived_nl', ['vaccine_coverage_archived_20220518', 'vaccine_administered_archived_20220914'], context.locale)}
       }`;
     })(context);
 
