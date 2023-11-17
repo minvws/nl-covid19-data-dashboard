@@ -1057,23 +1057,20 @@ export interface Nl {
   infectionradar_symptoms_trend_per_age_group_weekly: NlInfectionradarSymptomsTrendPerAgeGroupWeekly;
 }
 export interface NlDifference {
-  infectious_people__estimate: DifferenceInteger;
-  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   hospital_lcps__beds_occupied_covid: DifferenceDecimal;
-  intensive_care_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceDecimal;
   sewer__average: DifferenceInteger;
   reproduction__index_average?: DifferenceDecimal;
   vulnerable_hospital_admissions?: DifferenceInteger;
   self_test_overall: DifferenceDecimal;
 }
-export interface DifferenceInteger {
+export interface DifferenceDecimal {
   old_value: number;
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
 }
-export interface DifferenceDecimal {
+export interface DifferenceInteger {
   old_value: number;
   difference: number;
   old_date_unix: number;

@@ -236,7 +236,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 })}
                 metadata={{
                   source: textNl.ggd.bronnen.rivm,
-                  date: getLastInsertionDateOfPage(data, ['tested_ggd']),
+                  date: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230321']),
                 }}
                 onSelectTimeframe={setConfirmedCasesTestedOverTimeTimeframe}
                 toggle={{
