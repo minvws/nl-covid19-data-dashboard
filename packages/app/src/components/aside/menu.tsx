@@ -14,6 +14,7 @@ import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { AsideTitle } from './title';
+import { useCollapsible } from '~/utils/use-collapsible';
 
 type Url = UrlObject | string;
 
@@ -21,7 +22,15 @@ export function MenuRenderer({ items }: { items: ExpandedSidebarMap<Layout> }) {
   return (
     <>
       {items.map((x) =>
-        'items' in x ? (
+        'items' in x && x.key === 'archived_metrics' ? (
+          <CollapsibleCategoryMenu {...x}>
+            {x.items.map((item) => (
+              // item includes key, ESLint gives a false positive here
+              // eslint-disable-next-line react/jsx-key
+              <MenuItemLink {...item} />
+            ))}
+          </CollapsibleCategoryMenu>
+        ) : 'items' in x ? (
           <CategoryMenu {...x}>
             {x.items.map((item) => (
               // item includes key, ESLint gives a false positive here
@@ -41,6 +50,31 @@ export function Menu({ children, spacing }: { children: ReactNode; spacing?: Spa
   return (
     <Box as="ul" css={css({ listStyle: 'none' })} spacing={spacing}>
       {children}
+    </Box>
+  );
+}
+
+export function CollapsibleCategoryMenu({ title, children, icon }: { children: ReactNode; title?: string; icon: ReactNode }) {
+  const collapsible = useCollapsible();
+
+  return (
+    <Box as="li" spacing={2}>
+      {title && icon && (
+        <>
+          <Box display="flex" flexDirection="row" flexWrap="nowrap" alignItems="center">
+            <Box width="100%">
+              <Box paddingX={space[2]} paddingTop={space[3]} display="flex" justifyContent="space-between" alignItems="center">
+                <Box display="flex" alignItems="center">
+                  <Icon>{icon}</Icon>
+                  <Heading level={5}>{title}</Heading>
+                </Box>
+                <Box pr={space[1]}>{collapsible.button()}</Box>
+              </Box>
+            </Box>
+          </Box>
+          {collapsible.content(<Menu>{children}</Menu>)}
+        </>
+      )}
     </Box>
   );
 }
