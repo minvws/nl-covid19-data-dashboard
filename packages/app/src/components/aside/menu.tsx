@@ -1,22 +1,38 @@
-import css from '@styled-system/css';
-import { resolveHref } from 'next/dist/shared/lib/router/router';
+import { Anchor, Heading } from '~/components/typography';
+import { AsideTitle } from './title';
+import { asResponsiveArray } from '~/style/utils';
+import { Box } from '~/components/base';
+import { colors } from '@corona-dashboard/common';
+import { ExpandedSidebarMap, Layout } from '~/domain/layout/logic/types';
+import { Link } from '~/utils/link';
 import { NextRouter, useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import styled from 'styled-components';
-import { UrlObject } from 'url';
-import chevronUrl from '~/assets/chevron.svg';
-import { Box } from '~/components/base';
-import { Anchor, Heading } from '~/components/typography';
-import { ExpandedSidebarMap, Layout } from '~/domain/layout/logic/types';
+import { resolveHref } from 'next/dist/shared/lib/router/router';
 import { space, SpaceValue } from '~/style/theme';
-import { colors } from '@corona-dashboard/common';
-import { asResponsiveArray } from '~/style/utils';
-import { Link } from '~/utils/link';
+import { UrlObject } from 'url';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { AsideTitle } from './title';
 import { useCollapsible } from '~/utils/use-collapsible';
+import chevronUrl from '~/assets/chevron.svg';
+import css from '@styled-system/css';
+import styled from 'styled-components';
 
 type Url = UrlObject | string;
+
+type ArchivedNlPath =
+  | 'kwetsbare-groepen-70-plussers'
+  | 'reproductiegetal'
+  | 'corona-thermometer'
+  | 'gedrag'
+  | 'positieve-testen'
+  | 'gehandicaptenzorg'
+  | 'thuiswonende-70-plussers'
+  | 'coronamelder'
+  | 'besmettelijke-mensen'
+  | 'klachten-bij-huisartsen';
+
+type ArchivedGmPath = 'positieve-testen' | 'sterfte';
+
+type ArchivedPath = ArchivedNlPath | ArchivedGmPath;
 
 export function MenuRenderer({ items }: { items: ExpandedSidebarMap<Layout> }) {
   return (
@@ -55,7 +71,8 @@ export function Menu({ children, spacing }: { children: ReactNode; spacing?: Spa
 }
 
 export function CollapsibleCategoryMenu({ title, children, icon }: { children: ReactNode; title?: string; icon: ReactNode }) {
-  const collapsible = useCollapsible();
+  const router = useRouter();
+  const collapsible = useCollapsible({ isOpen: openArchivedCategoryMenu(router) });
 
   return (
     <Box as="li" spacing={2}>
@@ -131,6 +148,30 @@ function isActivePath(router: NextRouter, href: Url) {
   const currentPath = (router.asPath || '/').split('?')[0];
   const hrefPath = resolveHref(router, href).split('?')[0];
   return currentPath === hrefPath;
+}
+
+function openArchivedCategoryMenu(router: NextRouter) {
+  const archivedNlPaths: ArchivedPath[] = [
+    'kwetsbare-groepen-70-plussers',
+    'reproductiegetal',
+    'corona-thermometer',
+    'gedrag',
+    'positieve-testen',
+    'gehandicaptenzorg',
+    'thuiswonende-70-plussers',
+    'coronamelder',
+    'besmettelijke-mensen',
+    'klachten-bij-huisartsen',
+  ];
+
+  const archivedGmPaths: ArchivedPath[] = ['positieve-testen', 'sterfte'];
+
+  const currentPath = (router.asPath || '/').split('?')[0].split('/');
+
+  return (
+    archivedNlPaths.some((path) => path.toLowerCase() === currentPath[currentPath.length - 1].toLowerCase()) ||
+    archivedGmPaths.some((path) => path.toLowerCase() === currentPath[currentPath.length - 1].toLowerCase())
+  );
 }
 
 const Unavailable = styled.span(
