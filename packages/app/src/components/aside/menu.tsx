@@ -15,24 +15,9 @@ import { useCollapsible } from '~/utils/use-collapsible';
 import chevronUrl from '~/assets/chevron.svg';
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { ArchivedPath, useArchivedPaths } from '~/utils/use-archived-paths';
 
 type Url = UrlObject | string;
-
-type ArchivedNlPath =
-  | 'kwetsbare-groepen-70-plussers'
-  | 'reproductiegetal'
-  | 'corona-thermometer'
-  | 'gedrag'
-  | 'positieve-testen'
-  | 'gehandicaptenzorg'
-  | 'thuiswonende-70-plussers'
-  | 'coronamelder'
-  | 'besmettelijke-mensen'
-  | 'klachten-bij-huisartsen';
-
-type ArchivedGmPath = 'positieve-testen' | 'sterfte';
-
-type ArchivedPath = ArchivedNlPath | ArchivedGmPath;
 
 export function MenuRenderer({ items }: { items: ExpandedSidebarMap<Layout> }) {
   return (
@@ -70,10 +55,10 @@ export function Menu({ children, spacing }: { children: ReactNode; spacing?: Spa
   );
 }
 
-export function CollapsibleCategoryMenu({ title, children, icon }: { children: ReactNode; title?: string; icon: ReactNode }) {
+export function CollapsibleCategoryMenu({ title, children, icon }: { children: ReactNode; title?: string; icon: ReactNode; key: string }) {
   const router = useRouter();
-  const collapsible = useCollapsible({ isOpen: openArchivedCategoryMenu(router) });
-
+  const archivedPaths = useArchivedPaths();
+  const collapsible = useCollapsible({ isOpen: isCategoryMenuOpen(router, archivedPaths) });
   return (
     <Box as="li" spacing={2}>
       {title && icon && (
@@ -150,28 +135,19 @@ function isActivePath(router: NextRouter, href: Url) {
   return currentPath === hrefPath;
 }
 
-function openArchivedCategoryMenu(router: NextRouter) {
-  const archivedNlPaths: ArchivedPath[] = [
-    'kwetsbare-groepen-70-plussers',
-    'reproductiegetal',
-    'corona-thermometer',
-    'gedrag',
-    'positieve-testen',
-    'gehandicaptenzorg',
-    'thuiswonende-70-plussers',
-    'coronamelder',
-    'besmettelijke-mensen',
-    'klachten-bij-huisartsen',
-  ];
+function isCategoryMenuOpen(router: NextRouter, archivedPaths: ArchivedPath) {
+  const currentPath = (router.asPath || '/').split('?')[0];
+  const code = String(router.query.code);
 
-  const archivedGmPaths: ArchivedPath[] = ['positieve-testen', 'sterfte'];
+  if (currentPath.includes('landelijk')) {
+    return Object.values(archivedPaths.nl).some((archivedPathFunction) => archivedPathFunction() === currentPath);
+  }
 
-  const currentPath = (router.asPath || '/').split('?')[0].split('/');
+  if (currentPath.includes('gemeente')) {
+    return Object.values(archivedPaths.gm).some((archivedPathFunction) => archivedPathFunction(code) === currentPath);
+  }
 
-  return (
-    archivedNlPaths.some((path) => path.toLowerCase() === currentPath[currentPath.length - 1].toLowerCase()) ||
-    archivedGmPaths.some((path) => path.toLowerCase() === currentPath[currentPath.length - 1].toLowerCase())
-  );
+  return false;
 }
 
 const Unavailable = styled.span(

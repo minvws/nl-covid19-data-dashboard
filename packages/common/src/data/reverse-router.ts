@@ -49,3 +49,32 @@ export function getReverseRouter(isMobile: boolean) {
 
   return reverseRouter;
 }
+
+export function getArchivedRoutes() {
+  /**
+   * Add the same keys that are part of the archived_metrics array
+   * in the nl-layout and gm-layout files
+   */
+
+  const archivedPaths = {
+    nl: {
+      nursing_home_care: () => '/landelijk/kwetsbare-groepen-70-plussers',
+      reproduction_number: () => '/landelijk/reproductiegetal',
+      corona_thermometer: () => '/landelijk/corona-thermometer',
+      compliance: () => '/landelijk/gedrag',
+      positive_tests: () => '/landelijk/positieve-testen',
+      disabled_care: () => '/landelijk/gehandicaptenzorg',
+      elderly_at_home: () => '/landelijk/thuiswonende-70-plussers',
+      coronamelder_app: () => '/landelijk/coronamelder',
+      infectious_people: () => '/landelijk/besmettelijke-mensen',
+      general_practitioner_suspicions: () => '/landelijk/klachten-bij-huisartsen',
+    },
+
+    gm: {
+      positive_tests: (code: string) => `/gemeente/${code}/positieve-testen`,
+      mortality: (code: string) => `/gemeente/${code}/sterfte`,
+    },
+  } as const;
+
+  return archivedPaths;
+}
