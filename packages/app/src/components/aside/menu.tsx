@@ -60,7 +60,7 @@ export function CollapsibleCategoryMenu({ title, children, icon }: { children: R
   const archivedPaths = useArchivedPaths();
   const collapsible = useCollapsible({ isOpen: isCategoryMenuOpen(router, archivedPaths) });
   return (
-    <Box as="li" spacing={2}>
+    <Box as="li" spacing={2} borderTop={`1px solid ${colors.gray2}`}>
       {title && icon && (
         <>
           <Box display="flex" flexDirection="row" flexWrap="nowrap" alignItems="center">
