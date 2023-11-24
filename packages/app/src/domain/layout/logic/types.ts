@@ -6,6 +6,8 @@ export type GmItemKeys = 'hospital_admissions' | 'mortality' | 'positive_tests' 
 
 export type GmCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 
+export type CustomCategoryKeys = 'Algemeen' | 'Vaccinaties' | 'Ziekenhuizen' | 'Besmettingen' | 'Gearchiveerd' | 'Kwetsbare groepen' | 'Vroege signalen' | 'Gedrag' | 'Overig';
+
 export type NlItemKeys =
   | 'compliance'
   | 'coronamelder_app'
@@ -27,7 +29,7 @@ export type NlItemKeys =
 
 export type NlCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 
-export type CategoryKeys<T extends Layout> = T extends 'nl' ? NlCategoryKeys : GmCategoryKeys;
+export type CategoryKeys<T extends Layout> = T extends 'nl' ? NlCategoryKeys : T extends 'gm' ? GmCategoryKeys : CustomCategoryKeys;
 
 export type ItemKeys<T extends Layout> = T extends 'nl' ? NlItemKeys : GmItemKeys;
 
