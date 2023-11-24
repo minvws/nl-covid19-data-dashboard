@@ -23,7 +23,7 @@ export function MenuRenderer({ items }: { items: ExpandedSidebarMap<Layout> }) {
   return (
     <>
       {items.map((x) =>
-        'items' in x && (x.key === 'archived_metrics' || x.key === 'Gearchiveerd') ? (
+        'items' in x && (x.key === 'archived_metrics' || x.title === 'Gearchiveerd') ? (
           <CollapsibleCategoryMenu {...x}>
             {x.items.map((item) => (
               // item includes key, ESLint gives a false positive here
