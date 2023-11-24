@@ -6,7 +6,7 @@ export type GmItemKeys = 'hospital_admissions' | 'mortality' | 'positive_tests' 
 
 export type GmCategoryKeys = SharedCategoryKeys | 'archived_metrics';
 
-export type CustomCategoryKeys = 'Algemeen' | 'Vaccinaties' | 'Ziekenhuizen' | 'Besmettingen' | 'Gearchiveerd' | 'Kwetsbare groepen' | 'Vroege signalen' | 'Gedrag' | 'Overig';
+export type CustomCategoryKeys = 'Algemeen' | 'Ontwikkeling van het virus' | 'Gevolgen voor de zorg' | 'Wat kunt u zelf doen' | 'Gearchiveerd';
 
 export type NlItemKeys =
   | 'compliance'
