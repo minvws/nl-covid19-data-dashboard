@@ -58,7 +58,7 @@ export function Menu({ children, spacing }: { children: ReactNode; spacing?: Spa
 export function CollapsibleCategoryMenu({ title, children, icon }: { children: ReactNode; title?: string; icon: ReactNode; key: string }) {
   const router = useRouter();
   const archivedPaths = useArchivedPaths();
-  const collapsible = useCollapsible({ isOpen: isCategoryMenuOpen(router, archivedPaths) });
+  const collapsible = useCollapsible({ isOpen: isCurrentRouteArchivedPage(router, archivedPaths) });
   return (
     <Box as="li" spacing={2} borderTop={`1px solid ${colors.gray2}`}>
       {title && icon && (
@@ -135,7 +135,7 @@ function isActivePath(router: NextRouter, href: Url) {
   return currentPath === hrefPath;
 }
 
-function isCategoryMenuOpen(router: NextRouter, archivedPaths: ArchivedPath) {
+function isCurrentRouteArchivedPage(router: NextRouter, archivedPaths: ArchivedPath) {
   const currentPath = (router.asPath || '/').split('?')[0];
   const code = String(router.query.code);
 
