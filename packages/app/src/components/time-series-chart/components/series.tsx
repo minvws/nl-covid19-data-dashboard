@@ -43,6 +43,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({ seriesConfig, seriesList
             config.type === 'range'
               ? `${chartId}_${String(config.metricPropertyLow)}_${String(config.metricPropertyHigh)}_${config.type}`
               : `${chartId}_${String(config.metricProperty)}_${config.type}`;
+          const adaptedPadding: boolean = config.type === 'bar' ? config.metricProperty === 'beds_occupied_covid' || config.metricProperty === 'influx_covid_patients' : false;
 
           switch (config.type) {
             case 'gapped-line':
@@ -115,6 +116,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({ seriesConfig, seriesList
                   fillOpacity={config.fillOpacity}
                   getX={getX}
                   getY={getY}
+                  bandPadding={adaptedPadding ? 0.35 : undefined}
                   bounds={bounds}
                   yScale={yScale}
                   id={id}
