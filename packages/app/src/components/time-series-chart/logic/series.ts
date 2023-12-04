@@ -123,6 +123,7 @@ export interface BarSeriesDefinition<T extends TimestampedValue> extends SeriesC
   shortLabel?: string;
   color: string;
   fillOpacity?: number;
+  bandPadding?: number;
 }
 
 export interface BarOutOfBoundsSeriesDefinition<T extends TimestampedValue> extends SeriesCommonDefinition {

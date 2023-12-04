@@ -190,6 +190,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty: 'beds_occupied_covid',
                       label: textNl.hospitals.chart_beds_occupied.legend_trend_label,
                       color: colors.primary,
+                      bandPadding: 0.4,
                     },
                   ]}
                   dataOptions={{
@@ -241,6 +242,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty: 'beds_occupied_covid',
                       label: textNl.icu.chart_beds_occupied.legend_trend_label,
                       color: colors.primary,
+                      bandPadding: 0.4,
                     },
                   ]}
                   dataOptions={{
@@ -311,6 +313,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'influx_covid_patients',
                     label: textNl.hospitals.chart_patient_influx.legend_title_trend_label,
                     color: colors.primary,
+                    bandPadding: 0.4,
                   },
                 ]}
                 dataOptions={{
@@ -352,6 +355,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'influx_covid_patients',
                     label: textNl.icu.chart_patient_influx.legend_title_trend_label,
                     color: colors.primary,
+                    bandPadding: 0.4,
                   },
                 ]}
                 dataOptions={{
