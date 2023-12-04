@@ -1,7 +1,7 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { IconInput } from '../../../../components/icon-input';
-import { SEVERITY_LEVELS_LIST } from '../../../../studio/constants';
 import { localeStringValidation } from '../../../../studio/validation/locale-validation';
+import { SEVERITY_LEVELS_LIST } from '../../../../studio/constants';
 
 export const thermometer = defineType({
   type: 'object',
