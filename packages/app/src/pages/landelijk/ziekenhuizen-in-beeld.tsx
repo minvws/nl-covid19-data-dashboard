@@ -77,6 +77,8 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const [hospitalBedsOccupiedOverTimeTimeframe, setHospitalBedsOccupiedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
   const [intensiveCareBedsTimeframe, setIntensiveCareBedsTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
 
+  const gappedBarBandPaddingOverride = 0.4;
+
   const bedsOccupiedOverTimeToggleItems: ChartTileToggleItem[] = [
     {
       label: textNl.hospitals.chart_beds_occupied.toggle_label,
@@ -190,7 +192,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty: 'beds_occupied_covid',
                       label: textNl.hospitals.chart_beds_occupied.legend_trend_label,
                       color: colors.primary,
-                      bandPadding: 0.4,
+                      bandPadding: gappedBarBandPaddingOverride,
                     },
                   ]}
                   dataOptions={{
@@ -242,7 +244,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty: 'beds_occupied_covid',
                       label: textNl.icu.chart_beds_occupied.legend_trend_label,
                       color: colors.primary,
-                      bandPadding: 0.4,
+                      bandPadding: gappedBarBandPaddingOverride,
                     },
                   ]}
                   dataOptions={{
@@ -313,7 +315,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'influx_covid_patients',
                     label: textNl.hospitals.chart_patient_influx.legend_title_trend_label,
                     color: colors.primary,
-                    bandPadding: 0.4,
+                    bandPadding: gappedBarBandPaddingOverride,
                   },
                 ]}
                 dataOptions={{
@@ -355,7 +357,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'influx_covid_patients',
                     label: textNl.icu.chart_patient_influx.legend_title_trend_label,
                     color: colors.primary,
-                    bandPadding: 0.4,
+                    bandPadding: gappedBarBandPaddingOverride,
                   },
                 ]}
                 dataOptions={{
