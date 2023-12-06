@@ -4,7 +4,7 @@ import { ThermometerLevel, ThermometerTimelineEvent } from './query-types';
 
 export function getThermometerStructureQuery(locale: string) {
   const query = `// groq
-  *[_type == 'thermometer' && !(_id in path('drafts.**'))][0]
+  *[_type == 'coronaThermometer' && !(_id in path('drafts.**'))][0]
   {
     icon,
     'title': title.${locale},
