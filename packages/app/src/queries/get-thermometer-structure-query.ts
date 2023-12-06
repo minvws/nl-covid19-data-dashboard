@@ -4,37 +4,36 @@ import { ThermometerLevel, ThermometerTimelineEvent } from './query-types';
 
 export function getThermometerStructureQuery(locale: string) {
   const query = `// groq
-        {
-            *[_type == 'thermometer' && !(_id in path('drafts.**'))][0]{
-                icon,
-                'title': title.${locale},
-                'tileTitle':tileTitle.${locale},
-                currentLevel,
-                'thermometerLevels': thermometerLevels[]->{
-                    'level': level,
-                    'label': label.${locale},
-                    'description': description.${locale},
-                },
-                'datesLabel': datesLabel.${locale},
-                'levelDescription': levelDescription.${locale},
-                'sourceLabel': sourceLabel.${locale},
-                'articleReference': articleReference.${locale},
-                'collapsibleTitle': collapsibleTitle.${locale},
-                'timeline': {
-                    'title': timeline.title.${locale},
-                    'tooltipLabel': timeline.tooltipCurrentEstimationLabel.${locale},
-                    'todayLabel': timeline.todayLabel.${locale},
-                    'legendLabel': timeline.legendLabel.${locale},
-                    'ThermometerTimelineEvents': timeline.thermometerTimelineEvents[]->{
-                        'title': title.${locale},
-                        'description': description.${locale},
-                        level,
-                        date,
-                        dateEnd
-                    },
-                },
-            },
-        }`;
+  *[_type == 'thermometer' && !(_id in path('drafts.**'))][0]
+  {
+    icon,
+    'title': title.${locale},
+    'tileTitle':tileTitle.${locale},
+    currentLevel,
+    'thermometerLevels': thermometerLevels[]->{
+      'level': level,
+      'label': label.${locale},
+      'description': description.${locale},
+    },
+    'datesLabel': datesLabel.${locale},
+    'levelDescription': levelDescription.${locale},
+    'sourceLabel': sourceLabel.${locale},
+    'articleReference': articleReference.${locale},
+    'collapsibleTitle': collapsibleTitle.${locale},
+    'timeline': {
+      'title': timeline.title.${locale},
+      'tooltipLabel': timeline.tooltipCurrentEstimationLabel.${locale},
+      'todayLabel': timeline.todayLabel.${locale},
+      'legendLabel': timeline.legendLabel.${locale},
+      'ThermometerTimelineEvents': timeline.thermometerTimelineEvents[]->{
+        'title': title.${locale},
+        'description': description.${locale},
+        level,
+        date,
+        dateEnd
+      },
+    },
+  }`;
   return query;
 }
 
