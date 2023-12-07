@@ -1,1 +1,3 @@
 timestamp,action,key,document_id,move_to
+2023-12-06T14:06:27.293Z,add,pages.hospitals_and_care_page.nl.icu.chart_beds_occupied.legend_inaccurate_labels,CFKdIPVDhosWzjhr2xUv19,__
+2023-12-06T14:06:27.294Z,delete,pages.hospitals_and_care_page.nl.icu.chart_beds_occupied.legend_inaccurate_label,PKXdxxxKAnTg0F1ZCrIxVz,__

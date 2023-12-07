@@ -184,13 +184,13 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty: 'beds_occupied_covid_moving_average',
-                      label: textNl.hospitals.chart_beds_occupied.legend_dot_label,
+                      label: textNl.hospitals.chart_beds_occupied.legend_trend_label,
                       color: colors.primary,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'beds_occupied_covid',
-                      label: textNl.hospitals.chart_beds_occupied.legend_trend_label,
+                      label: textNl.hospitals.chart_beds_occupied.legend_dot_label,
                       color: colors.primary,
                       bandPadding: gappedBarBandPaddingOverride,
                     },
@@ -236,13 +236,13 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       type: 'line',
                       metricProperty: 'beds_occupied_covid_moving_average',
-                      label: textNl.icu.chart_beds_occupied.legend_dot_label,
+                      label: textNl.icu.chart_beds_occupied.legend_trend_label,
                       color: colors.primary,
                     },
                     {
                       type: 'bar',
                       metricProperty: 'beds_occupied_covid',
-                      label: textNl.icu.chart_beds_occupied.legend_trend_label,
+                      label: textNl.icu.chart_beds_occupied.legend_dot_label,
                       color: colors.primary,
                       bandPadding: gappedBarBandPaddingOverride,
                     },
@@ -252,10 +252,11 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                       {
                         start: data.intensive_care_lcps.values[0].date_unix,
                         end: new Date('1 June 2020').getTime() / 1000,
-                        label: textNl.icu.chart_beds_occupied.legend_inaccurate_label,
+                        label: textNl.icu.chart_beds_occupied.legend_inaccurate_labels,
                         shortLabel: commonTexts.common.incomplete,
                       },
                     ],
+
                     timelineEvents: getTimelineEvents(content.elements.timeSeries, 'intensive_care_lcps', 'beds_occupied_covid'),
                     useDatesAsRange: false,
                   }}
