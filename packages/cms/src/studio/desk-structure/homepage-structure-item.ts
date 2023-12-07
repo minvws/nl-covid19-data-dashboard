@@ -5,7 +5,7 @@ import { StructureBuilder } from 'sanity/desk';
 export const homepageStructureItem = (S: StructureBuilder) => {
   return S.listItem()
     .id('topicalPage')
-    .title('Topical page')
+    .title('Samenvattingspagina')
     .icon(BsHouse)
     .child(
       S.list()

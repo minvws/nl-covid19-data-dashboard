@@ -23,10 +23,10 @@ export const deskStructure = (S: StructureBuilder, context: StructureResolverCon
       S.divider(),
       S.listItem()
         .id('ContentPage')
-        .title('Dashboard Content Pages')
+        .title("Dashboard content pagina's")
         .child(
           S.list()
-            .title('Content')
+            .title("Pagina's")
             .items([
               notFoundPageStructureItem(S),
               addStructureItem(S, BsInfoCircle, 'Over dit dashboard', 'overDitDashboard'),
@@ -44,11 +44,11 @@ export const deskStructure = (S: StructureBuilder, context: StructureResolverCon
 
       S.listItem()
         .id('GraphConfigs')
-        .title('Graph Configurations')
+        .title('Visuals configuratie')
         .icon(BsBarChart)
         .child(
           S.list()
-            .title('Content')
+            .title('Configuratie')
             .items([coronaThermometerStructureItem(S), elementsStructureItem(S, context)])
         ),
       S.divider(),

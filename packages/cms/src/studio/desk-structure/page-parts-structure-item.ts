@@ -4,7 +4,7 @@ import { StructureBuilder } from 'sanity/desk';
 export const pagePartsStructureItem = (S: StructureBuilder) => {
   return S.listItem()
     .id('pagina-onderdelen')
-    .title('Page parts configuration')
+    .title('Pagina onderdelen')
     .icon(BsPuzzle)
     .child(
       S.list()
