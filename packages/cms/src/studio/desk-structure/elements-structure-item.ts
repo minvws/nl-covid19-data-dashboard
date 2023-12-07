@@ -1,7 +1,7 @@
-import uniq from 'lodash/uniq';
 import { BsBarChart, BsFolder, BsTags } from 'react-icons/bs';
 import { map } from 'rxjs/operators';
 import { StructureBuilder, StructureResolverContext } from 'sanity/desk';
+import uniq from 'lodash/uniq';
 
 export const elementsStructureItem = (S: StructureBuilder, context: StructureResolverContext) => {
   const { documentStore } = context;

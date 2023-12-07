@@ -1,33 +1,33 @@
+import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
+import { Box } from '~/components/base';
+import { ChartTile, InView, PageInformationBlock, TileList, WarningTile } from '~/components';
 import { colors } from '@corona-dashboard/common';
 import { Coronathermometer } from '@corona-dashboard/icons';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { GetStaticPropsContext } from 'next';
-import styled from 'styled-components';
-import { ChartTile, InView, PageInformationBlock, TileList, WarningTile } from '~/components';
-import { PageArticlesTile } from '~/components/articles/page-articles-tile';
-import { Box } from '~/components/base';
-import { PageFaqTile } from '~/components/page-faq-tile';
+import { getThermometerEvents, getThermometerStructureQuery } from '~/queries/get-thermometer-structure-query';
+import { getThermometerSeverityLevels } from '~/utils/get-thermometer-severity-level';
 import { getTimelineRangeDates } from '~/components/severity-indicator-tile/components/timeline/logic';
-import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
+import { IndicatorLevelDescription } from '~/domain/topical/components/indicator-level-description';
+import { Languages, SiteText } from '~/locale';
+import { Layout } from '~/domain/layout/layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SEVERITY_LEVELS_LIST, TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH } from '~/components/severity-indicator-tile/constants';
 import { SeverityIndicatorTile } from '~/components/severity-indicator-tile/severity-indicator-tile';
 import { SeverityLevel } from '~/components/severity-indicator-tile/types';
-import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { IndicatorLevelDescription } from '~/domain/topical/components/indicator-level-description';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { getThermometerEvents, getTopicalStructureQuery } from '~/queries/get-topical-structure-query';
-import { TopicalSanityData } from '~/queries/query-types';
-import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { space } from '~/style/theme';
-import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
+import { ThermometerConfig } from '~/queries/query-types';
+import { Timeline } from '~/components/severity-indicator-tile/components/timeline/timeline';
+import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
-import { getThermometerSeverityLevels } from '~/utils/get-thermometer-severity-level';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useIntl } from '~/intl';
+import styled from 'styled-components';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.corona_thermometer_page.nl,
@@ -41,12 +41,12 @@ export const getStaticProps = createGetStaticProps(
   async (context: GetStaticPropsContext) => {
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
-      topicalStructure: TopicalSanityData;
+      thermometerStructure: ThermometerConfig;
     }>((context) => {
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('coronathermometer_page')},
-        "topicalStructure": ${getTopicalStructureQuery(locale)}
+        "thermometerStructure": ${getThermometerStructureQuery(locale)}
       }`;
     })(context);
     return {
@@ -54,7 +54,7 @@ export const getStaticProps = createGetStaticProps(
         articles: getArticleParts(content.parts.pageParts, 'coronathermometerPageArticles'),
         dataExplained: getDataExplainedParts(content.parts.pageParts, 'coronathermometerPageDataExplained'),
         faqs: getFaqParts(content.parts.pageParts, 'coronathermometerPageFAQs'),
-        topicalStructure: content.topicalStructure,
+        thermometerStructure: content.thermometerStructure,
       },
     };
   }
@@ -63,9 +63,7 @@ export const getStaticProps = createGetStaticProps(
 const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, lastGenerated } = props;
 
-  const { topicalStructure } = content;
-
-  const { thermometer } = topicalStructure;
+  const { thermometerStructure } = content;
 
   const { textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -78,9 +76,9 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts } = useIntl();
   const { formatDateFromSeconds } = useIntl();
 
-  const { currentSeverityLevel, currentSeverityLevelTexts } = getThermometerSeverityLevels(thermometer);
+  const { currentSeverityLevel, currentSeverityLevelTexts } = getThermometerSeverityLevels(thermometerStructure);
 
-  const thermometerEvents = getThermometerEvents(thermometer.timeline.ThermometerTimelineEvents, thermometer.thermometerLevels);
+  const thermometerEvents = getThermometerEvents(thermometerStructure.timeline.ThermometerTimelineEvents, thermometerStructure.thermometerLevels);
 
   const lastThermometerSetDate = formatDateFromSeconds(thermometerEvents.slice(-1)[0].end, 'weekday-long');
 
@@ -114,7 +112,7 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.pagina.belangrijk_bericht} variant="informational"></WarningTile>}
 
-          <ChartTile title={thermometer.title} disableFullscreen>
+          <ChartTile title={thermometerStructure.title} disableFullscreen>
             {currentSeverityLevelTexts && (
               <Box maxWidth={TOPICAL_SEVERITY_INDICATOR_TILE_MAX_WIDTH}>
                 <SeverityIndicatorTile
@@ -125,11 +123,11 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
                       label: currentSeverityLevelTexts.label.toLowerCase(),
                     })
                   }
-                  title={thermometer.tileTitle}
+                  title={thermometerStructure.tileTitle}
                   label={currentSeverityLevelTexts.label}
-                  sourceLabel={thermometer.sourceLabel}
-                  datesLabel={thermometer.datesLabel}
-                  levelDescription={thermometer.levelDescription}
+                  sourceLabel={thermometerStructure.sourceLabel}
+                  datesLabel={thermometerStructure.datesLabel}
+                  levelDescription={thermometerStructure.levelDescription}
                 />
                 {thermometerEvents && thermometerEvents.length && (
                   <Timeline
@@ -137,13 +135,13 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
                     endDate={endDate}
                     timelineEvents={thermometerEvents}
                     labels={{
-                      heading: thermometer.timeline.title,
-                      today: thermometer.timeline.todayLabel,
-                      tooltipCurrentEstimation: thermometer.timeline.tooltipLabel,
+                      heading: thermometerStructure.timeline.title,
+                      today: thermometerStructure.timeline.todayLabel,
+                      tooltipCurrentEstimation: thermometerStructure.timeline.tooltipLabel,
                     }}
                     legendItems={[
                       {
-                        label: thermometer.timeline.legendLabel,
+                        label: thermometerStructure.timeline.legendLabel,
                         shape: 'custom',
                         shapeComponent: <TimelineMarker color={colors.gray6} />,
                       },
@@ -154,10 +152,10 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ChartTile title={thermometer.collapsibleTitle} disableFullscreen>
+          <ChartTile title={thermometerStructure.collapsibleTitle} disableFullscreen>
             <OrderedList>
               {SEVERITY_LEVELS_LIST.map((severityLevel, index) => {
-                const indicatorTexts = thermometer.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === severityLevel);
+                const indicatorTexts = thermometerStructure.thermometerLevels.find((thermometerLevel) => thermometerLevel.level === severityLevel);
                 return (
                   indicatorTexts && (
                     <IndicatorLevelDescription key={index} level={indicatorTexts.level as SeverityLevel} label={indicatorTexts.label} description={indicatorTexts.description} />

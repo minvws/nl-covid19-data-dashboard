@@ -1,6 +1,6 @@
-import { BsCardList, BsCardText, BsGear, BsHouse, BsThermometer } from 'react-icons/bs';
-import { StructureBuilder } from 'sanity/desk';
 import { addStructureItem } from '../utils';
+import { BsCardList, BsCardText, BsGear, BsHouse } from 'react-icons/bs';
+import { StructureBuilder } from 'sanity/desk';
 
 export const homepageStructureItem = (S: StructureBuilder) => {
   return S.listItem()
@@ -13,7 +13,6 @@ export const homepageStructureItem = (S: StructureBuilder) => {
         .items([
           addStructureItem(S, BsGear, 'Samenvattingspagina configuratie', 'topicalPageConfig'),
           addStructureItem(S, BsCardList, 'Weeksamenvatting', 'weeklySummary'),
-          addStructureItem(S, BsThermometer, 'Thermometer', 'thermometer'),
           addStructureItem(S, BsCardText, "KPI thema's en tegels", 'themeCollection'),
           addStructureItem(S, BsCardText, 'Adviezen', 'advice'),
         ])
