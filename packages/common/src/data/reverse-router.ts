@@ -74,6 +74,22 @@ export function getArchivedRoutes() {
       positive_tests: (code: string) => `/gemeente/${code}/positieve-testen`,
       mortality: (code: string) => `/gemeente/${code}/sterfte`,
     },
+
+    dataExplained: {
+      nursing_home_care: () => '/verantwoording/kwetsbare-groepen-en-70-plussers',
+      pressure_on_health_care: () => '/verantwoording/druk-op-de-zorg-verzuimcijfers-nza',
+      reproduction_number: () => '/verantwoording/reproductiegetal',
+      compliance: () => '/verantwoording/gedrag',
+      positive_tests: () => '/verantwoording/positieve-testen',
+      mortality: () => '/verantwoording/sterfte-rivm',
+      disabled_care: () => '/verantwoording/gehandicaptenzorg',
+      elderly_at_home: () => '/verantwoording/thuiswonende-70-plussers',
+      contact_research: () => '/verantwoording/bron-en-contactonderzoek-ggd-en',
+      coronamelder_app: () => '/verantwoording/coronamelder',
+      vaccinations: () => '/verantwoording/leveringen-en-voorraden-vaccins-and-vaccinatiebereidheid',
+      contagious_people: () => '/verantwoording/besmettelijke-mensen',
+      patients_with_complaints: () => '/verantwoording/patienten-met-klachten-bij-de-huisarts',
+    },
   } as const;
 
   return archivedPaths;

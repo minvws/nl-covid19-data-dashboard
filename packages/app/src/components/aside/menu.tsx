@@ -147,6 +147,10 @@ function isCurrentRouteArchivedPage(router: NextRouter, archivedPaths: ArchivedP
     return Object.values(archivedPaths.gm).some((archivedPathFunction) => archivedPathFunction(code) === currentPath);
   }
 
+  if (currentPath.includes('verantwoording')) {
+    return Object.values(archivedPaths.dataExplained).some((archivedPathFunction) => archivedPathFunction() === currentPath);
+  }
+
   return false;
 }
 
