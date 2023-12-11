@@ -4,7 +4,11 @@ on: pull_request
 
 jobs:
   init:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04]
+        node-version: [18.18.2]
     steps:
       - name: Cancel previous workflow
         uses: styfle/cancel-workflow-action@0.4.0
@@ -12,7 +16,11 @@ jobs:
           access_token: ${{ github.token }}
 
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04]
+        node-version: [18.18.2]
     needs: init
     steps:
       - name: Check out repository
@@ -38,10 +46,10 @@ jobs:
         run: yarn lint
 
   compile:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-22.04]
         node-version: [18.18.2]
     needs: init
     steps:
@@ -92,7 +100,11 @@ jobs:
         run: yarn typecheck
 
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04]
+        node-version: [18.18.2]
     needs: init
     steps:
       - name: Check out repository
@@ -127,7 +139,11 @@ jobs:
         run: yarn test:ci
 
   docker:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [ubuntu-22.04]
+        node-version: [18.18.2]
     needs: init
     if: contains(github.head_ref, 'release')
     steps:
