@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        os: [ubuntu-22.04]
         node-version: [18.18.2]
     steps:
       - name: Check out repository
