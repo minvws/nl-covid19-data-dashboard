@@ -5,10 +5,6 @@ on: pull_request
 jobs:
   init:
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        os: [ubuntu-22.04]
-        node-version: [18.18.2]
     steps:
       - name: Cancel previous workflow
         uses: styfle/cancel-workflow-action@0.4.0
@@ -150,10 +146,6 @@ jobs:
 
   docker:
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        os: [ubuntu-22.04]
-        node-version: [18.18.2]
     needs: init
     if: contains(github.head_ref, 'release')
     steps:
