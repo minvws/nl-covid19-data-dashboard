@@ -39,6 +39,7 @@ jobs:
 
   compile:
     runs-on: ubuntu-latest
+    container: node:18.18.2-alpine
     needs: init
     steps:
       - name: Get target branch name (pull request)
