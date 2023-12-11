@@ -10,7 +10,7 @@ jobs:
   trigger-acceptance-build:
     environment: Acceptance
     name: Call Azure Pipeline
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Azure Pipelines Action
         uses: Azure/pipelines@v1.2
