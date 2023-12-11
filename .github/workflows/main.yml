@@ -4,7 +4,7 @@ on: pull_request
 
 jobs:
   init:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Cancel previous workflow
         uses: styfle/cancel-workflow-action@0.4.0
@@ -12,7 +12,7 @@ jobs:
           access_token: ${{ github.token }}
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: init
     steps:
       - name: Check out repository
@@ -38,7 +38,7 @@ jobs:
         run: yarn lint
 
   compile:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: init
     steps:
       - name: Get target branch name (pull request)
@@ -83,7 +83,7 @@ jobs:
         run: yarn typecheck
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: init
     steps:
       - name: Check out repository
@@ -118,7 +118,7 @@ jobs:
         run: yarn test:ci
 
   docker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: init
     if: contains(github.head_ref, 'release')
     steps:
