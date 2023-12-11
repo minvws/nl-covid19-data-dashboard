@@ -4,7 +4,7 @@ on: pull_request
 
 jobs:
   init:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Cancel previous workflow
         uses: styfle/cancel-workflow-action@0.4.0
@@ -12,11 +12,19 @@ jobs:
           access_token: ${{ github.token }}
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [18.18.2]
     needs: init
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -38,7 +46,10 @@ jobs:
         run: yarn lint
 
   compile:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [18.18.2]
     needs: init
     steps:
       - name: Get target branch name (pull request)
@@ -48,6 +59,11 @@ jobs:
 
       - name: Check out repository
         uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -83,11 +99,19 @@ jobs:
         run: yarn typecheck
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [18.18.2]
     needs: init
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -118,7 +142,7 @@ jobs:
         run: yarn test:ci
 
   docker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: init
     if: contains(github.head_ref, 'release')
     steps:
