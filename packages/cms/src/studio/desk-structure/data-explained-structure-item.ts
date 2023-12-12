@@ -1,6 +1,6 @@
+import { addStructureItem } from '../utils';
 import { Bs123, BsBookHalf } from 'react-icons/bs';
 import { StructureBuilder } from 'sanity/desk';
-import { addStructureItem } from '../utils';
 
 export const dataExplainedStructureItem = (S: StructureBuilder) => {
   return S.listItem()

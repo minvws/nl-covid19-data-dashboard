@@ -1,6 +1,6 @@
+import { addStructureItem } from '../utils';
 import { BsBookHalf, BsQuestionCircle } from 'react-icons/bs';
 import { StructureBuilder } from 'sanity/desk';
-import { addStructureItem } from '../utils';
 
 export const faqStructureItem = (S: StructureBuilder) => {
   return S.listItem()

@@ -115,6 +115,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({ seriesConfig, seriesList
                   fillOpacity={config.fillOpacity}
                   getX={getX}
                   getY={getY}
+                  bandPadding={config.bandPadding}
                   bounds={bounds}
                   yScale={yScale}
                   id={id}

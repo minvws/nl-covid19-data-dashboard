@@ -49,3 +49,48 @@ export function getReverseRouter(isMobile: boolean) {
 
   return reverseRouter;
 }
+
+export function getArchivedRoutes() {
+  /**
+   * Add the same keys that are part of the archived_metrics array
+   * in the nl-layout and gm-layout files
+   */
+
+  const archivedPaths = {
+    nl: {
+      nursing_home_care: () => '/landelijk/kwetsbare-groepen-70-plussers',
+      reproduction_number: () => '/landelijk/reproductiegetal',
+      corona_thermometer: () => '/landelijk/corona-thermometer',
+      compliance: () => '/landelijk/gedrag',
+      positive_tests: () => '/landelijk/positieve-testen',
+      disabled_care: () => '/landelijk/gehandicaptenzorg',
+      elderly_at_home: () => '/landelijk/thuiswonende-70-plussers',
+      coronamelder_app: () => '/landelijk/coronamelder',
+      infectious_people: () => '/landelijk/besmettelijke-mensen',
+      general_practitioner_suspicions: () => '/landelijk/klachten-bij-huisartsen',
+    },
+
+    gm: {
+      positive_tests: (code: string) => `/gemeente/${code}/positieve-testen`,
+      mortality: (code: string) => `/gemeente/${code}/sterfte`,
+    },
+
+    dataExplained: {
+      nursing_home_care: () => '/verantwoording/kwetsbare-groepen-en-70-plussers',
+      pressure_on_health_care: () => '/verantwoording/druk-op-de-zorg-verzuimcijfers-nza',
+      reproduction_number: () => '/verantwoording/reproductiegetal',
+      compliance: () => '/verantwoording/gedrag',
+      positive_tests: () => '/verantwoording/positieve-testen',
+      mortality: () => '/verantwoording/sterfte-rivm',
+      disabled_care: () => '/verantwoording/gehandicaptenzorg',
+      elderly_at_home: () => '/verantwoording/thuiswonende-70-plussers',
+      contact_research: () => '/verantwoording/bron-en-contactonderzoek-ggd-en',
+      coronamelder_app: () => '/verantwoording/coronamelder',
+      vaccinations: () => '/verantwoording/leveringen-en-voorraden-vaccins-and-vaccinatiebereidheid',
+      contagious_people: () => '/verantwoording/besmettelijke-mensen',
+      patients_with_complaints: () => '/verantwoording/patienten-met-klachten-bij-de-huisarts',
+    },
+  } as const;
+
+  return archivedPaths;
+}

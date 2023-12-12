@@ -1,5 +1,5 @@
-import { defineField, defineType } from 'sanity';
 import { DATE_FORMAT, SEVERITY_LEVELS_LIST, thermometerLevelPreviewMedia } from '../../../../studio/constants';
+import { defineField, defineType } from 'sanity';
 
 export const thermometerTimelineEvent = defineType({
   name: 'thermometerTimelineEvent',

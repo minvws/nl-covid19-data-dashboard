@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
-import { SEVERITY_LEVELS_LIST, thermometerLevelPreviewMedia } from '../../../../studio/constants';
 import { localeStringValidation } from '../../../../studio/validation/locale-validation';
+import { SEVERITY_LEVELS_LIST, thermometerLevelPreviewMedia } from '../../../../studio/constants';
 
 export const thermometerLevel = defineType({
   type: 'document',

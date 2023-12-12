@@ -19,7 +19,7 @@ export const pagesStructureItem = (S: StructureBuilder, context: StructureResolv
   return (
     S.listItem()
       .id('dashboard-paginas')
-      .title("Dashboard pagina's")
+      .title("Dashboard data pagina's")
       .icon(BsBook)
       // @ts-expect-error - The below code works like a charm and creates list items accordingly.
       // The old CMS would also face challenges here, but does not report this as such given the TS implementation.

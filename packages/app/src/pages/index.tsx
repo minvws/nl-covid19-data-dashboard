@@ -16,8 +16,9 @@ import { TopicalSectionHeader } from '~/domain/topical/components/topical-sectio
 import { TopicalThemeHeader } from '~/domain/topical/components/topical-theme-header';
 import { Languages, SiteText } from '~/locale';
 import { getArticleParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getThermometerStructureQuery } from '~/queries/get-thermometer-structure-query';
 import { getTopicalStructureQuery } from '~/queries/get-topical-structure-query';
-import { TopicalSanityData } from '~/queries/query-types';
+import { ThermometerConfig, TopicalSanityData } from '~/queries/query-types';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
 import { space } from '~/style/theme';
@@ -40,17 +41,20 @@ export const getStaticProps = createGetStaticProps(
     const { content } = await createGetContent<{
       parts: PagePartQueryResult<ArticleParts | LinkParts | RichTextParts>;
       topicalStructure: TopicalSanityData;
+      thermometerStructure: ThermometerConfig;
     }>((context) => {
       const { locale } = context;
       return `{
         "parts": ${getPagePartsQuery('topical_page')},
-        "topicalStructure": ${getTopicalStructureQuery(locale)}
+        "topicalStructure": ${getTopicalStructureQuery(locale)},
+        "thermometerStructure": ${getThermometerStructureQuery(locale)}
       }`;
     })(context);
     return {
       content: {
         articles: getArticleParts(content.parts.pageParts, 'topicalPageArticles')?.articles,
         topicalStructure: content.topicalStructure,
+        thermometerStructure: content.thermometerStructure,
       },
     };
   }
@@ -59,9 +63,9 @@ export const getStaticProps = createGetStaticProps(
 const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, content, lastGenerated } = props;
 
-  const { topicalStructure } = content;
+  const { topicalStructure, thermometerStructure } = content;
 
-  const { topicalConfig, thermometer, kpiThemes, weeklySummary, advice } = topicalStructure;
+  const { topicalConfig, kpiThemes, weeklySummary, advice } = topicalStructure;
 
   const { textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
@@ -77,7 +81,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     md: `repeat(3, 1fr)`,
   };
 
-  const { currentSeverityLevel, currentSeverityLevelTexts } = getThermometerSeverityLevels(thermometer);
+  const { currentSeverityLevel, currentSeverityLevelTexts } = getThermometerSeverityLevels(thermometerStructure);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
