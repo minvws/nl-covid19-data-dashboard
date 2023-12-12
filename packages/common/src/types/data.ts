@@ -1192,9 +1192,9 @@ export interface NlDeceasedCbs {
 }
 export interface NlDeceasedCbsValue {
   registered: number;
-  expected: number;
-  expected_min: number;
-  expected_max: number;
+  expected: number | null;
+  expected_min: number | null;
+  expected_max: number | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;

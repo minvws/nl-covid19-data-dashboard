@@ -24,13 +24,13 @@
           "type": "integer"
         },
         "expected": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "expected_min": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "expected_max": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "date_start_unix": {
           "type": "integer"
