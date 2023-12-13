@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [ 18 ]
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
