@@ -21,7 +21,7 @@
     "ts-node": "^10.9.1"
   },
   "scripts": {
-    "prepare-release": "ts-node src/release/prepare-release.ts",
+    "prepare-release": "node --loader ts-node/esm src/release/prepare-release.ts",
     "bootstrap": "yarn generate-data-types",
     "clean": "echo 'No clean command available for @corona-dashboard/cli'",
     "nuke": "yarn clean && npx rimraf node_modules",
@@ -36,7 +36,7 @@
     "validate-json-single": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-json-single.ts",
     "validate-last-values": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-last-values.ts",
     "generate-data-types": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/generate-data-types.ts",
-    "generate-data-structures": "ts-node src/scripts/generate-data-structures.ts"
+    "generate-data-structures": "node --loader ts-node/esm src/scripts/generate-data-structures.ts"
   },
   "devDependencies": {
     "@types/node": "^16.11.11",
