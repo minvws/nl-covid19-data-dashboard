@@ -25,7 +25,7 @@ interface VariantsStackedAreaTileProps {
 }
 
 export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata }: VariantsStackedAreaTileProps) => {
-  const [variantTimeframe, setVariantTimeframe] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
+  const [variantStackedAreaTimeframe, setVariantStackedAreaTimeframe] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
 
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
 
@@ -55,7 +55,7 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
       metadata={metadata}
       timeframeOptions={TimeframeOptionsList}
       timeframeInitialValue={TimeframeOption.THREE_MONTHS}
-      onSelectTimeframe={setVariantTimeframe}
+      onSelectTimeframe={setVariantStackedAreaTimeframe}
     >
       <InteractiveLegend helpText={text.legend_help_tekst} selectOptions={selectOptions} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer marginBottom={space[2]} />
@@ -64,7 +64,7 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
           key: 'variants_stacked_area_over_time_chart',
         }}
         values={values}
-        timeframe={variantTimeframe}
+        timeframe={variantStackedAreaTimeframe}
         seriesConfig={filteredConfig}
         disableLegend
         dataOptions={{
