@@ -15,7 +15,6 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout, NlLayout } from '~/domain/layout';
 import {
   Autumn2022ShotCoveragePerAgeGroup,
-  CampaignBanner,
   VaccinationsKpiHeader,
   VaccinationsOverTimeTile,
   VaccinationsShotKpiSection,
@@ -224,12 +223,6 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               date: { start: currentData.vaccine_administered_last_timeframe.date_start_unix, end: currentData.vaccine_administered_last_timeframe.date_end_unix },
               obtainedAt: currentData.vaccine_administered_last_timeframe.date_of_insertion_unix,
             }}
-          />
-
-          <CampaignBanner
-            title={textNl.vaccine_campaigns.autumn_2023.campaign_banner.title}
-            description={textNl.vaccine_campaigns.autumn_2023.campaign_banner.description}
-            altText={textNl.vaccine_campaigns.autumn_2023.campaign_banner.alt}
           />
 
           <PrimarySeriesKpiHeader
