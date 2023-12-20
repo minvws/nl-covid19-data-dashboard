@@ -1,3 +1,4 @@
 timestamp,action,key,document_id,move_to
-2023-12-06T14:06:27.293Z,add,pages.hospitals_and_care_page.nl.icu.chart_beds_occupied.legend_inaccurate_labels,CFKdIPVDhosWzjhr2xUv19,__
-2023-12-06T14:06:27.294Z,delete,pages.hospitals_and_care_page.nl.icu.chart_beds_occupied.legend_inaccurate_label,PKXdxxxKAnTg0F1ZCrIxVz,__
+2023-12-19T13:35:17.504Z,delete,pages.vaccinations_page.nl.vaccine_campaigns.autumn_2023.campaign_banner.alt,fQMSbwQpEgDbjt4uWKBe2g,__
+2023-12-19T13:35:17.505Z,delete,pages.vaccinations_page.nl.vaccine_campaigns.autumn_2023.campaign_banner.description,nX27LJrkVpILF9ToyJf7OI,__
+2023-12-19T13:35:17.505Z,delete,pages.vaccinations_page.nl.vaccine_campaigns.autumn_2023.campaign_banner.title,fQMSbwQpEgDbjt4uWGfKig,__
