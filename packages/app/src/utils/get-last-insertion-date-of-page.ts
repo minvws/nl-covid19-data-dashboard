@@ -73,3 +73,4 @@ export function getLastInsertionDateOfPage(
     return Math.max(metricDate, lastDate);
   }, 0);
 };
+
