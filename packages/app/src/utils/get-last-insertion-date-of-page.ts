@@ -55,9 +55,7 @@ function getMetricDate(metricOrUnixDate: any): number {
 
 export function getLastInsertionDateOfPage(data: unknown, pageMetrics: string[]) {
   const metricsAvailableInData: string[] = pageMetrics.filter((metricProperty) => {
-    if (get(data, metricProperty) !== undefined) {
-      return metricProperty;
-    }
+    return typeof get(data, metricProperty) === 'number';
   });
 
   if (metricsAvailableInData.length === 0) {
