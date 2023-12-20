@@ -60,7 +60,7 @@ export function getLastInsertionDateOfPage(
   pageMetrics: string[]
 ) {
   const metricsAvailableInData: string[] = pageMetrics.filter((metricProperty) => {
-    return typeof get(data, metricProperty) === 'number';
+    return typeof get(data, metricProperty) !== 'undefined';
   });
 
   if (metricsAvailableInData.length === 0) {
