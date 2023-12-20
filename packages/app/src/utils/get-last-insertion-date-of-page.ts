@@ -54,17 +54,17 @@ function getMetricDate(metricOrUnixDate: any): number {
 }
 
 export function getLastInsertionDateOfPage(data: unknown, pageMetrics: string[]) {
-  const foundMetrics: string[] = pageMetrics.filter((metricProperty) => {
+  const metricsAvailableInData: string[] = pageMetrics.filter((metricProperty) => {
     if (get(data, metricProperty) !== undefined) {
       return metricProperty;
     }
   });
 
-  if (foundMetrics?.length === 0) {
+  if (metricsAvailableInData.length === 0) {
     throw new Error(`Pagemetrics not found in data`);
   }
 
-  return foundMetrics.reduce((lastDate, metricProperty) => {
+  return metricsAvailableInData.reduce((lastDate, metricProperty) => {
     const metric: any = get(data, metricProperty);
     const metricDate = getMetricDate(metric);
 
