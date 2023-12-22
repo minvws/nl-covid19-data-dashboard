@@ -4,17 +4,15 @@ import { getLastInsertionDateOfPage } from '../get-last-insertion-date-of-page';
 
 const GetLastDateOfInsertion = suite('getLastInsertionDateOfPage');
 
-GetLastDateOfInsertion('returns zero when data is empty', () => {
-  const result = getLastInsertionDateOfPage({}, ['key1']);
-  assert.is(result, 0);
+GetLastDateOfInsertion('returns error when data is empty', () => {
+  assert.throws(() => getLastInsertionDateOfPage({}, ['key1']), /Pagemetrics not found in data/)
 });
 
-GetLastDateOfInsertion('returns zero when metrics are empty', () => {
-  const result = getLastInsertionDateOfPage(
-    { key1: { last_value: { date_of_insertion_unix: 123 } } },
-    []
-  );
-  assert.is(result, 0);
+GetLastDateOfInsertion('returns error when metrics are empty', () => {
+    assert.throws(() => getLastInsertionDateOfPage(
+        { key1: { last_value: { date_of_insertion_unix: 123 } } },
+        []
+      ), /Pagemetrics not found in data/);
 });
 
 GetLastDateOfInsertion('returns the max date_of_insertion_unix', () => {
