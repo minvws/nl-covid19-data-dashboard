@@ -59,7 +59,7 @@ export const VariantsStackedBarChartTile = ({ title, description, tooltipLabels,
       timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
       onSelectTimeframe={setVariantTimeFrame}
     >
-      <InteractiveLegend helpText={text.legend_help_text} selectOptions={interactiveLegendOptions} selection={list} onToggleItem={toggle} onReset={clear} />
+      <InteractiveLegend helpText={text.legend_help_text} selectOptions={interactiveLegendOptions.reverse()} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer marginBottom={space[2]} />
       <TimeSeriesChart
         accessibility={{

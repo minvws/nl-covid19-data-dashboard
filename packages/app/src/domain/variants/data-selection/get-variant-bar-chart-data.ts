@@ -20,7 +20,7 @@ export function getVariantBarChartData(variants: NlVariants) {
     return EMPTY_VALUES;
   }
 
-  const sortedVariants = variants.values.sort((a, b) => b.last_value.order - a.last_value.order);
+  const sortedVariants = variants.values.sort((a, b) => a.last_value.order - b.last_value.order);
 
   const firstVariantInList = sortedVariants.shift();
 
