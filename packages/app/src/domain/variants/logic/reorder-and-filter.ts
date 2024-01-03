@@ -36,7 +36,7 @@ export const reorderAndFilter = <T, P>(context: TooltipData<VariantChartValue & 
         return 0;
       }
     })
-  );
+  ) as VariantChartValue;
 
   /**
    * Generate filtered tooltip context.
