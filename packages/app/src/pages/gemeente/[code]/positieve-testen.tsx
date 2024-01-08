@@ -79,7 +79,7 @@ export const getStaticProps = createGetStaticProps(
 
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedGmData: data, selectedArchivedGmData: archivedData, archivedChoropleth, municipalityName, content, lastGenerated } = props;
-  const [positivelyTestedPeopleTimeframe, setpositivelyTestedPeopleTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
+  const [positivelyTestedPeopleTimeframe, setpositivelyTestedPeopleTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);

@@ -78,7 +78,7 @@ export const getStaticProps = createGetStaticProps(
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedArchivedNlData: data, archivedChoropleth, content, lastGenerated } = props;
 
-  const [confirmedCasesInfectedTimeframe, setConfirmedCasesInfectedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
+  const [confirmedCasesInfectedTimeframe, setConfirmedCasesInfectedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const [confirmedCasesInfectedPercentageTimeframe, setConfirmedCasesInfectedPercentageTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 

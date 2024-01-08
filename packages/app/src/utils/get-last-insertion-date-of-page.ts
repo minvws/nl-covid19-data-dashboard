@@ -59,10 +59,18 @@ export function getLastInsertionDateOfPage(
   data: unknown,
   pageMetrics: string[]
 ) {
-  return pageMetrics.reduce((lastDate, metricProperty) => {
+  const metricsAvailableInData: string[] = pageMetrics.filter((metricProperty) => {
+    return typeof get(data, metricProperty) !== 'undefined';
+  });
+
+  if (metricsAvailableInData.length === 0) {
+    throw new Error(`Pagemetrics not found in data`);
+  }
+
+  return metricsAvailableInData.reduce((lastDate, metricProperty) => {
     const metric: any = get(data, metricProperty);
     const metricDate = getMetricDate(metric);
-    
     return Math.max(metricDate, lastDate);
   }, 0);
 };
+
