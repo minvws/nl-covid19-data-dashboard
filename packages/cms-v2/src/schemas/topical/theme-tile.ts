@@ -9,15 +9,6 @@ export const themeTile = {
   name: 'themeTile',
   fieldsets: [
     {
-      title: 'Thema tegeldatum-configuratie',
-      name: 'theme-tile-date-config',
-      description: 'Klik op het label om de velden te tonen.',
-      options: {
-        collapsible: true,
-        collapsed: true,
-      },
-    },
-    {
       title: 'KPI Waarde',
       name: 'kpiValue',
     },
