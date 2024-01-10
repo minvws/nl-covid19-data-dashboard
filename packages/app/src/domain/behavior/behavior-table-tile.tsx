@@ -47,6 +47,11 @@ export const BehaviorTableTile = ({ title, description, value, annotation, setCu
           }}
           tableData={behaviorsTableData}
           percentageData={percentageData}
+          tableColumnWidths={{
+            labelColumn: '35%',
+            percentageColumn: '20%',
+            percentageBarColumn: '30%',
+          }}
         />
       ) : (
         <NarrowTable tableData={behaviorsTableData} percentageData={percentageData} headerText={text.basisregels.header_basisregel} />
