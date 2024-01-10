@@ -113,20 +113,11 @@ interface MetadataItemProps {
 }
 
 function MetadataItem({ icon, label, items, referenceLink, accessibilityText, accessibilitySubject }: MetadataItemProps) {
-  const { commonTexts } = useIntl();
-
   return (
     <Box display="flex" alignItems="flex-start" color={colors.gray7}>
       <Icon>{icon}</Icon>
 
       <Text variant="label1">
-        {referenceLink && !items && (
-          <Link href={referenceLink} passHref>
-            <Anchor underline display="inline-block">
-              {commonTexts.informatie_header.meer_informatie_link} <ChevronRight width={space[2]} height={space[2]} />
-            </Anchor>
-          </Link>
-        )}
         {items && referenceLink && (
           <>
             {`${label}: `}
