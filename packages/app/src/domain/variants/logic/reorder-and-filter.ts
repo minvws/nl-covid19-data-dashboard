@@ -19,37 +19,35 @@ const hasMetricProperty = (config: any): config is { metricProperty: string } =>
 export const reorderAndFilter = <T, P>(context: TooltipData<VariantChartValue & T>, selectionOptions: P[]) => {
   const filterSelectionActive = context.config.length !== selectionOptions.length; // Check whether the user has selected any variants from the interactive legend.
 
-  /* Filter out any variants that have an occcurrence value of 0 */
+  // If the user has no filter selected -> Filter out any variants that have an occurrence value of 0
   const valuesFromContext = Object.fromEntries(
     Object.entries(context.value).filter(([key, value]) => (key.includes('occurrence') ? value !== 0 && isPresent(value) && !isNaN(Number(value)) : value))
   ) as VariantChartValue;
 
-  const sortedValuesFromContext = Object.fromEntries(
-    Object.entries(valuesFromContext).sort((a, b) => {
-      if (a[0].includes('occurrence') && typeof a[1] === 'number') {
-        if (a[0] === b[0]) {
-          return 0;
-        } else {
-          return a[0] < b[0] ? -1 : 1;
-        }
-      } else {
-        return 0;
-      }
+  // If the user has no filter selected -> Filter out configs that do not contain a 'metricProperty' key OR have an occurrence value of 0
+  const filteredConfigs = context.config
+    .filter((value) => {
+      return !hasMetricProperty(value) || valuesFromContext[value.metricProperty] || filterSelectionActive;
     })
-  ) as VariantChartValue;
+    .filter(isDefined);
 
-  /**
-   * Generate filtered tooltip context.
-   * If user has selected any variants to filter:
-   *  - return all properties from context config
-   * If user has not selected any variants to filter:
-   *  return only properties from context config that are either:
-   *    - Do NOT contain key 'metricProperty'
-   *    - Do contain key 'metricProperty' and it's value matches with keyname in valuesFromContext object
-   */
+  // Sort variants by occurrence
+  const sortedConfigs = filteredConfigs.sort((a: any, b: any) => {
+    return context.value[b.metricProperty] - context.value[a.metricProperty];
+  });
+
+  // Move config entry 'other variants' to end
+  sortedConfigs.push(
+    sortedConfigs.splice(
+      sortedConfigs.map((configEntry: any) => configEntry.metricProperty).findIndex((e) => e === 'other_variants_percentage' || e === 'other_variants_occurrence'),
+      1
+    )[0]
+  );
+
+  // Generate filtered tooltip context
   const reorderContext = {
     ...context,
-    config: [...context.config.filter((value) => !hasMetricProperty(value) || sortedValuesFromContext[value.metricProperty] || filterSelectionActive)].filter(isDefined),
+    config: sortedConfigs.filter(isDefined),
     value: !filterSelectionActive ? valuesFromContext : context.value,
   };
 
