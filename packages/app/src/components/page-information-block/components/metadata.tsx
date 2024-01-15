@@ -140,6 +140,7 @@ function MetadataItem({ icon, label, items, referenceLink, accessibilityText, ac
                 {item.href && (
                   <ExternalLink
                     href={item.href}
+                    underline="hover"
                     ariaLabel={
                       accessibilityText && accessibilitySubject
                         ? replaceVariablesInText(accessibilityText, {
