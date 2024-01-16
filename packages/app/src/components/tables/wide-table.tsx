@@ -5,18 +5,18 @@ import { PercentageData } from './components/wide-percentage-data';
 import { Cell, HeaderCell, Table, TableHead } from './components/shared-styled-components';
 import { CommonTableProps } from './types';
 
-export const tableColumnWidths = {
+interface WideTableProps extends CommonTableProps {
+  headerText: { [key: string]: string };
+}
+
+const defaultColumnWidths = {
   labelColumn: '30%',
   percentageColumn: '20%',
   percentageBarColumn: '30%',
 };
 
-interface WideTableProps extends CommonTableProps {
-  headerText: { [key: string]: string };
-}
-
 // Component shown for tables on wide screens.
-export const WideTable = ({ tableData, headerText, percentageData }: WideTableProps) => {
+export const WideTable = ({ tableData, headerText, tableColumnWidths = defaultColumnWidths, percentageData }: WideTableProps) => {
   return (
     <Box overflow="auto">
       <Table>
@@ -47,7 +47,7 @@ export const WideTable = ({ tableData, headerText, percentageData }: WideTablePr
               <Cell minWidth={tableColumnWidths.labelColumn} border="0">
                 {item.firstColumnLabel}
               </Cell>
-              <PercentageData percentageDataPoints={percentageData[tableDataIndex]} key={`wide-${item.id}-${tableDataIndex}`} />
+              <PercentageData columnWidths={tableColumnWidths} percentageDataPoints={percentageData[tableDataIndex]} key={`wide-${item.id}-${tableDataIndex}`} />
             </Row>
           ))}
         </tbody>

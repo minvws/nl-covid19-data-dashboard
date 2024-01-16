@@ -3,6 +3,12 @@ import { BehaviorTrendType } from '~/domain/behavior/logic/behavior-types';
 
 type TrendDirection = BehaviorTrendType | null;
 
+export type TableColumnWidths = {
+  labelColumn: string;
+  percentageColumn: string;
+  percentageBarColumn: string;
+};
+
 export type PercentageDataPoint = {
   title: string;
   trendDirection?: TrendDirection;
@@ -34,6 +40,7 @@ export interface TableData extends BaseTableData {
 export type BaseCoverageTable = BaseTableData;
 
 export interface CommonTableProps {
+  tableColumnWidths?: TableColumnWidths;
   tableData: SingleCoverageTableData[] | TableData[];
   percentageData: PercentageDataPoint[][];
 }

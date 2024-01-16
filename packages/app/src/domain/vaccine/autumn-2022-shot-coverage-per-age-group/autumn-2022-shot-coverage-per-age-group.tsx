@@ -51,6 +51,11 @@ export const Autumn2022ShotCoveragePerAgeGroup = ({ title, description, metadata
           }}
           tableData={sortedData}
           percentageData={percentageData}
+          tableColumnWidths={{
+            labelColumn: '10%',
+            percentageColumn: '20%',
+            percentageBarColumn: '30%',
+          }}
         />
       ) : (
         <NarrowTable headerText={text.headers.agegroup} tableData={sortedData} percentageData={percentageData} />
