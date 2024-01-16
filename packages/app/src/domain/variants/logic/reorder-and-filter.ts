@@ -32,23 +32,11 @@ export const reorderAndFilter = <T, P>(context: TooltipData<VariantChartValue & 
     .filter(isDefined);
 
   // Sort variants by occurrence, always put 'other variants' at the end
-  // Todo: add user defined type guard to a and b
   const sortedConfigs = filteredConfigs.sort((a: any, b: any) => {
     if (a.metricProperty.includes('other_variants')) return 1;
     if (b.metricProperty.includes('other_variants')) return -1;
     return context.value[b.metricProperty] - context.value[a.metricProperty];
   });
-
-  /**
-   * {
-   *   "type": "stacked-bar",
-   *   "metricProperty": "JN_1_occurrence",
-   *   "color": "#C80000",
-   *   "label": "Omikron JN.1",
-   *   "fillOpacity": 1,
-   *   "shape": "gapped-area"
-   * }
-   */
 
   // Generate filtered tooltip context
   const reorderContext = {
