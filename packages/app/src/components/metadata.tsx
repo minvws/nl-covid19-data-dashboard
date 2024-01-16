@@ -6,6 +6,8 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from './base';
 import { InlineText, Text } from './typography';
 import { Markdown } from '~/components/markdown';
+import { External as ExternalLinkIcon } from '@corona-dashboard/icons';
+import React from 'react';
 
 type source = {
   text: string;
@@ -59,6 +61,7 @@ export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, m
           {`${dateString} - ${commonTexts.common.metadata.source}: `}
           <ExternalLink ariaLabel={source.aria_text} href={source.href}>
             {source.text}
+            <ExternalLinkIcon width={space[3]} height={space[2]} />
           </ExternalLink>
         </Text>
       )}

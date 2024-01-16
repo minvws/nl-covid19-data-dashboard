@@ -6,6 +6,7 @@ import { Anchor } from '~/components/typography';
 import { fontWeights, mediaQueries, space } from '~/style/theme';
 import { BehaviorIdentifier } from '../logic/behavior-types';
 import { BehaviorIcon } from './behavior-icon';
+import { ChevronRight } from '@corona-dashboard/icons';
 
 type ScrollRef = { current: HTMLDivElement | null };
 
@@ -33,8 +34,9 @@ export const BehaviorIconWithLabel = ({ id, description, onClickConfig }: Behavi
       </Box>
 
       <BehaviorAnchor as="button" underline="hover" color={colors.black} onClick={() => anchorButtonClickHandler(id, onClickConfig.scrollRef)}>
-        <Box as="span" display="flex" alignItems="center" textAlign="left" flexWrap="wrap">
+        <Box as="span" display="flex" alignItems="center" textAlign="left" flexWrap="wrap" gridColumnGap={space[1]}>
           {description}
+          <ChevronRight width={space[2]} height={space[2]} />
         </Box>
       </BehaviorAnchor>
     </Box>
