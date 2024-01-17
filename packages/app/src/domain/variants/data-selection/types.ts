@@ -9,6 +9,11 @@ export type ColorMatch = {
   color: string;
 };
 
+export type OrderMatch = {
+  variant: VariantCode;
+  order: number;
+};
+
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
 export type VariantChartValue = {

@@ -18,7 +18,7 @@ import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-p
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { useState } from 'react';
-import { getArchivedVariantChartData, getVariantBarChartData, getVariantOrderColors, getVariantTableData } from '~/domain/variants/data-selection';
+import { getArchivedVariantChartData, getVariantBarChartData, getVariantOrderColors, getVariantOrders, getVariantTableData } from '~/domain/variants/data-selection';
 import { VariantsStackedAreaTile, VariantsStackedBarChartTile, VariantsTableTile } from '~/domain/variants';
 import { VariantDynamicLabels } from '~/domain/variants/data-selection/types';
 import { NlVariantsVariant } from '@corona-dashboard/common';
@@ -51,11 +51,14 @@ export const getStaticProps = createGetStaticProps(
 
     const variantColors = getVariantOrderColors(variants);
 
+    const variantOrders = getVariantOrders(variants);
+
     return {
       ...getVariantTableData(variants, data.selectedNlData.named_difference, variantColors),
       ...getVariantBarChartData(variants),
       ...getArchivedVariantChartData(variants_archived_20231101),
       variantColors,
+      variantOrders,
     };
   },
   async (context: GetStaticPropsContext) => {
@@ -83,6 +86,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
     variantChart,
     archivedVariantChart,
     variantColors,
+    variantOrders,
     dates,
   } = props;
 
@@ -173,6 +177,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               values={variantChart}
               variantLabels={variantLabels}
               variantColors={variantColors}
+              variantOrders={variantOrders}
               metadata={{
                 datumsText: textNl.datums,
                 date: getLastInsertionDateOfPage(data, ['variants']),

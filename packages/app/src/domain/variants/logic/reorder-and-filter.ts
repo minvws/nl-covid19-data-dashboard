@@ -35,6 +35,7 @@ export const reorderAndFilter = <T, P>(context: TooltipData<VariantChartValue & 
   const sortedConfigs = filteredConfigs.sort((a: any, b: any) => {
     if (a.metricProperty.includes('other_variants')) return 1;
     if (b.metricProperty.includes('other_variants')) return -1;
+    if (context.value[a.metricProperty] === context.value[b.metricProperty]) return b.order - a.order;
     return context.value[b.metricProperty] - context.value[a.metricProperty];
   });
 
