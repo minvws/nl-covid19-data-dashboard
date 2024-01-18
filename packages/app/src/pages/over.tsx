@@ -1,17 +1,18 @@
-import Head from 'next/head';
-import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ContentImage } from '~/components/cms/content-image';
-import { RichContent } from '~/components/cms/rich-content';
+import { ContentLayout } from '~/domain/layout/content-layout';
+import { createGetContent, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Heading } from '~/components/typography';
-import { ContentLayout } from '~/domain/layout/content-layout';
-import { Layout } from '~/domain/layout/layout';
-import { useIntl } from '~/intl';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate } from '~/static-props/get-data';
-import { mediaQueries, sizes, space } from '~/style/theme';
 import { ImageBlock, RichContentBlock } from '~/types/cms';
+import { Layout } from '~/domain/layout/layout';
+import { mediaQueries, sizes, space } from '~/style/theme';
+import { RichContent } from '~/components/cms/rich-content';
+import { useIntl } from '~/intl';
+import Head from 'next/head';
+import styled from 'styled-components';
+
 interface OverData {
   title: string | null;
   intro: RichContentBlock[];
@@ -66,7 +67,7 @@ const Over = (props: StaticProps<typeof getStaticProps>) => {
           <link key="dc-type" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" />
           <link key="dc-type-title" rel="dcterms:type" href="https://standaarden.overheid.nl/owms/terms/webpagina" title="webpagina" />
         </Head>
-        <Box paddingBottom={space[5]}>
+        <Box id="content" paddingBottom={space[5]}>
           <Box marginBottom={space[4]} maxWidth={sizes.maxWidthText}>
             <Heading variant="h2" level={1}>
               {content.title}

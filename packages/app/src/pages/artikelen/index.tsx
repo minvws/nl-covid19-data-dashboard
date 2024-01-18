@@ -1,23 +1,23 @@
-import { colors } from '@corona-dashboard/common';
-import { useRouter } from 'next/router';
-import { useCallback, useMemo } from 'react';
-import styled from 'styled-components';
+import { ArticleCategoryType, allPossibleArticleCategories } from '~/domain/topical/common/categories';
+import { ArticlesList } from '~/components/articles/articles-list';
 import { ArticleSummary } from '~/components/articles/article-teaser';
 import { Box } from '~/components/base';
-import { MaxWidth } from '~/components/max-width';
-import { RichContentSelect } from '~/components/rich-content-select';
-import { Heading, InlineText, Text } from '~/components/typography';
-import { ArticlesList } from '~/components/articles/articles-list';
-import { Layout } from '~/domain/layout/layout';
-import { ArticleCategoryType, allPossibleArticleCategories } from '~/domain/topical/common/categories';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
+import { colors } from '@corona-dashboard/common';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
-import { mediaQueries, space } from '~/style/theme';
-import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { getCategories } from '~/components/articles/logic/get-categories';
+import { Heading, InlineText, Text } from '~/components/typography';
+import { Languages, SiteText } from '~/locale';
+import { Layout } from '~/domain/layout/layout';
+import { MaxWidth } from '~/components/max-width';
+import { mediaQueries, space } from '~/style/theme';
+import { RichContentSelect } from '~/components/rich-content-select';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useCallback, useMemo } from 'react';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { useIntl } from '~/intl';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textShared: siteText.pages.topical_page.shared,
@@ -99,7 +99,7 @@ const Articles = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...commonTexts.articles_metadata} lastGenerated={lastGenerated}>
-      <Box as="section" backgroundColor="white" paddingY={{ _: space[4], md: space[5] }}>
+      <Box id="content" as="section" backgroundColor="white" paddingY={{ _: space[4], md: space[5] }}>
         <MaxWidth paddingX={{ _: space[3], lg: space[4] }}>
           <Box paddingBottom={space[2]}>
             <Heading level={2} as="h1">
