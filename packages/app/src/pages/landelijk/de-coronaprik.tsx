@@ -36,15 +36,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery, getRichTextParts } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import {
-  createGetArchivedChoroplethData,
-  createGetContent,
-  getArchivedNlData,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectArchivedNlData,
-  selectNlData,
-} from '~/static-props/get-data';
+import { createGetArchivedChoroplethData, createGetContent, getArchivedNlData, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -75,7 +67,6 @@ const pageMetrics = [
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData(),
   selectArchivedNlData(
     'vaccine_administered_doctors_archived_20220324',
     'vaccine_administered_hospitals_and_care_institutions_archived_20220324',
@@ -140,7 +131,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
-  const { content, archivedChoropleth, selectedNlData: currentData, selectedArchivedNlData: archivedData, lastGenerated, administrationData } = props;
+  const { content, archivedChoropleth, selectedArchivedNlData: archivedData, lastGenerated, administrationData } = props;
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
 
@@ -171,7 +162,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
   const hasActiveWarningTile = textNl.belangrijk_bericht && !isEmpty(textNl.belangrijk_bericht);
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(currentData, pageMetrics);
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
