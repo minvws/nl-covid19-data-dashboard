@@ -52,8 +52,8 @@
     "corona_melder_app_warning_archived_20220421",
     "corona_melder_app_download_archived_20220421",
     "infectious_people_archived_20210709",
-    "vaccine_campaigns_archived_20241701",
-    "vaccine_administered_last_timeframe_archived_20241701"
+    "vaccine_campaigns_archived_20240117",
+    "vaccine_administered_last_timeframe_archived_20240117"
   ],
   "additionalProperties": false,
   "properties": {
@@ -204,10 +204,10 @@
     "infectious_people_archived_20210709": {
       "$ref": "infectious_people.json"
     },
-    "vaccine_administered_last_timeframe_archived_20241701": {
+    "vaccine_administered_last_timeframe_archived_20240117": {
       "$ref": "vaccine_administered_last_timeframe.json"
     },
-    "vaccine_campaigns_archived_20241701": {
+    "vaccine_campaigns_archived_20240117": {
       "$ref": "vaccine_campaigns.json"
     }
   },

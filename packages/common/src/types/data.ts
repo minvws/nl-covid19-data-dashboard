@@ -236,8 +236,8 @@ export interface ArchivedNl {
   corona_melder_app_warning_archived_20220421: ArchivedNlCoronaMelderAppWarning;
   corona_melder_app_download_archived_20220421: ArchivedNlCoronaMelderAppDownload;
   infectious_people_archived_20210709: ArchivedNlInfectiousPeople;
-  vaccine_administered_last_timeframe_archived_20241701: ArchivedNlVaccineAdministeredLastTimeframe;
-  vaccine_campaigns_archived_20241701: ArchivedNlVaccineCampaign;
+  vaccine_administered_last_timeframe_archived_20240117: ArchivedNlVaccineAdministeredLastTimeframe;
+  vaccine_campaigns_archived_20240117: ArchivedNlVaccineCampaign;
 }
 export interface ArchivedNlDifference {
   deceased_rivm__covid_daily_archived_20221231: DifferenceInteger;
@@ -894,6 +894,31 @@ export interface ArchivedNlInfectiousPeopleValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
+export interface ArchivedNlVaccineAdministeredLastTimeframe {
+  vaccine_types: NlVaccineType[];
+  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineType {
+  vaccine_type_name: string;
+  vaccine_type_value: number;
+}
+export interface ArchivedNlVaccineCampaign {
+  vaccine_campaigns: ArchivedNlVaccineCampaigns[];
+  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface ArchivedNlVaccineCampaigns {
+  vaccine_campaign_order: number;
+  vaccine_campaign_name_nl: string;
+  vaccine_campaign_name_en: string;
+  vaccine_administered_total: number | null;
+  vaccine_administered_last_timeframe: number;
+}
 
 export type ArchivedVrCollectionId = 'VR_COLLECTION';
 
@@ -1198,31 +1223,6 @@ export interface NlDeceasedCbsValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
-}
-export interface ArchivedNlVaccineAdministeredLastTimeframe {
-  vaccine_types: NlVaccineType[];
-  date_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlVaccineType {
-  vaccine_type_name: string;
-  vaccine_type_value: number;
-}
-export interface ArchivedNlVaccineCampaign {
-  vaccine_campaigns: NlVaccineCampaigns[];
-  date_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlVaccineCampaigns {
-  vaccine_campaign_order: number;
-  vaccine_campaign_name_nl: string;
-  vaccine_campaign_name_en: string;
-  vaccine_administered_total: number | null;
-  vaccine_administered_last_timeframe: number;
 }
 export interface NlVariants {
   values: NlVariantsVariant[];

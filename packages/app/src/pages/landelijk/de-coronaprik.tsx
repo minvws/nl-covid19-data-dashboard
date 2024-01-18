@@ -68,8 +68,8 @@ const pageMetrics = [
   'booster_coverage_archived_20220904',
   'booster_shot_administered_archived_20220904',
   'repeating_shot_administered_20220713',
-  'vaccine_administered_last_timeframe_archived_20241701',
-  'vaccine_campaigns_archived_20241701'
+  'vaccine_administered_last_timeframe_archived_20240117',
+  'vaccine_campaigns_archived_20240117',
 ];
 
 export const getStaticProps = createGetStaticProps(
@@ -97,8 +97,8 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_delivery_per_supplier_archived_20211101',
     'vaccine_stock_archived_20211024',
     'vaccine_vaccinated_or_support_archived_20230411',
-    'vaccine_administered_last_timeframe_archived_20241701',
-    'vaccine_campaigns_archived_20241701'
+    'vaccine_administered_last_timeframe_archived_20240117',
+    'vaccine_campaigns_archived_20240117'
   ),
   () => selectAdministrationData(getArchivedNlData().data.vaccine_administered_archived_20220914),
   async (context: GetStaticPropsContext) => {
@@ -202,15 +202,15 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               {
                 title: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_last_timeframe.title,
                 description: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_last_timeframe.omschrijving,
-                value: archivedData.vaccine_campaigns_archived_20241701.vaccine_campaigns[0].vaccine_administered_last_timeframe,
-                dateOrRange: { start: archivedData.vaccine_campaigns_archived_20241701.date_start_unix, end: archivedData.vaccine_campaigns_archived_20241701.date_end_unix },
+                value: archivedData.vaccine_campaigns_archived_20240117.vaccine_campaigns[0].vaccine_administered_last_timeframe,
+                dateOrRange: { start: archivedData.vaccine_campaigns_archived_20240117.date_start_unix, end: archivedData.vaccine_campaigns_archived_20240117.date_end_unix },
                 source: textShared.bronnen.rivm,
               },
               {
                 title: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_total.title,
                 description: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_total.omschrijving,
-                value: archivedData.vaccine_campaigns_archived_20241701.vaccine_campaigns[0].vaccine_administered_total,
-                dateOrRange: archivedData.vaccine_campaigns_archived_20241701.date_unix,
+                value: archivedData.vaccine_campaigns_archived_20240117.vaccine_campaigns[0].vaccine_administered_total,
+                dateOrRange: archivedData.vaccine_campaigns_archived_20240117.date_unix,
                 source: textShared.bronnen.rivm,
               },
             ]}
@@ -219,11 +219,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           <VaccinationsPerSupplierOverLastTimeframeTile
             title={textNl.vaccinations_per_supplier_over_last_timeframe.title}
             description={textNl.vaccinations_per_supplier_over_last_timeframe.description}
-            data={archivedData.vaccine_administered_last_timeframe_archived_20241701.vaccine_types}
+            data={archivedData.vaccine_administered_last_timeframe_archived_20240117.vaccine_types}
             metadata={{
               source: textShared.bronnen.rivm,
-              date: { start: archivedData.vaccine_administered_last_timeframe_archived_20241701.date_start_unix, end: archivedData.vaccine_administered_last_timeframe_archived_20241701.date_end_unix },
-              obtainedAt: archivedData.vaccine_administered_last_timeframe_archived_20241701.date_of_insertion_unix,
+              date: {
+                start: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_start_unix,
+                end: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_end_unix,
+              },
+              obtainedAt: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_of_insertion_unix,
             }}
           />
 
