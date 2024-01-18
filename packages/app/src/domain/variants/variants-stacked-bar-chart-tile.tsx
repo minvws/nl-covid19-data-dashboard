@@ -2,7 +2,7 @@ import { ChartTile, MetadataProps, TimeSeriesChart } from '~/components';
 import { Spacer } from '~/components/base';
 import { TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { useState } from 'react';
-import { ColorMatch, VariantChartValue, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
+import { ColorMatch, OrderMatch, VariantChartValue, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
 import { useBarConfig } from '~/domain/variants/logic/use-bar-config';
 import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
 import { useList } from '~/utils/use-list';
@@ -13,13 +13,14 @@ import { reorderAndFilter } from '~/domain/variants/logic/reorder-and-filter';
 import { useIntl } from '~/intl';
 
 interface VariantsStackedBarChartTileProps {
-  title: string;
   description: string;
-  values: VariantChartValue[];
-  tooltipLabels: VariantsOverTimeGraphText;
-  variantLabels: VariantDynamicLabels;
-  variantColors: ColorMatch[];
   metadata: MetadataProps;
+  title: string;
+  tooltipLabels: VariantsOverTimeGraphText;
+  values: VariantChartValue[];
+  variantColors: ColorMatch[];
+  variantLabels: VariantDynamicLabels;
+  variantOrders: OrderMatch[];
 }
 
 const alwaysEnabled: (keyof VariantChartValue)[] = [];
@@ -35,12 +36,21 @@ const alwaysEnabled: (keyof VariantChartValue)[] = [];
  * @param metadata - Metadata block
  * @constructor
  */
-export const VariantsStackedBarChartTile = ({ title, description, tooltipLabels, values, variantLabels, variantColors, metadata }: VariantsStackedBarChartTileProps) => {
+export const VariantsStackedBarChartTile = ({
+  title,
+  description,
+  tooltipLabels,
+  values,
+  variantLabels,
+  variantColors,
+  variantOrders,
+  metadata,
+}: VariantsStackedBarChartTileProps) => {
   const today = useCurrentDate();
   const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
   const [variantTimeFrame, setVariantTimeFrame] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
-  const barSeriesConfig = useBarConfig(values, variantLabels, tooltipLabels, variantColors, variantTimeFrame, today);
+  const barSeriesConfig = useBarConfig(values, variantLabels, tooltipLabels, variantColors, variantOrders, variantTimeFrame, today);
 
   const text = commonTexts.variants_page;
 
@@ -59,7 +69,7 @@ export const VariantsStackedBarChartTile = ({ title, description, tooltipLabels,
       timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
       onSelectTimeframe={setVariantTimeFrame}
     >
-      <InteractiveLegend helpText={text.legend_help_text} selectOptions={interactiveLegendOptions} selection={list} onToggleItem={toggle} onReset={clear} />
+      <InteractiveLegend helpText={text.legend_help_text} selectOptions={interactiveLegendOptions.reverse()} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer marginBottom={space[2]} />
       <TimeSeriesChart
         accessibility={{

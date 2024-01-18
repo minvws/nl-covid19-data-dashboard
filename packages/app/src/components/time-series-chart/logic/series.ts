@@ -186,6 +186,7 @@ export interface StackedBarSeriesDefinition<T extends TimestampedValue> extends 
   shortLabel?: string;
   color: string;
   fillOpacity?: number;
+  order: number;
 }
 
 /**
