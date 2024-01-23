@@ -19,8 +19,6 @@
     "self_test_overall",
     "infectionradar_symptoms_trend_per_age_group_weekly",
     "sewer",
-    "vaccine_campaigns",
-    "vaccine_administered_last_timeframe",
     "variants"
   ],
   "additionalProperties": false,
@@ -66,12 +64,6 @@
     },
     "deceased_cbs": {
       "$ref": "deceased_cbs.json"
-    },
-    "vaccine_administered_last_timeframe": {
-      "$ref": "vaccine_administered_last_timeframe.json"
-    },
-    "vaccine_campaigns": {
-      "$ref": "vaccine_campaigns.json"
     },
     "variants": {
       "$ref": "variants.json"
