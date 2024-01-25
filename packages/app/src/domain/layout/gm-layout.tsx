@@ -77,7 +77,7 @@ export function GmLayout(props: GmLayoutProps) {
         hideBackButton={isMainRoute}
         searchComponent={
           <Box height="100%" maxWidth={{ _: '38rem', md: undefined }} marginX="auto">
-            <GmComboBox getLink={getLink} selectedGmCode={code} />
+            <GmComboBox getLink={getLink} selectedGmCode={code} shouldFocusInput={false} />
           </Box>
         }
         sidebarComponent={

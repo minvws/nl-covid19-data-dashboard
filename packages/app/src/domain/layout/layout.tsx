@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
+import { AppFooter } from '~/components/layout/app-footer';
+import { AppHeader } from '~/components/layout/app-header';
 import { Box } from '~/components/base/box';
 import { Breadcrumbs } from '~/components/breadcrumbs';
 import { BreadcrumbsDataProvider } from '~/components/breadcrumbs/logic/use-breadcrumbs';
-import { AppFooter } from '~/components/layout/app-footer';
-import { AppHeader } from '~/components/layout/app-header';
+import { CurrentDateProvider } from '~/utils/current-date-context';
 import { NotificationBanner } from '~/components/notification-banner';
+import { ReactNode } from 'react';
 import { SEOHead } from '~/components/seo-head';
 import { SkipLinkMenu } from '~/components/skip-link-menu';
 import { useIntl } from '~/intl';
-import { CurrentDateProvider } from '~/utils/current-date-context';
 
 interface LayoutProps {
   children: ReactNode;
@@ -30,12 +30,12 @@ export function Layout({ breadcrumbsData, children, title, description, openGrap
       <SkipLinkMenu
         ariaLabel={commonTexts.aria_labels.skip_links}
         links={[
-          { href: '#content', label: commonTexts.skiplinks.inhoud },
           { href: '#main-navigation', label: commonTexts.skiplinks.nav },
           {
             href: '#metric-navigation',
             label: commonTexts.skiplinks.metric_nav,
           },
+          { href: '#content', label: commonTexts.skiplinks.inhoud },
           {
             href: '#footer-navigation',
             label: commonTexts.skiplinks.footer_nav,

@@ -1,7 +1,7 @@
 import { colors } from '@corona-dashboard/common';
-import { ChevronRight, Clock, Database, MeerInformatie } from '@corona-dashboard/icons';
+import { ChevronRight, Clock, Database, External as ExternalLinkIcon, MeerInformatie } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
@@ -9,6 +9,7 @@ import { Anchor, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { space } from '~/style/theme';
 
 interface Datasource {
   href: string;
@@ -112,18 +113,11 @@ interface MetadataItemProps {
 }
 
 function MetadataItem({ icon, label, items, referenceLink, accessibilityText, accessibilitySubject }: MetadataItemProps) {
-  const { commonTexts } = useIntl();
-
   return (
-    <Box display="flex" alignItems="flex-start" color="gray7">
+    <Box display="flex" alignItems="flex-start" color={colors.gray7}>
       <Icon>{icon}</Icon>
 
       <Text variant="label1">
-        {referenceLink && !items && (
-          <Link href={referenceLink} passHref>
-            <a>{commonTexts.informatie_header.meer_informatie_link}</a>
-          </Link>
-        )}
         {items && referenceLink && (
           <>
             {`${label}: `}
@@ -146,6 +140,7 @@ function MetadataItem({ icon, label, items, referenceLink, accessibilityText, ac
                 {item.href && (
                   <ExternalLink
                     href={item.href}
+                    underline="hover"
                     ariaLabel={
                       accessibilityText && accessibilitySubject
                         ? replaceVariablesInText(accessibilityText, {
@@ -156,6 +151,7 @@ function MetadataItem({ icon, label, items, referenceLink, accessibilityText, ac
                     }
                   >
                     {item.text}
+                    <ExternalLinkIcon width={space[3]} height={space[2]} />
                   </ExternalLink>
                 )}
                 {!item.href && item.text}

@@ -36,15 +36,7 @@ import { Languages, SiteText } from '~/locale';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery, getRichTextParts } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import {
-  createGetArchivedChoroplethData,
-  createGetContent,
-  getArchivedNlData,
-  getLastGeneratedDate,
-  getLokalizeTexts,
-  selectArchivedNlData,
-  selectNlData,
-} from '~/static-props/get-data';
+import { createGetArchivedChoroplethData, createGetContent, getArchivedNlData, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
 import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -57,7 +49,6 @@ const pageMetrics = [
   'vaccine_administered_hospitals_and_care_institutions',
   'vaccine_administered_planned_archived_20231004',
   'vaccine_administered_total_archived_20220324',
-  'vaccine_administered_last_timeframe',
   'vaccine_coverage_per_age_group',
   'vaccine_coverage_archived_20220518',
   'vaccine_delivery_per_supplier_archived_20211101',
@@ -65,17 +56,17 @@ const pageMetrics = [
   'vaccine_vaccinated_or_support_archived_20230411',
   'vaccine_coverage_per_age_group_estimated_fully_vaccinated',
   'vaccine_coverage_per_age_group_estimated_autumn_2022',
-  'vaccine_campaigns',
   'vaccine_planned_archived_20220908',
   'booster_coverage_archived_20220904',
   'booster_shot_administered_archived_20220904',
   'repeating_shot_administered_20220713',
+  'vaccine_administered_last_timeframe_archived_20240117',
+  'vaccine_campaigns_archived_20240117',
 ];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectNlData('vaccine_administered_last_timeframe', 'vaccine_campaigns'),
   selectArchivedNlData(
     'vaccine_administered_doctors_archived_20220324',
     'vaccine_administered_hospitals_and_care_institutions_archived_20220324',
@@ -96,7 +87,9 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_coverage_archived_20220518',
     'vaccine_delivery_per_supplier_archived_20211101',
     'vaccine_stock_archived_20211024',
-    'vaccine_vaccinated_or_support_archived_20230411'
+    'vaccine_vaccinated_or_support_archived_20230411',
+    'vaccine_administered_last_timeframe_archived_20240117',
+    'vaccine_campaigns_archived_20240117'
   ),
   () => selectAdministrationData(getArchivedNlData().data.vaccine_administered_archived_20220914),
   async (context: GetStaticPropsContext) => {
@@ -138,7 +131,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
 
 function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
-  const { content, archivedChoropleth, selectedNlData: currentData, selectedArchivedNlData: archivedData, lastGenerated, administrationData } = props;
+  const { content, archivedChoropleth, selectedArchivedNlData: archivedData, lastGenerated, administrationData } = props;
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
 
@@ -169,7 +162,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
   const hasActiveWarningTile = textNl.belangrijk_bericht && !isEmpty(textNl.belangrijk_bericht);
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(currentData, pageMetrics);
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -200,15 +193,15 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               {
                 title: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_last_timeframe.title,
                 description: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_last_timeframe.omschrijving,
-                value: currentData.vaccine_campaigns.vaccine_campaigns[0].vaccine_administered_last_timeframe,
-                dateOrRange: { start: currentData.vaccine_campaigns.date_start_unix, end: currentData.vaccine_campaigns.date_end_unix },
+                value: archivedData.vaccine_campaigns_archived_20240117.vaccine_campaigns[0].vaccine_administered_last_timeframe,
+                dateOrRange: { start: archivedData.vaccine_campaigns_archived_20240117.date_start_unix, end: archivedData.vaccine_campaigns_archived_20240117.date_end_unix },
                 source: textShared.bronnen.rivm,
               },
               {
                 title: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_total.title,
                 description: textNl.kpi_vaccinaties_de_coronaprik.tile_amount_administered_total.omschrijving,
-                value: currentData.vaccine_campaigns.vaccine_campaigns[0].vaccine_administered_total,
-                dateOrRange: currentData.vaccine_campaigns.date_unix,
+                value: archivedData.vaccine_campaigns_archived_20240117.vaccine_campaigns[0].vaccine_administered_total,
+                dateOrRange: archivedData.vaccine_campaigns_archived_20240117.date_unix,
                 source: textShared.bronnen.rivm,
               },
             ]}
@@ -217,11 +210,14 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
           <VaccinationsPerSupplierOverLastTimeframeTile
             title={textNl.vaccinations_per_supplier_over_last_timeframe.title}
             description={textNl.vaccinations_per_supplier_over_last_timeframe.description}
-            data={currentData.vaccine_administered_last_timeframe.vaccine_types}
+            data={archivedData.vaccine_administered_last_timeframe_archived_20240117.vaccine_types}
             metadata={{
               source: textShared.bronnen.rivm,
-              date: { start: currentData.vaccine_administered_last_timeframe.date_start_unix, end: currentData.vaccine_administered_last_timeframe.date_end_unix },
-              obtainedAt: currentData.vaccine_administered_last_timeframe.date_of_insertion_unix,
+              date: {
+                start: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_start_unix,
+                end: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_end_unix,
+              },
+              obtainedAt: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_of_insertion_unix,
             }}
           />
 
