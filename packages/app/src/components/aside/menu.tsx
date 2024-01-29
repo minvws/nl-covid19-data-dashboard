@@ -16,6 +16,7 @@ import chevronUrl from '~/assets/chevron.svg';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { ArchivedPath, useArchivedPaths } from '~/utils/use-archived-paths';
+import { CategoryDropdown, CategoryDropdownRoot, CategoryListBox, CategoryListBoxOption, CategorySelectBox } from '~/components/aside/components/CategoryDropdown';
 
 type Url = UrlObject | string;
 
@@ -55,28 +56,28 @@ export function Menu({ children, spacing }: { children: ReactNode; spacing?: Spa
   );
 }
 
-export function CollapsibleCategoryMenu({ title, children, icon }: { children: ReactNode; title?: string; icon: ReactNode; key: string }) {
+export function CollapsibleCategoryMenu({ title, children, icon }: { children: React.ReactNode; title?: string; icon: ReactNode; key: string }) {
   const router = useRouter();
+
   const archivedPaths = useArchivedPaths();
+
   const collapsible = useCollapsible({ isOpen: isCurrentRouteArchivedPage(router, archivedPaths) });
+
   return (
-    <Box as="li" spacing={2} borderTop={`1px solid ${colors.gray2}`}>
-      {title && icon && (
-        <>
-          <Box display="flex" flexDirection="row" flexWrap="nowrap" alignItems="center">
-            <Box width="100%">
-              <Box paddingX={space[2]} paddingTop={space[3]} display="flex" justifyContent="space-between" alignItems="center">
-                <Box display="flex" alignItems="center">
-                  <Icon>{icon}</Icon>
-                  <Heading level={5}>{title}</Heading>
-                </Box>
-                <Box pr={space[1]}>{collapsible.button()}</Box>
-              </Box>
-            </Box>
-          </Box>
-          {collapsible.content(<Menu>{children}</Menu>)}
-        </>
-      )}
+    <Box as="li" mt={space[4]} mb={space[4]}>
+      <CategoryDropdownRoot>
+        {collapsible.button(
+          <CategoryDropdown>
+            <CategorySelectBox>
+              <Icon>{icon}</Icon>
+              <Heading level={5}>{title}</Heading>
+            </CategorySelectBox>
+            {collapsible.chevron}
+          </CategoryDropdown>
+        )}
+
+        <CategoryListBox>{collapsible.content(<CategoryListBoxOption>{children}</CategoryListBoxOption>)}</CategoryListBox>
+      </CategoryDropdownRoot>
     </Box>
   );
 }
