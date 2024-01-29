@@ -30,14 +30,9 @@ export const CategoryDropdown = styled(Box)(
       color: colors.black,
       borderRadius: '5px 5px 0 0',
       borderColor: colors.blue8,
-      '&:after': {
-        content: 'attr(data-color)',
-        position: 'absolute',
-        left: '1px',
-        right: '1px',
-        bottom: 0,
-        borderBottom: '1px solid',
-        borderColor: colors.white,
+      borderBottomColor: colors.white,
+      '&:hover, &:focus': {
+        borderBottomColor: colors.white,
       },
     },
     '&:hover, &:focus': {
@@ -65,9 +60,6 @@ export const CategorySelectBox = styled(Box)(
 export const CategoryListBox = styled(Box)(
   css({
     bg: 'white',
-    position: 'absolute',
-    top: '100%',
-    left: 0,
     width: '100%',
     overflowY: 'clip',
     borderColor: colors.blue8,
