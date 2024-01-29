@@ -11,7 +11,18 @@ export interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
   timeStyle?: 'full' | 'long' | 'medium' | 'short';
 }
 
-export type formatStyle = 'time' | 'long' | 'medium' | 'iso' | 'axis' | 'axis-with-year' | 'weekday-medium' | 'weekday-long' | 'day-month';
+export type formatStyle =
+  | 'time'
+  | 'long'
+  | 'medium'
+  | 'iso'
+  | 'axis'
+  | 'axis-with-year'
+  | 'axis-with-month-year-short'
+  | 'axis-with-day-month-year-short'
+  | 'weekday-medium'
+  | 'weekday-long'
+  | 'day-month';
 
 // Helper functions
 
@@ -115,6 +126,16 @@ export function createFormatting(
     timeZone: 'Europe/Amsterdam',
   });
 
+  const Month = new Intl.DateTimeFormat(languageTag, {
+    month: 'short',
+    timeZone: 'Europe/Amsterdam',
+  });
+
+  const YearShort = new Intl.DateTimeFormat(languageTag, {
+    year: '2-digit',
+    timeZone: 'Europe/Amsterdam',
+  });
+
   const sharedWeekdayOptions = {
     weekday: 'long',
     month: 'long',
@@ -159,6 +180,12 @@ export function createFormatting(
 
       case 'axis-with-year': // '23 jul 2021'
         return DayMonthShortYear.format(date).replace(/\./g, '');
+
+      case 'axis-with-month-year-short': // 'jul '21'
+        return `${Month.format(date).replace(/\./g, '')} '${YearShort.format(date)}}`;
+
+      case 'axis-with-day-month-year-short': // '23 jul '21'
+        return `${DayMonth.format(date).replace(/\./g, '')} '${YearShort.format(date)}`;
 
       case 'weekday-medium':
         return WeekdayMedium.format(date);
