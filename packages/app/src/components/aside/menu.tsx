@@ -75,7 +75,6 @@ export function CollapsibleCategoryMenu({ title, children, icon }: { children: R
             {collapsible.chevron}
           </CategoryDropdown>
         )}
-
         <CategoryListBox>{collapsible.content(<CategoryListBoxOption>{children}</CategoryListBoxOption>)}</CategoryListBox>
       </CategoryDropdownRoot>
     </Box>
