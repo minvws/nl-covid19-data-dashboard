@@ -374,7 +374,7 @@ export function StackedChart<T extends TimestampedValue>(props: StackedChartProp
                       </>
                     )
                   }
-                  hideTicks
+                  tickStroke={colors.gray3}
                 />
                 <g ref={yAxisRef}>
                   <AxisLeft

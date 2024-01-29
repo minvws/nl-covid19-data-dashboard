@@ -253,7 +253,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
           dy: '-0.5px',
           textAnchor: getAnchor(x),
         })}
-        hideTicks
+        tickStroke={colors.gray3}
       />
 
       <g>

@@ -168,8 +168,8 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
           numTicks={numTicks}
           tickFormat={formatValue}
           tickComponent={TickValue}
-          hideTicks
           hideAxisLine
+          tickStroke={colors.gray3}
         />
 
         <AxisBottom
@@ -179,8 +179,8 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
           numTicks={numTicks}
           tickFormat={formatValue}
           tickComponent={TickValue}
-          hideTicks
           hideAxisLine
+          tickStroke={colors.gray3}
         />
       </StyledSVG>
 
