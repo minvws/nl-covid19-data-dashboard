@@ -243,3 +243,13 @@ export function middleOfDayInSeconds(seconds: number) {
   date.setHours(12, 0, 0, 0);
   return Math.floor(date.getTime() / 1000);
 }
+
+export function extractYearFromDate(seconds: number) {
+  const date = new Date(seconds * 1000);
+  return date.getFullYear();
+}
+
+export function getFirstDayOfGivenYear(year: number) {
+  const date = new Date(year, 0, 1);
+  return Math.floor(date.getTime() / 1000);
+}

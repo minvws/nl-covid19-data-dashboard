@@ -15,6 +15,7 @@ export type formatStyle =
   | 'time'
   | 'long'
   | 'medium'
+  | 'day-only'
   | 'iso'
   | 'axis'
   | 'axis-with-year'
@@ -106,6 +107,11 @@ export function createFormatting(
     timeZone: 'Europe/Amsterdam',
   } as DateTimeFormatOptions);
 
+  const Day = new Intl.DateTimeFormat(languageTag, {
+    day: 'numeric',
+    timeZone: 'Europe/Amsterdam',
+  } as DateTimeFormatOptions);
+
   // Day Month or Month Day depending on the locale
   const DayMonth = new Intl.DateTimeFormat(languageTag, {
     month: 'long',
@@ -175,6 +181,9 @@ export function createFormatting(
       case 'medium': // '23 juli 2020'
         return Medium.format(date);
 
+      case 'day-only': // '23'
+        return Day.format(date);
+
       case 'axis': // '23 jul'
         return DayMonthShort.format(date).replace(/\./g, '');
 
@@ -182,10 +191,10 @@ export function createFormatting(
         return DayMonthShortYear.format(date).replace(/\./g, '');
 
       case 'axis-with-month-year-short': // 'jul '21'
-        return `${Month.format(date).replace(/\./g, '')} '${YearShort.format(date)}}`;
+        return `${Month.format(date).replace(/\./g, '')} '${YearShort.format(date)}`;
 
       case 'axis-with-day-month-year-short': // '23 jul '21'
-        return `${DayMonth.format(date).replace(/\./g, '')} '${YearShort.format(date)}`;
+        return `${DayMonthShort.format(date).replace(/\./g, '')} '${YearShort.format(date)}`;
 
       case 'weekday-medium':
         return WeekdayMedium.format(date);
