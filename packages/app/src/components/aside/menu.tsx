@@ -1,7 +1,11 @@
 import { Anchor, Heading } from '~/components/typography';
+import { ArchivedPath, useArchivedPaths } from '~/utils/use-archived-paths';
 import { AsideTitle } from './title';
 import { asResponsiveArray } from '~/style/utils';
 import { Box } from '~/components/base';
+import chevronUrl from '~/assets/chevron.svg';
+import css from '@styled-system/css';
+import { CategoryDropdown, CategoryDropdownRoot, CategoryListBox, CategoryListBoxOption, CategorySelectBox } from '~/components/aside/components/CategoryDropdown';
 import { colors } from '@corona-dashboard/common';
 import { ExpandedSidebarMap, Layout } from '~/domain/layout/logic/types';
 import { Link } from '~/utils/link';
@@ -9,14 +13,10 @@ import { NextRouter, useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { resolveHref } from 'next/dist/shared/lib/router/router';
 import { space, SpaceValue } from '~/style/theme';
+import styled from 'styled-components';
 import { UrlObject } from 'url';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';
-import chevronUrl from '~/assets/chevron.svg';
-import css from '@styled-system/css';
-import styled from 'styled-components';
-import { ArchivedPath, useArchivedPaths } from '~/utils/use-archived-paths';
-import { CategoryDropdown, CategoryDropdownRoot, CategoryListBox, CategoryListBoxOption, CategorySelectBox } from '~/components/aside/components/CategoryDropdown';
 
 type Url = UrlObject | string;
 
@@ -56,26 +56,26 @@ export function Menu({ children, spacing }: { children: ReactNode; spacing?: Spa
   );
 }
 
-export function CollapsibleCategoryMenu({ title, children, icon }: { children: React.ReactNode; title?: string; icon: ReactNode; key: string }) {
+export function CollapsibleCategoryMenu({ title, children, icon }: { children: ReactNode; title?: string; icon: ReactNode; key: string }) {
   const router = useRouter();
-
   const archivedPaths = useArchivedPaths();
-
   const collapsible = useCollapsible({ isOpen: isCurrentRouteArchivedPage(router, archivedPaths) });
 
   return (
     <Box as="li" mt={space[4]} mb={space[4]}>
       <CategoryDropdownRoot>
-        {collapsible.button(
-          <CategoryDropdown>
-            <CategorySelectBox>
-              <Icon>{icon}</Icon>
-              <Heading level={5}>{title}</Heading>
-            </CategorySelectBox>
-            {collapsible.chevron}
-          </CategoryDropdown>
-        )}
-        <CategoryListBox>{collapsible.content(<CategoryListBoxOption>{children}</CategoryListBoxOption>)}</CategoryListBox>
+        {title &&
+          icon &&
+          collapsible.button(
+            <CategoryDropdown>
+              <CategorySelectBox>
+                <Icon>{icon}</Icon>
+                <Heading level={5}>{title}</Heading>
+              </CategorySelectBox>
+              {collapsible.chevron}
+            </CategoryDropdown>
+          )}
+        <CategoryListBox as="ul">{collapsible.content(<CategoryListBoxOption>{children}</CategoryListBoxOption>)}</CategoryListBox>
       </CategoryDropdownRoot>
     </Box>
   );
