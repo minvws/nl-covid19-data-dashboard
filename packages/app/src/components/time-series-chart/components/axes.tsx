@@ -244,7 +244,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
   );
 
   const xTicks = useMemo(
-    () => tickValues.map((tickValue, index) => (isDateSpanValues(values) ? DateSpanTick(tickValue.timestamp, values, index) : TimeStampTick(tickValue, index))),
+    () => tickValues.map((tickValue) => (isDateSpanValues(values) ? DateSpanTick(tickValue.timestamp, values) : TimeStampTick(tickValue))),
     [values, DateSpanTick, TimeStampTick, isDateSpanValues, tickValues]
   );
 
