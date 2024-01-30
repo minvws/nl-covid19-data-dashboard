@@ -13,43 +13,43 @@ export const CategoryDropdownRoot = styled(Box)`
 `;
 
 export const CategoryDropdown = styled(Box)`
-    @media ${mediaQueries.xl} {  
-      padding: ${space[2]} ${space[3]} ${space[2]} ${space[2]};
-      margin: 0;
-    }
-    cursor: default;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 36px;
-    padding: ${space[2]} ${space[1]} ${space[2]} ${space[1]};
-    border-color: ${colors.gray3};
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
-    user-select: none;
-    transition: 0.1s background-color;
-    &[aria-expanded=true] {
-      background: ${colors.white};
-      color: ${colors.black};
-      border-radius: 5px 5px 0 0;
-      border-color: ${colors.blue8};
-      border-bottom-color: ${colors.white};
-      &:hover, &:focus {
-        border-bottom-color: ${colors.white};
-      },
-    },
+  @media ${mediaQueries.xl} {  
+    padding: ${space[2]} ${space[3]} ${space[2]} ${space[2]};
+    margin: 0;
+  }
+  cursor: default;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 36px;
+  padding: ${space[2]} ${space[1]} ${space[2]} ${space[1]};
+  border-color: ${colors.gray3};
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  user-select: none;
+  transition: 0.1s background-color;
+  &[aria-expanded=true] {
+    background: ${colors.white};
+    color: ${colors.black};
+    border-radius: 5px 5px 0 0;
+    border-color: ${colors.blue8};
+    border-bottom-color: ${colors.white};
     &:hover, &:focus {
-      background: ${colors.gray1};
+      border-bottom-color: ${colors.white};
     },
-    &:hover {
-      color: ${colors.blue8};
-      border-color: ${colors.blue8};
-    },
-    &:focus {
-      background: ${colors.white};
-      color: ${colors.black};
-    }
+  },
+  &:hover, &:focus {
+    background: ${colors.gray1};
+  },
+  &:hover {
+    color: ${colors.blue8};
+    border-color: ${colors.blue8};
+  },
+  &:focus {
+    background: ${colors.white};
+    color: ${colors.black};
+  }
 `;
 
 export const CategorySelectBox = styled(Box)`
@@ -75,4 +75,10 @@ export const CategoryListBox = styled(Box)`
 
 export const CategoryListBoxOption = styled(Box)`
   cursor: default;
+  a {
+    @media ${mediaQueries.xl} {
+      padding: ${space[2]} ${space[2]} ${space[2]} 3rem;
+    }
+    padding: ${space[2]} 0 ${space[2]} ${space[4]};
+  }
 `;
