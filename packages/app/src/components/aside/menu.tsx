@@ -59,23 +59,23 @@ export function Menu({ children, spacing }: { children: ReactNode; spacing?: Spa
 export function CollapsibleCategoryMenu({ title, children, icon }: { children: ReactNode; title?: string; icon: ReactNode; key: string }) {
   const router = useRouter();
   const archivedPaths = useArchivedPaths();
-  const collapsible = useCollapsible({ isOpen: isCurrentRouteArchivedPage(router, archivedPaths) });
+  const { button: collapsibleButton, content: collapsibleContent, chevron: collapseChevron } = useCollapsible({ isOpen: isCurrentRouteArchivedPage(router, archivedPaths) });
 
   return (
     <Box as="li" mt={space[4]} mb={space[4]}>
       <CategoryDropdownRoot>
         {title &&
           icon &&
-          collapsible.button(
+          collapsibleButton(
             <CategoryDropdown>
               <CategorySelectBox>
                 <Icon>{icon}</Icon>
                 <Heading level={5}>{title}</Heading>
               </CategorySelectBox>
-              {collapsible.chevron}
+              {collapseChevron}
             </CategoryDropdown>
           )}
-        <CategoryListBox as="ul">{collapsible.content(<CategoryListBoxOption>{children}</CategoryListBoxOption>)}</CategoryListBox>
+        <CategoryListBox as="ul">{collapsibleContent(<CategoryListBoxOption>{children}</CategoryListBoxOption>)}</CategoryListBox>
       </CategoryDropdownRoot>
     </Box>
   );
