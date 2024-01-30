@@ -1,20 +1,28 @@
 import { Box } from '~/components/base';
 import styled from 'styled-components';
 import { colors } from '@corona-dashboard/common';
-import { space } from '~/style/theme';
+import { mediaQueries, space } from '~/style/theme';
 
 export const CategoryDropdownRoot = styled(Box)`
+  @media ${mediaQueries.xl} {
+    margin: 0;
+  }
   position: relative;
   box-shadow: ${space[1]} 0 0 ${space[4]} ${colors.white};
+  margin: 0 8px;
 `;
 
 export const CategoryDropdown = styled(Box)`
+    @media ${mediaQueries.xl} {  
+      padding: ${space[2]} ${space[3]} ${space[2]} ${space[2]};
+      margin: 0;
+    }
     cursor: default;
     display: flex;
     justify-content: space-between;
     align-items: center;
     min-height: 36px;
-    padding: ${space[2]} ${space[2]};
+    padding: ${space[2]} ${space[1]} ${space[2]} ${space[1]};
     border-color: ${colors.gray3};
     border-style: solid;
     border-width: 1px;
