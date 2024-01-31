@@ -16,6 +16,7 @@ export type formatStyle =
   | 'long'
   | 'medium'
   | 'day-only'
+  | 'month-only'
   | 'iso'
   | 'axis'
   | 'axis-with-year'
@@ -183,6 +184,9 @@ export function createFormatting(
 
       case 'day-only': // '23'
         return Day.format(date);
+
+      case 'month-only': // 'okt'
+        return Month.format(date);
 
       case 'axis': // '23 jul'
         return DayMonthShort.format(date).replace(/\./g, '');

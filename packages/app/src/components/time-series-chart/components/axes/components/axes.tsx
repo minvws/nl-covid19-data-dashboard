@@ -5,7 +5,7 @@
  * props. It might be easier to just create 2 or 3 different types of axes
  * layouts by forking this component.
  */
-import { colors, middleOfDayInSeconds, TimeframeOption, TimestampedValue, DateSpanValue, formatStyle, extractYearFromDate, getFirstDayOfGivenYear } from '@corona-dashboard/common';
+import { colors, TimeframeOption, TimestampedValue, DateSpanValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -16,9 +16,10 @@ import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { fontSizes } from '~/style/theme';
 import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
-import { Breakpoints, useBreakpoints } from '~/utils/use-breakpoints';
-import { Bounds } from '../logic';
-import { WeekNumbers } from './week-numbers';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { Bounds } from '../../../logic';
+import { WeekNumbers } from '../../week-numbers';
+import { TickInstance, createTimeTicks, createTimeTicksAllTimeFrame } from '../logic/create-time-ticks';
 
 export type AxesProps<T extends TimestampedValue> = {
   bounds: Bounds;
@@ -65,60 +66,6 @@ export type AxesProps<T extends TimestampedValue> = {
    */
   hasAllZeroValues?: boolean;
 };
-
-interface TickInstance {
-  timestamp: number;
-  formatStyle: formatStyle;
-}
-
-function createTimeTicks(startTick: number, endTick: number, count: number, valuesCount: number | undefined): TickInstance[] {
-  const start = middleOfDayInSeconds(startTick);
-  const end = middleOfDayInSeconds(endTick);
-
-  if (count <= 2) {
-    return [
-      { timestamp: start, formatStyle: 'axis' },
-      { timestamp: end, formatStyle: 'axis' },
-    ] as TickInstance[];
-  }
-
-  const ticks: TickInstance[] = [];
-  const stepCount = (valuesCount && valuesCount <= count ? valuesCount : count) - 1;
-  const step = Math.floor((end - start) / stepCount);
-
-  for (let i = 0; i < stepCount; i++) {
-    const tick = start + i * step;
-    ticks.push({ timestamp: middleOfDayInSeconds(tick), formatStyle: 'axis' } as TickInstance);
-  }
-  ticks.push({ timestamp: end, formatStyle: 'axis' } as TickInstance);
-
-  return ticks;
-}
-
-function createTimeTicksAllTimeFrame(startTick: number, endTick: number, count: number, breakpoints: Breakpoints): TickInstance[] {
-  const start = middleOfDayInSeconds(startTick);
-  const end = middleOfDayInSeconds(endTick);
-  const startYear = extractYearFromDate(start);
-
-  if (count <= 2) {
-    return [
-      { timestamp: start, formatStyle: 'axis-with-day-month-year-short' },
-      { timestamp: end, formatStyle: 'axis-with-day-month-year-short' },
-    ] as TickInstance[];
-  }
-
-  const ticks: TickInstance[] = Array.from({ length: count }, (_, i) => {
-    const firstDayOfYearTimeStamp = getFirstDayOfGivenYear(startYear + i + 1); // 01.01.2021, 01.01.2022... etc.
-    return { timestamp: firstDayOfYearTimeStamp, formatStyle: 'axis-with-day-month-year-short' } as TickInstance;
-  });
-
-  // This if statement ensures that first & second label of the all-values timeframe don't overlap
-  if (breakpoints.lg) {
-    ticks.unshift({ timestamp: start, formatStyle: 'axis-with-month-year-short' } as TickInstance);
-  }
-
-  return ticks;
-}
 
 export const Axes = memo(function Axes<T extends TimestampedValue>({
   numGridLines,
@@ -193,10 +140,20 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
 
   const getSmallestDiff = (start: number, end: number, current: number) => Math.min(Math.abs(start - current), Math.abs(end - current));
 
-  const tickValues =
-    timeframe === 'all'
-      ? createTimeTicksAllTimeFrame(startUnix, endUnix, bottomAxesTickNumber, breakpoints)
-      : createTimeTicks(startUnix, endUnix, bottomAxesTickNumber, values?.length);
+  const tickValues = (() => {
+    switch (timeframe) {
+      case 'all':
+        return createTimeTicksAllTimeFrame(startUnix, endUnix, bottomAxesTickNumber, breakpoints);
+      case '30_days':
+        return createTimeTicks(startUnix, endUnix, bottomAxesTickNumber, values?.length, 'axis');
+      case '3_months':
+      case '6_months':
+      case 'last_year':
+        return createTimeTicks(startUnix, endUnix, bottomAxesTickNumber, values?.length, 'month-only');
+      default:
+        return createTimeTicks(startUnix, endUnix, bottomAxesTickNumber, values?.length, 'long');
+    }
+  })();
 
   const DateSpanTick = useCallback(
     (dateUnix: number, values: DateSpanValue[]) => {
