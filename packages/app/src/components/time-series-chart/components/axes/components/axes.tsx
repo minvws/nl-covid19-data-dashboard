@@ -120,13 +120,13 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
           value = breakpoints.sm ? (hasDatesAsRange ? 2 : prefferedDateTicksAllTimeFrame()) : hasDatesAsRange ? 3 : prefferedDateTicksAllTimeFrame();
           break;
         case '30_days':
-          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 5) : 3;
+          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 5) : 4;
           break;
         case '3_months':
-          value = breakpoints.sm ? 4 : 3;
+          value = breakpoints.sm ? 4 : 4;
           break;
         case '6_months':
-          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 7) : 3;
+          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 7) : 4;
           break;
         case 'last_year':
           value = breakpoints.sm ? (hasDatesAsRange ? 3 : 5) : 4;

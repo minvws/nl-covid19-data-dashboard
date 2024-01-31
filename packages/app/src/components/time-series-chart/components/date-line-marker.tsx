@@ -33,7 +33,7 @@ export function DateLineMarker<T extends TimestampedValue>({ lineColor = colors.
               {formatDateFromSeconds(value.date_end_unix, 'axis')}
             </>
           ) : (
-            formatDateFromSeconds(point.seriesValue.__date_unix, 'axis')
+            formatDateFromSeconds(point.seriesValue.__date_unix, 'axis-with-day-month-year-short')
           )}
         </Label>
       </LabelContainer>
