@@ -19,7 +19,7 @@ import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-times
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Bounds } from '../../../logic';
 import { WeekNumbers } from '../../week-numbers';
-import { TickInstance, createTimeTicks, createTimeTicksAllTimeFrame } from '../logic/create-time-ticks';
+import { TickInstance, createTimeTicks, createTimeTicksAllTimeFrame, createTimeTicksMonthlyTimeFrame } from '../logic/create-time-ticks';
 
 export type AxesProps<T extends TimestampedValue> = {
   bounds: Bounds;
@@ -116,19 +116,19 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
     let value = 2;
     if (!isPresent(xTickNumber)) {
       switch (timeframe) {
-        case 'all':
-          value = breakpoints.sm ? (hasDatesAsRange ? 2 : prefferedDateTicksAllTimeFrame()) : hasDatesAsRange ? 3 : prefferedDateTicksAllTimeFrame();
+        case TimeframeOption.ALL:
+          value = breakpoints.sm ? (hasDatesAsRange ? 4 : prefferedDateTicksAllTimeFrame()) : hasDatesAsRange ? 4 : prefferedDateTicksAllTimeFrame();
           break;
-        case '30_days':
+        case TimeframeOption.THIRTY_DAYS:
           value = breakpoints.sm ? (hasDatesAsRange ? 4 : 5) : 4;
           break;
-        case '3_months':
-          value = 4;
+        case TimeframeOption.THREE_MONTHS:
+          value = 3;
           break;
-        case '6_months':
-          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 7) : 4;
+        case TimeframeOption.SIX_MONTHS:
+          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 6) : 4;
           break;
-        case 'last_year':
+        case TimeframeOption.LAST_YEAR:
           value = breakpoints.sm ? (hasDatesAsRange ? 3 : 5) : 4;
           break;
         default:
@@ -141,17 +141,26 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
   const getSmallestDiff = (start: number, end: number, current: number) => Math.min(Math.abs(start - current), Math.abs(end - current));
 
   const tickValues = (() => {
+    if (hasDatesAsRange || (!breakpoints.md && timeframe == TimeframeOption.SIX_MONTHS)) {
+      /**
+       * This if statement will isolate the logic for graphs that use dates with ranges and
+       * edge cases for six months timeframe. The reason for using the logic is because we have
+       * too many labels for six months period that are overlapping on each other and we don't want
+       * to change the behavior of date ranged graphs.
+       */
+      return createTimeTicks(startUnix, endUnix, bottomAxesTickNumber, values?.length, 'axis-with-day-month-year-short');
+    }
+
     switch (timeframe) {
-      case 'all':
+      case TimeframeOption.ALL:
         return createTimeTicksAllTimeFrame(startUnix, endUnix, bottomAxesTickNumber, breakpoints);
-      case '30_days':
-        return createTimeTicks(startUnix, endUnix, bottomAxesTickNumber, values?.length, 'axis');
-      case '3_months':
-      case '6_months':
-      case 'last_year':
-        return createTimeTicks(startUnix, endUnix, bottomAxesTickNumber, values?.length, 'month-only');
+      case TimeframeOption.THREE_MONTHS:
+      case TimeframeOption.SIX_MONTHS:
+        return createTimeTicksMonthlyTimeFrame(startUnix, endUnix, bottomAxesTickNumber);
+      case TimeframeOption.THIRTY_DAYS:
+      case TimeframeOption.LAST_YEAR:
       default:
-        return createTimeTicks(startUnix, endUnix, bottomAxesTickNumber, values?.length, 'long');
+        return createTimeTicks(startUnix, endUnix, bottomAxesTickNumber, values?.length, 'axis-with-day-month-year-short');
     }
   })();
 
@@ -185,7 +194,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
           'axis-with-day-month-year-short'
         )}`;
       } else if (startMonth !== endMonth) {
-        return `${formatDateFromSeconds(tickValue.date_start_unix, 'axis')} - ${formatDateFromSeconds(tickValue.date_end_unix, 'axis-with-year')}`;
+        return `${formatDateFromSeconds(tickValue.date_start_unix, 'axis')} - ${formatDateFromSeconds(tickValue.date_end_unix, 'axis-with-day-month-year-short')}`;
       } else {
         return `${formatDateFromSeconds(tickValue.date_start_unix, 'day-only')} - ${formatDateFromSeconds(tickValue.date_end_unix, 'axis-with-day-month-year-short')}`;
       }

@@ -1,4 +1,4 @@
-import { extractYearFromDate, formatStyle, getFirstDayOfGivenYear, middleOfDayInSeconds } from '@corona-dashboard/common';
+import { subtractMonthToDate, extractYearFromDate, formatStyle, getFirstDayOfGivenYear, middleOfDayInSeconds, startOfDayInSeconds } from '@corona-dashboard/common';
 import { Breakpoints } from '~/utils/use-breakpoints';
 
 export interface TickInstance {
@@ -25,15 +25,41 @@ export function createTimeTicksAllTimeFrame(startTick: number, endTick: number, 
     return getDefault2ValuesForXAxis(start, end);
   }
 
-  const ticks: TickInstance[] = Array.from({ length: count }, (_, i) => {
-    const firstDayOfYearTimeStamp = getFirstDayOfGivenYear(startYear + i + 1); // 01.01.2021, 01.01.2022... etc.
-    return { timestamp: firstDayOfYearTimeStamp, formatStyle: 'axis-with-day-month-year-short' } as TickInstance;
+  const ticks: TickInstance[] = Array.from({ length: count }, (_, index) => {
+    const firstDayOfYearTimeStamp = getFirstDayOfGivenYear(startYear + index + 1); // 01.01.2021, 01.01.2022... etc.
+    return { timestamp: startOfDayInSeconds(firstDayOfYearTimeStamp), formatStyle: 'axis-with-day-month-year-short' } as TickInstance;
   });
 
   // This if statement ensures that first & second label of the all-values timeframe don't overlap
   if (breakpoints.lg) {
     ticks.unshift({ timestamp: start, formatStyle: 'axis-with-month-year-short' } as TickInstance);
   }
+
+  return ticks;
+}
+
+export function createTimeTicksMonthlyTimeFrame(startTick: number, endTick: number, count: number): TickInstance[] {
+  /**
+   * This method will calculate the timestamps for the 3 months interval. It must consist of exactly 4 values.
+   * First value:  01 (XX - 3) 'YY
+   * Second value: 01 (XX - 2) 'YY
+   * Third value:  01 (XX - 1) 'YY
+   * Fourth value: 01 XX 'YY     - Where XX is the current month
+   */
+  const start = middleOfDayInSeconds(startTick);
+  const end = middleOfDayInSeconds(endTick);
+
+  if (count <= 2) {
+    return getDefault2ValuesForXAxis(start, end);
+  }
+
+  const ticks: TickInstance[] = Array.from({ length: count - 1 }, (_, index) => {
+    const previousMonthDate = subtractMonthToDate(end, index); // Reset to 01.XX
+
+    return { timestamp: previousMonthDate, formatStyle: 'axis-with-day-month-year-short' } as TickInstance;
+  });
+
+  ticks.reverse().unshift({ timestamp: start, formatStyle: 'axis-with-day-month-year-short' } as TickInstance);
 
   return ticks;
 }
@@ -57,7 +83,7 @@ export function createTimeTicks(startTick: number, endTick: number, count: numbe
 
   const ticks: TickInstance[] = populateTicksArray(stepCount, step, start, formatStyle);
 
-  ticks.push({ timestamp: end, formatStyle: 'axis-with-month-year-short' });
+  ticks.push({ timestamp: end, formatStyle: 'axis-with-day-month-year-short' });
 
   return ticks;
 }
@@ -66,7 +92,7 @@ function populateTicksArray(stepCount: number, step: number, startTick: number, 
   const ticks: TickInstance[] = [];
   for (let i = 0; i < stepCount; i++) {
     const tick = startTick + i * step;
-    ticks.push({ timestamp: middleOfDayInSeconds(tick), formatStyle: i == 0 ? 'axis-with-month-year-short' : formatStyle });
+    ticks.push({ timestamp: middleOfDayInSeconds(tick), formatStyle: i == 0 ? 'axis-with-day-month-year-short' : formatStyle });
   }
   return ticks;
 }
