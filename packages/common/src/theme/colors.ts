@@ -52,6 +52,7 @@ const colorDefinitions = {
   orange1: '#E37321',
   orange2: '#A14E00',
   orange3: '#F65234',
+  orange4: 'rgba(227,115,33,0.7)',
   //Yellow scales
   yellow1: '#FFF4C1',
   yellow2: '#fee670',
