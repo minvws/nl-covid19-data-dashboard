@@ -192,7 +192,8 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
                 type: 'line',
                 metricProperty: 'selected_installation_rna_normalized',
                 label: text.rwziLabel ? `${text.rwziLabel} ${selectedInstallation}` : selectedInstallation,
-                color: colors.orange4,
+                color: colors.orange1,
+                opacity: 0.7,
                 strokeWidth: 1,
               },
             ]}

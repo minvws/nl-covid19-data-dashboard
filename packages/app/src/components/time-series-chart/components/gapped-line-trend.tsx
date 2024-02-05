@@ -5,6 +5,7 @@ import { LineTrend } from './line-trend';
 type GappedLinedTrendProps = {
   series: SeriesSingleValue[];
   color: string;
+  opacity?: number;
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
   getX: (v: SeriesItem) => number;
@@ -14,7 +15,7 @@ type GappedLinedTrendProps = {
 };
 
 export function GappedLinedTrend(props: GappedLinedTrendProps) {
-  const { series, color, style, strokeWidth, getX, getY, curve, id } = props;
+  const { series, color, opacity, style, strokeWidth, getX, getY, curve, id } = props;
 
   /**
    * Here we loop through the series and each time a null value is encountered a
@@ -30,6 +31,7 @@ export function GappedLinedTrend(props: GappedLinedTrendProps) {
           key={index}
           series={series}
           color={color}
+          opacity={opacity}
           style={style}
           strokeWidth={strokeWidth}
           curve={curve}
