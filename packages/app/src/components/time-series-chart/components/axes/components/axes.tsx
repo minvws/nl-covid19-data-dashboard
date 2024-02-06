@@ -5,21 +5,21 @@
  * props. It might be easier to just create 2 or 3 different types of axes
  * layouts by forking this component.
  */
-import { colors, TimeframeOption, TimestampedValue, DateSpanValue } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
-import { GridRows } from '@visx/grid';
-import { scaleLinear } from '@visx/scale';
-import { NumberValue, ScaleBand, ScaleLinear } from 'd3-scale';
-import { memo, Ref, useCallback, useMemo } from 'react';
-import { isPresent } from 'ts-is-present';
-import { useIntl } from '~/intl';
-import { fontSizes } from '~/style/theme';
-import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Bounds } from '../../../logic';
-import { WeekNumbers } from '../../week-numbers';
+import { colors, TimeframeOption, TimestampedValue, DateSpanValue } from '@corona-dashboard/common';
+import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
+import { fontSizes } from '~/style/theme';
+import { GridRows } from '@visx/grid';
+import { isPresent } from 'ts-is-present';
+import { memo, Ref, useCallback, useMemo } from 'react';
+import { NumberValue, ScaleBand, ScaleLinear } from 'd3-scale';
+import { scaleLinear } from '@visx/scale';
 import { TickInstance, createTimeTicks, createTimeTicksAllTimeFrame, createTimeTicksMonthlyTimeFrame } from '../logic/create-time-ticks';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useIntl } from '~/intl';
+import { WeekNumbers } from '../../week-numbers';
+import css from '@styled-system/css';
 
 export type AxesProps<T extends TimestampedValue> = {
   bounds: Bounds;
@@ -106,6 +106,9 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
      * The result is divided by 31557600 and rounded UP with .ceil
      * 31557600 is calculated based on 86400 (seconds in a day)
      * multiplied by 365.25 (number of days in a year and .25 to consider leap years)
+     *
+     * This logic is used to calculate the amount of January 1st dates the algorithm needs
+     * for displaying "all" timeframe.
      */
     const yearsDifferenceInDomain = Math.ceil((endUnix - startUnix) / 31557600);
 

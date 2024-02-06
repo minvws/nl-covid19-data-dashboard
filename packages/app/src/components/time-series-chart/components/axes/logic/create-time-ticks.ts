@@ -1,5 +1,5 @@
-import { subtractMonthToDate, extractYearFromDate, formatStyle, getFirstDayOfGivenYear, middleOfDayInSeconds, startOfDayInSeconds } from '@corona-dashboard/common';
 import { Breakpoints } from '~/utils/use-breakpoints';
+import { subtractMonthToDate, extractYearFromDate, formatStyle, getFirstDayOfGivenYear, middleOfDayInSeconds, startOfDayInSeconds } from '@corona-dashboard/common';
 
 export interface TickInstance {
   timestamp: number;
@@ -13,7 +13,7 @@ function getDefault2ValuesForXAxis(startTick: number, endTick: number): TickInst
   ] as TickInstance[];
 }
 
-export function createTimeTicksAllTimeFrame(startTick: number, endTick: number, count: number, breakpoints: Breakpoints): TickInstance[] {
+export function createTimeTicksAllTimeFrame(startTick: number, endTick: number, ticksNumber: number, breakpoints: Breakpoints): TickInstance[] {
   /**
    * This method is only used for the `all` timeframe option.
    */
@@ -21,11 +21,11 @@ export function createTimeTicksAllTimeFrame(startTick: number, endTick: number, 
   const end = middleOfDayInSeconds(endTick);
   const startYear = extractYearFromDate(start);
 
-  if (count <= 2) {
+  if (ticksNumber <= 2) {
     return getDefault2ValuesForXAxis(start, end);
   }
 
-  const ticks: TickInstance[] = Array.from({ length: count }, (_, index) => {
+  const ticks: TickInstance[] = Array.from({ length: ticksNumber }, (_, index) => {
     const firstDayOfYearTimeStamp = getFirstDayOfGivenYear(startYear + index + 1); // 01.01.2021, 01.01.2022... etc.
     return { timestamp: startOfDayInSeconds(firstDayOfYearTimeStamp), formatStyle: 'axis-with-day-month-year-short' } as TickInstance;
   });

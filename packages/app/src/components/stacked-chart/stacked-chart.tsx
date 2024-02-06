@@ -2,36 +2,36 @@
  * Code loosely based on
  * https://codesandbox.io/s/github/airbnb/visx/tree/master/packages/visx-demo/src/sandboxes/visx-barstack
  */
-import { colors, getValuesInTimeframe, TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
+import { BarStack, Line } from '@visx/shape';
+import { colors, getValuesInTimeframe, TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
-import { BarStack, Line } from '@visx/shape';
 import { Text } from '@visx/text';
+import css from '@styled-system/css';
 /**
  * useTooltipInPortal will not work for IE11 at the moment. See this issue
  * https://github.com/airbnb/visx/issues/904
  */
-import { useTooltip } from '@visx/tooltip';
-import { isEmpty } from 'lodash';
-import { MouseEvent, TouchEvent, useCallback, useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
-import { Box, Spacer } from '~/components/base';
-import { Legend } from '~/components/legend';
-import { ValueAnnotation } from '~/components/value-annotation';
-import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
-import { useCurrentDate } from '~/utils/current-date-context';
 import { AccessibilityDefinition, useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
+import { Box, Spacer } from '~/components/base';
+import { calculateSeriesMaximum, getSeriesData, getWeekInfo, SeriesValue } from './logic';
+import { DateSpanMarker, Overlay, Tooltip, TooltipData, TooltipFormatter } from '../time-series-chart/components';
+import { isDefined } from 'ts-is-present';
+import { isEmpty } from 'lodash';
+import { Legend } from '~/components/legend';
+import { MouseEvent, TouchEvent, useCallback, useMemo } from 'react';
+import { space } from '~/style/theme';
+import { TooltipSeriesList } from '../time-series-chart/components/tooltip/tooltip-series-list';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useCurrentDate } from '~/utils/current-date-context';
+import { useIntl } from '~/intl';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
-import { DateSpanMarker, Overlay, Tooltip, TooltipData, TooltipFormatter } from '../time-series-chart/components';
-import { TooltipSeriesList } from '../time-series-chart/components/tooltip/tooltip-series-list';
-import { calculateSeriesMaximum, getSeriesData, getWeekInfo, SeriesValue } from './logic';
+import { useTooltip } from '@visx/tooltip';
+import { ValueAnnotation } from '~/components/value-annotation';
 
 type AnyTickFormatter = (value: any) => string;
 

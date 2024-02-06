@@ -1,5 +1,5 @@
-import { isDefined } from 'ts-is-present';
 import { ArchivedNlVariantsVariantValue, GmSewerPerInstallationValue, NlVariantsVariantValue } from './types';
+import { isDefined } from 'ts-is-present';
 
 export type UnknownObject = Record<string, unknown>;
 

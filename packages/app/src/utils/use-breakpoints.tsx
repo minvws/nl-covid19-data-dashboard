@@ -1,7 +1,7 @@
-import React, { createContext, ReactNode, useContext, useMemo } from 'react';
-import { useTheme } from 'styled-components';
 import { useIsMounted } from './use-is-mounted';
 import { useMediaQuery } from './use-media-query';
+import { useTheme } from 'styled-components';
+import React, { createContext, ReactNode, useContext, useMemo } from 'react';
 
 export type Breakpoints = {
   /**
