@@ -20,7 +20,6 @@ export const CategoryDropdown = styled(Box)`
   &:hover {
     cursor: pointer;
     border-color: ${colors.blue8};
-    color: ${colors.blue8};
   },
   &:focus {
     background: ${colors.white};
