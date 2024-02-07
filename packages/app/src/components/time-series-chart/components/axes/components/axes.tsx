@@ -120,7 +120,14 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
     if (!isPresent(xTickNumber)) {
       switch (timeframe) {
         case TimeframeOption.ALL:
-          value = breakpoints.sm ? (hasDatesAsRange ? 4 : prefferedDateTicksAllTimeFrame()) : hasDatesAsRange ? 4 : prefferedDateTicksAllTimeFrame();
+          // Turned to an if statement for readability purposes
+          if (breakpoints.sm) {
+            if (hasDatesAsRange) {
+              value = 4;
+            } else {
+              value = prefferedDateTicksAllTimeFrame();
+            }
+          }
           break;
         case TimeframeOption.THIRTY_DAYS:
           value = breakpoints.sm ? (hasDatesAsRange ? 4 : 5) : 4;
