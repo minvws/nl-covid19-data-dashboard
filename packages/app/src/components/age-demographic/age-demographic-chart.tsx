@@ -1,20 +1,20 @@
-import { Color, colors } from '@corona-dashboard/common';
+import { AccessibilityDefinition, useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
+import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
+import { AgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AxisBottom, TickRendererProps } from '@visx/axis';
+import { Bar } from '@visx/shape';
+import { Box } from '~/components/base';
+import { Color, colors } from '@corona-dashboard/common';
+import { fontSizes, fontWeights, space } from '~/style/theme';
+import { formatAgeGroupRange } from './utils';
 import { GridColumns } from '@visx/grid';
 import { Group } from '@visx/group';
-import { PatternLines } from '@visx/pattern';
-import { Bar } from '@visx/shape';
-import { Text as VisxText } from '@visx/text';
 import { KeyboardEvent, MouseEvent } from 'react';
-import styled from 'styled-components';
-import { Box } from '~/components/base';
-import { Text } from '~/components/typography';
-import { fontSizes, fontWeights, space } from '~/style/theme';
+import { PatternLines } from '@visx/pattern';
 import { replaceVariablesInText } from '~/utils';
-import { AccessibilityDefinition, useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
-import { AgeDemographicCoordinates } from './age-demographic-coordinates';
-import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
-import { formatAgeGroupRange } from './utils';
+import { Text } from '~/components/typography';
+import { Text as VisxText } from '@visx/text';
+import styled from 'styled-components';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
@@ -168,8 +168,8 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
           numTicks={numTicks}
           tickFormat={formatValue}
           tickComponent={TickValue}
-          hideTicks
           hideAxisLine
+          tickStroke={colors.gray3}
         />
 
         <AxisBottom
@@ -179,8 +179,8 @@ export function AgeDemographicChart<T extends AgeDemographicDefaultValue>({
           numTicks={numTicks}
           tickFormat={formatValue}
           tickComponent={TickValue}
-          hideTicks
           hideAxisLine
+          tickStroke={colors.gray3}
         />
       </StyledSVG>
 
