@@ -1,5 +1,5 @@
 export * from './area-trend';
-export * from './axes';
+export * from './axes/components/axes';
 export * from './bar-trend';
 export * from './benchmark';
 export * from './chart-container';

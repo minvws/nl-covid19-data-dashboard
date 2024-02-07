@@ -1,5 +1,5 @@
-import { isDefined } from 'ts-is-present';
 import { ArchivedNlVariantsVariantValue, GmSewerPerInstallationValue, NlVariantsVariantValue } from './types';
+import { isDefined } from 'ts-is-present';
 
 export type UnknownObject = Record<string, unknown>;
 
@@ -242,4 +242,22 @@ export function middleOfDayInSeconds(seconds: number) {
   const date = new Date(seconds * 1000);
   date.setHours(12, 0, 0, 0);
   return Math.floor(date.getTime() / 1000);
+}
+
+export function extractYearFromDate(seconds: number) {
+  const date = new Date(seconds * 1000);
+  return date.getFullYear();
+}
+
+export function getFirstDayOfGivenYear(year: number) {
+  const date = new Date(year, 0, 1);
+  return Math.floor(date.getTime() / 1000);
+}
+
+export function subtractMonthToDate(seconds: number, monthSubtract: number) {
+  const date = new Date(seconds * 1000);
+  date.setDate(1);
+  date.setMonth(date.getMonth() - monthSubtract);
+
+  return date.getTime() / 1000;
 }
