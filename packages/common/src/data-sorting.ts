@@ -271,3 +271,11 @@ export function subtractMonthToDate(seconds: number, monthSubtract: number) {
 
   return date.getTime() / 1000;
 }
+
+export function addMonthToDate(seconds: number, monthAddition: number) {
+  const date = new Date(seconds * 1000);
+  date.setDate(1);
+  date.setMonth(date.getMonth() + monthAddition);
+
+  return date.getTime() / 1000;
+}

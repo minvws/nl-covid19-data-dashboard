@@ -1,6 +1,5 @@
 import { Breakpoints } from '~/utils/use-breakpoints';
 import {
-  subtractMonthToDate,
   extractYearFromDate,
   formatStyle,
   getFirstDayOfGivenYear,
@@ -8,6 +7,7 @@ import {
   startOfDayInSeconds,
   extractMonthFromDate,
   extractDayFromDate,
+  addMonthToDate,
 } from '@corona-dashboard/common';
 
 export interface TickInstance {
@@ -81,11 +81,15 @@ export function createTimeTicksMonthlyTimeFrame(startTick: number, endTick: numb
     return getDefault2ValuesForXAxis(start, end);
   }
 
-  const ticks: TickInstance[] = Array.from({ length: count - 1 }, (_, index) => {
-    const previousMonthDate = subtractMonthToDate(end, index); // Reset to 01.XX
+  const ticks: TickInstance[] = [];
 
-    return { timestamp: previousMonthDate, formatStyle: 'axis-with-day-month-year-short' } as TickInstance;
-  });
+  for (let index = 1; index <= count; index++) {
+    const nextMonthDate = addMonthToDate(start, index);
+
+    if (nextMonthDate <= end) {
+      ticks.push({ timestamp: nextMonthDate, formatStyle: 'axis-with-day-month-year-short' } as TickInstance);
+    }
+  }
 
   ticks.reverse().unshift({ timestamp: start, formatStyle: 'axis-with-day-month-year-short' } as TickInstance);
 
