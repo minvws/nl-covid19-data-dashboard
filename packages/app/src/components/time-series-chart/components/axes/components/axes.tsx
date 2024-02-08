@@ -15,7 +15,7 @@ import { isPresent } from 'ts-is-present';
 import { memo, Ref, useCallback, useMemo } from 'react';
 import { NumberValue, ScaleBand, ScaleLinear } from 'd3-scale';
 import { scaleLinear } from '@visx/scale';
-import { TickInstance, createTimeTicks, createTimeTicksAllTimeFrame, createTimeTicksMonthlyTimeFrame } from '../logic/create-time-ticks';
+import { TickInstance, createTimeTicks, createTimeTicksAllTimeFrame, createTimeTicksMonthlyTimeFrame, getPrefferedTimeTicksAllTimeFrame } from '../logic/create-time-ticks';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIntl } from '~/intl';
 import { WeekNumbers } from '../../week-numbers';
@@ -100,21 +100,6 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
 
   const formatYAxisPercentage: TickFormatter<NumberValue> = useCallback((y: NumberValue) => `${formatPercentage(y as number)}%`, [formatPercentage]);
 
-  const prefferedDateTicksAllTimeFrame = () => {
-    /**
-     * This method gets the difference in years between endUnix and startUnix.
-     * The result is divided by 31557600 and rounded UP with .ceil
-     * 31557600 is calculated based on 86400 (seconds in a day)
-     * multiplied by 365.25 (number of days in a year and .25 to consider leap years)
-     *
-     * This logic is used to calculate the amount of January 1st dates the algorithm needs
-     * for displaying "all" timeframe.
-     */
-    const yearsDifferenceInDomain = Math.ceil((endUnix - startUnix) / 31557600);
-
-    return yearsDifferenceInDomain;
-  };
-
   const bottomAxesTickNumber = useMemo(() => {
     let value = 2;
     if (!isPresent(xTickNumber)) {
@@ -124,23 +109,23 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
           if (hasDatesAsRange) {
             value = 4;
           } else {
-            value = prefferedDateTicksAllTimeFrame();
+            value = getPrefferedTimeTicksAllTimeFrame(startUnix, endUnix);
           }
           break;
         case TimeframeOption.THIRTY_DAYS:
           value = breakpoints.sm ? (hasDatesAsRange ? 4 : 5) : 4;
           break;
         case TimeframeOption.THREE_MONTHS:
-          value = 3;
+          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 6) : 4;
           break;
         case TimeframeOption.SIX_MONTHS:
-          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 6) : 4;
+          value = 4;
           break;
         case TimeframeOption.LAST_YEAR:
           value = breakpoints.sm ? (hasDatesAsRange ? 3 : 5) : 4;
           break;
         default:
-          value = 2;
+          value = 4;
       }
     }
     return value;

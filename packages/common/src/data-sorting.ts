@@ -249,6 +249,16 @@ export function extractYearFromDate(seconds: number) {
   return date.getFullYear();
 }
 
+export function extractMonthFromDate(seconds: number) {
+  const date = new Date(seconds * 1000);
+  return date.getMonth();
+}
+
+export function extractDayFromDate(seconds: number) {
+  const date = new Date(seconds * 1000);
+  return date.getDay();
+}
+
 export function getFirstDayOfGivenYear(year: number) {
   const date = new Date(year, 0, 1);
   return Math.floor(date.getTime() / 1000);
