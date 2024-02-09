@@ -1,9 +1,37 @@
 import { Breakpoints } from '~/utils/use-breakpoints';
-import { subtractMonthToDate, extractYearFromDate, formatStyle, getFirstDayOfGivenYear, middleOfDayInSeconds, startOfDayInSeconds } from '@corona-dashboard/common';
+import {
+  extractYearFromDate,
+  formatStyle,
+  getFirstDayOfGivenYear,
+  middleOfDayInSeconds,
+  startOfDayInSeconds,
+  extractMonthFromDate,
+  extractDayFromDate,
+  addMonthToDate,
+} from '@corona-dashboard/common';
 
 export interface TickInstance {
   timestamp: number;
   formatStyle: formatStyle;
+}
+
+export function getPrefferedTimeTicksAllTimeFrame(startUnix: number, endUnix: number): number {
+  /**
+   * For the All timeframe we are interested in the amount of January 1st dates inbetween
+   * startUnix and endUnix (e.g 07.09.2020 - 31.01.2024 will results in 4 ticks).
+   *
+   * The way it works is that we first check if the startDate is equal to January 1st.
+   * If so, the count will get +1 at the end since the start year is not included when
+   * making the difference between the endYear and startYear
+   *
+   * This function is used in the Axes component where the bottomAxesTickNumber value
+   * is being generated.
+   */
+  const firstYearFirstOfJanuary = extractMonthFromDate(startUnix) == 0 && extractDayFromDate(startUnix) == 1;
+
+  const count = extractYearFromDate(endUnix) - extractYearFromDate(startUnix);
+
+  return firstYearFirstOfJanuary ? count + 1 : count;
 }
 
 function getDefault2ValuesForXAxis(startTick: number, endTick: number): TickInstance[] {
@@ -25,13 +53,13 @@ export function createTimeTicksAllTimeFrame(startTick: number, endTick: number, 
     return getDefault2ValuesForXAxis(start, end);
   }
 
-  const ticks: TickInstance[] = Array.from({ length: ticksNumber }, (_, index) => {
+  const ticks: TickInstance[] = Array.from({ length: ticksNumber }, (_, index = 1) => {
     const firstDayOfYearTimeStamp = getFirstDayOfGivenYear(startYear + index + 1); // 01.01.2021, 01.01.2022... etc.
     return { timestamp: startOfDayInSeconds(firstDayOfYearTimeStamp), formatStyle: 'axis-with-day-month-year-short' } as TickInstance;
   });
 
   // This if statement ensures that first & second label of the all-values timeframe don't overlap
-  if (breakpoints.lg) {
+  if (breakpoints.lg && Math.floor((ticks[0].timestamp - startTick) / 86400) > 180) {
     ticks.unshift({ timestamp: start, formatStyle: 'axis-with-month-year-short' } as TickInstance);
   }
 
@@ -53,11 +81,15 @@ export function createTimeTicksMonthlyTimeFrame(startTick: number, endTick: numb
     return getDefault2ValuesForXAxis(start, end);
   }
 
-  const ticks: TickInstance[] = Array.from({ length: count - 1 }, (_, index) => {
-    const previousMonthDate = subtractMonthToDate(end, index); // Reset to 01.XX
+  const ticks: TickInstance[] = [];
 
-    return { timestamp: previousMonthDate, formatStyle: 'axis-with-day-month-year-short' } as TickInstance;
-  });
+  for (let index = 1; index <= count; index++) {
+    const nextMonthDate = addMonthToDate(start, index);
+
+    if (nextMonthDate <= end) {
+      ticks.push({ timestamp: nextMonthDate, formatStyle: 'axis-with-day-month-year-short' } as TickInstance);
+    }
+  }
 
   ticks.reverse().unshift({ timestamp: start, formatStyle: 'axis-with-day-month-year-short' } as TickInstance);
 
