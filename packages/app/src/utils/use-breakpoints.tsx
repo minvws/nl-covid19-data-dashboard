@@ -1,9 +1,9 @@
-import React, { createContext, ReactNode, useContext, useMemo } from 'react';
-import { useTheme } from 'styled-components';
 import { useIsMounted } from './use-is-mounted';
 import { useMediaQuery } from './use-media-query';
+import { useTheme } from 'styled-components';
+import React, { createContext, ReactNode, useContext, useMemo } from 'react';
 
-type Breakpoints = {
+export type Breakpoints = {
   /**
    * ~420px
    */
@@ -34,11 +34,7 @@ const breakpointContext = createContext<Breakpoints | undefined>(undefined);
  * @param param0
  * @returns
  */
-export function BreakpointContextProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function BreakpointContextProvider({ children }: { children: ReactNode }) {
   const isMounted = useIsMounted();
   const { mediaQueries } = useTheme();
 
@@ -50,11 +46,7 @@ export function BreakpointContextProvider({
 
   const value = useMemo(() => ({ xs, sm, md, lg, xl }), [xs, sm, md, lg, xl]);
 
-  return (
-    <breakpointContext.Provider value={isMounted ? value : undefined}>
-      {children}
-    </breakpointContext.Provider>
-  );
+  return <breakpointContext.Provider value={isMounted ? value : undefined}>{children}</breakpointContext.Provider>;
 }
 
 /**

@@ -1,22 +1,22 @@
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
+import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
+import { ChartTimeControls } from '~/components/chart-time-controls';
 import { colors, NlSewer, SewerPerInstallationData, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { isPresent } from 'ts-is-present';
+import { mediaQueries, space } from '~/style/theme';
+import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
+import { RichContentSelect } from '~/components/rich-content-select';
+import styled from 'styled-components';
+import { Text } from '~/components/typography';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
-import { isPresent } from 'ts-is-present';
-import { Warning } from '@corona-dashboard/icons';
-import { Box } from '~/components/base';
-import { Text } from '~/components/typography';
-import { ChartTile } from '~/components/chart-tile';
-import { RichContentSelect } from '~/components/rich-content-select';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
-import { WarningTile } from '~/components/warning-tile';
-import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
-import { useIntl } from '~/intl';
-import { mediaQueries, space } from '~/style/theme';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
-import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
-import { ChartTimeControls } from '~/components/chart-time-controls';
-import styled from 'styled-components';
+import { useIntl } from '~/intl';
+import { Warning } from '@corona-dashboard/icons';
+import { WarningTile } from '~/components/warning-tile';
 
 interface SewerChartProps {
   /**
@@ -183,16 +183,18 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
             seriesConfig={[
               {
                 type: 'line',
-                metricProperty: 'selected_installation_rna_normalized',
-                label: text.rwziLabel ? `${text.rwziLabel} ${selectedInstallation}` : selectedInstallation,
-                color: colors.orange1,
-              },
-              {
-                type: 'line',
                 metricProperty: 'average',
                 label: text.averagesLegendLabel,
                 shortLabel: text.averagesTooltipLabel,
                 color: colors.scale.blue[3],
+              },
+              {
+                type: 'line',
+                metricProperty: 'selected_installation_rna_normalized',
+                label: text.rwziLabel ? `${text.rwziLabel} ${selectedInstallation}` : selectedInstallation,
+                color: colors.orange1,
+                opacity: 0.7,
+                strokeWidth: 1,
               },
             ]}
             dataOptions={dataOptions}

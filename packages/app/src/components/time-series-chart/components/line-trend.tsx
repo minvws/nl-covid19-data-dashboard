@@ -12,6 +12,7 @@ const DEFAULT_STROKE_WIDTH = 2;
 type LineTrendProps = {
   series: SeriesSingleValue[];
   color: string;
+  opacity?: number;
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
   getX: (v: SeriesItem) => number;
@@ -20,7 +21,7 @@ type LineTrendProps = {
   id: string;
 };
 
-export function LineTrend({ series, style = DEFAULT_STYLE, strokeWidth = DEFAULT_STROKE_WIDTH, color, getX, getY, curve = 'linear', id }: LineTrendProps) {
+export function LineTrend({ series, style = DEFAULT_STYLE, strokeWidth = DEFAULT_STROKE_WIDTH, color, opacity, getX, getY, curve = 'linear', id }: LineTrendProps) {
   const nonNullSeries = useMemo(() => {
     let nonNull = series.filter((x) => isPresent(x.__value));
     if (nonNull.length === 1) {
@@ -48,6 +49,7 @@ export function LineTrend({ series, style = DEFAULT_STYLE, strokeWidth = DEFAULT
       x={getX}
       y={getY}
       stroke={color}
+      opacity={opacity}
       strokeWidth={strokeWidth}
       curve={curves[curve]}
       strokeDasharray={style === 'dashed' ? 4 : undefined}
@@ -61,12 +63,13 @@ export function LineTrend({ series, style = DEFAULT_STYLE, strokeWidth = DEFAULT
 interface LineTrendIconProps {
   color: string;
   style?: 'solid' | 'dashed';
+  opacity?: number;
   strokeWidth?: number;
   width?: number;
   height?: number;
 }
 
-export function LineTrendIcon({ color, strokeWidth = DEFAULT_STROKE_WIDTH, style = DEFAULT_STYLE, width = 15, height = 15 }: LineTrendIconProps) {
+export function LineTrendIcon({ color, strokeWidth = DEFAULT_STROKE_WIDTH, style = DEFAULT_STYLE, opacity, width = 15, height = 15 }: LineTrendIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <line
@@ -75,6 +78,7 @@ export function LineTrendIcon({ color, strokeWidth = DEFAULT_STROKE_WIDTH, style
         strokeDasharray={style === 'dashed' ? 4 : undefined}
         strokeLinecap="round"
         strokeLinejoin="round"
+        opacity={opacity}
         x1={2}
         y1={height / 2}
         x2={width - 2}
