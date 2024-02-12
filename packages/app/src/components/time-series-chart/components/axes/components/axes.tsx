@@ -107,22 +107,22 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         case TimeframeOption.ALL:
           // Turned to an if statement for readability purposes
           if (hasDatesAsRange) {
-            value = 4;
+            value = breakpoints.sm ? 4 : 3;
           } else {
             value = getPrefferedTimeTicksAllTimeFrame(startUnix, endUnix);
           }
           break;
         case TimeframeOption.THIRTY_DAYS:
-          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 5) : 4;
+          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 5) : 3;
           break;
         case TimeframeOption.THREE_MONTHS:
           value = 4;
           break;
         case TimeframeOption.SIX_MONTHS:
-          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 6) : 4;
+          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 6) : 3;
           break;
         case TimeframeOption.LAST_YEAR:
-          value = breakpoints.sm ? (hasDatesAsRange ? 3 : 5) : 4;
+          value = breakpoints.sm ? (hasDatesAsRange ? 4 : 5) : 3;
           break;
         default:
           value = 4;
@@ -149,7 +149,7 @@ export const Axes = memo(function Axes<T extends TimestampedValue>({
         return createTimeTicksAllTimeFrame(startUnix, endUnix, bottomAxesTickNumber, breakpoints);
       case TimeframeOption.THREE_MONTHS:
       case TimeframeOption.SIX_MONTHS:
-        return createTimeTicksMonthlyTimeFrame(startUnix, endUnix, bottomAxesTickNumber);
+        return createTimeTicksMonthlyTimeFrame(startUnix, endUnix, bottomAxesTickNumber, breakpoints);
       case TimeframeOption.THIRTY_DAYS:
       case TimeframeOption.LAST_YEAR:
       default:

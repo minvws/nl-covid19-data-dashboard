@@ -66,7 +66,7 @@ export function createTimeTicksAllTimeFrame(startTick: number, endTick: number, 
   return ticks;
 }
 
-export function createTimeTicksMonthlyTimeFrame(startTick: number, endTick: number, count: number): TickInstance[] {
+export function createTimeTicksMonthlyTimeFrame(startTick: number, endTick: number, count: number, breakpoints: Breakpoints): TickInstance[] {
   /**
    * This method will calculate the timestamps for the 3 months interval. It must consist of exactly 4 values.
    * First value:  01 (XX - 3) 'YY
@@ -90,8 +90,9 @@ export function createTimeTicksMonthlyTimeFrame(startTick: number, endTick: numb
       ticks.push({ timestamp: nextMonthDate, formatStyle: 'axis-with-day-month-year-short' } as TickInstance);
     }
   }
-
-  ticks.reverse().unshift({ timestamp: start, formatStyle: 'axis-with-day-month-year-short' } as TickInstance);
+  if (breakpoints.lg && Math.floor((ticks[0].timestamp - startTick) / 86400) > 60) {
+    ticks.reverse().unshift({ timestamp: start, formatStyle: 'axis-with-day-month-year-short' } as TickInstance);
+  }
 
   return ticks;
 }
