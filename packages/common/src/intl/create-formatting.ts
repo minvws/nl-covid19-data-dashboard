@@ -1,9 +1,10 @@
+import { assert } from '../utils';
+import { isDefined } from 'ts-is-present';
 import isSameDay from 'date-fns/isSameDay';
 import isToday from 'date-fns/isToday';
 import isYesterday from 'date-fns/isYesterday';
 import subDays from 'date-fns/subDays';
-import { isDefined } from 'ts-is-present';
-import { assert } from '../utils';
+
 // TypeScript is missing some types for `Intl.DateTimeFormat`.
 // https://github.com/microsoft/TypeScript/issues/35865
 export interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
@@ -11,7 +12,20 @@ export interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
   timeStyle?: 'full' | 'long' | 'medium' | 'short';
 }
 
-export type formatStyle = 'time' | 'long' | 'medium' | 'iso' | 'axis' | 'axis-with-year' | 'weekday-medium' | 'weekday-long' | 'day-month';
+export type formatStyle =
+  | 'time'
+  | 'long'
+  | 'medium'
+  | 'day-only'
+  | 'month-only'
+  | 'iso'
+  | 'axis'
+  | 'axis-with-year'
+  | 'axis-with-month-year-short'
+  | 'axis-with-day-month-year-short'
+  | 'weekday-medium'
+  | 'weekday-long'
+  | 'day-month';
 
 // Helper functions
 
@@ -95,6 +109,11 @@ export function createFormatting(
     timeZone: 'Europe/Amsterdam',
   } as DateTimeFormatOptions);
 
+  const Day = new Intl.DateTimeFormat(languageTag, {
+    day: 'numeric',
+    timeZone: 'Europe/Amsterdam',
+  } as DateTimeFormatOptions);
+
   // Day Month or Month Day depending on the locale
   const DayMonth = new Intl.DateTimeFormat(languageTag, {
     month: 'long',
@@ -112,6 +131,16 @@ export function createFormatting(
     month: 'short',
     day: 'numeric',
     year: 'numeric',
+    timeZone: 'Europe/Amsterdam',
+  });
+
+  const Month = new Intl.DateTimeFormat(languageTag, {
+    month: 'short',
+    timeZone: 'Europe/Amsterdam',
+  });
+
+  const YearShort = new Intl.DateTimeFormat(languageTag, {
+    year: '2-digit',
     timeZone: 'Europe/Amsterdam',
   });
 
@@ -154,11 +183,23 @@ export function createFormatting(
       case 'medium': // '23 juli 2020'
         return Medium.format(date);
 
+      case 'day-only': // '23'
+        return Day.format(date);
+
+      case 'month-only': // 'okt'
+        return Month.format(date);
+
       case 'axis': // '23 jul'
         return DayMonthShort.format(date).replace(/\./g, '');
 
       case 'axis-with-year': // '23 jul 2021'
         return DayMonthShortYear.format(date).replace(/\./g, '');
+
+      case 'axis-with-month-year-short': // 'jul '21'
+        return `${Month.format(date).replace(/\./g, '')} '${YearShort.format(date)}`;
+
+      case 'axis-with-day-month-year-short': // '23 jul '21'
+        return `${DayMonthShort.format(date).replace(/\./g, '')} '${YearShort.format(date)}`;
 
       case 'weekday-medium':
         return WeekdayMedium.format(date);

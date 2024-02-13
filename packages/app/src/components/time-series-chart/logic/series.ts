@@ -70,6 +70,7 @@ export interface GappedLineSeriesDefinition<T extends TimestampedValue> extends 
   label: string;
   shortLabel?: string;
   color: string;
+  opacity?: number;
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
   curve?: 'linear' | 'step';
@@ -81,6 +82,7 @@ export interface LineSeriesDefinition<T extends TimestampedValue> extends Series
   label: string;
   shortLabel?: string;
   color: string;
+  opacity?: number;
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
   curve?: 'linear' | 'step';

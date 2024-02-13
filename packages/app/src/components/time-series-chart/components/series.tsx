@@ -51,6 +51,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({ seriesConfig, seriesList
                   key={index}
                   series={series as SeriesSingleValue[]}
                   color={config.color}
+                  opacity={config.opacity}
                   style={config.style}
                   strokeWidth={config.strokeWidth}
                   curve={config.curve}
@@ -65,6 +66,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({ seriesConfig, seriesList
                   key={index}
                   series={series as SeriesSingleValue[]}
                   color={config.color}
+                  opacity={config.opacity}
                   style={config.style}
                   strokeWidth={config.strokeWidth}
                   curve={config.curve}

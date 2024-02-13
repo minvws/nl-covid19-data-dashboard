@@ -25,7 +25,7 @@ export function SeriesIcon<T extends TimestampedValue>({ config, value }: Series
   switch (config.type) {
     case 'line':
     case 'gapped-line':
-      return <LineTrendIcon color={config.color} strokeWidth={config.strokeWidth} style={config.style} />;
+      return <LineTrendIcon color={config.color} strokeWidth={config.strokeWidth} style={config.style} opacity={config.opacity} />;
     case 'scatter-plot':
       return <ScatterPlotIcon color={config.color} />;
     case 'range':
