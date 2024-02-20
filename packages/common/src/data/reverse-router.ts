@@ -73,6 +73,7 @@ export function getArchivedRoutes() {
     gm: {
       positive_tests: (code: string) => `/gemeente/${code}/positieve-testen`,
       mortality: (code: string) => `/gemeente/${code}/sterfte`,
+      patientenInBeeld: (code: string) => `/gemeente/${code}/patienten-in-beeld`,
     },
 
     dataExplained: {
