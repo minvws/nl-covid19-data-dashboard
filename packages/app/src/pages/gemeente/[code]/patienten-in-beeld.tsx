@@ -233,7 +233,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                   dataOptions={{
                     selectedCode: data.code,
                     highlightSelection: true,
-                    getLink: reverseRouter.gm.ziekenhuisopnames,
+                    getLink: reverseRouter.gm.patientenInBeeld,
                     tooltipVariables: {
                       patients: commonTexts.choropleth_tooltip.patients,
                     },
@@ -271,7 +271,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                   dataOptions={{
                     selectedCode: data.code,
                     highlightSelection: true,
-                    getLink: reverseRouter.gm.ziekenhuisopnames,
+                    getLink: reverseRouter.gm.patientenInBeeld,
                     tooltipVariables: {
                       patients: commonTexts.choropleth_tooltip.patients,
                     },

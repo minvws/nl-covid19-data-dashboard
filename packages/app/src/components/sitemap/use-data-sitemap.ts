@@ -27,7 +27,7 @@ export function useDataSitemap(base: 'nl' | 'gm', code?: string, data?: Pick<Nl,
         links: [
           {
             text: commonTexts.sidebar.metrics.hospital_admissions.title,
-            href: reverseRouter.gm.ziekenhuisopnames(code),
+            href: reverseRouter.gm.patientenInBeeld(code),
           },
         ],
       },
