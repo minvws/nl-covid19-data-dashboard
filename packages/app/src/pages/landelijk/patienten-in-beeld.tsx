@@ -353,7 +353,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'admissions_on_date_of_admission_per_100000',
                   }}
                   dataOptions={{
-                    getLink: reverseRouter.gm.ziekenhuisopnames,
+                    getLink: reverseRouter.gm.patientenInBeeld,
                     tooltipVariables: {
                       patients: commonTexts.choropleth_tooltip.patients,
                     },
@@ -392,7 +392,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'admissions_in_the_last_7_days_per_100000',
                   }}
                   dataOptions={{
-                    getLink: reverseRouter.gm.ziekenhuisopnames,
+                    getLink: reverseRouter.gm.patientenInBeeld,
                     tooltipVariables: {
                       patients: commonTexts.choropleth_tooltip.patients,
                     },
