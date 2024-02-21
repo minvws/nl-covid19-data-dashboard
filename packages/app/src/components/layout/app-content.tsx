@@ -105,7 +105,6 @@ interface ResponsiveVisibleProps {
 
 const ResponsiveVisible = styled.div<ResponsiveVisibleProps>`
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
-  height: 100%;
 
   @media ${mediaQueries.md} {
     display: ${({ isVisible }) => (!isVisible ? 'block' : undefined)};
