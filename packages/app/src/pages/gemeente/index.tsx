@@ -16,6 +16,8 @@ import { space } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { DynamicChoropleth } from '../../components/choropleth';
+import { Menu, MenuItemLink } from '~/components/aside/menu';
+import { Menu as MenuIcon } from '@corona-dashboard/icons';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
@@ -84,6 +86,11 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             </ErrorBoundary>
           </Box>
         </Box>
+        {!breakpoints.md && (
+          <Menu spacing={2}>
+            <MenuItemLink title={'__Placeholder__'} href={'/landelijk/de-coronaprik'} icon={<MenuIcon />} />
+          </Menu>
+        )}
       </GmLayout>
     </Layout>
   );
