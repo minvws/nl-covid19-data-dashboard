@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Menu, MenuRenderer } from '~/components/aside/menu';
+import { Menu, MenuItemLink, MenuRenderer } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
@@ -10,6 +10,7 @@ import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { GmComboBox } from './components/gm-combo-box';
 import { useSidebar } from './logic/use-sidebar';
+import { Menu as MenuIcon } from '@corona-dashboard/icons';
 
 type GmLayoutProps = {
   children?: React.ReactNode;
@@ -76,8 +77,15 @@ export function GmLayout(props: GmLayoutProps) {
       <AppContent
         hideBackButton={isMainRoute}
         searchComponent={
-          <Box height="100%" maxWidth={{ _: '38rem', md: undefined }} marginX="auto">
-            <GmComboBox getLink={getLink} selectedGmCode={code} shouldFocusInput={false} />
+          <Box display={'flex'} flexWrap={'wrap'} height={'100%'} maxWidth={{ _: '38rem', md: undefined }} marginX={'auto'}>
+            <Box alignSelf={'flex-start'} flexGrow={1}>
+              <GmComboBox getLink={getLink} selectedGmCode={code} shouldFocusInput={false} />
+            </Box>
+            <Box alignSelf={'flex-end'} flexGrow={1}>
+              <Menu spacing={2}>
+                <MenuItemLink title={'__Placeholder__'} href={'/landelijk/de-coronaprik'} icon={<MenuIcon />} />
+              </Menu>
+            </Box>
           </Box>
         }
         sidebarComponent={

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { space } from '~/style/theme';
 import { Box } from '../base';
 import { Text } from '../typography';
+import { Icon } from '~/components/aside/menu';
 
 type TitleProps = {
   title: string;
@@ -13,17 +14,21 @@ type TitleProps = {
   showArrow?: boolean;
 };
 
-export const AsideTitle = ({ title, subtitle, showArrow }: TitleProps) => {
+export const AsideTitle = ({ title, subtitle, showArrow, icon }: TitleProps) => {
   return (
     <Box width="100%" display="flex" flexDirection="row" flexWrap="nowrap" alignItems="center">
       <Box width="100%">
-        <Text>
-          <Box as="span" display="flex" justifyContent="space-between" alignItems="center" width="100%">
-            {title}
-            {showArrow && <AsideArrow />}
-          </Box>
-        </Text>
-
+        <Box as="span" display="flex" justifyContent="space-between" alignItems="center" width="100%">
+          {icon ? (
+            <Box display={'flex'} alignItems={'center'} gridColumnGap={space[2]}>
+              {icon && <Icon>{icon}</Icon>}
+              <Text fontWeight={'bold'}>{title}</Text>
+            </Box>
+          ) : (
+            <Text>{title}</Text>
+          )}
+          {showArrow && <AsideArrow />}
+        </Box>
         {subtitle && <Text>{subtitle}</Text>}
       </Box>
     </Box>

@@ -102,7 +102,7 @@ interface MenuItemLinkProps {
   showArrow?: boolean;
 }
 
-export function MenuItemLink({ href, title }: MenuItemLinkProps) {
+export function MenuItemLink({ href, title, icon }: MenuItemLinkProps) {
   const router = useRouter();
   const breakpoints = useBreakpoints(true);
 
@@ -110,7 +110,7 @@ export function MenuItemLink({ href, title }: MenuItemLinkProps) {
     return (
       <li>
         <Unavailable>
-          <AsideTitle title={title} />
+          <AsideTitle title={title} icon={icon} />
         </Unavailable>
       </li>
     );
@@ -122,7 +122,7 @@ export function MenuItemLink({ href, title }: MenuItemLinkProps) {
     <li>
       <Link href={href} passHref>
         <StyledAnchor isActive={breakpoints.md && isActive} aria-current={isActive ? 'page' : undefined}>
-          <AsideTitle title={title} showArrow={!breakpoints.md || !isActive} />
+          <AsideTitle title={title} showArrow={!breakpoints.md || !isActive} icon={icon} />
         </StyledAnchor>
       </Link>
     </li>
@@ -202,7 +202,7 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
   })
 );
 
-const Icon = ({ children }: { children: ReactNode }) => {
+export const Icon = ({ children }: { children: ReactNode }) => {
   return (
     <Box
       role="img"
