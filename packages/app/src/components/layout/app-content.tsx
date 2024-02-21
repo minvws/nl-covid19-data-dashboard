@@ -49,7 +49,7 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
           width={{ md: '18rem', lg: '21rem' }}
           zIndex={3}
         >
-          <ResponsiveVisible isVisible={isMenuOpen}>
+          <ResponsiveVisible isVisible={isMenuOpen} fullHeight={hideBackButton}>
             {searchComponent}
             {sidebarComponent}
           </ResponsiveVisible>
@@ -101,10 +101,12 @@ const BackButtonContainer = styled(Box)<BackButtonContainerProps>`
 
 interface ResponsiveVisibleProps {
   isVisible: boolean;
+  fullHeight?: boolean;
 }
 
 const ResponsiveVisible = styled.div<ResponsiveVisibleProps>`
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+  height: ${({ fullHeight }) => (fullHeight ? '100%' : 'auto')};
 
   @media ${mediaQueries.md} {
     display: ${({ isVisible }) => (!isVisible ? 'block' : undefined)};
