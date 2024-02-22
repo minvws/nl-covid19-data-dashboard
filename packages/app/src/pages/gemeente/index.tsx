@@ -88,7 +88,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
         </Box>
         {!breakpoints.md && (
           <Menu spacing={2}>
-            <MenuItemLink title={'__Placeholder__'} href={'/landelijk/de-coronaprik'} icon={<MenuIcon />} />
+            <MenuItemLink title={commonTexts.gemeente_index.lijstweergave_button.title} href={commonTexts.gemeente_index.lijstweergave_button.href} icon={<MenuIcon />} />
           </Menu>
         )}
       </GmLayout>
