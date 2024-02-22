@@ -1,15 +1,15 @@
-import { colors } from '@corona-dashboard/common';
-import { ChevronRight, Clock, Database, External as ExternalLinkIcon, MeerInformatie } from '@corona-dashboard/icons';
-import css from '@styled-system/css';
-import React, { Fragment } from 'react';
-import styled from 'styled-components';
-import { Box } from '~/components/base';
-import { ExternalLink } from '~/components/external-link';
 import { Anchor, InlineText, Text } from '~/components/typography';
-import { useIntl } from '~/intl';
+import { Box } from '~/components/base';
+import { ChevronRight, Clock, Database, External as ExternalLinkIcon, MeerInformatie } from '@corona-dashboard/icons';
+import { colors } from '@corona-dashboard/common';
+import { ExternalLink } from '~/components/external-link';
 import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { space } from '~/style/theme';
+import { useIntl } from '~/intl';
+import css from '@styled-system/css';
+import React, { Fragment } from 'react';
+import styled from 'styled-components';
 
 interface Datasource {
   href: string;
@@ -34,6 +34,7 @@ export interface MetadataProps {
     text: string;
   };
   referenceLink?: string;
+  jsonSources?: Datasource[];
 }
 
 export function Metadata({
@@ -45,6 +46,7 @@ export function Metadata({
   moreInformationLabel,
   moreInformationLink,
   referenceLink,
+  jsonSources = [],
 }: MetadataProps) {
   const { commonTexts } = useIntl();
   const text = commonTexts.common.metadata;
@@ -72,6 +74,8 @@ export function Metadata({
       )}
 
       {referenceLink && <MetadataReference icon={<MeerInformatie aria-hidden />} referenceLink={referenceLink} />}
+
+      {jsonSources.length > 0 && <MetadataItem icon={<MeerInformatie aria-hidden />} items={jsonSources} label={text.metrics_json_links.metrics_json_source} />}
 
       {moreInformationLabel && <MetadataItem icon={<MeerInformatie aria-hidden />} items={moreInformationLink ? [moreInformationLink] : []} label={moreInformationLabel} />}
     </Box>
@@ -136,7 +140,7 @@ function MetadataItem({ icon, label, items, referenceLink, accessibilityText, ac
             {`${label}: `}
             {items.map((item, index) => (
               <Fragment key={index + item.href}>
-                {index > 0 && ' & '}
+                {index > 0 && (index !== items.length - 1 ? ', ' : '')}
                 {item.href && (
                   <ExternalLink
                     href={item.href}

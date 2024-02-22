@@ -1,23 +1,24 @@
-import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { useState } from 'react';
-import { Phone } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
-import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
+import { Languages, SiteText } from '~/locale';
+import { Layout } from '~/domain/layout/layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { Phone } from '@corona-dashboard/icons';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { useIntl } from '~/intl';
+import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.behavior_page.nl,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -34,7 +35,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { pageText, selectedArchivedNlData: data, lastGenerated } = props;
   const { corona_melder_app } = commonTexts;
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const warningLastValue = data.corona_melder_app_warning_archived_20220421.last_value;
   const endDate = createDateFromUnixTimestamp(warningLastValue.date_unix);
@@ -61,6 +62,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: warningLastValue.date_unix,
               dateOfInsertionUnix: warningLastValue.date_of_insertion_unix,
               dataSources: [corona_melder_app.header.bronnen.rivm],
+              jsonSources: [jsonText.metrics_archived_national_json],
             }}
           />
 

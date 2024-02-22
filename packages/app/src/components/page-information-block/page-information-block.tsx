@@ -50,6 +50,12 @@ interface InformationBlockProps {
     };
   };
   onToggleArchived?: () => void;
+  showNationalJson?: boolean;
+  showArchivedNationalJson?: boolean;
+  showMunicipalityJson?: boolean;
+  showArchivedMunicipalityJson?: boolean;
+  showGmCollectionJson?: boolean;
+  showArchivedGmCollectionJson?: boolean;
 }
 
 export function PageInformationBlock({
@@ -71,7 +77,6 @@ export function PageInformationBlock({
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
   const showArchivedToggleButton = typeof isArchivedHidden !== 'undefined' && typeof onToggleArchived !== 'undefined';
   const { commonTexts } = useIntl();
-
   const hasPageInformationHeader = !!pageInformationHeader;
 
   const MetaDataBlock = metadata ? (
