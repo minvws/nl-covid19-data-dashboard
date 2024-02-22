@@ -50,12 +50,6 @@ interface InformationBlockProps {
     };
   };
   onToggleArchived?: () => void;
-  showNationalJson?: boolean;
-  showArchivedNationalJson?: boolean;
-  showMunicipalityJson?: boolean;
-  showArchivedMunicipalityJson?: boolean;
-  showGmCollectionJson?: boolean;
-  showArchivedGmCollectionJson?: boolean;
 }
 
 export function PageInformationBlock({
