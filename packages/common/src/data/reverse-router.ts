@@ -39,6 +39,7 @@ export function getReverseRouter(isMobile: boolean) {
 
     gm: {
       index: (code?: string) => (code ? (isMobile ? `/gemeente/${code}` : reverseRouter.gm.rioolwater(code)) : '/gemeente'),
+      lijstWeergave: (code?: string) => (code ? (isMobile ? `/gemeente/${code}` : reverseRouter.gm.rioolwater(code)) : '/gemeente/lijstweergave'),
       positieveTesten: (code: string) => `/gemeente/${code}/positieve-testen`,
       sterfte: (code: string) => `/gemeente/${code}/sterfte`,
       ziekenhuisopnames: (code: string) => `/gemeente/${code}/ziekenhuis-opnames`,

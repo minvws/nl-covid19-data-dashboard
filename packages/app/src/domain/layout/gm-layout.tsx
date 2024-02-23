@@ -83,7 +83,7 @@ export function GmLayout(props: GmLayoutProps) {
             </Box>
             <Box alignSelf={'flex-end'} flexGrow={1}>
               <Menu spacing={2}>
-                <MenuItemLink title={'__Placeholder__'} href={'/landelijk/de-coronaprik'} icon={<MenuIcon />} />
+                <MenuItemLink title={commonTexts.gemeente_index.lijstweergave_button.title} href={commonTexts.gemeente_index.lijstweergave_button.href} icon={<MenuIcon />} />
               </Menu>
             </Box>
           </Box>
