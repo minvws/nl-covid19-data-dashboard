@@ -4,30 +4,40 @@ import { space } from '~/style/theme';
 import { Heading } from '~/components/typography';
 import { DynamicChoropleth, Markdown } from '~/components';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { ArchivedGmCollectionHospitalNiceChoropleth, colors } from '@corona-dashboard/common';
+import { ArchivedGmCollectionHospitalNiceChoropleth, colors, gmData } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { Menu, MenuItemButton } from '~/components/aside/menu';
 import { Menu as MenuIcon } from '@corona-dashboard/icons';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils';
 import { useIntl } from '~/intl';
+import { useMemo } from 'react';
 
 interface ChoroplethLayoutProps {
   code: string;
-  data: ArchivedGmCollectionHospitalNiceChoropleth[];
   switchIndexPageType: () => void;
 }
 
 /**
  * Display the overview of municipalities in an interactive choropleth map
  * @param code
- * @param data
+ * @param switchIndexPageType
  * @constructor
  */
-export function ChoroplethLayout({ code, data, switchIndexPageType }: ChoroplethLayoutProps) {
+export function ChoroplethLayout({ code, switchIndexPageType }: ChoroplethLayoutProps) {
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
   const breakpoints = useBreakpoints();
+
+  const data = useMemo(() => {
+    return gmData.map<ArchivedGmCollectionHospitalNiceChoropleth>(
+      (x) =>
+        ({
+          gmcode: x.gemcode,
+          admissions_on_date_of_reporting: null,
+        } as unknown as ArchivedGmCollectionHospitalNiceChoropleth)
+    );
+  }, []);
 
   return (
     <>
