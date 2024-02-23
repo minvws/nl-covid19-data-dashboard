@@ -27,7 +27,7 @@ type GmLayoutProps = {
       isLandingPage: true;
       code: string;
       municipalityName?: undefined;
-      showListAsIndexPage: boolean;
+      showListAsIndexPage?: boolean;
       switchIndexPageType: () => void;
     }
 );
@@ -79,13 +79,7 @@ export function GmLayout(props: GmLayoutProps) {
       <AppContent
         hideBackButton={isMainRoute}
         searchComponent={
-          showListAsIndexPage ? (
-            <Box alignSelf={'flex-end'} flexGrow={1}>
-              <Menu spacing={2}>
-                <MenuItemButton title={commonTexts.gemeente_index.kaartweergave_button_title} icon={<Eye />} action={switchIndexPageType} />
-              </Menu>
-            </Box>
-          ) : (
+          !showListAsIndexPage ? (
             <Box display={'flex'} flexWrap={'wrap'} height={'100%'} maxWidth={{ _: '38rem', md: undefined }} marginX={'auto'}>
               <Box alignSelf={'flex-start'} flexGrow={1}>
                 <GmComboBox getLink={getLink} selectedGmCode={code} shouldFocusInput={false} />
@@ -97,6 +91,12 @@ export function GmLayout(props: GmLayoutProps) {
                   </Menu>
                 </Box>
               )}
+            </Box>
+          ) : (
+            <Box alignSelf={'flex-end'} flexGrow={1}>
+              <Menu spacing={2}>
+                <MenuItemButton title={commonTexts.gemeente_index.kaartweergave_button_title} icon={<Eye />} action={switchIndexPageType} />
+              </Menu>
             </Box>
           )
         }

@@ -39,7 +39,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <GmLayout isLandingPage code={code} showListAsIndexPage={showListAsIndexPage} switchIndexPageType={() => switchIndexPageType(!showListAsIndexPage)}>
-        {showListAsIndexPage ? <Box>hoi</Box> : <ChoroplethLayout code={code} data={data} />}
+        {showListAsIndexPage ? <Box>hoi</Box> : <ChoroplethLayout code={code} data={data} switchIndexPageType={() => switchIndexPageType(!showListAsIndexPage)} />}
       </GmLayout>
     </Layout>
   );

@@ -136,11 +136,9 @@ interface MenuItemButtonProps {
 }
 
 export function MenuItemButton({ title, icon, action }: MenuItemButtonProps) {
-  const breakpoints = useBreakpoints(true);
-
   return (
     <StyledButton isActive={false} onClick={action}>
-      <AsideTitle title={title} showArrow={!breakpoints.md} icon={icon} />
+      <AsideTitle title={title} showArrow icon={icon} />
     </StyledButton>
   );
 }
@@ -223,8 +221,9 @@ const StyledButton = styled.button<{ isActive: boolean }>((buttonProps) =>
     width: '100%',
     padding: space[2],
     paddingLeft: '3rem',
-    display: 'block',
+    paddingRight: '1rem',
     border: 'none',
+    display: 'block',
     color: buttonProps.isActive ? colors.blue8 : 'black',
     fontWeight: buttonProps.isActive ? 'bold' : 'normal',
     position: 'relative',
