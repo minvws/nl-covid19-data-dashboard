@@ -75,7 +75,6 @@ See below an overview of all the available icons in this package. This file is g
 | Klok210001                             | <div style="background-color: white;"><img src="./src/svg/klok_2100-01.svg" alt="Klok210001" /></div>                                                          |
 | KunstCultuur                           | <div style="background-color: white;"><img src="./src/svg/kunst_cultuur.svg" alt="KunstCultuur" /></div>                                                       |
 | KunstcultuurMusea                      | <div style="background-color: white;"><img src="./src/svg/kunstcultuur_musea.svg" alt="KunstcultuurMusea" /></div>                                             |
-| Lijstweergave                          | <div style="background-color: white;"><img src="./src/svg/lijstweergave.svg" alt="Lijstweergave" /></div>                                                      |
 | Line                                   | <div style="background-color: white;"><img src="./src/svg/line.svg" alt="Line" /></div>                                                                        |
 | Locaties                               | <div style="background-color: white;"><img src="./src/svg/locaties.svg" alt="Locaties" /></div>                                                                |
 | Location                               | <div style="background-color: white;"><img src="./src/svg/location.svg" alt="Location" /></div>                                                                |

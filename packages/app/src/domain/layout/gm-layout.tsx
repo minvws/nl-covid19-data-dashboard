@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Menu, MenuItemLink, MenuRenderer } from '~/components/aside/menu';
+import { Menu, MenuItemButton, MenuRenderer } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
@@ -10,7 +10,7 @@ import { useIntl } from '~/intl';
 import { space } from '~/style/theme';
 import { GmComboBox } from './components/gm-combo-box';
 import { useSidebar } from './logic/use-sidebar';
-import { Menu as MenuIcon } from '@corona-dashboard/icons';
+import { Menu as MenuIcon, Eye } from '@corona-dashboard/icons';
 
 type GmLayoutProps = {
   children?: React.ReactNode;
@@ -27,6 +27,8 @@ type GmLayoutProps = {
       isLandingPage: true;
       code: string;
       municipalityName?: undefined;
+      showListAsIndexPage: boolean;
+      switchIndexPageType: () => void;
     }
 );
 
@@ -47,7 +49,7 @@ type GmLayoutProps = {
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 export function GmLayout(props: GmLayoutProps) {
-  const { children, municipalityName, code, getLink } = props;
+  const { children, municipalityName, code, getLink, showListAsIndexPage, switchIndexPageType, isLandingPage } = props;
 
   const { commonTexts } = useIntl();
   const router = useRouter();
@@ -77,16 +79,26 @@ export function GmLayout(props: GmLayoutProps) {
       <AppContent
         hideBackButton={isMainRoute}
         searchComponent={
-          <Box display={'flex'} flexWrap={'wrap'} height={'100%'} maxWidth={{ _: '38rem', md: undefined }} marginX={'auto'}>
-            <Box alignSelf={'flex-start'} flexGrow={1}>
-              <GmComboBox getLink={getLink} selectedGmCode={code} shouldFocusInput={false} />
-            </Box>
+          showListAsIndexPage ? (
             <Box alignSelf={'flex-end'} flexGrow={1}>
               <Menu spacing={2}>
-                <MenuItemLink title={commonTexts.gemeente_index.lijstweergave_button.title} href={commonTexts.gemeente_index.lijstweergave_button.href} icon={<MenuIcon />} />
+                <MenuItemButton title={commonTexts.gemeente_index.kaartweergave_button_title} icon={<Eye />} action={switchIndexPageType} />
               </Menu>
             </Box>
-          </Box>
+          ) : (
+            <Box display={'flex'} flexWrap={'wrap'} height={'100%'} maxWidth={{ _: '38rem', md: undefined }} marginX={'auto'}>
+              <Box alignSelf={'flex-start'} flexGrow={1}>
+                <GmComboBox getLink={getLink} selectedGmCode={code} shouldFocusInput={false} />
+              </Box>
+              {isLandingPage && (
+                <Box alignSelf={'flex-end'} flexGrow={1}>
+                  <Menu spacing={2}>
+                    <MenuItemButton title={commonTexts.gemeente_index.lijstweergave_button_title} icon={<MenuIcon />} action={switchIndexPageType} />
+                  </Menu>
+                </Box>
+              )}
+            </Box>
+          )
         }
         sidebarComponent={
           <>

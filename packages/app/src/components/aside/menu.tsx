@@ -129,6 +129,22 @@ export function MenuItemLink({ href, title, icon }: MenuItemLinkProps) {
   );
 }
 
+interface MenuItemButtonProps {
+  title: string;
+  icon?: ReactNode;
+  action: () => void;
+}
+
+export function MenuItemButton({ title, icon, action }: MenuItemButtonProps) {
+  const breakpoints = useBreakpoints(true);
+
+  return (
+    <StyledButton isActive={false} onClick={action}>
+      <AsideTitle title={title} showArrow={!breakpoints.md} icon={icon} />
+    </StyledButton>
+  );
+}
+
 function isActivePath(router: NextRouter, href: Url) {
   const currentPath = (router.asPath || '/').split('?')[0];
   const hrefPath = resolveHref(router, href).split('?')[0];
@@ -189,6 +205,43 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
 
     '&::after': {
       content: anchorProps.isActive ? 'none' : asResponsiveArray({ _: 'none', xs: undefined }),
+      backgroundImage: `url('${chevronUrl}')`,
+      // match aspect ratio of chevron.svg
+      backgroundSize: '0.6em 1.2em',
+      height: '1.2em',
+      width: '0.6em',
+      display: 'block',
+      position: 'absolute',
+      right: space[3],
+      top: '1.35em',
+    },
+  })
+);
+
+const StyledButton = styled.button<{ isActive: boolean }>((buttonProps) =>
+  css({
+    width: '100%',
+    padding: space[2],
+    paddingLeft: '3rem',
+    display: 'block',
+    border: 'none',
+    color: buttonProps.isActive ? colors.blue8 : 'black',
+    fontWeight: buttonProps.isActive ? 'bold' : 'normal',
+    position: 'relative',
+    bg: buttonProps.isActive ? 'blue1' : 'transparent',
+
+    '&:hover, &:focus': {
+      cursor: 'pointer',
+      bg: 'blue8',
+      color: colors.white,
+      fontWeight: 'bold',
+      svg: {
+        color: colors.white,
+      },
+    },
+
+    '&::after': {
+      content: buttonProps.isActive ? 'none' : asResponsiveArray({ _: 'none', xs: undefined }),
       backgroundImage: `url('${chevronUrl}')`,
       // match aspect ratio of chevron.svg
       backgroundSize: '0.6em 1.2em',
