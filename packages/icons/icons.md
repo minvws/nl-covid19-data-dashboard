@@ -76,10 +76,12 @@ See below an overview of all the available icons in this package. This file is g
 | KunstCultuur                           | <div style="background-color: white;"><img src="./src/svg/kunst_cultuur.svg" alt="KunstCultuur" /></div>                                                       |
 | KunstcultuurMusea                      | <div style="background-color: white;"><img src="./src/svg/kunstcultuur_musea.svg" alt="KunstcultuurMusea" /></div>                                             |
 | Line                                   | <div style="background-color: white;"><img src="./src/svg/line.svg" alt="Line" /></div>                                                                        |
+| List                                   | <div style="background-color: white;"><img src="./src/svg/list.svg" alt="List" /></div>                                                                        |
 | Locaties                               | <div style="background-color: white;"><img src="./src/svg/locaties.svg" alt="Locaties" /></div>                                                                |
 | Location                               | <div style="background-color: white;"><img src="./src/svg/location.svg" alt="Location" /></div>                                                                |
 | Lopend                                 | <div style="background-color: white;"><img src="./src/svg/lopend.svg" alt="Lopend" /></div>                                                                    |
 | Maatregelen                            | <div style="background-color: white;"><img src="./src/svg/maatregelen.svg" alt="Maatregelen" /></div>                                                          |
+| Map                                    | <div style="background-color: white;"><img src="./src/svg/map.svg" alt="Map" /></div>                                                                          |
 | MaxAantalBezoekers                     | <div style="background-color: white;"><img src="./src/svg/max_aantal_bezoekers.svg" alt="MaxAantalBezoekers" /></div>                                          |
 | MaxVisitors                            | <div style="background-color: white;"><img src="./src/svg/max_visitors.svg" alt="MaxVisitors" /></div>                                                         |
 | MedischeScreening                      | <div style="background-color: white;"><img src="./src/svg/medische_screening.svg" alt="MedischeScreening" /></div>                                             |

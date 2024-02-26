@@ -71,10 +71,12 @@ export type IconName =
   | 'KunstCultuur'
   | 'KunstcultuurMusea'
   | 'Line'
+  | 'List'
   | 'Locaties'
   | 'Location'
   | 'Lopend'
   | 'Maatregelen'
+  | 'Map'
   | 'MaxAantalBezoekers'
   | 'MaxVisitors'
   | 'MedischeScreening'
@@ -211,10 +213,12 @@ export const iconName2filename: Record<IconName, string> = {
   KunstCultuur: 'kunst_cultuur.svg',
   KunstcultuurMusea: 'kunstcultuur_musea.svg',
   Line: 'line.svg',
+  List: 'list.svg',
   Locaties: 'locaties.svg',
   Location: 'location.svg',
   Lopend: 'lopend.svg',
   Maatregelen: 'maatregelen.svg',
+  Map: 'map.svg',
   MaxAantalBezoekers: 'max_aantal_bezoekers.svg',
   MaxVisitors: 'max_visitors.svg',
   MedischeScreening: 'medische_screening.svg',

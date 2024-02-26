@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { space } from '~/style/theme';
 import { Box } from '../base';
 import { Text } from '../typography';
+import css from '@styled-system/css';
 
 type TitleProps = {
   title: string;
@@ -13,13 +14,17 @@ type TitleProps = {
   showArrow?: boolean;
 };
 
-export const AsideTitle = ({ title, subtitle, showArrow }: TitleProps) => {
+export const AsideTitle = ({ title, subtitle, showArrow, icon }: TitleProps) => {
   return (
     <Box width="100%" display="flex" flexDirection="row" flexWrap="nowrap" alignItems="center">
       <Box width="100%">
         <Text>
           <Box as="span" display="flex" justifyContent="space-between" alignItems="center" width="100%">
-            {title}
+            <Box display="flex" alignItems="center">
+              {icon && <Icon>{icon}</Icon>}
+              {title}
+            </Box>
+
             {showArrow && <AsideArrow />}
           </Box>
         </Text>
@@ -36,3 +41,26 @@ const AsideArrow = styled(ChevronRight)`
   height: 20px;
   width: ${space[3]};
 `;
+
+const Icon = ({ children }: { children: ReactNode }) => {
+  return (
+    <Box
+      role="img"
+      aria-hidden="true"
+      flex="0 0 auto"
+      display="flex"
+      flexDirection="row"
+      flexWrap="nowrap"
+      css={css({
+        width: '2.5rem',
+        height: '2.5rem',
+        svg: {
+          height: '2.25rem',
+          fill: 'currentColor',
+        },
+      })}
+    >
+      {children}
+    </Box>
+  );
+};

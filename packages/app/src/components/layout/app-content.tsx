@@ -28,7 +28,6 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
   const currentCode = router.query.code as string | undefined;
   const backButtonConfig = { currentPageScope, currentCode, isMenuOpen, reverseRouter, commonTexts };
   const backButtonValues = getBackButtonValues(backButtonConfig);
-
   return (
     <MaxWidth paddingX={{ _: '0', lg: space[3] }}>
       <Box display={{ _: 'block', md: 'flex' }} flexDirection={{ _: 'column', md: 'row' }} margin={`0 auto ${space[4]} auto`} minHeight="50vh" paddingBottom={space[4]}>

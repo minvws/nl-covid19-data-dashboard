@@ -1,21 +1,23 @@
-import { colors, ArchivedGmCollectionHospitalNiceChoropleth, gmData } from '@corona-dashboard/common';
-import { useRouter } from 'next/router';
-import { useMemo } from 'react';
 import { Box } from '~/components/base';
-import { TooltipContent } from '~/components/choropleth/tooltips';
+import { colors, ArchivedGmCollectionHospitalNiceChoropleth, gmData } from '@corona-dashboard/common';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { DynamicChoropleth } from '../../components/choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { Markdown } from '~/components/markdown';
-import { Heading } from '~/components/typography';
+import { getLastGeneratedDate } from '~/static-props/get-data';
 import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
 import { GmLayout } from '~/domain/layout/gm-layout';
+import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { useIntl } from '~/intl';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate } from '~/static-props/get-data';
+import { Markdown } from '~/components/markdown';
+import { Menu, MenuItemLink } from '~/components/aside/menu';
 import { space } from '~/style/theme';
+import { TooltipContent } from '~/components/choropleth/tooltips';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useIntl } from '~/intl';
+import { useMemo } from 'react';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { DynamicChoropleth } from '../../components/choropleth';
+import { useRouter } from 'next/router';
+import { List } from '@corona-dashboard/icons';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
@@ -84,6 +86,12 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             </ErrorBoundary>
           </Box>
         </Box>
+
+        {!breakpoints.md && (
+          <Menu>
+            <MenuItemLink icon={<List />} title="LijstWeergave" href={'/landelijk'} showArrow isLinkForMainMenu={false} />
+          </Menu>
+        )}
       </GmLayout>
     </Layout>
   );
