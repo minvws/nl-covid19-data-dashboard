@@ -51,9 +51,9 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlData('hospital_nice_per_age_group', 'intensive_care_nice_per_age_group', 'hospital_nice', 'intensive_care_nice'),
   createGetArchivedChoroplethData({
-    gm: ({ hospital_nice_choropleth_archived_20230830, hospital_nice_choropleth_archived_20240305 }) => ({
+    gm: ({ hospital_nice_choropleth_archived_20230830, hospital_nice_choropleth_archived_20240228 }) => ({
       hospital_nice_choropleth_archived_20230830,
-      hospital_nice_choropleth_archived_20240305,
+      hospital_nice_choropleth_archived_20240228,
     }),
   }),
   async (context: GetStaticPropsContext) => {
@@ -132,7 +132,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   const archivedChoroplethDataGm: ArchivedGmCollectionHospitalNiceChoropleth[] = archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830;
-  const archivedChoroplethDataGmWeelklyAdmissions: ArchivedGmCollectionHospitalNiceChoroplethWeeklyAdmissions[] = archivedChoropleth.gm.hospital_nice_choropleth_archived_20240305;
+  const archivedChoroplethDataGmWeelklyAdmissions: ArchivedGmCollectionHospitalNiceChoroplethWeeklyAdmissions[] = archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228;
 
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
@@ -374,8 +374,8 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                 metadata={{
                   date: {
                     start:
-                      archivedChoropleth.gm.hospital_nice_choropleth_archived_20240305[archivedChoropleth.gm.hospital_nice_choropleth_archived_20240305.length - 1].date_start_unix,
-                    end: archivedChoropleth.gm.hospital_nice_choropleth_archived_20240305[archivedChoropleth.gm.hospital_nice_choropleth_archived_20240305.length - 1]
+                      archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228[archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228.length - 1].date_start_unix,
+                    end: archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228[archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228.length - 1]
                       .date_end_unix,
                   },
                   source: textNl.sources.nice,
@@ -390,7 +390,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   map="gm"
                   data={archivedChoroplethDataGmWeelklyAdmissions}
                   dataConfig={{
-                    metricName: 'hospital_nice_choropleth_archived_20240305',
+                    metricName: 'hospital_nice_choropleth_archived_20240228',
                     metricProperty: 'admissions_in_the_last_7_days_per_100000',
                   }}
                   dataOptions={{
