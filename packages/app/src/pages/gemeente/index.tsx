@@ -8,6 +8,7 @@ import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
+import { List } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { Menu, MenuItemLink } from '~/components/aside/menu';
 import { space } from '~/style/theme';
@@ -17,7 +18,6 @@ import { useIntl } from '~/intl';
 import { useMemo } from 'react';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useRouter } from 'next/router';
-import { List } from '@corona-dashboard/icons';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
@@ -46,7 +46,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <GmLayout isLandingPage code={code}>
+      <GmLayout isLandingPage code={code} displayAsFlex>
         {!breakpoints.md && (
           <Box bg="white">
             <GmComboBox selectedGmCode={code} />
@@ -89,7 +89,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
         {!breakpoints.md && (
           <Menu>
-            <MenuItemLink icon={<List />} title="LijstWeergave" href={'/landelijk'} showArrow isLinkForMainMenu={false} />
+            <MenuItemLink icon={<List />} title="LijstWeergave" href={reverseRouter.gm.lijstweergave()} showArrow isLinkForMainMenu={false} />
           </Menu>
         )}
       </GmLayout>

@@ -16,9 +16,10 @@ interface AppContentProps {
   sidebarComponent: React.ReactNode;
   searchComponent?: React.ReactNode;
   hideBackButton?: boolean;
+  displayAsFlex?: boolean;
 }
 
-export function AppContent({ children, sidebarComponent, searchComponent, hideBackButton }: AppContentProps) {
+export function AppContent({ children, sidebarComponent, searchComponent, hideBackButton, displayAsFlex = false }: AppContentProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { commonTexts } = useIntl();
@@ -46,12 +47,12 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
           flexShrink={0}
           minHeight={{ lg: '35em' }}
           width={{ md: '18rem', lg: '21rem' }}
+          display={displayAsFlex ? 'flex' : 'block'}
           zIndex={3}
+          justifyContent="center"
         >
-          <ResponsiveVisible isVisible={isMenuOpen}>
-            {searchComponent}
-            {sidebarComponent}
-          </ResponsiveVisible>
+          <ResponsiveVisibleAside isVisible={isMenuOpen}>{searchComponent}</ResponsiveVisibleAside>
+          <ResponsiveVisible isVisible={isMenuOpen}>{sidebarComponent}</ResponsiveVisible>
         </Box>
 
         {/* id is for hash navigation */}
@@ -107,6 +108,18 @@ const ResponsiveVisible = styled.div<ResponsiveVisibleProps>`
 
   @media ${mediaQueries.md} {
     display: ${({ isVisible }) => (!isVisible ? 'block' : undefined)};
+  }
+
+  .has-no-js & {
+    display: block;
+  }
+`;
+
+const ResponsiveVisibleAside = styled.div<ResponsiveVisibleProps>`
+  display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
+
+  @media ${mediaQueries.md} {
+    display: ${({ isVisible }) => (!isVisible ? 'flex' : undefined)};
   }
 
   .has-no-js & {
