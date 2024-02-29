@@ -1,34 +1,34 @@
-import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard/common';
-import { Coronavirus, External } from '@corona-dashboard/icons';
-import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
 import { AgeDemographic } from '~/components/age-demographic';
-import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
+import { Coronavirus, External } from '@corona-dashboard/icons';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData, selectNlData } from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { ExternalLink } from '~/components/external-link';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
 import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Languages, SiteText } from '~/locale';
+import { Layout, NlLayout } from '~/domain/layout';
 import { Markdown } from '~/components/markdown';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { space } from '~/style/theme';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { TileList } from '~/components/tile-list';
+import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard/common';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { WarningTile } from '~/components/warning-tile';
-import { Layout, NlLayout } from '~/domain/layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData, selectNlData } from '~/static-props/get-data';
-import { space } from '~/style/theme';
-import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { useIntl } from '~/intl';
+import { useState } from 'react';
+import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = ['deceased_cbs', 'deceased_rivm_per_age_group_archived_20221231', 'deceased_rivm_archived_20221231'];
 
@@ -36,6 +36,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.deceased_page.nl,
   textShared: siteText.pages.deceased_page.shared,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -79,7 +80,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const dataDeceasedPerAgeGroup = archivedData.deceased_rivm_per_age_group_archived_20221231;
 
   const { commonTexts, formatPercentage } = useIntl();
-  const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, textShared, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -109,6 +110,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               },
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
               dataSources: [textNl.section_sterftemonitor.bronnen.cbs],
+              jsonSources: [jsonText.metrics_national_json, jsonText.metrics_archived_national_json],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

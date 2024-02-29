@@ -1,40 +1,41 @@
-import { colors, GmCollectionHospitalNiceChoropleth, ArchivedGmCollectionHospitalNiceChoropleth, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { Ziekenhuis } from '@corona-dashboard/icons';
-import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
+import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group/admissions-per-age-group';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
+import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
-import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { colors, GmCollectionHospitalNiceChoropleth, ArchivedGmCollectionHospitalNiceChoropleth, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { countTrailingNullValues, getBoundaryDateStartUnix, useReverseRouter } from '~/utils';
+import { createGetArchivedChoroplethData, createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { DynamicChoropleth } from '~/components/choropleth';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
 import { InView } from '~/components/in-view';
+import { Languages, SiteText } from '~/locale';
+import { Layout, NlLayout } from '~/domain/layout';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { SEOHead } from '~/components/seo-head';
+import { space } from '~/style/theme';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group/admissions-per-age-group';
-import { Layout, NlLayout } from '~/domain/layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetArchivedChoroplethData, createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
-import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { countTrailingNullValues, getBoundaryDateStartUnix, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
-import { Box } from '~/components/base/box';
-import { space } from '~/style/theme';
+import { useIntl } from '~/intl';
+import { useState } from 'react';
+import { Ziekenhuis } from '@corona-dashboard/icons';
 
 const pageMetrics = ['hospital_nice_per_age_group', 'intensive_care_nice_per_age_group', 'hospital_nice', 'intensive_care_nice'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.patients_page.nl,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -75,7 +76,7 @@ export const getStaticProps = createGetStaticProps(
 const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, choropleth, archivedChoropleth, content, lastGenerated } = props;
   const { commonTexts } = useIntl();
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const [selectedAdmissionsPerAgeGroupOverTimeChart, setSelectedAdmissionsPerAgeGroupOverTimeChart] = useState<string>('admissions_per_age_group_over_time_hospital');
   const [hospitalAdmissionsPerAgeGroupOverTimeTimeframe, setHospitalAdmissionsPerAgeGroupOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -143,6 +144,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: lastValueNice.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.sources.nice],
+              jsonSources: [jsonText.metrics_national_json, jsonText.metrics_archived_gm_collection_json],
             }}
             pageLinks={content.links}
             pageInformationHeader={getPageInformationHeaderContent({

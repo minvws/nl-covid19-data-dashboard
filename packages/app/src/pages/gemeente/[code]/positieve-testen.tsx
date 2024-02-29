@@ -1,44 +1,47 @@
-import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { GgdTesten } from '@corona-dashboard/icons';
-import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleContent } from '~/components/collapsible/collapsible-content';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData } from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { DynamicChoropleth } from '~/components/choropleth';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getMunicipalityJsonLink } from '~/utils/get-json-links';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
+import { GgdTesten } from '@corona-dashboard/icons';
+import { GmLayout, Layout } from '~/domain/layout';
 import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Languages, SiteText } from '~/locale';
 import { Markdown } from '~/components/markdown';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
+import { Text } from '~/components/typography';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Text } from '~/components/typography';
-import { WarningTile } from '~/components/warning-tile';
-import { GmLayout, Layout } from '~/domain/layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData } from '~/static-props/get-data';
-import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
-import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceComponentsInText, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { useIntl } from '~/intl';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { WarningTile } from '~/components/warning-tile';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textGm: siteText.pages.positive_tests_page.gm,
   textShared: siteText.pages.positive_tests_page.shared,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -78,11 +81,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
+  const router = useRouter();
   const { pageText, selectedGmData: data, selectedArchivedGmData: archivedData, archivedChoropleth, municipalityName, content, lastGenerated } = props;
   const [positivelyTestedPeopleTimeframe, setpositivelyTestedPeopleTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textGm, textShared, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const archivedLastValue = archivedData.tested_overall_archived_20230331.last_value;
   const populationCount = data.static_values.population_count;
@@ -114,6 +118,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               dateOrRange: archivedLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
+              jsonSources: [
+                getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_municipality_json),
+                getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_archived_municipality_json),
+                jsonText.metrics_archived_gm_collection_json,
+              ],
             }}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}

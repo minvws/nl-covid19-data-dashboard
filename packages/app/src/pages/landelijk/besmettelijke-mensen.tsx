@@ -23,6 +23,7 @@ import { getPageInformationHeaderContent } from '~/utils/get-page-information-he
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.infectious_people_page.nl,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -47,7 +48,7 @@ export const getStaticProps = createGetStaticProps(
 const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedArchivedNlData: data, lastGenerated, content } = props;
   const { commonTexts } = useIntl();
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const lastFullValue = getLastFilledValue(data.infectious_people_archived_20210709);
 
@@ -74,6 +75,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: lastFullValue.date_unix,
               dateOfInsertionUnix: lastFullValue.date_of_insertion_unix,
               dataSources: [textNl.bronnen.rivm],
+              jsonSources: [jsonText.metrics_archived_national_json],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,
