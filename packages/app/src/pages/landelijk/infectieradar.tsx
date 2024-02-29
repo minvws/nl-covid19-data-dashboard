@@ -1,35 +1,36 @@
-import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { GgdTesten } from '@corona-dashboard/icons';
-import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { ChartTile } from '~/components/chart-tile';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
+import { GgdTesten } from '@corona-dashboard/icons';
+import { InfectionRadarSymptomsPerAgeGroup } from '~/domain/infection_radar/infection-radar-per-age-group';
 import { InView } from '~/components/in-view';
+import { KpiTile, KpiValue, TwoKpiSection } from '~/components';
+import { Languages, SiteText } from '~/locale';
+import { Layout } from '~/domain/layout/layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { replaceVariablesInText } from '~/utils';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { InfectionRadarSymptomsPerAgeGroup } from '~/domain/infection_radar/infection-radar-per-age-group';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
-import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
-import { KpiTile, KpiValue, TwoKpiSection } from '~/components';
-import { replaceVariablesInText } from '~/utils';
+import { useIntl } from '~/intl';
+import { useState } from 'react';
 
 const pageMetrics = ['self_test_overall', 'infection_radar_symptoms_per_age_group'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.infectie_radar_page.nl,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -69,7 +70,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
 
   const { commonTexts } = useIntl();
 
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const totalInfectedPercentage = data.self_test_overall.last_value.infected_percentage ? data.self_test_overall.last_value.infected_percentage : 0;
 
@@ -99,6 +100,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
               },
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.sources.rivm],
+              jsonSources: [jsonText.metrics_national_json],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

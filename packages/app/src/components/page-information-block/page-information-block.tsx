@@ -71,7 +71,6 @@ export function PageInformationBlock({
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
   const showArchivedToggleButton = typeof isArchivedHidden !== 'undefined' && typeof onToggleArchived !== 'undefined';
   const { commonTexts } = useIntl();
-
   const hasPageInformationHeader = !!pageInformationHeader;
 
   const MetaDataBlock = metadata ? (

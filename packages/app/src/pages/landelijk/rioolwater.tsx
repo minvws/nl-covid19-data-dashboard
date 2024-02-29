@@ -1,32 +1,32 @@
-import { Experimenteel, Rioolvirus } from '@corona-dashboard/icons';
-import { isEmpty } from 'lodash';
-import { GetStaticPropsContext } from 'next';
-import { DynamicChoropleth } from '~/components/choropleth';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { DynamicChoropleth } from '~/components/choropleth';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { Experimenteel, Rioolvirus } from '@corona-dashboard/icons';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
 import { InView } from '~/components/in-view';
+import { isEmpty } from 'lodash';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Languages, SiteText } from '~/locale';
+import { Layout } from '~/domain/layout/layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { SewerChart } from '~/domain/sewer/sewer-chart';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { WarningTile } from '~/components/warning-tile';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { SewerChart } from '~/domain/sewer/sewer-chart';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
-import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = ['sewer'];
 
@@ -38,6 +38,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.sewer_page.nl,
   textShared: siteText.pages.sewer_page.shared,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -76,7 +77,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const { pageText, selectedNlData: data, choropleth, content, lastGenerated } = props;
 
-  const { caterogyTexts, metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { caterogyTexts, metadataTexts, textNl, textShared, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const sewerAverages = data.sewer;
 
   const metadata = {
@@ -102,6 +103,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: sewerAverages.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
+              jsonSources: [jsonText.metrics_national_json, jsonText.metrics_gm_collection_json],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

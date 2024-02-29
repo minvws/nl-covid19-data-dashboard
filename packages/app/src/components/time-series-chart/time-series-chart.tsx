@@ -364,7 +364,6 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
               yScale={yScale}
               isPercentage={isPercentage}
               yAxisRef={leftPaddingRef}
-              isYAxisCollapsed={isYAxisCollapsed}
               hasAllZeroValues={hasAllZeroValues}
               showWeekNumbers={showWeekNumbers}
             />

@@ -1,52 +1,53 @@
-import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { Coronavirus, VulnerableGroups as VulnerableGroupsIcon } from '@corona-dashboard/icons';
-import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { Coronavirus, VulnerableGroups as VulnerableGroupsIcon } from '@corona-dashboard/icons';
+import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { Divider } from '~/components/divider';
-import { InView } from '~/components/in-view';
-import { KpiTile } from '~/components/kpi-tile';
-import { KpiValue } from '~/components/kpi-value';
-import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
-import { Markdown } from '~/components/markdown';
-import { PageArticlesTile } from '~/components/articles/page-articles-tile';
-import { PageFaqTile } from '~/components/page-faq-tile';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { WarningTile } from '~/components/warning-tile';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
-import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
+import { InView } from '~/components/in-view';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Languages, SiteText } from '~/locale';
+import { Layout } from '~/domain/layout/layout';
+import { Markdown } from '~/components/markdown';
+import { NlLayout } from '~/domain/layout/nl-layout';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { useIntl } from '~/intl';
+import { useState } from 'react';
+import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = [
   'difference.nursing_home__deceased_daily_archived_20230126',
-  'difference.vulnerable_nursing_home__infected_locations_total_archived_20230711',
   'difference.nursing_home__newly_infected_people_archived_20230126',
   'difference.vulnerable_hospital_admissions_archived_20230711',
-  'vulnerable_nursing_home_archived_20230711',
+  'difference.vulnerable_nursing_home__infected_locations_total_archived_20230711',
   'nursing_home_archived_20230126',
   'vulnerable_hospital_admissions_archived_20230711',
+  'vulnerable_nursing_home_archived_20230711',
 ];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.nursing_home_page.nl,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -102,7 +103,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
   const nursingHomeArchivedUnderReportedDateStart = getBoundaryDateStartUnix(data.nursing_home_archived_20230126.values, 7);
 
   const { commonTexts, formatNumber } = useIntl();
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const infectedLocationsText = textNl.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText = textNl.verpleeghuis_positief_geteste_personen;
 
@@ -136,6 +137,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               dateOrRange: vulnerableNursingHomeDataLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [positiveTestedPeopleText.bronnen.rivm],
+              jsonSources: [jsonText.metrics_archived_national_json, jsonText.metrics_archived_gm_collection_json],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,
