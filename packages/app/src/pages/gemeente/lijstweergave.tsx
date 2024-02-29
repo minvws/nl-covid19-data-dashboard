@@ -69,7 +69,7 @@ const MunicipalityListOverview = (props: StaticProps<typeof getStaticProps>) => 
           <Box width="100%">
             <Box maxWidth={{ _: '38rem', md: undefined }}>
               <Menu>
-                <MenuItemLink icon={<Map />} title="LijstWeergave" href={reverseRouter.gm.index()} showArrow isLinkForMainMenu={false} />
+                <MenuItemLink icon={<Map />} title={commonTexts.gemeente_layout.list.go_to_map_label} href={reverseRouter.gm.index()} showArrow isLinkForMainMenu={false} />
               </Menu>
             </Box>
           </Box>
@@ -78,7 +78,7 @@ const MunicipalityListOverview = (props: StaticProps<typeof getStaticProps>) => 
         code={code}
       >
         <Box padding={space[3]}>
-          <Heading level={2}>Lijstweergave gemeenten</Heading>
+          <Heading level={2}>{commonTexts.gemeente_layout.list.list_label}</Heading>
           <Box paddingY={space[3]} display="flex" flexDirection="row" flexWrap={'wrap'} alignItems="stretch" justifyContent="left">
             {Object.entries(MunicipalityLetter).map(([letterKey, letterValue], index) => (
               <Fragment key={index + letterKey}>

@@ -89,7 +89,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
         {!breakpoints.md && (
           <Menu>
-            <MenuItemLink icon={<List />} title="LijstWeergave" href={reverseRouter.gm.lijstweergave()} showArrow isLinkForMainMenu={false} />
+            <MenuItemLink icon={<List />} title={commonTexts.gemeente_layout.list.go_to_list_label} href={reverseRouter.gm.lijstweergave()} showArrow isLinkForMainMenu={false} />
           </Menu>
         )}
       </GmLayout>

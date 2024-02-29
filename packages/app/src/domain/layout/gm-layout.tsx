@@ -51,6 +51,7 @@ type GmLayoutProps = {
  */
 export function GmLayout(props: GmLayoutProps) {
   const reverseRouter = useReverseRouter();
+  const { commonTexts } = useIntl();
 
   const {
     children,
@@ -64,7 +65,7 @@ export function GmLayout(props: GmLayoutProps) {
         </Box>
         <Box maxWidth={{ _: '38rem', md: undefined }}>
           <Menu>
-            <MenuItemLink icon={<List />} title="LijstWeergave" href={reverseRouter.gm.lijstweergave()} showArrow isLinkForMainMenu={false} />
+            <MenuItemLink icon={<List />} title={commonTexts.gemeente_layout.list.go_to_list_label} href={reverseRouter.gm.lijstweergave()} showArrow isLinkForMainMenu={false} />
           </Menu>
         </Box>
       </Box>
@@ -72,7 +73,6 @@ export function GmLayout(props: GmLayoutProps) {
     displayAsFlex = false,
   } = props;
 
-  const { commonTexts } = useIntl();
   const router = useRouter();
 
   const showMetricLinks = router.route !== '/gemeente' && router.route !== '/gemeente/lijstweergave';
