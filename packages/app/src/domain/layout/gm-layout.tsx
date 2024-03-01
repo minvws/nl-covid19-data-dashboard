@@ -1,18 +1,24 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { Menu, MenuRenderer } from '~/components/aside/menu';
+import { AppContent } from '~/components/layout/app-content';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { AppContent } from '~/components/layout/app-content';
-import { Heading } from '~/components/typography';
-import { VisuallyHidden } from '~/components/visually-hidden';
-import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
 import { GmComboBox } from './components/gm-combo-box';
+import { Heading } from '~/components/typography';
+import { List } from '@corona-dashboard/icons';
+import { Menu, MenuItemLink, MenuRenderer } from '~/components/aside/menu';
+import { space } from '~/style/theme';
+import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
+import { useRouter } from 'next/router';
 import { useSidebar } from './logic/use-sidebar';
+import { VisuallyHidden } from '~/components/visually-hidden';
+import Head from 'next/head';
+import React from 'react';
 
 type GmLayoutProps = {
   children?: React.ReactNode;
+  asideComponent?: React.ReactNode;
+  displayListButton?: React.ReactNode;
+  displayAsFlex?: boolean;
   getLink?: (code: string) => string;
 } & (
   | {
@@ -35,23 +41,50 @@ type GmLayoutProps = {
  * ## States
  *
  * ### Mobile
- * - /gemeente -> only show aside
+ * - /gemeente && /gemeente/lijstweergave-> only show aside
  * - /gemeente/[metric] -> only show content (children)
  *
  * ### Desktop
- * - /gemeente -> shows aside and content (children)
+ * - /gemeente && /gemeente/lijstweergave -> shows aside and content (children)
  * - /gemeente/[metric] -> shows aside and content (children)
  *
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 export function GmLayout(props: GmLayoutProps) {
-  const { children, municipalityName, code, getLink } = props;
-
+  const reverseRouter = useReverseRouter();
   const { commonTexts } = useIntl();
+
+  const {
+    children,
+    municipalityName,
+    code,
+    getLink,
+    displayListButton,
+    asideComponent = displayListButton ? (
+      <Box display="flex" flexDirection="column" justifyContent="space-between" width="100%">
+        <Box maxWidth={{ _: '38rem', md: undefined }}>
+          <GmComboBox getLink={getLink} selectedGmCode={code} shouldFocusInput={false} />
+        </Box>
+        <Box maxWidth={{ _: '38rem', md: undefined }}>
+          <Menu>
+            <MenuItemLink icon={<List />} title={commonTexts.gemeente_layout.list.go_to_list_label} href={reverseRouter.gm.lijstweergave()} showArrow isLinkForMainMenu={false} />
+          </Menu>
+        </Box>
+      </Box>
+    ) : (
+      <Box display="flex" flexDirection="column" justifyContent="space-between" width="100%">
+        <Box maxWidth={{ _: '38rem', md: undefined }}>
+          <GmComboBox getLink={getLink} selectedGmCode={code} shouldFocusInput={false} />
+        </Box>
+      </Box>
+    ),
+    displayAsFlex = false,
+  } = props;
+
   const router = useRouter();
 
-  const showMetricLinks = router.route !== '/gemeente';
+  const showMetricLinks = router.route !== '/gemeente' && router.route !== '/gemeente/lijstweergave';
 
   const isMainRoute = router.route === '/gemeente';
 
@@ -74,11 +107,7 @@ export function GmLayout(props: GmLayoutProps) {
 
       <AppContent
         hideBackButton={isMainRoute}
-        searchComponent={
-          <Box height="100%" maxWidth={{ _: '38rem', md: undefined }} marginX="auto">
-            <GmComboBox getLink={getLink} selectedGmCode={code} shouldFocusInput={false} />
-          </Box>
-        }
+        searchComponent={asideComponent}
         sidebarComponent={
           <>
             {showMetricLinks && (
@@ -107,6 +136,7 @@ export function GmLayout(props: GmLayoutProps) {
             )}
           </>
         }
+        displayAsFlex={displayAsFlex}
       >
         <ErrorBoundary>{children}</ErrorBoundary>
       </AppContent>

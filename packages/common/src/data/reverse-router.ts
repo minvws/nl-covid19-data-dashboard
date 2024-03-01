@@ -44,6 +44,7 @@ export function getReverseRouter(isMobile: boolean) {
       patientenInBeeld: (code: string) => `/gemeente/${code}/patienten-in-beeld`,
       rioolwater: (code: string) => `/gemeente/${code}/rioolwater`,
       deCoronaprik: (code: string) => `/gemeente/${code}/de-coronaprik`,
+      lijstweergave: () => '/gemeente/lijstweergave',
     },
   } as const;
 

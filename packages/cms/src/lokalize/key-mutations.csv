@@ -1,4 +1,13 @@
 timestamp,action,key,document_id,move_to
+2024-02-29T16:56:00.034Z,add,pages.municipality_list_page.gm.go_to_list_label,Nj97lpO3jQh76onlHCRsla,__
+2024-02-29T16:56:00.971Z,add,pages.municipality_list_page.gm.go_to_map_label,Nj97lpO3jQh76onlHCRt42,__
+2024-02-29T16:56:02.195Z,add,pages.municipality_list_page.gm.list_label,aLsER6e7bVv6SzRxzsorn7,__
+2024-02-29T17:08:19.417Z,add,common.gemeente_layout.list.go_to_list_label,jsGiCtokn2h16No2XOCjsg,__
+2024-02-29T17:08:21.363Z,add,common.gemeente_layout.list.go_to_map_label,aIhqVlpPHSWN4KBoRtCqN3,__
+2024-02-29T17:08:22.547Z,add,common.gemeente_layout.list.list_label,P56mtwcJXH3ayG8JPz9lUD,__
+2024-02-29T17:08:22.554Z,delete,pages.municipality_list_page.gm.go_to_list_label,Nj97lpO3jQh76onlHCRsla,__
+2024-02-29T17:08:22.556Z,delete,pages.municipality_list_page.gm.go_to_map_label,Nj97lpO3jQh76onlHCRt42,__
+2024-02-29T17:08:22.557Z,delete,pages.municipality_list_page.gm.list_label,aLsER6e7bVv6SzRxzsorn7,__
 2024-02-22T14:50:50.064Z,add,common.common.metadata.metrics_json_links.metrics_json_source,BDRHgHFora2UCq5UG30sAv,__
 2024-02-22T14:50:50.989Z,add,common.common.metadata.metrics_json_links.metrics_national_json.href,2z0g0X7Nweo2izzuiKMmnu,__
 2024-02-22T14:50:51.987Z,add,common.common.metadata.metrics_json_links.metrics_national_json.text,BDRHgHFora2UCq5UG30sFf,__

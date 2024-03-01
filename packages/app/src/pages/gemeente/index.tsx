@@ -8,7 +8,9 @@ import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
+import { List } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
+import { Menu, MenuItemLink } from '~/components/aside/menu';
 import { space } from '~/style/theme';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -44,7 +46,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <GmLayout isLandingPage code={code}>
+      <GmLayout isLandingPage code={code} displayAsFlex displayListButton>
         {!breakpoints.md && (
           <Box bg="white">
             <GmComboBox selectedGmCode={code} />
@@ -84,6 +86,12 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             </ErrorBoundary>
           </Box>
         </Box>
+
+        {!breakpoints.md && (
+          <Menu>
+            <MenuItemLink icon={<List />} title={commonTexts.gemeente_layout.list.go_to_list_label} href={reverseRouter.gm.lijstweergave()} showArrow isLinkForMainMenu={false} />
+          </Menu>
+        )}
       </GmLayout>
     </Layout>
   );
