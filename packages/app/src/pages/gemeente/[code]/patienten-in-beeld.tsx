@@ -34,7 +34,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 
-const pageMetrics = ['hospital_nice'];
+const pageMetrics = ['hospital_nice_archived_20240228'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textGm: siteText.pages.hospital_page.gm,
