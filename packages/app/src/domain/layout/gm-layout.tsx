@@ -7,11 +7,11 @@ import { List } from '@corona-dashboard/icons';
 import { Menu, MenuItemLink, MenuRenderer } from '~/components/aside/menu';
 import { space } from '~/style/theme';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
 import { useRouter } from 'next/router';
 import { useSidebar } from './logic/use-sidebar';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import Head from 'next/head';
-import { useReverseRouter } from '~/utils';
 import React from 'react';
 
 type GmLayoutProps = {
