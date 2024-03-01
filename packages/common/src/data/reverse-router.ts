@@ -41,7 +41,7 @@ export function getReverseRouter(isMobile: boolean) {
       index: (code?: string) => (code ? (isMobile ? `/gemeente/${code}` : reverseRouter.gm.rioolwater(code)) : '/gemeente'),
       positieveTesten: (code: string) => `/gemeente/${code}/positieve-testen`,
       sterfte: (code: string) => `/gemeente/${code}/sterfte`,
-      ziekenhuisopnames: (code: string) => `/gemeente/${code}/ziekenhuis-opnames`,
+      patientenInBeeld: (code: string) => `/gemeente/${code}/patienten-in-beeld`,
       rioolwater: (code: string) => `/gemeente/${code}/rioolwater`,
       deCoronaprik: (code: string) => `/gemeente/${code}/de-coronaprik`,
     },
@@ -73,6 +73,7 @@ export function getArchivedRoutes() {
     gm: {
       positive_tests: (code: string) => `/gemeente/${code}/positieve-testen`,
       mortality: (code: string) => `/gemeente/${code}/sterfte`,
+      patientenInBeeld: (code: string) => `/gemeente/${code}/patienten-in-beeld`,
     },
 
     dataExplained: {
