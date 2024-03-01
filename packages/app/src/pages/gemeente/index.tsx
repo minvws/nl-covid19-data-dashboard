@@ -46,7 +46,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <GmLayout isLandingPage code={code} displayAsFlex>
+      <GmLayout isLandingPage code={code} displayAsFlex displayListButton>
         {!breakpoints.md && (
           <Box bg="white">
             <GmComboBox selectedGmCode={code} />

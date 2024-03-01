@@ -12,10 +12,12 @@ import { useSidebar } from './logic/use-sidebar';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import Head from 'next/head';
 import { useReverseRouter } from '~/utils';
+import React from 'react';
 
 type GmLayoutProps = {
   children?: React.ReactNode;
   asideComponent?: React.ReactNode;
+  displayListButton?: React.ReactNode;
   displayAsFlex?: boolean;
   getLink?: (code: string) => string;
 } & (
@@ -58,7 +60,8 @@ export function GmLayout(props: GmLayoutProps) {
     municipalityName,
     code,
     getLink,
-    asideComponent = (
+    displayListButton,
+    asideComponent = displayListButton ? (
       <Box display="flex" flexDirection="column" justifyContent="space-between" width="100%">
         <Box maxWidth={{ _: '38rem', md: undefined }}>
           <GmComboBox getLink={getLink} selectedGmCode={code} shouldFocusInput={false} />
@@ -67,6 +70,12 @@ export function GmLayout(props: GmLayoutProps) {
           <Menu>
             <MenuItemLink icon={<List />} title={commonTexts.gemeente_layout.list.go_to_list_label} href={reverseRouter.gm.lijstweergave()} showArrow isLinkForMainMenu={false} />
           </Menu>
+        </Box>
+      </Box>
+    ) : (
+      <Box display="flex" flexDirection="column" justifyContent="space-between" width="100%">
+        <Box maxWidth={{ _: '38rem', md: undefined }}>
+          <GmComboBox getLink={getLink} selectedGmCode={code} shouldFocusInput={false} />
         </Box>
       </Box>
     ),
