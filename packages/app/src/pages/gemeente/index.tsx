@@ -11,6 +11,7 @@ import { Layout } from '~/domain/layout/layout';
 import { List } from '@corona-dashboard/icons';
 import { Markdown } from '~/components/markdown';
 import { Menu, MenuItemLink } from '~/components/aside/menu';
+import { Markdown } from '~/components/markdown';
 import { space } from '~/style/theme';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { useBreakpoints } from '~/utils/use-breakpoints';

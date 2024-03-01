@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { GmLayout } from '~/domain/layout/gm-layout';
-import { Layout } from '~/domain/layout/layout';
-import { useIntl } from '~/intl';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, selectGmData } from '~/static-props/get-data';
+import { GmLayout } from '~/domain/layout/gm-layout';
+import { Layout } from '~/domain/layout/layout';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useEffect } from 'react';
+import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useRouter } from 'next/router';
 
 export { getStaticPaths } from '~/static-paths/gm';
 

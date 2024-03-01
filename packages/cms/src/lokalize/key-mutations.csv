@@ -8,3 +8,16 @@ timestamp,action,key,document_id,move_to
 2024-02-29T17:08:22.554Z,delete,pages.municipality_list_page.gm.go_to_list_label,Nj97lpO3jQh76onlHCRsla,__
 2024-02-29T17:08:22.556Z,delete,pages.municipality_list_page.gm.go_to_map_label,Nj97lpO3jQh76onlHCRt42,__
 2024-02-29T17:08:22.557Z,delete,pages.municipality_list_page.gm.list_label,aLsER6e7bVv6SzRxzsorn7,__
+2024-02-22T14:50:50.064Z,add,common.common.metadata.metrics_json_links.metrics_json_source,BDRHgHFora2UCq5UG30sAv,__
+2024-02-22T14:50:50.989Z,add,common.common.metadata.metrics_json_links.metrics_national_json.href,2z0g0X7Nweo2izzuiKMmnu,__
+2024-02-22T14:50:51.987Z,add,common.common.metadata.metrics_json_links.metrics_national_json.text,BDRHgHFora2UCq5UG30sFf,__
+2024-02-22T14:50:53.063Z,add,common.common.metadata.metrics_json_links.metrics_archived_national_json.href,BDRHgHFora2UCq5UG30sKP,__
+2024-02-22T14:50:54.197Z,add,common.common.metadata.metrics_json_links.metrics_archived_national_json.text,2z0g0X7Nweo2izzuiKMn3y,__
+2024-02-22T14:50:55.202Z,add,common.common.metadata.metrics_json_links.metrics_municipality_json.href,CEYjXN3lO3X17pY2n57knM,__
+2024-02-22T14:50:56.216Z,add,common.common.metadata.metrics_json_links.metrics_municipality_json.text,wNH7AHaoQOBFzNJdymvlyg,__
+2024-02-22T14:50:57.258Z,add,common.common.metadata.metrics_json_links.metrics_archived_municipality_json.href,aFg4DQ8VnKtfWX3L7ofdtJ,__
+2024-02-22T14:50:58.279Z,add,common.common.metadata.metrics_json_links.metrics_archived_municipality_json.text,LEQIG0OTDngFQu9E9HHLGp,__
+2024-02-22T14:50:59.270Z,add,common.common.metadata.metrics_json_links.metrics_gm_collection_json.href,UTNNzvANEIshqW3hB5Uu1r,__
+2024-02-22T14:51:00.317Z,add,common.common.metadata.metrics_json_links.metrics_gm_collection_json.text,LEQIG0OTDngFQu9E9HHLOA,__
+2024-02-22T14:51:01.330Z,add,common.common.metadata.metrics_json_links.metrics_archived_gm_collection_json.href,VWkwBKrnqfeEle0Dvjc5hg,__
+2024-02-22T14:51:02.347Z,add,common.common.metadata.metrics_json_links.metrics_archived_gm_collection_json.text,CEYjXN3lO3X17pY2n57mro,__

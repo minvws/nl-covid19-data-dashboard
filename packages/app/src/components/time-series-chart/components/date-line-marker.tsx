@@ -1,4 +1,4 @@
-import { colors, isDateSpanValue, TimestampedValue } from '@corona-dashboard/common';
+import { colors, DateSpanValue, extractMonthFromDate, extractYearFromDate, formatStyle, isDateSpanValue, TimestampedValue } from '@corona-dashboard/common';
 import { HoveredPoint } from '../logic';
 import { space } from '~/style/theme';
 import { useIntl } from '~/intl';
@@ -21,21 +21,32 @@ interface DateLineMarkerProps<T extends TimestampedValue> {
 
 export function DateLineMarker<T extends TimestampedValue>({ lineColor = colors.primary, point, value }: DateLineMarkerProps<T>) {
   const { formatDateFromSeconds } = useIntl();
+
+  const getFormattedDate = (unixDate: number, format: formatStyle) => formatDateFromSeconds(unixDate, format);
+
+  const getDateSpanValueDate = (value: DateSpanValue) => {
+    const startDateMonth = extractMonthFromDate(value.date_start_unix);
+    const startDateYear = extractYearFromDate(value.date_start_unix);
+
+    const endDateMonth = extractMonthFromDate(value.date_end_unix);
+    const endDateYear = extractYearFromDate(value.date_end_unix);
+
+    if (startDateYear !== endDateYear) {
+      return `${formatDateFromSeconds(value.date_start_unix, 'axis-with-day-month-year-short')} - ${formatDateFromSeconds(value.date_end_unix, 'axis-with-day-month-year-short')}`;
+    } else if (startDateMonth !== endDateMonth) {
+      return `${formatDateFromSeconds(value.date_start_unix, 'axis')} - ${formatDateFromSeconds(value.date_end_unix, 'axis-with-day-month-year-short')}`;
+    } else {
+      return `${formatDateFromSeconds(value.date_start_unix, 'day-only')} - ${formatDateFromSeconds(value.date_end_unix, 'axis-with-day-month-year-short')}`;
+    }
+  };
+
+  const label = isDateSpanValue(value) ? getDateSpanValueDate(value) : getFormattedDate(point.seriesValue.__date_unix, 'axis-with-day-month-year-short');
+
   return (
     <Container style={{ transform: `translateX(${point.x}px)` }}>
       <Line color={lineColor} />
       <LabelContainer>
-        <Label>
-          {isDateSpanValue(value) ? (
-            <>
-              {formatDateFromSeconds(value.date_start_unix, 'axis')}
-              <> &ndash; </>
-              {formatDateFromSeconds(value.date_end_unix, 'axis')}
-            </>
-          ) : (
-            formatDateFromSeconds(point.seriesValue.__date_unix, 'axis-with-day-month-year-short')
-          )}
-        </Label>
+        <Label>{label}</Label>
       </LabelContainer>
     </Container>
   );
@@ -46,7 +57,7 @@ const LabelContainer = styled.div({
   justifyContent: 'center',
   marginTop: '7px',
   transform: 'translate(-50%, 0)',
-  width: '100px',
+  width: '100%',
 });
 
 const Label = styled.span(

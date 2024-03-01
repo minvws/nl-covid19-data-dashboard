@@ -1,35 +1,35 @@
-import { Bevolking } from '@corona-dashboard/icons';
-import { GetStaticPropsContext } from 'next';
-import { middleOfDayInSeconds } from '@corona-dashboard/common';
-import { useMemo, useRef, useState } from 'react';
-import { Heading } from '~/components/typography';
-import { Markdown } from '~/components/markdown';
-import { PageInformationBlock } from '~/components/page-information-block';
-import { Tile } from '~/components/tile';
-import { TileList } from '~/components/tile-list';
-import { TwoKpiSection } from '~/components/two-kpi-section';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
+import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
-import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
-import { useBehaviorLookupKeys } from '~/domain/behavior/logic/use-behavior-lookup-keys';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { Bevolking } from '@corona-dashboard/icons';
+import { Box } from '~/components/base/box';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
-import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
+import { Heading } from '~/components/typography';
+import { InView } from '~/components/in-view';
+import { Languages, SiteText } from '~/locale';
+import { Layout } from '~/domain/layout/layout';
+import { Markdown } from '~/components/markdown';
+import { middleOfDayInSeconds } from '@corona-dashboard/common';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { Tile } from '~/components/tile';
+import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { useBehaviorLookupKeys } from '~/domain/behavior/logic/use-behavior-lookup-keys';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { useIntl } from '~/intl';
+import { useMemo, useRef, useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
-import { Box } from '~/components/base/box';
-import { InView } from '~/components/in-view';
 
 const pageMetrics = ['behavior_archived_20230411', 'behavior_annotations_archived_20230412', 'behavior_per_age_group_archived_20230411'];
 
@@ -37,6 +37,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   text: siteText.pages.behavior_page,
   textNl: siteText.pages.behavior_page.nl,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -67,7 +68,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
   const behaviorPerAgeGroup = data.behavior_per_age_group_archived_20230411;
 
   const { commonTexts, formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
-  const { metadataTexts, text, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, text, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...metadataTexts,
@@ -131,6 +132,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
               },
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
+              jsonSources: [jsonText.metrics_archived_national_json],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

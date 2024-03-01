@@ -2,6 +2,7 @@ import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData 
 import { Experimenteel, Rioolvirus } from '@corona-dashboard/icons';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getMunicipalityJsonLink } from '~/utils/get-json-links';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { GetStaticPropsContext } from 'next';
 import { GmLayout } from '~/domain/layout/gm-layout';
@@ -25,6 +26,7 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
+import { useRouter } from 'next/router';
 import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = ['sewer_per_installation', 'sewer'];
@@ -32,6 +34,7 @@ const pageMetrics = ['sewer_per_installation', 'sewer'];
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textGm: siteText.pages.sewer_page.gm,
   textShared: siteText.pages.sewer_page.shared,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -59,8 +62,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedGmData: data, municipalityName, content, lastGenerated } = props;
 
   const { commonTexts, formatNumber } = useIntl();
-  const { textGm, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
-
+  const { textGm, textShared, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const router = useRouter();
   const sewerAverages = data.sewer;
   const sewerInstallationMeasurement = data.sewer_installation_measurement;
   const populationCountConnectedToRWZIS = data.static_values.population_count_connected_to_rwzis;
@@ -105,6 +108,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               },
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
+              jsonSources: [getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_municipality_json)],
             }}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}

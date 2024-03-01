@@ -1,18 +1,12 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { getLastGeneratedDate, getLokalizeTexts } from '~/static-props/get-data';
+import { Languages } from '~/locale';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { Languages } from '~/locale';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
-import {
-  getLastGeneratedDate,
-  getLokalizeTexts,
-} from '~/static-props/get-data';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useEffect } from 'react';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useRouter } from 'next/router';
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) =>

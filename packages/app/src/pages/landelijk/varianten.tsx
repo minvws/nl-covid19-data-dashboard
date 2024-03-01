@@ -1,33 +1,34 @@
-import { Varianten } from '@corona-dashboard/icons';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData, selectNlData } from '~/static-props/get-data';
+import { getArchivedVariantChartData, getVariantBarChartData, getVariantOrderColors, getVariantOrders, getVariantTableData } from '~/domain/variants/data-selection';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { GetStaticPropsContext } from 'next';
 import { InView } from '~/components/in-view';
+import { Languages, SiteText } from '~/locale';
+import { Layout } from '~/domain/layout/layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
+import { NlVariantsVariant } from '@corona-dashboard/common';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData, selectNlData } from '~/static-props/get-data';
-import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
+import { TileList } from '~/components/tile-list';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
-import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { useIntl } from '~/intl';
 import { useState } from 'react';
-import { getArchivedVariantChartData, getVariantBarChartData, getVariantOrderColors, getVariantOrders, getVariantTableData } from '~/domain/variants/data-selection';
-import { VariantsStackedAreaTile, VariantsStackedBarChartTile, VariantsTableTile } from '~/domain/variants';
 import { VariantDynamicLabels } from '~/domain/variants/data-selection/types';
-import { NlVariantsVariant } from '@corona-dashboard/common';
+import { Varianten } from '@corona-dashboard/icons';
+import { VariantsStackedAreaTile, VariantsStackedBarChartTile, VariantsTableTile } from '~/domain/variants';
 
 const pageMetrics = ['variants', 'named_difference'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.variants_page.nl,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -91,7 +92,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
   } = props;
 
   const { commonTexts, locale } = useIntl();
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
   const metadata = {
@@ -138,6 +139,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               },
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
+              jsonSources: [jsonText.metrics_national_json, jsonText.metrics_archived_national_json],
             }}
             pageLinks={content.links}
             pageInformationHeader={getPageInformationHeaderContent({
