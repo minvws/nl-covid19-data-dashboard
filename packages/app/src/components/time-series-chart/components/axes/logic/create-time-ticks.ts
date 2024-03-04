@@ -44,6 +44,9 @@ function getDefault2ValuesForXAxis(startTick: number, endTick: number): TickInst
 export function createTimeTicksAllTimeFrame(startTick: number, endTick: number, ticksNumber: number, breakpoints: Breakpoints): TickInstance[] {
   /**
    * This method is only used for the `all` timeframe option.
+   * The function is not and won't be adjusted to cover all the edge cases available:
+   * e.g. having a very short period between the start and end date which results
+   * in only 1 or 2 january dates in between them.
    */
   const start = middleOfDayInSeconds(startTick);
   const end = middleOfDayInSeconds(endTick);

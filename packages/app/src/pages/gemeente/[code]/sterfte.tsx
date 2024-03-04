@@ -1,36 +1,39 @@
-import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard/common';
-import { Coronavirus } from '@corona-dashboard/icons';
-import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { ChartTile } from '~/components/chart-tile';
+import { Coronavirus } from '@corona-dashboard/icons';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedGmData } from '~/static-props/get-data';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getMunicipalityJsonLink } from '~/utils/get-json-links';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
+import { GmLayout, Layout } from '~/domain/layout';
 import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Languages, SiteText } from '~/locale';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block/page-information-block';
+import { replaceVariablesInText } from '~/utils';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { TileList } from '~/components/tile-list';
+import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard/common';
 import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { WarningTile } from '~/components/warning-tile';
-import { GmLayout, Layout } from '~/domain/layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedGmData } from '~/static-props/get-data';
-import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { replaceVariablesInText } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { useIntl } from '~/intl';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = ['deceased_rivm_archived_20221231'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textGm: siteText.pages.deceased_page.gm,
   textShared: siteText.pages.deceased_page.shared,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -65,12 +68,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
+  const router = useRouter();
   const { pageText, municipalityName, selectedArchivedGmData: data, content, lastGenerated } = props;
 
   const [deceasedMunicipalTimeframe, setDeceasedMunicipalTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
-  const { textGm } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textGm, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...commonTexts.gemeente_index.metadata,
@@ -103,6 +107,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: data.deceased_rivm_archived_20221231.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.section_deceased_rivm.bronnen.rivm],
+              jsonSources: [getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_archived_municipality_json)],
             }}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}

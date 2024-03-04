@@ -65,6 +65,12 @@ async function redirects() {
       destination: `/gemeente/GM${to}/:page*`,
       permanent: true,
     })),
+    // Redirects for municipal patienten-in-beeld
+    ...gmRedirects.map(({ from, to }) => ({
+      source: `/gemeente/:gm(gm|GM|gM|Gm):nr(${from.join('|')})/ziekenhuis-opnames`,
+      destination: `/gemeente/GM${to}/patienten-in-beeld`,
+      permanent: true,
+    })),
     // Redirects for the NL pages
     {
       source: '/landelijk/ziekenhuis-opnames',

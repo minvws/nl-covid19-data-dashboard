@@ -1,42 +1,45 @@
-import { colors, ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth } from '@corona-dashboard/common';
-import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
-import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
-import { isDefined, isPresent } from 'ts-is-present';
-import { InView } from '~/components/in-view';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
+import { assert, replaceVariablesInText, useFormatLokalizePercentage, useReverseRouter } from '~/utils';
 import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { colors, ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth } from '@corona-dashboard/common';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData, createGetArchivedChoroplethData } from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { emptyCoverageData } from '~/data/gm/vaccinations/empty-coverage-data';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getMunicipalityJsonLink } from '~/utils/get-json-links';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
+import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
+import { GmLayout, Layout } from '~/domain/layout';
+import { InView } from '~/components/in-view';
+import { isDefined, isPresent } from 'ts-is-present';
+import { Languages, SiteText } from '~/locale';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block/page-information-block';
 import { TileList } from '~/components/tile-list';
-import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
-import { emptyCoverageData } from '~/data/gm/vaccinations/empty-coverage-data';
-import { GmLayout, Layout } from '~/domain/layout';
-import { VaccineCoveragePerAgeGroup, VaccineCoverageToggleTile } from '~/domain/vaccine';
-import { VaccineCoverageChoropleth } from '~/domain/vaccine/vaccine-coverage-choropleth';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData, createGetArchivedChoroplethData } from '~/static-props/get-data';
-import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { assert, replaceVariablesInText, useFormatLokalizePercentage, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { useIntl } from '~/intl';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
+import { VaccineCoverageChoropleth } from '~/domain/vaccine/vaccine-coverage-choropleth';
+import { VaccineCoveragePerAgeGroup, VaccineCoverageToggleTile } from '~/domain/vaccine';
 import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = [
-  'vaccine_coverage_per_age_group',
-  'vaccine_coverage_per_age_group_archived',
   'booster_coverage_archived_20220904',
   'vaccine_coverage_per_age_group_archived_20231004',
+  'vaccine_coverage_per_age_group_archived',
+  'vaccine_coverage_per_age_group',
 ];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textGm: siteText.pages.vaccinations_page.gm,
   textNl: siteText.pages.vaccinations_page.nl,
   textShared: siteText.pages.vaccinations_page.shared,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -48,9 +51,9 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmData('code'),
   selectArchivedGmData(
+    'booster_coverage_archived_20220904',
     'vaccine_coverage_per_age_group_archived_20220622',
     'vaccine_coverage_per_age_group_archived_20220908',
-    'booster_coverage_archived_20220904',
     'vaccine_coverage_per_age_group_archived_20231004'
   ),
   createGetArchivedChoroplethData({
@@ -83,12 +86,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) => {
+  const router = useRouter();
   const { pageText, archivedChoropleth, municipalityName, selectedGmData: currentData, selectedArchivedGmData: archivedData, content, lastGenerated } = props;
   const { commonTexts } = useIntl();
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
   const reverseRouter = useReverseRouter();
-  const { textGm, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textGm, textNl, textShared, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...textGm.metadata,
@@ -138,6 +142,11 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               dateOrRange: filteredVaccination.primarySeries.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
+              jsonSources: [
+                getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_municipality_json),
+                getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_archived_municipality_json),
+                jsonText.metrics_archived_gm_collection_json,
+              ],
             }}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}

@@ -1,41 +1,44 @@
-import { colors, DAY_IN_SECONDS, TimeframeOption, TimeframeOptionsList, WEEK_IN_SECONDS } from '@corona-dashboard/common';
-import { Ziekenhuis } from '@corona-dashboard/icons';
-import { last } from 'lodash';
-import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
+import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
+import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
-import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { colors, DAY_IN_SECONDS, TimeframeOption, TimeframeOptionsList, WEEK_IN_SECONDS } from '@corona-dashboard/common';
+import { countTrailingNullValues, getBoundaryDateStartUnix, replaceVariablesInText, useReverseRouter } from '~/utils';
+import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedGmData } from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { DynamicChoropleth } from '~/components/choropleth';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getMunicipalityJsonLink } from '~/utils/get-json-links';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
+import { GmLayout, Layout } from '~/domain/layout';
 import { InView } from '~/components/in-view';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Languages, SiteText } from '~/locale';
+import { last } from 'lodash';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block/page-information-block';
+import { space } from '~/style/theme';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { GmLayout, Layout } from '~/domain/layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetArchivedChoroplethData, createGetChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData } from '~/static-props/get-data';
-import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
-import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
-import { countTrailingNullValues, getBoundaryDateStartUnix, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
-import { Box } from '~/components/base/box';
-import { space } from '~/style/theme';
+import { useIntl } from '~/intl';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { Ziekenhuis } from '@corona-dashboard/icons';
 
-const pageMetrics = ['hospital_nice'];
+const pageMetrics = ['hospital_nice_archived_20240228'];
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textGm: siteText.pages.hospital_page.gm,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -45,15 +48,11 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
-  selectGmData('hospital_nice', 'code'),
-  createGetChoroplethData({
-    gm: ({ hospital_nice_choropleth }, context) => ({
-      hospital_nice_choropleth: filterByRegionMunicipalities(hospital_nice_choropleth, context),
-    }),
-  }),
+  selectArchivedGmData('hospital_nice_archived_20240228', 'code'),
   createGetArchivedChoroplethData({
-    gm: ({ hospital_nice_choropleth_archived_20230830 }, context) => ({
+    gm: ({ hospital_nice_choropleth_archived_20230830, hospital_nice_choropleth_archived_20240228 }, context) => ({
       hospital_nice_choropleth_archived_20230830: filterByRegionMunicipalities(hospital_nice_choropleth_archived_20230830, context),
+      hospital_nice_choropleth_archived_20240228: filterByRegionMunicipalities(hospital_nice_choropleth_archived_20240228, context),
     }),
   }),
   async (context: GetStaticPropsContext) => {
@@ -80,7 +79,8 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
-  const { pageText, selectedGmData: data, choropleth, archivedChoropleth, municipalityName, content, lastGenerated } = props;
+  const router = useRouter();
+  const { pageText, selectedArchivedGmData: data, archivedChoropleth, municipalityName, content, lastGenerated } = props;
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
   const [hospitalAdmissionsOverTimeTimeframe, setHospitalAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -88,12 +88,15 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
 
-  const { textGm } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textGm, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
-  const lastValue = data.hospital_nice.last_value;
-  const lastValueChoropleth = last(choropleth.gm.hospital_nice_choropleth) || lastValue;
+  const lastValue = data.hospital_nice_archived_20240228.last_value;
+  const lastValueChoropleth = last(archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228) || lastValue;
 
-  const underReportedRange = getBoundaryDateStartUnix(data.hospital_nice.values, countTrailingNullValues(data.hospital_nice.values, 'admissions_in_the_last_7_days'));
+  const underReportedRange = getBoundaryDateStartUnix(
+    data.hospital_nice_archived_20240228.values,
+    countTrailingNullValues(data.hospital_nice_archived_20240228.values, 'admissions_in_the_last_7_days')
+  );
 
   const sevenDayAverageDates = { start: underReportedRange - WEEK_IN_SECONDS, end: underReportedRange - DAY_IN_SECONDS };
 
@@ -125,6 +128,11 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               dateOrRange: lastValue.date_end_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
+              jsonSources: [
+                getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_municipality_json),
+                jsonText.metrics_gm_collection_json,
+                jsonText.metrics_archived_gm_collection_json,
+              ],
             }}
             pageLinks={content.links}
             vrNameOrGmName={municipalityName}
@@ -162,7 +170,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               accessibility={{
                 key: 'hospital_admissions_over_time_chart',
               }}
-              values={data.hospital_nice.values}
+              values={data.hospital_nice_archived_20240228.values}
               timeframe={hospitalAdmissionsOverTimeTimeframe}
               seriesConfig={[
                 {
@@ -192,44 +200,6 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               }}
             />
           </ChartTile>
-
-          <ChoroplethTile
-            title={replaceVariablesInText(textGm.map_titel, {
-              municipality: municipalityName,
-            })}
-            metadata={{
-              date: { start: lastValueChoropleth.date_start_unix, end: lastValueChoropleth.date_end_unix },
-              source: textGm.bronnen.rivm,
-            }}
-            description={textGm.map_toelichting}
-            legend={{
-              title: textGm.chloropleth_legenda.titel,
-              thresholds: thresholds.gm.admissions_in_the_last_7_days_per_100000,
-              outdatedDataLabel: textGm.choropleth_legend_outdated_data_label,
-            }}
-            pageType="ziekenhuis-opnames"
-            notification={textGm.choropleth_update_notification}
-          >
-            <DynamicChoropleth
-              map="gm"
-              accessibility={{
-                key: 'hospital_admissions_choropleth',
-              }}
-              data={choropleth.gm.hospital_nice_choropleth}
-              dataConfig={{
-                metricName: 'hospital_nice_choropleth',
-                metricProperty: 'admissions_in_the_last_7_days_per_100000',
-              }}
-              dataOptions={{
-                selectedCode: data.code,
-                highlightSelection: true,
-                getLink: reverseRouter.gm.ziekenhuisopnames,
-                tooltipVariables: {
-                  patients: commonTexts.choropleth_tooltip.patients,
-                },
-              }}
-            />
-          </ChoroplethTile>
 
           {content.faqs && content.faqs.questions?.length > 0 && <PageFaqTile questions={content.faqs.questions} title={content.faqs.sectionTitle} />}
 
@@ -275,7 +245,45 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                   dataOptions={{
                     selectedCode: data.code,
                     highlightSelection: true,
-                    getLink: reverseRouter.gm.ziekenhuisopnames,
+                    getLink: reverseRouter.gm.patientenInBeeld,
+                    tooltipVariables: {
+                      patients: commonTexts.choropleth_tooltip.patients,
+                    },
+                  }}
+                />
+              </ChoroplethTile>
+
+              <ChoroplethTile
+                title={replaceVariablesInText(textGm.map_titel, {
+                  municipality: municipalityName,
+                })}
+                metadata={{
+                  date: { start: lastValueChoropleth.date_start_unix, end: lastValueChoropleth.date_end_unix },
+                  source: textGm.bronnen.rivm,
+                }}
+                description={textGm.map_toelichting}
+                legend={{
+                  title: textGm.chloropleth_legenda.titel,
+                  thresholds: thresholds.gm.admissions_in_the_last_7_days_per_100000,
+                  outdatedDataLabel: textGm.choropleth_legend_outdated_data_label,
+                }}
+                pageType="ziekenhuis-opnames"
+                notification={textGm.choropleth_update_notification}
+              >
+                <DynamicChoropleth
+                  map="gm"
+                  accessibility={{
+                    key: 'hospital_admissions_choropleth',
+                  }}
+                  data={archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228}
+                  dataConfig={{
+                    metricName: 'hospital_nice_choropleth_archived_20240228',
+                    metricProperty: 'admissions_in_the_last_7_days_per_100000',
+                  }}
+                  dataOptions={{
+                    selectedCode: data.code,
+                    highlightSelection: true,
+                    getLink: reverseRouter.gm.patientenInBeeld,
                     tooltipVariables: {
                       patients: commonTexts.choropleth_tooltip.patients,
                     },

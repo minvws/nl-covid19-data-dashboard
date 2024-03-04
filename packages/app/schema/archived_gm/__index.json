@@ -15,7 +15,8 @@
     "vaccine_coverage_per_age_group_archived_20220622",
     "vaccine_coverage_per_age_group_archived_20220908",
     "vaccine_coverage_per_age_group_archived_20231004",
-    "tested_overall_archived_20230331"
+    "tested_overall_archived_20230331",
+    "hospital_nice_archived_20240228"
   ],
   "properties": {
     "difference": {
@@ -53,6 +54,9 @@
     },
     "tested_overall_archived_20230331": {
       "$ref": "positive_tests/tested_overall.json"
+    },
+    "hospital_nice_archived_20240228": {
+      "$ref": "hospital_nice.json"
     }
   },
   "$defs": {

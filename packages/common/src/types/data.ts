@@ -19,6 +19,7 @@ export interface ArchivedGm {
   booster_coverage_archived_20220904: ArchivedGmBoosterCoverage;
   sewer_archived_20230623: ArchivedGmSewer;
   tested_overall_archived_20230331: ArchivedGmTestedOverall;
+  hospital_nice_archived_20240228: GmHospitalNice;
 }
 export interface ArchivedGmDifference {
   tested_overall__infected_moving_average_archived_20230331: DifferenceDecimal;
@@ -131,6 +132,21 @@ export interface ArchivedGmTestedOverallValue {
   infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
 }
+export interface GmHospitalNice {
+  values: ArchivedGmHospitalNiceValue[];
+  last_value: ArchivedGmHospitalNiceValue;
+}
+export interface ArchivedGmHospitalNiceValue {
+  date_unix: number;
+  admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_moving_average: number | null;
+  admissions_on_date_of_admission_moving_average_rounded: number | null;
+  admissions_in_the_last_7_days: number | null;
+  admissions_on_date_of_reporting: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
 
 export type ArchivedGmCollectionId = 'GM_COLLECTION';
 
@@ -140,6 +156,7 @@ export interface ArchivedGmCollection {
   name: ArchivedGmCollectionId;
   code: ArchivedGmCollectionId;
   hospital_nice_choropleth_archived_20230830: ArchivedGmCollectionHospitalNiceChoropleth[];
+  hospital_nice_choropleth_archived_20240228: ArchivedGmCollectionHospitalNiceChoroplethWeeklyAdmissions[];
   sewer_archived_20230623: ArchivedGmCollectionSewer[];
   tested_overall_archived_20230331: ArchivedGmCollectionTestedOverall[];
   vaccine_coverage_per_age_group_choropleth_archived_20231004: ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth[];
@@ -151,6 +168,14 @@ export interface ArchivedGmCollectionHospitalNiceChoropleth {
   admissions_on_date_of_admission_per_100000: number;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
+}
+export interface ArchivedGmCollectionHospitalNiceChoroplethWeeklyAdmissions {
+  date_unix: number;
+  gmcode: string;
+  admissions_in_the_last_7_days_per_100000: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface ArchivedGmCollectionSewer {
   date_start_unix: number;
@@ -967,7 +992,6 @@ export interface Gm {
   code: GmCode;
   static_values: GmStaticValues;
   difference: GmDifference;
-  hospital_nice: GmHospitalNice;
   sewer: GmSewer;
   sewer_per_installation: GmSewerPerInstallation;
   sewer_installation_measurement: GmSewerInstallationMeasurement;
@@ -984,21 +1008,6 @@ export interface DifferenceInteger {
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
-}
-export interface GmHospitalNice {
-  values: GmHospitalNiceValue[];
-  last_value: GmHospitalNiceValue;
-}
-export interface GmHospitalNiceValue {
-  date_unix: number;
-  admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_moving_average: number | null;
-  admissions_on_date_of_admission_moving_average_rounded: number | null;
-  admissions_in_the_last_7_days: number | null;
-  admissions_on_date_of_reporting: number;
-  date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
 }
 export interface GmSewer {
   values: GmSewerValue[];
@@ -1040,16 +1049,7 @@ export interface GmCollection {
   proto_name: GmCollectionId;
   name: GmCollectionId;
   code: GmCollectionId;
-  hospital_nice_choropleth: GmCollectionHospitalNiceChoropleth[];
   sewer: GmCollectionSewer[];
-}
-export interface GmCollectionHospitalNiceChoropleth {
-  date_unix: number;
-  gmcode: string;
-  admissions_in_the_last_7_days_per_100000: number;
-  date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
 }
 export interface GmCollectionSewer {
   date_start_unix: number;

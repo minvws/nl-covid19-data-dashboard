@@ -19,7 +19,7 @@ async function rewrites() {
        * 3. /gemeente/gblah
        */
       {
-        source: '/gemeente/((?!gm|GM|gM|Gm).*):slug*',
+        source: '/gemeente/((?!gm|GM|gM|Gm|lijstweergave).*):slug*',
         destination: '/gemeente/code/404',
       },
       /**

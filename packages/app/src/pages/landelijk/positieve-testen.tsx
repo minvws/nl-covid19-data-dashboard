@@ -1,40 +1,40 @@
-import { colors, ArchivedNlTestedOverallValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { GgdTesten } from '@corona-dashboard/icons';
-import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
+import { BoldText } from '~/components/typography';
 import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
-import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { colors, ArchivedNlTestedOverallValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { DynamicChoropleth } from '~/components/choropleth';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
+import { GgdTesten } from '@corona-dashboard/icons';
+import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
+import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group/infected-per-age-group';
 import { InView } from '~/components/in-view';
+import { Languages, SiteText } from '~/locale';
+import { Layout } from '~/domain/layout/layout';
 import { Markdown } from '~/components/markdown';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { BoldText } from '~/components/typography';
-import { WarningTile } from '~/components/warning-tile';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
-import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group/infected-per-age-group';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
-import { space } from '~/style/theme';
-import { ArticleParts, PagePartQueryResult } from '~/types/cms';
-import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { space } from '~/style/theme';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useState } from 'react';
+import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = ['g_number_archived_20220607', 'tested_ggd_archived_20230321', 'tested_overall_archived_20230331', 'tested_per_age_group_archived_20230331'];
 
@@ -42,6 +42,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.positive_tests_page.nl,
   textShared: siteText.pages.positive_tests_page.shared,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -89,7 +90,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
 
-  const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, textShared, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const [selectedGgdGraph, setSelectedGgdGraph] = useState<string>('GGD_infected_percentage_over_time_chart');
 
@@ -130,6 +131,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               dateOrRange: archivedDataOverallLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
+              jsonSources: [jsonText.metrics_archived_national_json, jsonText.metrics_archived_gm_collection_json],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

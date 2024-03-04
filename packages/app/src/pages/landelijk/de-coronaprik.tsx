@@ -1,20 +1,9 @@
-import { assert, colors } from '@corona-dashboard/common';
-import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
-import { isEmpty } from 'lodash';
-import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
-import { ChartTile } from '~/components/chart-tile';
-import { InView } from '~/components/in-view';
-import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
-import { PageArticlesTile } from '~/components/articles/page-articles-tile';
-import { PageFaqTile } from '~/components/page-faq-tile';
-import { PageInformationBlock } from '~/components/page-information-block/page-information-block';
-import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
-import { WarningTile } from '~/components/warning-tile';
-import { Layout, NlLayout } from '~/domain/layout';
 import {
   Autumn2022ShotCoveragePerAgeGroup,
+  BoosterShotCoveragePerAgeGroup,
+  PrimarySeriesKpiHeader,
+  PrimarySeriesShotCoveragePerAgeGroup,
+  selectAdministrationData,
   VaccinationsKpiHeader,
   VaccinationsOverTimeTile,
   VaccinationsShotKpiSection,
@@ -24,72 +13,83 @@ import {
   VaccineCoverageToggleTile,
   VaccineDeliveryBarChart,
   VaccineStockPerSupplierChart,
-  selectAdministrationData,
-  BoosterShotCoveragePerAgeGroup,
-  PrimarySeriesShotCoveragePerAgeGroup,
-  PrimarySeriesKpiHeader,
 } from '~/domain/vaccine';
-import { VaccinationsPerSupplierOverLastTimeframeTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-timeframe-tile';
-import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
+import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
+import { assert, colors } from '@corona-dashboard/common';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { ChartTile } from '~/components/chart-tile';
+import { createGetArchivedChoroplethData, createGetContent, getArchivedNlData, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery, getRichTextParts } from '~/queries/get-page-parts-query';
-import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
-import { createGetArchivedChoroplethData, createGetContent, getArchivedNlData, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
-import { ArticleParts, LinkParts, PagePartQueryResult, RichTextParts } from '~/types/cms';
-import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
-import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
+import { InView } from '~/components/in-view';
+import { isEmpty } from 'lodash';
+import { Languages, SiteText } from '~/locale';
+import { Layout, NlLayout } from '~/domain/layout';
+import { PageArticlesTile } from '~/components/articles/page-articles-tile';
+import { PageFaqTile } from '~/components/page-faq-tile';
+import { PageInformationBlock } from '~/components/page-information-block/page-information-block';
+import { replaceVariablesInText, useFormatLokalizePercentage } from '~/utils';
+import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useState } from 'react';
+import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
+import { VaccinationsPerSupplierOverLastTimeframeTile } from '~/domain/vaccine/vaccinations-per-supplier-over-last-timeframe-tile';
+import { VaccineCampaignsTile } from '~/domain/vaccine/vaccine-campaigns-tile/vaccine-campaigns-tile';
+import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = [
-  'vaccine_administered_doctors_archived_20220324',
-  'vaccine_administered_hospitals_and_care_institutions',
-  'vaccine_administered_planned_archived_20231004',
-  'vaccine_administered_total_archived_20220324',
-  'vaccine_coverage_per_age_group',
-  'vaccine_coverage_archived_20220518',
-  'vaccine_delivery_per_supplier_archived_20211101',
-  'vaccine_stock_archived_20211024',
-  'vaccine_vaccinated_or_support_archived_20230411',
-  'vaccine_coverage_per_age_group_estimated_fully_vaccinated',
-  'vaccine_coverage_per_age_group_estimated_autumn_2022',
-  'vaccine_planned_archived_20220908',
   'booster_coverage_archived_20220904',
   'booster_shot_administered_archived_20220904',
   'repeating_shot_administered_20220713',
+  'vaccine_administered_doctors_archived_20220324',
+  'vaccine_administered_hospitals_and_care_institutions',
   'vaccine_administered_last_timeframe_archived_20240117',
+  'vaccine_administered_planned_archived_20231004',
+  'vaccine_administered_total_archived_20220324',
   'vaccine_campaigns_archived_20240117',
+  'vaccine_coverage_archived_20220518',
+  'vaccine_coverage_per_age_group_estimated_autumn_2022',
+  'vaccine_coverage_per_age_group_estimated_fully_vaccinated',
+  'vaccine_coverage_per_age_group',
+  'vaccine_delivery_per_supplier_archived_20211101',
+  'vaccine_planned_archived_20220908',
+  'vaccine_stock_archived_20211024',
+  'vaccine_vaccinated_or_support_archived_20230411',
 ];
 
 export const getStaticProps = createGetStaticProps(
   ({ locale }: { locale: keyof Languages }) => getLokalizeTexts(selectLokalizeTexts, locale),
   getLastGeneratedDate,
   selectArchivedNlData(
-    'vaccine_administered_doctors_archived_20220324',
-    'vaccine_administered_hospitals_and_care_institutions_archived_20220324',
-    'vaccine_administered_planned_archived_20220518',
-    'vaccine_administered_total_archived_20220324',
-    'vaccine_coverage_per_age_group_archived_20220908',
-    'vaccine_coverage_per_age_group_archived_20220622',
-    'vaccine_coverage_per_age_group_archived_20231004',
-    'vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004',
-    'vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004',
-    'vaccine_campaigns_archived_20220908',
-    'vaccine_campaigns_archived_20231004',
-    'vaccine_planned_archived_20220908',
     'booster_coverage_archived_20220904',
-    'vaccine_coverage_per_age_group_estimated_archived_20220908',
     'booster_shot_administered_archived_20220904',
     'repeating_shot_administered_20220713',
-    'vaccine_coverage_archived_20220518',
-    'vaccine_delivery_per_supplier_archived_20211101',
-    'vaccine_stock_archived_20211024',
-    'vaccine_vaccinated_or_support_archived_20230411',
+    'vaccine_administered_doctors_archived_20220324',
+    'vaccine_administered_hospitals_and_care_institutions_archived_20220324',
     'vaccine_administered_last_timeframe_archived_20240117',
-    'vaccine_campaigns_archived_20240117'
+    'vaccine_administered_planned_archived_20220518',
+    'vaccine_administered_total_archived_20220324',
+    'vaccine_campaigns_archived_20220908',
+    'vaccine_campaigns_archived_20231004',
+    'vaccine_campaigns_archived_20240117',
+    'vaccine_coverage_archived_20220518',
+    'vaccine_coverage_per_age_group_archived_20220622',
+    'vaccine_coverage_per_age_group_archived_20220908',
+    'vaccine_coverage_per_age_group_archived_20231004',
+    'vaccine_coverage_per_age_group_estimated_archived_20220908',
+    'vaccine_coverage_per_age_group_estimated_autumn_2022_archived_20231004',
+    'vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004',
+    'vaccine_delivery_per_supplier_archived_20211101',
+    'vaccine_planned_archived_20220908',
+    'vaccine_stock_archived_20211024',
+    'vaccine_vaccinated_or_support_archived_20230411'
   ),
   () => selectAdministrationData(getArchivedNlData().data.vaccine_administered_archived_20220914),
   async (context: GetStaticPropsContext) => {
@@ -126,6 +126,7 @@ const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.vaccinations_page.nl,
   textShared: siteText.pages.vaccinations_page.shared,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -135,7 +136,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
   const { commonTexts } = useIntl();
   const reverseRouter = useReverseRouter();
 
-  const { metadataTexts, textNl, textShared } = useDynamicLokalizeTexts<LokalizeTexts>(props.pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, textShared, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(props.pageText, selectLokalizeTexts);
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
   const [hasHideArchivedCharts, setHideArchivedCharts] = useState<boolean>(false);
 
@@ -179,6 +180,12 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               dateOrRange: archivedData.vaccine_administered_total_archived_20220324.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
+              jsonSources: [
+                jsonText.metrics_national_json,
+                jsonText.metrics_archived_national_json,
+                jsonText.metrics_gm_collection_json,
+                jsonText.metrics_archived_gm_collection_json,
+              ],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,
