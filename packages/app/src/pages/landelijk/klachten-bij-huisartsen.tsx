@@ -1,20 +1,21 @@
-import { colors, TimeframeOption } from '@corona-dashboard/common';
 import { Arts } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
+import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
+import { Languages, SiteText } from '~/locale';
+import { Layout } from '~/domain/layout/layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { WarningTile } from '~/components/warning-tile';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { useIntl } from '~/intl';
+import { WarningTile } from '~/components/warning-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -28,7 +29,7 @@ export const getStaticProps = createGetStaticProps(
 const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedArchivedNlData: archivedData, lastGenerated } = props;
   const lastValue = archivedData.doctor_archived_20210903.last_value;
-  const { metadataTexts } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
   const text = commonTexts.verdenkingen_huisartsen;
 
@@ -55,6 +56,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: lastValue.date_end_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.nivel],
+              jsonSources: [jsonText.metrics_archived_national_json],
             }}
           />
 

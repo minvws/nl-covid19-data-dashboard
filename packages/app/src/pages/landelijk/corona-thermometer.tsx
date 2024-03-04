@@ -31,6 +31,7 @@ import styled from 'styled-components';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   textNl: siteText.pages.corona_thermometer_page.nl,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -65,7 +66,7 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
 
   const { thermometerStructure } = content;
 
-  const { textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
   const metadata = {
     ...textNl.metadata,
@@ -103,6 +104,7 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: endDate,
               dateOfInsertionUnix: endDate,
               dataSources: [textNl.bronnen.rivm],
+              jsonSources: [jsonText.metrics_archived_national_json],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

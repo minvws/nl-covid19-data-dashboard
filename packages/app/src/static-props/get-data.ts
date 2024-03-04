@@ -310,7 +310,7 @@ export function createGetArchivedChoroplethData<T1, T2>(settings?: {
  * This is meant to be a temporary fix until this is done on the backend.
  */
 function replaceInaccurateLastValue(data: any) {
-  const metricsInaccurateItems = ['intensive_care_nice', 'hospital_nice'];
+  const metricsInaccurateItems = ['intensive_care_nice', 'hospital_nice_archived_20240228'];
 
   const inaccurateMetricProperties = ['admissions_on_date_of_admission_moving_average_rounded', 'admissions_in_the_last_7_days'];
 

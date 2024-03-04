@@ -100,32 +100,33 @@ interface MenuItemLinkProps {
   icon?: ReactNode;
   href?: Url;
   showArrow?: boolean;
+  isLinkForMainMenu?: boolean;
 }
 
-export function MenuItemLink({ href, title }: MenuItemLinkProps) {
+export function MenuItemLink({ href, title, icon, isLinkForMainMenu = true }: MenuItemLinkProps) {
   const router = useRouter();
   const breakpoints = useBreakpoints(true);
 
   if (!href) {
     return (
-      <li>
+      <StyledMenuItemLinkBox>
         <Unavailable>
           <AsideTitle title={title} />
         </Unavailable>
-      </li>
+      </StyledMenuItemLinkBox>
     );
   }
 
   const isActive = isActivePath(router, href);
 
   return (
-    <li>
+    <StyledMenuItemLinkBox>
       <Link href={href} passHref>
-        <StyledAnchor isActive={breakpoints.md && isActive} aria-current={isActive ? 'page' : undefined}>
-          <AsideTitle title={title} showArrow={!breakpoints.md || !isActive} />
+        <StyledAnchor isActive={breakpoints.md && isActive} isLinkForMainMenu={isLinkForMainMenu} aria-current={isActive ? 'page' : undefined}>
+          <AsideTitle icon={icon} title={title} showArrow={!breakpoints.md || !isActive} />
         </StyledAnchor>
       </Link>
-    </li>
+    </StyledMenuItemLinkBox>
   );
 }
 
@@ -166,10 +167,10 @@ const Unavailable = styled.span(
   })
 );
 
-const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
+const StyledAnchor = styled(Anchor)<{ isActive: boolean; isLinkForMainMenu: boolean }>((anchorProps) =>
   css({
     padding: space[2],
-    paddingLeft: '3rem',
+    paddingLeft: anchorProps.isLinkForMainMenu ? '3rem' : '0.5rem',
     display: 'block',
     borderRight: '5px solid transparent',
     color: anchorProps.isActive ? colors.blue8 : 'black',
@@ -201,6 +202,14 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean }>((anchorProps) =>
     },
   })
 );
+
+const StyledMenuItemLinkBox = styled.li`
+  list-style-type: none;
+
+  li:last-child div {
+    margin: 0;
+  }
+`;
 
 const Icon = ({ children }: { children: ReactNode }) => {
   return (

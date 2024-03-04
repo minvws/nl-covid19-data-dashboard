@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "gm_hospital_nice_value",
+      "title": "archived_gm_hospital_nice_value",
       "type": "object",
       "additionalProperties": false,
       "required": [

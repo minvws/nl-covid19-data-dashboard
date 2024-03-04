@@ -1,29 +1,29 @@
-import { colors, getLastFilledValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { IntensiveCareOpnames } from '@corona-dashboard/icons';
-import { GetStaticPropsContext } from 'next';
-import { useState } from 'react';
+import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
+import { colors, getLastFilledValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
+import { IntensiveCareOpnames } from '@corona-dashboard/icons';
 import { InView } from '~/components/in-view';
-import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
+import { Languages, SiteText } from '~/locale';
+import { Layout, NlLayout } from '~/domain/layout';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { PagePart, PagePartQueryResult } from '~/types/cms';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { Layout, NlLayout } from '~/domain/layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getLinkParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectNlData } from '~/static-props/get-data';
-import { PagePart, PagePartQueryResult } from '~/types/cms';
-import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { trimLeadingNullValues } from '~/utils/trim-leading-null-values';
+import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
+import { useIntl } from '~/intl';
+import { useState } from 'react';
 
 const pageMetrics = [
   'difference.hospital_lcps__beds_occupied_covid',
@@ -37,6 +37,7 @@ const pageMetrics = [
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
   textNl: siteText.pages.hospitals_and_care_page.nl,
+  jsonText: siteText.common.common.metadata.metrics_json_links,
 });
 
 type LokalizeTexts = ReturnType<typeof selectLokalizeTexts>;
@@ -70,7 +71,7 @@ export const getStaticProps = createGetStaticProps(
 
 const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
-  const { metadataTexts, textNl } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
+  const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
 
   const [selectedBedsOccupiedOverTimeChart, setSelectedBedsOccupiedOverTimeChart] = useState<string>('beds_occupied_covid_hospital');
@@ -129,6 +130,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: hospitalLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.sources.lnaz],
+              jsonSources: [jsonText.metrics_national_json],
             }}
             pageLinks={content.links}
             pageInformationHeader={getPageInformationHeaderContent({
