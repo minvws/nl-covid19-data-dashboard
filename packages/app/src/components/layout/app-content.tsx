@@ -10,16 +10,19 @@ import { getCurrentPageScope } from '~/utils/get-current-page-scope';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LinkWithIcon } from '../link-with-icon';
 import { getBackButtonValues } from './logic/get-back-button-values';
+import React from 'react';
+import { Menu, MenuItemLink } from '~/components/aside/menu';
+import { List } from '@corona-dashboard/icons';
 
 interface AppContentProps {
   children: React.ReactNode;
   sidebarComponent: React.ReactNode;
-  searchComponent?: React.ReactNode;
+  mainComponent?: React.ReactNode;
   hideBackButton?: boolean;
-  displayAsFlex?: boolean;
+  displayListButton?: boolean;
 }
 
-export function AppContent({ children, sidebarComponent, searchComponent, hideBackButton, displayAsFlex = false }: AppContentProps) {
+export function AppContent({ children, sidebarComponent, mainComponent, hideBackButton, displayListButton = false }: AppContentProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { commonTexts } = useIntl();
@@ -47,11 +50,29 @@ export function AppContent({ children, sidebarComponent, searchComponent, hideBa
           flexShrink={0}
           minHeight={{ lg: '35em' }}
           width={{ md: '18rem', lg: '21rem' }}
-          display={displayAsFlex ? 'flex' : 'block'}
+          display={'block'}
           zIndex={3}
           justifyContent="center"
         >
-          <ResponsiveVisibleAside isVisible={isMenuOpen}>{searchComponent}</ResponsiveVisibleAside>
+          <Box display={displayListButton ? 'flex' : 'block'} flexDirection="column" flex={1} justifyContent="space-between" height={displayListButton ? '100%' : undefined}>
+            <ResponsiveVisible isVisible={isMenuOpen}>{mainComponent}</ResponsiveVisible>
+
+            {displayListButton && (
+              <ResponsiveVisible isVisible={isMenuOpen}>
+                <Box maxWidth={{ _: '38rem', md: undefined }}>
+                  <Menu>
+                    <MenuItemLink
+                      icon={<List />}
+                      title={commonTexts.gemeente_layout.list.go_to_list_label}
+                      href={reverseRouter.gm.lijstweergave()}
+                      showArrow
+                      isLinkForMainMenu={false}
+                    />
+                  </Menu>
+                </Box>
+              </ResponsiveVisible>
+            )}
+          </Box>
           <ResponsiveVisible isVisible={isMenuOpen}>{sidebarComponent}</ResponsiveVisible>
         </Box>
 
@@ -108,18 +129,6 @@ const ResponsiveVisible = styled.div<ResponsiveVisibleProps>`
 
   @media ${mediaQueries.md} {
     display: ${({ isVisible }) => (!isVisible ? 'block' : undefined)};
-  }
-
-  .has-no-js & {
-    display: block;
-  }
-`;
-
-const ResponsiveVisibleAside = styled.div<ResponsiveVisibleProps>`
-  display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
-
-  @media ${mediaQueries.md} {
-    display: ${({ isVisible }) => (!isVisible ? 'flex' : undefined)};
   }
 
   .has-no-js & {
