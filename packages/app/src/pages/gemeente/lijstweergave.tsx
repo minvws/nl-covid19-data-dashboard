@@ -1,11 +1,11 @@
 import _ from 'lodash';
+import { Anchor, Heading } from '~/components/typography';
 import { Box } from '~/components/base';
 import { CollapsibleSection } from '~/components';
 import { colors, gmData, MunicipalityInfo } from '@corona-dashboard/common';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
 import { GmLayout, Layout } from '~/domain/layout';
-import { Heading } from '~/components/typography';
 import { Link } from '~/utils/link';
 import { Map } from '@corona-dashboard/icons';
 import { Menu, MenuItemLink } from '~/components/aside/menu';
@@ -83,9 +83,7 @@ const MunicipalityListOverview = (props: StaticProps<typeof getStaticProps>) => 
             {Object.entries(MunicipalityLetter).map(([letterKey, letterValue], index) => (
               <Fragment key={index + letterKey}>
                 <StyledLetter textAlign="center">
-                  <Link href={`#${letterValue}`} passHref>
-                    {letterValue}
-                  </Link>
+                  <Anchor href={`#${letterValue}`}>{letterValue}</Anchor>
                 </StyledLetter>
               </Fragment>
             ))}
