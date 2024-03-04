@@ -109,24 +109,24 @@ export function MenuItemLink({ href, title, icon, isLinkForMainMenu = true }: Me
 
   if (!href) {
     return (
-      <li>
+      <StyledMenuItemLinkBox>
         <Unavailable>
           <AsideTitle title={title} />
         </Unavailable>
-      </li>
+      </StyledMenuItemLinkBox>
     );
   }
 
   const isActive = isActivePath(router, href);
 
   return (
-    <li>
+    <StyledMenuItemLinkBox>
       <Link href={href} passHref>
         <StyledAnchor isActive={breakpoints.md && isActive} isLinkForMainMenu={isLinkForMainMenu} aria-current={isActive ? 'page' : undefined}>
           <AsideTitle icon={icon} title={title} showArrow={!breakpoints.md || !isActive} />
         </StyledAnchor>
       </Link>
-    </li>
+    </StyledMenuItemLinkBox>
   );
 }
 
@@ -202,6 +202,14 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean; isLinkForMainMenu: bool
     },
   })
 );
+
+const StyledMenuItemLinkBox = styled.li`
+  list-style-type: none;
+
+  li:last-child div {
+    margin: 0;
+  }
+`;
 
 const Icon = ({ children }: { children: ReactNode }) => {
   return (
