@@ -140,7 +140,7 @@ function MetadataItem({ icon, label, items, referenceLink, accessibilityText, ac
             {`${label}: `}
             {items.map((item, index) => (
               <Fragment key={index + item.href}>
-                {index > 0 && index !== items.length && ', '}
+                {index > 0 && ', '}
                 {item.href && (
                   <ExternalLink
                     href={item.href}
