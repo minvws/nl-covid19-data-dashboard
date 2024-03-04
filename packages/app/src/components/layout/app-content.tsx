@@ -1,18 +1,18 @@
-import { colors } from '@corona-dashboard/common';
-import { useRouter } from 'next/router';
-import styled from 'styled-components';
 import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
-import { MaxWidth } from '~/components/max-width';
-import { useIntl } from '~/intl';
-import { mediaQueries, space } from '~/style/theme';
-import { getCurrentPageScope } from '~/utils/get-current-page-scope';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import { LinkWithIcon } from '../link-with-icon';
+import { colors } from '@corona-dashboard/common';
 import { getBackButtonValues } from './logic/get-back-button-values';
-import React from 'react';
-import { Menu, MenuItemLink } from '~/components/aside/menu';
+import { getCurrentPageScope } from '~/utils/get-current-page-scope';
+import { LinkWithIcon } from '../link-with-icon';
 import { List } from '@corona-dashboard/icons';
+import { MaxWidth } from '~/components/max-width';
+import { mediaQueries, space } from '~/style/theme';
+import { Menu, MenuItemLink } from '~/components/aside/menu';
+import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useRouter } from 'next/router';
+import React from 'react';
+import styled from 'styled-components';
 
 interface AppContentProps {
   children: React.ReactNode;
