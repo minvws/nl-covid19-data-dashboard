@@ -54,7 +54,7 @@ export function AppContent({ children, sidebarComponent, mainComponent, hideBack
           zIndex={3}
           justifyContent="center"
         >
-          <Box display={displayListButton ? 'flex' : 'block'} flexDirection="column" flex={1} justifyContent="space-between" height={displayListButton ? '100%' : undefined}>
+          <Box display={displayListButton ? 'flex' : 'block'} flexDirection="column" justifyContent="space-between" height={displayListButton ? '100%' : undefined}>
             <ResponsiveVisible isVisible={isMenuOpen}>{mainComponent}</ResponsiveVisible>
 
             {displayListButton && (
