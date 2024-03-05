@@ -12,6 +12,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
 import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
@@ -32,6 +33,8 @@ export const getStaticProps = createGetStaticProps(
 const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
   const [coronamelderTimeframe, setCoronamelderTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const { commonTexts } = useIntl();
+
+  const reverseRouter = useReverseRouter();
 
   const { pageText, selectedArchivedNlData: data, lastGenerated } = props;
   const { corona_melder_app } = commonTexts;
@@ -62,7 +65,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: warningLastValue.date_unix,
               dateOfInsertionUnix: warningLastValue.date_of_insertion_unix,
               dataSources: [corona_melder_app.header.bronnen.rivm],
-              jsonSources: [jsonText.metrics_archived_national_json],
+              jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}
           />
 

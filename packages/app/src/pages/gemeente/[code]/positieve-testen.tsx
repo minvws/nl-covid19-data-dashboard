@@ -32,7 +32,6 @@ import { TimeSeriesChart } from '~/components/time-series-chart/time-series-char
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
@@ -81,7 +80,6 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
-  const router = useRouter();
   const { pageText, selectedGmData: data, selectedArchivedGmData: archivedData, archivedChoropleth, municipalityName, content, lastGenerated } = props;
   const [positivelyTestedPeopleTimeframe, setpositivelyTestedPeopleTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
@@ -119,9 +117,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
               jsonSources: [
-                getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_municipality_json),
-                getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_archived_municipality_json),
-                jsonText.metrics_archived_gm_collection_json,
+                getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text),
+                getMunicipalityJsonLink(reverseRouter.json.archivedMunicipality(data.code), jsonText.metrics_archived_municipality_json.text),
+                { href: reverseRouter.json.archivedGmCollection(), text: jsonText.metrics_archived_gm_collection_json.text },
               ],
             }}
             vrNameOrGmName={municipalityName}

@@ -150,7 +150,10 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: lastValueNice.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.sources.nice],
-              jsonSources: [jsonText.metrics_national_json, jsonText.metrics_archived_gm_collection_json],
+              jsonSources: [
+                { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },
+                { href: reverseRouter.json.archivedGmCollection(), text: jsonText.metrics_archived_gm_collection_json.text },
+              ],
             }}
             pageLinks={content.links}
             pageInformationHeader={getPageInformationHeaderContent({

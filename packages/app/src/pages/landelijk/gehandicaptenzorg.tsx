@@ -25,6 +25,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
 import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
@@ -75,6 +76,8 @@ export const getStaticProps = createGetStaticProps(
 function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedArchivedNlData: data, archivedChoropleth, lastGenerated, content } = props;
 
+  const reverseRouter = useReverseRouter();
+
   const [disabilityCareConfirmedCasesTimeframe, setDisabilityCareConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [disabilityCareInfectedLocationsTimeframe, setDisabilityCareInfectedLocationsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [disabilityCareDeceasedTimeframe, setDisabilityCareDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -109,7 +112,10 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.positief_geteste_personen.bronnen.rivm],
-              jsonSources: [jsonText.metrics_archived_national_json, jsonText.metrics_archived_gm_collection_json],
+              jsonSources: [
+                { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
+                { href: reverseRouter.json.archivedGmCollection(), text: jsonText.metrics_archived_gm_collection_json.text },
+              ],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

@@ -21,7 +21,6 @@ import { PageInformationBlock } from '~/components/page-information-block/page-i
 import { TileList } from '~/components/tile-list';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { VaccineCoverageChoropleth } from '~/domain/vaccine/vaccine-coverage-choropleth';
@@ -86,7 +85,6 @@ export const getStaticProps = createGetStaticProps(
 );
 
 export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) => {
-  const router = useRouter();
   const { pageText, archivedChoropleth, municipalityName, selectedGmData: currentData, selectedArchivedGmData: archivedData, content, lastGenerated } = props;
   const { commonTexts } = useIntl();
   const { formatPercentageAsNumber } = useFormatLokalizePercentage();
@@ -143,9 +141,9 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
               jsonSources: [
-                getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_municipality_json),
-                getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_archived_municipality_json),
-                jsonText.metrics_archived_gm_collection_json,
+                getMunicipalityJsonLink(reverseRouter.json.municipality(currentData.code), jsonText.metrics_municipality_json.text),
+                getMunicipalityJsonLink(reverseRouter.json.archivedMunicipality(currentData.code), jsonText.metrics_archived_municipality_json.text),
+                { href: reverseRouter.json.archivedGmCollection(), text: jsonText.metrics_archived_gm_collection_json.text },
               ],
             }}
             vrNameOrGmName={municipalityName}
