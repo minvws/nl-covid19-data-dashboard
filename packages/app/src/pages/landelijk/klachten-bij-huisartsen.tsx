@@ -11,6 +11,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
 import { WarningTile } from '~/components/warning-tile';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
@@ -28,6 +29,8 @@ export const getStaticProps = createGetStaticProps(
 
 const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedArchivedNlData: archivedData, lastGenerated } = props;
+  const reverseRouter = useReverseRouter();
+
   const lastValue = archivedData.doctor_archived_20210903.last_value;
   const { metadataTexts, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
@@ -56,7 +59,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: lastValue.date_end_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.nivel],
-              jsonSources: [jsonText.metrics_archived_national_json],
+              jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}
           />
 

@@ -46,6 +46,15 @@ export function getReverseRouter(isMobile: boolean) {
       deCoronaprik: (code: string) => `/gemeente/${code}/de-coronaprik`,
       lijstweergave: () => '/gemeente/lijstweergave',
     },
+
+    json: {
+      national: () => `/json/NL.json`,
+      archivedNational: () => `/json/archived/NL.json`,
+      municipality: (code: string) => `/json/${code}.json`,
+      archivedMunicipality: (code: string) => `/json/archived/${code}.json`,
+      gmCollection: () => `/json/GM_COLLECTION.json`,
+      archivedGmCollection: () => `/json/archived/GM_COLLECTION.json`,
+    },
   } as const;
 
   return reverseRouter;

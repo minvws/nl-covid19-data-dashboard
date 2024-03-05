@@ -23,6 +23,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { trimLeadingNullValues } from '~/utils/trim-leading-null-values';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
 import { useState } from 'react';
 
 const pageMetrics = [
@@ -73,6 +74,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
   const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const [selectedBedsOccupiedOverTimeChart, setSelectedBedsOccupiedOverTimeChart] = useState<string>('beds_occupied_covid_hospital');
   const [hospitalBedsOccupiedOverTimeTimeframe, setHospitalBedsOccupiedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
@@ -130,7 +132,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: hospitalLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.sources.lnaz],
-              jsonSources: [jsonText.metrics_national_json],
+              jsonSources: [{ href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text }],
             }}
             pageLinks={content.links}
             pageInformationHeader={getPageInformationHeaderContent({

@@ -26,7 +26,7 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
-import { useRouter } from 'next/router';
+import { useReverseRouter } from '~/utils';
 import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = ['sewer_per_installation', 'sewer'];
@@ -63,7 +63,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   const { commonTexts, formatNumber } = useIntl();
   const { textGm, textShared, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
-  const router = useRouter();
+
+  const reverseRouter = useReverseRouter();
+
   const sewerAverages = data.sewer;
   const sewerInstallationMeasurement = data.sewer_installation_measurement;
   const populationCountConnectedToRWZIS = data.static_values.population_count_connected_to_rwzis;
@@ -108,7 +110,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               },
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
-              jsonSources: [getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_municipality_json)],
+              jsonSources: [getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text)],
             }}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}

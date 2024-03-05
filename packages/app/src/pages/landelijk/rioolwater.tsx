@@ -103,7 +103,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: sewerAverages.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
-              jsonSources: [jsonText.metrics_national_json, jsonText.metrics_gm_collection_json],
+              jsonSources: [
+                { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },
+                { href: reverseRouter.json.gmCollection(), text: jsonText.metrics_gm_collection_json.text },
+              ],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

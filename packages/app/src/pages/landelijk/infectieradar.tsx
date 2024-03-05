@@ -18,7 +18,7 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { replaceVariablesInText } from '~/utils';
+import { replaceVariablesInText, useReverseRouter } from '~/utils';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -64,6 +64,8 @@ export const getStaticProps = createGetStaticProps(
 const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: data, content, lastGenerated } = props;
 
+  const reverseRouter = useReverseRouter();
+
   const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
 
   const [confirmedCasesCovidSymptomsPerAgeTimeFrame, setConfirmedCasesCovidSymptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
@@ -100,7 +102,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
               },
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.sources.rivm],
-              jsonSources: [jsonText.metrics_national_json],
+              jsonSources: [{ href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text }],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

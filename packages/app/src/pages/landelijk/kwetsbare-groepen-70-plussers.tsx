@@ -31,6 +31,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
 import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
@@ -93,6 +94,8 @@ export const getStaticProps = createGetStaticProps(
 function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedArchivedNlData: data, archivedChoropleth, lastGenerated, content } = props;
 
+  const reverseRouter = useReverseRouter();
+
   const [nursingHomeConfirmedCasesTimeframe, setNursingHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const [nursingHomeInfectedLocationsTimeframe, setNursingHomeInfectedLocationsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -137,7 +140,10 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               dateOrRange: vulnerableNursingHomeDataLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [positiveTestedPeopleText.bronnen.rivm],
-              jsonSources: [jsonText.metrics_archived_national_json, jsonText.metrics_archived_gm_collection_json],
+              jsonSources: [
+                { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
+                { href: reverseRouter.json.archivedGmCollection(), text: jsonText.metrics_archived_gm_collection_json.text },
+              ],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,
