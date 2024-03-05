@@ -16,7 +16,7 @@ import { Languages, SiteText } from '~/locale';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block/page-information-block';
-import { replaceVariablesInText } from '~/utils';
+import { replaceVariablesInText, useReverseRouter } from '~/utils';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { TileList } from '~/components/tile-list';
 import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard/common';
@@ -24,7 +24,6 @@ import { TimeSeriesChart } from '~/components/time-series-chart/time-series-char
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
@@ -68,7 +67,8 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
-  const router = useRouter();
+  const reverseRouter = useReverseRouter();
+
   const { pageText, municipalityName, selectedArchivedGmData: data, content, lastGenerated } = props;
 
   const [deceasedMunicipalTimeframe, setDeceasedMunicipalTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
@@ -107,7 +107,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: data.deceased_rivm_archived_20221231.last_value.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.section_deceased_rivm.bronnen.rivm],
-              jsonSources: [getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_archived_municipality_json)],
+              jsonSources: [getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_archived_municipality_json.text)],
             }}
             vrNameOrGmName={municipalityName}
             warning={textGm.warning}

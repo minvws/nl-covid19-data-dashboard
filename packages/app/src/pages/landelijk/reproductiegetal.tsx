@@ -23,6 +23,7 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
 import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = ['reproduction_archived_20230711'];
@@ -65,6 +66,8 @@ export const getStaticProps = createGetStaticProps(
 const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedArchivedNlData: data, content, lastGenerated } = props;
 
+  const reverseRouter = useReverseRouter();
+
   const reproductionLastValue = getLastFilledValue(data.reproduction_archived_20230711);
   const reproductionValues = data.reproduction_archived_20230711;
 
@@ -96,7 +99,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: reproductionLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
-              jsonSources: [jsonText.metrics_archived_national_json],
+              jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

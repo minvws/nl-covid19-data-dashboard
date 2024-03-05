@@ -29,6 +29,7 @@ import { useBehaviorLookupKeys } from '~/domain/behavior/logic/use-behavior-look
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
 import { useMemo, useRef, useState } from 'react';
+import { useReverseRouter } from '~/utils';
 import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = ['behavior_archived_20230411', 'behavior_annotations_archived_20230412', 'behavior_per_age_group_archived_20230411'];
@@ -66,6 +67,8 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
   const behaviorValues = data.behavior_archived_20230411.values;
   const behaviorAnnotations = data.behavior_annotations_archived_20230412;
   const behaviorPerAgeGroup = data.behavior_per_age_group_archived_20230411;
+
+  const reverseRouter = useReverseRouter();
 
   const { commonTexts, formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
   const { metadataTexts, text, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -132,7 +135,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
               },
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
-              jsonSources: [jsonText.metrics_archived_national_json],
+              jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

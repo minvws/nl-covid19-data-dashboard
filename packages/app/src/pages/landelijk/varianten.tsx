@@ -18,6 +18,7 @@ import { StaticProps, createGetStaticProps } from '~/static-props/create-get-sta
 import { TileList } from '~/components/tile-list';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
 import { useState } from 'react';
 import { VariantDynamicLabels } from '~/domain/variants/data-selection/types';
 import { Varianten } from '@corona-dashboard/icons';
@@ -91,6 +92,8 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
     dates,
   } = props;
 
+  const reverseRouter = useReverseRouter();
+
   const { commonTexts, locale } = useIntl();
   const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
@@ -139,7 +142,10 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               },
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
-              jsonSources: [jsonText.metrics_national_json, jsonText.metrics_archived_national_json],
+              jsonSources: [
+                { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },
+                { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
+              ],
             }}
             pageLinks={content.links}
             pageInformationHeader={getPageInformationHeaderContent({
