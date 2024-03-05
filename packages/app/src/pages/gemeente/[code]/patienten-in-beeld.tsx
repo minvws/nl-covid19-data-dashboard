@@ -128,8 +128,8 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               dataSources: [textGm.bronnen.rivm],
               jsonSources: [
                 getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text),
-                jsonText.metrics_gm_collection_json,
-                jsonText.metrics_archived_gm_collection_json,
+                { href: reverseRouter.json.gmCollection(), text: jsonText.metrics_gm_collection_json.text },
+                { href: reverseRouter.json.archivedGmCollection(), text: jsonText.metrics_archived_gm_collection_json.text },
               ],
             }}
             pageLinks={content.links}

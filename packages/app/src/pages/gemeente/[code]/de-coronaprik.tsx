@@ -7,6 +7,7 @@ import { createGetStaticProps, StaticProps } from '~/static-props/create-get-sta
 import { emptyCoverageData } from '~/data/gm/vaccinations/empty-coverage-data';
 import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
 import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
+import { getMunicipalityJsonLink } from '~/utils/get-json-links';
 import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
 import { GetStaticPropsContext } from 'next';
 import { gmCodesByVrCode, vrCodeByGmCode } from '~/data';
@@ -25,7 +26,6 @@ import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { VaccineCoverageChoropleth } from '~/domain/vaccine/vaccine-coverage-choropleth';
 import { VaccineCoveragePerAgeGroup, VaccineCoverageToggleTile } from '~/domain/vaccine';
 import { WarningTile } from '~/components/warning-tile';
-import { getMunicipalityJsonLink } from '~/utils/get-json-links';
 
 const pageMetrics = [
   'booster_coverage_archived_20220904',
@@ -143,7 +143,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
               jsonSources: [
                 getMunicipalityJsonLink(reverseRouter.json.municipality(currentData.code), jsonText.metrics_municipality_json.text),
                 getMunicipalityJsonLink(reverseRouter.json.archivedMunicipality(currentData.code), jsonText.metrics_archived_municipality_json.text),
-                jsonText.metrics_archived_gm_collection_json,
+                { href: reverseRouter.json.archivedGmCollection(), text: jsonText.metrics_archived_gm_collection_json.text },
               ],
             }}
             vrNameOrGmName={municipalityName}

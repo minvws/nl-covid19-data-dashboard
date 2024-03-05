@@ -119,7 +119,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               jsonSources: [
                 getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text),
                 getMunicipalityJsonLink(reverseRouter.json.archivedMunicipality(data.code), jsonText.metrics_archived_municipality_json.text),
-                jsonText.metrics_archived_gm_collection_json,
+                { href: reverseRouter.json.archivedGmCollection(), text: jsonText.metrics_archived_gm_collection_json.text },
               ],
             }}
             vrNameOrGmName={municipalityName}
