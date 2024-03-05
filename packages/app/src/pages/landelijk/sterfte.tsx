@@ -27,6 +27,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
 import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
@@ -75,6 +76,8 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const [deceasedOverTimeTimeframe, setDeceasedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
+  const reverseRouter = useReverseRouter();
+
   const dataCbs = currentData.deceased_cbs;
   const dataRivm = archivedData.deceased_rivm_archived_20221231;
   const dataDeceasedPerAgeGroup = archivedData.deceased_rivm_per_age_group_archived_20221231;
@@ -110,7 +113,10 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               },
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
               dataSources: [textNl.section_sterftemonitor.bronnen.cbs],
-              jsonSources: [jsonText.metrics_national_json, jsonText.metrics_archived_national_json],
+              jsonSources: [
+                { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },
+                { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
+              ],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

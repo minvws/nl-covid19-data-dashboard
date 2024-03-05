@@ -1,24 +1,25 @@
-import { colors, getLastFilledValue } from '@corona-dashboard/common';
-import { Ziektegolf } from '@corona-dashboard/icons';
-import { GetStaticPropsContext } from 'next';
+import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { ChartTile } from '~/components/chart-tile';
+import { colors, getLastFilledValue } from '@corona-dashboard/common';
+import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
+import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
+import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
+import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { GetStaticPropsContext } from 'next';
 import { InView } from '~/components/in-view';
+import { Languages, SiteText } from '~/locale';
+import { Layout } from '~/domain/layout/layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { PageArticlesTile } from '~/components/articles/page-articles-tile';
 import { PageFaqTile } from '~/components/page-faq-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { WarningTile } from '~/components/warning-tile';
-import { Layout } from '~/domain/layout/layout';
-import { NlLayout } from '~/domain/layout/nl-layout';
-import { useIntl } from '~/intl';
-import { Languages, SiteText } from '~/locale';
-import { getArticleParts, getDataExplainedParts, getFaqParts, getPagePartsQuery } from '~/queries/get-page-parts-query';
-import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
-import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
-import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
-import { getPageInformationHeaderContent } from '~/utils/get-page-information-header-content';
+import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
+import { WarningTile } from '~/components/warning-tile';
+import { Ziektegolf } from '@corona-dashboard/icons';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -50,6 +51,8 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { commonTexts } = useIntl();
   const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
+  const reverseRouter = useReverseRouter();
+
   const lastFullValue = getLastFilledValue(data.infectious_people_archived_20210709);
 
   const metadata = {
@@ -75,7 +78,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: lastFullValue.date_unix,
               dateOfInsertionUnix: lastFullValue.date_of_insertion_unix,
               dataSources: [textNl.bronnen.rivm],
-              jsonSources: [jsonText.metrics_archived_national_json],
+              jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

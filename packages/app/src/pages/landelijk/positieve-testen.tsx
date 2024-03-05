@@ -131,7 +131,10 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               dateOrRange: archivedDataOverallLastValue.date_unix,
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
-              jsonSources: [jsonText.metrics_archived_national_json, jsonText.metrics_archived_gm_collection_json],
+              jsonSources: [
+                { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
+                { href: reverseRouter.json.archivedGmCollection(), text: jsonText.metrics_archived_gm_collection_json.text },
+              ],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,

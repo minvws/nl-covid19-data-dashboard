@@ -181,10 +181,10 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
               jsonSources: [
-                jsonText.metrics_national_json,
-                jsonText.metrics_archived_national_json,
-                jsonText.metrics_gm_collection_json,
-                jsonText.metrics_archived_gm_collection_json,
+                { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },
+                { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
+                { href: reverseRouter.json.gmCollection(), text: jsonText.metrics_gm_collection_json.text },
+                { href: reverseRouter.json.archivedGmCollection(), text: jsonText.metrics_archived_gm_collection_json.text },
               ],
             }}
             pageInformationHeader={getPageInformationHeaderContent({

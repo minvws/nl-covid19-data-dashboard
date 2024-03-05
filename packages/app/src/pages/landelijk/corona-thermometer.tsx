@@ -27,6 +27,7 @@ import { Timeline } from '~/components/severity-indicator-tile/components/timeli
 import { TimelineMarker } from '~/components/time-series-chart/components/timeline';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils';
 import styled from 'styled-components';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
@@ -68,6 +69,8 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
 
   const { textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
 
+  const reverseRouter = useReverseRouter();
+
   const metadata = {
     ...textNl.metadata,
     title: textNl.metadata.title,
@@ -104,7 +107,7 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
               dateOrRange: endDate,
               dateOfInsertionUnix: endDate,
               dataSources: [textNl.bronnen.rivm],
-              jsonSources: [jsonText.metrics_archived_national_json],
+              jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}
             pageInformationHeader={getPageInformationHeaderContent({
               dataExplained: content.dataExplained,
