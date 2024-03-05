@@ -30,7 +30,6 @@ import { TimeSeriesChart } from '~/components/time-series-chart/time-series-char
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 
@@ -79,7 +78,6 @@ export const getStaticProps = createGetStaticProps(
 );
 
 function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
-  const router = useRouter();
   const { pageText, selectedArchivedGmData: data, archivedChoropleth, municipalityName, content, lastGenerated } = props;
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
@@ -129,7 +127,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
               dateOfInsertionUnix: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
               jsonSources: [
-                getMunicipalityJsonLink(router.query.code as string, jsonText.metrics_municipality_json),
+                getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text),
                 jsonText.metrics_gm_collection_json,
                 jsonText.metrics_archived_gm_collection_json,
               ],
