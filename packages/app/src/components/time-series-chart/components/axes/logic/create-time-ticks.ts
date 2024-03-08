@@ -15,6 +15,13 @@ export interface TickInstance {
   formatStyle: formatStyle;
 }
 
+function getDefault2ValuesForXAxis(startTick: number, endTick: number): TickInstance[] {
+  return [
+    { timestamp: startTick, formatStyle: 'axis-with-day-month-year-short' },
+    { timestamp: endTick, formatStyle: 'axis-with-day-month-year-short' },
+  ] as TickInstance[];
+}
+
 /**
  * For the All timeframe we are interested in the amount of January 1st dates inbetween
  * startUnix and endUnix (e.g 07.09.2020 - 31.01.2024 will results in 4 ticks).
@@ -34,13 +41,6 @@ export function getPrefferedTimeTicksAllTimeFrame(startUnix: number, endUnix: nu
   const count = extractYearFromDate(endUnix) - extractYearFromDate(startUnix);
 
   return firstYearFirstOfJanuary ? count + 1 : count;
-}
-
-function getDefault2ValuesForXAxis(startTick: number, endTick: number): TickInstance[] {
-  return [
-    { timestamp: startTick, formatStyle: 'axis-with-day-month-year-short' },
-    { timestamp: endTick, formatStyle: 'axis-with-day-month-year-short' },
-  ] as TickInstance[];
 }
 
 /**
