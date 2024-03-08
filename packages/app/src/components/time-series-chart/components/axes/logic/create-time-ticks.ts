@@ -15,18 +15,20 @@ export interface TickInstance {
   formatStyle: formatStyle;
 }
 
+/**
+ * For the All timeframe we are interested in the amount of January 1st dates inbetween
+ * startUnix and endUnix (e.g 07.09.2020 - 31.01.2024 will results in 4 ticks).
+ *
+ * The way it works is that we first check if the startDate is equal to January 1st.
+ * If so, the count will get +1 at the end since the start year is not included when
+ * making the difference between the endYear and startYear
+ *
+ * This function is used in the Axes component where the bottomAxesTickNumber value
+ * is being generated.
+ * @param startUnix fist date on the x-axis
+ * @param endUnix last date on the x-axis
+ */
 export function getPrefferedTimeTicksAllTimeFrame(startUnix: number, endUnix: number): number {
-  /**
-   * For the All timeframe we are interested in the amount of January 1st dates inbetween
-   * startUnix and endUnix (e.g 07.09.2020 - 31.01.2024 will results in 4 ticks).
-   *
-   * The way it works is that we first check if the startDate is equal to January 1st.
-   * If so, the count will get +1 at the end since the start year is not included when
-   * making the difference between the endYear and startYear
-   *
-   * This function is used in the Axes component where the bottomAxesTickNumber value
-   * is being generated.
-   */
   const firstYearFirstOfJanuary = extractMonthFromDate(startUnix) == 0 && extractDayFromDate(startUnix) == 1;
 
   const count = extractYearFromDate(endUnix) - extractYearFromDate(startUnix);
@@ -41,13 +43,17 @@ function getDefault2ValuesForXAxis(startTick: number, endTick: number): TickInst
   ] as TickInstance[];
 }
 
+/**
+ * This method is only used for the `all` timeframe option.
+ * The function is not and won't be adjusted to cover all the edge cases available:
+ * e.g. having a very short period between the start and end date which results
+ * in only 1 or 2 january dates in between them.
+ * @param startTick first tick date on the x-axis
+ * @param endTick last tick date on the x-axis
+ * @param ticksNumber total number of ticks
+ * @param breakpoints current screen size
+ */
 export function createTimeTicksAllTimeFrame(startTick: number, endTick: number, ticksNumber: number, breakpoints: Breakpoints): TickInstance[] {
-  /**
-   * This method is only used for the `all` timeframe option.
-   * The function is not and won't be adjusted to cover all the edge cases available:
-   * e.g. having a very short period between the start and end date which results
-   * in only 1 or 2 january dates in between them.
-   */
   const start = middleOfDayInSeconds(startTick);
   const end = middleOfDayInSeconds(endTick);
   const startYear = extractYearFromDate(start);
@@ -69,14 +75,18 @@ export function createTimeTicksAllTimeFrame(startTick: number, endTick: number, 
   return ticks;
 }
 
+/**
+ * This method will calculate the timestamps for the 3 months interval. It must consist of exactly 4 values.
+ * First value:  01 (XX - 3) 'YY
+ * Second value: 01 (XX - 2) 'YY
+ * Third value:  01 (XX - 1) 'YY
+ * Fourth value: 01 XX 'YY     - Where XX is the current month
+ * @param startTick first tick date on the x-axis
+ * @param endTick last tick date on the x-axis
+ * @param count total number of ticks
+ * @param breakpoints current screen size
+ */
 export function createTimeTicksMonthlyTimeFrame(startTick: number, endTick: number, count: number, breakpoints: Breakpoints): TickInstance[] {
-  /**
-   * This method will calculate the timestamps for the 3 months interval. It must consist of exactly 4 values.
-   * First value:  01 (XX - 3) 'YY
-   * Second value: 01 (XX - 2) 'YY
-   * Third value:  01 (XX - 1) 'YY
-   * Fourth value: 01 XX 'YY     - Where XX is the current month
-   */
   const start = middleOfDayInSeconds(startTick);
   const end = middleOfDayInSeconds(endTick);
 
@@ -100,13 +110,18 @@ export function createTimeTicksMonthlyTimeFrame(startTick: number, endTick: numb
   return ticks;
 }
 
+/**
+ * This method will create the ticks for the entire interval except the last value
+ * The way it's setup is that the last value is pushed after `populateTicksArray()`
+ * is executed. The user is able to define what format style for labels he wants between
+ * value[1] and second to last value. The last value will always have the same format.
+ * @param startTick first tick date on the x-axis
+ * @param endTick last tick date on the x-axis
+ * @param count total number of ticks
+ * @param valuesCount total number of data points on x-axis
+ * @param formatStyle what date format is followed
+ */
 export function createTimeTicks(startTick: number, endTick: number, count: number, valuesCount: number | undefined, formatStyle: formatStyle): TickInstance[] {
-  /**
-   * This method will create the ticks for the entire interval except the last value
-   * The way it's setup is that the last value is pushed after `populateTicksArray()`
-   * is executed. The user is able to define what format style for labels he wants between
-   * value[1] and second to last value. The last value will always have the same format.
-   */
   const start = middleOfDayInSeconds(startTick);
   const end = middleOfDayInSeconds(endTick);
 
