@@ -22,6 +22,15 @@ function getDefault2ValuesForXAxis(startTick: number, endTick: number): TickInst
   ] as TickInstance[];
 }
 
+function populateTicksArray(stepCount: number, step: number, startTick: number, formatStyle: formatStyle): TickInstance[] {
+  const ticks: TickInstance[] = [];
+  for (let i = 0; i < stepCount; i++) {
+    const tick = startTick + i * step;
+    ticks.push({ timestamp: middleOfDayInSeconds(tick), formatStyle: i == 0 ? 'axis-with-day-month-year-short' : formatStyle });
+  }
+  return ticks;
+}
+
 /**
  * For the All timeframe we are interested in the amount of January 1st dates inbetween
  * startUnix and endUnix (e.g 07.09.2020 - 31.01.2024 will results in 4 ticks).
@@ -136,14 +145,5 @@ export function createTimeTicks(startTick: number, endTick: number, count: numbe
 
   ticks.push({ timestamp: end, formatStyle: 'axis-with-day-month-year-short' });
 
-  return ticks;
-}
-
-function populateTicksArray(stepCount: number, step: number, startTick: number, formatStyle: formatStyle): TickInstance[] {
-  const ticks: TickInstance[] = [];
-  for (let i = 0; i < stepCount; i++) {
-    const tick = startTick + i * step;
-    ticks.push({ timestamp: middleOfDayInSeconds(tick), formatStyle: i == 0 ? 'axis-with-day-month-year-short' : formatStyle });
-  }
   return ticks;
 }
