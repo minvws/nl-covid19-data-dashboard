@@ -78,7 +78,7 @@ export function createTimeTicksAllTimeFrame(startTick: number, endTick: number, 
 
   // This if statement ensures that first & second label of the all-values timeframe don't overlap
   if (breakpoints.lg && Math.floor((ticks[0].timestamp - startTick) / 86400) > 180) {
-    ticks.unshift({ timestamp: start, formatStyle: 'axis-with-month-year-short' } as TickInstance);
+    ticks.unshift({ timestamp: start, formatStyle: 'axis-with-day-month-year-short' } as TickInstance);
   }
 
   return ticks;
