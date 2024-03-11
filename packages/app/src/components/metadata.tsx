@@ -6,8 +6,11 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from './base';
 import { InlineText, Text } from './typography';
 import { Markdown } from '~/components/markdown';
-import { External as ExternalLinkIcon } from '@corona-dashboard/icons';
+import { Calendar, Clock, Database, External as ExternalLinkIcon } from '@corona-dashboard/icons';
 import React from 'react';
+import styled from 'styled-components';
+import { colors } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 
 type source = {
   text: string;
@@ -15,7 +18,7 @@ type source = {
   aria_text?: string;
 };
 
-interface DateRange {
+export interface DateRange {
   start: number;
   end: number;
 }
@@ -29,15 +32,33 @@ export interface MetadataProps extends MarginBottomProps {
   datumsText?: string;
   intervalCount?: string;
   disclaimer?: string;
+
+  //Metadata enhacements
+  datePeriod?: DateRange;
+  dateOfInsertion?: number;
+  isArchivedGraph?: boolean;
 }
 
-export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, marginBottom, dataSources, intervalCount, disclaimer }: MetadataProps) {
+export function Metadata({
+  date,
+  source,
+  obtainedAt,
+  isTileFooter,
+  datumsText,
+  marginBottom,
+  dataSources,
+  intervalCount,
+  disclaimer,
+  datePeriod,
+  dateOfInsertion,
+  isArchivedGraph = false,
+}: MetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
 
   const dateString =
     typeof date === 'number'
       ? replaceVariablesInText(commonTexts.common.metadata.date, {
-          date: formatDateFromSeconds(date, 'weekday-long'),
+          date: formatDateFromSeconds(date, 'axis-with-year'),
         })
       : typeof date === 'string'
       ? date
@@ -82,6 +103,70 @@ export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, m
               })
             ) : (
               <>
+                {datePeriod && (
+                  <Box display="flex" alignItems="flex-start" color="gray7">
+                    <Icon>
+                      <Calendar aria-hidden color={colors.gray7} />
+                    </Icon>
+                    <Text variant="label1">
+                      {replaceVariablesInText(commonTexts.common.metadata.time_interval, {
+                        dateStart: formatDateFromSeconds(datePeriod.start, 'weekday-long'),
+                        dateEnd: formatDateFromSeconds(datePeriod.end, 'weekday-long'),
+                      })}
+                    </Text>
+                  </Box>
+                )}
+
+                {dateOfInsertion && !isArchivedGraph && (
+                  <Box display="flex" alignItems="flex-start" color="gray7" paddingY={space[2]}>
+                    <Icon>
+                      <Clock aria-hidden color={colors.gray7} />
+                    </Icon>
+                    <Text variant="label1">
+                      {replaceVariablesInText(commonTexts.common.metadata.last_insertion_date, { dateOfInsertion: formatDateFromSeconds(dateOfInsertion, 'weekday-long') })}
+                    </Text>
+                  </Box>
+                )}
+
+                {dateOfInsertion && isArchivedGraph && (
+                  <Box display="flex" alignItems="flex-start" color="gray7">
+                    <Icon>
+                      <Clock aria-hidden color={colors.gray7} />
+                    </Icon>
+                    <Text variant="label1">
+                      {replaceVariablesInText(commonTexts.common.metadata.last_insertion_date_archived, {
+                        dateOfInsertion: formatDateFromSeconds(dateOfInsertion, 'weekday-long'),
+                      })}
+                    </Text>
+                  </Box>
+                )}
+
+                {source ? (
+                  <Box display="flex" alignItems="flex-start" color="gray7">
+                    <Icon>
+                      <Database aria-hidden color={colors.gray7} />
+                    </Icon>
+                    <Text variant="label1">
+                      {commonTexts.common.metadata.source}: {source.text}
+                    </Text>
+                  </Box>
+                ) : dataSources ? (
+                  <Box display="flex" alignItems="flex-start" color="gray7">
+                    <Icon>
+                      <Database aria-hidden color={colors.gray7} />
+                    </Icon>
+                    <Text variant="label1">
+                      {`${commonTexts.common.metadata.source}: `}
+                      {dataSources.map((item, index) => (
+                        <InlineText key={index}>
+                          {index > 0 && (index !== dataSources.length - 1 ? ' , ' : ' & ')}
+                          {item.text}
+                        </InlineText>
+                      ))}
+                    </Text>
+                  </Box>
+                ) : null}
+
                 {disclaimer && (
                   <Box paddingBottom={space[3]}>
                     <Markdown content={disclaimer}></Markdown>
@@ -90,11 +175,12 @@ export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, m
                 {dateString}
                 {obtainedAt &&
                   ` ${replaceVariablesInText(commonTexts.common.metadata.obtained, {
-                    date: formatDateFromSeconds(obtainedAt, 'weekday-long'),
+                    date: formatDateFromSeconds(obtainedAt, 'axis-with-year'),
                   })}`}
                 {intervalString && `. ${intervalString}`}
                 {dateString && source ? ' · ' : null}
 
+                {/* This can go */}
                 {source ? (
                   `${commonTexts.common.metadata.source}: ${source.text}`
                 ) : dataSources ? (
@@ -116,3 +202,14 @@ export function Metadata({ date, source, obtainedAt, isTileFooter, datumsText, m
     </>
   );
 }
+
+const Icon = styled.span(() =>
+  css({
+    minWidth: '1.8rem',
+
+    svg: {
+      height: '15px',
+      width: 'auto',
+    },
+  })
+);
