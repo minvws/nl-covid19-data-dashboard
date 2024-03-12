@@ -13,28 +13,28 @@ import { Heading } from './typography';
 
 interface ChartTileProps {
   children: ReactNode;
-  title: string;
   description?: string;
   disableFullscreen?: boolean;
   id?: string;
   metadata?: MetadataProps;
+  onSelectTimeframe?: (timeframe: TimeframeOption) => void;
   timeframeInitialValue?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
+  title: string;
   toggle?: ChartTileToggleProps;
-  onSelectTimeframe?: (timeframe: TimeframeOption) => void;
 }
 
 export const ChartTile = ({
   children,
-  title,
   description,
   disableFullscreen,
   id,
   metadata,
-  timeframeInitialValue,
-  toggle,
-  timeframeOptions,
   onSelectTimeframe,
+  timeframeInitialValue,
+  timeframeOptions,
+  title,
+  toggle,
 }: ChartTileProps) => {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(timeframeInitialValue || TimeframeOption.ALL);
 

@@ -1,11 +1,5 @@
 import { assert, endOfDayInSeconds } from '@corona-dashboard/common';
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 /**
  * Dates shouldn't be created during render because the server-side date can be
@@ -24,26 +18,11 @@ import {
  */
 const CurrentDateContext = createContext<Date | undefined>(undefined);
 
-export function CurrentDateProvider({
-  dateInSeconds,
-  children,
-}: {
-  dateInSeconds: number;
-  children: ReactNode;
-}) {
-  const [date, setDate] = useState(
-    new Date(endOfDayInSeconds(dateInSeconds) * 1000)
-  );
-  useEffect(
-    () => setDate(new Date(endOfDayInSeconds(Date.now() / 1000) * 1000)),
-    []
-  );
+export function CurrentDateProvider({ dateInSeconds, children }: { dateInSeconds: number; children: ReactNode }) {
+  const [date, setDate] = useState(new Date(endOfDayInSeconds(dateInSeconds) * 1000));
+  useEffect(() => setDate(new Date(endOfDayInSeconds(Date.now() / 1000) * 1000)), []);
 
-  return (
-    <CurrentDateContext.Provider value={date}>
-      {children}
-    </CurrentDateContext.Provider>
-  );
+  return <CurrentDateContext.Provider value={date}>{children}</CurrentDateContext.Provider>;
 }
 
 /**
@@ -51,10 +30,7 @@ export function CurrentDateProvider({
  */
 export function useCurrentDate() {
   const currentDate = useContext(CurrentDateContext);
-  assert(
-    currentDate,
-    `[${useCurrentDate.name}] Missing CurrentDateProvider in component tree`
-  );
+  assert(currentDate, `[${useCurrentDate.name}] Missing CurrentDateProvider in component tree`);
 
   return currentDate;
 }
