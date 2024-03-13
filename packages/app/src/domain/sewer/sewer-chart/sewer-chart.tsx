@@ -2,21 +2,23 @@ import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTimeControls } from '~/components/chart-time-controls';
-import { colors, NlSewer, SewerPerInstallationData, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors, isDateSpanSeries, NlSewer, SewerPerInstallationData, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { DateRange } from '~/components/metadata';
 import { isPresent } from 'ts-is-present';
 import { mediaQueries, space } from '~/style/theme';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
 import { RichContentSelect } from '~/components/rich-content-select';
-import styled from 'styled-components';
 import { Text } from '~/components/typography';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
-import { useScopedWarning } from '~/utils/use-scoped-warning';
 import { useIntl } from '~/intl';
+import { useRouter } from 'next/router';
+import { useScopedWarning } from '~/utils/use-scoped-warning';
+import { useValuesInTimeframe } from '~/components/time-series-chart/logic';
 import { Warning } from '@corona-dashboard/icons';
 import { WarningTile } from '~/components/warning-tile';
+import styled from 'styled-components';
 
 interface SewerChartProps {
   /**
@@ -82,8 +84,19 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
       } as SewerPerInstallationData),
     text.rwziSelectDropdown?.select_none_label || ''
   );
+  const { commonTexts } = useIntl();
+
+  const [timeframe, setTimeframe] = useState(TimeframeOption.ALL);
+  const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const router = useRouter();
+  const values = useValuesInTimeframe(dataAverages.values, timeframe);
+
+  const [metadataTimeInterval, setMetadataTimeInterval] = useState<DateRange>({ start: 0, end: 0 });
+  const metadataLastInsertion = values[values.length - 1] ? values[values.length - 1].date_of_insertion_unix : 1; // Weird behavior if set to 0
+
+  const scopedGmName = commonTexts.gemeente_index.municipality_warning;
+  const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
 
   useEffect(() => {
     const routeChangeHandler = () => onChange(undefined);
@@ -91,14 +104,16 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
     return () => router.events.off('routeChangeStart', routeChangeHandler);
   }, [onChange, router.events]);
 
-  const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
-  const { commonTexts } = useIntl();
-  const scopedGmName = commonTexts.gemeente_index.municipality_warning;
-
-  const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
-
-  const [timeframe, setTimeframe] = useState(TimeframeOption.ALL);
+  useEffect(() => {
+    if (isDateSpanSeries(values)) {
+      setMetadataTimeInterval({
+        start: values[0] ? values[0].date_start_unix : 0,
+        end: values[values.length - 1] ? values[values.length - 1].date_end_unix : 0,
+      });
+    } else {
+      setMetadataTimeInterval({ start: values[0] ? values[0].date_unix : 0, end: values[values.length - 1] ? values[values.length - 1].date_unix : 0 });
+    }
+  }, [timeframe, values, setMetadataTimeInterval]);
 
   useEffect(() => {
     setSewerTimeframe(timeframe);
@@ -142,6 +157,8 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
       title={text.title}
       metadata={{
         source: text.source,
+        datePeriod: metadataTimeInterval,
+        dateOfInsertion: metadataLastInsertion,
       }}
       description={text.description}
     >

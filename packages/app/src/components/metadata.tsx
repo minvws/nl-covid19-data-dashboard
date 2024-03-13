@@ -1,16 +1,16 @@
-import { MarginBottomProps } from 'styled-system';
-import { ExternalLink } from '~/components/external-link';
-import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from './base';
-import { InlineText, Text } from './typography';
-import { Markdown } from '~/components/markdown';
 import { Calendar, Clock, Database, External as ExternalLinkIcon } from '@corona-dashboard/icons';
+import { colors } from '@corona-dashboard/common';
+import { ExternalLink } from '~/components/external-link';
+import { InlineText, Text } from './typography';
+import { MarginBottomProps } from 'styled-system';
+import { Markdown } from '~/components/markdown';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { space } from '~/style/theme';
+import { useIntl } from '~/intl';
+import css from '@styled-system/css';
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 
 type source = {
   text: string;
@@ -40,18 +40,18 @@ export interface MetadataProps extends MarginBottomProps {
 }
 
 export function Metadata({
-  date,
-  source,
-  obtainedAt,
-  isTileFooter,
-  datumsText,
-  marginBottom,
   dataSources,
-  intervalCount,
-  disclaimer,
-  datePeriod,
+  date,
   dateOfInsertion,
+  datePeriod,
+  datumsText,
+  disclaimer,
+  intervalCount,
   isArchivedGraph = false,
+  isTileFooter,
+  marginBottom,
+  obtainedAt,
+  source,
 }: MetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
 
@@ -117,26 +117,17 @@ export function Metadata({
                   </Box>
                 )}
 
-                {dateOfInsertion && !isArchivedGraph && (
-                  <Box display="flex" alignItems="flex-start" color="gray7" paddingY={space[2]}>
+                {dateOfInsertion && (
+                  <Box display="flex" alignItems="flex-start" color="gray7" marginY={space[1]}>
                     <Icon>
                       <Clock aria-hidden color={colors.gray7} />
                     </Icon>
                     <Text variant="label1">
-                      {replaceVariablesInText(commonTexts.common.metadata.last_insertion_date, { dateOfInsertion: formatDateFromSeconds(dateOfInsertion, 'weekday-long') })}
-                    </Text>
-                  </Box>
-                )}
-
-                {dateOfInsertion && isArchivedGraph && (
-                  <Box display="flex" alignItems="flex-start" color="gray7">
-                    <Icon>
-                      <Clock aria-hidden color={colors.gray7} />
-                    </Icon>
-                    <Text variant="label1">
-                      {replaceVariablesInText(commonTexts.common.metadata.last_insertion_date_archived, {
-                        dateOfInsertion: formatDateFromSeconds(dateOfInsertion, 'weekday-long'),
-                      })}
+                      {isArchivedGraph
+                        ? replaceVariablesInText(commonTexts.common.metadata.last_insertion_date_archived, {
+                            dateOfInsertion: formatDateFromSeconds(dateOfInsertion, 'weekday-long'),
+                          })
+                        : replaceVariablesInText(commonTexts.common.metadata.last_insertion_date, { dateOfInsertion: formatDateFromSeconds(dateOfInsertion, 'weekday-long') })}
                     </Text>
                   </Box>
                 )}
