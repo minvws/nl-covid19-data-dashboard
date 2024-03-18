@@ -2,7 +2,7 @@ import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
 import { fontSizes } from '~/style/theme';
 import { Box } from './base';
-import { Metadata, MetadataProps } from './metadata';
+import { Metadata, MetadataProps } from '~/components/metadata';
 import { Heading } from './typography';
 interface KpiTileProps {
   title?: string;

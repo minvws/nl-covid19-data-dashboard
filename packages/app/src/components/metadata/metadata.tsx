@@ -1,9 +1,8 @@
-import { Box } from './base';
+import { Box } from '../base';
 import { Calendar, ChevronRight, Clock, Database, External as ExternalLinkIcon, MeerInformatie } from '@corona-dashboard/icons';
 import { colors } from '@corona-dashboard/common';
 import { ExternalLink } from '~/components/external-link';
-import { Anchor, InlineText, Text } from './typography';
-import { MarginBottomProps } from 'styled-system';
+import { Anchor, InlineText, Text } from '../typography';
 import { Markdown } from '~/components/markdown';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { space } from '~/style/theme';
@@ -11,90 +10,9 @@ import { useIntl } from '~/intl';
 import css from '@styled-system/css';
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { insertDateIntoString } from '~/utils/insert-date-into-string';
+import { insertDateIntoString } from '~/components/metadata/logic/insert-date-into-string';
 import { Link } from '~/utils/link';
-
-/**
- * @interface Datasource
- * @property {string} href - The URL of the data source.
- * @property {string} text - The display text of the data source.
- * @property {string} [download] - The URL to download the data source, optional.
- */
-interface Datasource {
-  href: string;
-  text: string;
-  download?: string;
-}
-
-/**
- * @typedef Source
- * @type {object}
- * @property {string} text - The display text of the source.
- * @property {string} href - The URL of the source.
- * @property {string} [aria_text] - The aria text of the source, optional.
- */
-type Source = {
-  text: string;
-  href: string;
-  aria_text?: string;
-};
-
-/**
- * @interface DateRange
- * @property {number} start - The start date in Unix timestamp.
- * @property {number} end - The end date in Unix timestamp.
- */
-export interface DateRange {
-  start: number;
-  end: number;
-}
-
-/**
- * @interface MetadataProps
- * @property {number | DateRange | string} [date] - The date or date range of the metadata, optional.
- * @property {Source} [source] - The source of the metadata, optional.
- * @property {Source[]} [dataSources] - An array of sources of the data, optional.
- * @property {number} [obtainedAt] - The Unix timestamp when the data was obtained, optional.
- * @property {boolean} [isTileFooter] - If the metadata is a tile footer, optional.
- * @property {string} [datumsText] - The text of the datum, optional.
- * @property {string} [intervalCount] - The interval count, optional.
- * @property {string} [disclaimer] - The disclaimer text, optional.
- * @property {DateRange} [datePeriod] - The date period of the metadata, optional.
- * @property {number} [dateOfInsertionUnix] - The Unix timestamp when the data was inserted, optional.
- * @property {boolean} [isArchivedGraph] - If the metadata is for an archived graph, optional.
- * @property {number | DateRange} [dateOrRange] - The date or date range of the metadata, optional.
- * @property {string} [accessibilitySubject] - The accessibility subject, optional.
- * @property {string} [moreInformationLabel] - The label for more information, optional.
- * @property {Object} [moreInformationLink] - The link for more information, optional.
- * @property {string} [moreInformationLink.href] - The URL of the more information link.
- * @property {string} [moreInformationLink.text] - The display text of the more information link.
- * @property {string} [referenceLink] - The reference link, optional.
- * @property {Datasource[]} [jsonSources] - An array of JSON data sources, optional.
- * @extends {MarginBottomProps}
- */
-export interface MetadataProps extends MarginBottomProps {
-  date?: number | DateRange | string;
-  source?: Source;
-  dataSources?: Source[];
-  obtainedAt?: number;
-  isTileFooter?: boolean;
-  isPageInformationBlock?: boolean;
-  datumsText?: string;
-  intervalCount?: string;
-  disclaimer?: string;
-  datePeriod?: DateRange;
-  dateOfInsertionUnix?: number;
-  isArchivedGraph?: boolean;
-  dateOrRange?: number | DateRange;
-  accessibilitySubject?: string;
-  moreInformationLabel?: string;
-  moreInformationLink?: {
-    href: string;
-    text: string;
-  };
-  referenceLink?: string;
-  jsonSources?: Datasource[];
-}
+import { MetadataProps } from './types';
 
 /**
  * @function
@@ -156,7 +74,7 @@ export function Metadata({
       {!isTileFooter && source && (
         <Text color="gray7" variant="label1">
           {`${dateString} - ${commonTexts.common.metadata.source}: `}
-          <ExternalLink ariaLabel={source.aria_text} href={source.href}>
+          <ExternalLink ariaLabel={source.ariaText} href={source.href}>
             {source.text}
             <ExternalLinkIcon width={space[3]} height={space[2]} />
           </ExternalLink>

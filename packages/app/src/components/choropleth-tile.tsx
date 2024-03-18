@@ -6,7 +6,7 @@ import { Box } from './base';
 import { ChartRegionControls, RegionControlOption } from './chart-region-controls';
 import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
-import { MetadataProps } from './metadata';
+import { MetadataProps } from '~/components/metadata';
 import { Heading, Text } from './typography';
 import { CalendarGear } from '@corona-dashboard/icons';
 type ChoroplethTileProps = {
