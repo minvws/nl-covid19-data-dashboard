@@ -14,23 +14,64 @@ import styled from 'styled-components';
 import { useFormatDateText } from '~/utils/use-format-date-text';
 import { Link } from '~/utils/link';
 
+/**
+ * @interface Datasource
+ * @property {string} href - The URL of the data source.
+ * @property {string} text - The display text of the data source.
+ * @property {string} [download] - The URL to download the data source, optional.
+ */
 interface Datasource {
   href: string;
   text: string;
   download?: string;
 }
 
+/**
+ * @typedef Source
+ * @type {object}
+ * @property {string} text - The display text of the source.
+ * @property {string} href - The URL of the source.
+ * @property {string} [aria_text] - The aria text of the source, optional.
+ */
 type Source = {
   text: string;
   href: string;
   aria_text?: string;
 };
 
+/**
+ * @interface DateRange
+ * @property {number} start - The start date in Unix timestamp.
+ * @property {number} end - The end date in Unix timestamp.
+ */
 export interface DateRange {
   start: number;
   end: number;
 }
 
+/**
+ * @interface MetadataProps
+ * @property {number | DateRange | string} [date] - The date or date range of the metadata, optional.
+ * @property {Source} [source] - The source of the metadata, optional.
+ * @property {Source[]} [dataSources] - An array of sources of the data, optional.
+ * @property {number} [obtainedAt] - The Unix timestamp when the data was obtained, optional.
+ * @property {boolean} [isTileFooter] - If the metadata is a tile footer, optional.
+ * @property {string} [datumsText] - The text of the datum, optional.
+ * @property {string} [intervalCount] - The interval count, optional.
+ * @property {string} [disclaimer] - The disclaimer text, optional.
+ * @property {DateRange} [datePeriod] - The date period of the metadata, optional.
+ * @property {number} [dateOfInsertionUnix] - The Unix timestamp when the data was inserted, optional.
+ * @property {boolean} [isArchivedGraph] - If the metadata is for an archived graph, optional.
+ * @property {number | DateRange} [dateOrRange] - The date or date range of the metadata, optional.
+ * @property {string} [accessibilitySubject] - The accessibility subject, optional.
+ * @property {string} [moreInformationLabel] - The label for more information, optional.
+ * @property {Object} [moreInformationLink] - The link for more information, optional.
+ * @property {string} [moreInformationLink.href] - The URL of the more information link.
+ * @property {string} [moreInformationLink.text] - The display text of the more information link.
+ * @property {string} [referenceLink] - The reference link, optional.
+ * @property {Datasource[]} [jsonSources] - An array of JSON data sources, optional.
+ * @extends {MarginBottomProps}
+ */
 export interface MetadataProps extends MarginBottomProps {
   date?: number | DateRange | string;
   source?: Source;
@@ -54,6 +95,15 @@ export interface MetadataProps extends MarginBottomProps {
   jsonSources?: Datasource[];
 }
 
+/**
+ * @function
+ * @name Metadata
+ * @description A function component that generates a metadata interface based on the provided parameters. It handles
+ *  multiple use cases, including tile footers, single or multiple data sources, different date formats, and intervals.
+ *  It also provides an option for a disclaimer and more information label.
+ * @param {MetadataProps} props - The properties object containing all necessary parameters for Metadata function.
+ * @returns {JSX.Element} JSX Element that represents metadata information.
+ */
 export function Metadata({
   dataSources = [],
   date,
