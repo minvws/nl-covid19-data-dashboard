@@ -11,7 +11,7 @@ import { useIntl } from '~/intl';
 import css from '@styled-system/css';
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { useFormatDateText } from '~/utils/use-format-date-text';
+import { insertDateIntoString } from '~/utils/insert-date-into-string';
 import { Link } from '~/utils/link';
 
 /**
@@ -149,7 +149,7 @@ export function Metadata({
       count: intervalCount,
     });
 
-  const dateText = useFormatDateText(datumsText, dateOfInsertionUnix, dateOrRange);
+  const dateText = datumsText && dateOfInsertionUnix && dateOrRange && insertDateIntoString(formatDateFromSeconds, datumsText, dateOfInsertionUnix, dateOrRange);
 
   return (
     <>
@@ -222,18 +222,20 @@ export function Metadata({
                 )}
 
                 {dateOfInsertionUnix && (
-                  <Box display="flex" alignItems="flex-start" color="gray7" marginY={space[1]}>
-                    <Icon>
-                      <Clock aria-hidden color={colors.gray7} />
-                    </Icon>
-                    <Text variant="label1">
-                      {isArchivedGraph
-                        ? replaceVariablesInText(commonTexts.common.metadata.last_insertion_date_archived, {
-                            dateOfInsertion: formatDateFromSeconds(dateOfInsertionUnix, 'weekday-long'),
-                          })
-                        : replaceVariablesInText(commonTexts.common.metadata.last_insertion_date, { dateOfInsertion: formatDateFromSeconds(dateOfInsertionUnix, 'weekday-long') })}
-                    </Text>
-                  </Box>
+                  <MetadataItem
+                    icon={<Clock aria-hidden colors={colors.gray7} />}
+                    items={[
+                      {
+                        text: insertDateIntoString(
+                          formatDateFromSeconds,
+                          isArchivedGraph ? commonTexts.common.metadata.last_insertion_date_archived : commonTexts.common.metadata.last_insertion_date,
+                          dateOfInsertionUnix,
+                          dateOfInsertionUnix,
+                          'weekday-long'
+                        ),
+                      },
+                    ]}
+                  />
                 )}
 
                 {source ? (
@@ -243,7 +245,7 @@ export function Metadata({
                     icon={<Database aria-hidden color={colors.gray7} />}
                     items={dataSources}
                     label={referenceLink ? commonTexts.informatie_header.bron : metadataText.source}
-                  ></MetadataItem>
+                  />
                 ) : null}
 
                 {disclaimer && (
@@ -268,11 +270,11 @@ export function Metadata({
 
 interface MetadataItemProps {
   icon: JSX.Element;
-  label?: string;
   items: {
-    href: string;
     text: string;
+    href?: string;
   }[];
+  label?: string;
   accessibilityText?: string;
   accessibilitySubject?: string;
   referenceLink?: string;
@@ -286,9 +288,9 @@ function MetadataItem({ icon, label, items, referenceLink, accessibilityText, ac
       <Text variant="label1">
         {items && referenceLink && (
           <>
-            {`${label}: `}
+            {label && `${label}: `}
             {items.map((item, index) => (
-              <Fragment key={index + item.href}>
+              <Fragment key={index + item.text}>
                 <InlineText>
                   {index > 0 && (index !== items.length - 1 ? ' , ' : ' & ')}
                   {item.text}
@@ -299,9 +301,9 @@ function MetadataItem({ icon, label, items, referenceLink, accessibilityText, ac
         )}
         {items && !referenceLink && (
           <>
-            {`${label}: `}
+            {label && `${label}: `}
             {items.map((item, index) => (
-              <Fragment key={index + item.href}>
+              <Fragment key={index + item.text}>
                 {index > 0 && ', '}
                 {item.href && (
                   <ExternalLink
