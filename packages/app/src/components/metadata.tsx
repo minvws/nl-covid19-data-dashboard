@@ -237,29 +237,13 @@ export function Metadata({
                 )}
 
                 {source ? (
-                  <Box display="flex" alignItems="flex-start" color="gray7">
-                    <Icon>
-                      <Database aria-hidden color={colors.gray7} />
-                    </Icon>
-                    <Text variant="label1">
-                      {commonTexts.common.metadata.source}: {source.text}
-                    </Text>
-                  </Box>
+                  <MetadataItem icon={<Database aria-hidden />} items={[source]} label={commonTexts.common.metadata.source} />
                 ) : dataSources && dataSources.length > 0 ? (
-                  <Box display="flex" alignItems="flex-start" color="gray7">
-                    <Icon>
-                      <Database aria-hidden color={colors.gray7} />
-                    </Icon>
-                    <Text variant="label1">
-                      {`${commonTexts.common.metadata.source}: `}
-                      {dataSources.map((item, index) => (
-                        <InlineText key={index}>
-                          {index > 0 && (index !== dataSources.length - 1 ? ' , ' : ' & ')}
-                          {item.text}
-                        </InlineText>
-                      ))}
-                    </Text>
-                  </Box>
+                  <MetadataItem
+                    icon={<Database aria-hidden color={colors.gray7} />}
+                    items={dataSources}
+                    label={referenceLink ? commonTexts.informatie_header.bron : metadataText.source}
+                  ></MetadataItem>
                 ) : null}
 
                 {disclaimer && (
