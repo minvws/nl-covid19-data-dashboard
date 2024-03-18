@@ -12,7 +12,7 @@ import { mediaQueries, radii, space } from '~/style/theme';
 import { RichContentBlock } from '~/types/cms';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
 import { Header } from './components/header';
-import { Metadata, MetadataProps } from './components/metadata';
+import { Metadata, MetadataProps } from '~/components/metadata';
 import { PageLinks } from './components/page-links';
 
 interface InformationBlockProps {

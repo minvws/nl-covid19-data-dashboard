@@ -152,7 +152,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.sources.self_test,
               datePeriod: confirmedCasesSelfTestedTimeInterval,
-              dateOfInsertion: data.self_test_overall.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: data.self_test_overall.last_value.date_of_insertion_unix,
             }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={confirmedCasesSelfTestedTimeframe}
@@ -189,7 +189,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: textNl.chart_infection_radar_age_groups.source.rivm,
               datePeriod: confirmedCasesCovidSymptomsPerAgeTimeInterval,
-              dateOfInsertion: data.infectionradar_symptoms_trend_per_age_group_weekly.last_value.date_of_insertion_unix,
+              dateOfInsertionUnix: data.infectionradar_symptoms_trend_per_age_group_weekly.last_value.date_of_insertion_unix,
             }}
             onSelectTimeframe={setConfirmedCasesCovidSymptomsPerAgeTimeFrame}
           >
