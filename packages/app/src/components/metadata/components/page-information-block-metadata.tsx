@@ -1,16 +1,14 @@
 import { Box } from '~/components/base';
 import { Clock, Database, MeerInformatie } from '@corona-dashboard/icons';
 import { colors } from '@corona-dashboard/common';
-import { Text } from '~/components/typography';
 import React from 'react';
-import { MetadataIcon } from '~/components/metadata/components/items/metadata-icon';
 import { MetadataItem } from '~/components/metadata/components/items/metadata-item';
 import { MetadataProps } from '~/components';
 import { useIntl } from '~/intl';
 import { MetadataReference } from '~/components/metadata/components/items/metadata-reference';
 
 interface PageInformationBlockMetadataProps extends MetadataProps {
-  dateText: string | 0 | undefined;
+  dateText: string | undefined;
 }
 
 /**
@@ -43,12 +41,7 @@ export function PageInformationBlockMetadata({
 
   return (
     <Box spacing={2}>
-      <Box display="flex" alignItems="flex-start" color="gray7">
-        <MetadataIcon>
-          <Clock aria-hidden color={colors.gray7} />
-        </MetadataIcon>
-        <Text variant="label1">{dateText}</Text>
-      </Box>
+      {dateText && <MetadataItem icon={<Clock aria-hidden color={colors.gray7} />} items={[{ text: dateText }]} />}
 
       {dataSources.length > 0 && (
         <MetadataItem

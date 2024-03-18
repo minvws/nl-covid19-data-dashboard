@@ -13,6 +13,7 @@ import { MetadataIcon } from '~/components/metadata/components/items/metadata-ic
 
 interface TileFooterMetadataProps extends MetadataProps {
   dateString: string | null;
+  intervalString: string | undefined;
 }
 
 /**
@@ -50,16 +51,10 @@ export function TileFooterMetadata({
   referenceLink,
   disclaimer,
   obtainedAt,
-  intervalCount,
+  intervalString,
 }: TileFooterMetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const metadataText = commonTexts.common.metadata;
-
-  const intervalString =
-    intervalCount &&
-    replaceVariablesInText(commonTexts.common.metadata.interval, {
-      count: intervalCount,
-    });
 
   return (
     <Box as="footer" marginTop={space[3]} marginBottom={marginBottom || { _: '0', sm: `-${space[3]}` }} gridArea="metadata">

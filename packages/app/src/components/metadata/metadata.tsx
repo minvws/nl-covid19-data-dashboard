@@ -56,7 +56,13 @@ export function Metadata({
         })
       : null;
 
-  const dateText = datumsText && dateOfInsertionUnix && dateOrRange && insertDateIntoString(formatDateFromSeconds, datumsText, dateOfInsertionUnix, dateOrRange);
+  const dateText = datumsText && dateOfInsertionUnix && dateOrRange ? insertDateIntoString(formatDateFromSeconds, datumsText, dateOfInsertionUnix, dateOrRange) : undefined;
+
+  const intervalString =
+    intervalCount &&
+    replaceVariablesInText(commonTexts.common.metadata.interval, {
+      count: intervalCount,
+    });
 
   return (
     <>
@@ -96,7 +102,7 @@ export function Metadata({
           referenceLink={referenceLink}
           disclaimer={disclaimer}
           obtainedAt={obtainedAt}
-          intervalCount={intervalCount}
+          intervalString={intervalString}
         />
       )}
     </>
