@@ -75,7 +75,7 @@ export function PageInformationBlock({
 
   const MetaDataBlock = metadata ? (
     <MetadataBox>
-      <Metadata {...metadata} accessibilitySubject={title} referenceLink={referenceLink} />
+      <Metadata {...metadata} accessibilitySubject={title} referenceLink={referenceLink} isPageInformationBlock />
     </MetadataBox>
   ) : null;
 

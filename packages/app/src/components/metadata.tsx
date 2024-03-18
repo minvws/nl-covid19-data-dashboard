@@ -78,6 +78,7 @@ export interface MetadataProps extends MarginBottomProps {
   dataSources?: Source[];
   obtainedAt?: number;
   isTileFooter?: boolean;
+  isPageInformationBlock?: boolean;
   datumsText?: string;
   intervalCount?: string;
   disclaimer?: string;
@@ -114,6 +115,7 @@ export function Metadata({
   intervalCount,
   isArchivedGraph = false,
   isTileFooter,
+  isPageInformationBlock,
   marginBottom,
   obtainedAt,
   source,
@@ -161,7 +163,35 @@ export function Metadata({
         </Text>
       )}
 
-      {isTileFooter ? (
+      {isPageInformationBlock && (
+        <Box spacing={2}>
+          <Box display="flex" alignItems="flex-start" color="gray7">
+            <Icon>
+              <Clock aria-hidden color={colors.gray7} />
+            </Icon>
+            <Text variant="label1">{dateText}</Text>
+          </Box>
+
+          {dataSources.length > 0 && (
+            <MetadataItem
+              icon={<Database aria-hidden />}
+              items={dataSources}
+              label={referenceLink ? commonTexts.informatie_header.bron : metadataText.source}
+              accessibilityText={commonTexts.accessibility.text_source}
+              accessibilitySubject={accessibilitySubject}
+              referenceLink={referenceLink}
+            />
+          )}
+
+          {referenceLink && <MetadataReference icon={<MeerInformatie aria-hidden />} referenceLink={referenceLink} />}
+
+          {jsonSources.length > 0 && <MetadataItem icon={<MeerInformatie aria-hidden />} items={jsonSources} label={metadataText.metrics_json_links.metrics_json_source} />}
+
+          {moreInformationLabel && <MetadataItem icon={<MeerInformatie aria-hidden />} items={moreInformationLink ? [moreInformationLink] : []} label={moreInformationLabel} />}
+        </Box>
+      )}
+
+      {isTileFooter && (
         /**
          * @TODO Clean up the negative margin by passing the Metadata instance
          * to the Tile via props and position it there properly.
@@ -215,7 +245,7 @@ export function Metadata({
                       {commonTexts.common.metadata.source}: {source.text}
                     </Text>
                   </Box>
-                ) : dataSources ? (
+                ) : dataSources && dataSources.length > 0 ? (
                   <Box display="flex" alignItems="flex-start" color="gray7">
                     <Icon>
                       <Database aria-hidden color={colors.gray7} />
@@ -246,32 +276,6 @@ export function Metadata({
               </>
             )}
           </Text>
-        </Box>
-      ) : (
-        <Box spacing={2}>
-          <Box display="flex" alignItems="flex-start" color="gray7">
-            <Icon>
-              <Clock aria-hidden color={colors.gray7} />
-            </Icon>
-            <Text variant="label1">{dateText}</Text>
-          </Box>
-
-          {dataSources.length > 0 && (
-            <MetadataItem
-              icon={<Database aria-hidden />}
-              items={dataSources}
-              label={referenceLink ? commonTexts.informatie_header.bron : metadataText.source}
-              accessibilityText={commonTexts.accessibility.text_source}
-              accessibilitySubject={accessibilitySubject}
-              referenceLink={referenceLink}
-            />
-          )}
-
-          {referenceLink && <MetadataReference icon={<MeerInformatie aria-hidden />} referenceLink={referenceLink} />}
-
-          {jsonSources.length > 0 && <MetadataItem icon={<MeerInformatie aria-hidden />} items={jsonSources} label={metadataText.metrics_json_links.metrics_json_source} />}
-
-          {moreInformationLabel && <MetadataItem icon={<MeerInformatie aria-hidden />} items={moreInformationLink ? [moreInformationLink] : []} label={moreInformationLabel} />}
         </Box>
       )}
     </>
