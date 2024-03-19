@@ -4,7 +4,7 @@ import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
-import { MetadataProps } from '~/components/metadata';
+import { DateRange, MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { GappedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
@@ -22,9 +22,10 @@ interface VariantsStackedAreaTileProps {
   values: VariantChartValue[];
   metadata: MetadataProps;
   variantColors: ColorMatch[];
+  onHandleTimeIntervalChange?: (value: DateRange | undefined) => void;
 }
 
-export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata }: VariantsStackedAreaTileProps) => {
+export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata, onHandleTimeIntervalChange }: VariantsStackedAreaTileProps) => {
   const [variantStackedAreaTimeframe, setVariantStackedAreaTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
@@ -78,6 +79,7 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
         )}
         numGridLines={0}
         tickValues={[0, 25, 50, 75, 100]}
+        onHandleTimeIntervalChange={onHandleTimeIntervalChange}
       />
       <Legend items={staticLegendItems} />
     </ChartTile>

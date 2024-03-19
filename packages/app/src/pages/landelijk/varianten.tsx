@@ -19,10 +19,11 @@ import { TileList } from '~/components/tile-list';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { VariantDynamicLabels } from '~/domain/variants/data-selection/types';
 import { Varianten } from '@corona-dashboard/icons';
 import { VariantsStackedAreaTile, VariantsStackedBarChartTile, VariantsTableTile } from '~/domain/variants';
+import { DateRange } from '~/components/metadata';
 
 const pageMetrics = ['variants', 'named_difference'];
 
@@ -97,6 +98,18 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
   const { commonTexts, locale } = useIntl();
   const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
+
+  const [covidVariantsTimeInterval, setCovidVariantsTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
+  const archivedCovidVariantsTimeInterval = archivedVariantChart
+    ? {
+        start: archivedVariantChart[0].date_start_unix,
+        end: archivedVariantChart[archivedVariantChart?.length - 1].date_end_unix,
+      }
+    : undefined;
+
+  const handleSetCovidVariantsTimeInterval = useCallback((value: DateRange | undefined) => {
+    setCovidVariantsTimeInterval(value);
+  }, []);
 
   const metadata = {
     ...metadataTexts,
@@ -188,9 +201,11 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               variantOrders={variantOrders}
               metadata={{
                 datumsText: textNl.datums,
-                date: getLastInsertionDateOfPage(data, ['variants']),
                 source: textNl.bronnen.rivm,
+                timeInterval: covidVariantsTimeInterval,
+                dateOfInsertion: getLastInsertionDateOfPage(data, ['variants']),
               }}
+              onHandleTimeIntervalChange={handleSetCovidVariantsTimeInterval}
             />
           )}
 
@@ -234,6 +249,9 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
                     datumsText: textNl.datums,
                     date: archivedData.variants_archived_20231101.values[0].last_value.date_of_report_unix,
                     source: textNl.bronnen.rivm,
+                    timeInterval: archivedCovidVariantsTimeInterval,
+                    dateOfInsertion: archivedData.variants_archived_20231101.values[0].last_value.date_of_report_unix,
+                    isArchivedGraph: true,
                   }}
                 />
               )}
