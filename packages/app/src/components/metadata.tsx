@@ -34,7 +34,7 @@ export interface MetadataProps extends MarginBottomProps {
   disclaimer?: string;
 
   //Metadata enhacements
-  datePeriod?: DateRange;
+  timeInterval?: DateRange;
   dateOfInsertion?: number;
   isArchivedGraph?: boolean;
 }
@@ -43,7 +43,6 @@ export function Metadata({
   dataSources,
   date,
   dateOfInsertion,
-  datePeriod,
   datumsText,
   disclaimer,
   intervalCount,
@@ -52,6 +51,7 @@ export function Metadata({
   marginBottom,
   obtainedAt,
   source,
+  timeInterval,
 }: MetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
 
@@ -103,15 +103,15 @@ export function Metadata({
               })
             ) : (
               <>
-                {datePeriod && (
+                {timeInterval && (
                   <Box display="flex" alignItems="flex-start" color="gray7">
                     <Icon>
                       <Calendar aria-hidden color={colors.gray7} />
                     </Icon>
                     <Text variant="label1">
                       {replaceVariablesInText(commonTexts.common.metadata.time_interval, {
-                        dateStart: formatDateFromSeconds(datePeriod.start, 'weekday-long'),
-                        dateEnd: formatDateFromSeconds(datePeriod.end, 'weekday-long'),
+                        dateStart: formatDateFromSeconds(timeInterval.start, 'weekday-long'),
+                        dateEnd: formatDateFromSeconds(timeInterval.end, 'weekday-long'),
                       })}
                     </Text>
                   </Box>

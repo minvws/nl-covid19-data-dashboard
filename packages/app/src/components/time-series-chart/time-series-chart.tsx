@@ -141,7 +141,7 @@ export type TimeSeriesChartProps<T extends TimestampedValue, C extends SeriesCon
    * @param value: DateRange | number
    * @returns
    */
-  onHandleTimeIntervalChange?: (value: DateRange) => void;
+  onHandleTimeIntervalChange?: (value: DateRange | undefined) => void;
 
   /**
    * By default markers for all series are displayed on hover, also the tooltip
@@ -210,7 +210,9 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
 
   useEffect(() => {
     if (onHandleTimeIntervalChange) {
-      if (isDateSpanSeries(values)) {
+      if (values.length == 0) {
+        onHandleTimeIntervalChange(undefined);
+      } else if (isDateSpanSeries(values)) {
         onHandleTimeIntervalChange({
           start: values[0] ? values[0].date_start_unix : 0,
           end: values[values.length - 1] ? values[values.length - 1].date_end_unix : 0,
@@ -219,7 +221,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
         onHandleTimeIntervalChange({ start: values[0] ? values[0].date_unix : 0, end: values[values.length - 1] ? values[values.length - 1].date_unix : 0 });
       }
     }
-  }, [values, timeframe, onHandleTimeIntervalChange]);
+  }, [timeframe, onHandleTimeIntervalChange]);
 
   const cutValuesConfig = useMemo(() => extractCutValuesConfig(timespanAnnotations), [timespanAnnotations]);
 
