@@ -3,7 +3,7 @@ import { BorderedKpiSection } from '~/components/kpi/bordered-kpi-section';
 import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import { Coronavirus, VulnerableGroups as VulnerableGroupsIcon } from '@corona-dashboard/icons';
 import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
@@ -32,7 +32,6 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils';
-import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = [
@@ -95,12 +94,6 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedArchivedNlData: data, archivedChoropleth, lastGenerated, content } = props;
 
   const reverseRouter = useReverseRouter();
-
-  const [nursingHomeConfirmedCasesTimeframe, setNursingHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
-  const [nursingHomeInfectedLocationsTimeframe, setNursingHomeInfectedLocationsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
-  const [nursingHomeDeceasedTimeframe, setNursingHomeDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const nursinghomeDataLastValue = data.nursing_home_archived_20230126.last_value;
   const nursingHomeArchivedUnderReportedDateStart = getBoundaryDateStartUnix(data.nursing_home_archived_20230126.values, 7);
@@ -217,16 +210,13 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
           <ChartTile
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
-            timeframeOptions={TimeframeOptionsList}
             description={infectedLocationsText.linechart_description}
-            onSelectTimeframe={setNursingHomeInfectedLocationsTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
                 key: 'nursing_home_infected_locations_over_time_chart',
               }}
               values={data.vulnerable_nursing_home_archived_20230711.values}
-              timeframe={nursingHomeInfectedLocationsTimeframe}
               seriesConfig={[
                 {
                   type: 'line',
@@ -257,15 +247,12 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
               title={positiveTestedPeopleText.linechart_titel}
               description={positiveTestedPeopleText.linechart_description}
-              timeframeOptions={TimeframeOptionsList}
-              onSelectTimeframe={setNursingHomeConfirmedCasesTimeframe}
             >
               <TimeSeriesChart
                 accessibility={{
                   key: 'nursing_home_confirmed_cases_over_time_chart',
                 }}
                 values={data.nursing_home_archived_20230126.values}
-                timeframe={nursingHomeConfirmedCasesTimeframe}
                 seriesConfig={[
                   {
                     type: 'line',
@@ -326,19 +313,12 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               </KpiTile>
             </TwoKpiSection>
 
-            <ChartTile
-              metadata={{ source: textNl.bronnen.rivm }}
-              title={textNl.linechart_titel}
-              timeframeOptions={TimeframeOptionsList}
-              description={textNl.linechart_description}
-              onSelectTimeframe={setNursingHomeDeceasedTimeframe}
-            >
+            <ChartTile metadata={{ source: textNl.bronnen.rivm }} title={textNl.linechart_titel} description={textNl.linechart_description}>
               <TimeSeriesChart
                 accessibility={{
                   key: 'nursing_home_deceased_over_time_chart',
                 }}
                 values={data.nursing_home_archived_20230126.values}
-                timeframe={nursingHomeDeceasedTimeframe}
                 seriesConfig={[
                   {
                     type: 'line',
