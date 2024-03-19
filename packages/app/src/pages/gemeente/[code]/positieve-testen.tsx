@@ -98,6 +98,12 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
     }),
   };
 
+  const testedOverallTimeInterval = {
+    start: archivedData.tested_overall_archived_20230331.values[0].date_unix,
+    end: archivedData.tested_overall_archived_20230331.values[archivedData.tested_overall_archived_20230331.values.length - 1].date_unix,
+  };
+  const testedOverallDateOfInsertion = getLastInsertionDateOfPage(archivedData, ['tested_overall_archived_20230331']);
+
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
 
   return (
@@ -186,6 +192,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             description={textGm.linechart_toelichting}
             metadata={{
               source: textGm.bronnen.rivm,
+              dateOfInsertion: testedOverallDateOfInsertion,
+              timeInterval: testedOverallTimeInterval,
             }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={positivelyTestedPeopleTimeframe}
