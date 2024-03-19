@@ -1,18 +1,18 @@
-import { NlVaccineAdministeredPlannedValue, ArchivedNlVaccineCoverage } from '@corona-dashboard/common';
-import React, { Dispatch, SetStateAction, useState, useMemo } from 'react';
-import { Box } from '~/components/base';
-import { isDefined } from 'ts-is-present';
-import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
-import { Markdown } from '~/components/markdown';
-import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
-import { Heading } from '~/components/typography';
-import { useIntl } from '~/intl';
-import { SiteText } from '~/locale';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useFormatDateRange } from '~/utils/use-format-date-range';
-import { AdministrationData } from './data-selection/select-administration-data';
 import { ActiveVaccinationChart, VaccinationChartControls, VaccinationsOverTimeChart } from './vaccinations-over-time-chart';
+import { AdministrationData } from './data-selection/select-administration-data';
+import { Box } from '~/components/base';
+import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
+import { Heading } from '~/components/typography';
+import { isDefined } from 'ts-is-present';
+import { Markdown } from '~/components/markdown';
+import { NlVaccineAdministeredPlannedValue, ArchivedNlVaccineCoverage } from '@corona-dashboard/common';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
+import { useFormatDateRange } from '~/utils/use-format-date-range';
+import { useIntl } from '~/intl';
+import React, { Dispatch, SetStateAction, useState, useMemo } from 'react';
 
 function useTileData(
   activeChart: ActiveVaccinationChart,

@@ -1,15 +1,15 @@
-import { colors, getValuesInTimeframe, ArchivedNlVaccineStockValue, TimeframeOption } from '@corona-dashboard/common';
-import { pick } from 'lodash';
-import { useMemo, useState } from 'react';
-import { isPresent } from 'ts-is-present';
-import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { colors, getValuesInTimeframe, ArchivedNlVaccineStockValue, TimeframeOption } from '@corona-dashboard/common';
 import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
+import { isPresent } from 'ts-is-present';
+import { pick } from 'lodash';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
+import { Spacer } from '~/components/base';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useMemo, useState } from 'react';
 
 interface VaccineStockPerSupplierChartProps {
   values: ArchivedNlVaccineStockValue[];
