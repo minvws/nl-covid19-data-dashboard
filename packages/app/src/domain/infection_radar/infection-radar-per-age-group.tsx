@@ -26,7 +26,7 @@ interface InfectionRadarSymptomsPerAgeGroup {
   timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
   text: SiteText['pages']['infectie_radar_page']['nl'];
-  onHandleTimeIntervalChange?: (value: DateRange) => void;
+  onHandleTimeIntervalChange?: (value: DateRange | undefined) => void;
 }
 
 export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text, onHandleTimeIntervalChange }: InfectionRadarSymptomsPerAgeGroup) {
