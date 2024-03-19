@@ -4,7 +4,7 @@ import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTileToggleItem } from '~/components/chart-tile-toggle';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { colors, ArchivedNlTestedOverallValue, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors, ArchivedNlTestedOverallValue } from '@corona-dashboard/common';
 import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -79,14 +79,6 @@ export const getStaticProps = createGetStaticProps(
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedArchivedNlData: data, archivedChoropleth, content, lastGenerated } = props;
 
-  const [confirmedCasesInfectedTimeframe, setConfirmedCasesInfectedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
-  const [confirmedCasesInfectedPercentageTimeframe, setConfirmedCasesInfectedPercentageTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
-  const [confirmedCasesTestedOverTimeTimeframe, setConfirmedCasesTestedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
-  const [confirmedCasesInfectedPerAgeTimeframe, setConfirmedCasesInfectedPerAgeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
 
@@ -154,16 +146,12 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               source: textNl.bronnen.rivm,
             }}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={confirmedCasesInfectedTimeframe}
-            onSelectTimeframe={setConfirmedCasesInfectedTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
                 key: 'confirmed_cases_infected_over_time_chart',
               }}
               values={data.tested_overall_archived_20230331.values}
-              timeframe={confirmedCasesInfectedTimeframe}
               seriesConfig={[
                 {
                   type: 'line',
@@ -193,7 +181,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
           <InView rootMargin="400px">
             {selectedGgdGraph === 'GGD_infected_percentage_over_time_chart' && (
               <ChartTile
-                timeframeOptions={TimeframeOptionsList}
                 title={textNl.ggd.linechart_percentage_titel}
                 description={replaceVariablesInText(textNl.ggd.linechart_percentage_toelichting, {
                   date: formatDateFromSeconds(archivedDataGgdLastValue.date_unix, 'weekday-long'),
@@ -204,7 +191,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   date: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230321']),
                   source: textNl.ggd.bronnen.rivm,
                 }}
-                onSelectTimeframe={setConfirmedCasesInfectedPercentageTimeframe}
                 toggle={{
                   initialValue: selectedGgdGraph,
                   items: ggdGraphToggleItems,
@@ -215,7 +201,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   accessibility={{
                     key: 'confirmed_cases_infected_percentage_over_time_chart',
                   }}
-                  timeframe={confirmedCasesInfectedPercentageTimeframe}
                   values={data.tested_ggd_archived_20230321.values}
                   forceLegend
                   seriesConfig={[
@@ -232,7 +217,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             )}
             {selectedGgdGraph === 'GGD_tested_over_time_chart' && (
               <ChartTile
-                timeframeOptions={TimeframeOptionsList}
                 title={textNl.ggd.linechart_totaltests_titel}
                 description={replaceVariablesInText(textNl.ggd.linechart_totaltests_toelichting, {
                   date: formatDateFromSeconds(archivedDataGgdLastValue.date_unix, 'weekday-long'),
@@ -243,7 +227,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   source: textNl.ggd.bronnen.rivm,
                   date: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230321']),
                 }}
-                onSelectTimeframe={setConfirmedCasesTestedOverTimeTimeframe}
                 toggle={{
                   initialValue: selectedGgdGraph,
                   items: ggdGraphToggleItems,
@@ -254,7 +237,6 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   accessibility={{
                     key: 'confirmed_cases_tested_over_time_chart',
                   }}
-                  timeframe={confirmedCasesTestedOverTimeTimeframe}
                   values={data.tested_ggd_archived_20230321.values}
                   seriesConfig={[
                     {
@@ -281,18 +263,15 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             <ChartTile
               title={textNl.infected_per_age_group.title}
               description={textNl.infected_per_age_group.description}
-              timeframeOptions={TimeframeOptionsList}
               metadata={{
                 source: textNl.bronnen.rivm,
               }}
-              onSelectTimeframe={setConfirmedCasesInfectedPerAgeTimeframe}
             >
               <InfectedPerAgeGroup
                 accessibility={{
                   key: 'confirmed_cases_infected_per_age_group_over_time_chart',
                 }}
                 values={data.tested_per_age_group_archived_20230331.values}
-                timeframe={confirmedCasesInfectedPerAgeTimeframe}
                 timelineEvents={getTimelineEvents(content.elements.timeSeries, 'tested_per_age_group_archived_20230331')}
                 text={textNl}
               />
