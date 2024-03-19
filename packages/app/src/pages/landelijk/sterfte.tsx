@@ -2,6 +2,7 @@ import { AgeDemographic } from '~/components/age-demographic';
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
+import { colors } from '@corona-dashboard/common';
 import { Coronavirus, External } from '@corona-dashboard/icons';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData, selectNlData } from '~/static-props/get-data';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
@@ -22,7 +23,6 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { space } from '~/style/theme';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { TileList } from '~/components/tile-list';
-import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard/common';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
@@ -73,7 +73,6 @@ export const getStaticProps = createGetStaticProps(
 const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: currentData, selectedArchivedNlData: archivedData, lastGenerated, content } = props;
 
-  const [deceasedOverTimeTimeframe, setDeceasedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
   const reverseRouter = useReverseRouter();
@@ -233,20 +232,17 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               </TwoKpiSection>
 
               <ChartTile
-                timeframeOptions={TimeframeOptionsList}
                 title={textNl.section_deceased_rivm.line_chart_covid_daily_title}
                 description={textNl.section_deceased_rivm.line_chart_covid_daily_description}
                 metadata={{
                   source: textNl.section_deceased_rivm.bronnen.rivm,
                 }}
-                onSelectTimeframe={setDeceasedOverTimeTimeframe}
               >
                 <TimeSeriesChart
                   accessibility={{
                     key: 'deceased_over_time_chart',
                   }}
                   values={dataRivm.values}
-                  timeframe={deceasedOverTimeTimeframe}
                   seriesConfig={[
                     {
                       type: 'line',
