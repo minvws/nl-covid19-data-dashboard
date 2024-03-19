@@ -1,19 +1,20 @@
-import { DAY_IN_SECONDS, NlHospitalNicePerAgeGroupValue, NlIntensiveCareNicePerAgeGroupValue, TimeframeOption } from '@corona-dashboard/common';
-import { Spacer } from '~/components/base';
-import { ErrorBoundary } from '~/components/error-boundary';
-import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
-import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
-import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
-import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
-import { useBreakpoints } from '~/utils/use-breakpoints';
-import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
+import { DateRange } from '~/components/metadata';
+import { DAY_IN_SECONDS, NlHospitalNicePerAgeGroupValue, NlIntensiveCareNicePerAgeGroupValue, TimeframeOption } from '@corona-dashboard/common';
+import { ErrorBoundary } from '~/components/error-boundary';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
+import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
+import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { space } from '~/style/theme';
+import { Spacer } from '~/components/base';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useIntl } from '~/intl';
+import { useList } from '~/utils/use-list';
 
 type NLHospitalAdmissionPerAgeGroupValue = NlIntensiveCareNicePerAgeGroupValue | NlHospitalNicePerAgeGroupValue;
 
@@ -26,9 +27,10 @@ interface AdmissionsPerAgeGroup {
    */
   accessibility: AccessibilityDefinition;
   timelineEvents?: TimelineEventConfig[];
+  onHandleTimeIntervalChange?: (value: DateRange | undefined) => void;
 }
 
-export function AdmissionsPerAgeGroup({ values, timeframe, accessibility, timelineEvents }: AdmissionsPerAgeGroup) {
+export function AdmissionsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, onHandleTimeIntervalChange }: AdmissionsPerAgeGroup) {
   const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
@@ -91,6 +93,7 @@ export function AdmissionsPerAgeGroup({ values, timeframe, accessibility, timeli
           ],
           timelineEvents,
         }}
+        onHandleTimeIntervalChange={onHandleTimeIntervalChange}
       />
     </ErrorBoundary>
   );
