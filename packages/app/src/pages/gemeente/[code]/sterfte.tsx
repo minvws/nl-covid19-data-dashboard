@@ -1,5 +1,6 @@
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { ChartTile } from '~/components/chart-tile';
+import { colors } from '@corona-dashboard/common';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedGmData } from '~/static-props/get-data';
 import { ElementsQueryResult, getElementsQuery, getTimelineEvents } from '~/queries/get-elements-query';
@@ -19,12 +20,10 @@ import { PageInformationBlock } from '~/components/page-information-block/page-i
 import { replaceVariablesInText, useReverseRouter } from '~/utils';
 import { StaticProps, createGetStaticProps } from '~/static-props/create-get-static-props';
 import { TileList } from '~/components/tile-list';
-import { TimeframeOption, TimeframeOptionsList, colors } from '@corona-dashboard/common';
 import { TimeSeriesChart } from '~/components/time-series-chart/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
-import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = ['deceased_rivm_archived_20221231'];
@@ -70,8 +69,6 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
 
   const { pageText, municipalityName, selectedArchivedGmData: data, content, lastGenerated } = props;
-
-  const [deceasedMunicipalTimeframe, setDeceasedMunicipalTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts } = useIntl();
   const { textGm, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -144,18 +141,15 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            timeframeOptions={TimeframeOptionsList}
             title={textGm.section_deceased_rivm.line_chart_covid_daily_title}
             description={textGm.section_deceased_rivm.line_chart_covid_daily_description}
             metadata={{ source: textGm.section_deceased_rivm.bronnen.rivm }}
-            onSelectTimeframe={setDeceasedMunicipalTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
                 key: 'deceased_over_time_chart',
               }}
               values={data.deceased_rivm_archived_20221231.values}
-              timeframe={deceasedMunicipalTimeframe}
               seriesConfig={[
                 {
                   type: 'line',
