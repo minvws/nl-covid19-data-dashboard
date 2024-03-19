@@ -15,6 +15,7 @@ import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils';
 import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -49,6 +50,11 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
+  const metadataTimeInterval = {
+    start: data.corona_melder_app_warning_archived_20220421.values[0].date_unix,
+    end: data.corona_melder_app_warning_archived_20220421.values[data.corona_melder_app_warning_archived_20220421.values.length - 1].date_unix,
+  };
+
   const hasActiveWarningTile = !!corona_melder_app.belangrijk_bericht;
 
   return (
@@ -74,6 +80,8 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{
               source: corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen.coronamelder,
+              dateOfInsertion: getLastInsertionDateOfPage(data, ['corona_melder_app_warning_archived_20220421']),
+              timeInterval: metadataTimeInterval,
             }}
             title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
             description={corona_melder_app.waarschuwingen_over_tijd_grafiek.description}
