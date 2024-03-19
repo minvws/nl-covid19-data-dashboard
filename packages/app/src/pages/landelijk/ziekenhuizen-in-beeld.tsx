@@ -24,7 +24,8 @@ import { trimLeadingNullValues } from '~/utils/trim-leading-null-values';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { DateRange } from '~/components/metadata';
 
 const pageMetrics = [
   'difference.hospital_lcps__beds_occupied_covid',
@@ -80,6 +81,9 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const [hospitalBedsOccupiedOverTimeTimeframe, setHospitalBedsOccupiedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
   const [intensiveCareBedsTimeframe, setIntensiveCareBedsTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
 
+  const [hospitalBedsOccupiedOverTimeTimeInterval, setHospitalBedOccupiedOverTimeTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
+  const [intensiveCareBedsTimeInterval, setIntensiveCareBedsTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
+
   const gappedBarBandPaddingOverride = 0.4;
 
   const bedsOccupiedOverTimeToggleItems: ChartTileToggleItem[] = [
@@ -96,6 +100,9 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const [selectedPatientInfluxOverTimeChart, setSelectedPatientInfluxOverTimeChart] = useState<string>('patients_influx_hospital');
   const [hospitalPatientInfluxOverTimeTimeframe, setHospitalPatientInfluxOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
   const [intensiveCarePatientInfluxOverTimeTimeframe, setIntensiveCarePatientInfluxOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
+
+  const [hospitalPatientInfluxOverTimeTimeInterval, setHospitalPatientInfluxOverTimeTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
+  const [intensiveCarePatientInfluxOverTimeTimeInterval, setIntensiveCarePatientInfluxOverTimeTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
 
   const patientInfluxOverTimeToggleItems: ChartTileToggleItem[] = [
     {
@@ -115,6 +122,26 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const lcpsICWithoutRange = data.intensive_care_lcps.values.map((value) => ({ ...value, date_end_unix: undefined, date_start_unix: undefined }));
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+  const lastInsertionDateHospitalBedsOccupiedOverTime = getLastInsertionDateOfPage(data, ['hospital_lcps']);
+  const lastInsertionDateIntensiveCareBeds = getLastInsertionDateOfPage(data, ['intensive_care_lcps']);
+  const lastInsertionDateHospitalPatientInfluxOverTime = getLastInsertionDateOfPage(data, ['hospital_lcps']);
+  const lastInsertionDateIntensiveCarePatientInfluxOverTimeTimeInterval = getLastInsertionDateOfPage(data, ['intensive_care_lcps']);
+
+  const handleHospitalBedsOccupiedOverTimeTimeIntervalChange = useCallback((value: DateRange | undefined) => {
+    setHospitalBedOccupiedOverTimeTimeInterval(value);
+  }, []);
+
+  const handleIntensiveCareBedsTimeIntervalChange = useCallback((value: DateRange | undefined) => {
+    setIntensiveCareBedsTimeInterval(value);
+  }, []);
+
+  const handleHospitalPatientInfluxOverTimeTimeIntervalChange = useCallback((value: DateRange | undefined) => {
+    setHospitalPatientInfluxOverTimeTimeInterval(value);
+  }, []);
+
+  const handleIntensiveCarePatientInfluxOverTimeTimeIntervalChange = useCallback((value: DateRange | undefined) => {
+    setIntensiveCarePatientInfluxOverTimeTimeInterval(value);
+  }, []);
 
   return (
     <Layout {...metadataTexts} lastGenerated={lastGenerated}>
@@ -168,7 +195,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 timeframeOptions={TimeframeOptionsList}
                 title={textNl.hospitals.chart_beds_occupied.title}
                 description={textNl.hospitals.chart_beds_occupied.description}
-                metadata={{ source: textNl.sources.lnaz }}
+                metadata={{ source: textNl.sources.lnaz, timeInterval: hospitalBedsOccupiedOverTimeTimeInterval, dateOfInsertion: lastInsertionDateHospitalBedsOccupiedOverTime }}
                 timeframeInitialValue={hospitalBedsOccupiedOverTimeTimeframe}
                 onSelectTimeframe={setHospitalBedsOccupiedOverTimeTimeframe}
                 toggle={{
@@ -211,6 +238,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                     timelineEvents: getTimelineEvents(content.elements.timeSeries, 'hospital_lcps', 'beds_occupied_covid'),
                     useDatesAsRange: false,
                   }}
+                  onHandleTimeIntervalChange={handleHospitalBedsOccupiedOverTimeTimeIntervalChange}
                 />
               </ChartTile>
             )}
@@ -219,7 +247,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               <ChartTile
                 title={textNl.icu.chart_beds_occupied.title}
                 description={textNl.icu.chart_beds_occupied.description}
-                metadata={{ source: textNl.sources.lnaz }}
+                metadata={{ source: textNl.sources.lnaz, timeInterval: intensiveCareBedsTimeInterval, dateOfInsertion: lastInsertionDateIntensiveCareBeds }}
                 timeframeOptions={TimeframeOptionsList}
                 timeframeInitialValue={intensiveCareBedsTimeframe}
                 onSelectTimeframe={setIntensiveCareBedsTimeframe}
@@ -264,6 +292,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                     timelineEvents: getTimelineEvents(content.elements.timeSeries, 'intensive_care_lcps', 'beds_occupied_covid'),
                     useDatesAsRange: false,
                   }}
+                  onHandleTimeIntervalChange={handleIntensiveCareBedsTimeIntervalChange}
                 />
               </ChartTile>
             )}
@@ -293,7 +322,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               timeframeOptions={TimeframeOptionsList}
               title={textNl.hospitals.chart_patient_influx.title}
               description={textNl.hospitals.chart_patient_influx.description}
-              metadata={{ source: textNl.sources.lnaz }}
+              metadata={{ source: textNl.sources.lnaz, timeInterval: hospitalPatientInfluxOverTimeTimeInterval, dateOfInsertion: lastInsertionDateHospitalPatientInfluxOverTime }}
               timeframeInitialValue={hospitalPatientInfluxOverTimeTimeframe}
               onSelectTimeframe={setHospitalPatientInfluxOverTimeTimeframe}
               toggle={{
@@ -326,6 +355,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   timelineEvents: getTimelineEvents(content.elements.timeSeries, 'hospital_lcps'),
                 }}
+                onHandleTimeIntervalChange={handleHospitalPatientInfluxOverTimeTimeIntervalChange}
               />
             </ChartTile>
           )}
@@ -335,7 +365,11 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               timeframeOptions={TimeframeOptionsList}
               title={textNl.icu.chart_patient_influx.title}
               description={textNl.icu.chart_patient_influx.description}
-              metadata={{ source: textNl.sources.lnaz }}
+              metadata={{
+                source: textNl.sources.lnaz,
+                timeInterval: intensiveCarePatientInfluxOverTimeTimeInterval,
+                dateOfInsertion: lastInsertionDateIntensiveCarePatientInfluxOverTimeTimeInterval,
+              }}
               timeframeInitialValue={intensiveCarePatientInfluxOverTimeTimeframe}
               onSelectTimeframe={setIntensiveCarePatientInfluxOverTimeTimeframe}
               toggle={{
@@ -368,6 +402,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   timelineEvents: getTimelineEvents(content.elements.timeSeries, 'intensive_care_lcps'),
                 }}
+                onHandleTimeIntervalChange={handleIntensiveCarePatientInfluxOverTimeTimeIntervalChange}
               />
             </ChartTile>
           )}
