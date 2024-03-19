@@ -3,7 +3,7 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { CollapsibleContent } from '~/components/collapsible/collapsible-content';
-import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectGmData, selectArchivedGmData } from '~/static-props/get-data';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -32,7 +32,6 @@ import { TimeSeriesChart } from '~/components/time-series-chart/time-series-char
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
-import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
 export { getStaticPaths } from '~/static-paths/gm';
@@ -81,7 +80,6 @@ export const getStaticProps = createGetStaticProps(
 
 function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedGmData: data, selectedArchivedGmData: archivedData, archivedChoropleth, municipalityName, content, lastGenerated } = props;
-  const [positivelyTestedPeopleTimeframe, setpositivelyTestedPeopleTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const { commonTexts, formatNumber, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
   const { textGm, textShared, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -187,16 +185,12 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               source: textGm.bronnen.rivm,
             }}
-            timeframeOptions={TimeframeOptionsList}
-            timeframeInitialValue={positivelyTestedPeopleTimeframe}
-            onSelectTimeframe={setpositivelyTestedPeopleTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
                 key: 'confirmed_cases_infected_over_time_chart',
               }}
               values={archivedData.tested_overall_archived_20230331.values}
-              timeframe={positivelyTestedPeopleTimeframe}
               seriesConfig={[
                 {
                   type: 'line',
