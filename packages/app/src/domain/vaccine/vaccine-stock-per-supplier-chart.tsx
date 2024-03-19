@@ -28,6 +28,9 @@ export function VaccineStockPerSupplierChart({ values, text }: VaccineStockPerSu
     [values, today]
   );
 
+  const metadataTimeInterval = { start: values[0].date_unix, end: values[values.length - 1].date_unix };
+  const metadataDateOfInsertion = values[values.length - 1].date_of_insertion_unix;
+
   const optionsConfig: SelectOption[] = [
     {
       metricProperty: 'bio_n_tech_pfizer',
@@ -89,6 +92,9 @@ export function VaccineStockPerSupplierChart({ values, text }: VaccineStockPerSu
       description={text.stock_per_supplier_chart.description}
       metadata={{
         source: text.bronnen.rivm,
+        dateOfInsertion: metadataDateOfInsertion,
+        timeInterval: metadataTimeInterval,
+        isArchivedGraph: true,
       }}
     >
       <InteractiveLegend helpText={text.stock_per_supplier_chart.select_help_text} selectOptions={optionsConfig} selection={[selected]} onToggleItem={setSelected} />

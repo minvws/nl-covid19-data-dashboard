@@ -22,11 +22,17 @@ export function VaccineDeliveryBarChart({ data, text }: { data: ArchivedNlVaccin
     return <TooltipSeriesList data={context} />;
   };
 
+  const metadataTimeInterval = { start: data.values[0].date_start_unix, end: data.values[data.values.length - 1].date_end_unix };
+  const metadataDateOfInsertion = data.last_value.date_of_insertion_unix;
+
   return (
     <ChartTile
       title={text.grafiek_leveringen.titel}
       metadata={{
         source: text.bronnen.rivm,
+        dateOfInsertion: metadataDateOfInsertion,
+        timeInterval: metadataTimeInterval,
+        isArchivedGraph: true,
       }}
     >
       <Box marginBottom={space[3]} display="flex" flexDirection="column" alignItems="flex-start" spacing={3}>
