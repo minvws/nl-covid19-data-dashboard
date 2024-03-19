@@ -73,14 +73,20 @@ export const getStaticProps = createGetStaticProps(
 const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const { pageText, selectedNlData: currentData, selectedArchivedNlData: archivedData, lastGenerated, content } = props;
 
-  const [deceasedOverTimeTimeframe, setDeceasedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-  const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
-
-  const reverseRouter = useReverseRouter();
-
   const dataCbs = currentData.deceased_cbs;
   const dataRivm = archivedData.deceased_rivm_archived_20221231;
   const dataDeceasedPerAgeGroup = archivedData.deceased_rivm_per_age_group_archived_20221231;
+
+  const [deceasedOverTimeTimeframe, setDeceasedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const deceasedOverTimeTimeInterval = { start: dataCbs.values[0].date_start_unix, end: dataCbs.values[dataCbs.values.length - 1].date_end_unix };
+  const deceasedRivmTimeInterval = { start: dataRivm.values[0].date_unix, end: dataRivm.values[dataRivm.values.length - 1].date_unix };
+
+  const deceasedOverTimeLastInsertionDate = getLastInsertionDateOfPage(currentData, ['deceased_cbs']);
+  const deceasedRivmLastInsertionDate = getLastInsertionDateOfPage(archivedData, ['deceased_rivm_archived_20221231']);
+
+  const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
+
+  const reverseRouter = useReverseRouter();
 
   const { commonTexts, formatPercentage } = useIntl();
   const { metadataTexts, textNl, textShared, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
@@ -127,7 +133,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="informational" />}
 
           <ChartTile
-            metadata={{ source: textNl.section_sterftemonitor.bronnen.cbs }}
+            metadata={{ source: textNl.section_sterftemonitor.bronnen.cbs, timeInterval: deceasedOverTimeTimeInterval, dateOfInsertion: deceasedOverTimeLastInsertionDate }}
             title={textNl.section_sterftemonitor.deceased_monitor_chart_title}
             description={textNl.section_sterftemonitor.deceased_monitor_chart_description}
           >
@@ -238,6 +244,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 description={textNl.section_deceased_rivm.line_chart_covid_daily_description}
                 metadata={{
                   source: textNl.section_deceased_rivm.bronnen.rivm,
+                  timeInterval: deceasedRivmTimeInterval,
+                  dateOfInsertion: deceasedRivmLastInsertionDate,
+                  isArchivedGraph: true,
                 }}
                 onSelectTimeframe={setDeceasedOverTimeTimeframe}
               >
