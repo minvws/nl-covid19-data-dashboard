@@ -6,7 +6,7 @@ import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Heading } from './typography';
 import { Markdown } from './markdown';
-import { MetadataProps } from './metadata';
+import { MetadataProps } from '~/components/metadata';
 import { space } from '~/style/theme';
 
 interface ChartTileDoubleColumnProps {

@@ -1,7 +1,7 @@
 import { PageInformationBlock } from '~/components';
 import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
-import { MetadataProps } from '~/components/page-information-block/components/metadata';
+import { MetadataProps } from '~/components/metadata';
 
 interface PrimarySeriesKpiHeaderProps {
   title: string;

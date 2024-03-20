@@ -8,7 +8,7 @@ import { ChartTimeControls } from './chart-time-controls';
 import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Markdown } from './markdown';
-import { MetadataProps } from './metadata';
+import { MetadataProps } from '~/components/metadata';
 import { Heading } from './typography';
 
 interface ChartTileProps {

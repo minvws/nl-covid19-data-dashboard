@@ -11,7 +11,7 @@ import { usePrevious } from '~/utils/use-previous';
 import { Spacer } from './base';
 import { Box } from './base/box';
 import { IconButton } from './icon-button';
-import { Metadata, MetadataProps } from './metadata';
+import { Metadata, MetadataProps } from '~/components/metadata';
 import { Modal } from './modal';
 
 interface FullscreenChartTileProps {
