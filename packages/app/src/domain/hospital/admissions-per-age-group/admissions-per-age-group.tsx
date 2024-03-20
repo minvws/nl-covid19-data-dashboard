@@ -27,10 +27,10 @@ interface AdmissionsPerAgeGroup {
    */
   accessibility: AccessibilityDefinition;
   timelineEvents?: TimelineEventConfig[];
-  onHandletimeframePeriodChange?: (value: DateRange | undefined) => void;
+  onHandleTimeIntervalChange?: (value: DateRange | undefined) => void;
 }
 
-export function AdmissionsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, onHandletimeframePeriodChange }: AdmissionsPerAgeGroup) {
+export function AdmissionsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, onHandleTimeIntervalChange }: AdmissionsPerAgeGroup) {
   const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
@@ -93,7 +93,7 @@ export function AdmissionsPerAgeGroup({ values, timeframe, accessibility, timeli
           ],
           timelineEvents,
         }}
-        onHandletimeframePeriodChange={onHandletimeframePeriodChange}
+        onHandleTimeIntervalChange={onHandleTimeIntervalChange}
       />
     </ErrorBoundary>
   );

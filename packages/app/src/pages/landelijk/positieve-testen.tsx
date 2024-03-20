@@ -114,17 +114,17 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
     description: textNl.metadata.description,
   };
 
-  const testedOveralltimeframePeriod = {
+  const testedOverallTimeInterval = {
     start: data.tested_overall_archived_20230331.values[0].date_unix,
     end: data.tested_overall_archived_20230331.values[data.tested_overall_archived_20230331.values.length - 1].date_unix,
   };
 
-  const testedGgdtimeframePeriod = {
+  const testedGgdTimeInterval = {
     start: data.tested_ggd_archived_20230321.values[0].date_unix,
     end: data.tested_ggd_archived_20230321.values[data.tested_ggd_archived_20230321.values.length - 1].date_unix,
   };
 
-  const testedPerAgeGrouptimeframePeriod = {
+  const testedPerAgeGroupTimeInterval = {
     start: data.tested_per_age_group_archived_20230331.values[0].date_unix,
     end: data.tested_per_age_group_archived_20230331.values[data.tested_per_age_group_archived_20230331.values.length - 1].date_unix,
   };
@@ -169,7 +169,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               source: textNl.bronnen.rivm,
               dateOfInsertion: getLastInsertionDateOfPage(data, ['tested_overall_archived_20230331']),
-              timeframePeriod: testedOveralltimeframePeriod,
+              timeInterval: testedOverallTimeInterval,
               isArchivedGraph: true,
             }}
             timeframeOptions={TimeframeOptionsList}
@@ -222,7 +222,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   date: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230321']),
                   source: textNl.ggd.bronnen.rivm,
                   dateOfInsertion: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230321']),
-                  timeframePeriod: testedGgdtimeframePeriod,
+                  timeInterval: testedGgdTimeInterval,
                   isArchivedGraph: true,
                 }}
                 onSelectTimeframe={setConfirmedCasesInfectedPercentageTimeframe}
@@ -264,7 +264,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   source: textNl.ggd.bronnen.rivm,
                   date: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230321']),
                   dateOfInsertion: getLastInsertionDateOfPage(data, ['tested_per_age_group_archived_20230331']),
-                  timeframePeriod: testedGgdtimeframePeriod,
+                  timeInterval: testedGgdTimeInterval,
                 }}
                 onSelectTimeframe={setConfirmedCasesTestedOverTimeTimeframe}
                 toggle={{
@@ -308,7 +308,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               metadata={{
                 source: textNl.bronnen.rivm,
                 dateOfInsertion: getLastInsertionDateOfPage(data, ['tested_per_age_group_archived_20230331']),
-                timeframePeriod: testedPerAgeGrouptimeframePeriod,
+                timeInterval: testedPerAgeGroupTimeInterval,
               }}
               onSelectTimeframe={setConfirmedCasesInfectedPerAgeTimeframe}
             >

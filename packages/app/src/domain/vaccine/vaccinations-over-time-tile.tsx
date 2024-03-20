@@ -31,7 +31,7 @@ function useTileData(
        * The metadata component would display a date which is a week early if we use the .date_start_unix
        * and that is not present in the graph
        */
-      timeframePeriod: { start: metadataData.values[0].date_end_unix, end: metadataData.values[data.values.length - 1].date_end_unix },
+      timeInterval: { start: metadataData.values[0].date_end_unix, end: metadataData.values[data.values.length - 1].date_end_unix },
       isArchivedGraph: true,
     };
     const description = text.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving;
@@ -41,7 +41,7 @@ function useTileData(
     source: text.bronnen.rivm,
     date: insertionDate,
     dateOfInsertion: insertionDate,
-    timeframePeriod: { start: data.values[0].date_unix, end: data.values[data.values.length - 1].date_unix },
+    timeInterval: { start: data.values[0].date_unix, end: data.values[data.values.length - 1].date_unix },
     isArchivedGraph: true,
   };
   const description = text.grafiek.omschrijving;

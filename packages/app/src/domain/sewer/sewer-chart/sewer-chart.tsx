@@ -91,7 +91,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
 
   const router = useRouter();
 
-  const [sewerCharttimeframePeriod, setSewerCharttimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
+  const [sewerChartTimeInterval, setSewerChartTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
 
   const metadataLastInsertionDate = getDateFromValues(dataAverages);
 
@@ -108,8 +108,8 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
     setSewerTimeframe(timeframe);
   }, [timeframe, setSewerTimeframe]);
 
-  const handleSetSewerCharttimeframePeriodChange = useCallback((value: DateRange | undefined) => {
-    setSewerCharttimeframePeriod(value);
+  const handleSetSewerChartTimeIntervalChange = useCallback((value: DateRange | undefined) => {
+    setSewerChartTimeInterval(value);
   }, []);
 
   const dataOptions =
@@ -150,7 +150,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
       title={text.title}
       metadata={{
         source: text.source,
-        timeframePeriod: sewerCharttimeframePeriod,
+        timeInterval: sewerChartTimeInterval,
         dateOfInsertion: metadataLastInsertionDate,
       }}
       description={text.description}
@@ -209,7 +209,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
             ]}
             dataOptions={dataOptions}
             forceLegend
-            onHandletimeframePeriodChange={handleSetSewerCharttimeframePeriodChange}
+            onHandleTimeIntervalChange={handleSetSewerChartTimeIntervalChange}
           />
         ) : (
           <TimeSeriesChart
@@ -227,7 +227,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
             ]}
             dataOptions={dataOptions}
             forceLegend
-            onHandletimeframePeriodChange={handleSetSewerCharttimeframePeriodChange}
+            onHandleTimeIntervalChange={handleSetSewerChartTimeIntervalChange}
           />
         )
       }

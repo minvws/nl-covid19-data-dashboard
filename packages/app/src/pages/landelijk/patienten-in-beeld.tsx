@@ -89,11 +89,8 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
   const [hospitalAdmissionsPerAgeGroupOverTimeTimeframe, setHospitalAdmissionsPerAgeGroupOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [intensiveCareAdmissionsPerAgeGroupOverTimeTimeframe, setIntensiveCareAdmissionsPerAgeGroupOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [hospitalAdmissionsPerAgeGroupOverTimetimeframePeriod, setHospitalAdmissionsPerAgeGroupOverTimetimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
-  const [intensiveCareAdmissionsPerAgeGroupOverTimetimeframePeriod, setIntensiveCareAdmissionsPerAgeGroupOverTimetimeframePeriod] = useState<DateRange | undefined>({
-    start: 0,
-    end: 0,
-  });
+  const [hospitalAdmissionsPerAgeGroupOverTimeTimeInterval, setHospitalAdmissionsPerAgeGroupOverTimeTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
+  const [intensiveCareAdmissionsPerAgeGroupOverTimeTimeInterval, setIntensiveCareAdmissionsPerAgeGroupOverTimeTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
 
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
@@ -112,23 +109,23 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
   const [hospitalAdmissionsOverTimeTimeframe, setHospitalAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [intensiveCareAdmissionsOverTimeTimeframe, setIntensiveCareAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
-  const [hospitalAdmissionsOverTimetimeframePeriod, setHospitalAdmissionsOverTimetimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
-  const [intensiveCareAdmissionsOverTimetimeframePeriod, setIntensiveCareAdmissionsOverTimetimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
+  const [hospitalAdmissionsOverTimeTimeInterval, setHospitalAdmissionsOverTimeTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
+  const [intensiveCareAdmissionsOverTimeTimeInterval, setIntensiveCareAdmissionsOverTimeTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
 
-  const handleHospitalAdmissionsPerAgeGroupOverTimetimeframePeriod = useCallback((value: DateRange | undefined) => {
-    setHospitalAdmissionsPerAgeGroupOverTimetimeframePeriod(value);
+  const handleHospitalAdmissionsPerAgeGroupOverTimeTimeInterval = useCallback((value: DateRange | undefined) => {
+    setHospitalAdmissionsPerAgeGroupOverTimeTimeInterval(value);
   }, []);
 
-  const handleIntensiveCareAdmissionsPerAgeGroupOverTimetimeframePeriodChange = useCallback((value: DateRange | undefined) => {
-    setIntensiveCareAdmissionsPerAgeGroupOverTimetimeframePeriod(value);
+  const handleIntensiveCareAdmissionsPerAgeGroupOverTimeTimeIntervalChange = useCallback((value: DateRange | undefined) => {
+    setIntensiveCareAdmissionsPerAgeGroupOverTimeTimeInterval(value);
   }, []);
 
-  const handleHospitalAdmissionsOverTimetimeframePeriodChange = useCallback((value: DateRange | undefined) => {
-    setHospitalAdmissionsOverTimetimeframePeriod(value);
+  const handleHospitalAdmissionsOverTimeTimeIntervalChange = useCallback((value: DateRange | undefined) => {
+    setHospitalAdmissionsOverTimeTimeInterval(value);
   }, []);
 
-  const handleIntensiveCareAdmissionsOverTimetimeframePeriodChange = useCallback((value: DateRange | undefined) => {
-    setIntensiveCareAdmissionsOverTimetimeframePeriod(value);
+  const handleIntensiveCareAdmissionsOverTimeTimeIntervalChange = useCallback((value: DateRange | undefined) => {
+    setIntensiveCareAdmissionsOverTimeTimeInterval(value);
   }, []);
 
   const admissionsOverTimeToggleItems: ChartTileToggleItem[] = [
@@ -202,7 +199,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                 metadata={{
                   source: textNl.sources.nice,
                   dateOfInsertion: lastInsertionDateHospitalAdmissionsPerAgeGroupOverTime,
-                  timeframePeriod: hospitalAdmissionsPerAgeGroupOverTimetimeframePeriod,
+                  timeInterval: hospitalAdmissionsPerAgeGroupOverTimeTimeInterval,
                 }}
                 onSelectTimeframe={setHospitalAdmissionsPerAgeGroupOverTimeTimeframe}
                 toggle={{
@@ -218,7 +215,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   values={data.hospital_nice_per_age_group.values}
                   timeframe={hospitalAdmissionsPerAgeGroupOverTimeTimeframe}
                   timelineEvents={getTimelineEvents(content.elements.timeSeries, 'hospital_nice_per_age_group')}
-                  onHandletimeframePeriodChange={handleHospitalAdmissionsPerAgeGroupOverTimetimeframePeriod}
+                  onHandleTimeIntervalChange={handleHospitalAdmissionsPerAgeGroupOverTimeTimeInterval}
                 />
               </ChartTile>
             )}
@@ -232,7 +229,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                 metadata={{
                   source: textNl.sources.nice,
                   dateOfInsertion: lastInsertionDateIntensiveCareAdmissionsPerAgeGroupOverTime,
-                  timeframePeriod: intensiveCareAdmissionsPerAgeGroupOverTimetimeframePeriod,
+                  timeInterval: intensiveCareAdmissionsPerAgeGroupOverTimeTimeInterval,
                 }}
                 onSelectTimeframe={setIntensiveCareAdmissionsPerAgeGroupOverTimeTimeframe}
                 toggle={{
@@ -248,7 +245,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   values={data.intensive_care_nice_per_age_group.values}
                   timeframe={intensiveCareAdmissionsPerAgeGroupOverTimeTimeframe}
                   timelineEvents={getTimelineEvents(content.elements.timeSeries, 'intensive_care_nice_per_age_group')}
-                  onHandletimeframePeriodChange={handleIntensiveCareAdmissionsPerAgeGroupOverTimetimeframePeriodChange}
+                  onHandleTimeIntervalChange={handleIntensiveCareAdmissionsPerAgeGroupOverTimeTimeIntervalChange}
                 />
               </ChartTile>
             )}
@@ -262,7 +259,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                 metadata={{
                   source: textNl.sources.nice,
                   dateOfInsertion: lastInsertionDateHospitalAdmissionsOverTime,
-                  timeframePeriod: hospitalAdmissionsOverTimetimeframePeriod,
+                  timeInterval: hospitalAdmissionsOverTimeTimeInterval,
                 }}
                 timeframeOptions={TimeframeOptionsList}
                 timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
@@ -305,7 +302,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                     ],
                     timelineEvents: getTimelineEvents(content.elements.timeSeries, 'hospital_nice'),
                   }}
-                  onHandletimeframePeriodChange={handleHospitalAdmissionsOverTimetimeframePeriodChange}
+                  onHandleTimeIntervalChange={handleHospitalAdmissionsOverTimeTimeIntervalChange}
                 />
               </ChartTile>
             )}
@@ -317,7 +314,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                 metadata={{
                   source: textNl.sources.nice,
                   dateOfInsertion: lastInsertionDateIntensiveCareAdmissionsOverTime,
-                  timeframePeriod: intensiveCareAdmissionsOverTimetimeframePeriod,
+                  timeInterval: intensiveCareAdmissionsOverTimeTimeInterval,
                 }}
                 timeframeOptions={TimeframeOptionsList}
                 timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
@@ -360,7 +357,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                       color: colors.primary,
                     },
                   ]}
-                  onHandletimeframePeriodChange={handleIntensiveCareAdmissionsOverTimetimeframePeriodChange}
+                  onHandleTimeIntervalChange={handleIntensiveCareAdmissionsOverTimeTimeIntervalChange}
                 />
               </ChartTile>
             )}

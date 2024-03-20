@@ -22,7 +22,7 @@ export function VaccineDeliveryBarChart({ data, text }: { data: ArchivedNlVaccin
     return <TooltipSeriesList data={context} />;
   };
 
-  const metadatatimeframePeriod = { start: data.values[0].date_start_unix, end: data.values[data.values.length - 1].date_end_unix };
+  const metadataTimeInterval = { start: data.values[0].date_start_unix, end: data.values[data.values.length - 1].date_end_unix };
   const metadataDateOfInsertion = data.last_value.date_of_insertion_unix;
 
   return (
@@ -31,7 +31,7 @@ export function VaccineDeliveryBarChart({ data, text }: { data: ArchivedNlVaccin
       metadata={{
         source: text.bronnen.rivm,
         dateOfInsertion: metadataDateOfInsertion,
-        timeframePeriod: metadatatimeframePeriod,
+        timeInterval: metadataTimeInterval,
         isArchivedGraph: true,
       }}
     >

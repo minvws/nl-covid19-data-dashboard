@@ -68,7 +68,7 @@ export type MetadataProps = {
   datumsText?: string;
   intervalCount?: string;
   disclaimer?: string;
-  timeframePeriod?: DateRange;
+  timeInterval?: DateRange;
   dateOfInsertion?: number;
   isArchivedGraph?: boolean;
   dateOrRange?: number | DateRange;

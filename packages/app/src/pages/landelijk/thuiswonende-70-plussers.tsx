@@ -91,7 +91,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
     description: textNl.metadata.description,
   };
 
-  const metadatatimeframePeriod = { start: elderlyAtHomeData.values[0].date_unix, end: elderlyAtHomeData.values[elderlyAtHomeData.values.length - 1].date_unix };
+  const metadataTimeInterval = { start: elderlyAtHomeData.values[0].date_unix, end: elderlyAtHomeData.values[elderlyAtHomeData.values.length - 1].date_unix };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
@@ -128,7 +128,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
           <ChartTile
             timeframeOptions={TimeframeOptionsList}
             title={textNl.section_positive_tested.line_chart_daily_title}
-            metadata={{ source: textNl.section_positive_tested.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadatatimeframePeriod }}
+            metadata={{ source: textNl.section_positive_tested.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeInterval: metadataTimeInterval }}
             description={textNl.section_positive_tested.line_chart_daily_description}
             onSelectTimeframe={setElderlyAtHomeConfirmedCasesTimeframe}
           >
@@ -210,7 +210,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
           <ChartTile
             timeframeOptions={TimeframeOptionsList}
             title={textNl.section_deceased.line_chart_daily_title}
-            metadata={{ source: textNl.section_positive_tested.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadatatimeframePeriod }}
+            metadata={{ source: textNl.section_positive_tested.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeInterval: metadataTimeInterval }}
             description={textNl.section_deceased.line_chart_daily_description}
             onSelectTimeframe={setElderlyAtHomeConfirmedCasesOverTimeTimeframe}
           >
