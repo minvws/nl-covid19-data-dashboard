@@ -99,16 +99,16 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
   const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
-  const [covidVariantsTimeInterval, setCovidVariantsTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
-  const archivedCovidVariantsTimeInterval = archivedVariantChart
+  const [covidVariantstimeframePeriod, setCovidVariantstimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
+  const archivedCovidVariantstimeframePeriod = archivedVariantChart
     ? {
         start: archivedVariantChart[0].date_start_unix,
         end: archivedVariantChart[archivedVariantChart?.length - 1].date_end_unix,
       }
     : undefined;
 
-  const handleSetCovidVariantsTimeInterval = useCallback((value: DateRange | undefined) => {
-    setCovidVariantsTimeInterval(value);
+  const handleSetCovidVariantstimeframePeriod = useCallback((value: DateRange | undefined) => {
+    setCovidVariantstimeframePeriod(value);
   }, []);
 
   const metadata = {
@@ -202,10 +202,10 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               metadata={{
                 datumsText: textNl.datums,
                 source: textNl.bronnen.rivm,
-                timeInterval: covidVariantsTimeInterval,
+                timeframePeriod: covidVariantstimeframePeriod,
                 dateOfInsertion: getLastInsertionDateOfPage(data, ['variants']),
               }}
-              onHandleTimeIntervalChange={handleSetCovidVariantsTimeInterval}
+              onHandletimeframePeriodChange={handleSetCovidVariantstimeframePeriod}
             />
           )}
 
@@ -249,7 +249,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
                     datumsText: textNl.datums,
                     date: archivedData.variants_archived_20231101.values[0].last_value.date_of_report_unix,
                     source: textNl.bronnen.rivm,
-                    timeInterval: archivedCovidVariantsTimeInterval,
+                    timeframePeriod: archivedCovidVariantstimeframePeriod,
                     dateOfInsertion: archivedData.variants_archived_20231101.values[0].last_value.date_of_report_unix,
                     isArchivedGraph: true,
                   }}

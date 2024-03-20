@@ -165,7 +165,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
 
-  const vaccineVaccinatedOrSupportTimeInterval = {
+  const vaccineVaccinatedOrSupporttimeframePeriod = {
     start: archivedData.vaccine_vaccinated_or_support_archived_20230411.values[0].date_start_unix,
     end: archivedData.vaccine_vaccinated_or_support_archived_20230411.values[archivedData.vaccine_vaccinated_or_support_archived_20230411.values.length - 1].date_end_unix,
   };
@@ -534,7 +534,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                   },
                   source: textNl.vaccination_coverage.bronnen.rivm,
                   dateOfInsertion: getLastInsertionDateOfPage(archivedData, ['vaccine_vaccinated_or_support_archived_20230411']),
-                  timeInterval: vaccineVaccinatedOrSupportTimeInterval,
+                  timeframePeriod: vaccineVaccinatedOrSupporttimeframePeriod,
                   isArchivedGraph: true,
                 }}
               >

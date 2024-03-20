@@ -108,7 +108,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
     }),
   };
 
-  const hospitalNiceTimeInterval = {
+  const hospitalNicetimeframePeriod = {
     start: data.hospital_nice_archived_20240228.values[0].date_start_unix,
     end: data.hospital_nice_archived_20240228.values[data.hospital_nice_archived_20240228.values.length - 1].date_end_unix,
   };
@@ -165,7 +165,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
           <ChartTile
             title={textGm.linechart_titel}
             description={textGm.linechart_description}
-            metadata={{ source: textGm.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeInterval: hospitalNiceTimeInterval }}
+            metadata={{ source: textGm.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: hospitalNicetimeframePeriod }}
             timeframeOptions={TimeframeOptionsList}
             onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
           >

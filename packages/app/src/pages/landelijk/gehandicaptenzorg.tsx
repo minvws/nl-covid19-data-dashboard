@@ -95,7 +95,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
   };
 
   // All timeseries charts use the same set of data, thus the inteval is equal
-  const metadataTimeInterval = {
+  const metadatatimeframePeriod = {
     start: data.disability_care_archived_20230126.values[0].date_unix,
     end: data.disability_care_archived_20230126.values[data.disability_care_archived_20230126.values.length - 1].date_unix,
   };
@@ -133,7 +133,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <ChartTile
-            metadata={{ source: textNl.positief_geteste_personen.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeInterval: metadataTimeInterval }}
+            metadata={{ source: textNl.positief_geteste_personen.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadatatimeframePeriod }}
             title={textNl.positief_geteste_personen.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textNl.positief_geteste_personen.linechart_description}
@@ -224,7 +224,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               source: textNl.besmette_locaties.bronnen.rivm,
               dateOfInsertion: lastInsertionDateOfPage,
-              timeInterval: metadataTimeInterval,
+              timeframePeriod: metadatatimeframePeriod,
             }}
             timeframeOptions={TimeframeOptionsList}
             description={textNl.besmette_locaties.charts.linechart_description}
@@ -266,7 +266,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
           />
 
           <ChartTile
-            metadata={{ source: textNl.oversterfte.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeInterval: metadataTimeInterval }}
+            metadata={{ source: textNl.oversterfte.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadatatimeframePeriod }}
             title={textNl.oversterfte.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textNl.oversterfte.linechart_description}

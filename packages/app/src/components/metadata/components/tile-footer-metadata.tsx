@@ -50,7 +50,7 @@ export function TileFooterMetadata({
   obtainedAt,
   referenceLink,
   source,
-  timeInterval,
+  timeframePeriod,
 }: TileFooterMetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const metadataText = commonTexts.common.metadata;
@@ -65,15 +65,15 @@ export function TileFooterMetadata({
           })
         ) : (
           <>
-            {timeInterval && (
+            {timeframePeriod && (
               <Box display="flex" alignItems="flex-start" color="gray7">
                 <MetadataIcon>
                   <Calendar aria-hidden color={colors.gray7} />
                 </MetadataIcon>
                 <Text variant="label1">
                   {replaceVariablesInText(commonTexts.common.metadata.time_interval, {
-                    dateStart: formatDateFromSeconds(timeInterval.start, 'weekday-long'),
-                    dateEnd: formatDateFromSeconds(timeInterval.end, 'weekday-long'),
+                    dateStart: formatDateFromSeconds(timeframePeriod.start, 'weekday-long'),
+                    dateEnd: formatDateFromSeconds(timeframePeriod.end, 'weekday-long'),
                   })}
                 </Text>
               </Box>

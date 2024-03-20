@@ -88,7 +88,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const hasActiveWarningTile = !!textGm.notification.message;
 
-  const deceasedRivmTimeInterval = {
+  const deceasedRivmtimeframePeriod = {
     start: data.deceased_rivm_archived_20221231.values[0].date_unix,
     end: data.deceased_rivm_archived_20221231.values[data.deceased_rivm_archived_20221231.values.length - 1].date_unix,
   };
@@ -153,7 +153,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             timeframeOptions={TimeframeOptionsList}
             title={textGm.section_deceased_rivm.line_chart_covid_daily_title}
             description={textGm.section_deceased_rivm.line_chart_covid_daily_description}
-            metadata={{ source: textGm.section_deceased_rivm.bronnen.rivm, dateOfInsertion: lastInsertionDateDeceasedRivm, timeInterval: deceasedRivmTimeInterval }}
+            metadata={{ source: textGm.section_deceased_rivm.bronnen.rivm, dateOfInsertion: lastInsertionDateDeceasedRivm, timeframePeriod: deceasedRivmtimeframePeriod }}
             onSelectTimeframe={setDeceasedMunicipalTimeframe}
           >
             <TimeSeriesChart

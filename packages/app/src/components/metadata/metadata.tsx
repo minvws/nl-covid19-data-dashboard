@@ -38,7 +38,7 @@ export function Metadata({
   obtainedAt,
   referenceLink,
   source,
-  timeInterval,
+  timeframePeriod,
 }: MetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
 
@@ -94,7 +94,7 @@ export function Metadata({
           marginBottom={marginBottom}
           datumsText={datumsText}
           date={date}
-          timeInterval={timeInterval}
+          timeframePeriod={timeframePeriod}
           dateOfInsertion={dateOfInsertion}
           isArchivedGraph={isArchivedGraph}
           source={source}

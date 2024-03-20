@@ -61,7 +61,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
-  const metadataTimeInterval = {
+  const metadatatimeframePeriod = {
     start: data.infectious_people_archived_20210709.values[0].date_unix,
     end: data.infectious_people_archived_20210709.values[data.infectious_people_archived_20210709.values.length - 1].date_unix,
   };
@@ -94,7 +94,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <ChartTile
-            metadata={{ source: textNl.bronnen.rivm, dateOfInsertion: lastFullValue.date_of_insertion_unix, timeInterval: metadataTimeInterval }}
+            metadata={{ source: textNl.bronnen.rivm, dateOfInsertion: lastFullValue.date_of_insertion_unix, timeframePeriod: metadatatimeframePeriod }}
             title={textNl.linechart_titel}
             description={textNl.linechart_description}
           >

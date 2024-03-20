@@ -50,7 +50,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
     description: textNl.metadata.description,
   };
 
-  const metadataTimeInterval = {
+  const metadatatimeframePeriod = {
     start: data.corona_melder_app_warning_archived_20220421.values[0].date_unix,
     end: data.corona_melder_app_warning_archived_20220421.values[data.corona_melder_app_warning_archived_20220421.values.length - 1].date_unix,
   };
@@ -81,7 +81,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen.coronamelder,
               dateOfInsertion: getLastInsertionDateOfPage(data, ['corona_melder_app_warning_archived_20220421']),
-              timeInterval: metadataTimeInterval,
+              timeframePeriod: metadatatimeframePeriod,
             }}
             title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
             description={corona_melder_app.waarschuwingen_over_tijd_grafiek.description}
