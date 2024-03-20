@@ -4,6 +4,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { ChartTimeControls } from '~/components/chart-time-controls';
 import { colors, NlSewer, SewerPerInstallationData, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { DateRange } from '~/components/metadata';
+import { getDateFromValues } from '~/utils/get-last-insertion-date-of-page';
 import { isPresent } from 'ts-is-present';
 import { mediaQueries, space } from '~/style/theme';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
@@ -19,7 +20,6 @@ import { useValuesInTimeframe } from '~/components/time-series-chart/logic';
 import { Warning } from '@corona-dashboard/icons';
 import { WarningTile } from '~/components/warning-tile';
 import styled from 'styled-components';
-import { getDateFromValues } from '~/utils/get-last-insertion-date-of-page';
 
 interface SewerChartProps {
   /**
