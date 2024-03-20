@@ -112,7 +112,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
                 start: data.self_test_overall.last_value.date_start_unix,
                 end: data.self_test_overall.last_value.date_end_unix,
               },
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.sources.rivm],
               jsonSources: [{ href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text }],
             }}

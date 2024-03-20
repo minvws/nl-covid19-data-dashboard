@@ -111,7 +111,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textGm.section_deceased_rivm.datums,
               dateOrRange: data.deceased_rivm_archived_20221231.last_value.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textGm.section_deceased_rivm.bronnen.rivm],
               jsonSources: [getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_archived_municipality_json.text)],
             }}

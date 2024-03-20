@@ -156,7 +156,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: positiveTestedPeopleText.datums,
               dateOrRange: vulnerableNursingHomeDataLastValue.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [positiveTestedPeopleText.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
@@ -335,7 +335,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               metadata={{
                 datumsText: textNl.datums,
                 dateOrRange: nursinghomeDataLastValue.date_unix,
-                dateOfInsertionUnix: nursinghomeDataLastValue.date_of_insertion_unix,
+                dateOfInsertion: nursinghomeDataLastValue.date_of_insertion_unix,
                 dataSources: [textNl.bronnen.rivm],
               }}
               referenceLink={textNl.reference.href}

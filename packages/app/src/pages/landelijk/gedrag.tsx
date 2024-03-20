@@ -135,7 +135,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
                 start: behaviorLastValue.date_start_unix,
                 end: behaviorLastValue.date_end_unix,
               },
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
               jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}

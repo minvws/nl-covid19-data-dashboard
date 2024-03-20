@@ -3,12 +3,12 @@ export * from './collapsible/collapsible-content';
 export * from './collapsible/collapsible-section';
 export type { AgeDemographicProps } from './age-demographic';
 export type { PieChartProps } from './pie-chart';
-export type { MetadataProps } from './metadata';
+export type { MetadataProps } from './metadata/types';
 
 export { AgeDemographic } from './age-demographic';
 export { ChartTile } from './chart-tile';
 export { InView } from './in-view';
-export { Metadata } from './metadata';
+export { Metadata } from './metadata/metadata';
 export { PageInformationBlock } from './page-information-block';
 export { TileList } from './tile-list';
 export { Tile } from './tile';

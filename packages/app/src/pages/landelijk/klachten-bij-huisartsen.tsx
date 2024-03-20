@@ -64,7 +64,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastValue.date_end_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertion: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.nivel],
               jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}

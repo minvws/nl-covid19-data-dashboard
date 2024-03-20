@@ -1,15 +1,15 @@
-import { ArchivedNlVaccineCoveragePerAgeGroupAutumn_2022Value } from '@corona-dashboard/common';
 import { AgeGroup } from '~/components/age-groups/age-group';
+import { ArchivedNlVaccineCoveragePerAgeGroupAutumn_2022Value } from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
-import { MetadataProps } from '~/components/metadata';
-import { useGetSingleCoveragePercentageData } from '~/components/tables/logic/use-get-single-coverage-percentage-data';
+import { COLOR_FULLY_VACCINATED } from '~/domain/vaccine/common';
+import { getSortingOrder } from '../logic/get-sorting-order';
+import { MetadataProps } from '~/components/metadata/types';
 import { NarrowTable } from '~/components/tables/narrow-table';
 import { SingleCoverageTableData } from '~/components/tables/types';
-import { WideTable } from '~/components/tables/wide-table';
-import { COLOR_FULLY_VACCINATED } from '~/domain/vaccine/common';
 import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { getSortingOrder } from '../logic/get-sorting-order';
+import { useGetSingleCoveragePercentageData } from '~/components/tables/logic/use-get-single-coverage-percentage-data';
+import { WideTable } from '~/components/tables/wide-table';
 
 interface PrimarySeriesShotCoveragePerAgeGroupProps {
   title: string;

@@ -120,7 +120,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textGm.datums,
               dateOrRange: archivedLastValue.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
               jsonSources: [
                 getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text),

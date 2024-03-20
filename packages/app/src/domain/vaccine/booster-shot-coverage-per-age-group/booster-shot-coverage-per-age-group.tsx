@@ -1,7 +1,7 @@
 import { ArchivedGmVaccineCoveragePerAgeGroupWithBoosterShotValue, ArchivedNlVaccineCoveragePerAgeGroupWithBoosterShotValue } from '@corona-dashboard/common';
 import { AgeGroup } from '~/components/age-groups/age-group';
 import { ChartTile } from '~/components/chart-tile';
-import { MetadataProps } from '~/components/metadata';
+import {} from '~/components/metadata';
 import { useGetPercentageData } from '~/components/tables/logic/use-get-percentage-data';
 import { NarrowTable } from '~/components/tables/narrow-table';
 import { TableData } from '~/components/tables/types';
@@ -10,6 +10,7 @@ import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { COLOR_FULLY_BOOSTERED, COLOR_FULLY_VACCINATED } from '../common';
 import { getSortingOrder } from '../logic/get-sorting-order';
+import { MetadataProps } from '~/components/metadata/types';
 
 interface BoosterCoveragePerAgeGroupProps {
   title: string;

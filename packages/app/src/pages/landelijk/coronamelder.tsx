@@ -69,7 +69,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: corona_melder_app.header.datums,
               dateOrRange: warningLastValue.date_unix,
-              dateOfInsertionUnix: warningLastValue.date_of_insertion_unix,
+              dateOfInsertion: warningLastValue.date_of_insertion_unix,
               dataSources: [corona_melder_app.header.bronnen.rivm],
               jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}

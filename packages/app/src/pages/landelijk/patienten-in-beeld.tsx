@@ -175,7 +175,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: lastValueNice.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.sources.nice],
               jsonSources: [
                 { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },

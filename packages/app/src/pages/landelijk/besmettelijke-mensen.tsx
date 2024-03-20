@@ -81,7 +81,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: lastFullValue.date_unix,
-              dateOfInsertionUnix: lastFullValue.date_of_insertion_unix,
+              dateOfInsertion: lastFullValue.date_of_insertion_unix,
               dataSources: [textNl.bronnen.rivm],
               jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}

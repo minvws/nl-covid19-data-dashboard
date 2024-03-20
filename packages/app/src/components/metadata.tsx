@@ -3,8 +3,8 @@ import { Calendar, Clock, Database, External as ExternalLinkIcon } from '@corona
 import { colors } from '@corona-dashboard/common';
 import { ExternalLink } from '~/components/external-link';
 import { InlineText, Text } from './typography';
-import { MarginBottomProps } from 'styled-system';
 import { Markdown } from '~/components/markdown';
+import { MetadataProps } from './metadata/types';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { space } from '~/style/theme';
 import { useIntl } from '~/intl';
@@ -12,31 +12,9 @@ import css from '@styled-system/css';
 import React from 'react';
 import styled from 'styled-components';
 
-type source = {
-  text: string;
-  href: string;
-  aria_text?: string;
-};
-
 export interface DateRange {
   start: number;
   end: number;
-}
-
-export interface MetadataProps extends MarginBottomProps {
-  date?: number | DateRange | string;
-  source?: source;
-  dataSources?: source[];
-  obtainedAt?: number;
-  isTileFooter?: boolean;
-  datumsText?: string;
-  intervalCount?: string;
-  disclaimer?: string;
-
-  //Metadata enhacements
-  timeInterval?: DateRange;
-  dateOfInsertion?: number;
-  isArchivedGraph?: boolean;
 }
 
 export function Metadata({
@@ -80,7 +58,7 @@ export function Metadata({
       {!isTileFooter && source && (
         <Text color="gray7" variant="label1">
           {`${dateString} - ${commonTexts.common.metadata.source}: `}
-          <ExternalLink ariaLabel={source.aria_text} href={source.href}>
+          <ExternalLink ariaLabel={source.ariaText} href={source.href}>
             {source.text}
             <ExternalLinkIcon width={space[3]} height={space[2]} />
           </ExternalLink>

@@ -117,7 +117,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.positief_geteste_personen.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.positief_geteste_personen.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
@@ -185,7 +185,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.besmette_locaties.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertion: lastValue.date_of_insertion_unix,
               dataSources: [textNl.besmette_locaties.bronnen.rivm],
             }}
             referenceLink={textNl.besmette_locaties.reference.href}
@@ -259,7 +259,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.oversterfte.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertion: lastValue.date_of_insertion_unix,
               dataSources: [textNl.oversterfte.bronnen.rivm],
             }}
             referenceLink={textNl.oversterfte.reference.href}

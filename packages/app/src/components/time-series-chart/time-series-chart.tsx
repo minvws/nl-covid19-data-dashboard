@@ -53,7 +53,7 @@ import {
   useValuesInTimeframe,
   useValueWidth,
 } from './logic';
-import { DateRange } from '../metadata';
+import { DateRange } from '~/components/metadata';
 export type { SeriesConfig } from './logic';
 
 /**

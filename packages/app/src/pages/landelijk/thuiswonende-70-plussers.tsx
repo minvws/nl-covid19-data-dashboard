@@ -110,7 +110,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.section_positive_tested.datums,
               dateOrRange: elderlyAtHomeData.last_value.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.section_positive_tested.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
@@ -202,7 +202,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.section_deceased.datums,
               dateOrRange: elderlyAtHomeData.last_value.date_unix,
-              dateOfInsertionUnix: elderlyAtHomeData.last_value.date_of_insertion_unix,
+              dateOfInsertion: elderlyAtHomeData.last_value.date_of_insertion_unix,
               dataSources: [textNl.section_deceased.bronnen.rivm],
             }}
             referenceLink={textNl.section_deceased.reference.href}

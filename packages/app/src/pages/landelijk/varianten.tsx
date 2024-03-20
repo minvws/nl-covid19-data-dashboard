@@ -153,7 +153,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
                 start: data.variants.values[0].last_value.date_start_unix,
                 end: data.variants.values[0].last_value.date_end_unix,
               },
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },

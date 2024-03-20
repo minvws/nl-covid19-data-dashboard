@@ -100,8 +100,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             description={textNl.pagina_toelichting}
             metadata={{
               datumsText: textNl.datums,
-              dateOrRange: sewerAverages.last_value.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              date: sewerAverages.last_value.date_unix,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },

@@ -183,7 +183,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.dates,
               dateOrRange: archivedData.vaccine_administered_total_archived_20220324.last_value.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },
@@ -239,7 +239,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.dates_archived,
               dateOrRange: archivedData.vaccine_administered_total_archived_20220324.last_value.date_unix,
-              dateOfInsertionUnix: archivedData.vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004.last_value.date_unix,
+              dateOfInsertion: archivedData.vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004.last_value.date_unix,
               dataSources: [textShared.bronnen.rivm],
             }}
           />
@@ -442,7 +442,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               <VaccinationsKpiHeader
                 text={textNl.repeating_shot_information_block}
                 dateUnix={boosterShotAdministeredArchivedLastValue.date_unix}
-                dateOfInsertionUnix={boosterShotAdministeredArchivedLastValue.date_of_insertion_unix}
+                dateOfInsertion={boosterShotAdministeredArchivedLastValue.date_of_insertion_unix}
               />
 
               <VaccinationsShotKpiSection
@@ -472,7 +472,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               <VaccinationsKpiHeader
                 text={textNl.booster_information_block}
                 dateUnix={boosterShotAdministeredArchivedLastValue.date_unix}
-                dateOfInsertionUnix={boosterShotAdministeredArchivedLastValue.date_of_insertion_unix}
+                dateOfInsertion={boosterShotAdministeredArchivedLastValue.date_of_insertion_unix}
               />
 
               <VaccineBoosterAdministrationsKpiSection

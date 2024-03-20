@@ -144,7 +144,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: archivedDataOverallLastValue.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },

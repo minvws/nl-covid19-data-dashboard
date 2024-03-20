@@ -117,7 +117,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 start: dataCbs.last_value.date_start_unix,
                 end: dataCbs.last_value.date_end_unix,
               },
-              dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
+              dateOfInsertion: dataCbs.last_value.date_of_insertion_unix,
               dataSources: [textNl.section_sterftemonitor.bronnen.cbs],
               jsonSources: [
                 { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },
@@ -210,7 +210,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 metadata={{
                   datumsText: textNl.section_deceased_rivm.datums,
                   dateOrRange: dataRivm.last_value.date_unix,
-                  dateOfInsertionUnix: lastInsertionDateOfPage,
+                  dateOfInsertion: lastInsertionDateOfPage,
                   dataSources: [textNl.section_deceased_rivm.bronnen.rivm],
                 }}
               />
