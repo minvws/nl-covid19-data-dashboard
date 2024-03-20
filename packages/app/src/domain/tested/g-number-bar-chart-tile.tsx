@@ -25,7 +25,7 @@ export function GNumberBarChartTile({ data: __data, timeframeInitialValue = Time
   const last_value = __data.last_value;
   const endDate = createDateFromUnixTimestamp(last_value.date_unix);
 
-  const metadataTimeInterval = { start: values[0].date_unix, end: values[values.length - 1].date_unix };
+  const metadataTimeframePeriod = { start: values[0].date_unix, end: values[values.length - 1].date_unix };
   const metadataDateOfInsertion = values[values.length - 1].date_of_insertion_unix;
 
   return (
@@ -38,7 +38,7 @@ export function GNumberBarChartTile({ data: __data, timeframeInitialValue = Time
         date: last_value.date_of_insertion_unix,
         source: text.bronnen,
         dateOfInsertion: metadataDateOfInsertion,
-        timeInterval: metadataTimeInterval,
+        timeframePeriod: metadataTimeframePeriod,
         isArchivedGraph: true,
       }}
       onSelectTimeframe={setGnumberTimeframe}

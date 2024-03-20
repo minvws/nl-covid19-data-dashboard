@@ -78,8 +78,8 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const dataDeceasedPerAgeGroup = archivedData.deceased_rivm_per_age_group_archived_20221231;
 
   const [deceasedOverTimeTimeframe, setDeceasedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-  const deceasedOverTimeTimeInterval = { start: dataCbs.values[0].date_start_unix, end: dataCbs.values[dataCbs.values.length - 1].date_end_unix };
-  const deceasedRivmTimeInterval = { start: dataRivm.values[0].date_unix, end: dataRivm.values[dataRivm.values.length - 1].date_unix };
+  const deceasedOverTimeTimeframePeriod = { start: dataCbs.values[0].date_start_unix, end: dataCbs.values[dataCbs.values.length - 1].date_end_unix };
+  const deceasedRivmTimeframePeriod = { start: dataRivm.values[0].date_unix, end: dataRivm.values[dataRivm.values.length - 1].date_unix };
 
   const deceasedOverTimeLastInsertionDate = getLastInsertionDateOfPage(currentData, ['deceased_cbs']);
   const deceasedRivmLastInsertionDate = getLastInsertionDateOfPage(archivedData, ['deceased_rivm_archived_20221231']);
@@ -133,7 +133,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           {hasActiveWarningTile && <WarningTile isFullWidth message={textShared.notification.message} variant="informational" />}
 
           <ChartTile
-            metadata={{ source: textNl.section_sterftemonitor.bronnen.cbs, timeInterval: deceasedOverTimeTimeInterval, dateOfInsertion: deceasedOverTimeLastInsertionDate }}
+            metadata={{ source: textNl.section_sterftemonitor.bronnen.cbs, timeframePeriod: deceasedOverTimeTimeframePeriod, dateOfInsertion: deceasedOverTimeLastInsertionDate }}
             title={textNl.section_sterftemonitor.deceased_monitor_chart_title}
             description={textNl.section_sterftemonitor.deceased_monitor_chart_description}
           >
@@ -244,7 +244,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 description={textNl.section_deceased_rivm.line_chart_covid_daily_description}
                 metadata={{
                   source: textNl.section_deceased_rivm.bronnen.rivm,
-                  timeInterval: deceasedRivmTimeInterval,
+                  timeframePeriod: deceasedRivmTimeframePeriod,
                   dateOfInsertion: deceasedRivmLastInsertionDate,
                   isArchivedGraph: true,
                 }}

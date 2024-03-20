@@ -115,17 +115,17 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
 
   const ElderlyPeopleText = textNl['70_plussers'];
 
-  const nursingHomeInfectedLocationsOverTimeTimeInterval = {
+  const nursingHomeInfectedLocationsOverTimeTimeframePeriod = {
     start: data.vulnerable_nursing_home_archived_20230711.values[0].date_unix,
     end: data.vulnerable_nursing_home_archived_20230711.values[data.vulnerable_nursing_home_archived_20230711.values.length - 1].date_unix,
   };
 
-  const nursingHomeConfirmedCasesOverTimeTimeInterval = {
+  const nursingHomeConfirmedCasesOverTimeTimeframePeriod = {
     start: data.nursing_home_archived_20230126.values[0].date_unix,
     end: data.nursing_home_archived_20230126.values[data.nursing_home_archived_20230126.values.length - 1].date_unix,
   };
 
-  const nursingHomeDeceasedOverTimeTimeInterval = {
+  const nursingHomeDeceasedOverTimeTimeframePeriod = {
     start: data.nursing_home_archived_20230126.values[0].date_unix,
     end: data.nursing_home_archived_20230126.values[data.nursing_home_archived_20230126.values.length - 1].date_unix,
   };
@@ -236,7 +236,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               source: infectedLocationsText.bronnen.rivm,
               dateOfInsertion: lastInsertionDateNursingHomeInfectedLocationsOverTime,
-              timeInterval: nursingHomeInfectedLocationsOverTimeTimeInterval,
+              timeframePeriod: nursingHomeInfectedLocationsOverTimeTimeframePeriod,
               isArchivedGraph: true,
             }}
             title={infectedLocationsText.linechart_titel}
@@ -280,7 +280,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               metadata={{
                 source: positiveTestedPeopleText.bronnen.rivm,
                 dateOfInsertion: lastInsertionDateNursingHomeConfirmedCasesOverTime,
-                timeInterval: nursingHomeConfirmedCasesOverTimeTimeInterval,
+                timeframePeriod: nursingHomeConfirmedCasesOverTimeTimeframePeriod,
                 isArchivedGraph: true,
               }}
               title={positiveTestedPeopleText.linechart_titel}
@@ -358,7 +358,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               metadata={{
                 source: textNl.bronnen.rivm,
                 dateOfInsertion: lastInsertionDateNursingHomeDeceasedOverTime,
-                timeInterval: nursingHomeDeceasedOverTimeTimeInterval,
+                timeframePeriod: nursingHomeDeceasedOverTimeTimeframePeriod,
                 isArchivedGraph: true,
               }}
               title={textNl.linechart_titel}

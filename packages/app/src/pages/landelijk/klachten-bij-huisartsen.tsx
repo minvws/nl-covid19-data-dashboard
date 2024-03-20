@@ -43,7 +43,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
-  const metadataTimeInterval = {
+  const metadataTimeframePeriod = {
     start: archivedData.doctor_archived_20210903.values[0].date_start_unix,
     end: lastFullValue.date_end_unix,
   };
@@ -74,7 +74,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
 
           <ChartTile
             title={text.linechart_titel}
-            metadata={{ source: text.bronnen.nivel, dateOfInsertion: metadataLastDateOfInsertion, timeInterval: metadataTimeInterval }}
+            metadata={{ source: text.bronnen.nivel, dateOfInsertion: metadataLastDateOfInsertion, timeframePeriod: metadataTimeframePeriod }}
             description={text.linechart_description}
           >
             <TimeSeriesChart

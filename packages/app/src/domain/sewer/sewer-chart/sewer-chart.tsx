@@ -91,7 +91,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
 
   const router = useRouter();
 
-  const [sewerChartTimeInterval, setSewerChartTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
+  const [sewerChartTimeframePeriod, setSewerChartTimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
 
   const metadataLastInsertionDate = getDateFromValues(dataAverages);
 
@@ -108,8 +108,8 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
     setSewerTimeframe(timeframe);
   }, [timeframe, setSewerTimeframe]);
 
-  const handleSetSewerChartTimeIntervalChange = useCallback((value: DateRange | undefined) => {
-    setSewerChartTimeInterval(value);
+  const handleSetSewerChartTimeframePeriodChange = useCallback((value: DateRange | undefined) => {
+    setSewerChartTimeframePeriod(value);
   }, []);
 
   const dataOptions =
@@ -150,7 +150,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
       title={text.title}
       metadata={{
         source: text.source,
-        timeInterval: sewerChartTimeInterval,
+        timeframePeriod: sewerChartTimeframePeriod,
         dateOfInsertion: metadataLastInsertionDate,
       }}
       description={text.description}
@@ -209,7 +209,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
             ]}
             dataOptions={dataOptions}
             forceLegend
-            onHandleTimeIntervalChange={handleSetSewerChartTimeIntervalChange}
+            onHandleTimeframePeriodChange={handleSetSewerChartTimeframePeriodChange}
           />
         ) : (
           <TimeSeriesChart
@@ -227,7 +227,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
             ]}
             dataOptions={dataOptions}
             forceLegend
-            onHandleTimeIntervalChange={handleSetSewerChartTimeIntervalChange}
+            onHandleTimeframePeriodChange={handleSetSewerChartTimeframePeriodChange}
           />
         )
       }

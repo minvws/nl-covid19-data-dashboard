@@ -23,10 +23,10 @@ interface VariantsStackedAreaTileProps {
   values: VariantChartValue[];
   metadata: MetadataProps;
   variantColors: ColorMatch[];
-  onHandleTimeIntervalChange?: (value: DateRange | undefined) => void;
+  onHandleTimeframePeriodChange?: (value: DateRange | undefined) => void;
 }
 
-export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata, onHandleTimeIntervalChange }: VariantsStackedAreaTileProps) => {
+export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata, onHandleTimeframePeriodChange }: VariantsStackedAreaTileProps) => {
   const [variantStackedAreaTimeframe, setVariantStackedAreaTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
@@ -80,7 +80,7 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata,
         )}
         numGridLines={0}
         tickValues={[0, 25, 50, 75, 100]}
-        onHandleTimeIntervalChange={onHandleTimeIntervalChange}
+        onHandleTimeframePeriodChange={onHandleTimeframePeriodChange}
       />
       <Legend items={staticLegendItems} />
     </ChartTile>

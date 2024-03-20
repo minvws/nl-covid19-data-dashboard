@@ -28,7 +28,7 @@ export function VaccineStockPerSupplierChart({ values, text }: VaccineStockPerSu
     [values, today]
   );
 
-  const metadataTimeInterval = { start: values[0].date_unix, end: values[values.length - 1].date_unix };
+  const metadataTimeframePeriod = { start: values[0].date_unix, end: values[values.length - 1].date_unix };
   const metadataDateOfInsertion = values[values.length - 1].date_of_insertion_unix;
 
   const optionsConfig: SelectOption[] = [
@@ -93,7 +93,7 @@ export function VaccineStockPerSupplierChart({ values, text }: VaccineStockPerSu
       metadata={{
         source: text.bronnen.rivm,
         dateOfInsertion: metadataDateOfInsertion,
-        timeInterval: metadataTimeInterval,
+        timeframePeriod: metadataTimeframePeriod,
         isArchivedGraph: true,
       }}
     >

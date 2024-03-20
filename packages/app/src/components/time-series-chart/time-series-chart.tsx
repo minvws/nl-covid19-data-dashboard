@@ -135,13 +135,13 @@ export type TimeSeriesChartProps<T extends TimestampedValue, C extends SeriesCon
    * The dashboard is not currently adapted to having the CurrentDateContext available
    * at page level. In order to connect the state values to the context, we either extract
    * all the timeseries instances into separate components or pass the handlers as functions
-   * from the parent component. onHandleTimeIntervalChange is responsible for handling the
+   * from the parent component. onHandleTimeframePeriodChange is responsible for handling the
    * metadata interval for the X axis. onHandleDateOfInsertion is responsible for handling
    * the last insertion date metadata for the interval.
    * @param value: DateRange | number
    * @returns
    */
-  onHandleTimeIntervalChange?: (value: DateRange | undefined) => void;
+  onHandleTimeframePeriodChange?: (value: DateRange | undefined) => void;
 
   /**
    * By default markers for all series are displayed on hover, also the tooltip
@@ -177,7 +177,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
   markNearestPointOnly,
   minHeight = 250,
   numGridLines = 4,
-  onHandleTimeIntervalChange,
+  onHandleTimeframePeriodChange,
   onSeriesClick,
   paddingLeft,
   seriesConfig,
@@ -209,19 +209,19 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
   const values = useValuesInTimeframe(allValues, timeframe, endDate);
 
   useEffect(() => {
-    if (onHandleTimeIntervalChange) {
+    if (onHandleTimeframePeriodChange) {
       if (values.length == 0) {
-        onHandleTimeIntervalChange(undefined);
+        onHandleTimeframePeriodChange(undefined);
       } else if (isDateSpanSeries(values)) {
-        onHandleTimeIntervalChange({
+        onHandleTimeframePeriodChange({
           start: values[0] ? values[0].date_start_unix : 0,
           end: values[values.length - 1] ? values[values.length - 1].date_end_unix : 0,
         });
       } else if (isDateSeries(values)) {
-        onHandleTimeIntervalChange({ start: values[0] ? values[0].date_unix : 0, end: values[values.length - 1] ? values[values.length - 1].date_unix : 0 });
+        onHandleTimeframePeriodChange({ start: values[0] ? values[0].date_unix : 0, end: values[values.length - 1] ? values[values.length - 1].date_unix : 0 });
       }
     }
-  }, [timeframe, onHandleTimeIntervalChange]);
+  }, [timeframe, onHandleTimeframePeriodChange]);
 
   const cutValuesConfig = useMemo(() => extractCutValuesConfig(timespanAnnotations), [timespanAnnotations]);
 

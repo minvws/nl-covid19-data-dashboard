@@ -22,7 +22,7 @@ interface VariantsStackedBarChartTileProps {
   variantColors: ColorMatch[];
   variantLabels: VariantDynamicLabels;
   variantOrders: OrderMatch[];
-  onHandleTimeIntervalChange?: (value: DateRange | undefined) => void;
+  onHandleTimeframePeriodChange?: (value: DateRange | undefined) => void;
 }
 
 const alwaysEnabled: (keyof VariantChartValue)[] = [];
@@ -47,7 +47,7 @@ export const VariantsStackedBarChartTile = ({
   variantColors,
   variantOrders,
   metadata,
-  onHandleTimeIntervalChange,
+  onHandleTimeframePeriodChange,
 }: VariantsStackedBarChartTileProps) => {
   const today = useCurrentDate();
   const { commonTexts } = useIntl();
@@ -83,7 +83,7 @@ export const VariantsStackedBarChartTile = ({
         timeframe={variantTimeFrame}
         disableLegend
         formatTooltip={(data) => <TooltipSeriesList data={reorderAndFilter<VariantChartValue, SelectOption>(data, interactiveLegendOptions)} hasTwoColumns={hasTwoColumns} />}
-        onHandleTimeIntervalChange={onHandleTimeIntervalChange}
+        onHandleTimeframePeriodChange={onHandleTimeframePeriodChange}
       />
     </ChartTile>
   );

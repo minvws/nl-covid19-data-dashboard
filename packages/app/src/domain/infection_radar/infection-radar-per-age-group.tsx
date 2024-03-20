@@ -26,10 +26,10 @@ interface InfectionRadarSymptomsPerAgeGroup {
   timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
   text: SiteText['pages']['infectie_radar_page']['nl'];
-  onHandleTimeIntervalChange?: (value: DateRange | undefined) => void;
+  onHandleTimeframePeriodChange?: (value: DateRange | undefined) => void;
 }
 
-export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text, onHandleTimeIntervalChange }: InfectionRadarSymptomsPerAgeGroup) {
+export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text, onHandleTimeframePeriodChange }: InfectionRadarSymptomsPerAgeGroup) {
   const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
@@ -91,7 +91,7 @@ export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibi
           valueAnnotation: text.infection_radar_infected_per_age_group.value_annotation,
           timelineEvents,
         }}
-        onHandleTimeIntervalChange={onHandleTimeIntervalChange}
+        onHandleTimeframePeriodChange={onHandleTimeframePeriodChange}
       />
     </ErrorBoundary>
   );
