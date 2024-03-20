@@ -16,7 +16,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from '~/intl';
 import { useRouter } from 'next/router';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
-import { useValuesInTimeframe } from '~/components/time-series-chart/logic';
 import { Warning } from '@corona-dashboard/icons';
 import { WarningTile } from '~/components/warning-tile';
 import styled from 'styled-components';
@@ -91,10 +90,10 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
   const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const router = useRouter();
-  const values = useValuesInTimeframe(dataAverages.values, timeframe);
 
   const [sewerChartTimeInterval, setSewerChartTimeInterval] = useState<DateRange | undefined>({ start: 0, end: 0 });
-  const metadataLastInsertionDate = getDateFromValues(values);
+
+  const metadataLastInsertionDate = getDateFromValues(dataAverages);
 
   const scopedGmName = commonTexts.gemeente_index.municipality_warning;
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
