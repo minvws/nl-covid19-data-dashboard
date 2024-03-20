@@ -87,7 +87,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
   const { commonTexts } = useIntl();
 
   const [timeframe, setTimeframe] = useState(TimeframeOption.ALL);
-  const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
+  const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const router = useRouter();
 
