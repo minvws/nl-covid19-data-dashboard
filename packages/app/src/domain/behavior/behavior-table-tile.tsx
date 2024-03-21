@@ -16,7 +16,7 @@ import { BehaviorIconWithLabel, OnClickConfig } from './components/behavior-icon
 import { BehaviorTrend } from './components/behavior-trend';
 import { BehaviorIdentifier } from './logic/behavior-types';
 import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
-import { columnWidths } from '~/components/tables';
+import { columnWidths } from '~/components/tables/logic/column-widths';
 
 interface BehaviorTableTileProps {
   title: string;

@@ -4,7 +4,7 @@ import { Box } from '~/components/base';
 import { PercentageData } from './components/wide-percentage-data';
 import { Cell, HeaderCell, Table, TableHead } from './components/shared-styled-components';
 import { CommonTableProps } from './types';
-import { columnWidths } from '~/components/tables';
+import { columnWidths } from '~/components/tables/logic/column-widths';
 
 interface WideTableProps extends CommonTableProps {
   headerText: { [key: string]: string };
