@@ -16,6 +16,7 @@ import { BehaviorIconWithLabel, OnClickConfig } from './components/behavior-icon
 import { BehaviorTrend } from './components/behavior-trend';
 import { BehaviorIdentifier } from './logic/behavior-types';
 import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
+import { columnWidths } from '~/components/tables/logic/column-widths';
 
 interface BehaviorTableTileProps {
   title: string;
@@ -47,11 +48,7 @@ export const BehaviorTableTile = ({ title, description, value, annotation, setCu
           }}
           tableData={behaviorsTableData}
           percentageData={percentageData}
-          tableColumnWidths={{
-            labelColumn: '35%',
-            percentageColumn: '20%',
-            percentageBarColumn: '30%',
-          }}
+          tableColumnWidths={columnWidths.wide.behaviourTableTileWidth}
         />
       ) : (
         <NarrowTable tableData={behaviorsTableData} percentageData={percentageData} headerText={text.basisregels.header_basisregel} />
