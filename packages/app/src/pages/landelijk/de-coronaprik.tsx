@@ -165,6 +165,11 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
 
+  const vaccineVaccinatedOrSupportTimeframePeriod = {
+    start: archivedData.vaccine_vaccinated_or_support_archived_20230411.values[0].date_start_unix,
+    end: archivedData.vaccine_vaccinated_or_support_archived_20230411.values[archivedData.vaccine_vaccinated_or_support_archived_20230411.values.length - 1].date_end_unix,
+  };
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout>
@@ -178,7 +183,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.dates,
               dateOrRange: archivedData.vaccine_administered_total_archived_20220324.last_value.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },
@@ -234,7 +239,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.dates_archived,
               dateOrRange: archivedData.vaccine_administered_total_archived_20220324.last_value.date_unix,
-              dateOfInsertionUnix: archivedData.vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004.last_value.date_unix,
+              dateOfInsertion: archivedData.vaccine_coverage_per_age_group_estimated_fully_vaccinated_archived_20231004.last_value.date_unix,
               dataSources: [textShared.bronnen.rivm],
             }}
           />
@@ -437,7 +442,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               <VaccinationsKpiHeader
                 text={textNl.repeating_shot_information_block}
                 dateUnix={boosterShotAdministeredArchivedLastValue.date_unix}
-                dateOfInsertionUnix={boosterShotAdministeredArchivedLastValue.date_of_insertion_unix}
+                dateOfInsertion={boosterShotAdministeredArchivedLastValue.date_of_insertion_unix}
               />
 
               <VaccinationsShotKpiSection
@@ -467,7 +472,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               <VaccinationsKpiHeader
                 text={textNl.booster_information_block}
                 dateUnix={boosterShotAdministeredArchivedLastValue.date_unix}
-                dateOfInsertionUnix={boosterShotAdministeredArchivedLastValue.date_of_insertion_unix}
+                dateOfInsertion={boosterShotAdministeredArchivedLastValue.date_of_insertion_unix}
               />
 
               <VaccineBoosterAdministrationsKpiSection
@@ -527,6 +532,10 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                     start: archivedData.vaccine_vaccinated_or_support_archived_20230411.last_value.date_start_unix,
                     end: archivedData.vaccine_vaccinated_or_support_archived_20230411.last_value.date_end_unix,
                   },
+                  source: textNl.vaccination_coverage.bronnen.rivm,
+                  dateOfInsertion: getLastInsertionDateOfPage(archivedData, ['vaccine_vaccinated_or_support_archived_20230411']),
+                  timeframePeriod: vaccineVaccinatedOrSupportTimeframePeriod,
+                  isArchivedGraph: true,
                 }}
               >
                 <TimeSeriesChart

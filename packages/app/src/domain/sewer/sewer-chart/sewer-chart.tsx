@@ -2,8 +2,9 @@ import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChartTimeControls } from '~/components/chart-time-controls';
-import { colors, isDateSpanSeries, NlSewer, SewerPerInstallationData, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors, NlSewer, SewerPerInstallationData, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { DateRange } from '~/components/metadata';
+import { getDateFromValues } from '~/utils/get-last-insertion-date-of-page';
 import { isPresent } from 'ts-is-present';
 import { mediaQueries, space } from '~/style/theme';
 import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
@@ -11,11 +12,10 @@ import { RichContentSelect } from '~/components/rich-content-select';
 import { Text } from '~/components/typography';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from '~/intl';
 import { useRouter } from 'next/router';
 import { useScopedWarning } from '~/utils/use-scoped-warning';
-import { useValuesInTimeframe } from '~/components/time-series-chart/logic';
 import { Warning } from '@corona-dashboard/icons';
 import { WarningTile } from '~/components/warning-tile';
 import styled from 'styled-components';
@@ -90,10 +90,10 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
   const [sewerTimeframe, setSewerTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const router = useRouter();
-  const values = useValuesInTimeframe(dataAverages.values, timeframe);
 
-  const [metadataTimeInterval, setMetadataTimeInterval] = useState<DateRange>({ start: 0, end: 0 });
-  const metadataLastInsertion = values[values.length - 1] ? values[values.length - 1].date_of_insertion_unix : 1; // Weird behavior if set to 0
+  const [sewerChartTimeframePeriod, setSewerChartTimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
+
+  const metadataLastInsertionDate = getDateFromValues(dataAverages);
 
   const scopedGmName = commonTexts.gemeente_index.municipality_warning;
   const scopedWarning = useScopedWarning(vrNameOrGmName || '', warning || '');
@@ -105,19 +105,12 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
   }, [onChange, router.events]);
 
   useEffect(() => {
-    if (isDateSpanSeries(values)) {
-      setMetadataTimeInterval({
-        start: values[0] ? values[0].date_start_unix : 0,
-        end: values[values.length - 1] ? values[values.length - 1].date_end_unix : 0,
-      });
-    } else {
-      setMetadataTimeInterval({ start: values[0] ? values[0].date_unix : 0, end: values[values.length - 1] ? values[values.length - 1].date_unix : 0 });
-    }
-  }, [timeframe, values, setMetadataTimeInterval]);
-
-  useEffect(() => {
     setSewerTimeframe(timeframe);
   }, [timeframe, setSewerTimeframe]);
+
+  const handleSetSewerChartTimeframePeriodChange = useCallback((value: DateRange | undefined) => {
+    setSewerChartTimeframePeriod(value);
+  }, []);
 
   const dataOptions =
     incompleteDatesAndTexts && selectedInstallation === 'ZEEWOLDE'
@@ -157,8 +150,8 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
       title={text.title}
       metadata={{
         source: text.source,
-        datePeriod: metadataTimeInterval,
-        dateOfInsertionUnix: metadataLastInsertion,
+        timeframePeriod: sewerChartTimeframePeriod,
+        dateOfInsertion: metadataLastInsertionDate,
       }}
       description={text.description}
     >
@@ -216,6 +209,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
             ]}
             dataOptions={dataOptions}
             forceLegend
+            onHandleTimeframePeriodChange={handleSetSewerChartTimeframePeriodChange}
           />
         ) : (
           <TimeSeriesChart
@@ -233,6 +227,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
             ]}
             dataOptions={dataOptions}
             forceLegend
+            onHandleTimeframePeriodChange={handleSetSewerChartTimeframePeriodChange}
           />
         )
       }

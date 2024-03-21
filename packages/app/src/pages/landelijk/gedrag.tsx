@@ -68,6 +68,8 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
   const behaviorAnnotations = data.behavior_annotations_archived_20230412;
   const behaviorPerAgeGroup = data.behavior_per_age_group_archived_20230411;
 
+  const behaviorChartTimeframePeriod = { start: behaviorValues[0].date_start_unix, end: behaviorValues[behaviorValues.length - 1].date_end_unix };
+
   const reverseRouter = useReverseRouter();
 
   const { commonTexts, formatNumber, formatDateFromSeconds, formatPercentage, locale } = useIntl();
@@ -133,7 +135,7 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
                 start: behaviorLastValue.date_start_unix,
                 end: behaviorLastValue.date_end_unix,
               },
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
               jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}
@@ -198,6 +200,9 @@ export default function BehaviorPage(props: StaticProps<typeof getStaticProps>) 
             metadata={{
               date: { start: behaviorLastValue.date_start_unix, end: behaviorLastValue.date_end_unix },
               source: textNl.bronnen.rivm,
+              dateOfInsertion: getLastInsertionDateOfPage(data, ['behavior_archived_20230411']),
+              timeframePeriod: behaviorChartTimeframePeriod,
+              isArchivedGraph: true,
             }}
             {...timelineProp}
             currentId={currentId}

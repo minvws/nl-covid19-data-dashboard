@@ -1,14 +1,14 @@
+import { Bar } from '~/domain/vaccine/components/bar';
+import { BoldText } from '~/components/typography';
 import { Box } from '~/components/base';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
-import { BoldText } from '~/components/typography';
-import { Bar } from '~/domain/vaccine/components/bar';
-import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
-import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils';
-import { TileData as KpiContentProps } from '../types';
 import { Metadata, MetadataProps } from '~/components';
+import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
+import { replaceVariablesInText } from '~/utils';
+import { space } from '~/style/theme';
+import { TileData as KpiContentProps } from '../types';
+import { useIntl } from '~/intl';
 
 export const KpiContent = ({ title, description, value, bar, birthyear, differenceValue, isPercentage = false, dateOrRange, source }: KpiContentProps) => {
   const { commonTexts } = useIntl();

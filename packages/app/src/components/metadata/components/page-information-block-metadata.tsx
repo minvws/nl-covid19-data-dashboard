@@ -1,11 +1,11 @@
 import { Box } from '~/components/base';
 import { Clock, Database, MeerInformatie } from '@corona-dashboard/icons';
 import { colors } from '@corona-dashboard/common';
-import React from 'react';
 import { MetadataItem } from '~/components/metadata/components/items/metadata-item';
 import { MetadataProps } from '~/components';
-import { useIntl } from '~/intl';
 import { MetadataReference } from '~/components/metadata/components/items/metadata-reference';
+import { useIntl } from '~/intl';
+import React from 'react';
 
 interface PageInformationBlockMetadataProps extends MetadataProps {
   dateText: string | undefined;

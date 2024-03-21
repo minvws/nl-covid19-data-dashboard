@@ -138,7 +138,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             metadata={{
               datumsText: textGm.vaccination_coverage.top_level_information_block.dates,
               dateOrRange: filteredVaccination.primarySeries.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
               jsonSources: [
                 getMunicipalityJsonLink(reverseRouter.json.municipality(currentData.code), jsonText.metrics_municipality_json.text),

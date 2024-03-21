@@ -1,18 +1,19 @@
-import { colors } from '@corona-dashboard/common';
-import { Close, Expand } from '@corona-dashboard/icons';
-import { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import { Tile } from '~/components/tile';
-import { useIntl } from '~/intl';
-import { space } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useBreakpoints } from '~/utils/use-breakpoints';
-import { usePrevious } from '~/utils/use-previous';
-import { Spacer } from './base';
 import { Box } from './base/box';
+import { Close, Expand } from '@corona-dashboard/icons';
+import { colors } from '@corona-dashboard/common';
 import { IconButton } from './icon-button';
-import { Metadata, MetadataProps } from '~/components/metadata';
+import { Metadata } from '~/components/metadata';
+import { MetadataProps } from './metadata/types';
 import { Modal } from './modal';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { space } from '~/style/theme';
+import { Spacer } from './base';
+import { Tile } from '~/components/tile';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useEffect, useRef, useState } from 'react';
+import { useIntl } from '~/intl';
+import { usePrevious } from '~/utils/use-previous';
+import styled from 'styled-components';
 
 interface FullscreenChartTileProps {
   children: React.ReactNode;

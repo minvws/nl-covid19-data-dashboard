@@ -1,15 +1,15 @@
-import { TimeframeOption } from '@corona-dashboard/common';
-import { ReactNode, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import theme, { space } from '~/style/theme';
 import { Box, Spacer } from './base';
 import { ChartTileToggle, ChartTileToggleProps } from './chart-tile-toggle';
 import { ChartTimeControls } from './chart-time-controls';
 import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
-import { Markdown } from './markdown';
-import { MetadataProps } from '~/components/metadata';
 import { Heading } from './typography';
+import { Markdown } from './markdown';
+import { MetadataProps } from './metadata/types';
+import { ReactNode, useEffect, useState } from 'react';
+import { TimeframeOption } from '@corona-dashboard/common';
+import styled from 'styled-components';
+import theme, { space } from '~/style/theme';
 
 interface ChartTileProps {
   children: ReactNode;

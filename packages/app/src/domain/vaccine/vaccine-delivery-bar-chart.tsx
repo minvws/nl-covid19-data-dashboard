@@ -1,14 +1,14 @@
-import { colors, ArchivedNlVaccineDeliveryPerSupplier, ArchivedNlVaccineDeliveryPerSupplierValue } from '@corona-dashboard/common';
-import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { colors, ArchivedNlVaccineDeliveryPerSupplier, ArchivedNlVaccineDeliveryPerSupplierValue } from '@corona-dashboard/common';
+import { isDefined } from 'ts-is-present';
 import { Markdown } from '~/components/markdown';
+import { SiteText } from '~/locale';
+import { space } from '~/style/theme';
 import { StackedBarTooltipData, StackedChart } from '~/components/stacked-chart';
 import { TooltipData, TooltipFormatter } from '~/components/time-series-chart/components';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { useIntl } from '~/intl';
-import { SiteText } from '~/locale';
-import { space } from '~/style/theme';
 
 export function VaccineDeliveryBarChart({ data, text }: { data: ArchivedNlVaccineDeliveryPerSupplier; text: SiteText['pages']['vaccinations_page']['nl'] }) {
   const { commonTexts } = useIntl();
@@ -22,11 +22,17 @@ export function VaccineDeliveryBarChart({ data, text }: { data: ArchivedNlVaccin
     return <TooltipSeriesList data={context} />;
   };
 
+  const metadataTimeframePeriod = { start: data.values[0].date_start_unix, end: data.values[data.values.length - 1].date_end_unix };
+  const metadataDateOfInsertion = data.last_value.date_of_insertion_unix;
+
   return (
     <ChartTile
       title={text.grafiek_leveringen.titel}
       metadata={{
         source: text.bronnen.rivm,
+        dateOfInsertion: metadataDateOfInsertion,
+        timeframePeriod: metadataTimeframePeriod,
+        isArchivedGraph: true,
       }}
     >
       <Box marginBottom={space[3]} display="flex" flexDirection="column" alignItems="flex-start" spacing={3}>

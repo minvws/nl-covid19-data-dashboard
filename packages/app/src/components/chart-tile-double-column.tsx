@@ -1,13 +1,13 @@
-import { ReactNode } from 'react';
-import css from '@styled-system/css';
 import { asResponsiveArray } from '~/style/utils';
 import { Box } from './base';
 import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Heading } from './typography';
 import { Markdown } from './markdown';
-import { MetadataProps } from '~/components/metadata';
+import { MetadataProps } from './metadata/types';
+import { ReactNode } from 'react';
 import { space } from '~/style/theme';
+import css from '@styled-system/css';
 
 interface ChartTileDoubleColumnProps {
   title: string;

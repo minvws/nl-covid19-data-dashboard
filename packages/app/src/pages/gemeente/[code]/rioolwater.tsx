@@ -108,7 +108,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 start: sewerAverages.last_value.date_start_unix,
                 end: sewerAverages.last_value.date_end_unix,
               },
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
               jsonSources: [getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text)],
             }}

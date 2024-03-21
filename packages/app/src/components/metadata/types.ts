@@ -48,7 +48,7 @@ export interface DateRange {
  * @property {string} [intervalCount] - Interval count for the metadata.
  * @property {string} [disclaimer] - Disclaimer text for the metadata.
  * @property {DateRange} [datePeriod] - Date range for the metadata.
- * @property {number} [dateOfInsertionUnix] - Unix timestamp of when the metadata was inserted.
+ * @property {number} [dateOfInsertion] - Unix timestamp of when the metadata was inserted.
  * @property {boolean} [isArchivedGraph] - Flag indicating whether the metadata is for an archived graph.
  * @property {number|DateRange} [dateOrRange] - Date or date range of the metadata.
  * @property {string} [accessibilitySubject] - Accessibility subject text for the metadata.
@@ -68,8 +68,8 @@ export type MetadataProps = {
   datumsText?: string;
   intervalCount?: string;
   disclaimer?: string;
-  datePeriod?: DateRange;
-  dateOfInsertionUnix?: number;
+  timeframePeriod?: DateRange;
+  dateOfInsertion?: number;
   isArchivedGraph?: boolean;
   dateOrRange?: number | DateRange;
   accessibilitySubject?: string;

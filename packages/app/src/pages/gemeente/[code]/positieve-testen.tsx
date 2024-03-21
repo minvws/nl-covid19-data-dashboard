@@ -98,6 +98,12 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
     }),
   };
 
+  const testedOverallTimeframePeriod = {
+    start: archivedData.tested_overall_archived_20230331.values[0].date_unix,
+    end: archivedData.tested_overall_archived_20230331.values[archivedData.tested_overall_archived_20230331.values.length - 1].date_unix,
+  };
+  const testedOverallDateOfInsertion = getLastInsertionDateOfPage(archivedData, ['tested_overall_archived_20230331']);
+
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
 
   return (
@@ -114,7 +120,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textGm.datums,
               dateOrRange: archivedLastValue.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
               jsonSources: [
                 getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text),
@@ -186,6 +192,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             description={textGm.linechart_toelichting}
             metadata={{
               source: textGm.bronnen.rivm,
+              dateOfInsertion: testedOverallDateOfInsertion,
+              timeframePeriod: testedOverallTimeframePeriod,
             }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={positivelyTestedPeopleTimeframe}
