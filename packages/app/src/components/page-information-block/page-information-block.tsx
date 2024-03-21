@@ -1,19 +1,20 @@
-import { colors } from '@corona-dashboard/common';
-import { ChevronDown, ChevronRight, Warning } from '@corona-dashboard/icons';
-import { ReactNode, isValidElement } from 'react';
-import styled from 'styled-components';
-import { Box } from '~/components/base';
-import { RichContent } from '~/components/cms/rich-content';
-import { Markdown } from '~/components/markdown';
 import { Anchor, BoldText } from '~/components/typography';
-import { WarningTile } from '~/components/warning-tile';
-import { useIntl } from '~/intl';
-import { mediaQueries, radii, space } from '~/style/theme';
-import { RichContentBlock } from '~/types/cms';
-import { useScopedWarning } from '~/utils/use-scoped-warning';
+import { Box } from '~/components/base';
+import { ChevronDown, ChevronRight, Warning } from '@corona-dashboard/icons';
+import { colors } from '@corona-dashboard/common';
 import { Header } from './components/header';
-import { Metadata, MetadataProps } from '~/components/metadata';
+import { Markdown } from '~/components/markdown';
+import { mediaQueries, radii, space } from '~/style/theme';
+import { Metadata } from '~/components/metadata/metadata';
+import { MetadataProps } from '../metadata/types';
 import { PageLinks } from './components/page-links';
+import { ReactNode, isValidElement } from 'react';
+import { RichContent } from '~/components/cms/rich-content';
+import { RichContentBlock } from '~/types/cms';
+import { useIntl } from '~/intl';
+import { useScopedWarning } from '~/utils/use-scoped-warning';
+import { WarningTile } from '~/components/warning-tile';
+import styled from 'styled-components';
 
 interface InformationBlockProps {
   title?: string;

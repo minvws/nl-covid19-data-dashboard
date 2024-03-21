@@ -108,8 +108,13 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
     }),
   };
 
-  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+  const hospitalNiceTimeframePeriod = {
+    start: data.hospital_nice_archived_20240228.values[0].date_start_unix,
+    end: data.hospital_nice_archived_20240228.values[data.hospital_nice_archived_20240228.values.length - 1].date_end_unix,
+  };
 
+  const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
+  //const lastInsertionDateHospitalNice = getLastInsertionDateOfPage(data, ['hospital_nice_archived_20240228']);
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <GmLayout code={data.code} municipalityName={municipalityName}>
@@ -124,7 +129,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textGm.datums,
               dateOrRange: lastValue.date_end_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
               jsonSources: [
                 getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text),
@@ -160,7 +165,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
           <ChartTile
             title={textGm.linechart_titel}
             description={textGm.linechart_description}
-            metadata={{ source: textGm.bronnen.rivm }}
+            metadata={{ source: textGm.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: hospitalNiceTimeframePeriod }}
             timeframeOptions={TimeframeOptionsList}
             onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
           >

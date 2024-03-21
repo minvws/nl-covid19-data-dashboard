@@ -1,9 +1,9 @@
 import { Box } from '~/components/base';
 import { InlineText, Text, Heading, BoldText } from '~/components/typography';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { Metadata, MetadataProps, Message, Tile, TwoKpiSection, KpiValue } from '~/components';
-import { useIntl } from '~/intl';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { SiteText } from '~/locale';
+import { useIntl } from '~/intl';
 
 interface VaccineBoosterAdministrationsKpiSectionProps {
   totalBoosterShots: number;

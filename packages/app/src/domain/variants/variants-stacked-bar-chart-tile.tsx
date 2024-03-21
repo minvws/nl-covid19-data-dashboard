@@ -1,16 +1,17 @@
 import { ChartTile, MetadataProps, TimeSeriesChart } from '~/components';
+import { ColorMatch, OrderMatch, VariantChartValue, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
+import { DateRange } from '~/components/metadata';
+import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
+import { reorderAndFilter } from '~/domain/variants/logic/reorder-and-filter';
+import { space } from '~/style/theme';
 import { Spacer } from '~/components/base';
 import { TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { useState } from 'react';
-import { ColorMatch, OrderMatch, VariantChartValue, VariantDynamicLabels, VariantsOverTimeGraphText } from '~/domain/variants/data-selection/types';
-import { useBarConfig } from '~/domain/variants/logic/use-bar-config';
-import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
-import { useList } from '~/utils/use-list';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
-import { space } from '~/style/theme';
+import { useBarConfig } from '~/domain/variants/logic/use-bar-config';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { reorderAndFilter } from '~/domain/variants/logic/reorder-and-filter';
 import { useIntl } from '~/intl';
+import { useList } from '~/utils/use-list';
+import { useState } from 'react';
 
 interface VariantsStackedBarChartTileProps {
   description: string;
@@ -21,6 +22,7 @@ interface VariantsStackedBarChartTileProps {
   variantColors: ColorMatch[];
   variantLabels: VariantDynamicLabels;
   variantOrders: OrderMatch[];
+  onHandleTimeframePeriodChange?: (value: DateRange | undefined) => void;
 }
 
 const alwaysEnabled: (keyof VariantChartValue)[] = [];
@@ -45,6 +47,7 @@ export const VariantsStackedBarChartTile = ({
   variantColors,
   variantOrders,
   metadata,
+  onHandleTimeframePeriodChange,
 }: VariantsStackedBarChartTileProps) => {
   const today = useCurrentDate();
   const { commonTexts } = useIntl();
@@ -80,6 +83,7 @@ export const VariantsStackedBarChartTile = ({
         timeframe={variantTimeFrame}
         disableLegend
         formatTooltip={(data) => <TooltipSeriesList data={reorderAndFilter<VariantChartValue, SelectOption>(data, interactiveLegendOptions)} hasTwoColumns={hasTwoColumns} />}
+        onHandleTimeframePeriodChange={onHandleTimeframePeriodChange}
       />
     </ChartTile>
   );

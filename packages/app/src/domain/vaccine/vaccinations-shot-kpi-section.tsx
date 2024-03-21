@@ -1,6 +1,6 @@
-import { useIntl } from '~/intl';
-import { KpiTile, KpiValue, TwoKpiSection, Message, MetadataProps } from '~/components';
 import { Box } from '~/components/base';
+import { KpiTile, KpiValue, TwoKpiSection, Message, MetadataProps } from '~/components';
+import { useIntl } from '~/intl';
 
 type SourceType = {
   text: string;

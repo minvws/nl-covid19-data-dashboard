@@ -1,15 +1,14 @@
-import { space } from '~/style/theme';
-import { Text } from '~/components/typography';
-import { replaceVariablesInText } from '~/utils';
 import { Box } from '~/components/base';
 import { Calendar, Clock, Database } from '@corona-dashboard/icons';
 import { colors } from '@corona-dashboard/common';
-import { insertDateIntoString } from '~/components/metadata/logic/insert-date-into-string';
 import { Markdown, MetadataProps } from '~/components';
-import React from 'react';
-import { MetadataItem } from '~/components/metadata/components/items/metadata-item';
-import { useIntl } from '~/intl';
 import { MetadataIcon } from '~/components/metadata/components/items/metadata-icon';
+import { MetadataItem } from '~/components/metadata/components/items/metadata-item';
+import { replaceVariablesInText } from '~/utils';
+import { space } from '~/style/theme';
+import { Text } from '~/components/typography';
+import { useIntl } from '~/intl';
+import React from 'react';
 
 interface TileFooterMetadataProps extends MetadataProps {
   dateString: string | null;
@@ -28,7 +27,7 @@ interface TileFooterMetadataProps extends MetadataProps {
  * @param {string} props.datumsText - Textual representation of the metadata date.
  * @param {(number|DateRange|string)} props.date - Date of the metadata item. It can be a number, a DateRange object, or a string.
  * @param {DateRange} props.datePeriod - Date range for the metadata.
- * @param {number} props.dateOfInsertionUnix - Unix timestamp of when the metadata was inserted.
+ * @param {number} props.dateOfInsertion - Unix timestamp of when the metadata was inserted.
  * @param {boolean} props.isArchivedGraph - Flag indicating whether the metadata is for an archived graph.
  * @param {Source} props.source - Source of the metadata.
  * @param {Source[]} [props.dataSources=[]] - Array of data sources for the metadata.
@@ -39,19 +38,19 @@ interface TileFooterMetadataProps extends MetadataProps {
  * @returns {ReactElement} A React element that contains the tile footer with metadata items.
  */
 export function TileFooterMetadata({
-  dateString,
-  marginBottom,
-  datumsText,
-  date,
-  datePeriod,
-  dateOfInsertionUnix,
-  isArchivedGraph,
-  source,
   dataSources = [],
-  referenceLink,
+  date,
+  dateOfInsertion,
+  dateString,
+  datumsText,
   disclaimer,
-  obtainedAt,
   intervalString,
+  isArchivedGraph,
+  marginBottom,
+  obtainedAt,
+  referenceLink,
+  source,
+  timeframePeriod,
 }: TileFooterMetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const metadataText = commonTexts.common.metadata;
@@ -66,35 +65,33 @@ export function TileFooterMetadata({
           })
         ) : (
           <>
-            {datePeriod && (
+            {timeframePeriod && (
               <Box display="flex" alignItems="flex-start" color="gray7">
                 <MetadataIcon>
                   <Calendar aria-hidden color={colors.gray7} />
                 </MetadataIcon>
                 <Text variant="label1">
                   {replaceVariablesInText(commonTexts.common.metadata.time_interval, {
-                    dateStart: formatDateFromSeconds(datePeriod.start, 'weekday-long'),
-                    dateEnd: formatDateFromSeconds(datePeriod.end, 'weekday-long'),
+                    dateStart: formatDateFromSeconds(timeframePeriod.start, 'weekday-long'),
+                    dateEnd: formatDateFromSeconds(timeframePeriod.end, 'weekday-long'),
                   })}
                 </Text>
               </Box>
             )}
 
-            {dateOfInsertionUnix && (
-              <MetadataItem
-                icon={<Clock aria-hidden colors={colors.gray7} />}
-                items={[
-                  {
-                    text: insertDateIntoString(
-                      formatDateFromSeconds,
-                      isArchivedGraph ? commonTexts.common.metadata.last_insertion_date_archived : commonTexts.common.metadata.last_insertion_date,
-                      dateOfInsertionUnix,
-                      dateOfInsertionUnix,
-                      'weekday-long'
-                    ),
-                  },
-                ]}
-              />
+            {dateOfInsertion && (
+              <Box display="flex" alignItems="flex-start" color="gray7" marginY={space[1]}>
+                <MetadataIcon>
+                  <Clock aria-hidden color={colors.gray7} />
+                </MetadataIcon>
+                <Text variant="label1">
+                  {isArchivedGraph
+                    ? replaceVariablesInText(commonTexts.common.metadata.last_insertion_date_archived, {
+                        dateOfInsertion: formatDateFromSeconds(dateOfInsertion, 'weekday-long'),
+                      })
+                    : replaceVariablesInText(commonTexts.common.metadata.last_insertion_date, { dateOfInsertion: formatDateFromSeconds(dateOfInsertion, 'weekday-long') })}
+                </Text>
+              </Box>
             )}
 
             {source ? (

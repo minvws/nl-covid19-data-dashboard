@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { mediaQueries, space } from '~/style/theme';
 import { KpiTile } from '../kpi-tile';
-import { MetadataProps } from '~/components/metadata';
 import { TwoKpiSection } from '../two-kpi-section';
 import { KpiContent } from './components/kpi-content';
 import { BorderedKpiSectionProps } from './types';
 import { Markdown } from '../markdown';
+import { MetadataProps } from '../metadata/types';
 
 export const BorderedKpiSection = ({ title, description, source, dateOrRange, tilesData, disclaimer }: BorderedKpiSectionProps) => {
   const metadata: MetadataProps = {

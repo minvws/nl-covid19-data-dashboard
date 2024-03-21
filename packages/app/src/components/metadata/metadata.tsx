@@ -1,14 +1,14 @@
 import { External as ExternalLinkIcon } from '@corona-dashboard/icons';
 import { ExternalLink } from '~/components/external-link';
-import { Text } from '../typography';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { space } from '~/style/theme';
-import { useIntl } from '~/intl';
-import React from 'react';
 import { insertDateIntoString } from '~/components/metadata/logic/insert-date-into-string';
 import { MetadataProps } from './types';
 import { PageInformationBlockMetadata } from '~/components/metadata/components/page-information-block-metadata';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { space } from '~/style/theme';
+import { Text } from '../typography';
 import { TileFooterMetadata } from '~/components/metadata/components/tile-footer-metadata';
+import { useIntl } from '~/intl';
+import React from 'react';
 
 /**
  * @function
@@ -20,25 +20,25 @@ import { TileFooterMetadata } from '~/components/metadata/components/tile-footer
  * @returns {JSX.Element} JSX Element that represents metadata information.
  */
 export function Metadata({
+  accessibilitySubject,
   dataSources = [],
   date,
-  dateOfInsertionUnix,
-  datePeriod,
+  dateOfInsertion,
+  dateOrRange,
   datumsText,
   disclaimer,
   intervalCount,
   isArchivedGraph = false,
-  isTileFooter,
   isPageInformationBlock,
+  isTileFooter,
+  jsonSources = [],
   marginBottom,
-  obtainedAt,
-  source,
-  dateOrRange,
-  accessibilitySubject,
   moreInformationLabel,
   moreInformationLink,
+  obtainedAt,
   referenceLink,
-  jsonSources = [],
+  source,
+  timeframePeriod,
 }: MetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
 
@@ -56,7 +56,7 @@ export function Metadata({
         })
       : null;
 
-  const dateText = datumsText && dateOfInsertionUnix && dateOrRange ? insertDateIntoString(formatDateFromSeconds, datumsText, dateOfInsertionUnix, dateOrRange) : undefined;
+  const dateText = datumsText && dateOfInsertion && dateOrRange ? insertDateIntoString(formatDateFromSeconds, datumsText, dateOfInsertion, dateOrRange) : undefined;
 
   const intervalString =
     intervalCount &&
@@ -94,8 +94,8 @@ export function Metadata({
           marginBottom={marginBottom}
           datumsText={datumsText}
           date={date}
-          datePeriod={datePeriod}
-          dateOfInsertionUnix={dateOfInsertionUnix}
+          timeframePeriod={timeframePeriod}
+          dateOfInsertion={dateOfInsertion}
           isArchivedGraph={isArchivedGraph}
           source={source}
           dataSources={dataSources}
