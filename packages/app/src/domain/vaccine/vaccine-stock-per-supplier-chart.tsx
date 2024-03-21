@@ -94,7 +94,7 @@ export function VaccineStockPerSupplierChart({ values, text }: VaccineStockPerSu
         source: text.bronnen.rivm,
         dateOfInsertion: metadataDateOfInsertion,
         timeframePeriod: metadataTimeframePeriod,
-        isArchivedGraph: true,
+        isArchived: true,
       }}
     >
       <InteractiveLegend helpText={text.stock_per_supplier_chart.select_help_text} selectOptions={optionsConfig} selection={[selected]} onToggleItem={setSelected} />

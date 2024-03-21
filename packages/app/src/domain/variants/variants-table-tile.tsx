@@ -79,9 +79,10 @@ function VariantsTableTileWithData({ text, sampleThresholdPassed, source, data, 
   const { formatDateSpan } = useIntl();
 
   const metadata: MetadataProps = {
-    date: { start: dates.date_start_unix, end: dates.date_end_unix },
+    timeframePeriod: { start: dates.date_start_unix, end: dates.date_end_unix },
     source,
     obtainedAt: dates.date_of_report_unix,
+    isTimeframePeriodKpi: true,
   };
 
   const [date_start, date_end] = formatDateSpan({ seconds: dates.date_start_unix }, { seconds: dates.date_end_unix });

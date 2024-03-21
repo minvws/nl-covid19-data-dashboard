@@ -74,7 +74,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
 
           <ChartTile
             title={text.linechart_titel}
-            metadata={{ source: text.bronnen.nivel, dateOfInsertion: metadataLastDateOfInsertion, timeframePeriod: metadataTimeframePeriod }}
+            metadata={{ source: text.bronnen.nivel, dateOfInsertion: metadataLastDateOfInsertion, timeframePeriod: metadataTimeframePeriod, isArchived: true }}
             description={text.linechart_description}
           >
             <TimeSeriesChart

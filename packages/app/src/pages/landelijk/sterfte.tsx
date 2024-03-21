@@ -219,8 +219,10 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 <KpiTile
                   title={textNl.section_deceased_rivm.kpi_covid_daily_title}
                   metadata={{
-                    date: dataRivm.last_value.date_unix,
+                    timeframePeriod: dataRivm.last_value.date_unix,
+                    obtainedAt: dataRivm.last_value.date_of_insertion_unix,
                     source: textNl.section_deceased_rivm.bronnen.rivm,
+                    isTimeframePeriodKpi: true,
                   }}
                   description={textNl.section_deceased_rivm.kpi_covid_daily_description}
                 >
@@ -229,8 +231,10 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 <KpiTile
                   title={textNl.section_deceased_rivm.kpi_covid_total_title}
                   metadata={{
-                    date: dataRivm.last_value.date_unix,
+                    timeframePeriod: dataRivm.last_value.date_unix,
+                    obtainedAt: dataRivm.last_value.date_of_insertion_unix,
                     source: textNl.section_deceased_rivm.bronnen.rivm,
+                    isTimeframePeriodKpi: true,
                   }}
                   description={textNl.section_deceased_rivm.kpi_covid_total_description}
                 >
@@ -246,7 +250,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                   source: textNl.section_deceased_rivm.bronnen.rivm,
                   timeframePeriod: deceasedRivmTimeframePeriod,
                   dateOfInsertion: deceasedRivmLastInsertionDate,
-                  isArchivedGraph: true,
+                  isArchived: true,
                 }}
                 onSelectTimeframe={setDeceasedOverTimeTimeframe}
               >
@@ -282,8 +286,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 title={textNl.age_groups.title}
                 description={textNl.age_groups.description}
                 metadata={{
-                  date: lastdeceasedPerAgeGroupInsertionDate,
+                  dateOfInsertion: lastdeceasedPerAgeGroupInsertionDate,
                   source: textNl.age_groups.bronnen.rivm,
+                  isArchived: true,
                 }}
               >
                 <AgeDemographic

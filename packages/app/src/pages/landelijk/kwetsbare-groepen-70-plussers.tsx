@@ -176,8 +176,11 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               title={ElderlyPeopleText.hospital_admissions.kpi_titel}
               description={ElderlyPeopleText.hospital_admissions.kpi_toelichting}
               metadata={{
-                date: { start: vulnerableHospitalAdmissionsData.date_start_unix, end: vulnerableHospitalAdmissionsData.date_end_unix },
+                timeframePeriod: { start: vulnerableHospitalAdmissionsData.date_start_unix, end: vulnerableHospitalAdmissionsData.date_end_unix },
+                dateOfInsertion: vulnerableHospitalAdmissionsData.date_of_insertion_unix,
                 source: ElderlyPeopleText.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
             >
               <KpiValue absolute={vulnerableHospitalAdmissionsData.admissions_age_70_plus} difference={data.difference.vulnerable_hospital_admissions_archived_20230711} isAmount />
@@ -188,7 +191,10 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             title={textNl.kpi_tiles.infected_locations.title}
             description={textNl.kpi_tiles.infected_locations.description}
             source={infectedLocationsText.bronnen.rivm}
-            dateOrRange={vulnerableNursingHomeDataLastValue.date_unix}
+            timeframePeriod={vulnerableNursingHomeDataLastValue.date_unix}
+            isTimeframePeriodKpi={true}
+            dateOfInsertion={vulnerableNursingHomeDataLastValue.date_of_insertion_unix}
+            isArchived={true}
             tilesData={[
               {
                 value: vulnerableNursingHomeDataLastValue.infected_locations_total,
@@ -208,8 +214,11 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
             title={infectedLocationsText.map_titel}
             description={infectedLocationsText.map_toelichting}
             metadata={{
-              date: vulnerableNursingHomeDataLastValue.date_unix,
+              timeframePeriod: vulnerableNursingHomeDataLastValue.date_unix,
+              dateOfInsertion: vulnerableNursingHomeDataLastValue.date_of_insertion_unix,
               source: infectedLocationsText.bronnen.rivm,
+              isTimeframePeriodKpi: true,
+              isArchived: true,
             }}
             legend={{
               thresholds: thresholds.vr.infected_locations_percentage,
@@ -237,7 +246,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
               source: infectedLocationsText.bronnen.rivm,
               dateOfInsertion: lastInsertionDateNursingHomeInfectedLocationsOverTime,
               timeframePeriod: nursingHomeInfectedLocationsOverTimeTimeframePeriod,
-              isArchivedGraph: true,
+              isArchived: true,
             }}
             title={infectedLocationsText.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
@@ -268,8 +277,11 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                 title={positiveTestedPeopleText.barscale_titel}
                 description={positiveTestedPeopleText.extra_uitleg}
                 metadata={{
-                  date: nursinghomeDataLastValue.date_unix,
+                  timeframePeriod: nursinghomeDataLastValue.date_unix,
+                  dateOfInsertion: nursinghomeDataLastValue.date_of_insertion_unix,
                   source: positiveTestedPeopleText.bronnen.rivm,
+                  isTimeframePeriodKpi: true,
+                  isArchived: true,
                 }}
               >
                 <KpiValue absolute={nursinghomeDataLastValue.newly_infected_people} difference={data.difference.nursing_home__newly_infected_people_archived_20230126} isAmount />
@@ -281,7 +293,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                 source: positiveTestedPeopleText.bronnen.rivm,
                 dateOfInsertion: lastInsertionDateNursingHomeConfirmedCasesOverTime,
                 timeframePeriod: nursingHomeConfirmedCasesOverTimeTimeframePeriod,
-                isArchivedGraph: true,
+                isArchived: true,
               }}
               title={positiveTestedPeopleText.linechart_titel}
               description={positiveTestedPeopleText.linechart_description}
@@ -346,8 +358,11 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                 title={textNl.barscale_titel}
                 description={textNl.extra_uitleg}
                 metadata={{
-                  date: nursinghomeDataLastValue.date_unix,
+                  timeframePeriod: nursinghomeDataLastValue.date_unix,
+                  dateOfInsertion: nursinghomeDataLastValue.date_of_insertion_unix,
                   source: textNl.bronnen.rivm,
+                  isTimeframePeriodKpi: true,
+                  isArchived: true,
                 }}
               >
                 <KpiValue absolute={nursinghomeDataLastValue.deceased_daily} />
@@ -359,7 +374,7 @@ function VulnerableGroups(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.bronnen.rivm,
                 dateOfInsertion: lastInsertionDateNursingHomeDeceasedOverTime,
                 timeframePeriod: nursingHomeDeceasedOverTimeTimeframePeriod,
-                isArchivedGraph: true,
+                isArchived: true,
               }}
               title={textNl.linechart_titel}
               timeframeOptions={TimeframeOptionsList}

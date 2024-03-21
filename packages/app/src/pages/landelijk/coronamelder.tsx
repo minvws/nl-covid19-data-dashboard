@@ -79,9 +79,10 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <ChartTile
             metadata={{
-              source: corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen.coronamelder,
-              dateOfInsertion: getLastInsertionDateOfPage(data, ['corona_melder_app_warning_archived_20220421']),
               timeframePeriod: metadataTimeframePeriod,
+              dateOfInsertion: getLastInsertionDateOfPage(data, ['corona_melder_app_warning_archived_20220421']),
+              source: corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen.coronamelder,
+              isArchived: true,
             }}
             title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
             description={corona_melder_app.waarschuwingen_over_tijd_grafiek.description}

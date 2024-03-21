@@ -38,9 +38,17 @@ export const dataStructure = {
     booster_coverage_archived_20220904: ['age_group', 'percentage', 'percentage_label'],
     sewer_archived_20230623: ['average', 'total_number_of_samples', 'sampled_installation_count', 'total_installation_count', 'data_is_outdated'],
     tested_overall_archived_20230331: ['infected', 'infected_moving_average', 'infected_moving_average_rounded', 'infected_per_100k', 'infected_per_100k_moving_average'],
+    hospital_nice_archived_20240228: [
+      'admissions_on_date_of_admission',
+      'admissions_on_date_of_admission_moving_average',
+      'admissions_on_date_of_admission_moving_average_rounded',
+      'admissions_in_the_last_7_days',
+      'admissions_on_date_of_reporting',
+    ],
   },
   archived_gm_collection: {
     hospital_nice_choropleth_archived_20230830: ['admissions_on_date_of_admission', 'admissions_on_date_of_admission_per_100000', 'admissions_on_date_of_reporting'],
+    hospital_nice_choropleth_archived_20240228: ['admissions_in_the_last_7_days_per_100000'],
     sewer_archived_20230623: ['average', 'total_installation_count', 'data_is_outdated'],
     tested_overall_archived_20230331: ['infected_per_100k', 'infected'],
     vaccine_coverage_per_age_group_choropleth_archived_20231004: [
@@ -272,17 +280,8 @@ export const dataStructure = {
     disability_care_archived_20230126: ['newly_infected_people', 'newly_infected_locations', 'infected_locations_total', 'infected_locations_percentage', 'deceased_daily'],
     elderly_at_home_archived_20230126: ['positive_tested_daily', 'positive_tested_daily_per_100k', 'deceased_daily'],
   },
-  gm: {
-    hospital_nice: [
-      'admissions_on_date_of_admission',
-      'admissions_on_date_of_admission_moving_average',
-      'admissions_on_date_of_admission_moving_average_rounded',
-      'admissions_in_the_last_7_days',
-      'admissions_on_date_of_reporting',
-    ],
-    sewer: ['average', 'data_is_outdated'],
-  },
-  gm_collection: { hospital_nice_choropleth: ['admissions_in_the_last_7_days_per_100000'], sewer: ['average', 'data_is_outdated'] },
+  gm: { sewer: ['average', 'data_is_outdated'] },
+  gm_collection: { sewer: ['average', 'data_is_outdated'] },
   nl: {
     intensive_care_nice: [
       'admissions_on_date_of_admission',

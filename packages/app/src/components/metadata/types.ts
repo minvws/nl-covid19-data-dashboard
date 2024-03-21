@@ -49,7 +49,7 @@ export interface DateRange {
  * @property {string} [disclaimer] - Disclaimer text for the metadata.
  * @property {DateRange} [datePeriod] - Date range for the metadata.
  * @property {number} [dateOfInsertion] - Unix timestamp of when the metadata was inserted.
- * @property {boolean} [isArchivedGraph] - Flag indicating whether the metadata is for an archived graph.
+ * @property {boolean} [isArchived] - Flag indicating whether the metadata is for an archived graph.
  * @property {number|DateRange} [dateOrRange] - Date or date range of the metadata.
  * @property {string} [accessibilitySubject] - Accessibility subject text for the metadata.
  * @property {string} [moreInformationLabel] - Label for the "More Information" link.
@@ -59,7 +59,6 @@ export interface DateRange {
  * @memberof module:Metadata
  */
 export type MetadataProps = {
-  date?: number | DateRange | string;
   source?: Source;
   dataSources?: Source[];
   obtainedAt?: number;
@@ -68,9 +67,9 @@ export type MetadataProps = {
   datumsText?: string;
   intervalCount?: string;
   disclaimer?: string;
-  timeframePeriod?: DateRange;
+  timeframePeriod?: number | DateRange | string;
   dateOfInsertion?: number;
-  isArchivedGraph?: boolean;
+  isArchived?: boolean;
   dateOrRange?: number | DateRange;
   accessibilitySubject?: string;
   moreInformationLabel?: string;
@@ -80,4 +79,5 @@ export type MetadataProps = {
   };
   referenceLink?: string;
   jsonSources?: Datasource[];
+  isTimeframePeriodKpi?: boolean;
 } & MarginBottomProps;

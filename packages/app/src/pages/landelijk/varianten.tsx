@@ -172,10 +172,11 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             description={textNl.kpi_amount_of_samples.kpi_tile_description}
             source={textNl.bronnen.rivm}
             disclaimer={textNl.kpi_amount_of_samples.disclaimer}
-            dateOrRange={{
+            timeframePeriod={{
               start: data.variants.values[0].last_value.date_start_unix,
               end: data.variants.values[0].last_value.date_end_unix,
             }}
+            dateOfInsertion={data.variants.values[0].last_value.date_of_insertion_unix}
             tilesData={[
               {
                 value: data.variants ? data.variants.values[0].last_value.sample_size : null,
@@ -247,11 +248,10 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
                   variantColors={variantColors}
                   metadata={{
                     datumsText: textNl.datums,
-                    date: archivedData.variants_archived_20231101.values[0].last_value.date_of_report_unix,
                     source: textNl.bronnen.rivm,
                     timeframePeriod: archivedCovidVariantsTimeframePeriod,
                     dateOfInsertion: archivedData.variants_archived_20231101.values[0].last_value.date_of_report_unix,
-                    isArchivedGraph: true,
+                    isArchived: true,
                   }}
                 />
               )}

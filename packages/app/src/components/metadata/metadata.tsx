@@ -22,13 +22,12 @@ import React from 'react';
 export function Metadata({
   accessibilitySubject,
   dataSources = [],
-  date,
   dateOfInsertion,
   dateOrRange,
   datumsText,
   disclaimer,
   intervalCount,
-  isArchivedGraph = false,
+  isArchived = false,
   isPageInformationBlock,
   isTileFooter,
   jsonSources = [],
@@ -39,22 +38,29 @@ export function Metadata({
   referenceLink,
   source,
   timeframePeriod,
+  isTimeframePeriodKpi,
 }: MetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
 
-  const dateString =
-    typeof date === 'number'
+  const dateString = isTimeframePeriodKpi
+    ? typeof timeframePeriod === 'number'
       ? replaceVariablesInText(commonTexts.common.metadata.date, {
-          date: formatDateFromSeconds(date, 'axis-with-year'),
+          date: formatDateFromSeconds(timeframePeriod, 'weekday-long'),
         })
-      : typeof date === 'string'
-      ? date
-      : date && date.start && date.end
+      : typeof timeframePeriod === 'string'
+      ? timeframePeriod
+      : timeframePeriod && timeframePeriod.start && timeframePeriod.end
       ? replaceVariablesInText(commonTexts.common.metadata.date_from_to, {
-          startDate: formatDateFromSeconds(date.start, 'weekday-long'),
-          endDate: formatDateFromSeconds(date.end, 'weekday-long'),
+          startDate: formatDateFromSeconds(timeframePeriod.start, 'weekday-long'),
+          endDate: formatDateFromSeconds(timeframePeriod.end, 'weekday-long'),
         })
-      : null;
+      : null
+    : timeframePeriod && typeof timeframePeriod !== 'string' && typeof timeframePeriod !== 'number'
+    ? replaceVariablesInText(commonTexts.common.metadata.time_interval, {
+        dateStart: formatDateFromSeconds(timeframePeriod.start, 'weekday-long'),
+        dateEnd: formatDateFromSeconds(timeframePeriod.end, 'weekday-long'),
+      })
+    : null;
 
   const dateText = datumsText && dateOfInsertion && dateOrRange ? insertDateIntoString(formatDateFromSeconds, datumsText, dateOfInsertion, dateOrRange) : undefined;
 
@@ -93,16 +99,16 @@ export function Metadata({
           dateString={dateString}
           marginBottom={marginBottom}
           datumsText={datumsText}
-          date={date}
           timeframePeriod={timeframePeriod}
           dateOfInsertion={dateOfInsertion}
-          isArchivedGraph={isArchivedGraph}
+          isArchived={isArchived}
           source={source}
           dataSources={dataSources}
           referenceLink={referenceLink}
           disclaimer={disclaimer}
           obtainedAt={obtainedAt}
           intervalString={intervalString}
+          isTimeframePeriodKpi={isTimeframePeriodKpi}
         />
       )}
     </>

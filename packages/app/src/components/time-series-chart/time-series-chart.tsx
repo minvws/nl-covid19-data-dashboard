@@ -210,7 +210,7 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
 
   useEffect(() => {
     if (onHandleTimeframePeriodChange) {
-      if (values.length == 0) {
+      if (values.length === 0) {
         onHandleTimeframePeriodChange(undefined);
       } else if (isDateSpanSeries(values)) {
         onHandleTimeframePeriodChange({

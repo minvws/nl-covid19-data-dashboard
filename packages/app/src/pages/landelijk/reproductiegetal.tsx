@@ -113,9 +113,9 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={textNl.barscale_titel}
               metadata={{
-                date: reproductionLastValue.date_unix,
-                source: textNl.bronnen.rivm,
+                timeframePeriod: reproductionLastValue.date_unix,
                 obtainedAt: reproductionLastValue.date_of_insertion_unix,
+                source: textNl.bronnen.rivm,
               }}
               hasNoBorder
               description={textNl.barscale_toelichting}
