@@ -25,7 +25,7 @@ interface WideTableProps extends CommonTableProps {
  *
  * @returns {JSX.Element} - A JSX element representing a table with columns.
  */
-export const WideTable = ({ tableData, headerText, tableColumnWidths = columnWidths.wide.default, percentageData }: WideTableProps) => {
+export const WideTable = ({ tableData, headerText, tableColumnWidths = columnWidths.wide.defaultWidth, percentageData }: WideTableProps) => {
   return (
     <Box overflow="auto">
       <Table>

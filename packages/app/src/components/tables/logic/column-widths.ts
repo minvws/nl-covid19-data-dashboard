@@ -14,10 +14,17 @@ const layout_352030: TableColumnWidths = {
   percentageBarColumn: '30%',
 };
 
+const layout_102030: TableColumnWidths = {
+  labelColumn: '10%',
+  percentageColumn: '20%',
+  percentageBarColumn: '30%',
+};
+
 export const columnWidths: ColumnWidths = {
   wide: {
-    default: layout_302030,
-    behaviourTableTile: layout_352030,
+    defaultWidth: layout_302030,
+    behaviourTableTileWidth: layout_352030,
+    autumn2022ShotCoverageAgeGroupWidth: layout_102030,
   },
   narrow: {},
 };
