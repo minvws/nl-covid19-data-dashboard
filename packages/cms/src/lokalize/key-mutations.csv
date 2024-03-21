@@ -1,1 +1,4 @@
 timestamp,action,key,document_id,move_to
+2024-03-11T13:37:36.895Z,add,common.common.metadata.time_interval,V3fj32UEKvvuXu4Iovo5z5,__
+2024-03-11T13:37:38.270Z,add,common.common.metadata.last_insertion_date,5TS9pYihLOuAIId3Kw7iWJ,__
+2024-03-11T13:37:39.291Z,add,common.common.metadata.last_insertion_date_archived,Vf3yMozLDMk7Uu7HtRmrDT,__

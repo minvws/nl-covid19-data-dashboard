@@ -24,6 +24,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
 import { useState } from 'react';
+import { DateRange } from '~/components/metadata';
 
 const pageMetrics = ['self_test_overall', 'infection_radar_symptoms_per_age_group'];
 
@@ -66,9 +67,11 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
 
   const reverseRouter = useReverseRouter();
 
-  const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
+  const [confirmedCasesSelfTestedTimeInterval, setConfirmedCasesSelfTestedTimeInterval] = useState<DateRange>({ start: 0, end: 0 });
 
-  const [confirmedCasesCovidSymptomsPerAgeTimeFrame, setConfirmedCasesCovidSymptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [confirmedCasesCovidSymptomsPerAgeTimeFrame, setConfirmedCasesCovidSymptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
+  const [confirmedCasesCovidSymptomsPerAgeTimeInterval, setConfirmedCasesCovidSymptomsPerAgeTimeInterval] = useState<DateRange>({ start: 0, end: 0 });
 
   const { commonTexts } = useIntl();
 
@@ -80,6 +83,14 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
     ...metadataTexts,
     title: textNl.metadata.title,
     description: textNl.metadata.description,
+  };
+
+  const handleSetConfirmedCasesSelfTestedTimeInterval = (value: DateRange) => {
+    setConfirmedCasesSelfTestedTimeInterval(value);
+  };
+
+  const handleSetConfirmedCasesCovidSymptomsPerAgeTimeInterval = (value: DateRange) => {
+    setConfirmedCasesCovidSymptomsPerAgeTimeInterval(value);
   };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
@@ -140,6 +151,8 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
             description={textNl.chart_self_tests.description}
             metadata={{
               source: textNl.sources.self_test,
+              datePeriod: confirmedCasesSelfTestedTimeInterval,
+              dateOfInsertionUnix: data.self_test_overall.last_value.date_of_insertion_unix,
             }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={confirmedCasesSelfTestedTimeframe}
@@ -164,6 +177,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
                 timelineEvents: getTimelineEvents(content.elements.timeSeries, 'self_test_overall'),
               }}
               forceLegend
+              onHandleTimeIntervalChange={handleSetConfirmedCasesSelfTestedTimeInterval}
             />
           </ChartTile>
 
@@ -174,6 +188,8 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
             timeframeInitialValue={confirmedCasesCovidSymptomsPerAgeTimeFrame}
             metadata={{
               source: textNl.chart_infection_radar_age_groups.source.rivm,
+              datePeriod: confirmedCasesCovidSymptomsPerAgeTimeInterval,
+              dateOfInsertionUnix: data.infectionradar_symptoms_trend_per_age_group_weekly.last_value.date_of_insertion_unix,
             }}
             onSelectTimeframe={setConfirmedCasesCovidSymptomsPerAgeTimeFrame}
           >
@@ -185,6 +201,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
               timeframe={confirmedCasesCovidSymptomsPerAgeTimeFrame}
               timelineEvents={getTimelineEvents(content.elements.timeSeries, 'infectionradar_symptoms_trend_per_age_group_weekly')}
               text={textNl}
+              onHandleTimeIntervalChange={handleSetConfirmedCasesCovidSymptomsPerAgeTimeInterval}
             />
           </ChartTile>
 
