@@ -25,6 +25,7 @@ export const columnWidths: ColumnWidths = {
     defaultWidth: layout_302030,
     behaviourTableTileWidth: layout_352030,
     autumn2022ShotCoverageAgeGroupWidth: layout_102030,
+    primarySeriesCoveragePerAgeGroupWidth: layout_102030,
   },
   narrow: {},
 };
