@@ -3,6 +3,8 @@ import { BehaviorTrendType } from '~/domain/behavior/logic/behavior-types';
 
 type TrendDirection = BehaviorTrendType | null;
 
+export type TableType = 'wide' | 'narrow';
+
 export type TableColumnWidths = {
   labelColumn: string;
   percentageColumn: string;

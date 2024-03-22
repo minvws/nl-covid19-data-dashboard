@@ -10,6 +10,7 @@ import { SiteText } from '~/locale';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useGetSingleCoveragePercentageData } from '~/components/tables/logic/use-get-single-coverage-percentage-data';
 import { WideTable } from '~/components/tables/wide-table';
+import { columnWidths } from '~/components/tables/logic/column-widths';
 
 interface PrimarySeriesShotCoveragePerAgeGroupProps {
   title: string;
@@ -51,11 +52,7 @@ export const PrimarySeriesShotCoveragePerAgeGroup = ({ title, description, metad
           }}
           tableData={sortedData}
           percentageData={percentageData}
-          tableColumnWidths={{
-            labelColumn: '10%',
-            percentageColumn: '20%',
-            percentageBarColumn: '30%',
-          }}
+          tableColumnWidths={columnWidths.wide.primarySeriesCoveragePerAgeGroupWidth}
         />
       ) : (
         <NarrowTable headerText={text.headers.agegroup} tableData={sortedData} percentageData={percentageData} />
