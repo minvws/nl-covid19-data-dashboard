@@ -1,7 +1,7 @@
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import { Coronavirus, Gehandicaptenzorg, Location } from '@corona-dashboard/icons';
 import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
@@ -26,7 +26,6 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils';
-import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = ['disability_care_archived_20230126'];
@@ -78,10 +77,6 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
 
   const reverseRouter = useReverseRouter();
 
-  const [disabilityCareConfirmedCasesTimeframe, setDisabilityCareConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-  const [disabilityCareInfectedLocationsTimeframe, setDisabilityCareInfectedLocationsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-  const [disabilityCareDeceasedTimeframe, setDisabilityCareDeceasedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
   const lastValue = data.disability_care_archived_20230126.last_value;
   const values = data.disability_care_archived_20230126.values;
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
@@ -94,6 +89,13 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
     description: textNl.besmette_locaties.metadata.description,
   };
 
+  // All timeseries charts use the same set of data, thus the inteval is equal
+  const metadataTimeframePeriod = {
+    start: data.disability_care_archived_20230126.values[0].date_unix,
+    end: data.disability_care_archived_20230126.values[data.disability_care_archived_20230126.values.length - 1].date_unix,
+  };
+
+  // This date can be used for all timeseries charts metadata components since the pageMetrics value only contains one metric
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
   const hasActiveWarningTile = !!textNl.belangrijk_bericht;
 
@@ -110,7 +112,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.positief_geteste_personen.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.positief_geteste_personen.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
@@ -126,18 +128,20 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <ChartTile
-            metadata={{ source: textNl.positief_geteste_personen.bronnen.rivm }}
+            metadata={{
+              source: textNl.positief_geteste_personen.bronnen.rivm,
+              dateOfInsertion: lastInsertionDateOfPage,
+              timeframePeriod: metadataTimeframePeriod,
+              isArchived: true,
+            }}
             title={textNl.positief_geteste_personen.linechart_titel}
-            timeframeOptions={TimeframeOptionsList}
             description={textNl.positief_geteste_personen.linechart_description}
-            onSelectTimeframe={setDisabilityCareConfirmedCasesTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
                 key: 'disability_care_confirmed_cases_over_time_chart',
               }}
               values={values}
-              timeframe={disabilityCareConfirmedCasesTimeframe}
               seriesConfig={[
                 {
                   type: 'line',
@@ -178,7 +182,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.besmette_locaties.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertion: lastValue.date_of_insertion_unix,
               dataSources: [textNl.besmette_locaties.bronnen.rivm],
             }}
             referenceLink={textNl.besmette_locaties.reference.href}
@@ -188,8 +192,11 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             title={textNl.besmette_locaties.map_titel}
             description={textNl.besmette_locaties.map_toelichting}
             metadata={{
-              date: lastValue.date_unix,
+              timeframePeriod: lastValue.date_unix,
+              dateOfInsertion: lastValue.date_of_insertion_unix,
               source: textNl.besmette_locaties.bronnen.rivm,
+              isTimeframePeriodKpi: true,
+              isArchived: true,
             }}
             legend={{
               thresholds: thresholds.vr.infected_locations_percentage,
@@ -216,17 +223,17 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             title={textNl.besmette_locaties.charts.linechart_title}
             metadata={{
               source: textNl.besmette_locaties.bronnen.rivm,
+              dateOfInsertion: lastInsertionDateOfPage,
+              timeframePeriod: metadataTimeframePeriod,
+              isArchived: true,
             }}
-            timeframeOptions={TimeframeOptionsList}
             description={textNl.besmette_locaties.charts.linechart_description}
-            onSelectTimeframe={setDisabilityCareInfectedLocationsTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
                 key: 'disability_care_infected_locations_over_time_chart',
               }}
               values={values}
-              timeframe={disabilityCareInfectedLocationsTimeframe}
               seriesConfig={[
                 {
                   type: 'line',
@@ -250,25 +257,18 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.oversterfte.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertion: lastValue.date_of_insertion_unix,
               dataSources: [textNl.oversterfte.bronnen.rivm],
             }}
             referenceLink={textNl.oversterfte.reference.href}
           />
 
-          <ChartTile
-            metadata={{ source: textNl.oversterfte.bronnen.rivm }}
-            title={textNl.oversterfte.linechart_titel}
-            timeframeOptions={TimeframeOptionsList}
-            description={textNl.oversterfte.linechart_description}
-            onSelectTimeframe={setDisabilityCareDeceasedTimeframe}
-          >
+          <ChartTile metadata={{ source: textNl.oversterfte.bronnen.rivm }} title={textNl.oversterfte.linechart_titel} description={textNl.oversterfte.linechart_description}>
             <TimeSeriesChart
               accessibility={{
                 key: 'disability_care_deceased_over_time_chart',
               }}
               values={values}
-              timeframe={disabilityCareDeceasedTimeframe}
               seriesConfig={[
                 {
                   type: 'line',

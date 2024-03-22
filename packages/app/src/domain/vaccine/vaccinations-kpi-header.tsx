@@ -23,10 +23,10 @@ type TextTypes = {
 interface VaccineKpiHeaderProps {
   text: TextTypes;
   dateUnix: number;
-  dateOfInsertionUnix: number;
+  dateOfInsertion: number;
 }
 
-export function VaccinationsKpiHeader({ text, dateUnix, dateOfInsertionUnix }: VaccineKpiHeaderProps) {
+export function VaccinationsKpiHeader({ text, dateUnix, dateOfInsertion }: VaccineKpiHeaderProps) {
   return (
     <Box paddingTop="40px" borderTopWidth="2px" borderColor="gray3" borderStyle="solid">
       <PageInformationBlock
@@ -36,7 +36,7 @@ export function VaccinationsKpiHeader({ text, dateUnix, dateOfInsertionUnix }: V
         metadata={{
           datumsText: text.datums,
           dateOrRange: dateUnix,
-          dateOfInsertionUnix: dateOfInsertionUnix,
+          dateOfInsertion: dateOfInsertion,
           dataSources: [text.sources],
         }}
         referenceLink={text.reference.href}

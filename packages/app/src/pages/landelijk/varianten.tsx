@@ -19,10 +19,11 @@ import { TileList } from '~/components/tile-list';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { VariantDynamicLabels } from '~/domain/variants/data-selection/types';
 import { Varianten } from '@corona-dashboard/icons';
 import { VariantsStackedAreaTile, VariantsStackedBarChartTile, VariantsTableTile } from '~/domain/variants';
+import { DateRange } from '~/components/metadata';
 
 const pageMetrics = ['variants', 'named_difference'];
 
@@ -98,6 +99,18 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
   const { metadataTexts, textNl, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
+  const [covidVariantsTimeframePeriod, setCovidVariantsTimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
+  const archivedCovidVariantsTimeframePeriod = archivedVariantChart
+    ? {
+        start: archivedVariantChart[0].date_start_unix,
+        end: archivedVariantChart[archivedVariantChart?.length - 1].date_end_unix,
+      }
+    : undefined;
+
+  const handleSetCovidVariantsTimeframePeriod = useCallback((value: DateRange | undefined) => {
+    setCovidVariantsTimeframePeriod(value);
+  }, []);
+
   const metadata = {
     ...metadataTexts,
     title: textNl.metadata.title,
@@ -140,7 +153,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
                 start: data.variants.values[0].last_value.date_start_unix,
                 end: data.variants.values[0].last_value.date_end_unix,
               },
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },
@@ -159,10 +172,11 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
             description={textNl.kpi_amount_of_samples.kpi_tile_description}
             source={textNl.bronnen.rivm}
             disclaimer={textNl.kpi_amount_of_samples.disclaimer}
-            dateOrRange={{
+            timeframePeriod={{
               start: data.variants.values[0].last_value.date_start_unix,
               end: data.variants.values[0].last_value.date_end_unix,
             }}
+            dateOfInsertion={data.variants.values[0].last_value.date_of_insertion_unix}
             tilesData={[
               {
                 value: data.variants ? data.variants.values[0].last_value.sample_size : null,
@@ -188,9 +202,11 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
               variantOrders={variantOrders}
               metadata={{
                 datumsText: textNl.datums,
-                date: getLastInsertionDateOfPage(data, ['variants']),
                 source: textNl.bronnen.rivm,
+                timeframePeriod: covidVariantsTimeframePeriod,
+                dateOfInsertion: getLastInsertionDateOfPage(data, ['variants']),
               }}
+              onHandleTimeframePeriodChange={handleSetCovidVariantsTimeframePeriod}
             />
           )}
 
@@ -232,8 +248,10 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
                   variantColors={variantColors}
                   metadata={{
                     datumsText: textNl.datums,
-                    date: archivedData.variants_archived_20231101.values[0].last_value.date_of_report_unix,
                     source: textNl.bronnen.rivm,
+                    timeframePeriod: archivedCovidVariantsTimeframePeriod,
+                    dateOfInsertion: archivedData.variants_archived_20231101.values[0].last_value.date_of_report_unix,
+                    isArchived: true,
                   }}
                 />
               )}

@@ -1,40 +1,40 @@
-import { TimeframeOption } from '@corona-dashboard/common';
-import { ReactNode, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import theme, { space } from '~/style/theme';
 import { Box, Spacer } from './base';
 import { ChartTileToggle, ChartTileToggleProps } from './chart-tile-toggle';
 import { ChartTimeControls } from './chart-time-controls';
 import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
-import { Markdown } from './markdown';
-import { MetadataProps } from './metadata';
 import { Heading } from './typography';
+import { Markdown } from './markdown';
+import { MetadataProps } from './metadata/types';
+import { ReactNode, useEffect, useState } from 'react';
+import { TimeframeOption } from '@corona-dashboard/common';
+import styled from 'styled-components';
+import theme, { space } from '~/style/theme';
 
 interface ChartTileProps {
   children: ReactNode;
-  title: string;
   description?: string;
   disableFullscreen?: boolean;
   id?: string;
   metadata?: MetadataProps;
+  onSelectTimeframe?: (timeframe: TimeframeOption) => void;
   timeframeInitialValue?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
+  title: string;
   toggle?: ChartTileToggleProps;
-  onSelectTimeframe?: (timeframe: TimeframeOption) => void;
 }
 
 export const ChartTile = ({
   children,
-  title,
   description,
   disableFullscreen,
   id,
   metadata,
-  timeframeInitialValue,
-  toggle,
-  timeframeOptions,
   onSelectTimeframe,
+  timeframeInitialValue,
+  timeframeOptions,
+  title,
+  toggle,
 }: ChartTileProps) => {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(timeframeInitialValue || TimeframeOption.ALL);
 

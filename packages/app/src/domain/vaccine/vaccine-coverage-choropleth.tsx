@@ -28,9 +28,10 @@ interface VaccineCoverageChoroplethProps {
     ageGroupLabel?: string;
   };
   isPrimarySeries?: boolean;
+  isArchived?: boolean;
 }
 
-export const VaccineCoverageChoropleth = ({ data, dataOptions, text, isPrimarySeries }: VaccineCoverageChoroplethProps) => {
+export const VaccineCoverageChoropleth = ({ data, dataOptions, text, isPrimarySeries, isArchived }: VaccineCoverageChoroplethProps) => {
   const { commonTexts } = useIntl();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>(isPrimarySeries ? '18' : '60');
   const selectedCoverageKind: CoverageKindProperty = isPrimarySeries ? 'primary_series' : 'autumn_2022';
@@ -70,7 +71,10 @@ export const VaccineCoverageChoropleth = ({ data, dataOptions, text, isPrimarySe
       }}
       metadata={{
         source: commonTexts.choropleth.vaccination_coverage.shared.bronnen.rivm,
-        date: data.find((item: ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth) => item.vaccination_type === selectedCoverageKind)?.date_unix,
+        timeframePeriod: data.find((item: ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth) => item.vaccination_type === selectedCoverageKind)?.date_unix,
+        dateOfInsertion: data.find((item: ArchivedGmCollectionVaccineCoveragePerAgeGroupChoropleth) => item.vaccination_type === selectedCoverageKind)?.date_of_insertion_unix,
+        isTimeframePeriodKpi: true,
+        isArchived: isArchived,
       }}
       hasPadding
     >

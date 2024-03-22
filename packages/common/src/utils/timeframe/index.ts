@@ -11,7 +11,7 @@ export enum TimeframeOption {
   ALL = 'all',
 }
 
-export const TimeframeOptionsList = [TimeframeOption.ALL, TimeframeOption.THIRTY_DAYS, TimeframeOption.THREE_MONTHS, TimeframeOption.SIX_MONTHS, TimeframeOption.LAST_YEAR];
+export const TimeframeOptionsList = [TimeframeOption.ALL, TimeframeOption.LAST_YEAR, TimeframeOption.SIX_MONTHS, TimeframeOption.THREE_MONTHS, TimeframeOption.THIRTY_DAYS];
 
 export function getDaysForTimeframe(timeframe: TimeframeOption): number {
   switch (timeframe) {

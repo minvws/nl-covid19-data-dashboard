@@ -1,14 +1,15 @@
-import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
-import { space } from '~/style/theme';
-import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Box } from './base';
+import { CalendarGear } from '@corona-dashboard/icons';
 import { ChartRegionControls, RegionControlOption } from './chart-region-controls';
+import { ChoroplethLegenda } from '~/components/choropleth-legenda';
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
-import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-import { CalendarGear } from '@corona-dashboard/icons';
+import { MetadataProps } from './metadata/types';
+import { space } from '~/style/theme';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+
 type ChoroplethTileProps = {
   title: string;
   description?: string | React.ReactNode;

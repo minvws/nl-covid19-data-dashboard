@@ -1,7 +1,7 @@
 import { ArticleParts, PagePartQueryResult } from '~/types/cms';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { colors, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
+import { colors } from '@corona-dashboard/common';
 import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { Divider } from '~/components/divider';
@@ -26,7 +26,6 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils';
-import { useState } from 'react';
 import { WarningTile } from '~/components/warning-tile';
 
 const pageMetrics = ['elderly_at_home_archived_20230126'];
@@ -72,9 +71,6 @@ export const getStaticProps = createGetStaticProps(
 function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
   const reverseRouter = useReverseRouter();
   const { pageText, selectedArchivedNlData: data, archivedChoropleth, lastGenerated, content } = props;
-  const [elderlyAtHomeConfirmedCasesTimeframe, setElderlyAtHomeConfirmedCasesTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
-  const [elderlyAtHomeConfirmedCasesOverTimeTimeframe, setElderlyAtHomeConfirmedCasesOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const elderlyAtHomeData = data.elderly_at_home_archived_20230126;
 
@@ -90,6 +86,8 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
     title: textNl.metadata.title,
     description: textNl.metadata.description,
   };
+
+  const metadataTimeframePeriod = { start: elderlyAtHomeData.values[0].date_unix, end: elderlyAtHomeData.values[elderlyAtHomeData.values.length - 1].date_unix };
 
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
@@ -108,7 +106,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.section_positive_tested.datums,
               dateOrRange: elderlyAtHomeData.last_value.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.section_positive_tested.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
@@ -124,17 +122,14 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <ChartTile
-            timeframeOptions={TimeframeOptionsList}
             title={textNl.section_positive_tested.line_chart_daily_title}
-            metadata={{ source: textNl.section_positive_tested.bronnen.rivm }}
+            metadata={{ source: textNl.section_positive_tested.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadataTimeframePeriod, isArchived: true }}
             description={textNl.section_positive_tested.line_chart_daily_description}
-            onSelectTimeframe={setElderlyAtHomeConfirmedCasesTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
                 key: 'elderly_at_home_confirmed_cases_over_time_chart',
               }}
-              timeframe={elderlyAtHomeConfirmedCasesTimeframe}
               values={elderlyAtHomeData.values}
               seriesConfig={[
                 {
@@ -169,8 +164,11 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             title={textNl.section_positive_tested.choropleth_daily_title}
             description={textNl.section_positive_tested.choropleth_daily_description}
             metadata={{
-              date: elderlyAtHomeData.last_value.date_unix,
+              timeframePeriod: elderlyAtHomeData.last_value.date_unix,
+              dateOfInsertion: elderlyAtHomeData.last_value.date_of_insertion_unix,
               source: textNl.section_positive_tested.bronnen.rivm,
+              isTimeframePeriodKpi: true,
+              isArchived: true,
             }}
             legend={{
               thresholds: thresholds.vr.positive_tested_daily_per_100k,
@@ -200,23 +198,20 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.section_deceased.datums,
               dateOrRange: elderlyAtHomeData.last_value.date_unix,
-              dateOfInsertionUnix: elderlyAtHomeData.last_value.date_of_insertion_unix,
+              dateOfInsertion: elderlyAtHomeData.last_value.date_of_insertion_unix,
               dataSources: [textNl.section_deceased.bronnen.rivm],
             }}
             referenceLink={textNl.section_deceased.reference.href}
           />
           <ChartTile
-            timeframeOptions={TimeframeOptionsList}
             title={textNl.section_deceased.line_chart_daily_title}
-            metadata={{ source: textNl.section_positive_tested.bronnen.rivm }}
+            metadata={{ source: textNl.section_positive_tested.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadataTimeframePeriod }}
             description={textNl.section_deceased.line_chart_daily_description}
-            onSelectTimeframe={setElderlyAtHomeConfirmedCasesOverTimeTimeframe}
           >
             <TimeSeriesChart
               accessibility={{
                 key: 'elderly_at_home_confirmed_cases_over_time_chart',
               }}
-              timeframe={elderlyAtHomeConfirmedCasesOverTimeTimeframe}
               values={elderlyAtHomeData.values}
               seriesConfig={[
                 {

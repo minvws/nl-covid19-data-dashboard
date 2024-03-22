@@ -1,4 +1,4 @@
-import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
+import { TimeframeOption, TimestampedValue, isDateSeries, isDateSpanSeries } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { TickFormatter } from '@visx/axis';
 import { useTooltip } from '@visx/tooltip';
@@ -53,6 +53,7 @@ import {
   useValuesInTimeframe,
   useValueWidth,
 } from './logic';
+import { DateRange } from '~/components/metadata';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -130,6 +131,19 @@ export type TimeSeriesChartProps<T extends TimestampedValue, C extends SeriesCon
   onSeriesClick?: (seriesConfig: C[number], value: T) => void;
 
   /**
+   * These handlers are responsible for managing the parent to child to parent relation.
+   * The dashboard is not currently adapted to having the CurrentDateContext available
+   * at page level. In order to connect the state values to the context, we either extract
+   * all the timeseries instances into separate components or pass the handlers as functions
+   * from the parent component. onHandleTimeframePeriodChange is responsible for handling the
+   * metadata interval for the X axis. onHandleDateOfInsertion is responsible for handling
+   * the last insertion date metadata for the interval.
+   * @param value: DateRange | number
+   * @returns
+   */
+  onHandleTimeframePeriodChange?: (value: DateRange | undefined) => void;
+
+  /**
    * By default markers for all series are displayed on hover, also the tooltip
    * will display all series of the selected X-value. The `markNearestPointOnly`
    * will result in a user interacting with the single nearest point only.
@@ -151,27 +165,28 @@ export type TimeSeriesChartProps<T extends TimestampedValue, C extends SeriesCon
 
 export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConfig<T>>({
   accessibility,
-  values: allValues,
-  endDate,
-  seriesConfig,
-  initialWidth = 840,
-  minHeight = 250,
-  timeframe = TimeframeOption.ALL,
-  formatTooltip,
   dataOptions,
-  showWeekNumbers,
-  numGridLines = 4,
-  tickValues: yTickValues,
-  xTickNumber,
-  formatTickValue: formatYTickValue,
-  paddingLeft,
-  tooltipTitle,
   disableLegend,
-  forceLegend = false,
-  onSeriesClick,
-  markNearestPointOnly,
   displayTooltipValueOnly,
+  endDate,
+  forceLegend = false,
+  formatTickValue: formatYTickValue,
+  formatTooltip,
+  initialWidth = 840,
   isYAxisCollapsed: defaultIsYAxisCollapsed,
+  markNearestPointOnly,
+  minHeight = 250,
+  numGridLines = 4,
+  onHandleTimeframePeriodChange,
+  onSeriesClick,
+  paddingLeft,
+  seriesConfig,
+  showWeekNumbers,
+  tickValues: yTickValues,
+  timeframe = TimeframeOption.ALL,
+  tooltipTitle,
+  values: allValues,
+  xTickNumber,
 }: TimeSeriesChartProps<T, C>) {
   const { commonTexts } = useIntl();
 
@@ -192,6 +207,21 @@ export function TimeSeriesChart<T extends TimestampedValue, C extends SeriesConf
   });
 
   const values = useValuesInTimeframe(allValues, timeframe, endDate);
+
+  useEffect(() => {
+    if (onHandleTimeframePeriodChange) {
+      if (values.length === 0) {
+        onHandleTimeframePeriodChange(undefined);
+      } else if (isDateSpanSeries(values)) {
+        onHandleTimeframePeriodChange({
+          start: values[0] ? values[0].date_start_unix : 0,
+          end: values[values.length - 1] ? values[values.length - 1].date_end_unix : 0,
+        });
+      } else if (isDateSeries(values)) {
+        onHandleTimeframePeriodChange({ start: values[0] ? values[0].date_unix : 0, end: values[values.length - 1] ? values[values.length - 1].date_unix : 0 });
+      }
+    }
+  }, [timeframe, onHandleTimeframePeriodChange]);
 
   const cutValuesConfig = useMemo(() => extractCutValuesConfig(timespanAnnotations), [timespanAnnotations]);
 

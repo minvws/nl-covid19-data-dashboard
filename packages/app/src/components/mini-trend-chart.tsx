@@ -18,7 +18,7 @@ export function MiniTrendChart<T extends TimestampedValue = TimestampedValue>({
   accessibility,
   seriesConfig,
   dataOptions,
-  timeframe = TimeframeOption.FIVE_WEEKS,
+  timeframe = TimeframeOption.ALL,
   values,
   displayTooltipValueOnly,
 }: MiniTrendChartProps<T>) {
