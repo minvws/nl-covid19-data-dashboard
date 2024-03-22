@@ -2,6 +2,7 @@ import { DifferenceInteger } from '@corona-dashboard/common';
 
 export type TileData = {
   dateOrRange?: number | DateRange;
+  dateOfInsertion?: number;
   source?: {
     href: string;
     text: string;
@@ -21,7 +22,10 @@ interface DateRange {
 }
 
 export interface BorderedKpiSectionProps {
-  dateOrRange?: number | DateRange;
+  timeframePeriod?: number | DateRange;
+  isTimeframePeriodKpi?: boolean;
+  dateOfInsertion?: number;
+  isArchived?: boolean;
   description: string;
   source?: {
     href: string;

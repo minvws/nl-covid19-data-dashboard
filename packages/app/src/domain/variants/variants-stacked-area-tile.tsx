@@ -1,9 +1,10 @@
 import { ChartTile } from '~/components/chart-tile';
 import { ColorMatch, VariantChartValue, VariantsStackedAreaTileText } from '~/domain/variants/data-selection/types';
+import { DateRange } from '~/components/metadata';
 import { GappedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
-import { MetadataProps } from '~/components/metadata';
+import { MetadataProps } from '~/components/metadata/types';
 import { reorderAndFilter } from '~/domain/variants/logic/reorder-and-filter';
 import { space } from '~/style/theme';
 import { Spacer } from '~/components/base';
@@ -21,9 +22,10 @@ interface VariantsStackedAreaTileProps {
   values: VariantChartValue[];
   metadata: MetadataProps;
   variantColors: ColorMatch[];
+  onHandleTimeframePeriodChange?: (value: DateRange | undefined) => void;
 }
 
-export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata }: VariantsStackedAreaTileProps) => {
+export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata, onHandleTimeframePeriodChange }: VariantsStackedAreaTileProps) => {
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
 
   const [seriesConfig, selectOptions] = useSeriesConfig(text, values, variantColors);
@@ -67,6 +69,7 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
         )}
         numGridLines={0}
         tickValues={[0, 25, 50, 75, 100]}
+        onHandleTimeframePeriodChange={onHandleTimeframePeriodChange}
       />
       <Legend items={staticLegendItems} />
     </ChartTile>

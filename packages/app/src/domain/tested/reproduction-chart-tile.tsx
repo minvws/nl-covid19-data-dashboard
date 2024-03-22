@@ -25,13 +25,17 @@ export const ReproductionChartTile = ({ data, timelineEvents, text }: Reproducti
   );
   const last_value = last(values) as ArchivedNlReproductionValue;
 
+  const metadataDateOfInsertion = data.last_value.date_of_insertion_unix;
+
   return (
     <ChartTile
       title={text.linechart_titel}
       description={text.legenda_r}
       metadata={{
-        date: last_value.date_of_insertion_unix,
         source: text.bronnen.rivm,
+        dateOfInsertion: metadataDateOfInsertion,
+        timeframePeriod: last_value.date_of_insertion_unix,
+        isArchived: true,
       }}
     >
       <TimeSeriesChart

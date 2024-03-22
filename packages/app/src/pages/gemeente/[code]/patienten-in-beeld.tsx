@@ -122,7 +122,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textGm.datums,
               dateOrRange: lastValue.date_end_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
               jsonSources: [
                 getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text),
@@ -147,8 +147,9 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                 dateEnd: formatDateFromSeconds(lastValue.date_end_unix, 'weekday-long'),
               })}
               metadata={{
-                date: { start: sevenDayAverageDates.start, end: sevenDayAverageDates.end },
+                timeframePeriod: { start: sevenDayAverageDates.start, end: sevenDayAverageDates.end },
                 source: textGm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
               }}
             >
               <KpiValue absolute={lastValue.admissions_in_the_last_7_days} isAmount isMovingAverageDifference />
@@ -212,8 +213,11 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                   municipality: municipalityName,
                 })}
                 metadata={{
-                  date: lastValueChoropleth.date_unix,
+                  timeframePeriod: lastValueChoropleth.date_unix,
+                  dateOfInsertion: lastValueChoropleth.date_of_insertion_unix,
                   source: textGm.section_archived.archived_choropleth.bronnen.rivm,
+                  isTimeframePeriodKpi: true,
+                  isArchived: true,
                 }}
                 description={textGm.section_archived.archived_choropleth.map_toelichting}
                 legend={{
@@ -247,8 +251,11 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                   municipality: municipalityName,
                 })}
                 metadata={{
-                  date: { start: lastValueChoropleth.date_start_unix, end: lastValueChoropleth.date_end_unix },
+                  timeframePeriod: { start: lastValueChoropleth.date_start_unix, end: lastValueChoropleth.date_end_unix },
+                  dateOfInsertion: lastValueChoropleth.date_of_insertion_unix,
                   source: textGm.bronnen.rivm,
+                  isTimeframePeriodKpi: true,
+                  isArchived: true,
                 }}
                 description={textGm.map_toelichting}
                 legend={{

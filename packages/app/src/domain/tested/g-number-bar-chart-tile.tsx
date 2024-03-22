@@ -21,13 +21,17 @@ export function GNumberBarChartTile({ data: __data }: GNumberBarChartTileProps) 
   const last_value = __data.last_value;
   const endDate = createDateFromUnixTimestamp(last_value.date_unix);
 
+  const metadataDateOfInsertion = last_value.date_of_insertion_unix;
+
   return (
     <ChartTile
       title={text.title}
       description={text.description}
       metadata={{
-        date: last_value.date_of_insertion_unix,
         source: text.bronnen,
+        dateOfInsertion: metadataDateOfInsertion,
+        timeframePeriod: last_value.date_of_insertion_unix,
+        isArchived: true,
       }}
     >
       <TimeSeriesChart

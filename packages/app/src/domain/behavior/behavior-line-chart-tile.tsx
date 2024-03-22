@@ -1,19 +1,19 @@
-import { colors, ArchivedNlBehaviorValue } from '@corona-dashboard/common';
-import { dropRightWhile, dropWhile } from 'lodash';
-import { useMemo } from 'react';
-import { isPresent } from 'ts-is-present';
+import { BehaviorIdentifier } from './logic/behavior-types';
+import { BoldText } from '~/components/typography';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { colors, ArchivedNlBehaviorValue } from '@corona-dashboard/common';
+import { dropRightWhile, dropWhile } from 'lodash';
 import { InlineTooltip } from '~/components/inline-tooltip';
-import { MetadataProps } from '~/components/metadata';
+import { isPresent } from 'ts-is-present';
+import { MetadataProps } from '~/components/metadata/types';
+import { SelectBehavior } from './components/select-behavior';
 import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
-import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
-import { BoldText } from '~/components/typography';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { SelectBehavior } from './components/select-behavior';
-import { BehaviorIdentifier } from './logic/behavior-types';
+import { useMemo } from 'react';
 
 type ValueType = ArchivedNlBehaviorValue;
 type ValueKey = keyof ValueType;

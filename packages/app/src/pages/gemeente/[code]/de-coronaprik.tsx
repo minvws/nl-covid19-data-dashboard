@@ -138,7 +138,7 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
             metadata={{
               datumsText: textGm.vaccination_coverage.top_level_information_block.dates,
               dateOrRange: filteredVaccination.primarySeries.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textShared.bronnen.rivm],
               jsonSources: [
                 getMunicipalityJsonLink(reverseRouter.json.municipality(currentData.code), jsonText.metrics_municipality_json.text),
@@ -184,7 +184,9 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
                 },
               },
             ]}
-            dateOrRange={filteredVaccination.primarySeries.date_unix}
+            timeframePeriod={filteredVaccination.primarySeries.date_unix}
+            dateOfInsertion={filteredVaccination.primarySeries.date_of_insertion_unix}
+            isTimeframePeriodKpi={true}
           />
           <VaccineCoverageChoropleth
             data={archivedChoropleth.gm.vaccine_coverage_per_age_group_choropleth_archived_20231004}
@@ -220,6 +222,10 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
                   title={textShared.vaccination_grade_tile.autumn_labels.title}
                   description={textShared.vaccination_grade_tile.autumn_labels.description}
                   source={textShared.vaccination_grade_tile.autumn_labels.source}
+                  timeframePeriod={filteredVaccination.autumn2022.date_unix}
+                  dateOfInsertion={filteredVaccination.autumn2022.date_of_insertion_unix}
+                  isArchived={true}
+                  isTimeframePeriodKpi={true}
                   tilesData={[
                     {
                       value: filteredVaccination.autumn2022.vaccinated_percentage_60_plus,
@@ -244,7 +250,6 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
                       },
                     },
                   ]}
-                  dateOrRange={filteredVaccination.autumn2022.date_unix}
                 />
               )}
               <VaccineCoverageChoropleth
@@ -290,10 +295,15 @@ export const VaccinationsGmPage = (props: StaticProps<typeof getStaticProps>) =>
                 description={textGm.vaccination_coverage.description}
                 sortingOrder={['18+', '12+']}
                 metadata={{
-                  date: archivedData.vaccine_coverage_per_age_group_archived_20220622.values.length
+                  timeframePeriod: archivedData.vaccine_coverage_per_age_group_archived_20220622.values.length
                     ? archivedData.vaccine_coverage_per_age_group_archived_20220622.values[0].date_unix
                     : undefined,
+                  dateOfInsertion: archivedData.vaccine_coverage_per_age_group_archived_20220622.values.length
+                    ? archivedData.vaccine_coverage_per_age_group_archived_20220622.values[0].date_of_insertion_unix
+                    : undefined,
                   source: textGm.vaccination_coverage.bronnen.rivm,
+                  isTimeframePeriodKpi: true,
+                  isArchived: true,
                 }}
                 values={archivedData.vaccine_coverage_per_age_group_archived_20220622.values}
                 text={textNl}

@@ -96,6 +96,12 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
     }),
   };
 
+  const testedOverallTimeframePeriod = {
+    start: archivedData.tested_overall_archived_20230331.values[0].date_unix,
+    end: archivedData.tested_overall_archived_20230331.values[archivedData.tested_overall_archived_20230331.values.length - 1].date_unix,
+  };
+  const testedOverallDateOfInsertion = getLastInsertionDateOfPage(archivedData, ['tested_overall_archived_20230331']);
+
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(archivedData, pageMetrics);
 
   return (
@@ -112,7 +118,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textGm.datums,
               dateOrRange: archivedLastValue.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
               jsonSources: [
                 getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text),
@@ -134,8 +140,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             <KpiTile
               title={textGm.infected_kpi.title}
               metadata={{
-                date: archivedLastValue.date_unix,
+                timeframePeriod: archivedLastValue.date_unix,
+                dateOfInsertion: archivedLastValue.date_of_insertion_unix,
                 source: textGm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
             >
               <KpiValue absolute={archivedLastValue.infected_moving_average_rounded} isAmount />
@@ -161,8 +170,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             <KpiTile
               title={textGm.barscale_titel}
               metadata={{
-                date: archivedLastValue.date_unix,
+                timeframePeriod: archivedLastValue.date_unix,
+                dateOfInsertion: archivedLastValue.date_of_insertion_unix,
                 source: textGm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
             >
               <KpiValue absolute={archivedLastValue.infected_per_100k_moving_average} isAmount />
@@ -184,6 +196,8 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             description={textGm.linechart_toelichting}
             metadata={{
               source: textGm.bronnen.rivm,
+              dateOfInsertion: testedOverallDateOfInsertion,
+              timeframePeriod: testedOverallTimeframePeriod,
             }}
           >
             <TimeSeriesChart
@@ -233,8 +247,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 title: textShared.chloropleth_legenda_titel,
               }}
               metadata={{
-                date: archivedLastValue.date_unix,
+                timeframePeriod: archivedLastValue.date_unix,
+                dateOfInsertion: archivedLastValue.date_of_insertion_unix,
                 source: textGm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
             >
               <DynamicChoropleth

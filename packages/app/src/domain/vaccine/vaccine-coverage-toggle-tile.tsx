@@ -1,20 +1,21 @@
-import { css } from '@styled-system/css';
-import { useState } from 'react';
+import { assert } from '~/utils/assert';
+import { BoldText } from '~/components/typography';
 import { Box } from '~/components/base';
+import { css } from '@styled-system/css';
+import { KeyWithLabel, useVaccineCoveragePercentageFormatter } from './logic/use-vaccine-coverage-percentage-formatter';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
-import { Metadata, MetadataProps } from '~/components/metadata';
-import { RadioGroup } from '~/components/radio-group';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { BoldText } from '~/components/typography';
+import { Metadata } from '~/components/metadata';
+import { MetadataProps } from '~/components/metadata/types';
 import { parseBirthyearRange } from '~/domain/vaccine/logic/parse-birthyear-range';
-import { useIntl } from '~/intl';
+import { RadioGroup } from '~/components/radio-group';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
-import { assert } from '~/utils/assert';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { KeyWithLabel, useVaccineCoveragePercentageFormatter } from './logic/use-vaccine-coverage-percentage-formatter';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { useIntl } from '~/intl';
+import { useState } from 'react';
 
 type AgeTypes = {
   fully_vaccinated: number | null;
@@ -66,7 +67,8 @@ export function VaccineCoverageToggleTile({
   const [selectedTab, setSelectedTab] = useState(age18PlusToggleText.label);
 
   const metadata: MetadataProps = {
-    date: dateUnix ?? undefined,
+    timeframePeriod: dateUnix ?? undefined,
+    isTimeframePeriodKpi: true,
     source: source,
   };
 
@@ -99,7 +101,7 @@ export function VaccineCoverageToggleTile({
                 description={age18PlusToggleText.description_booster_grade}
                 numFractionDigits={numFractionDigits}
               >
-                {age18Plus.dateUnixBoostered && <Metadata source={source} date={age18Plus.dateUnixBoostered} isTileFooter />}
+                {age18Plus.dateUnixBoostered && <Metadata source={source} timeframePeriod={age18Plus.dateUnixBoostered} isTimeframePeriodKpi isTileFooter />}
               </AgeGroupBlock>
             ) : (
               <NoBoosterBlock title={labelTexts.booster_grade} description={age18PlusToggleText.description_booster_grade_not_available} />
@@ -113,7 +115,7 @@ export function VaccineCoverageToggleTile({
               secondDescription={age18PlusToggleText.description_vaccination_one_shot_with_percentage}
               numFractionDigits={numFractionDigits}
             >
-              {metadata && <Metadata {...metadata} isTileFooter />}
+              {metadata && <Metadata {...metadata} isTimeframePeriodKpi isTileFooter />}
             </AgeGroupBlock>
           </>
         )}
@@ -127,7 +129,7 @@ export function VaccineCoverageToggleTile({
                 description={age12PlusToggleText.description_booster_grade}
                 numFractionDigits={numFractionDigits}
               >
-                {age12Plus.dateUnixBoostered && <Metadata source={source} date={age12Plus.dateUnixBoostered} isTileFooter />}
+                {age12Plus.dateUnixBoostered && <Metadata source={source} timeframePeriod={age12Plus.dateUnixBoostered} isTimeframePeriodKpi isTileFooter />}
               </AgeGroupBlock>
             ) : (
               <NoBoosterBlock title={labelTexts.booster_grade} description={age12PlusToggleText.description_booster_grade_not_available} />
@@ -141,7 +143,7 @@ export function VaccineCoverageToggleTile({
               secondDescription={age12PlusToggleText.description_vaccination_one_shot_with_percentage}
               numFractionDigits={numFractionDigits}
             >
-              {metadata && <Metadata {...metadata} isTileFooter />}
+              {metadata && <Metadata {...metadata} isTimeframePeriodKpi isTileFooter />}
             </AgeGroupBlock>
           </>
         )}

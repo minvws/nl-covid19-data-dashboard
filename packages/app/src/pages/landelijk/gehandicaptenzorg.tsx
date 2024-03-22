@@ -89,6 +89,13 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
     description: textNl.besmette_locaties.metadata.description,
   };
 
+  // All timeseries charts use the same set of data, thus the inteval is equal
+  const metadataTimeframePeriod = {
+    start: data.disability_care_archived_20230126.values[0].date_unix,
+    end: data.disability_care_archived_20230126.values[data.disability_care_archived_20230126.values.length - 1].date_unix,
+  };
+
+  // This date can be used for all timeseries charts metadata components since the pageMetrics value only contains one metric
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
   const hasActiveWarningTile = !!textNl.belangrijk_bericht;
 
@@ -105,7 +112,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.positief_geteste_personen.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.positief_geteste_personen.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text },
@@ -121,7 +128,12 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <ChartTile
-            metadata={{ source: textNl.positief_geteste_personen.bronnen.rivm }}
+            metadata={{
+              source: textNl.positief_geteste_personen.bronnen.rivm,
+              dateOfInsertion: lastInsertionDateOfPage,
+              timeframePeriod: metadataTimeframePeriod,
+              isArchived: true,
+            }}
             title={textNl.positief_geteste_personen.linechart_titel}
             description={textNl.positief_geteste_personen.linechart_description}
           >
@@ -170,7 +182,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.besmette_locaties.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertion: lastValue.date_of_insertion_unix,
               dataSources: [textNl.besmette_locaties.bronnen.rivm],
             }}
             referenceLink={textNl.besmette_locaties.reference.href}
@@ -180,8 +192,11 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             title={textNl.besmette_locaties.map_titel}
             description={textNl.besmette_locaties.map_toelichting}
             metadata={{
-              date: lastValue.date_unix,
+              timeframePeriod: lastValue.date_unix,
+              dateOfInsertion: lastValue.date_of_insertion_unix,
               source: textNl.besmette_locaties.bronnen.rivm,
+              isTimeframePeriodKpi: true,
+              isArchived: true,
             }}
             legend={{
               thresholds: thresholds.vr.infected_locations_percentage,
@@ -208,6 +223,9 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             title={textNl.besmette_locaties.charts.linechart_title}
             metadata={{
               source: textNl.besmette_locaties.bronnen.rivm,
+              dateOfInsertion: lastInsertionDateOfPage,
+              timeframePeriod: metadataTimeframePeriod,
+              isArchived: true,
             }}
             description={textNl.besmette_locaties.charts.linechart_description}
           >
@@ -239,7 +257,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textNl.oversterfte.datums,
               dateOrRange: lastValue.date_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertion: lastValue.date_of_insertion_unix,
               dataSources: [textNl.oversterfte.bronnen.rivm],
             }}
             referenceLink={textNl.oversterfte.reference.href}

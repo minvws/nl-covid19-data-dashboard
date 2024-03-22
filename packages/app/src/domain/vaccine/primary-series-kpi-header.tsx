@@ -1,7 +1,6 @@
-import { PageInformationBlock } from '~/components';
-import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
-import { MetadataProps } from '~/components/page-information-block/components/metadata';
+import { MetadataProps, PageInformationBlock } from '~/components';
+import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 
 interface PrimarySeriesKpiHeaderProps {
   title: string;
@@ -19,7 +18,7 @@ export function PrimarySeriesKpiHeader({ title, description, metadata }: Primary
         metadata={{
           datumsText: metadata.datumsText,
           dateOrRange: metadata.dateOrRange,
-          dateOfInsertionUnix: metadata.dateOfInsertionUnix,
+          dateOfInsertion: metadata.dateOfInsertion,
           dataSources: metadata.dataSources,
         }}
       />

@@ -6,14 +6,13 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
-import { MetadataProps } from '~/components/metadata';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { fontSizes, space } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { VariantsTable } from './variants-table-tile/components/variants-table';
 import { TableText } from './variants-table-tile/types';
-import { Tile } from '~/components';
+import { MetadataProps, Tile } from '~/components';
 import { VariantRow } from '~/domain/variants/data-selection/types';
 
 interface VariantsTableTileProps {
@@ -80,9 +79,10 @@ function VariantsTableTileWithData({ text, sampleThresholdPassed, source, data, 
   const { formatDateSpan } = useIntl();
 
   const metadata: MetadataProps = {
-    date: { start: dates.date_start_unix, end: dates.date_end_unix },
+    timeframePeriod: { start: dates.date_start_unix, end: dates.date_end_unix },
     source,
     obtainedAt: dates.date_of_report_unix,
+    isTimeframePeriodKpi: true,
   };
 
   const [date_start, date_end] = formatDateSpan({ seconds: dates.date_start_unix }, { seconds: dates.date_end_unix });

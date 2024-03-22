@@ -1,15 +1,15 @@
-import { ArchivedGmVaccineCoveragePerAgeGroupValue, ArchivedNlVaccineCoveragePerAgeGroupPrimarySeriesAndBoosterValue } from '@corona-dashboard/common';
 import { AgeGroup } from '~/components/age-groups/age-group';
-import { ChartTile } from '~/components/chart-tile';
-import { MetadataProps } from '~/components/metadata';
-import { useGetPercentageData } from '~/components/tables/logic/use-get-percentage-data';
-import { NarrowTable } from '~/components/tables/narrow-table';
-import { TableData } from '~/components/tables/types';
-import { WideTable } from '~/components/tables/wide-table';
-import { SiteText } from '~/locale';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { ARCHIVED_COLORS } from '../common';
+import { ArchivedGmVaccineCoveragePerAgeGroupValue, ArchivedNlVaccineCoveragePerAgeGroupPrimarySeriesAndBoosterValue } from '@corona-dashboard/common';
+import { ChartTile } from '~/components/chart-tile';
 import { getSortingOrder } from '../logic/get-sorting-order';
+import { MetadataProps } from '~/components/metadata/types';
+import { NarrowTable } from '~/components/tables/narrow-table';
+import { SiteText } from '~/locale';
+import { TableData } from '~/components/tables/types';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useGetPercentageData } from '~/components/tables/logic/use-get-percentage-data';
+import { WideTable } from '~/components/tables/wide-table';
 
 interface VaccineCoveragePerAgeGroupProps {
   title: string;
