@@ -94,7 +94,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <ChartTile
-            metadata={{ source: textNl.bronnen.rivm, dateOfInsertion: lastFullValue.date_of_insertion_unix, timeframePeriod: metadataTimeframePeriod }}
+            metadata={{ source: textNl.bronnen.rivm, dateOfInsertion: lastFullValue.date_of_insertion_unix, timeframePeriod: metadataTimeframePeriod, isArchived: true }}
             title={textNl.linechart_titel}
             description={textNl.linechart_description}
           >

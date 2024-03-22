@@ -133,7 +133,12 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
           {hasActiveWarningTile && <WarningTile isFullWidth message={textNl.belangrijk_bericht} variant="informational" />}
 
           <ChartTile
-            metadata={{ source: textNl.positief_geteste_personen.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadataTimeframePeriod }}
+            metadata={{
+              source: textNl.positief_geteste_personen.bronnen.rivm,
+              dateOfInsertion: lastInsertionDateOfPage,
+              timeframePeriod: metadataTimeframePeriod,
+              isArchived: true,
+            }}
             title={textNl.positief_geteste_personen.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textNl.positief_geteste_personen.linechart_description}
@@ -195,8 +200,11 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             title={textNl.besmette_locaties.map_titel}
             description={textNl.besmette_locaties.map_toelichting}
             metadata={{
-              date: lastValue.date_unix,
+              timeframePeriod: lastValue.date_unix,
+              dateOfInsertion: lastValue.date_of_insertion_unix,
               source: textNl.besmette_locaties.bronnen.rivm,
+              isTimeframePeriodKpi: true,
+              isArchived: true,
             }}
             legend={{
               thresholds: thresholds.vr.infected_locations_percentage,
@@ -225,6 +233,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
               source: textNl.besmette_locaties.bronnen.rivm,
               dateOfInsertion: lastInsertionDateOfPage,
               timeframePeriod: metadataTimeframePeriod,
+              isArchived: true,
             }}
             timeframeOptions={TimeframeOptionsList}
             description={textNl.besmette_locaties.charts.linechart_description}
@@ -266,7 +275,7 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
           />
 
           <ChartTile
-            metadata={{ source: textNl.oversterfte.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadataTimeframePeriod }}
+            metadata={{ source: textNl.oversterfte.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadataTimeframePeriod, isArchived: true }}
             title={textNl.oversterfte.linechart_titel}
             timeframeOptions={TimeframeOptionsList}
             description={textNl.oversterfte.linechart_description}

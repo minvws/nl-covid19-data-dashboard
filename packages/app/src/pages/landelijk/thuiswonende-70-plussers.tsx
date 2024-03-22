@@ -128,7 +128,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
           <ChartTile
             timeframeOptions={TimeframeOptionsList}
             title={textNl.section_positive_tested.line_chart_daily_title}
-            metadata={{ source: textNl.section_positive_tested.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadataTimeframePeriod }}
+            metadata={{ source: textNl.section_positive_tested.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadataTimeframePeriod, isArchived: true }}
             description={textNl.section_positive_tested.line_chart_daily_description}
             onSelectTimeframe={setElderlyAtHomeConfirmedCasesTimeframe}
           >
@@ -171,8 +171,11 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
             title={textNl.section_positive_tested.choropleth_daily_title}
             description={textNl.section_positive_tested.choropleth_daily_description}
             metadata={{
-              date: elderlyAtHomeData.last_value.date_unix,
+              timeframePeriod: elderlyAtHomeData.last_value.date_unix,
+              dateOfInsertion: elderlyAtHomeData.last_value.date_of_insertion_unix,
               source: textNl.section_positive_tested.bronnen.rivm,
+              isTimeframePeriodKpi: true,
+              isArchived: true,
             }}
             legend={{
               thresholds: thresholds.vr.positive_tested_daily_per_100k,

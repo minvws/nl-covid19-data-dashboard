@@ -36,7 +36,6 @@ export const ReproductionChartTile = ({
   );
   const last_value = last(values) as ArchivedNlReproductionValue;
 
-  const metadataTimeframePeriod = { start: values[0].date_unix, end: values[values.length - 1].date_unix };
   const metadataDateOfInsertion = data.last_value.date_of_insertion_unix;
 
   return (
@@ -46,11 +45,10 @@ export const ReproductionChartTile = ({
       timeframeOptions={timeframeOptions}
       timeframeInitialValue={timeframeInitialValue}
       metadata={{
-        date: last_value.date_of_insertion_unix,
         source: text.bronnen.rivm,
         dateOfInsertion: metadataDateOfInsertion,
-        timeframePeriod: metadataTimeframePeriod,
-        isArchivedGraph: true,
+        timeframePeriod: last_value.date_of_insertion_unix,
+        isArchived: true,
       }}
       onSelectTimeframe={setReproductionTimeframe}
     >

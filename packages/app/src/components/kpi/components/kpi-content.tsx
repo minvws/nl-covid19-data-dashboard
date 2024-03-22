@@ -10,13 +10,15 @@ import { space } from '~/style/theme';
 import { TileData as KpiContentProps } from '../types';
 import { useIntl } from '~/intl';
 
-export const KpiContent = ({ title, description, value, bar, birthyear, differenceValue, isPercentage = false, dateOrRange, source }: KpiContentProps) => {
+export const KpiContent = ({ title, description, value, bar, birthyear, differenceValue, isPercentage = false, dateOfInsertion, dateOrRange, source }: KpiContentProps) => {
   const { commonTexts } = useIntl();
   const parsedBirthyearRange = birthyear ? parseBirthyearRange(birthyear) : null;
 
   const metadata: MetadataProps = {
-    date: dateOrRange,
+    timeframePeriod: dateOrRange,
     source: source,
+    isTimeframePeriodKpi: true,
+    dateOfInsertion: dateOfInsertion,
   };
 
   return (

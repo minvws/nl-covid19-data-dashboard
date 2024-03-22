@@ -391,8 +391,14 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   title: textNl.section_archived.archived_choropleth.legend_title,
                 }}
                 metadata={{
-                  date: archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830[archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830.length - 1].date_unix,
+                  timeframePeriod:
+                    archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830[archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830.length - 1].date_unix,
                   source: textNl.sources.nice,
+                  isTimeframePeriodKpi: true,
+                  dateOfInsertion:
+                    archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830[archivedChoropleth.gm.hospital_nice_choropleth_archived_20230830.length - 1]
+                      .date_of_insertion_unix,
+                  isArchived: true,
                 }}
               >
                 <DynamicChoropleth
@@ -423,13 +429,18 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   outdatedDataLabel: textNl.choropleth_legend_outdated_data_label,
                 }}
                 metadata={{
-                  date: {
+                  timeframePeriod: {
                     start:
                       archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228[archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228.length - 1].date_start_unix,
                     end: archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228[archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228.length - 1]
                       .date_end_unix,
                   },
+                  isTimeframePeriodKpi: true,
+                  dateOfInsertion:
+                    archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228[archivedChoropleth.gm.hospital_nice_choropleth_archived_20240228.length - 1]
+                      .date_of_insertion_unix,
                   source: textNl.sources.nice,
+                  isArchived: true,
                 }}
                 pageType="patienten-in-beeld"
                 notification={textNl.choropleth_update_notification}

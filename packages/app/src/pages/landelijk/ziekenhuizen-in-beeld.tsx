@@ -172,7 +172,8 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.kpi_tiles.occupancies.title}
             description={textNl.kpi_tiles.occupancies.description}
             source={textNl.sources.lnaz}
-            dateOrRange={{ start: hospitalLastValue.date_start_unix, end: hospitalLastValue.date_end_unix }}
+            timeframePeriod={{ start: hospitalLastValue.date_start_unix, end: hospitalLastValue.date_end_unix }}
+            dateOfInsertion={hospitalLastValue.date_of_insertion_unix}
             tilesData={[
               {
                 value: hospitalLastValue.beds_occupied_covid_moving_average,
@@ -306,7 +307,6 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.kpi_tiles.influxes.title}
             description={textNl.kpi_tiles.influxes.description}
             source={textNl.sources.lnaz}
-            dateOrRange={{ start: hospitalLastValue.date_start_unix, end: hospitalLastValue.date_end_unix }}
             tilesData={[
               {
                 value: hospitalLastValue.influx_covid_patients,

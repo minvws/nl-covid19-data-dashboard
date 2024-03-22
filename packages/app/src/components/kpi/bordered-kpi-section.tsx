@@ -9,11 +9,24 @@ import { BorderedKpiSectionProps } from './types';
 import { Markdown } from '../markdown';
 import { MetadataProps } from '../metadata/types';
 
-export const BorderedKpiSection = ({ title, description, source, dateOrRange, tilesData, disclaimer }: BorderedKpiSectionProps) => {
+export const BorderedKpiSection = ({
+  title,
+  description,
+  source,
+  timeframePeriod,
+  dateOfInsertion,
+  isTimeframePeriodKpi,
+  tilesData,
+  disclaimer,
+  isArchived,
+}: BorderedKpiSectionProps) => {
   const metadata: MetadataProps = {
-    date: dateOrRange,
+    timeframePeriod: timeframePeriod,
     source: source,
     disclaimer: disclaimer,
+    isTimeframePeriodKpi: isTimeframePeriodKpi,
+    dateOfInsertion: dateOfInsertion,
+    isArchived: isArchived,
   };
 
   return (

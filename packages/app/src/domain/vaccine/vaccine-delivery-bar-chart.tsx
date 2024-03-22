@@ -32,7 +32,7 @@ export function VaccineDeliveryBarChart({ data, text }: { data: ArchivedNlVaccin
         source: text.bronnen.rivm,
         dateOfInsertion: metadataDateOfInsertion,
         timeframePeriod: metadataTimeframePeriod,
-        isArchivedGraph: true,
+        isArchived: true,
       }}
     >
       <Box marginBottom={space[3]} display="flex" flexDirection="column" alignItems="flex-start" spacing={3}>

@@ -142,8 +142,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             <KpiTile
               title={textGm.infected_kpi.title}
               metadata={{
-                date: archivedLastValue.date_unix,
+                timeframePeriod: archivedLastValue.date_unix,
+                dateOfInsertion: archivedLastValue.date_of_insertion_unix,
                 source: textGm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
             >
               <KpiValue absolute={archivedLastValue.infected_moving_average_rounded} isAmount />
@@ -169,8 +172,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             <KpiTile
               title={textGm.barscale_titel}
               metadata={{
-                date: archivedLastValue.date_unix,
+                timeframePeriod: archivedLastValue.date_unix,
+                dateOfInsertion: archivedLastValue.date_of_insertion_unix,
                 source: textGm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
             >
               <KpiValue absolute={archivedLastValue.infected_per_100k_moving_average} isAmount />
@@ -247,8 +253,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 title: textShared.chloropleth_legenda_titel,
               }}
               metadata={{
-                date: archivedLastValue.date_unix,
+                timeframePeriod: archivedLastValue.date_unix,
+                dateOfInsertion: archivedLastValue.date_of_insertion_unix,
                 source: textGm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
             >
               <DynamicChoropleth

@@ -170,7 +170,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
               source: textNl.bronnen.rivm,
               dateOfInsertion: getLastInsertionDateOfPage(data, ['tested_overall_archived_20230331']),
               timeframePeriod: testedOverallTimeframePeriod,
-              isArchivedGraph: true,
+              isArchived: true,
             }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={confirmedCasesInfectedTimeframe}
@@ -219,11 +219,10 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                   infected_total: formatNumber(archivedDataGgdLastValue.infected),
                 })}
                 metadata={{
-                  date: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230321']),
                   source: textNl.ggd.bronnen.rivm,
                   dateOfInsertion: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230321']),
                   timeframePeriod: testedGgdTimeframePeriod,
-                  isArchivedGraph: true,
+                  isArchived: true,
                 }}
                 onSelectTimeframe={setConfirmedCasesInfectedPercentageTimeframe}
                 toggle={{
@@ -262,9 +261,9 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 })}
                 metadata={{
                   source: textNl.ggd.bronnen.rivm,
-                  date: getLastInsertionDateOfPage(data, ['tested_ggd_archived_20230321']),
                   dateOfInsertion: getLastInsertionDateOfPage(data, ['tested_per_age_group_archived_20230331']),
                   timeframePeriod: testedGgdTimeframePeriod,
+                  isArchived: true,
                 }}
                 onSelectTimeframe={setConfirmedCasesTestedOverTimeTimeframe}
                 toggle={{
@@ -309,6 +308,7 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
                 source: textNl.bronnen.rivm,
                 dateOfInsertion: getLastInsertionDateOfPage(data, ['tested_per_age_group_archived_20230331']),
                 timeframePeriod: testedPerAgeGroupTimeframePeriod,
+                isArchived: true,
               }}
               onSelectTimeframe={setConfirmedCasesInfectedPerAgeTimeframe}
             >
@@ -328,8 +328,11 @@ function PositivelyTestedPeople(props: StaticProps<typeof getStaticProps>) {
             <ChoroplethTile
               title={textNl.map_titel}
               metadata={{
-                date: archivedDataOverallLastValue.date_unix,
+                timeframePeriod: archivedDataOverallLastValue.date_unix,
+                dateOfInsertion: archivedDataOverallLastValue.date_of_insertion_unix,
                 source: textNl.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
               description={
                 <>

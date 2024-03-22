@@ -129,8 +129,11 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={textGm.section_deceased_rivm.kpi_covid_daily_title}
               metadata={{
-                date: data.deceased_rivm_archived_20221231.last_value.date_unix,
+                timeframePeriod: data.deceased_rivm_archived_20221231.last_value.date_unix,
+                dateOfInsertion: data.deceased_rivm_archived_20221231.last_value.date_of_insertion_unix,
                 source: textGm.section_deceased_rivm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
               description={textGm.section_deceased_rivm.kpi_covid_daily_description}
             >
@@ -140,8 +143,11 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={textGm.section_deceased_rivm.kpi_covid_total_title}
               metadata={{
-                date: data.deceased_rivm_archived_20221231.last_value.date_unix,
+                timeframePeriod: data.deceased_rivm_archived_20221231.last_value.date_unix,
+                dateOfInsertion: data.deceased_rivm_archived_20221231.last_value.date_of_insertion_unix,
                 source: textGm.section_deceased_rivm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
               description={textGm.section_deceased_rivm.kpi_covid_total_description}
             >
