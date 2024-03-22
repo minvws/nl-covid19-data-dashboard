@@ -106,6 +106,11 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
     }),
   };
 
+  const hospitalNiceTimeframePeriod = {
+    start: data.hospital_nice_archived_20240228.values[0].date_start_unix,
+    end: data.hospital_nice_archived_20240228.values[data.hospital_nice_archived_20240228.values.length - 1].date_end_unix,
+  };
+
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
@@ -156,7 +161,11 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile title={textGm.linechart_titel} description={textGm.linechart_description} metadata={{ source: textGm.bronnen.rivm }}>
+          <ChartTile
+            title={textGm.linechart_titel}
+            description={textGm.linechart_description}
+            metadata={{ source: textGm.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: hospitalNiceTimeframePeriod, isArchived: true }}
+          >
             <TimeSeriesChart
               accessibility={{
                 key: 'hospital_admissions_over_time_chart',
