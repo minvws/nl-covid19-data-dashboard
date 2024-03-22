@@ -198,7 +198,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                 title={textNl.hospitals.admissions_per_age_group_chart.title}
                 description={textNl.hospitals.admissions_per_age_group_chart.description}
                 timeframeOptions={TimeframeOptionsList}
-                timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+                timeframeInitialValue={TimeframeOption.ALL}
                 metadata={{
                   source: textNl.sources.nice,
                   dateOfInsertion: lastInsertionDateHospitalAdmissionsPerAgeGroupOverTime,
@@ -228,7 +228,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                 title={textNl.icu.admissions_per_age_group_chart.title}
                 description={textNl.icu.admissions_per_age_group_chart.description}
                 timeframeOptions={TimeframeOptionsList}
-                timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+                timeframeInitialValue={TimeframeOption.ALL}
                 metadata={{
                   source: textNl.sources.nice,
                   dateOfInsertion: lastInsertionDateIntensiveCareAdmissionsPerAgeGroupOverTime,
@@ -265,7 +265,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   timeframePeriod: hospitalAdmissionsOverTimeTimeframePeriod,
                 }}
                 timeframeOptions={TimeframeOptionsList}
-                timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+                timeframeInitialValue={TimeframeOption.ALL}
                 onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
                 toggle={{
                   initialValue: selectedAdmissionsOverTimeChart,
@@ -320,7 +320,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   timeframePeriod: intensiveCareAdmissionsOverTimeTimeframePeriod,
                 }}
                 timeframeOptions={TimeframeOptionsList}
-                timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+                timeframeInitialValue={TimeframeOption.ALL}
                 onSelectTimeframe={setIntensiveCareAdmissionsOverTimeTimeframe}
                 toggle={{
                   initialValue: selectedAdmissionsOverTimeChart,

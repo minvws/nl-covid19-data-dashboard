@@ -52,7 +52,7 @@ export const VariantsStackedBarChartTile = ({
   const today = useCurrentDate();
   const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
-  const [variantTimeFrame, setVariantTimeFrame] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
+  const [variantTimeFrame, setVariantTimeFrame] = useState<TimeframeOption>(TimeframeOption.ALL);
   const barSeriesConfig = useBarConfig(values, variantLabels, tooltipLabels, variantColors, variantOrders, variantTimeFrame, today);
 
   const text = commonTexts.variants_page;
@@ -69,7 +69,7 @@ export const VariantsStackedBarChartTile = ({
       description={description}
       metadata={metadata}
       timeframeOptions={TimeframeOptionsList}
-      timeframeInitialValue={TimeframeOption.THIRTY_DAYS}
+      timeframeInitialValue={TimeframeOption.ALL}
       onSelectTimeframe={setVariantTimeFrame}
     >
       <InteractiveLegend helpText={text.legend_help_text} selectOptions={interactiveLegendOptions.reverse()} selection={list} onToggleItem={toggle} onReset={clear} />

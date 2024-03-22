@@ -78,8 +78,8 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
 
   const [selectedBedsOccupiedOverTimeChart, setSelectedBedsOccupiedOverTimeChart] = useState<string>('beds_occupied_covid_hospital');
-  const [hospitalBedsOccupiedOverTimeTimeframe, setHospitalBedsOccupiedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
-  const [intensiveCareBedsTimeframe, setIntensiveCareBedsTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
+  const [hospitalBedsOccupiedOverTimeTimeframe, setHospitalBedsOccupiedOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [intensiveCareBedsTimeframe, setIntensiveCareBedsTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const [hospitalBedsOccupiedOverTimeTimeframePeriod, setHospitalBedOccupiedOverTimeTimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
   const [intensiveCareBedsTimeframePeriod, setIntensiveCareBedsTimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
@@ -98,8 +98,8 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
   ];
 
   const [selectedPatientInfluxOverTimeChart, setSelectedPatientInfluxOverTimeChart] = useState<string>('patients_influx_hospital');
-  const [hospitalPatientInfluxOverTimeTimeframe, setHospitalPatientInfluxOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
-  const [intensiveCarePatientInfluxOverTimeTimeframe, setIntensiveCarePatientInfluxOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.THIRTY_DAYS);
+  const [hospitalPatientInfluxOverTimeTimeframe, setHospitalPatientInfluxOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
+  const [intensiveCarePatientInfluxOverTimeTimeframe, setIntensiveCarePatientInfluxOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const [hospitalPatientInfluxOverTimeTimeframePeriod, setHospitalPatientInfluxOverTimeTimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
   const [intensiveCarePatientInfluxOverTimeTimeframePeriod, setIntensiveCarePatientInfluxOverTimeTimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
