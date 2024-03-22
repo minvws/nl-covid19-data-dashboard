@@ -2,7 +2,7 @@ import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { colors, DAY_IN_SECONDS, TimeframeOption, TimeframeOptionsList, WEEK_IN_SECONDS } from '@corona-dashboard/common';
+import { colors, DAY_IN_SECONDS, WEEK_IN_SECONDS } from '@corona-dashboard/common';
 import { countTrailingNullValues, getBoundaryDateStartUnix, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedGmData } from '~/static-props/get-data';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
@@ -80,8 +80,6 @@ export const getStaticProps = createGetStaticProps(
 function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedArchivedGmData: data, archivedChoropleth, municipalityName, content, lastGenerated } = props;
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
-
-  const [hospitalAdmissionsOverTimeTimeframe, setHospitalAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
 
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -166,16 +164,13 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
           <ChartTile
             title={textGm.linechart_titel}
             description={textGm.linechart_description}
-            metadata={{ source: textGm.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: hospitalNiceTimeframePeriod }}
-            timeframeOptions={TimeframeOptionsList}
-            onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
+            metadata={{ source: textGm.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: hospitalNiceTimeframePeriod, isArchived: true }}
           >
             <TimeSeriesChart
               accessibility={{
                 key: 'hospital_admissions_over_time_chart',
               }}
               values={data.hospital_nice_archived_20240228.values}
-              timeframe={hospitalAdmissionsOverTimeTimeframe}
               seriesConfig={[
                 {
                   type: 'line',

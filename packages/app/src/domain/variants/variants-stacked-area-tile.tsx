@@ -8,11 +8,10 @@ import { MetadataProps } from '~/components/metadata/types';
 import { reorderAndFilter } from '~/domain/variants/logic/reorder-and-filter';
 import { space } from '~/style/theme';
 import { Spacer } from '~/components/base';
-import { TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { useList } from '~/utils/use-list';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useSeriesConfig } from '~/domain/variants/logic/use-series-config';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
@@ -27,8 +26,6 @@ interface VariantsStackedAreaTileProps {
 }
 
 export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata, onHandleTimeframePeriodChange }: VariantsStackedAreaTileProps) => {
-  const [variantStackedAreaTimeframe, setVariantStackedAreaTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
 
   const [seriesConfig, selectOptions] = useSeriesConfig(text, values, variantColors);
@@ -51,14 +48,7 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata,
   }
 
   return (
-    <ChartTile
-      title={text.titel}
-      description={text.toelichting}
-      metadata={metadata}
-      timeframeOptions={TimeframeOptionsList}
-      timeframeInitialValue={variantStackedAreaTimeframe}
-      onSelectTimeframe={setVariantStackedAreaTimeframe}
-    >
+    <ChartTile title={text.titel} description={text.toelichting} metadata={metadata}>
       <InteractiveLegend helpText={text.legend_help_tekst} selectOptions={selectOptions} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer marginBottom={space[2]} />
       <TimeSeriesChart
@@ -66,7 +56,6 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata,
           key: 'variants_stacked_area_over_time_chart',
         }}
         values={values}
-        timeframe={variantStackedAreaTimeframe}
         seriesConfig={filteredConfig}
         disableLegend
         dataOptions={{

@@ -1,20 +1,16 @@
-import { colors, ArchivedNlGNumber, TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { useState } from 'react';
+import { BoldText } from '~/components/typography';
 import { ChartTile } from '~/components/chart-tile';
+import { colors, ArchivedNlGNumber } from '@corona-dashboard/common';
+import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesListContainer } from '~/components/time-series-chart/components/tooltip/tooltip-series-list-container';
-import { BoldText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { createDateFromUnixTimestamp } from '~/utils/create-date-from-unix-timestamp';
 
 interface GNumberBarChartTileProps {
   data: ArchivedNlGNumber;
-  timeframeInitialValue?: TimeframeOption;
 }
 
-export function GNumberBarChartTile({ data: __data, timeframeInitialValue = TimeframeOption.ALL }: GNumberBarChartTileProps) {
-  const [gnumberTimeframe, setGnumberTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
+export function GNumberBarChartTile({ data: __data }: GNumberBarChartTileProps) {
   const { formatPercentage, commonTexts } = useIntl();
   const text = commonTexts.g_number.bar_chart;
 
@@ -31,15 +27,12 @@ export function GNumberBarChartTile({ data: __data, timeframeInitialValue = Time
     <ChartTile
       title={text.title}
       description={text.description}
-      timeframeInitialValue={timeframeInitialValue}
-      timeframeOptions={TimeframeOptionsList}
       metadata={{
         source: text.bronnen,
         dateOfInsertion: metadataDateOfInsertion,
         timeframePeriod: last_value.date_of_insertion_unix,
         isArchived: true,
       }}
-      onSelectTimeframe={setGnumberTimeframe}
     >
       <TimeSeriesChart
         accessibility={{
@@ -48,7 +41,6 @@ export function GNumberBarChartTile({ data: __data, timeframeInitialValue = Time
         }}
         values={values}
         endDate={endDate}
-        timeframe={gnumberTimeframe}
         seriesConfig={[
           {
             type: 'split-bar',
