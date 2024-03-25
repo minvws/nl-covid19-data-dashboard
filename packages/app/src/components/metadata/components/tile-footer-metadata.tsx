@@ -70,8 +70,13 @@ export function TileFooterMetadata({ dateString, marginBottom, dataSources = [],
             </Box>
           )}
 
+          {/**
+           * Since all components of a specific page use the same lokalize key, the refactored version of the metadata
+           * component will transform all sources to external links. In order to avoid that, we reset the .href property
+           * when we pass the items to the MetadataItem component.
+           */}
           {source ? (
-            <MetadataItem icon={<Database aria-hidden />} items={[source]} label={commonTexts.common.metadata.source} />
+            <MetadataItem icon={<Database aria-hidden />} items={[{ ...source, href: '' }]} label={commonTexts.common.metadata.source} />
           ) : dataSources && dataSources.length > 0 ? (
             <MetadataItem
               icon={<Database aria-hidden color={colors.gray7} />}
