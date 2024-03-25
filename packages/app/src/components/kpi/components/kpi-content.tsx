@@ -19,6 +19,7 @@ export const KpiContent = ({ title, description, value, bar, birthyear, differen
     source: source,
     isTimeframePeriodKpi: true,
     dateOfInsertion: dateOfInsertion,
+    isArchived: true,
   };
 
   return (

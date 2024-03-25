@@ -189,6 +189,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
                 description: textNl.kpi_amount_of_samples.tile_total_variants.description,
               },
             ]}
+            isArchived
           />
 
           {variantChart && variantLabels && (
@@ -205,6 +206,7 @@ export default function CovidVariantenPage(props: StaticProps<typeof getStaticPr
                 source: textNl.bronnen.rivm,
                 timeframePeriod: covidVariantsTimeframePeriod,
                 dateOfInsertion: getLastInsertionDateOfPage(data, ['variants']),
+                isArchived: true,
               }}
               onHandleTimeframePeriodChange={handleSetCovidVariantsTimeframePeriod}
             />

@@ -83,6 +83,7 @@ function VariantsTableTileWithData({ text, sampleThresholdPassed, source, data, 
     source,
     dateOfInsertion: dates.date_of_report_unix,
     isTimeframePeriodKpi: true,
+    isArchived: true,
   };
 
   const [date_start, date_end] = formatDateSpan({ seconds: dates.date_start_unix }, { seconds: dates.date_end_unix });

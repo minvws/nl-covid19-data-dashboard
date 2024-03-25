@@ -205,7 +205,7 @@ function ElderlyAtHomeNationalPage(props: StaticProps<typeof getStaticProps>) {
           />
           <ChartTile
             title={textNl.section_deceased.line_chart_daily_title}
-            metadata={{ source: textNl.section_positive_tested.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadataTimeframePeriod }}
+            metadata={{ source: textNl.section_positive_tested.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: metadataTimeframePeriod, isArchived: true }}
             description={textNl.section_deceased.line_chart_daily_description}
           >
             <TimeSeriesChart

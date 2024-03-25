@@ -152,6 +152,7 @@ export const SewerChart = ({ accessibility, dataAverages, dataPerInstallation, t
         source: text.source,
         timeframePeriod: sewerChartTimeframePeriod,
         dateOfInsertion: metadataLastInsertionDate,
+        isArchived: true,
       }}
       description={text.description}
     >

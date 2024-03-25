@@ -116,6 +116,8 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
                 timeframePeriod: reproductionLastValue.date_unix,
                 dateOfInsertion: reproductionLastValue.date_of_insertion_unix,
                 source: textNl.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
               hasNoBorder
               description={textNl.barscale_toelichting}

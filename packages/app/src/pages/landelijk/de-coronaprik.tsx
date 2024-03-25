@@ -232,6 +232,8 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 end: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_end_unix,
               },
               dateOfInsertion: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_of_insertion_unix,
+              isArchived: true,
+              isTimeframePeriodKpi: true,
             }}
           />
 
@@ -254,6 +256,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
             source={textShared.vaccination_grade_tile.fully_vaccinated_labels.source}
             timeframePeriod={vaccineCoverageEstimatedFullyVaccinated.date_unix}
             isTimeframePeriodKpi={true}
+            isArchived={true}
             dateOfInsertion={vaccineCoverageEstimatedFullyVaccinated.date_of_insertion_unix}
             tilesData={[
               {
@@ -291,6 +294,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               ageGroupLabel: commonTexts.choropleth.vaccination_coverage.shared.dropdown_label_age_group_select,
             }}
             isPrimarySeries
+            isArchived
           />
 
           <PrimarySeriesShotCoveragePerAgeGroup
@@ -304,6 +308,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
               isTimeframePeriodKpi: true,
               dateOfInsertion: archivedData.vaccine_coverage_per_age_group_archived_20231004.values[0].date_of_insertion_unix,
               source: textNl.vaccination_coverage.bronnen.rivm,
+              isArchived: true,
             }}
             values={archivedData.vaccine_coverage_per_age_group_archived_20231004.values}
           />

@@ -173,6 +173,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             description={textNl.kpi_tiles.occupancies.description}
             source={textNl.sources.lnaz}
             timeframePeriod={{ start: hospitalLastValue.date_start_unix, end: hospitalLastValue.date_end_unix }}
+            isTimeframePeriodKpi={true}
             dateOfInsertion={hospitalLastValue.date_of_insertion_unix}
             tilesData={[
               {
@@ -188,6 +189,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 description: textNl.kpi_tiles.occupancies.icu.description,
               },
             ]}
+            isArchived
           />
 
           <InView rootMargin="400px">
@@ -200,6 +202,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                   source: textNl.sources.lnaz,
                   timeframePeriod: hospitalBedsOccupiedOverTimeTimeframePeriod,
                   dateOfInsertion: lastInsertionDateHospitalBedsOccupiedOverTime,
+                  isArchived: true,
                 }}
                 timeframeInitialValue={hospitalBedsOccupiedOverTimeTimeframe}
                 onSelectTimeframe={setHospitalBedsOccupiedOverTimeTimeframe}
@@ -252,7 +255,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
               <ChartTile
                 title={textNl.icu.chart_beds_occupied.title}
                 description={textNl.icu.chart_beds_occupied.description}
-                metadata={{ source: textNl.sources.lnaz, timeframePeriod: intensiveCareBedsTimeframePeriod, dateOfInsertion: lastInsertionDateIntensiveCareBeds }}
+                metadata={{ source: textNl.sources.lnaz, timeframePeriod: intensiveCareBedsTimeframePeriod, dateOfInsertion: lastInsertionDateIntensiveCareBeds, isArchived: true }}
                 timeframeOptions={TimeframeOptionsList}
                 timeframeInitialValue={intensiveCareBedsTimeframe}
                 onSelectTimeframe={setIntensiveCareBedsTimeframe}
@@ -307,6 +310,10 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.kpi_tiles.influxes.title}
             description={textNl.kpi_tiles.influxes.description}
             source={textNl.sources.lnaz}
+            timeframePeriod={{ start: hospitalLastValue.date_start_unix, end: hospitalLastValue.date_end_unix }}
+            dateOfInsertion={hospitalLastValue.date_of_insertion_unix}
+            isTimeframePeriodKpi={true}
+            isArchived={true}
             tilesData={[
               {
                 value: hospitalLastValue.influx_covid_patients,
@@ -330,6 +337,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 source: textNl.sources.lnaz,
                 timeframePeriod: hospitalPatientInfluxOverTimeTimeframePeriod,
                 dateOfInsertion: lastInsertionDateHospitalPatientInfluxOverTime,
+                isArchived: true,
               }}
               timeframeInitialValue={hospitalPatientInfluxOverTimeTimeframe}
               onSelectTimeframe={setHospitalPatientInfluxOverTimeTimeframe}
@@ -377,6 +385,7 @@ const HospitalsAndCarePage = (props: StaticProps<typeof getStaticProps>) => {
                 source: textNl.sources.lnaz,
                 timeframePeriod: intensiveCarePatientInfluxOverTimeTimeframePeriod,
                 dateOfInsertion: lastInsertionDateIntensiveCarePatientInfluxOverTimeTimeframePeriod,
+                isArchived: true,
               }}
               timeframeInitialValue={intensiveCarePatientInfluxOverTimeTimeframe}
               onSelectTimeframe={setIntensiveCarePatientInfluxOverTimeTimeframe}
