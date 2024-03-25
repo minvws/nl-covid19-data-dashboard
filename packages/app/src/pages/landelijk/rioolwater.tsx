@@ -101,7 +101,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: sewerAverages.last_value.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
               jsonSources: [
                 { href: reverseRouter.json.national(), text: jsonText.metrics_national_json.text },
@@ -121,8 +121,11 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title={textNl.barscale_titel}
               description={textNl.extra_uitleg}
               metadata={{
-                date: sewerAverages.last_value.date_unix,
+                timeframePeriod: sewerAverages.last_value.date_unix,
+                dateOfInsertion: sewerAverages.last_value.date_of_insertion_unix,
                 source: textNl.bronnen.rivm,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
             >
               <KpiValue
@@ -156,8 +159,11 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             title={textNl.map_titel}
             description={textNl.map_toelichting}
             metadata={{
-              date: { start: choropleth.gm.sewer[0].date_start_unix, end: choropleth.gm.sewer[0].date_end_unix },
+              timeframePeriod: { start: choropleth.gm.sewer[0].date_start_unix, end: choropleth.gm.sewer[0].date_end_unix },
+              dateOfInsertion: choropleth.gm.sewer[0].date_of_insertion_unix,
               source: textNl.bronnen.rivm,
+              isTimeframePeriodKpi: true,
+              isArchived: true,
             }}
             valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
             legend={{

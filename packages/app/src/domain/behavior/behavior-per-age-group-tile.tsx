@@ -3,7 +3,6 @@ import React from 'react';
 import { AgeGroup } from '~/components/age-groups/age-group';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { MetadataProps } from '~/components/metadata';
 import { getBirthYearRange } from '~/components/tables/logic/get-birth-year-range';
 import { useGetPercentageData } from '~/components/tables/logic/use-get-percentage-data';
 import { NarrowTable } from '~/components/tables/narrow-table';
@@ -17,6 +16,7 @@ import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SelectBehavior } from './components/select-behavior';
 import { BehaviorIdentifier } from './logic/behavior-types';
+import { MetadataProps } from '~/components/metadata/types';
 
 const AGE_GROUPS_KEYS = ['70_plus', '55_69', '40_54', '25_39', '16_24'] as const;
 

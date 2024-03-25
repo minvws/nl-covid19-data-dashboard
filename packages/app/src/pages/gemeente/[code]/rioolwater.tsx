@@ -108,7 +108,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 start: sewerAverages.last_value.date_start_unix,
                 end: sewerAverages.last_value.date_end_unix,
               },
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
               jsonSources: [getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text)],
             }}
@@ -126,8 +126,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={textGm.barscale_titel}
               metadata={{
-                date: { start: sewerAverages.last_value.date_start_unix, end: sewerAverages.last_value.date_end_unix },
+                timeframePeriod: { start: sewerAverages.last_value.date_start_unix, end: sewerAverages.last_value.date_end_unix },
+                dateOfInsertion: sewerAverages.last_value.date_of_insertion_unix,
                 source: textGm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
               }}
               description={textGm.extra_uitleg}
             >
@@ -149,8 +151,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title={textGm.total_measurements_title}
               description={textGm.total_measurements_description}
               metadata={{
-                date: { start: sewerInstallationMeasurement.date_start_unix, end: sewerInstallationMeasurement.date_end_unix },
+                timeframePeriod: { start: sewerInstallationMeasurement.date_start_unix, end: sewerInstallationMeasurement.date_end_unix },
+                dateOfInsertion: sewerInstallationMeasurement.date_of_insertion_unix,
                 source: textGm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
               }}
             >
               <KpiValue absolute={sewerInstallationMeasurement.total_number_of_samples} />

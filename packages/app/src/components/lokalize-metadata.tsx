@@ -1,7 +1,7 @@
-import { useIntl } from '~/intl';
 import { Box } from '~/components/base';
-import { Text } from '~/components/typography';
 import { space } from '~/style/theme';
+import { Text } from '~/components/typography';
+import { useIntl } from '~/intl';
 
 export interface MetadataProps {
   date: string;

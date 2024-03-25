@@ -1,10 +1,10 @@
 import { assert, colors } from '@corona-dashboard/common';
-import { NlVaccineType } from '@corona-dashboard/common/src/types';
-import { Vaccinaties as VaccinationIcon } from '@corona-dashboard/icons';
-import { useIntl } from '~/intl';
 import { ChartTileDoubleColumn } from '~/components/chart-tile-double-column';
-import { MetadataProps } from '~/components/metadata';
+import { MetadataProps } from '~/components/metadata/types';
+import { NlVaccineType } from '@corona-dashboard/common/src/types';
 import { PieChart, PiePartConfig } from '~/components/pie-chart';
+import { useIntl } from '~/intl';
+import { Vaccinaties as VaccinationIcon } from '@corona-dashboard/icons';
 
 interface VaccinationsPerSupplierOverLastTimeframeTileProps {
   title: string;

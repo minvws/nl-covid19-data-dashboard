@@ -8,7 +8,22 @@ interface NarrowTableProps extends CommonTableProps {
   headerText: string;
 }
 
-// Component shown for tables on narrow screens.
+/**
+ * `NarrowTable` is a functional component that renders a table specifically for use on mobile screens.
+ * It takes a `NarrowTableProps` object as its properties.
+ *
+ * @component
+ * @param {Object} props - The properties that define the `NarrowTable` component.
+ * @param {Array} props.tableData - An array of objects where each object represents a row in the table. Each object should include an `id` and a `firstColumnLabel`.
+ * @param {string} props.headerText - The text to be displayed as the table's header.
+ * @param {Array} props.percentageData - An array of objects where each object represents a percentage data point to be displayed in the table.
+ *
+ * @example
+ * <NarrowTable tableData={tableData} headerText="Sample Table" percentageData={percentageData} />
+ *
+ * @extends {CommonTableProps}
+ * @returns {React.Element} The rendered `NarrowTable` component.
+ */
 export const NarrowTable = ({ tableData, headerText, percentageData }: NarrowTableProps) => {
   return (
     <Box overflow="auto">

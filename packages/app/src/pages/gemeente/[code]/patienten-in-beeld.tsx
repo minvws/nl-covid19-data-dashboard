@@ -2,7 +2,7 @@ import { ArticleParts, LinkParts, PagePartQueryResult } from '~/types/cms';
 import { Box } from '~/components/base/box';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { colors, DAY_IN_SECONDS, TimeframeOption, TimeframeOptionsList, WEEK_IN_SECONDS } from '@corona-dashboard/common';
+import { colors, DAY_IN_SECONDS, WEEK_IN_SECONDS } from '@corona-dashboard/common';
 import { countTrailingNullValues, getBoundaryDateStartUnix, replaceVariablesInText, useReverseRouter } from '~/utils';
 import { createGetArchivedChoroplethData, createGetContent, getLastGeneratedDate, getLokalizeTexts, selectArchivedGmData } from '~/static-props/get-data';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
@@ -81,8 +81,6 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
   const { pageText, selectedArchivedGmData: data, archivedChoropleth, municipalityName, content, lastGenerated } = props;
   const [isArchivedContentShown, setIsArchivedContentShown] = useState<boolean>(false);
 
-  const [hospitalAdmissionsOverTimeTimeframe, setHospitalAdmissionsOverTimeTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const reverseRouter = useReverseRouter();
 
@@ -108,6 +106,11 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
     }),
   };
 
+  const hospitalNiceTimeframePeriod = {
+    start: data.hospital_nice_archived_20240228.values[0].date_start_unix,
+    end: data.hospital_nice_archived_20240228.values[data.hospital_nice_archived_20240228.values.length - 1].date_end_unix,
+  };
+
   const lastInsertionDateOfPage = getLastInsertionDateOfPage(data, pageMetrics);
 
   return (
@@ -124,7 +127,7 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
             metadata={{
               datumsText: textGm.datums,
               dateOrRange: lastValue.date_end_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textGm.bronnen.rivm],
               jsonSources: [
                 getMunicipalityJsonLink(reverseRouter.json.municipality(data.code), jsonText.metrics_municipality_json.text),
@@ -149,8 +152,9 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                 dateEnd: formatDateFromSeconds(lastValue.date_end_unix, 'weekday-long'),
               })}
               metadata={{
-                date: { start: sevenDayAverageDates.start, end: sevenDayAverageDates.end },
+                timeframePeriod: { start: sevenDayAverageDates.start, end: sevenDayAverageDates.end },
                 source: textGm.bronnen.rivm,
+                isTimeframePeriodKpi: true,
               }}
             >
               <KpiValue absolute={lastValue.admissions_in_the_last_7_days} isAmount isMovingAverageDifference />
@@ -160,16 +164,13 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
           <ChartTile
             title={textGm.linechart_titel}
             description={textGm.linechart_description}
-            metadata={{ source: textGm.bronnen.rivm }}
-            timeframeOptions={TimeframeOptionsList}
-            onSelectTimeframe={setHospitalAdmissionsOverTimeTimeframe}
+            metadata={{ source: textGm.bronnen.rivm, dateOfInsertion: lastInsertionDateOfPage, timeframePeriod: hospitalNiceTimeframePeriod, isArchived: true }}
           >
             <TimeSeriesChart
               accessibility={{
                 key: 'hospital_admissions_over_time_chart',
               }}
               values={data.hospital_nice_archived_20240228.values}
-              timeframe={hospitalAdmissionsOverTimeTimeframe}
               seriesConfig={[
                 {
                   type: 'line',
@@ -221,8 +222,11 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                   municipality: municipalityName,
                 })}
                 metadata={{
-                  date: lastValueChoropleth.date_unix,
+                  timeframePeriod: lastValueChoropleth.date_unix,
+                  dateOfInsertion: lastValueChoropleth.date_of_insertion_unix,
                   source: textGm.section_archived.archived_choropleth.bronnen.rivm,
+                  isTimeframePeriodKpi: true,
+                  isArchived: true,
                 }}
                 description={textGm.section_archived.archived_choropleth.map_toelichting}
                 legend={{
@@ -256,8 +260,11 @@ function IntakeHospital(props: StaticProps<typeof getStaticProps>) {
                   municipality: municipalityName,
                 })}
                 metadata={{
-                  date: { start: lastValueChoropleth.date_start_unix, end: lastValueChoropleth.date_end_unix },
+                  timeframePeriod: { start: lastValueChoropleth.date_start_unix, end: lastValueChoropleth.date_end_unix },
+                  dateOfInsertion: lastValueChoropleth.date_of_insertion_unix,
                   source: textGm.bronnen.rivm,
+                  isTimeframePeriodKpi: true,
+                  isArchived: true,
                 }}
                 description={textGm.map_toelichting}
                 legend={{

@@ -1,8 +1,9 @@
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { ChartTile, MetadataProps } from '~/components';
 import { NarrowVaccineCampaignTable } from './components/narrow-vaccine-campaign-table';
-import { WideVaccineCampaignTable } from './components/wide-vaccine-campaign-table';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { VaccineCampaign, VaccineCampaignDescriptions, VaccineCampaignHeaders, VaccineCampaignOptions } from './types';
+import { WideVaccineCampaignTable } from './components/wide-vaccine-campaign-table';
+
 interface VaccineCampaignsTileProps {
   title: string;
   description: string;

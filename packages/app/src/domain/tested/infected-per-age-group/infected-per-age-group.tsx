@@ -1,20 +1,20 @@
-import { ArchivedNlTestedPerAgeGroupValue, TimeframeOption } from '@corona-dashboard/common';
-import { Spacer } from '~/components/base';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
+import { ArchivedNlTestedPerAgeGroupValue } from '@corona-dashboard/common';
+import { BASE_SERIES_CONFIG } from './series-config';
 import { ErrorBoundary } from '~/components/error-boundary';
+import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
 import { InteractiveLegend, SelectOption } from '~/components/interactive-legend';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
-import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
-import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-boundary-date-start-unix';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
+import { Spacer } from '~/components/base';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useIntl } from '~/intl';
 import { useList } from '~/utils/use-list';
-import { BASE_SERIES_CONFIG } from './series-config';
 
 interface InfectedPerAgeGroup {
   /**
@@ -23,12 +23,11 @@ interface InfectedPerAgeGroup {
    */
   accessibility: AccessibilityDefinition;
   values: ArchivedNlTestedPerAgeGroupValue[];
-  timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
   text: SiteText['pages']['positive_tests_page']['nl'];
 }
 
-export function InfectedPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text }: InfectedPerAgeGroup) {
+export function InfectedPerAgeGroup({ values, accessibility, timelineEvents, text }: InfectedPerAgeGroup) {
   const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
@@ -74,7 +73,6 @@ export function InfectedPerAgeGroup({ values, timeframe, accessibility, timeline
         forceLegend
         accessibility={accessibility}
         values={values}
-        timeframe={timeframe}
         seriesConfig={chartConfig}
         minHeight={breakpoints.md ? 300 : 250}
         formatTooltip={(data) => <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />}

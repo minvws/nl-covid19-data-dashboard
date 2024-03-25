@@ -1,6 +1,6 @@
 import { Arts } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
-import { colors, TimeframeOption } from '@corona-dashboard/common';
+import { colors, getLastFilledValue, TimeframeOption } from '@corona-dashboard/common';
 import { createGetStaticProps, StaticProps } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, getLokalizeTexts, selectArchivedNlData } from '~/static-props/get-data';
 import { Languages, SiteText } from '~/locale';
@@ -13,6 +13,7 @@ import { useDynamicLokalizeTexts } from '~/utils/cms/use-dynamic-lokalize-texts'
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils';
 import { WarningTile } from '~/components/warning-tile';
+import { getLastInsertionDateOfPage } from '~/utils/get-last-insertion-date-of-page';
 
 const selectLokalizeTexts = (siteText: SiteText) => ({
   metadataTexts: siteText.pages.topical_page.nl.nationaal_metadata,
@@ -35,12 +36,18 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
   const { metadataTexts, jsonText } = useDynamicLokalizeTexts<LokalizeTexts>(pageText, selectLokalizeTexts);
   const { commonTexts } = useIntl();
   const text = commonTexts.verdenkingen_huisartsen;
-
+  const lastFullValue = getLastFilledValue(archivedData.doctor_archived_20210903);
   const metadata = {
     ...metadataTexts,
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  const metadataTimeframePeriod = {
+    start: archivedData.doctor_archived_20210903.values[0].date_start_unix,
+    end: lastFullValue.date_end_unix,
+  };
+  const metadataLastDateOfInsertion = getLastInsertionDateOfPage(archivedData, ['doctor_archived_20210903']);
 
   const hasActiveWarningTile = !!text.belangrijk_bericht;
 
@@ -57,7 +64,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastValue.date_end_unix,
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertion: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.nivel],
               jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}
@@ -65,7 +72,11 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
 
           {hasActiveWarningTile && <WarningTile isFullWidth message={text.belangrijk_bericht} variant="informational" />}
 
-          <ChartTile title={text.linechart_titel} metadata={{ source: text.bronnen.nivel }} description={text.linechart_description}>
+          <ChartTile
+            title={text.linechart_titel}
+            metadata={{ source: text.bronnen.nivel, dateOfInsertion: metadataLastDateOfInsertion, timeframePeriod: metadataTimeframePeriod, isArchived: true }}
+            description={text.linechart_description}
+          >
             <TimeSeriesChart
               accessibility={{
                 key: 'doctor_covid_symptoms_over_time_chart',
