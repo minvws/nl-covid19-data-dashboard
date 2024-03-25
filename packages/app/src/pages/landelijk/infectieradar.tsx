@@ -67,10 +67,10 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
 
   const reverseRouter = useReverseRouter();
 
-  const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
+  const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [confirmedCasesSelfTestedTimeframePeriod, setConfirmedCasesSelfTestedTimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
 
-  const [confirmedCasesCovidSymptomsPerAgeTimeFrame, setConfirmedCasesCovidSymptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
+  const [confirmedCasesCovidSymptomsPerAgeTimeFrame, setConfirmedCasesCovidSymptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [confirmedCasesCovidSymptomsPerAgeTimeframePeriod, setConfirmedCasesCovidSymptomsPerAgeTimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
 
   const { commonTexts } = useIntl();
