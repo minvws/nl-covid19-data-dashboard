@@ -67,10 +67,10 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
 
   const reverseRouter = useReverseRouter();
 
-  const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.SIX_MONTHS);
+  const [confirmedCasesSelfTestedTimeframe, setConfirmedCasesSelfTestedTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [confirmedCasesSelfTestedTimeframePeriod, setConfirmedCasesSelfTestedTimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
 
-  const [confirmedCasesCovidSymptomsPerAgeTimeFrame, setConfirmedCasesCovidSymptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.THREE_MONTHS);
+  const [confirmedCasesCovidSymptomsPerAgeTimeFrame, setConfirmedCasesCovidSymptomsPerAgeTimeFrame] = useState<TimeframeOption>(TimeframeOption.ALL);
   const [confirmedCasesCovidSymptomsPerAgeTimeframePeriod, setConfirmedCasesCovidSymptomsPerAgeTimeframePeriod] = useState<DateRange | undefined>({ start: 0, end: 0 });
 
   const { commonTexts } = useIntl();
@@ -130,6 +130,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
                 dateOfInsertion: data.self_test_overall.last_value.date_of_insertion_unix,
                 source: textNl.sources.self_test,
                 isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
               description={replaceVariablesInText(textNl.kpi_tile.infected_participants_percentage.description, {
                 infectedPercentage: totalInfectedPercentage,
@@ -144,6 +145,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
                 dateOfInsertion: data.self_test_overall.last_value.date_of_insertion_unix,
                 source: textNl.sources.self_test,
                 isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
               description={textNl.kpi_tile.total_participants.description}
             >
@@ -158,6 +160,7 @@ const InfectionRadar = (props: StaticProps<typeof getStaticProps>) => {
               source: textNl.sources.self_test,
               timeframePeriod: confirmedCasesSelfTestedTimeframePeriod,
               dateOfInsertion: getLastInsertionDateOfPage(data, ['self_test_overall']),
+              isArchived: true,
             }}
             timeframeOptions={TimeframeOptionsList}
             timeframeInitialValue={confirmedCasesSelfTestedTimeframe}

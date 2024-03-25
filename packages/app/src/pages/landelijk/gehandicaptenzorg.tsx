@@ -263,7 +263,16 @@ function DisabilityCare(props: StaticProps<typeof getStaticProps>) {
             referenceLink={textNl.oversterfte.reference.href}
           />
 
-          <ChartTile metadata={{ source: textNl.oversterfte.bronnen.rivm }} title={textNl.oversterfte.linechart_titel} description={textNl.oversterfte.linechart_description}>
+          <ChartTile
+            metadata={{
+              source: textNl.oversterfte.bronnen.rivm,
+              timeframePeriod: { start: values[0].date_unix, end: values[values.length - 1].date_unix },
+              dateOfInsertion: values[values.length - 1].date_of_insertion_unix,
+              isArchived: true,
+            }}
+            title={textNl.oversterfte.linechart_titel}
+            description={textNl.oversterfte.linechart_description}
+          >
             <TimeSeriesChart
               accessibility={{
                 key: 'disability_care_deceased_over_time_chart',

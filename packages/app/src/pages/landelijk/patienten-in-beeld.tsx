@@ -203,6 +203,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   source: textNl.sources.nice,
                   dateOfInsertion: lastInsertionDateHospitalAdmissionsPerAgeGroupOverTime,
                   timeframePeriod: hospitalAdmissionsPerAgeGroupOverTimeTimeframePeriod,
+                  isArchived: true,
                 }}
                 onSelectTimeframe={setHospitalAdmissionsPerAgeGroupOverTimeTimeframe}
                 toggle={{
@@ -233,6 +234,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   source: textNl.sources.nice,
                   dateOfInsertion: lastInsertionDateIntensiveCareAdmissionsPerAgeGroupOverTime,
                   timeframePeriod: intensiveCareAdmissionsPerAgeGroupOverTimeTimeframePeriod,
+                  isArchived: true,
                 }}
                 onSelectTimeframe={setIntensiveCareAdmissionsPerAgeGroupOverTimeTimeframe}
                 toggle={{
@@ -263,6 +265,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   source: textNl.sources.nice,
                   dateOfInsertion: lastInsertionDateHospitalAdmissionsOverTime,
                   timeframePeriod: hospitalAdmissionsOverTimeTimeframePeriod,
+                  isArchived: true,
                 }}
                 timeframeOptions={TimeframeOptionsList}
                 timeframeInitialValue={TimeframeOption.ALL}
@@ -318,6 +321,7 @@ const PatientsPage = (props: StaticProps<typeof getStaticProps>) => {
                   source: textNl.sources.nice,
                   dateOfInsertion: lastInsertionDateIntensiveCareAdmissionsOverTime,
                   timeframePeriod: intensiveCareAdmissionsOverTimeTimeframePeriod,
+                  isArchived: true,
                 }}
                 timeframeOptions={TimeframeOptionsList}
                 timeframeInitialValue={TimeframeOption.ALL}

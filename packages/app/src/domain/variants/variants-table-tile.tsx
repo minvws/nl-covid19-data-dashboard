@@ -28,7 +28,7 @@ interface VariantsTableTileProps {
   dates: {
     date_start_unix: number;
     date_end_unix: number;
-    date_of_report_unix: number;
+    date_of_insertion_unix: number;
   };
   children?: ReactNode;
 }
@@ -70,7 +70,7 @@ interface VariantsTableTileWithDataProps {
   dates: {
     date_start_unix: number;
     date_end_unix: number;
-    date_of_report_unix: number;
+    date_of_insertion_unix: number;
   };
   children?: ReactNode;
 }
@@ -81,8 +81,9 @@ function VariantsTableTileWithData({ text, sampleThresholdPassed, source, data, 
   const metadata: MetadataProps = {
     timeframePeriod: { start: dates.date_start_unix, end: dates.date_end_unix },
     source,
-    obtainedAt: dates.date_of_report_unix,
+    dateOfInsertion: dates.date_of_insertion_unix,
     isTimeframePeriodKpi: true,
+    isArchived: true,
   };
 
   const [date_start, date_end] = formatDateSpan({ seconds: dates.date_start_unix }, { seconds: dates.date_end_unix });

@@ -34,7 +34,7 @@ export const ReproductionChartTile = ({ data, timelineEvents, text }: Reproducti
       metadata={{
         source: text.bronnen.rivm,
         dateOfInsertion: metadataDateOfInsertion,
-        timeframePeriod: last_value.date_of_insertion_unix,
+        timeframePeriod: { start: values[0].date_unix, end: last_value.date_unix },
         isArchived: true,
       }}
     >

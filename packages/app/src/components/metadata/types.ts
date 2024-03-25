@@ -41,7 +41,6 @@ export interface DateRange {
  * @property {number|DateRange|string} [date] - Date of the metadata item. It can be a number, a DateRange object, or a string.
  * @property {Source} [source] - Source of the metadata.
  * @property {Source[]} [dataSources] - Array of data sources for the metadata.
- * @property {number} [obtainedAt] - Unix timestamp of when the metadata was obtained.
  * @property {boolean} [isTileFooter] - Flag indicating whether the metadata is for a tile footer.
  * @property {boolean} [isPageInformationBlock] - Flag indicating whether the metadata is for a page information block.
  * @property {string} [datumsText] - Textual representation of the metadata date.
@@ -61,7 +60,6 @@ export interface DateRange {
 export type MetadataProps = {
   source?: Source;
   dataSources?: Source[];
-  obtainedAt?: number;
   isTileFooter?: boolean;
   isPageInformationBlock?: boolean;
   datumsText?: string;

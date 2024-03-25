@@ -125,6 +125,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 dateOfInsertion: sewerAverages.last_value.date_of_insertion_unix,
                 source: textNl.bronnen.rivm,
                 isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
             >
               <KpiValue
@@ -162,6 +163,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertion: choropleth.gm.sewer[0].date_of_insertion_unix,
               source: textNl.bronnen.rivm,
               isTimeframePeriodKpi: true,
+              isArchived: true,
             }}
             valueAnnotation={commonTexts.waarde_annotaties.riool_normalized}
             legend={{
