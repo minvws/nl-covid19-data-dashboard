@@ -231,7 +231,7 @@ function VaccinationPage(props: StaticProps<typeof getStaticProps>) {
                 start: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_start_unix,
                 end: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_end_unix,
               },
-              obtainedAt: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_of_insertion_unix,
+              dateOfInsertion: archivedData.vaccine_administered_last_timeframe_archived_20240117.date_of_insertion_unix,
             }}
           />
 

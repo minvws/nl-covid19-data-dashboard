@@ -114,7 +114,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
               title={textNl.barscale_titel}
               metadata={{
                 timeframePeriod: reproductionLastValue.date_unix,
-                obtainedAt: reproductionLastValue.date_of_insertion_unix,
+                dateOfInsertion: reproductionLastValue.date_of_insertion_unix,
                 source: textNl.bronnen.rivm,
               }}
               hasNoBorder

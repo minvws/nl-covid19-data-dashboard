@@ -81,7 +81,7 @@ function VariantsTableTileWithData({ text, sampleThresholdPassed, source, data, 
   const metadata: MetadataProps = {
     timeframePeriod: { start: dates.date_start_unix, end: dates.date_end_unix },
     source,
-    obtainedAt: dates.date_of_report_unix,
+    dateOfInsertion: dates.date_of_report_unix,
     isTimeframePeriodKpi: true,
   };
 

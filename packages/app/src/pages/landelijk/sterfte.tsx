@@ -219,7 +219,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                   title={textNl.section_deceased_rivm.kpi_covid_daily_title}
                   metadata={{
                     timeframePeriod: dataRivm.last_value.date_unix,
-                    obtainedAt: dataRivm.last_value.date_of_insertion_unix,
+                    dateOfInsertion: dataRivm.last_value.date_of_insertion_unix,
                     source: textNl.section_deceased_rivm.bronnen.rivm,
                     isTimeframePeriodKpi: true,
                   }}
@@ -231,7 +231,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                   title={textNl.section_deceased_rivm.kpi_covid_total_title}
                   metadata={{
                     timeframePeriod: dataRivm.last_value.date_unix,
-                    obtainedAt: dataRivm.last_value.date_of_insertion_unix,
+                    dateOfInsertion: dataRivm.last_value.date_of_insertion_unix,
                     source: textNl.section_deceased_rivm.bronnen.rivm,
                     isTimeframePeriodKpi: true,
                   }}

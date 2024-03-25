@@ -34,7 +34,6 @@ export function Metadata({
   marginBottom,
   moreInformationLabel,
   moreInformationLink,
-  obtainedAt,
   referenceLink,
   source,
   timeframePeriod,
@@ -106,7 +105,6 @@ export function Metadata({
           dataSources={dataSources}
           referenceLink={referenceLink}
           disclaimer={disclaimer}
-          obtainedAt={obtainedAt}
           intervalString={intervalString}
           isTimeframePeriodKpi={isTimeframePeriodKpi}
         />

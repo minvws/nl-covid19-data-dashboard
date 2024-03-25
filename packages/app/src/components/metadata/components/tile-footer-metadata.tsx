@@ -28,22 +28,11 @@ interface TileFooterMetadataProps extends MetadataProps {
  * @param {number} props.dateOfInsertion - Unix timestamp of when the metadata was inserted.
  * @param {string} props.disclaimer - Disclaimer text for the metadata.
  * @param {boolean} props.isArchived - Flag indicating whether the metadata is for an archived KPI / Graph / Choropleth.
- * @param {number} props.obtainedAt - Unix timestamp of when the metadata was obtained.
  * @param {string} [props.referenceLink] - Reference link for the metadata.
  * @param {Source} props.source - Source of the metadata.
  * @returns {ReactElement} A React element that contains the tile footer with metadata items.
  */
-export function TileFooterMetadata({
-  dateString,
-  marginBottom,
-  dataSources = [],
-  dateOfInsertion,
-  disclaimer,
-  isArchived,
-  obtainedAt,
-  referenceLink,
-  source,
-}: TileFooterMetadataProps) {
+export function TileFooterMetadata({ dateString, marginBottom, dataSources = [], dateOfInsertion, disclaimer, isArchived, referenceLink, source }: TileFooterMetadataProps) {
   const { commonTexts, formatDateFromSeconds } = useIntl();
   const metadataText = commonTexts.common.metadata;
 
@@ -51,8 +40,14 @@ export function TileFooterMetadata({
     <Box as="footer" marginTop={space[3]} marginBottom={marginBottom || { _: '0', sm: `-${space[3]}` }} gridArea="metadata">
       <Text color="gray7" variant="label1">
         <>
+          {disclaimer && (
+            <Box paddingBottom={space[2]}>
+              <Markdown content={disclaimer}></Markdown>
+            </Box>
+          )}
+
           {dateString && (
-            <Box display="flex" alignItems="flex-start" color="gray7" marginY={space[1]}>
+            <Box display="flex" alignItems="flex-start" color="gray7" marginBottom={space[1]}>
               <MetadataIcon>
                 <Calendar aria-hidden color={colors.gray7} />
               </MetadataIcon>
@@ -61,7 +56,7 @@ export function TileFooterMetadata({
           )}
 
           {dateOfInsertion && (
-            <Box display="flex" alignItems="flex-start" color="gray7" marginY={space[1]}>
+            <Box display="flex" alignItems="flex-start" color="gray7" marginBottom={space[1]}>
               <MetadataIcon>
                 <Clock aria-hidden color={colors.gray7} />
               </MetadataIcon>
@@ -75,19 +70,6 @@ export function TileFooterMetadata({
             </Box>
           )}
 
-          {obtainedAt && (
-            <Box display="flex" alignItems="flex-start" color="gray7" marginY={space[1]}>
-              <MetadataIcon>
-                <Clock aria-hidden color={colors.gray7} />
-              </MetadataIcon>
-              <Text variant="label1">
-                {replaceVariablesInText(commonTexts.common.metadata.obtained, {
-                  date: formatDateFromSeconds(obtainedAt, 'weekday-long'),
-                })}
-              </Text>
-            </Box>
-          )}
-
           {source ? (
             <MetadataItem icon={<Database aria-hidden />} items={[source]} label={commonTexts.common.metadata.source} />
           ) : dataSources && dataSources.length > 0 ? (
@@ -97,12 +79,6 @@ export function TileFooterMetadata({
               label={referenceLink ? commonTexts.informatie_header.bron : metadataText.source}
             />
           ) : null}
-
-          {disclaimer && (
-            <Box paddingBottom={space[3]}>
-              <Markdown content={disclaimer}></Markdown>
-            </Box>
-          )}
         </>
       </Text>
     </Box>
