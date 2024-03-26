@@ -1,19 +1,19 @@
-import { TimeframeOption, TimeframeOptionsList } from '@corona-dashboard/common';
-import { useMemo, useState } from 'react';
-import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { ColorMatch, VariantChartValue, VariantsStackedAreaTileText } from '~/domain/variants/data-selection/types';
+import { DateRange } from '~/components/metadata';
+import { GappedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
-import { MetadataProps } from '~/components/metadata';
+import { MetadataProps } from '~/components/metadata/types';
+import { reorderAndFilter } from '~/domain/variants/logic/reorder-and-filter';
+import { space } from '~/style/theme';
+import { Spacer } from '~/components/base';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
-import { GappedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useList } from '~/utils/use-list';
-import { space } from '~/style/theme';
-import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
-import { ColorMatch, VariantChartValue, VariantsStackedAreaTileText } from '~/domain/variants/data-selection/types';
+import { useMemo } from 'react';
 import { useSeriesConfig } from '~/domain/variants/logic/use-series-config';
-import { reorderAndFilter } from '~/domain/variants/logic/reorder-and-filter';
+import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
 const alwaysEnabled: (keyof VariantChartValue)[] = [];
 
@@ -22,11 +22,10 @@ interface VariantsStackedAreaTileProps {
   values: VariantChartValue[];
   metadata: MetadataProps;
   variantColors: ColorMatch[];
+  onHandleTimeframePeriodChange?: (value: DateRange | undefined) => void;
 }
 
-export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata }: VariantsStackedAreaTileProps) => {
-  const [variantStackedAreaTimeframe, setVariantStackedAreaTimeframe] = useState<TimeframeOption>(TimeframeOption.ALL);
-
+export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata, onHandleTimeframePeriodChange }: VariantsStackedAreaTileProps) => {
   const { list, toggle, clear } = useList<keyof VariantChartValue>(alwaysEnabled);
 
   const [seriesConfig, selectOptions] = useSeriesConfig(text, values, variantColors);
@@ -49,14 +48,7 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
   }
 
   return (
-    <ChartTile
-      title={text.titel}
-      description={text.toelichting}
-      metadata={metadata}
-      timeframeOptions={TimeframeOptionsList}
-      timeframeInitialValue={variantStackedAreaTimeframe}
-      onSelectTimeframe={setVariantStackedAreaTimeframe}
-    >
+    <ChartTile title={text.titel} description={text.toelichting} metadata={metadata}>
       <InteractiveLegend helpText={text.legend_help_tekst} selectOptions={selectOptions} selection={list} onToggleItem={toggle} onReset={clear} />
       <Spacer marginBottom={space[2]} />
       <TimeSeriesChart
@@ -64,7 +56,6 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
           key: 'variants_stacked_area_over_time_chart',
         }}
         values={values}
-        timeframe={variantStackedAreaTimeframe}
         seriesConfig={filteredConfig}
         disableLegend
         dataOptions={{
@@ -78,6 +69,7 @@ export const VariantsStackedAreaTile = ({ text, values, variantColors, metadata 
         )}
         numGridLines={0}
         tickValues={[0, 25, 50, 75, 100]}
+        onHandleTimeframePeriodChange={onHandleTimeframePeriodChange}
       />
       <Legend items={staticLegendItems} />
     </ChartTile>

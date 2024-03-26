@@ -97,7 +97,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: textNl.datums,
               dateOrRange: reproductionLastValue.date_unix,
-              dateOfInsertionUnix: lastInsertionDateOfPage,
+              dateOfInsertion: lastInsertionDateOfPage,
               dataSources: [textNl.bronnen.rivm],
               jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}
@@ -113,9 +113,11 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={textNl.barscale_titel}
               metadata={{
-                date: reproductionLastValue.date_unix,
+                timeframePeriod: reproductionLastValue.date_unix,
+                dateOfInsertion: reproductionLastValue.date_of_insertion_unix,
                 source: textNl.bronnen.rivm,
-                obtainedAt: reproductionLastValue.date_of_insertion_unix,
+                isTimeframePeriodKpi: true,
+                isArchived: true,
               }}
               hasNoBorder
               description={textNl.barscale_toelichting}

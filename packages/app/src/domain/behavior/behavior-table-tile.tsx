@@ -1,21 +1,22 @@
-import { colors, ArchivedNlBehaviorValue } from '@corona-dashboard/common';
-import React, { useMemo } from 'react';
-import { isDefined, isPresent } from 'ts-is-present';
+import { BehaviorIconWithLabel, OnClickConfig } from './components/behavior-icon-with-label';
+import { BehaviorIdentifier } from './logic/behavior-types';
+import { BehaviorTrend } from './components/behavior-trend';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { MetadataProps } from '~/components/metadata';
-import { useGetPercentageData } from '~/components/tables/logic/use-get-percentage-data';
+import { colors, ArchivedNlBehaviorValue } from '@corona-dashboard/common';
+import { isDefined, isPresent } from 'ts-is-present';
+import { MetadataProps } from '~/components/metadata/types';
 import { NarrowTable } from '~/components/tables/narrow-table';
-import { TableData } from '~/components/tables/types';
-import { WideTable } from '~/components/tables/wide-table';
-import { Text } from '~/components/typography';
 import { SiteText } from '~/locale';
 import { space } from '~/style/theme';
-import { useBreakpoints } from '~/utils/use-breakpoints';
-import { BehaviorIconWithLabel, OnClickConfig } from './components/behavior-icon-with-label';
-import { BehaviorTrend } from './components/behavior-trend';
-import { BehaviorIdentifier } from './logic/behavior-types';
+import { TableData } from '~/components/tables/types';
+import { Text } from '~/components/typography';
 import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useGetPercentageData } from '~/components/tables/logic/use-get-percentage-data';
+import { WideTable } from '~/components/tables/wide-table';
+import React, { useMemo } from 'react';
+import { columnWidths } from '~/components/tables/logic/column-widths';
 
 interface BehaviorTableTileProps {
   title: string;
@@ -47,11 +48,7 @@ export const BehaviorTableTile = ({ title, description, value, annotation, setCu
           }}
           tableData={behaviorsTableData}
           percentageData={percentageData}
-          tableColumnWidths={{
-            labelColumn: '35%',
-            percentageColumn: '20%',
-            percentageBarColumn: '30%',
-          }}
+          tableColumnWidths={columnWidths.wide.behaviourTableTileWidth}
         />
       ) : (
         <NarrowTable tableData={behaviorsTableData} percentageData={percentageData} headerText={text.basisregels.header_basisregel} />

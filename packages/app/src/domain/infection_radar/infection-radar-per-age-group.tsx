@@ -14,6 +14,7 @@ import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
+import { DateRange } from '~/components/metadata';
 
 interface InfectionRadarSymptomsPerAgeGroup {
   /**
@@ -25,9 +26,10 @@ interface InfectionRadarSymptomsPerAgeGroup {
   timeframe: TimeframeOption;
   timelineEvents?: TimelineEventConfig[];
   text: SiteText['pages']['infectie_radar_page']['nl'];
+  onHandleTimeframePeriodChange?: (value: DateRange | undefined) => void;
 }
 
-export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text }: InfectionRadarSymptomsPerAgeGroup) {
+export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibility, timelineEvents, text, onHandleTimeframePeriodChange }: InfectionRadarSymptomsPerAgeGroup) {
   const { commonTexts } = useIntl();
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
@@ -89,6 +91,7 @@ export function InfectionRadarSymptomsPerAgeGroup({ values, timeframe, accessibi
           valueAnnotation: text.infection_radar_infected_per_age_group.value_annotation,
           timelineEvents,
         }}
+        onHandleTimeframePeriodChange={onHandleTimeframePeriodChange}
       />
     </ErrorBoundary>
   );

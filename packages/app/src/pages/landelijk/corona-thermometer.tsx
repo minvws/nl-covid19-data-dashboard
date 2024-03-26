@@ -105,7 +105,7 @@ const CoronaThermometer = (props: StaticProps<typeof getStaticProps>) => {
                 end_date: lastThermometerSetDate,
               }),
               dateOrRange: endDate,
-              dateOfInsertionUnix: endDate,
+              dateOfInsertion: endDate,
               dataSources: [textNl.bronnen.rivm],
               jsonSources: [{ href: reverseRouter.json.archivedNational(), text: jsonText.metrics_archived_national_json.text }],
             }}
