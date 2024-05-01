@@ -35,4 +35,4 @@ exports
 !.yarn/versions
 
 # custom json folders
-#/packages/app/public/json*
+/packages/app/public/json*
