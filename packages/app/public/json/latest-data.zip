@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="nl" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="Actuele cijfers COVID-19 en nieuws over het nieuwe coronavirus. Corona cijfers worden iedere week op woensdagmiddag bekend gemaakt. De corona cijfers gaan over testen, besmettingen, ziekenhuisopnames en overledenen." />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@RIVM" />
+<meta name="twitter:title" content="Weekcijfers coronavirus SARS-CoV-2" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<link rel="icon" href="/themes/custom/sdv_theme/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="alternate" hreflang="nl" href="https://www.rivm.nl/corona/actueel/weekcijfers" />
+<link rel="canonical" href="https://www.rivm.nl/corona/actueel/weekcijfers" />
+<link rel="shortlink" href="https://www.rivm.nl/node/174781" />
+
+    <title>Weekcijfers coronavirus SARS-CoV-2 | RIVM</title>
+    <link rel="stylesheet" media="all" href="/sites/default/files/css/css_KBeBTprww2hUxEAPnK7qfFCqaWDBAdNGMQGDWvFxm3Y.css?delta=0&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_za2zOf9a5sQMbBbZxIOsPs8jV50X-sox1Ol6MQYfl3E.css?delta=1&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_3WK7XyQPfY4wZZOniOzFID9EdDKrP0cUiNEB7eAKPE8.css?delta=2&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_vhV7Vmb7q3hs1xy9YiC8BVFsdwOoq3wCCNXOsfCQI1E.css?delta=3&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_fUoLr7HOu0stoE7FHBu_-zzPLMEoZQdoKo7dWcgpUsY.css?delta=4&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ" />
+<link rel="stylesheet" media="print" href="/sites/default/files/css/css_FJnA-Pm20zfusXTPlEKu5REmJIMWiQJtY12pi6ud84s.css?delta=5&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_Mg_v6HHkPVuC92RewPgw2RGci54kxKqEp0LCcsYyeKM.css?delta=6&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ" />
+
+    
+  </head>
+  <body>
+  <a id="back-to-top-focus" tabindex="-1"></a>
+  <nav id="skipnav" class="skipnav list-group">
+    <a href="#main-title" class="sr-only sr-only-focusable list-group-item-info">Overslaan en naar de inhoud gaan</a>
+    <a href="#navbar-main" class="sr-only sr-only-focusable list-group-item-info">Direct naar de hoofdnavigatie</a>
+  </nav>
+    <script type="text/javascript">
+// <![CDATA[
+(function(window, document, dataLayerName, id) {
+window[dataLayerName]=window[dataLayerName]||[],window[dataLayerName].push({start:(new Date).getTime(),event:"stg.start"});var scripts=document.getElementsByTagName('script')[0],tags=document.createElement('script');
+function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString()}document.cookie=a+"="+b+d+"; path=/"}
+var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1);
+var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):"";
+tags.async=!0,tags.src="https://statistiek.rijksoverheid.nl/containers/"+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts);
+!function(a,n,i){a[n]=a[n]||{};for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]);
+})(window, document, 'dataLayer', 'c4aa3d73-954f-43c9-a9db-1d0e67ee1135');
+// ]]>
+</script><noscript><iframe src="https://statistiek.rijksoverheid.nl/containers/c4aa3d73-954f-43c9-a9db-1d0e67ee1135/noscript.html" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    
+
+<div class="layout-container">
+
+  
+          
+
+<header id="header" class="header   ">
+  <div class="logo">
+          <a href="/">        <img src="/themes/custom/sdv_theme/logo.svg" width="44" height="77" alt="Rijksoverheid logo | naar de homepagina van" class="logo-image" />
+      </a>        <span class="wordmark">
+      <span class="sender ">Rijksinstituut voor Volksgezondheid<br>en Milieu</span>
+      <span class="secondary-sender ">Ministerie van Volksgezondheid,<br>Welzijn en Sport</span>
+    </span>
+  </div>
+  </header>
+  
+  <div class="navbar-topnav">
+    <div class="container">
+      <div class="topnavwrapper">
+        
+              <ul class="menu top-navigation navbar-nav">
+                    <li class="nav-item">
+                                        <a href="https://www.rivm.nl"  class="nav-link">Nederlands</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="https://www.rivm.nl/en"  class="nav-link">English</a>
+              </li>
+        </ul>
+  
+
+
+        
+      </div>
+    </div>
+  </div>
+
+                    <div class="navbar-titlebar">
+          <div class="container">
+            <strong>RIVM </strong><em>De zorg voor morgen</em> begint vandaag 
+          </div>
+        </div>
+      
+      <div class="parentnav">
+        <div class="navspan">
+          <nav class="navbar-nav navbar-expand-lg navbar-full navbar-branded navbar-border" id="navbar-main">
+            <div class="container">
+
+              <div class="buttons">
+                <button class="navbar-toggler icon-menu" id="menuButton" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false">Menu<span class="sr-only"> uitklappen</span>
+                </button>
+
+                                <div class="collapse d-lg-flex clearfix" id="navbarResponsive">
+                                
+
+                          <ul class="navbar-nav use-dropdown">
+        
+                    <li class="nav-item">
+                                                <a href="/home" class="icon-home nav-item nav-link" data-drupal-visually-hidden-label="1" data-drupal-link-system-path="node/11">Home</a>
+            </li>
+                <li class="nav-item">
+                              <a href="/onderwerpen" class="nav-item nav-link" data-drupal-link-system-path="onderwerpen">Onderwerpen</a>
+            </li>
+                <li class="nav-item">
+                              <a href="/over-het-rivm" class="nav-item nav-link" data-drupal-link-system-path="node/173661">Over RIVM</a>
+            </li>
+                <li class="nav-item">
+                              <a href="/publicatieoverzicht" class="nav-item nav-link" data-drupal-link-system-path="node/160981">Publicaties</a>
+            </li>
+                <li class="nav-item">
+                              <a href="/international" class="nav-item nav-link" data-drupal-link-system-path="node/143101">Internationaal</a>
+            </li>
+                <li class="nav-item">
+                              <a href="/contact" class="nav-item nav-link" data-drupal-link-system-path="node/86191">Contact</a>
+            </li>
+                <li class="nav-item">
+                              <a href="/agenda" class="nav-item nav-link" data-drupal-link-system-path="agenda">Agenda</a>
+            </li>
+        </ul>
+  
+
+
+
+  
+
+  
+
+                  
+              <ul class="menu top-navigation navbar-nav">
+                    <li class="nav-item">
+                                        <a href="https://www.rivm.nl"  class="nav-link">Nederlands</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="https://www.rivm.nl/en"  class="nav-link">English</a>
+              </li>
+        </ul>
+  
+
+
+                </div>
+                
+                                <button class="navbar-toggler navbar-toggler-right auto-sm icon-zoek collapsed" id="searchButton" type="button" data-toggle="collapse" data-target="#searchformResponsive" aria-controls="searchformResponsive" aria-expanded="false"><span class="sr-only">Zoekformulier openen</span>
+                </button>
+                
+                <div class="collapse d-lg-flex clearfix" id="searchformResponsive">
+                                      <div class="nav-search">
+            <form action="/zoeken" method="get" id="views-exposed-form-zoekresultaten-page-search-dummy" accept-charset="UTF-8" novalidate>
+  <div class="form-inline">
+  
+<div class="js-form-item js-form-type-search form-type-search js-form-item-search form-item-search">
+      <label for="edit-search">Zoeken</label>
+        <div class="search-wrapper">
+  <input data-drupal-selector="edit-search" type="search" id="edit-search" name="search" value="" size="30" maxlength="128" class="form-search form-control">
+</div>
+
+        </div>
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-group" id="edit-actions">
+<button data-drupal-selector="edit-submit-zoekresultaten" type="submit" id="edit-submit-zoekresultaten" class="button js-form-submit form-submit btn btn-primary">Zoeken</button>
+</div>
+
+</div>
+
+</form>
+
+  
+  </div>
+
+                                  </div>
+
+              </div>
+
+            </div>
+          </nav>
+        </div>
+
+    
+                <nav  class="navbar-nav navbar-branded-light">
+        <div class="container">
+                                  <ul class="breadcrumb ">
+      <li class="breadcrumb-item">
+              <a href="/">Home</a>
+          </li>
+      <li class="breadcrumb-item">
+              <a href="https://www.rivm.nl/corona">Corona</a>
+          </li>
+      <li class="breadcrumb-item">
+              <a href="https://www.rivm.nl/corona/actueel">Corona actueel</a>
+          </li>
+      <li class="breadcrumb-item">
+              Weekcijfers coronavirus SARS-CoV-2
+          </li>
+  </ul>
+
+  
+  
+        
+                   <a id="main-title" tabindex="-1"></a>                                              <h1>Weekcijfers coronavirus SARS-CoV-2</h1>
+                  
+        
+        </div>
+      </nav>
+      
+      
+        <div data-drupal-messages-fallback class="hidden"></div>
+
+  
+
+  
+
+  <main role="main">
+
+  <div class="layout-local">
+    
+  </div>
+
+  <div class="layout-content" id="top">
+          <div class="views-element-container" id="block-views-block-back-to-top-block-link">
+  
+    
+      <div><div class="view view-back-to-top view-id-back_to_top view-display-id-block_link js-view-dom-id-0ed02c1c63b77a1ad0913bbb18889bf591e82e2740ad53686d4203f114c6b4f9">
+  
+    
+      
+  
+    
+  <div class="view-more">
+    </div>
+
+    </div>
+</div>
+
+  </div>
+      
+
+
+  
+  
+  
+<aside class="mobile-sidebar d-lg-none" id="mobile-sidebar" role="complementary">
+  <button class="closeBtn" aria-controls="mobile-sidebar" aria-expanded="true">&times; <span class="sr-only">Menu "In dit onderwerp" sluiten</span></button>
+  <div class="focus" tabindex="-1"></div>
+  
+
+<nav id="skipnav-onderwerp" class="skipnav full-width list-group skipnav-onderwerp">
+  <a href="#main-content" class="sr-only sr-only-focusable list-group-item-info">Overslaan menu  </a>
+</nav>
+<nav  class="onderwerpmenu">
+  <div class="onderwerpmenu-titlebox">
+    <h2>
+      <span class="onderwerpmenu-titlebox__title"></span>
+    </h2>
+  </div>
+  <ul class="list-group simple menu">
+      <li  class="list-group-item">
+  <a href="/corona/covid-19" class="navigation-link">COVID-19 </a>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/coronaprik" class="navigation-link">Coronaprik</a>
+<ul class="list-group simple menu submenu">
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/veiligheid-en-werking-vaccins" class="navigation-link">Veiligheid en werking van coronavaccins</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/bijwerkingen" class="navigation-link">Bijwerkingen van de coronaprik</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/kinderen" class="navigation-link">Coronaprik voor kinderen</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/zwangerschap" class="navigation-link">Coronaprik bij zwangerschap</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/ziekte-medicijngebruik" class="navigation-link">Coronaprik bij ziekte en medicijngebruik</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/afweerstoornis" class="navigation-link">Coronaprik bij afweerstoornis</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/registratie-privacy" class="navigation-link">Vaccinatieregistratie en privacy</a>
+<ul class="list-group simple menu subsubmenu">
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/registratie-privacy/rechten-betrokkenen" class="navigation-link">Rechten van betrokkenen</a>
+
+</li>
+
+</ul>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/onderzoek-afweer" class="navigation-link">Onderzoek naar afweer na vaccinatie tegen corona</a>
+<ul class="list-group simple menu subsubmenu">
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/onderzoek-afweer/resultaten" class="navigation-link">Resultaten van onderzoek naar afweer na vaccinatie tegen corona</a>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/risicogroepen" class="navigation-link">Risicogroepen en COVID-19</a>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/professionals" class="navigation-link">Professionals </a>
+<ul class="list-group simple menu submenu">
+  <li  class="list-group-item">
+    <a href="/corona/professionals/vaccinatie-bewoners-zorginstellingen" class="navigation-link">Vaccinatie van bewoners in zorginstellingen</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/professionals/vaccinatie-zwangeren" class="navigation-link">Vaccineren van zwangeren</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/professionals/behandelend-artsen" class="navigation-link">Informatie voor behandelend artsen</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/professionals/vaccinatie-immuungecompromitteerden" class="navigation-link">Vaccinatie van immuungecompromitteerden</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/professionals/vaccinatie-kinderen" class="navigation-link">Vaccinatie van kinderen met een medisch hoog risico (6 maanden t/m 17 jaar)</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/professionals/counseling-bij-vaccinatie" class="navigation-link">Toolkit voor advies bij twijfels en vragen</a>
+
+</li>
+
+</ul>
+
+</li>
+
+  <li  class="bg-brand-light list-group-item">
+  <a href="/corona/actueel" class="navigation-link">Actuele cijfers</a>
+<ul class="list-group simple menu submenu">
+  <li  class="bg-brand-light list-group-item">
+    <a href="/corona/actueel/weekcijfers" class="navigation-link">Weekcijfers </a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/actueel/virusvarianten" class="navigation-link">Varianten van het coronavirus</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/actueel/vaccinatiecijfers" class="navigation-link">Vaccinatiecijfers</a>
+
+</li>
+
+</ul>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/onderzoeken" class="navigation-link">Corona-onderzoek</a>
+<ul class="list-group simple menu submenu">
+  <li  class="list-group-item">
+    <a href="/corona/onderzoeken/luchtkwaliteit" class="navigation-link">Luchtkwaliteit en COVID-19</a>
+
+</li>
+
+</ul>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/adviezen" class="navigation-link">Adviezen OMT en RT</a>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/evaluaties" class="navigation-link">Evaluaties</a>
+
+</li>
+
+
+  </ul>
+</nav>
+
+</aside>
+
+
+<article class="sdv-landingspagina full">
+
+      
+  
+  <div class="container">
+
+    <div class="row justify-content-end sdv-onderwerp-tabmenu">
+      <div class="col-lg-8">
+        
+<div id="block-tabblock">
+  
+    
+      
+  </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-12">
+
+        <div class="row">
+
+                    <aside class="col-lg-4 d-none d-lg-block" id="desktop-sidebar" role="complementary">
+            
+
+<nav id="skipnav-onderwerp" class="skipnav full-width list-group skipnav-onderwerp">
+  <a href="#main-content" class="sr-only sr-only-focusable list-group-item-info">Overslaan menu  </a>
+</nav>
+<nav  class="onderwerpmenu">
+  <div class="onderwerpmenu-titlebox">
+    <h2>
+      <span class="onderwerpmenu-titlebox__title"></span>
+    </h2>
+  </div>
+  <ul class="list-group simple menu">
+      <li  class="list-group-item">
+  <a href="/corona/covid-19" class="navigation-link">COVID-19 </a>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/coronaprik" class="navigation-link">Coronaprik</a>
+<ul class="list-group simple menu submenu">
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/veiligheid-en-werking-vaccins" class="navigation-link">Veiligheid en werking van coronavaccins</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/bijwerkingen" class="navigation-link">Bijwerkingen van de coronaprik</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/kinderen" class="navigation-link">Coronaprik voor kinderen</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/zwangerschap" class="navigation-link">Coronaprik bij zwangerschap</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/ziekte-medicijngebruik" class="navigation-link">Coronaprik bij ziekte en medicijngebruik</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/afweerstoornis" class="navigation-link">Coronaprik bij afweerstoornis</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/registratie-privacy" class="navigation-link">Vaccinatieregistratie en privacy</a>
+<ul class="list-group simple menu subsubmenu">
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/registratie-privacy/rechten-betrokkenen" class="navigation-link">Rechten van betrokkenen</a>
+
+</li>
+
+</ul>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/onderzoek-afweer" class="navigation-link">Onderzoek naar afweer na vaccinatie tegen corona</a>
+<ul class="list-group simple menu subsubmenu">
+  <li  class="list-group-item">
+    <a href="/corona/coronaprik/onderzoek-afweer/resultaten" class="navigation-link">Resultaten van onderzoek naar afweer na vaccinatie tegen corona</a>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/risicogroepen" class="navigation-link">Risicogroepen en COVID-19</a>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/professionals" class="navigation-link">Professionals </a>
+<ul class="list-group simple menu submenu">
+  <li  class="list-group-item">
+    <a href="/corona/professionals/vaccinatie-bewoners-zorginstellingen" class="navigation-link">Vaccinatie van bewoners in zorginstellingen</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/professionals/vaccinatie-zwangeren" class="navigation-link">Vaccineren van zwangeren</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/professionals/behandelend-artsen" class="navigation-link">Informatie voor behandelend artsen</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/professionals/vaccinatie-immuungecompromitteerden" class="navigation-link">Vaccinatie van immuungecompromitteerden</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/professionals/vaccinatie-kinderen" class="navigation-link">Vaccinatie van kinderen met een medisch hoog risico (6 maanden t/m 17 jaar)</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/professionals/counseling-bij-vaccinatie" class="navigation-link">Toolkit voor advies bij twijfels en vragen</a>
+
+</li>
+
+</ul>
+
+</li>
+
+  <li  class="bg-brand-light list-group-item">
+  <a href="/corona/actueel" class="navigation-link">Actuele cijfers</a>
+<ul class="list-group simple menu submenu">
+  <li  class="bg-brand-light list-group-item">
+    <a href="/corona/actueel/weekcijfers" class="navigation-link">Weekcijfers </a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/actueel/virusvarianten" class="navigation-link">Varianten van het coronavirus</a>
+
+</li>
+
+  <li  class="list-group-item">
+    <a href="/corona/actueel/vaccinatiecijfers" class="navigation-link">Vaccinatiecijfers</a>
+
+</li>
+
+</ul>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/onderzoeken" class="navigation-link">Corona-onderzoek</a>
+<ul class="list-group simple menu submenu">
+  <li  class="list-group-item">
+    <a href="/corona/onderzoeken/luchtkwaliteit" class="navigation-link">Luchtkwaliteit en COVID-19</a>
+
+</li>
+
+</ul>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/adviezen" class="navigation-link">Adviezen OMT en RT</a>
+
+</li>
+
+  <li  class="list-group-item">
+  <a href="/corona/evaluaties" class="navigation-link">Evaluaties</a>
+
+</li>
+
+
+  </ul>
+</nav>
+
+          </aside>
+          
+          <div class="col-lg-8">
+
+                          <button class="btn btn-primary icon-angle-down d-lg-none" id="my-button" data-toggle="offcanvas" aria-controls="mobile-sidebar" aria-expanded="false">In dit onderwerp <span class="sr-only">Menu "In dit onderwerp" openen</span></button>
+                        <a id="main-content" tabindex="-1"></a>
+            
+            
+
+            
+                          
+
+
+
+  
+  
+
+
+
+
+  <div class="par content-block-wrapper">
+
+
+<div class="container container-spacer-sm content nobg clearfix" data-color="">
+    
+                            
+                <p>24-04-2024 | 16:00 uur</p>
+
+<h2>Wekelijkse update coronavirus <span class="position-relative custom-tooltip" tabindex="0">SARS<span class="tooltip-container d-none d-md-block hide-tooltip"> severe acute respiratory syndrome</span><span class="tooltip-arrow d-none d-md-block hide-tooltip"></span><span class="invisible-tooltip-container hide-tooltip"></span></span><span class="abbr-tip"> (severe acute respiratory syndrome)</span>-<span class="position-relative custom-tooltip" tabindex="0">CoV<span class="tooltip-container d-none d-md-block hide-tooltip"> coronavirus</span><span class="tooltip-arrow d-none d-md-block hide-tooltip"></span><span class="invisible-tooltip-container hide-tooltip"></span></span><span class="abbr-tip"> (coronavirus)</span>-2: 24 april 2024</h2>
+
+<h3>Weinig SARS-CoV-2 in Nederland&nbsp;</h3>
+
+<p>Er is op dit moment weinig circulatie van het coronavirus SARS-CoV-2. Het landelijk gemiddelde aantal virusdeeltjes in het <a href="https://www.rivm.nl/rioolwateronderzoek/covid-19">rioolwater </a>was in week 16 (15 &ndash; 21 april 2024) net als voorgaande weken op een laag niveau. Het aandeel deelnemers met een positieve corona-testuitslag in Infectieradar is laag en was in de afgelopen week minder dan 1%*. Ook het aantal ziekenhuisopnames van pati&euml;nten met SARS-CoV-2 is stabiel laag met dagelijks gemiddeld 16 opnames in de afgelopen week**. Afgelopen week lagen er gemiddeld 52 pati&euml;nten met SARS-CoV-2 in het ziekenhuis.</p>
+
+<p>Het coronadashboard is sinds 2 april 2024 gestopt. Het RIVM blijft wekelijkse updates geven van het coronavirus.</p>
+
+<p>Naast het SARS-CoV-2 zorgen ook andere virussen en bacteri&euml;n voor luchtweginfecties. Zie&nbsp;<span><a data-entity-type="node" data-entity-uuid="ca2ed1d6-c77e-4ba4-b990-0f7fa6a62d95" href="/luchtweginfecties/actuele-cijfers">hier</a>&nbsp;</span>voor een uitgebreidere toelichting op de actuele situatie omtrent luchtweginfecties in Nederland. Kijk voor de meest actuele situatie over varianten van SARS-CoV-2<span>&nbsp;</span><a data-entity-type="node" data-entity-uuid="6f9c5d3f-258b-4bf9-b1b0-f33a58c00fa2" href="/corona/actueel/virusvarianten">hier</a>.&nbsp;</p>
+
+
+          
+      </div>
+</div>
+
+
+  
+
+  
+        
+
+<div class="read-more-wrapper ">
+  <div class="container">
+    <div  class="read-more-icon-wrapper">
+            
+      <h6>
+        <button class="bg-brand collapse-toggler collapsed" data-toggle="collapse" data-target="#rm-cijferverantwoording-926701-more" aria-controls="rm-cijferverantwoording-926701-more" aria-expanded="false">
+          <span class="collapseFlexwrapper">
+            <span class="titletext">Cijferverantwoording</span>
+            <span class="infotext readmore ml-auto"><span class="description">Meer informatie</span></span>
+          </span>
+        </button>
+      </h6>
+    </div>
+    <div class="read-more-par-container collapse" id="rm-cijferverantwoording-926701-more">
+
+  
+
+
+
+  
+  
+
+
+
+
+  <div class="par content-block-wrapper">
+
+
+<div class="container container-spacer-sm content nobg clearfix" data-color="">
+    
+                            
+                <p><em>&nbsp;* Het aantal unieke deelnemers dat een positieve testuitslag meldde per dag, opgeteld voor de desbetreffende kalenderweek (maandag t/m zondag). Dit kan een zelftest of een <span class="position-relative custom-tooltip" tabindex="0">PCR<span class="tooltip-container d-none d-md-block hide-tooltip"> polymerase chain reaction</span><span class="tooltip-arrow d-none d-md-block hide-tooltip"></span><span class="invisible-tooltip-container hide-tooltip"></span></span><span class="abbr-tip"> (polymerase chain reaction)</span>-test/antigeen sneltest betreffen. Het aandeel deelnemers dat test bij klachten kan fluctueren over tijd. Deze resultaten betreffen niet de ingestuurde neus- en keelmonsters van het zelftest-onderzoek dat sinds september 2022 loopt.<br>
+** Het Landelijk Co&ouml;rdinatiecentrum Pati&euml;nten Spreiding (<a href="https://lcps.nu/">LCPS</a>) rapporteert op werkdagen het aantal nieuw opgenomen pati&euml;nten met <span class="position-relative custom-tooltip" tabindex="0">SARS<span class="tooltip-container d-none d-md-block hide-tooltip"> severe acute respiratory syndrome</span><span class="tooltip-arrow d-none d-md-block hide-tooltip"></span><span class="invisible-tooltip-container hide-tooltip"></span></span><span class="abbr-tip"> (severe acute respiratory syndrome)</span>-<span class="position-relative custom-tooltip" tabindex="0">CoV<span class="tooltip-container d-none d-md-block hide-tooltip"> coronavirus</span><span class="tooltip-arrow d-none d-md-block hide-tooltip"></span><span class="invisible-tooltip-container hide-tooltip"></span></span><span class="abbr-tip"> (coronavirus)</span>-2 op verpleegafdelingen tussen de voorgaande dag 10:00 uur en de rapportagedag 10:00 uur, en het aantal bedden bezet op de verpleeg- en <span class="position-relative custom-tooltip" tabindex="0">IC<span class="tooltip-container d-none d-md-block hide-tooltip"> intensive care</span><span class="tooltip-arrow d-none d-md-block hide-tooltip"></span><span class="invisible-tooltip-container hide-tooltip"></span></span><span class="abbr-tip"> (intensive care)</span>-afdeling door pati&euml;nten met SARS-CoV-2 op de rapportagedag om 10:00 uur.&nbsp; Als opnamedag wordt de dag voorafgaand aan de rapportagedag genomen. Het gemiddeld aantal nieuw opgenomen pati&euml;nten op de verpleegafdeling en het gemiddeld aantal bedden bezet op de verpleeg- en IC-afdeling per dag voor een kalenderweek (maandag t/m zondag) wordt berekend door het aantal pati&euml;nten of het aantal bezette bedden per opnamedag in een kalenderweek op te tellen en te delen door het aantal opnamedagen waarover gerapporteerd is.</em></p>
+
+
+          
+      </div>
+</div>
+
+    
+    
+    </div>
+      </div>
+</div>
+
+
+
+  
+
+  
+  <div class="chart-wrapper par">
+
+  <div class="container container-spacer-sm" data-color="">
+
+    
+    
+          <H2 class="chart-title icons-txt "><a class="focus_me" tabindex="-1">Rioolwater</a></H2>
+    
+      
+      <a href="#926331-0-field_par_chart_datatable" class="ec-data-link sr-only sr-only-focusable">Sla de grafiek <em class="placeholder">Gemiddelde virusvracht SARS-CoV-2</em> over en ga naar de datatabel</a><div class="easychart-embed--926331-0-field_par_chart" data-ec-key="926331-0-field_par_chart"></div>
+
+      
+      
+      </div>
+</div>
+
+
+
+  
+
+  
+        
+
+<div class="read-more-wrapper ">
+  <div class="container">
+    <div  class="read-more-icon-wrapper">
+            
+      <h6>
+        <button class="bg-brand collapse-toggler collapsed" data-toggle="collapse" data-target="#rm-informatie-over-bovenstaande-grafiek-926351-more" aria-controls="rm-informatie-over-bovenstaande-grafiek-926351-more" aria-expanded="false">
+          <span class="collapseFlexwrapper">
+            <span class="titletext">Informatie over bovenstaande grafiek</span>
+            <span class="infotext readmore ml-auto"><span class="description">Meer informatie</span></span>
+          </span>
+        </button>
+      </h6>
+    </div>
+    <div class="read-more-par-container collapse" id="rm-informatie-over-bovenstaande-grafiek-926351-more">
+
+  
+
+
+
+  
+  
+
+
+
+
+  <div class="par content-block-wrapper">
+
+
+<div class="container container-spacer-sm content nobg clearfix" data-color="">
+    
+                            
+                <p><em>Data van het seizoen 2019/2020 is beschikbaar vanaf week 14 van 2020. Week 53 van 2020 is uit deze figuur gelaten.</em></p>
+
+<p><em>Gebaseerd op data die op woensdag beschikbaar was bij het RIVM, zoals gepubliceerd in de <a href="https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv">open data</a> en getoond op <a href="https://coronadashboard.rijksoverheid.nl/landelijk/rioolwater">het coronadashboard</a>. Voor de meest recente cijfers, zie de <a href="https://www.rivm.nl/rioolwateronderzoek/covid-19">pagina over rioolwateronderzoek van de rioolwatersurveillance</a>. Voor meer uitleg over de berekeningen die uitgevoerd worden om tot dit cijfer te komen, zie <a href="https://www.rivm.nl/documenten/berekening-cijfers-rioolwatermetingen-covid-19">de uitleg over de berekeningen van de rioolwatermetingen voor covid-19</a>.</em></p>
+
+
+          
+      </div>
+</div>
+
+    
+    
+    </div>
+      </div>
+</div>
+
+
+
+
+
+
+  
+  
+
+
+  
+
+
+  <div class="par contentblock container container-spacer-sm singlecard card-two">
+       
+
+        
+        <div class="card card-button   bg-azure-lightest   ">
+
+            
+      <h2 class="card-header par-title sr-only bg-brand-secondary">Verwijzing naar kaart</h2>
+
+      
+    
+  
+        
+    <div class="card-content">
+          
+    <div class="card-body clearfix icons-txt ">
+
+                  <a href="/corona/actueel/weekcijfers/kaart-gemiddeld-aantal-virusdeeltjes-rioolwater" class="new-card-link" title="Kaart met het gemiddeld aantal virusdeeltjes in het rioolwater">
+          
+          <p>Ga naar sliderkaart met het gemiddeld aantal virusdeeltjes in het rioolwater over de afgelopen week, per gemeente, per 100.000 inwoners.</p>
+
+
+    
+                  </a>
+          
+    </div>
+  </div>
+
+  
+  
+      <div class="print-only"></div>
+      
+</div>
+  </div>
+
+
+
+
+  
+
+  
+  <div class="chart-wrapper par">
+
+  <div class="container container-spacer-sm" data-color="">
+
+    
+    
+          <H2 class="chart-title icons-txt "><a class="focus_me" tabindex="-1">Infectieradar</a></H2>
+    
+      
+      <a href="#926381-0-field_par_chart_datatable" class="ec-data-link sr-only sr-only-focusable">Sla de grafiek <em class="placeholder">Percentage deelnemers Infectieradar met een positieve SARS-CoV-2 testuitslag</em> over en ga naar de datatabel</a><div class="easychart-embed--926381-0-field_par_chart" data-ec-key="926381-0-field_par_chart"></div>
+
+      
+      
+      </div>
+</div>
+
+
+
+  
+
+  
+        
+
+<div class="read-more-wrapper ">
+  <div class="container">
+    <div  class="read-more-icon-wrapper">
+            
+      <h6>
+        <button class="bg-brand collapse-toggler collapsed" data-toggle="collapse" data-target="#rm-informatie-over-bovenstaande-grafiek-926391-more" aria-controls="rm-informatie-over-bovenstaande-grafiek-926391-more" aria-expanded="false">
+          <span class="collapseFlexwrapper">
+            <span class="titletext">Informatie over bovenstaande grafiek</span>
+            <span class="infotext readmore ml-auto"><span class="description">Meer informatie</span></span>
+          </span>
+        </button>
+      </h6>
+    </div>
+    <div class="read-more-par-container collapse" id="rm-informatie-over-bovenstaande-grafiek-926391-more">
+
+  
+
+
+
+  
+  
+
+
+
+
+  <div class="par content-block-wrapper">
+
+
+<div class="container container-spacer-sm content nobg clearfix" data-color="">
+    
+                            
+                <p><em>Het aantal unieke deelnemers dat een positieve testuitslag meldde per dag, opgeteld voor de desbetreffende kalenderweek (maandag t/m zondag). Dit kan een zelftest of een <span class="position-relative custom-tooltip" tabindex="0">PCR<span class="tooltip-container d-none d-md-block hide-tooltip"> polymerase chain reaction</span><span class="tooltip-arrow d-none d-md-block hide-tooltip"></span><span class="invisible-tooltip-container hide-tooltip"></span></span><span class="abbr-tip"> (polymerase chain reaction)</span>(polymerase chain reaction)-test/antigeen sneltest betreffen. Het aandeel deelnemers dat test bij klachten kan fluctueren over tijd. Deze resultaten betreffen niet de ingestuurde neus- en keelmonsters van het zelftest-onderzoek dat sinds september 2022 loopt. Bron grafiek: <a href="https://www.infectieradar.nl/welcome">Infectieradar</a> RIVM.&nbsp;</em></p>
+
+
+          
+      </div>
+</div>
+
+    
+    
+    </div>
+      </div>
+</div>
+
+
+
+  
+
+  
+  <div class="chart-wrapper par">
+
+  <div class="container container-spacer-sm" data-color="">
+
+    
+    
+          <H2 class="chart-title icons-txt "><a class="focus_me" tabindex="-1">Ziekenhuisopnames (bron LCPS)</a></H2>
+    
+      
+      <a href="#958091-0-field_par_chart_datatable" class="ec-data-link sr-only sr-only-focusable">Sla de grafiek <em class="placeholder">Gemiddeld aantal opnames per dag van patiënten met SARS-CoV-2</em> over en ga naar de datatabel</a><div class="easychart-embed--958091-0-field_par_chart" data-ec-key="958091-0-field_par_chart"></div>
+
+      
+      
+      </div>
+</div>
+
+
+
+  
+
+  
+        
+
+<div class="read-more-wrapper ">
+  <div class="container">
+    <div  class="read-more-icon-wrapper">
+            
+      <h6>
+        <button class="bg-brand collapse-toggler collapsed" data-toggle="collapse" data-target="#rm-informatie-over-bovenstaande-grafiek-958121-more" aria-controls="rm-informatie-over-bovenstaande-grafiek-958121-more" aria-expanded="false">
+          <span class="collapseFlexwrapper">
+            <span class="titletext">Informatie over bovenstaande grafiek</span>
+            <span class="infotext readmore ml-auto"><span class="description">Meer informatie</span></span>
+          </span>
+        </button>
+      </h6>
+    </div>
+    <div class="read-more-par-container collapse" id="rm-informatie-over-bovenstaande-grafiek-958121-more">
+
+  
+
+
+
+  
+  
+
+
+
+
+  <div class="par content-block-wrapper">
+
+
+<div class="container container-spacer-sm content nobg clearfix" data-color="">
+    
+                            
+                <p><em>Het Landelijk Co&ouml;rdinatiecentrum Pati&euml;nten Spreiding (<a href="https://lcps.nu/">LCPS</a>) rapporteert het aantal nieuw opgenomen pati&euml;nten met <span class="position-relative custom-tooltip" tabindex="0">SARS<span class="tooltip-container d-none d-md-block hide-tooltip"> severe acute respiratory syndrome</span><span class="tooltip-arrow d-none d-md-block hide-tooltip"></span><span class="invisible-tooltip-container hide-tooltip"></span></span><span class="abbr-tip"> (severe acute respiratory syndrome)</span>-<span class="position-relative custom-tooltip" tabindex="0">CoV<span class="tooltip-container d-none d-md-block hide-tooltip"> coronavirus</span><span class="tooltip-arrow d-none d-md-block hide-tooltip"></span><span class="invisible-tooltip-container hide-tooltip"></span></span><span class="abbr-tip"> (coronavirus)</span>-2 op de verpleegafdelingen in ziekenhuizen. Dit gebeurt op werkdagen tussen de voorgaande dag 10:00 uur en de dag van rapporteren 10:00 uur. Als opnamedag nemen wij de dag v&oacute;&oacute;r de dag van melden. Het gemiddeld aantal nieuw opgenomen pati&euml;nten op de verpleegafdeling per dag voor een kalenderweek (maandag t/m zondag) berekent het RIVM door het aantal pati&euml;nten of het aantal bezette bedden per opnamedag in een kalenderweek op te tellen en te delen door het aantal opnamedagen waarover gemeld is.</em></p>
+
+
+          
+      </div>
+</div>
+
+    
+    
+    </div>
+      </div>
+</div>
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  <div class="par links-wrapper rivm-style">
+
+    <div class="container container-spacer-sm" data-color="">
+  
+            <h2 class="sr-only links-title icons-txt par-title ">Links</h2>
+                <ul  class="list-group simple">
+              <li>
+          <a href="https://www.infectieradar.nl/results" class="list-group-item icon-pijl-rechts">Infectieradar</a>
+        </li>
+              <li>
+          <a href="/corona/onderzoeken/rioolwater" class="list-group-item icon-pijl-rechts">Rioolwatersurveillance</a>
+        </li>
+              <li>
+          <a href="/corona/actueel/virusvarianten" class="list-group-item icon-pijl-rechts">Varianten van het coronavirus</a>
+        </li>
+              <li>
+          <a href="/corona/adviezen" class="list-group-item icon-pijl-rechts">COVID-19 adviezen</a>
+        </li>
+              <li>
+          <a href="/gedragsonderzoek/trendonderzoek" class="list-group-item icon-pijl-rechts">Periodieke update gedragsindicatoren dashboard coronavirus</a>
+        </li>
+              <li>
+          <a href="https://data.rivm.nl" class="list-group-item icon-pijl-rechts">Open data RIVM</a>
+        </li>
+              <li>
+          <a href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6" class="list-group-item icon-pijl-rechts">COVID-19 internationale kaart</a>
+        </li>
+          </ul>
+  
+      </div>
+</div>
+
+
+
+
+
+  
+
+
+
+
+
+
+  <div class="par links-wrapper rivm-style">
+
+    <div class="container container-spacer-sm" data-color="">
+  
+            <h2 class="links-title icons-txt par-title ">This page in English</h2>
+                <ul  class="list-group simple">
+              <li>
+          <a href="https://www.rivm.nl/en/coronavirus-covid-19/weekly-figures" class="list-group-item icon-pijl-rechts">Weekly coronavirus SARS-CoV-2 figures</a>
+        </li>
+          </ul>
+  
+      </div>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+  
+  
+  
+
+
+  
+
+
+            
+                          <div class="comments">
+                
+              </div>
+            
+            
+          </div>
+
+        </div>
+      </div>
+          </div>
+  </div>
+</article>
+
+
+
+  <div id="block-deeldezepagina" class="sharing-wrapper">
+  <div class="container container-spacer-sm">
+          <div class="row">
+      <div class="col-sm-12">
+        <h2>Deel deze pagina</h2>
+      </div>
+    </div>
+          <hr>
+          <div class="row">
+  <div class="col-sm-12">
+    <ul class="common">
+            <li>
+        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.rivm.nl%2Fcorona%2Factueel%2Fweekcijfers" class="icon icon-facebook facebook" title="Deel deze pagina op Facebook"><span>Facebook</span></a>
+      </li>
+                  <li>
+        <a href="https://twitter.com/share?url=https%3A%2F%2Fwww.rivm.nl%2Fcorona%2Factueel%2Fweekcijfers" class="icon icon-x-twitter twitter" title="Deel deze pagina op Twitter"><span>Twitter</span></a>
+      </li>
+                  <li>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.rivm.nl%2Fcorona%2Factueel%2Fweekcijfers" class="icon icon-linked-in linkedin" title="Deel deze pagina op LinkedIn"><span>LinkedIn</span></a>
+      </li>
+                  <li>
+        <a href="whatsapp://send?text=https%3A%2F%2Fwww.rivm.nl%2Fcorona%2Factueel%2Fweekcijfers" data-action="share/whatsapp/share" class="icon icon-whatsapp whatsapp" title="Deel deze pagina via WhatsApp"><span>WhatsApp</span></a>
+      </li>
+                  <li>
+        <a href="mailto:?body=https%3A%2F%2Fwww.rivm.nl%2Fcorona%2Factueel%2Fweekcijfers" class="icon icon-email email" title="Deel deze pagina via E-mail"><span>E-mail</span></a>
+      </li>
+          </ul>
+  </div>
+</div>
+
+      </div>
+</div>
+
+  
+  </div>
+
+</main>
+
+      <footer class="footer bg-brand">
+  <div class="container">
+    <div class="row">
+      
+                    <div class="col-sm-3">
+<div aria-labelledby="block-voet-menu" id="block-voet" class="block block-menu navigation menu--footer">
+      
+  <h2 id="block-voet-menu">Service</h2>
+  
+
+        
+              <ul class="navbar-nav">
+                    <li class="nav-item">
+                                        <a href="/contact"  class="nav-link">Contact</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="/contact/persinformatie"  class="nav-link">Persinformatie</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="https://www.rivm.nl/over-het-rivm/organisatie/werken-bij-rivm"  class="nav-link" title="Werken bij het RIVM">Werken bij het RIVM</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="/klachten"  class="nav-link">Klachten</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="/woo-verzoeken-bij-het-rivm"  class="nav-link">Woo-verzoeken bij het RIVM</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="https://www.rivm.nl/contact/zakendoen-met-rivm"  class="nav-link">Zakendoen met het RIVM</a>
+              </li>
+        </ul>
+  
+
+
+  </div>
+</div>
+<div class="col-sm-3">
+<div aria-labelledby="block-footer2-menu" id="block-footer2" class="block block-menu navigation menu--footer-2">
+      
+  <h2 id="block-footer2-menu">Over deze site</h2>
+  
+
+        
+              <ul class="navbar-nav">
+                    <li class="nav-item">
+                                        <a href="/cookies"  class="nav-link">Cookies</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="/privacy"  class="nav-link">Privacy</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="/toegankelijkheid"  class="nav-link">Toegankelijkheid</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="/copyright"  class="nav-link">Copyright</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="/responsible-disclosure"  class="nav-link">Responsible disclosure</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="/archief-rivmnl"  class="nav-link" title="archiefweb.eu">Website archief</a>
+              </li>
+        </ul>
+  
+
+
+  </div>
+</div>
+<div class="col-sm-3">
+<div aria-labelledby="block-footer3-menu" id="block-footer3" class="block block-menu navigation menu--footer-3">
+      
+  <h2 id="block-footer3-menu">Talen</h2>
+  
+
+        
+              <ul class="navbar-nav">
+                    <li class="nav-item">
+                                        <a href="https://www.rivm.nl/en"  class="nav-link">English</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="https://www.rivm.nl"  class="nav-link">Nederlands</a>
+              </li>
+        </ul>
+  
+
+
+  </div>
+</div>
+<div class="col-sm-3">
+<div aria-labelledby="block-footer4-menu" id="block-footer4" class="block block-menu navigation menu--footer-4">
+      
+  <h2 id="block-footer4-menu">Volg ons</h2>
+  
+
+        
+              <ul class="navbar-nav">
+                    <li class="nav-item">
+                                        <a href="/abonneren"  class="nav-link">Abonneren nieuwsbrieven</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="/rss"  class="nav-link">RSS feed</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="https://twitter.com/rivm"  class="nav-link">X Twitter</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="https://www.facebook.com/RIVMnl"  class="nav-link">Facebook</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="https://nl.linkedin.com/company/rivm"  class="nav-link">LinkedIn</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="https://www.youtube.com/user/RIVMnl"  class="nav-link">Youtube</a>
+              </li>
+                <li class="nav-item">
+                                        <a href="https://www.instagram.com/rivmnl"  class="nav-link">Instagram </a>
+              </li>
+                <li class="nav-item">
+                                        <a href="https://social.overheid.nl/@rivm"  class="nav-link">Mastodon</a>
+              </li>
+        </ul>
+  
+
+
+  </div>
+</div>
+
+  
+          </div>
+  </div>
+</footer>
+  
+    </div>   
+</div>
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","pathPrefix":"","currentPath":"node\/174781","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"nl"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"eJx1kO2OAiEMRV-IwCNNCtMM1fIRLqjj06-Ljpps9k9zbk_aQH0pHb1RXZqczohDgC4ndZsWT2r8f35n1XI1QQnYnSfwwYkB2hgmlMYul5ZI5c6GCXuI1Lp7k22cV25fKsoWJ8H2yI9VX07F23fC39lf_5k3fOsq-ezWNiqpfUVTqdH2-FDEYT4dO3IdXgWRV4P1snjxQTovYaCX5F5xqlSqZCnZHTC789HH8SCpKi-JN0qcx_NK2NE5PfkifIWb1aayDuUfTGGdzQ","theme":"sdv_theme","theme_token":null},"ajaxTrustedUrl":{"\/zoeken":true},"mopinion":{"id":"Y0rTmSpMeW3aCdOIyn63QDS4j6sKgJjKiWeaRwFd"},"data":{"extlink":{"extTarget":false,"extTargetNoOverride":false,"extNofollow":false,"extNoreferrer":false,"extFollowNoOverride":false,"extClass":"ext","extLabel":"(externe link)","extImgClass":false,"extSubdomains":false,"extExclude":"(test\\.sdv\\.rivm\\.nl)|(sdv\\.docker\\.localhost)|(rivmweb\\.lndo\\.site)","extInclude":"mailing\\?cid=[0-9]+\\\u0026mid=[0-9]+","extCssExclude":"","extCssExplicit":"","extAlert":false,"extAlertText":"This link will take you to an external web site. We are not responsible for their content.","mailtoClass":"0","mailtoLabel":"(link stuurt een e-mail)","extUseFontAwesome":true,"extIconPlacement":"append","extFaLinkClasses":"ext","extFaMailtoClasses":"fa fa-envelope-o","whitelistedDomains":[]}},"easychart":{"958091-0-field_par_chart":{"config":"{\u0022chart\u0022:{\u0022height\u0022:600},\u0022xAxis\u0022:[{\u0022type\u0022:\u0022category\u0022,\u0022categories\u0022:[\u002240\u0022,\u002241\u0022,\u002242\u0022,\u002243\u0022,\u002244\u0022,\u002245\u0022,\u002246\u0022,\u002247\u0022,\u002248\u0022,\u002249\u0022,\u002250\u0022,\u002251\u0022,\u002252\u0022,\u00221\u0022,\u00222\u0022,\u00223\u0022,\u00224\u0022,\u00225\u0022,\u00226\u0022,\u00227\u0022,\u00228\u0022,\u00229\u0022,\u002210\u0022,\u002211\u0022,\u002212\u0022,\u002213\u0022,\u002214\u0022,\u002215\u0022,\u002216\u0022,\u002217\u0022,\u002218\u0022,\u002219\u0022,\u002220\u0022,\u002221\u0022,\u002222\u0022,\u002223\u0022,\u002224\u0022,\u002225\u0022,\u002226\u0022,\u002227\u0022,\u002228\u0022,\u002229\u0022,\u002230\u0022,\u002231\u0022,\u002232\u0022,\u002233\u0022,\u002234\u0022,\u002235\u0022,\u002236\u0022,\u002237\u0022,\u002238\u0022,\u002239\u0022],\u0022tickInterval\u0022:2}],\u0022yAxis\u0022:[{\u0022tickInterval\u0022:50,\u0022title\u0022:{\u0022text\u0022:\u0022Gemiddelde aantal kliniek opnames per dag\u0022}}],\u0022title\u0022:{\u0022text\u0022:\u0022Gemiddeld aantal opnames per dag van pati\\u00ebnten met SARS-CoV-2\u0022},\u0022series\u0022:[{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022},{\u0022name\u0022:\u002241\u0022},{\u0022name\u0022:\u002242\u0022},{\u0022name\u0022:\u002243\u0022,\u0022y\u0022:248},{\u0022name\u0022:\u002244\u0022,\u0022y\u0022:276.1},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:230.7},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:194.9},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:199.3},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:166.4},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:167.1},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:199.1},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:228.9},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:289},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:233.1},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:209.3},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:209.1},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:183.4},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:170},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:165.1},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:170.3},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:174.6},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:174.1},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:204.7},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:212.9},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:236.6},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:246.7},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:253},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:235.7},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:263},{\u0022name\u0022:\u002217\u0022,\u0022y\u0022:259.7},{\u0022name\u0022:\u002218\u0022,\u0022y\u0022:228.4},{\u0022name\u0022:\u002219\u0022,\u0022y\u0022:183.1},{\u0022name\u0022:\u002220\u0022,\u0022y\u0022:136.7},{\u0022name\u0022:\u002221\u0022,\u0022y\u0022:83.3},{\u0022name\u0022:\u002222\u0022,\u0022y\u0022:65.3},{\u0022name\u0022:\u002223\u0022,\u0022y\u0022:40.7},{\u0022name\u0022:\u002224\u0022,\u0022y\u0022:29.9},{\u0022name\u0022:\u002225\u0022,\u0022y\u0022:14.6},{\u0022name\u0022:\u002226\u0022,\u0022y\u0022:9},{\u0022name\u0022:\u002227\u0022,\u0022y\u0022:10.3},{\u0022name\u0022:\u002228\u0022,\u0022y\u0022:37.7},{\u0022name\u0022:\u002229\u0022,\u0022y\u0022:71},{\u0022name\u0022:\u002230\u0022,\u0022y\u0022:79.6},{\u0022name\u0022:\u002231\u0022,\u0022y\u0022:67.4},{\u0022name\u0022:\u002232\u0022,\u0022y\u0022:65.6},{\u0022name\u0022:\u002233\u0022,\u0022y\u0022:61.6},{\u0022name\u0022:\u002234\u0022,\u0022y\u0022:62},{\u0022name\u0022:\u002235\u0022,\u0022y\u0022:62.7},{\u0022name\u0022:\u002236\u0022,\u0022y\u0022:55.7},{\u0022name\u0022:\u002237\u0022,\u0022y\u0022:44},{\u0022name\u0022:\u002238\u0022,\u0022y\u0022:33},{\u0022name\u0022:\u002239\u0022,\u0022y\u0022:36.6}],\u0022name\u0022:\u00222020\\\/2021\u0022},{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022,\u0022y\u0022:48.7},{\u0022name\u0022:\u002241\u0022,\u0022y\u0022:56.6},{\u0022name\u0022:\u002242\u0022,\u0022y\u0022:90},{\u0022name\u0022:\u002243\u0022,\u0022y\u0022:133.9},{\u0022name\u0022:\u002244\u0022,\u0022y\u0022:170.4},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:208.1},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:265.9},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:299.4},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:284.1},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:272},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:194.7},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:157.6},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:144.4},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:127.6},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:106.7},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:114.4},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:145.6},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:179.1},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:183.4},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:175.4},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:140.7},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:156.3},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:222.4},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:231.9},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:215.7},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:186.4},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:138.7},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:137.8},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:95.2},{\u0022name\u0022:\u002217\u0022,\u0022y\u0022:68.2},{\u0022name\u0022:\u002218\u0022,\u0022y\u0022:52.2},{\u0022name\u0022:\u002219\u0022,\u0022y\u0022:42.2},{\u0022name\u0022:\u002220\u0022,\u0022y\u0022:38.4},{\u0022name\u0022:\u002221\u0022,\u0022y\u0022:33.8},{\u0022name\u0022:\u002222\u0022,\u0022y\u0022:34.2},{\u0022name\u0022:\u002223\u0022,\u0022y\u0022:42},{\u0022name\u0022:\u002224\u0022,\u0022y\u0022:59.2},{\u0022name\u0022:\u002225\u0022,\u0022y\u0022:85.4},{\u0022name\u0022:\u002226\u0022,\u0022y\u0022:106.4},{\u0022name\u0022:\u002227\u0022,\u0022y\u0022:121.6},{\u0022name\u0022:\u002228\u0022,\u0022y\u0022:144.2},{\u0022name\u0022:\u002229\u0022,\u0022y\u0022:151.2},{\u0022name\u0022:\u002230\u0022,\u0022y\u0022:113.2},{\u0022name\u0022:\u002231\u0022,\u0022y\u0022:104.4},{\u0022name\u0022:\u002232\u0022,\u0022y\u0022:78},{\u0022name\u0022:\u002233\u0022,\u0022y\u0022:74.6},{\u0022name\u0022:\u002234\u0022,\u0022y\u0022:57},{\u0022name\u0022:\u002235\u0022,\u0022y\u0022:43.8},{\u0022name\u0022:\u002236\u0022,\u0022y\u0022:49.4},{\u0022name\u0022:\u002237\u0022,\u0022y\u0022:55},{\u0022name\u0022:\u002238\u0022,\u0022y\u0022:73.6},{\u0022name\u0022:\u002239\u0022,\u0022y\u0022:124}],\u0022name\u0022:\u00222021\\\/2022\u0022},{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022,\u0022y\u0022:146.8},{\u0022name\u0022:\u002241\u0022,\u0022y\u0022:156},{\u0022name\u0022:\u002242\u0022,\u0022y\u0022:153.6},{\u0022name\u0022:\u002243\u0022,\u0022y\u0022:125.6},{\u0022name\u0022:\u002244\u0022,\u0022y\u0022:91.8},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:68},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:59.2},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:72.8},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:73},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:80},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:96},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:116},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:143.4},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:124.4},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:86.6},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:65.6},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:57.4},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:57.2},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:64},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:90.2},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:116},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:154.8},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:172.8},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:162.4},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:127.8},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:111},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:82.2},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:88},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:69.2},{\u0022name\u0022:\u002217\u0022,\u0022y\u0022:59.5},{\u0022name\u0022:\u002218\u0022,\u0022y\u0022:51.6},{\u0022name\u0022:\u002219\u0022,\u0022y\u0022:41},{\u0022name\u0022:\u002220\u0022,\u0022y\u0022:30.5},{\u0022name\u0022:\u002221\u0022,\u0022y\u0022:29},{\u0022name\u0022:\u002222\u0022,\u0022y\u0022:25.6},{\u0022name\u0022:\u002223\u0022,\u0022y\u0022:21.4},{\u0022name\u0022:\u002224\u0022,\u0022y\u0022:21.2},{\u0022name\u0022:\u002225\u0022,\u0022y\u0022:16.2},{\u0022name\u0022:\u002226\u0022,\u0022y\u0022:16.8},{\u0022name\u0022:\u002227\u0022,\u0022y\u0022:15.8},{\u0022name\u0022:\u002228\u0022,\u0022y\u0022:14.6},{\u0022name\u0022:\u002229\u0022,\u0022y\u0022:15.8},{\u0022name\u0022:\u002230\u0022,\u0022y\u0022:17.8},{\u0022name\u0022:\u002231\u0022,\u0022y\u0022:20.4},{\u0022name\u0022:\u002232\u0022,\u0022y\u0022:20.8},{\u0022name\u0022:\u002233\u0022,\u0022y\u0022:24.4},{\u0022name\u0022:\u002234\u0022,\u0022y\u0022:28.4},{\u0022name\u0022:\u002235\u0022,\u0022y\u0022:31},{\u0022name\u0022:\u002236\u0022,\u0022y\u0022:40.8},{\u0022name\u0022:\u002237\u0022,\u0022y\u0022:47.2},{\u0022name\u0022:\u002238\u0022,\u0022y\u0022:51.4},{\u0022name\u0022:\u002239\u0022,\u0022y\u0022:51.4}],\u0022name\u0022:\u00222022\\\/2023\u0022},{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022,\u0022y\u0022:60.4},{\u0022name\u0022:\u002241\u0022,\u0022y\u0022:64.6},{\u0022name\u0022:\u002242\u0022,\u0022y\u0022:75.4},{\u0022name\u0022:\u002243\u0022,\u0022y\u0022:98.4},{\u0022name\u0022:\u002244\u0022,\u0022y\u0022:98.6},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:103.4},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:96.6},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:101.6},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:107.8},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:142.8},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:163},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:164.5},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:140.7},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:102.8},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:67},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:59},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:52.2},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:51},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:39.6},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:32.4},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:27.2},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:23.8},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:19},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:19.2},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:17.5},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:19.2},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:15.6},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:15.8},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:16.2},{\u0022name\u0022:\u002217\u0022},{\u0022name\u0022:\u002218\u0022},{\u0022name\u0022:\u002219\u0022},{\u0022name\u0022:\u002220\u0022},{\u0022name\u0022:\u002221\u0022},{\u0022name\u0022:\u002222\u0022},{\u0022name\u0022:\u002223\u0022},{\u0022name\u0022:\u002224\u0022},{\u0022name\u0022:\u002225\u0022},{\u0022name\u0022:\u002226\u0022},{\u0022name\u0022:\u002227\u0022},{\u0022name\u0022:\u002228\u0022},{\u0022name\u0022:\u002229\u0022},{\u0022name\u0022:\u002230\u0022},{\u0022name\u0022:\u002231\u0022},{\u0022name\u0022:\u002232\u0022},{\u0022name\u0022:\u002233\u0022},{\u0022name\u0022:\u002234\u0022},{\u0022name\u0022:\u002235\u0022},{\u0022name\u0022:\u002236\u0022},{\u0022name\u0022:\u002237\u0022},{\u0022name\u0022:\u002238\u0022},{\u0022name\u0022:\u002239\u0022}],\u0022name\u0022:\u00222023\\\/2024\u0022}],\u0022colors\u0022:[\u0022#815d0a\u0022,\u0022#07d601\u0022,\u0022#f3e510\u0022,\u0022#fd0000\u0022,\u0022#007bc7\u0022,\u0022#673327\u0022,\u0022#e17000\u0022,\u0022#39870c\u0022,\u0022#94710a\u0022,\u0022#01689b\u0022,\u0022#f9e11e\u0022,\u0022#76d2b6\u0022,\u0022#d52b1e\u0022,\u0022#8fcae7\u0022,\u0022#ca005d\u0022,\u0022#275937\u0022,\u0022#f092cd\u0022]}","csv":"[[\u0022\u0022,\u00222020\/2021\u0022,\u00222021\/2022\u0022,\u00222022\/2023\u0022,\u00222023\/2024\u0022],[\u002240\u0022,\u0022NA\u0022,\u002248.7\u0022,\u0022146.8\u0022,\u002260.4\u0022],[\u002241\u0022,\u0022NA\u0022,\u002256.6\u0022,\u0022156.0\u0022,\u002264.6\u0022],[\u002242\u0022,\u0022NA\u0022,\u002290.0\u0022,\u0022153.6\u0022,\u002275.4\u0022],[\u002243\u0022,\u0022248.0\u0022,\u0022133.9\u0022,\u0022125.6\u0022,\u002298.4\u0022],[\u002244\u0022,\u0022276.1\u0022,\u0022170.4\u0022,\u002291.8\u0022,\u002298.6\u0022],[\u002245\u0022,\u0022230.7\u0022,\u0022208.1\u0022,\u002268.0\u0022,\u0022103.4\u0022],[\u002246\u0022,\u0022194.9\u0022,\u0022265.9\u0022,\u002259.2\u0022,\u002296.6\u0022],[\u002247\u0022,\u0022199.3\u0022,\u0022299.4\u0022,\u002272.8\u0022,\u0022101.6\u0022],[\u002248\u0022,\u0022166.4\u0022,\u0022284.1\u0022,\u002273.0\u0022,\u0022107.8\u0022],[\u002249\u0022,\u0022167.1\u0022,\u0022272.0\u0022,\u002280.0\u0022,\u0022142.8\u0022],[\u002250\u0022,\u0022199.1\u0022,\u0022194.7\u0022,\u002296.0\u0022,\u0022163.0\u0022],[\u002251\u0022,\u0022228.9\u0022,\u0022157.6\u0022,\u0022116.0\u0022,\u0022164.5\u0022],[\u002252\u0022,\u0022289.0\u0022,\u0022144.4\u0022,\u0022143.4\u0022,\u0022140.7\u0022],[\u00221\u0022,\u0022233.1\u0022,\u0022127.6\u0022,\u0022124.4\u0022,\u0022102.8\u0022],[\u00222\u0022,\u0022209.3\u0022,\u0022106.7\u0022,\u002286.6\u0022,\u002267.0\u0022],[\u00223\u0022,\u0022209.1\u0022,\u0022114.4\u0022,\u002265.6\u0022,\u002259.0\u0022],[\u00224\u0022,\u0022183.4\u0022,\u0022145.6\u0022,\u002257.4\u0022,\u002252.2\u0022],[\u00225\u0022,\u0022170.0\u0022,\u0022179.1\u0022,\u002257.2\u0022,\u002251.0\u0022],[\u00226\u0022,\u0022165.1\u0022,\u0022183.4\u0022,\u002264.0\u0022,\u002239.6\u0022],[\u00227\u0022,\u0022170.3\u0022,\u0022175.4\u0022,\u002290.2\u0022,\u002232.4\u0022],[\u00228\u0022,\u0022174.6\u0022,\u0022140.7\u0022,\u0022116.0\u0022,\u002227.2\u0022],[\u00229\u0022,\u0022174.1\u0022,\u0022156.3\u0022,\u0022154.8\u0022,\u002223.8\u0022],[\u002210\u0022,\u0022204.7\u0022,\u0022222.4\u0022,\u0022172.8\u0022,\u002219.0\u0022],[\u002211\u0022,\u0022212.9\u0022,\u0022231.9\u0022,\u0022162.4\u0022,\u002219.2\u0022],[\u002212\u0022,\u0022236.6\u0022,\u0022215.7\u0022,\u0022127.8\u0022,\u002217.5\u0022],[\u002213\u0022,\u0022246.7\u0022,\u0022186.4\u0022,\u0022111.0\u0022,\u002219.2\u0022],[\u002214\u0022,\u0022253.0\u0022,\u0022138.7\u0022,\u002282.2\u0022,\u002215.6\u0022],[\u002215\u0022,\u0022235.7\u0022,\u0022137.8\u0022,\u002288.0\u0022,\u002215.8\u0022],[\u002216\u0022,\u0022263.0\u0022,\u002295.2\u0022,\u002269.2\u0022,\u002216.2\u0022],[\u002217\u0022,\u0022259.7\u0022,\u002268.2\u0022,\u002259.5\u0022,\u0022NA\u0022],[\u002218\u0022,\u0022228.4\u0022,\u002252.2\u0022,\u002251.6\u0022,\u0022NA\u0022],[\u002219\u0022,\u0022183.1\u0022,\u002242.2\u0022,\u002241.0\u0022,\u0022NA\u0022],[\u002220\u0022,\u0022136.7\u0022,\u002238.4\u0022,\u002230.5\u0022,\u0022NA\u0022],[\u002221\u0022,\u002283.3\u0022,\u002233.8\u0022,\u002229.0\u0022,\u0022NA\u0022],[\u002222\u0022,\u002265.3\u0022,\u002234.2\u0022,\u002225.6\u0022,\u0022NA\u0022],[\u002223\u0022,\u002240.7\u0022,\u002242.0\u0022,\u002221.4\u0022,\u0022NA\u0022],[\u002224\u0022,\u002229.9\u0022,\u002259.2\u0022,\u002221.2\u0022,\u0022NA\u0022],[\u002225\u0022,\u002214.6\u0022,\u002285.4\u0022,\u002216.2\u0022,\u0022NA\u0022],[\u002226\u0022,\u00229.0\u0022,\u0022106.4\u0022,\u002216.8\u0022,\u0022NA\u0022],[\u002227\u0022,\u002210.3\u0022,\u0022121.6\u0022,\u002215.8\u0022,\u0022NA\u0022],[\u002228\u0022,\u002237.7\u0022,\u0022144.2\u0022,\u002214.6\u0022,\u0022NA\u0022],[\u002229\u0022,\u002271.0\u0022,\u0022151.2\u0022,\u002215.8\u0022,\u0022NA\u0022],[\u002230\u0022,\u002279.6\u0022,\u0022113.2\u0022,\u002217.8\u0022,\u0022NA\u0022],[\u002231\u0022,\u002267.4\u0022,\u0022104.4\u0022,\u002220.4\u0022,\u0022NA\u0022],[\u002232\u0022,\u002265.6\u0022,\u002278.0\u0022,\u002220.8\u0022,\u0022NA\u0022],[\u002233\u0022,\u002261.6\u0022,\u002274.6\u0022,\u002224.4\u0022,\u0022NA\u0022],[\u002234\u0022,\u002262.0\u0022,\u002257.0\u0022,\u002228.4\u0022,\u0022NA\u0022],[\u002235\u0022,\u002262.7\u0022,\u002243.8\u0022,\u002231.0\u0022,\u0022NA\u0022],[\u002236\u0022,\u002255.7\u0022,\u002249.4\u0022,\u002240.8\u0022,\u0022NA\u0022],[\u002237\u0022,\u002244.0\u0022,\u002255.0\u0022,\u002247.2\u0022,\u0022NA\u0022],[\u002238\u0022,\u002233.0\u0022,\u002273.6\u0022,\u002251.4\u0022,\u0022NA\u0022],[\u002239\u0022,\u002236.6\u0022,\u0022124.0\u0022,\u002251.4\u0022,\u0022NA\u0022]]","presets":null},"926381-0-field_par_chart":{"config":"{\u0022chart\u0022:{\u0022height\u0022:600},\u0022xAxis\u0022:[{\u0022type\u0022:\u0022category\u0022,\u0022categories\u0022:[\u002240\u0022,\u002241\u0022,\u002242\u0022,\u002243\u0022,\u002244\u0022,\u002245\u0022,\u002246\u0022,\u002247\u0022,\u002248\u0022,\u002249\u0022,\u002250\u0022,\u002251\u0022,\u002252\u0022,\u00221\u0022,\u00222\u0022,\u00223\u0022,\u00224\u0022,\u00225\u0022,\u00226\u0022,\u00227\u0022,\u00228\u0022,\u00229\u0022,\u002210\u0022,\u002211\u0022,\u002212\u0022,\u002213\u0022,\u002214\u0022,\u002215\u0022,\u002216\u0022,\u002217\u0022,\u002218\u0022,\u002219\u0022,\u002220\u0022,\u002221\u0022,\u002222\u0022,\u002223\u0022,\u002224\u0022,\u002225\u0022,\u002226\u0022,\u002227\u0022,\u002228\u0022,\u002229\u0022,\u002230\u0022,\u002231\u0022,\u002232\u0022,\u002233\u0022,\u002234\u0022,\u002235\u0022,\u002236\u0022,\u002237\u0022,\u002238\u0022,\u002239\u0022],\u0022tickInterval\u0022:2}],\u0022yAxis\u0022:[{\u0022title\u0022:{\u0022text\u0022:\u0022Percentage deelnemers met een positieve testuitslag\u0022}}],\u0022title\u0022:{\u0022text\u0022:\u0022Percentage deelnemers Infectieradar met een positieve SARS-CoV-2 testuitslag\u0022},\u0022colors\u0022:[\u0022#815d0a\u0022,\u0022#07d601\u0022,\u0022#f3e510\u0022,\u0022#fd0000\u0022,\u0022#007bc7\u0022,\u0022#673327\u0022,\u0022#e17000\u0022,\u0022#39870c\u0022,\u0022#94710a\u0022,\u0022#01689b\u0022,\u0022#f9e11e\u0022,\u0022#76d2b6\u0022,\u0022#d52b1e\u0022,\u0022#8fcae7\u0022,\u0022#ca005d\u0022,\u0022#275937\u0022,\u0022#f092cd\u0022],\u0022series\u0022:[{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022},{\u0022name\u0022:\u002241\u0022},{\u0022name\u0022:\u002242\u0022},{\u0022name\u0022:\u002243\u0022},{\u0022name\u0022:\u002244\u0022},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:0.37},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:0.35},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:0.3},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:0.27},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:0.33},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:0.51},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:0.65},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:0.77},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:0.54},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:0.29},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:0.34},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:0.3},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:0.25},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:0.17},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:0.22},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:0.18},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:0.22},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:0.31},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:0.3},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:0.41},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:0.4},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:0.3},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:0.35},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:0.44},{\u0022name\u0022:\u002217\u0022,\u0022y\u0022:0.38},{\u0022name\u0022:\u002218\u0022,\u0022y\u0022:0.41},{\u0022name\u0022:\u002219\u0022,\u0022y\u0022:0.4},{\u0022name\u0022:\u002220\u0022,\u0022y\u0022:0.19},{\u0022name\u0022:\u002221\u0022,\u0022y\u0022:0.08},{\u0022name\u0022:\u002222\u0022,\u0022y\u0022:0.12},{\u0022name\u0022:\u002223\u0022,\u0022y\u0022:0.03},{\u0022name\u0022:\u002224\u0022,\u0022y\u0022:0.04},{\u0022name\u0022:\u002225\u0022,\u0022y\u0022:0.09},{\u0022name\u0022:\u002226\u0022,\u0022y\u0022:0.07},{\u0022name\u0022:\u002227\u0022,\u0022y\u0022:0.16},{\u0022name\u0022:\u002228\u0022,\u0022y\u0022:0.24},{\u0022name\u0022:\u002229\u0022,\u0022y\u0022:0.26},{\u0022name\u0022:\u002230\u0022,\u0022y\u0022:0.19},{\u0022name\u0022:\u002231\u0022,\u0022y\u0022:0.11},{\u0022name\u0022:\u002232\u0022,\u0022y\u0022:0.1},{\u0022name\u0022:\u002233\u0022,\u0022y\u0022:0.08},{\u0022name\u0022:\u002234\u0022,\u0022y\u0022:0.09},{\u0022name\u0022:\u002235\u0022,\u0022y\u0022:0.07},{\u0022name\u0022:\u002236\u0022,\u0022y\u0022:0.13},{\u0022name\u0022:\u002237\u0022,\u0022y\u0022:0.07},{\u0022name\u0022:\u002238\u0022,\u0022y\u0022:0.07},{\u0022name\u0022:\u002239\u0022,\u0022y\u0022:0.08}],\u0022name\u0022:\u00222020\\\/2021\u0022},{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022,\u0022y\u0022:0.11},{\u0022name\u0022:\u002241\u0022,\u0022y\u0022:0.11},{\u0022name\u0022:\u002242\u0022,\u0022y\u0022:0.33},{\u0022name\u0022:\u002243\u0022,\u0022y\u0022:0.31},{\u0022name\u0022:\u002244\u0022,\u0022y\u0022:0.69},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:0.67},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:1.02},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:1.16},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:1.16},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:0.85},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:0.7},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:0.72},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:0.68},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:0.99},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:1.2},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:1.51},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:2.75},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:3.98},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:3.77},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:3.65},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:2.91},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:4.03},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:6.03},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:5.46},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:4.99},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:3.79},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:2.7},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:2.02},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:1.59},{\u0022name\u0022:\u002217\u0022,\u0022y\u0022:0.87},{\u0022name\u0022:\u002218\u0022,\u0022y\u0022:0.63},{\u0022name\u0022:\u002219\u0022,\u0022y\u0022:0.71},{\u0022name\u0022:\u002220\u0022,\u0022y\u0022:0.62},{\u0022name\u0022:\u002221\u0022,\u0022y\u0022:0.47},{\u0022name\u0022:\u002222\u0022,\u0022y\u0022:0.66},{\u0022name\u0022:\u002223\u0022,\u0022y\u0022:0.89},{\u0022name\u0022:\u002224\u0022,\u0022y\u0022:2.16},{\u0022name\u0022:\u002225\u0022,\u0022y\u0022:4.08},{\u0022name\u0022:\u002226\u0022,\u0022y\u0022:3.16},{\u0022name\u0022:\u002227\u0022,\u0022y\u0022:3.61},{\u0022name\u0022:\u002228\u0022,\u0022y\u0022:3.46},{\u0022name\u0022:\u002229\u0022,\u0022y\u0022:2.24},{\u0022name\u0022:\u002230\u0022,\u0022y\u0022:2.26},{\u0022name\u0022:\u002231\u0022,\u0022y\u0022:1.78},{\u0022name\u0022:\u002232\u0022,\u0022y\u0022:1.16},{\u0022name\u0022:\u002233\u0022,\u0022y\u0022:1.11},{\u0022name\u0022:\u002234\u0022,\u0022y\u0022:0.61},{\u0022name\u0022:\u002235\u0022,\u0022y\u0022:0.79},{\u0022name\u0022:\u002236\u0022,\u0022y\u0022:0.9},{\u0022name\u0022:\u002237\u0022,\u0022y\u0022:0.99},{\u0022name\u0022:\u002238\u0022,\u0022y\u0022:1.31},{\u0022name\u0022:\u002239\u0022,\u0022y\u0022:2.51}],\u0022name\u0022:\u00222021\\\/2022\u0022},{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022,\u0022y\u0022:3.31},{\u0022name\u0022:\u002241\u0022,\u0022y\u0022:2.41},{\u0022name\u0022:\u002242\u0022,\u0022y\u0022:2.21},{\u0022name\u0022:\u002243\u0022,\u0022y\u0022:1.56},{\u0022name\u0022:\u002244\u0022,\u0022y\u0022:1.25},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:0.97},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:0.86},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:0.95},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:1.03},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:1.12},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:1.35},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:1.69},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:1.83},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:1.33},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:0.81},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:0.52},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:0.58},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:0.62},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:1.03},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:1.52},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:2.16},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:2.3},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:1.94},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:1.77},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:1.41},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:1.19},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:0.8},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:0.76},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:0.59},{\u0022name\u0022:\u002217\u0022,\u0022y\u0022:0.46},{\u0022name\u0022:\u002218\u0022,\u0022y\u0022:0.35},{\u0022name\u0022:\u002219\u0022,\u0022y\u0022:0.25},{\u0022name\u0022:\u002220\u0022,\u0022y\u0022:0.21},{\u0022name\u0022:\u002221\u0022,\u0022y\u0022:0.3},{\u0022name\u0022:\u002222\u0022,\u0022y\u0022:0.25},{\u0022name\u0022:\u002223\u0022,\u0022y\u0022:0.11},{\u0022name\u0022:\u002224\u0022,\u0022y\u0022:0.11},{\u0022name\u0022:\u002225\u0022,\u0022y\u0022:0.08},{\u0022name\u0022:\u002226\u0022,\u0022y\u0022:0.07},{\u0022name\u0022:\u002227\u0022,\u0022y\u0022:0.07},{\u0022name\u0022:\u002228\u0022,\u0022y\u0022:0.08},{\u0022name\u0022:\u002229\u0022,\u0022y\u0022:0.16},{\u0022name\u0022:\u002230\u0022,\u0022y\u0022:0.14},{\u0022name\u0022:\u002231\u0022,\u0022y\u0022:0.21},{\u0022name\u0022:\u002232\u0022,\u0022y\u0022:0.23},{\u0022name\u0022:\u002233\u0022,\u0022y\u0022:0.37},{\u0022name\u0022:\u002234\u0022,\u0022y\u0022:0.4},{\u0022name\u0022:\u002235\u0022,\u0022y\u0022:0.66},{\u0022name\u0022:\u002236\u0022,\u0022y\u0022:0.82},{\u0022name\u0022:\u002237\u0022,\u0022y\u0022:0.79},{\u0022name\u0022:\u002238\u0022,\u0022y\u0022:0.76},{\u0022name\u0022:\u002239\u0022,\u0022y\u0022:0.94}],\u0022name\u0022:\u00222022\\\/2023\u0022},{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022,\u0022y\u0022:1.01},{\u0022name\u0022:\u002241\u0022,\u0022y\u0022:1.12},{\u0022name\u0022:\u002242\u0022,\u0022y\u0022:1.24},{\u0022name\u0022:\u002243\u0022,\u0022y\u0022:1.26},{\u0022name\u0022:\u002244\u0022,\u0022y\u0022:1.54},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:1.82},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:1.95},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:2.15},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:2.38},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:3.14},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:3.57},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:3.41},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:2.6},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:1.96},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:0.85},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:0.65},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:0.69},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:0.49},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:0.35},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:0.23},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:0.1},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:0.15},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:0.12},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:0.11},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:0.1},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:0.13},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:0.07},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:0.06},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:0.04},{\u0022name\u0022:\u002217\u0022},{\u0022name\u0022:\u002218\u0022},{\u0022name\u0022:\u002219\u0022},{\u0022name\u0022:\u002220\u0022},{\u0022name\u0022:\u002221\u0022},{\u0022name\u0022:\u002222\u0022},{\u0022name\u0022:\u002223\u0022},{\u0022name\u0022:\u002224\u0022},{\u0022name\u0022:\u002225\u0022},{\u0022name\u0022:\u002226\u0022},{\u0022name\u0022:\u002227\u0022},{\u0022name\u0022:\u002228\u0022},{\u0022name\u0022:\u002229\u0022},{\u0022name\u0022:\u002230\u0022},{\u0022name\u0022:\u002231\u0022},{\u0022name\u0022:\u002232\u0022},{\u0022name\u0022:\u002233\u0022},{\u0022name\u0022:\u002234\u0022},{\u0022name\u0022:\u002235\u0022},{\u0022name\u0022:\u002236\u0022},{\u0022name\u0022:\u002237\u0022},{\u0022name\u0022:\u002238\u0022},{\u0022name\u0022:\u002239\u0022}],\u0022name\u0022:\u00222023\\\/2024\u0022}]}","csv":"[[\u0022\u0022,\u00222020\/2021\u0022,\u00222021\/2022\u0022,\u00222022\/2023\u0022,\u00222023\/2024\u0022],[\u002240\u0022,\u0022NA\u0022,\u00220.11\u0022,\u00223.31\u0022,\u00221.01\u0022],[\u002241\u0022,\u0022NA\u0022,\u00220.11\u0022,\u00222.41\u0022,\u00221.12\u0022],[\u002242\u0022,\u0022NA\u0022,\u00220.33\u0022,\u00222.21\u0022,\u00221.24\u0022],[\u002243\u0022,\u0022NA\u0022,\u00220.31\u0022,\u00221.56\u0022,\u00221.26\u0022],[\u002244\u0022,\u0022NA\u0022,\u00220.69\u0022,\u00221.25\u0022,\u00221.54\u0022],[\u002245\u0022,\u00220.37\u0022,\u00220.67\u0022,\u00220.97\u0022,\u00221.82\u0022],[\u002246\u0022,\u00220.35\u0022,\u00221.02\u0022,\u00220.86\u0022,\u00221.95\u0022],[\u002247\u0022,\u00220.30\u0022,\u00221.16\u0022,\u00220.95\u0022,\u00222.15\u0022],[\u002248\u0022,\u00220.27\u0022,\u00221.16\u0022,\u00221.03\u0022,\u00222.38\u0022],[\u002249\u0022,\u00220.33\u0022,\u00220.85\u0022,\u00221.12\u0022,\u00223.14\u0022],[\u002250\u0022,\u00220.51\u0022,\u00220.70\u0022,\u00221.35\u0022,\u00223.57\u0022],[\u002251\u0022,\u00220.65\u0022,\u00220.72\u0022,\u00221.69\u0022,\u00223.41\u0022],[\u002252\u0022,\u00220.77\u0022,\u00220.68\u0022,\u00221.83\u0022,\u00222.60\u0022],[\u00221\u0022,\u00220.54\u0022,\u00220.99\u0022,\u00221.33\u0022,\u00221.96\u0022],[\u00222\u0022,\u00220.29\u0022,\u00221.20\u0022,\u00220.81\u0022,\u00220.85\u0022],[\u00223\u0022,\u00220.34\u0022,\u00221.51\u0022,\u00220.52\u0022,\u00220.65\u0022],[\u00224\u0022,\u00220.30\u0022,\u00222.75\u0022,\u00220.58\u0022,\u00220.69\u0022],[\u00225\u0022,\u00220.25\u0022,\u00223.98\u0022,\u00220.62\u0022,\u00220.49\u0022],[\u00226\u0022,\u00220.17\u0022,\u00223.77\u0022,\u00221.03\u0022,\u00220.35\u0022],[\u00227\u0022,\u00220.22\u0022,\u00223.65\u0022,\u00221.52\u0022,\u00220.23\u0022],[\u00228\u0022,\u00220.18\u0022,\u00222.91\u0022,\u00222.16\u0022,\u00220.10\u0022],[\u00229\u0022,\u00220.22\u0022,\u00224.03\u0022,\u00222.30\u0022,\u00220.15\u0022],[\u002210\u0022,\u00220.31\u0022,\u00226.03\u0022,\u00221.94\u0022,\u00220.12\u0022],[\u002211\u0022,\u00220.30\u0022,\u00225.46\u0022,\u00221.77\u0022,\u00220.11\u0022],[\u002212\u0022,\u00220.41\u0022,\u00224.99\u0022,\u00221.41\u0022,\u00220.10\u0022],[\u002213\u0022,\u00220.40\u0022,\u00223.79\u0022,\u00221.19\u0022,\u00220.13\u0022],[\u002214\u0022,\u00220.30\u0022,\u00222.70\u0022,\u00220.80\u0022,\u00220.07\u0022],[\u002215\u0022,\u00220.35\u0022,\u00222.02\u0022,\u00220.76\u0022,\u00220.06\u0022],[\u002216\u0022,\u00220.44\u0022,\u00221.59\u0022,\u00220.59\u0022,\u00220.04\u0022],[\u002217\u0022,\u00220.38\u0022,\u00220.87\u0022,\u00220.46\u0022,\u0022NA\u0022],[\u002218\u0022,\u00220.41\u0022,\u00220.63\u0022,\u00220.35\u0022,\u0022NA\u0022],[\u002219\u0022,\u00220.40\u0022,\u00220.71\u0022,\u00220.25\u0022,\u0022NA\u0022],[\u002220\u0022,\u00220.19\u0022,\u00220.62\u0022,\u00220.21\u0022,\u0022NA\u0022],[\u002221\u0022,\u00220.08\u0022,\u00220.47\u0022,\u00220.30\u0022,\u0022NA\u0022],[\u002222\u0022,\u00220.12\u0022,\u00220.66\u0022,\u00220.25\u0022,\u0022NA\u0022],[\u002223\u0022,\u00220.03\u0022,\u00220.89\u0022,\u00220.11\u0022,\u0022NA\u0022],[\u002224\u0022,\u00220.04\u0022,\u00222.16\u0022,\u00220.11\u0022,\u0022NA\u0022],[\u002225\u0022,\u00220.09\u0022,\u00224.08\u0022,\u00220.08\u0022,\u0022NA\u0022],[\u002226\u0022,\u00220.07\u0022,\u00223.16\u0022,\u00220.07\u0022,\u0022NA\u0022],[\u002227\u0022,\u00220.16\u0022,\u00223.61\u0022,\u00220.07\u0022,\u0022NA\u0022],[\u002228\u0022,\u00220.24\u0022,\u00223.46\u0022,\u00220.08\u0022,\u0022NA\u0022],[\u002229\u0022,\u00220.26\u0022,\u00222.24\u0022,\u00220.16\u0022,\u0022NA\u0022],[\u002230\u0022,\u00220.19\u0022,\u00222.26\u0022,\u00220.14\u0022,\u0022NA\u0022],[\u002231\u0022,\u00220.11\u0022,\u00221.78\u0022,\u00220.21\u0022,\u0022NA\u0022],[\u002232\u0022,\u00220.10\u0022,\u00221.16\u0022,\u00220.23\u0022,\u0022NA\u0022],[\u002233\u0022,\u00220.08\u0022,\u00221.11\u0022,\u00220.37\u0022,\u0022NA\u0022],[\u002234\u0022,\u00220.09\u0022,\u00220.61\u0022,\u00220.40\u0022,\u0022NA\u0022],[\u002235\u0022,\u00220.07\u0022,\u00220.79\u0022,\u00220.66\u0022,\u0022NA\u0022],[\u002236\u0022,\u00220.13\u0022,\u00220.90\u0022,\u00220.82\u0022,\u0022NA\u0022],[\u002237\u0022,\u00220.07\u0022,\u00220.99\u0022,\u00220.79\u0022,\u0022NA\u0022],[\u002238\u0022,\u00220.07\u0022,\u00221.31\u0022,\u00220.76\u0022,\u0022NA\u0022],[\u002239\u0022,\u00220.08\u0022,\u00222.51\u0022,\u00220.94\u0022,\u0022NA\u0022]]","presets":null},"926331-0-field_par_chart":{"config":"{\u0022chart\u0022:{\u0022height\u0022:600},\u0022xAxis\u0022:[{\u0022type\u0022:\u0022category\u0022,\u0022categories\u0022:[\u002240\u0022,\u002241\u0022,\u002242\u0022,\u002243\u0022,\u002244\u0022,\u002245\u0022,\u002246\u0022,\u002247\u0022,\u002248\u0022,\u002249\u0022,\u002250\u0022,\u002251\u0022,\u002252\u0022,\u00221\u0022,\u00222\u0022,\u00223\u0022,\u00224\u0022,\u00225\u0022,\u00226\u0022,\u00227\u0022,\u00228\u0022,\u00229\u0022,\u002210\u0022,\u002211\u0022,\u002212\u0022,\u002213\u0022,\u002214\u0022,\u002215\u0022,\u002216\u0022,\u002217\u0022,\u002218\u0022,\u002219\u0022,\u002220\u0022,\u002221\u0022,\u002222\u0022,\u002223\u0022,\u002224\u0022,\u002225\u0022,\u002226\u0022,\u002227\u0022,\u002228\u0022,\u002229\u0022,\u002230\u0022,\u002231\u0022,\u002232\u0022,\u002233\u0022,\u002234\u0022,\u002235\u0022,\u002236\u0022,\u002237\u0022,\u002238\u0022,\u002239\u0022],\u0022tickInterval\u0022:2}],\u0022yAxis\u0022:[{\u0022title\u0022:{\u0022text\u0022:\u0022Gemiddelde virusvracht (x100 miljard) per 100.000 inwoners\u0022}}],\u0022title\u0022:{\u0022text\u0022:\u0022Gemiddelde virusvracht SARS-CoV-2\u0022},\u0022series\u0022:[{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022},{\u0022name\u0022:\u002241\u0022},{\u0022name\u0022:\u002242\u0022},{\u0022name\u0022:\u002243\u0022},{\u0022name\u0022:\u002244\u0022},{\u0022name\u0022:\u002245\u0022},{\u0022name\u0022:\u002246\u0022},{\u0022name\u0022:\u002247\u0022},{\u0022name\u0022:\u002248\u0022},{\u0022name\u0022:\u002249\u0022},{\u0022name\u0022:\u002250\u0022},{\u0022name\u0022:\u002251\u0022},{\u0022name\u0022:\u002252\u0022},{\u0022name\u0022:\u00221\u0022},{\u0022name\u0022:\u00222\u0022},{\u0022name\u0022:\u00223\u0022},{\u0022name\u0022:\u00224\u0022},{\u0022name\u0022:\u00225\u0022},{\u0022name\u0022:\u00226\u0022},{\u0022name\u0022:\u00227\u0022},{\u0022name\u0022:\u00228\u0022},{\u0022name\u0022:\u00229\u0022},{\u0022name\u0022:\u002210\u0022},{\u0022name\u0022:\u002211\u0022},{\u0022name\u0022:\u002212\u0022},{\u0022name\u0022:\u002213\u0022},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:317},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:260},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:137},{\u0022name\u0022:\u002217\u0022,\u0022y\u0022:143},{\u0022name\u0022:\u002218\u0022,\u0022y\u0022:67},{\u0022name\u0022:\u002219\u0022,\u0022y\u0022:49},{\u0022name\u0022:\u002220\u0022,\u0022y\u0022:36},{\u0022name\u0022:\u002221\u0022,\u0022y\u0022:54},{\u0022name\u0022:\u002222\u0022,\u0022y\u0022:40},{\u0022name\u0022:\u002223\u0022,\u0022y\u0022:33},{\u0022name\u0022:\u002224\u0022,\u0022y\u0022:30},{\u0022name\u0022:\u002225\u0022,\u0022y\u0022:17},{\u0022name\u0022:\u002226\u0022,\u0022y\u0022:14},{\u0022name\u0022:\u002227\u0022,\u0022y\u0022:13},{\u0022name\u0022:\u002228\u0022,\u0022y\u0022:10},{\u0022name\u0022:\u002229\u0022,\u0022y\u0022:13},{\u0022name\u0022:\u002230\u0022,\u0022y\u0022:39},{\u0022name\u0022:\u002231\u0022,\u0022y\u0022:143},{\u0022name\u0022:\u002232\u0022,\u0022y\u0022:78},{\u0022name\u0022:\u002233\u0022,\u0022y\u0022:99},{\u0022name\u0022:\u002234\u0022,\u0022y\u0022:97},{\u0022name\u0022:\u002235\u0022,\u0022y\u0022:46},{\u0022name\u0022:\u002236\u0022,\u0022y\u0022:95},{\u0022name\u0022:\u002237\u0022,\u0022y\u0022:77},{\u0022name\u0022:\u002238\u0022,\u0022y\u0022:87},{\u0022name\u0022:\u002239\u0022,\u0022y\u0022:178}],\u0022name\u0022:\u00222019\\\/2020\u0022},{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022,\u0022y\u0022:345},{\u0022name\u0022:\u002241\u0022,\u0022y\u0022:520},{\u0022name\u0022:\u002242\u0022,\u0022y\u0022:491},{\u0022name\u0022:\u002243\u0022,\u0022y\u0022:562},{\u0022name\u0022:\u002244\u0022,\u0022y\u0022:589},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:395},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:467},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:282},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:229},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:255},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:316},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:376},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:384},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:337},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:348},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:378},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:319},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:238},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:228},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:377},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:206},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:215},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:219},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:180},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:251},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:237},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:283},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:273},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:295},{\u0022name\u0022:\u002217\u0022,\u0022y\u0022:272},{\u0022name\u0022:\u002218\u0022,\u0022y\u0022:275},{\u0022name\u0022:\u002219\u0022,\u0022y\u0022:224},{\u0022name\u0022:\u002220\u0022,\u0022y\u0022:200},{\u0022name\u0022:\u002221\u0022,\u0022y\u0022:178},{\u0022name\u0022:\u002222\u0022,\u0022y\u0022:135},{\u0022name\u0022:\u002223\u0022,\u0022y\u0022:61},{\u0022name\u0022:\u002224\u0022,\u0022y\u0022:50},{\u0022name\u0022:\u002225\u0022,\u0022y\u0022:49},{\u0022name\u0022:\u002226\u0022,\u0022y\u0022:51},{\u0022name\u0022:\u002227\u0022,\u0022y\u0022:206},{\u0022name\u0022:\u002228\u0022,\u0022y\u0022:510},{\u0022name\u0022:\u002229\u0022,\u0022y\u0022:387},{\u0022name\u0022:\u002230\u0022,\u0022y\u0022:256},{\u0022name\u0022:\u002231\u0022,\u0022y\u0022:398},{\u0022name\u0022:\u002232\u0022,\u0022y\u0022:400},{\u0022name\u0022:\u002233\u0022,\u0022y\u0022:547},{\u0022name\u0022:\u002234\u0022,\u0022y\u0022:533},{\u0022name\u0022:\u002235\u0022,\u0022y\u0022:222},{\u0022name\u0022:\u002236\u0022,\u0022y\u0022:145},{\u0022name\u0022:\u002237\u0022,\u0022y\u0022:121},{\u0022name\u0022:\u002238\u0022,\u0022y\u0022:71},{\u0022name\u0022:\u002239\u0022,\u0022y\u0022:83}],\u0022name\u0022:\u00222020\\\/2021\u0022},{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022,\u0022y\u0022:185},{\u0022name\u0022:\u002241\u0022,\u0022y\u0022:274},{\u0022name\u0022:\u002242\u0022,\u0022y\u0022:440},{\u0022name\u0022:\u002243\u0022,\u0022y\u0022:450},{\u0022name\u0022:\u002244\u0022,\u0022y\u0022:522},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:889},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:1122},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:1162},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:816},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:868},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:907},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:679},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:712},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:784},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:795},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:1303},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:1645},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:2063},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:1719},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:1541},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:1088},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:1891},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:2428},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:2310},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:1690},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:1447},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:1237},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:686},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:496},{\u0022name\u0022:\u002217\u0022,\u0022y\u0022:325},{\u0022name\u0022:\u002218\u0022,\u0022y\u0022:345},{\u0022name\u0022:\u002219\u0022,\u0022y\u0022:291},{\u0022name\u0022:\u002220\u0022,\u0022y\u0022:300},{\u0022name\u0022:\u002221\u0022,\u0022y\u0022:274},{\u0022name\u0022:\u002222\u0022,\u0022y\u0022:461},{\u0022name\u0022:\u002223\u0022,\u0022y\u0022:642},{\u0022name\u0022:\u002224\u0022,\u0022y\u0022:950},{\u0022name\u0022:\u002225\u0022,\u0022y\u0022:1204},{\u0022name\u0022:\u002226\u0022,\u0022y\u0022:1600},{\u0022name\u0022:\u002227\u0022,\u0022y\u0022:1565},{\u0022name\u0022:\u002228\u0022,\u0022y\u0022:1839},{\u0022name\u0022:\u002229\u0022,\u0022y\u0022:1645},{\u0022name\u0022:\u002230\u0022,\u0022y\u0022:1094},{\u0022name\u0022:\u002231\u0022,\u0022y\u0022:841},{\u0022name\u0022:\u002232\u0022,\u0022y\u0022:569},{\u0022name\u0022:\u002233\u0022,\u0022y\u0022:565},{\u0022name\u0022:\u002234\u0022,\u0022y\u0022:517},{\u0022name\u0022:\u002235\u0022,\u0022y\u0022:540},{\u0022name\u0022:\u002236\u0022,\u0022y\u0022:659},{\u0022name\u0022:\u002237\u0022,\u0022y\u0022:662},{\u0022name\u0022:\u002238\u0022,\u0022y\u0022:817},{\u0022name\u0022:\u002239\u0022,\u0022y\u0022:1415}],\u0022name\u0022:\u00222021\\\/2022\u0022},{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022,\u0022y\u0022:1717},{\u0022name\u0022:\u002241\u0022,\u0022y\u0022:1590},{\u0022name\u0022:\u002242\u0022,\u0022y\u0022:1724},{\u0022name\u0022:\u002243\u0022,\u0022y\u0022:1266},{\u0022name\u0022:\u002244\u0022,\u0022y\u0022:1081},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:759},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:974},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:1030},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:1078},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:1150},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:1712},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:2291},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:1974},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:1042},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:699},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:439},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:455},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:706},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:748},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:1136},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:1718},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:2116},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:2134},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:1597},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:1784},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:1238},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:924},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:963},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:620},{\u0022name\u0022:\u002217\u0022,\u0022y\u0022:572},{\u0022name\u0022:\u002218\u0022,\u0022y\u0022:537},{\u0022name\u0022:\u002219\u0022,\u0022y\u0022:341},{\u0022name\u0022:\u002220\u0022,\u0022y\u0022:176},{\u0022name\u0022:\u002221\u0022,\u0022y\u0022:163},{\u0022name\u0022:\u002222\u0022,\u0022y\u0022:140},{\u0022name\u0022:\u002223\u0022,\u0022y\u0022:109},{\u0022name\u0022:\u002224\u0022,\u0022y\u0022:75},{\u0022name\u0022:\u002225\u0022,\u0022y\u0022:63},{\u0022name\u0022:\u002226\u0022,\u0022y\u0022:49},{\u0022name\u0022:\u002227\u0022,\u0022y\u0022:59},{\u0022name\u0022:\u002228\u0022,\u0022y\u0022:79},{\u0022name\u0022:\u002229\u0022,\u0022y\u0022:99},{\u0022name\u0022:\u002230\u0022,\u0022y\u0022:157},{\u0022name\u0022:\u002231\u0022,\u0022y\u0022:206},{\u0022name\u0022:\u002232\u0022,\u0022y\u0022:321},{\u0022name\u0022:\u002233\u0022,\u0022y\u0022:266},{\u0022name\u0022:\u002234\u0022,\u0022y\u0022:356},{\u0022name\u0022:\u002235\u0022,\u0022y\u0022:415},{\u0022name\u0022:\u002236\u0022,\u0022y\u0022:467},{\u0022name\u0022:\u002237\u0022,\u0022y\u0022:446},{\u0022name\u0022:\u002238\u0022,\u0022y\u0022:486},{\u0022name\u0022:\u002239\u0022,\u0022y\u0022:518}],\u0022name\u0022:\u00222022\\\/2023\u0022},{\u0022animation\u0022:false,\u0022data\u0022:[{\u0022name\u0022:\u002240\u0022,\u0022y\u0022:597},{\u0022name\u0022:\u002241\u0022,\u0022y\u0022:574},{\u0022name\u0022:\u002242\u0022,\u0022y\u0022:598},{\u0022name\u0022:\u002243\u0022,\u0022y\u0022:820},{\u0022name\u0022:\u002244\u0022,\u0022y\u0022:1096},{\u0022name\u0022:\u002245\u0022,\u0022y\u0022:1130},{\u0022name\u0022:\u002246\u0022,\u0022y\u0022:1456},{\u0022name\u0022:\u002247\u0022,\u0022y\u0022:1743},{\u0022name\u0022:\u002248\u0022,\u0022y\u0022:2269},{\u0022name\u0022:\u002249\u0022,\u0022y\u0022:3713},{\u0022name\u0022:\u002250\u0022,\u0022y\u0022:4176},{\u0022name\u0022:\u002251\u0022,\u0022y\u0022:4343},{\u0022name\u0022:\u002252\u0022,\u0022y\u0022:2686},{\u0022name\u0022:\u00221\u0022,\u0022y\u0022:1555},{\u0022name\u0022:\u00222\u0022,\u0022y\u0022:868},{\u0022name\u0022:\u00223\u0022,\u0022y\u0022:617},{\u0022name\u0022:\u00224\u0022,\u0022y\u0022:630},{\u0022name\u0022:\u00225\u0022,\u0022y\u0022:487},{\u0022name\u0022:\u00226\u0022,\u0022y\u0022:354},{\u0022name\u0022:\u00227\u0022,\u0022y\u0022:207},{\u0022name\u0022:\u00228\u0022,\u0022y\u0022:144},{\u0022name\u0022:\u00229\u0022,\u0022y\u0022:94},{\u0022name\u0022:\u002210\u0022,\u0022y\u0022:133},{\u0022name\u0022:\u002211\u0022,\u0022y\u0022:105},{\u0022name\u0022:\u002212\u0022,\u0022y\u0022:83},{\u0022name\u0022:\u002213\u0022,\u0022y\u0022:115},{\u0022name\u0022:\u002214\u0022,\u0022y\u0022:73},{\u0022name\u0022:\u002215\u0022,\u0022y\u0022:72},{\u0022name\u0022:\u002216\u0022,\u0022y\u0022:86},{\u0022name\u0022:\u002217\u0022},{\u0022name\u0022:\u002218\u0022},{\u0022name\u0022:\u002219\u0022},{\u0022name\u0022:\u002220\u0022},{\u0022name\u0022:\u002221\u0022},{\u0022name\u0022:\u002222\u0022},{\u0022name\u0022:\u002223\u0022},{\u0022name\u0022:\u002224\u0022},{\u0022name\u0022:\u002225\u0022},{\u0022name\u0022:\u002226\u0022},{\u0022name\u0022:\u002227\u0022},{\u0022name\u0022:\u002228\u0022},{\u0022name\u0022:\u002229\u0022},{\u0022name\u0022:\u002230\u0022},{\u0022name\u0022:\u002231\u0022},{\u0022name\u0022:\u002232\u0022},{\u0022name\u0022:\u002233\u0022},{\u0022name\u0022:\u002234\u0022},{\u0022name\u0022:\u002235\u0022},{\u0022name\u0022:\u002236\u0022},{\u0022name\u0022:\u002237\u0022},{\u0022name\u0022:\u002238\u0022},{\u0022name\u0022:\u002239\u0022}],\u0022name\u0022:\u00222023\\\/2024\u0022}],\u0022colors\u0022:[\u0022#3086f1\u0022,\u0022#815d0a\u0022,\u0022#07d601\u0022,\u0022#f3e510\u0022,\u0022#fd0000\u0022,\u0022#673327\u0022,\u0022#e17000\u0022,\u0022#39870c\u0022,\u0022#94710a\u0022,\u0022#01689b\u0022,\u0022#f9e11e\u0022,\u0022#76d2b6\u0022,\u0022#d52b1e\u0022,\u0022#8fcae7\u0022,\u0022#ca005d\u0022,\u0022#275937\u0022,\u0022#f092cd\u0022],\u0022legend\u0022:{\u0022verticalAlign\u0022:\u0022bottom\u0022,\u0022align\u0022:\u0022left\u0022,\u0022layout\u0022:\u0022horizontal\u0022}}","csv":"[[\u0022\u0022,\u00222019\/2020\u0022,\u00222020\/2021\u0022,\u00222021\/2022\u0022,\u00222022\/2023\u0022,\u00222023\/2024\u0022],[\u002240\u0022,\u0022\u0022,\u0022345\u0022,\u0022185\u0022,\u00221717\u0022,\u0022597\u0022],[\u002241\u0022,\u0022\u0022,\u0022520\u0022,\u0022274\u0022,\u00221590\u0022,\u0022574\u0022],[\u002242\u0022,\u0022\u0022,\u0022491\u0022,\u0022440\u0022,\u00221724\u0022,\u0022598\u0022],[\u002243\u0022,\u0022\u0022,\u0022562\u0022,\u0022450\u0022,\u00221266\u0022,\u0022820\u0022],[\u002244\u0022,\u0022\u0022,\u0022589\u0022,\u0022522\u0022,\u00221081\u0022,\u00221096\u0022],[\u002245\u0022,\u0022\u0022,\u0022395\u0022,\u0022889\u0022,\u0022759\u0022,\u00221130\u0022],[\u002246\u0022,\u0022\u0022,\u0022467\u0022,\u00221122\u0022,\u0022974\u0022,\u00221456\u0022],[\u002247\u0022,\u0022\u0022,\u0022282\u0022,\u00221162\u0022,\u00221030\u0022,\u00221743\u0022],[\u002248\u0022,\u0022\u0022,\u0022229\u0022,\u0022816\u0022,\u00221078\u0022,\u00222269\u0022],[\u002249\u0022,\u0022\u0022,\u0022255\u0022,\u0022868\u0022,\u00221150\u0022,\u00223713\u0022],[\u002250\u0022,\u0022\u0022,\u0022316\u0022,\u0022907\u0022,\u00221712\u0022,\u00224176\u0022],[\u002251\u0022,\u0022\u0022,\u0022376\u0022,\u0022679\u0022,\u00222291\u0022,\u00224343\u0022],[\u002252\u0022,\u0022\u0022,\u0022384\u0022,\u0022712\u0022,\u00221974\u0022,\u00222686\u0022],[\u00221\u0022,\u0022\u0022,\u0022337\u0022,\u0022784\u0022,\u00221042\u0022,\u00221555\u0022],[\u00222\u0022,\u0022\u0022,\u0022348\u0022,\u0022795\u0022,\u0022699\u0022,\u0022868\u0022],[\u00223\u0022,\u0022\u0022,\u0022378\u0022,\u00221303\u0022,\u0022439\u0022,\u0022617\u0022],[\u00224\u0022,\u0022\u0022,\u0022319\u0022,\u00221645\u0022,\u0022455\u0022,\u0022630\u0022],[\u00225\u0022,\u0022\u0022,\u0022238\u0022,\u00222063\u0022,\u0022706\u0022,\u0022487\u0022],[\u00226\u0022,\u0022\u0022,\u0022228\u0022,\u00221719\u0022,\u0022748\u0022,\u0022354\u0022],[\u00227\u0022,\u0022\u0022,\u0022377\u0022,\u00221541\u0022,\u00221136\u0022,\u0022207\u0022],[\u00228\u0022,\u0022\u0022,\u0022206\u0022,\u00221088\u0022,\u00221718\u0022,\u0022144\u0022],[\u00229\u0022,\u0022\u0022,\u0022215\u0022,\u00221891\u0022,\u00222116\u0022,\u002294\u0022],[\u002210\u0022,\u0022\u0022,\u0022219\u0022,\u00222428\u0022,\u00222134\u0022,\u0022133\u0022],[\u002211\u0022,\u0022\u0022,\u0022180\u0022,\u00222310\u0022,\u00221597\u0022,\u0022105\u0022],[\u002212\u0022,\u0022\u0022,\u0022251\u0022,\u00221690\u0022,\u00221784\u0022,\u002283\u0022],[\u002213\u0022,\u0022\u0022,\u0022237\u0022,\u00221447\u0022,\u00221238\u0022,\u0022115\u0022],[\u002214\u0022,\u0022317\u0022,\u0022283\u0022,\u00221237\u0022,\u0022924\u0022,\u002273\u0022],[\u002215\u0022,\u0022260\u0022,\u0022273\u0022,\u0022686\u0022,\u0022963\u0022,\u002272\u0022],[\u002216\u0022,\u0022137\u0022,\u0022295\u0022,\u0022496\u0022,\u0022620\u0022,\u002286\u0022],[\u002217\u0022,\u0022143\u0022,\u0022272\u0022,\u0022325\u0022,\u0022572\u0022,\u0022\u0022],[\u002218\u0022,\u002267\u0022,\u0022275\u0022,\u0022345\u0022,\u0022537\u0022,\u0022\u0022],[\u002219\u0022,\u002249\u0022,\u0022224\u0022,\u0022291\u0022,\u0022341\u0022,\u0022\u0022],[\u002220\u0022,\u002236\u0022,\u0022200\u0022,\u0022300\u0022,\u0022176\u0022,\u0022\u0022],[\u002221\u0022,\u002254\u0022,\u0022178\u0022,\u0022274\u0022,\u0022163\u0022,\u0022\u0022],[\u002222\u0022,\u002240\u0022,\u0022135\u0022,\u0022461\u0022,\u0022140\u0022,\u0022\u0022],[\u002223\u0022,\u002233\u0022,\u002261\u0022,\u0022642\u0022,\u0022109\u0022,\u0022\u0022],[\u002224\u0022,\u002230\u0022,\u002250\u0022,\u0022950\u0022,\u002275\u0022,\u0022\u0022],[\u002225\u0022,\u002217\u0022,\u002249\u0022,\u00221204\u0022,\u002263\u0022,\u0022\u0022],[\u002226\u0022,\u002214\u0022,\u002251\u0022,\u00221600\u0022,\u002249\u0022,\u0022\u0022],[\u002227\u0022,\u002213\u0022,\u0022206\u0022,\u00221565\u0022,\u002259\u0022,\u0022\u0022],[\u002228\u0022,\u002210\u0022,\u0022510\u0022,\u00221839\u0022,\u002279\u0022,\u0022\u0022],[\u002229\u0022,\u002213\u0022,\u0022387\u0022,\u00221645\u0022,\u002299\u0022,\u0022\u0022],[\u002230\u0022,\u002239\u0022,\u0022256\u0022,\u00221094\u0022,\u0022157\u0022,\u0022\u0022],[\u002231\u0022,\u0022143\u0022,\u0022398\u0022,\u0022841\u0022,\u0022206\u0022,\u0022\u0022],[\u002232\u0022,\u002278\u0022,\u0022400\u0022,\u0022569\u0022,\u0022321\u0022,\u0022\u0022],[\u002233\u0022,\u002299\u0022,\u0022547\u0022,\u0022565\u0022,\u0022266\u0022,\u0022\u0022],[\u002234\u0022,\u002297\u0022,\u0022533\u0022,\u0022517\u0022,\u0022356\u0022,\u0022\u0022],[\u002235\u0022,\u002246\u0022,\u0022222\u0022,\u0022540\u0022,\u0022415\u0022,\u0022\u0022],[\u002236\u0022,\u002295\u0022,\u0022145\u0022,\u0022659\u0022,\u0022467\u0022,\u0022\u0022],[\u002237\u0022,\u002277\u0022,\u0022121\u0022,\u0022662\u0022,\u0022446\u0022,\u0022\u0022],[\u002238\u0022,\u002287\u0022,\u002271\u0022,\u0022817\u0022,\u0022486\u0022,\u0022\u0022],[\u002239\u0022,\u0022178\u0022,\u002283\u0022,\u00221415\u0022,\u0022518\u0022,\u0022\u0022]]","presets":null}},"navbar":{"title":"In dit onderwerp","link":"\/corona"},"user":{"uid":0,"permissionsHash":"ff07c419e9342baf8d8987aebf7d71c78e357da6087afc62332aa3385757cbbb"}}</script>
+<script src="/sites/default/files/js/js_AyIS0Zo62hqkS6DCrOir30XOgbgn_WtVvtuJppDcWFM.js?scope=footer&amp;delta=0&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ"></script>
+<script src="/sites/default/files/js/js_lsmwkURXhrL1KkzZM6-YGO-aizUCrD1hGrcuvV8OfDA.js?scope=footer&amp;delta=1&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ"></script>
+<script src="/sites/default/files/js/js_l_nQSlbcbB99u2MllsvFWhs-zz8QFEv9giwQK09HtU0.js?scope=footer&amp;delta=2&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ"></script>
+<script src="/sites/default/files/js/js_zJ3MH3G1tidgJF_OuSpdi_tPu_CF5tFFc-Mhtiv5dHI.js?scope=footer&amp;delta=3&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ"></script>
+<script src="/sites/default/files/js/js_v1uRpYMSa8dZOAnIftDfH6FkYvHZSKbM8LbqR4SbixI.js?scope=footer&amp;delta=4&amp;language=nl&amp;theme=sdv_theme&amp;include=eJyFkFuuwyAMRDeEYEmRCVZwax5ioG3u6m-UNG0_KvXHmpkDGBvhNqVSJUvJ7hQGKzon5wlsfCkdvVGdmlyuiEOALhd1ixZPamYlYD3OPnVigBaGmUtjl0tLpPLHBluzHjnxeZcfXSVfXWijktqnNZUaLVvHiJO8EztyHV4FkcP-oBc_S-dpHuhl-_NhDRPWOVLr7qVs4xy4fSAVb18O33mUJR78A7xDuw8EcxO-w-3VphKGbuNKqspT4oUS5_FjnSurlvs_kOCdzQ"></script>
+
+  </body>
+</html>

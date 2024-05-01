@@ -27,7 +27,7 @@ node_modules
 
 # CI/CD
 /env
-/public/json
+#/public/json
 public/latest-data.zip
 .gitlab-ci.yml
 

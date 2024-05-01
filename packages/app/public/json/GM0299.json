@@ -1,0 +1,6301 @@
+{
+  "name": "GM0299",
+  "code": "GM0299",
+  "proto_name": "GM0299",
+  "last_generated": "1711723795",
+  "difference": {
+    "sewer__average": {
+      "new_date_unix": 1710720000,
+      "old_date_unix": 1710115200,
+      "old_value": 33,
+      "difference": -12
+    }
+  },
+  "sewer": {
+    "values": [
+      {
+        "date_start_unix": 1616976000,
+        "date_end_unix": 1617494400,
+        "average": 89,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1708905600,
+        "date_end_unix": 1709424000,
+        "average": 16,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1619395200,
+        "date_end_unix": 1619913600,
+        "average": 213,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1641772800,
+        "date_end_unix": 1642291200,
+        "average": 744,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1705276800,
+        "date_end_unix": 1705795200,
+        "average": 886,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1698019200,
+        "date_end_unix": 1698537600,
+        "average": 144,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1687737600,
+        "date_end_unix": 1688256000,
+        "average": 9,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1675036800,
+        "date_end_unix": 1675555200,
+        "average": 792,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1682294400,
+        "date_end_unix": 1682812800,
+        "average": 500,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1646006400,
+        "date_end_unix": 1646524800,
+        "average": 2294,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1641168000,
+        "date_end_unix": 1641686400,
+        "average": 709,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1600646400,
+        "date_end_unix": 1601164800,
+        "average": 68,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1636329600,
+        "date_end_unix": 1636848000,
+        "average": 415,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1702252800,
+        "date_end_unix": 1702771200,
+        "average": 4501,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1679270400,
+        "date_end_unix": 1679788800,
+        "average": 1354,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1676246400,
+        "date_end_unix": 1676764800,
+        "average": 515,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1599436800,
+        "date_end_unix": 1599955200,
+        "average": 0,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1609113600,
+        "date_end_unix": 1609632000,
+        "average": 110,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1649635200,
+        "date_end_unix": 1650153600,
+        "average": 736,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1678060800,
+        "date_end_unix": 1678579200,
+        "average": 1102,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1683504000,
+        "date_end_unix": 1684022400,
+        "average": 202,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1697414400,
+        "date_end_unix": 1697932800,
+        "average": 215,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1609718400,
+        "date_end_unix": 1610236800,
+        "average": 97,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1639353600,
+        "date_end_unix": 1639872000,
+        "average": 683,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1710720000,
+        "date_end_unix": 1711238400,
+        "average": 21,
+        "data_is_outdated": false,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1704672000,
+        "date_end_unix": 1705190400,
+        "average": 945,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1601856000,
+        "date_end_unix": 1602374400,
+        "average": 150,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1639958400,
+        "date_end_unix": 1640476800,
+        "average": 695,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1650844800,
+        "date_end_unix": 1651363200,
+        "average": 191,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1656892800,
+        "date_end_unix": 1657411200,
+        "average": 1386,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1622419200,
+        "date_end_unix": 1622937600,
+        "average": 167,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1630886400,
+        "date_end_unix": 1631404800,
+        "average": 104,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1702857600,
+        "date_end_unix": 1703376000,
+        "average": 4068,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1670803200,
+        "date_end_unix": 1671321600,
+        "average": 1467,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1604880000,
+        "date_end_unix": 1605398400,
+        "average": 242,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1690761600,
+        "date_end_unix": 1691280000,
+        "average": 280,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1708300800,
+        "date_end_unix": 1708819200,
+        "average": 29,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1672617600,
+        "date_end_unix": 1673136000,
+        "average": 957,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1653868800,
+        "date_end_unix": 1654387200,
+        "average": 282,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1678665600,
+        "date_end_unix": 1679184000,
+        "average": 1150,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1611532800,
+        "date_end_unix": 1612051200,
+        "average": 319,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1675641600,
+        "date_end_unix": 1676160000,
+        "average": 977,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1620000000,
+        "date_end_unix": 1620518400,
+        "average": 84,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1628467200,
+        "date_end_unix": 1628985600,
+        "average": 230,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1621814400,
+        "date_end_unix": 1622332800,
+        "average": 170,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1664755200,
+        "date_end_unix": 1665273600,
+        "average": 2016,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1653264000,
+        "date_end_unix": 1653782400,
+        "average": 104,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1706486400,
+        "date_end_unix": 1707004800,
+        "average": 498,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1659916800,
+        "date_end_unix": 1660435200,
+        "average": 538,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1644192000,
+        "date_end_unix": 1644710400,
+        "average": 2438,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1659312000,
+        "date_end_unix": 1659830400,
+        "average": 886,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1629072000,
+        "date_end_unix": 1629590400,
+        "average": 420,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1613347200,
+        "date_end_unix": 1613865600,
+        "average": 247,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1632700800,
+        "date_end_unix": 1633219200,
+        "average": 88,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1672012800,
+        "date_end_unix": 1672531200,
+        "average": 1325,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1623024000,
+        "date_end_unix": 1623542400,
+        "average": 35,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1606089600,
+        "date_end_unix": 1606608000,
+        "average": 114,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1695600000,
+        "date_end_unix": 1696118400,
+        "average": 239,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1665964800,
+        "date_end_unix": 1666483200,
+        "average": 1836,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1682899200,
+        "date_end_unix": 1683417600,
+        "average": 442,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1686528000,
+        "date_end_unix": 1687046400,
+        "average": 24,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1656288000,
+        "date_end_unix": 1656806400,
+        "average": 1605,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1625443200,
+        "date_end_unix": 1625961600,
+        "average": 149,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1680480000,
+        "date_end_unix": 1680998400,
+        "average": 635,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1671408000,
+        "date_end_unix": 1671926400,
+        "average": 1494,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1662336000,
+        "date_end_unix": 1662854400,
+        "average": 437,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1620604800,
+        "date_end_unix": 1621123200,
+        "average": 155,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1627862400,
+        "date_end_unix": 1628380800,
+        "average": 253,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1617580800,
+        "date_end_unix": 1618099200,
+        "average": 183,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1691971200,
+        "date_end_unix": 1692489600,
+        "average": 100,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1633305600,
+        "date_end_unix": 1633824000,
+        "average": 83,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1626048000,
+        "date_end_unix": 1626566400,
+        "average": 664,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1637539200,
+        "date_end_unix": 1638057600,
+        "average": 1095,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1699228800,
+        "date_end_unix": 1699747200,
+        "average": 1142,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1650240000,
+        "date_end_unix": 1650758400,
+        "average": 382,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1647216000,
+        "date_end_unix": 1647734400,
+        "average": 2701,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1615161600,
+        "date_end_unix": 1615680000,
+        "average": 142,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1699833600,
+        "date_end_unix": 1700352000,
+        "average": 1154,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1635120000,
+        "date_end_unix": 1635638400,
+        "average": 334,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1657497600,
+        "date_end_unix": 1658016000,
+        "average": 2468,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1674432000,
+        "date_end_unix": 1674950400,
+        "average": 422,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1661731200,
+        "date_end_unix": 1662249600,
+        "average": 330,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1689552000,
+        "date_end_unix": 1690070400,
+        "average": 43,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1646611200,
+        "date_end_unix": 1647129600,
+        "average": 3475,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1603670400,
+        "date_end_unix": 1604188800,
+        "average": 238,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1701648000,
+        "date_end_unix": 1702166400,
+        "average": 7255,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1668384000,
+        "date_end_unix": 1668902400,
+        "average": 875,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1652054400,
+        "date_end_unix": 1652572800,
+        "average": 227,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1612137600,
+        "date_end_unix": 1612656000,
+        "average": 133,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1685923200,
+        "date_end_unix": 1686441600,
+        "average": 49,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1647820800,
+        "date_end_unix": 1648339200,
+        "average": 1562,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1636934400,
+        "date_end_unix": 1637452800,
+        "average": 743,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1693785600,
+        "date_end_unix": 1694304000,
+        "average": 374,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1601251200,
+        "date_end_unix": 1601769600,
+        "average": 109,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1642982400,
+        "date_end_unix": 1643500800,
+        "average": 1337,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1694390400,
+        "date_end_unix": 1694908800,
+        "average": 290,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1610323200,
+        "date_end_unix": 1610841600,
+        "average": 169,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1691366400,
+        "date_end_unix": 1691884800,
+        "average": 4,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1616371200,
+        "date_end_unix": 1616889600,
+        "average": 99,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1607299200,
+        "date_end_unix": 1607817600,
+        "average": 157,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1710115200,
+        "date_end_unix": 1710633600,
+        "average": 33,
+        "data_is_outdated": false,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1643587200,
+        "date_end_unix": 1644105600,
+        "average": 2179,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1630281600,
+        "date_end_unix": 1630800000,
+        "average": 161,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1605484800,
+        "date_end_unix": 1606003200,
+        "average": 524,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1687132800,
+        "date_end_unix": 1687651200,
+        "average": 43,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1668988800,
+        "date_end_unix": 1669507200,
+        "average": 812,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1665360000,
+        "date_end_unix": 1665878400,
+        "average": 1980,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1638748800,
+        "date_end_unix": 1639267200,
+        "average": 457,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1698624000,
+        "date_end_unix": 1699142400,
+        "average": 846,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1705881600,
+        "date_end_unix": 1706400000,
+        "average": 759,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1624233600,
+        "date_end_unix": 1624752000,
+        "average": 0,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1644796800,
+        "date_end_unix": 1645315200,
+        "average": 1749,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1661126400,
+        "date_end_unix": 1661644800,
+        "average": 330,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1688342400,
+        "date_end_unix": 1688860800,
+        "average": 55,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1681084800,
+        "date_end_unix": 1681603200,
+        "average": 507,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1707091200,
+        "date_end_unix": 1707609600,
+        "average": 662,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1615766400,
+        "date_end_unix": 1616284800,
+        "average": 64,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1703462400,
+        "date_end_unix": 1703980800,
+        "average": 2176,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1701043200,
+        "date_end_unix": 1701561600,
+        "average": 3001,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1688947200,
+        "date_end_unix": 1689465600,
+        "average": 43,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1673827200,
+        "date_end_unix": 1674345600,
+        "average": 548,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1664150400,
+        "date_end_unix": 1664668800,
+        "average": 1456,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1694995200,
+        "date_end_unix": 1695513600,
+        "average": 1370,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1651449600,
+        "date_end_unix": 1651968000,
+        "average": 332,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1654473600,
+        "date_end_unix": 1654992000,
+        "average": 290,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1631491200,
+        "date_end_unix": 1632009600,
+        "average": 111,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1645401600,
+        "date_end_unix": 1645920000,
+        "average": 1458,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1677456000,
+        "date_end_unix": 1677974400,
+        "average": 972,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1626652800,
+        "date_end_unix": 1627171200,
+        "average": 209,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1707696000,
+        "date_end_unix": 1708214400,
+        "average": 279,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1692576000,
+        "date_end_unix": 1693094400,
+        "average": 321,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1652659200,
+        "date_end_unix": 1653177600,
+        "average": 175,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1696809600,
+        "date_end_unix": 1697328000,
+        "average": 367,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1618790400,
+        "date_end_unix": 1619308800,
+        "average": 141,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1660521600,
+        "date_end_unix": 1661040000,
+        "average": 557,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1667174400,
+        "date_end_unix": 1667692800,
+        "average": 761,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1602460800,
+        "date_end_unix": 1602979200,
+        "average": 138,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1635724800,
+        "date_end_unix": 1636243200,
+        "average": 346,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1632096000,
+        "date_end_unix": 1632614400,
+        "average": 43,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1658707200,
+        "date_end_unix": 1659225600,
+        "average": 1986,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1629676800,
+        "date_end_unix": 1630195200,
+        "average": 492,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1608508800,
+        "date_end_unix": 1609027200,
+        "average": 230,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1655683200,
+        "date_end_unix": 1656201600,
+        "average": 891,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1604275200,
+        "date_end_unix": 1604793600,
+        "average": 268,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1673222400,
+        "date_end_unix": 1673740800,
+        "average": 538,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1690156800,
+        "date_end_unix": 1690675200,
+        "average": 140,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1658102400,
+        "date_end_unix": 1658620800,
+        "average": 2039,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1709510400,
+        "date_end_unix": 1710028800,
+        "average": 168,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1640563200,
+        "date_end_unix": 1641081600,
+        "average": 907,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1634515200,
+        "date_end_unix": 1635033600,
+        "average": 432,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1618185600,
+        "date_end_unix": 1618704000,
+        "average": 149,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1684713600,
+        "date_end_unix": 1685232000,
+        "average": 124,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1679875200,
+        "date_end_unix": 1680393600,
+        "average": 1157,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1669593600,
+        "date_end_unix": 1670112000,
+        "average": 857,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1696204800,
+        "date_end_unix": 1696723200,
+        "average": 127,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1613952000,
+        "date_end_unix": 1614470400,
+        "average": 121,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1685318400,
+        "date_end_unix": 1685836800,
+        "average": 136,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1614556800,
+        "date_end_unix": 1615075200,
+        "average": 66,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1670198400,
+        "date_end_unix": 1670716800,
+        "average": 1445,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1627257600,
+        "date_end_unix": 1627776000,
+        "average": 144,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1603065600,
+        "date_end_unix": 1603584000,
+        "average": 217,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1624838400,
+        "date_end_unix": 1625356800,
+        "average": 6,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1648425600,
+        "date_end_unix": 1648944000,
+        "average": 1508,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1655078400,
+        "date_end_unix": 1655596800,
+        "average": 1144,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1623628800,
+        "date_end_unix": 1624147200,
+        "average": 61,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1607904000,
+        "date_end_unix": 1608422400,
+        "average": 1221,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1621209600,
+        "date_end_unix": 1621728000,
+        "average": 49,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1642377600,
+        "date_end_unix": 1642896000,
+        "average": 728,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1610928000,
+        "date_end_unix": 1611446400,
+        "average": 138,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1663545600,
+        "date_end_unix": 1664064000,
+        "average": 695,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1612742400,
+        "date_end_unix": 1613260800,
+        "average": 27,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1649030400,
+        "date_end_unix": 1649548800,
+        "average": 778,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1666569600,
+        "date_end_unix": 1667088000,
+        "average": 1117,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1638144000,
+        "date_end_unix": 1638662400,
+        "average": 816,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1667779200,
+        "date_end_unix": 1668297600,
+        "average": 500,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1662940800,
+        "date_end_unix": 1663459200,
+        "average": 522,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1676851200,
+        "date_end_unix": 1677369600,
+        "average": 1115,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1693180800,
+        "date_end_unix": 1693699200,
+        "average": 250,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1704067200,
+        "date_end_unix": 1704585600,
+        "average": 1799,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1600041600,
+        "date_end_unix": 1600560000,
+        "average": 27,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1700438400,
+        "date_end_unix": 1700956800,
+        "average": 1248,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1606694400,
+        "date_end_unix": 1607212800,
+        "average": 299,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1684108800,
+        "date_end_unix": 1684627200,
+        "average": 79,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1633910400,
+        "date_end_unix": 1634428800,
+        "average": 177,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      },
+      {
+        "date_start_unix": 1681689600,
+        "date_end_unix": 1682208000,
+        "average": 459,
+        "data_is_outdated": true,
+        "date_of_insertion_unix": 1711544758
+      }
+    ],
+    "last_value": {
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 21,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    }
+  },
+  "sewer_installation_measurement": {
+    "total_number_of_samples": 3,
+    "sampled_installation_count": 2,
+    "total_installation_count": 2,
+    "date_start_unix": 1710720000,
+    "date_end_unix": 1711238400,
+    "date_of_insertion_unix": 1711544758
+  },
+  "sewer_per_installation": {
+    "values": [
+      {
+        "rwzi_awzi_name": "Olburgen",
+        "values": [
+          {
+            "date_unix": 1599609600,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1600214400,
+            "rna_normalized": 15,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1600819200,
+            "rna_normalized": 201,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1601424000,
+            "rna_normalized": 157,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1602028800,
+            "rna_normalized": 507,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1602633600,
+            "rna_normalized": 165,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1603065600,
+            "rna_normalized": 637,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1603238400,
+            "rna_normalized": 548,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1603670400,
+            "rna_normalized": 349,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1603843200,
+            "rna_normalized": 1201,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1604275200,
+            "rna_normalized": 247,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1604448000,
+            "rna_normalized": 311,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1604880000,
+            "rna_normalized": 97,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1605052800,
+            "rna_normalized": 76,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1605484800,
+            "rna_normalized": 280,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1606089600,
+            "rna_normalized": 69,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1605657600,
+            "rna_normalized": 120,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1606262400,
+            "rna_normalized": 78,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1606694400,
+            "rna_normalized": 551,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1606867200,
+            "rna_normalized": 42,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1607299200,
+            "rna_normalized": 127,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1607472000,
+            "rna_normalized": 126,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1607904000,
+            "rna_normalized": 964,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1608076800,
+            "rna_normalized": 163,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1608508800,
+            "rna_normalized": 265,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1608681600,
+            "rna_normalized": 465,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1609113600,
+            "rna_normalized": 27,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1609891200,
+            "rna_normalized": 82,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1610323200,
+            "rna_normalized": 329,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1610496000,
+            "rna_normalized": 238,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1611100800,
+            "rna_normalized": 85,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1610928000,
+            "rna_normalized": 172,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1611532800,
+            "rna_normalized": 1022,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1611705600,
+            "rna_normalized": 193,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1612310400,
+            "rna_normalized": 272,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1612742400,
+            "rna_normalized": 56,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1612137600,
+            "rna_normalized": 169,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1612915200,
+            "rna_normalized": 36,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1613347200,
+            "rna_normalized": 224,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1613520000,
+            "rna_normalized": 7,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1613952000,
+            "rna_normalized": 145,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1614124800,
+            "rna_normalized": 33,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1614556800,
+            "rna_normalized": 58,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1614729600,
+            "rna_normalized": 68,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1615161600,
+            "rna_normalized": 172,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1615334400,
+            "rna_normalized": 313,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1615766400,
+            "rna_normalized": 63,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1616371200,
+            "rna_normalized": 71,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1615939200,
+            "rna_normalized": 84,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1616544000,
+            "rna_normalized": 134,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1616976000,
+            "rna_normalized": 223,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1617148800,
+            "rna_normalized": 123,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1617580800,
+            "rna_normalized": 356,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1617753600,
+            "rna_normalized": 451,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1618185600,
+            "rna_normalized": 113,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1618358400,
+            "rna_normalized": 111,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1618790400,
+            "rna_normalized": 79,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1618963200,
+            "rna_normalized": 62,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1619395200,
+            "rna_normalized": 113,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1620000000,
+            "rna_normalized": 248,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1620604800,
+            "rna_normalized": 62,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1621209600,
+            "rna_normalized": 85,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1621987200,
+            "rna_normalized": 356,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1622592000,
+            "rna_normalized": 106,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1623024000,
+            "rna_normalized": 50,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1623196800,
+            "rna_normalized": 19,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1623628800,
+            "rna_normalized": 7,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1609718400,
+            "rna_normalized": 296,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1624406400,
+            "rna_normalized": 14,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1624838400,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1625616000,
+            "rna_normalized": 100,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1626220800,
+            "rna_normalized": 199,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1626652800,
+            "rna_normalized": 129,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1626825600,
+            "rna_normalized": 75,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1627257600,
+            "rna_normalized": 53,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1627430400,
+            "rna_normalized": 10,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1627862400,
+            "rna_normalized": 35,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1628035200,
+            "rna_normalized": 72,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1628467200,
+            "rna_normalized": 72,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1628640000,
+            "rna_normalized": 298,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1629072000,
+            "rna_normalized": 394,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1629244800,
+            "rna_normalized": 165,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1629676800,
+            "rna_normalized": 15,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1629849600,
+            "rna_normalized": 352,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1630540800,
+            "rna_normalized": 149,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1630281600,
+            "rna_normalized": 29,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1630800000,
+            "rna_normalized": 376,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1630972800,
+            "rna_normalized": 93,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1631145600,
+            "rna_normalized": 172,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1631404800,
+            "rna_normalized": 36,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1631664000,
+            "rna_normalized": 72,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1631750400,
+            "rna_normalized": 9,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632096000,
+            "rna_normalized": 76,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632182400,
+            "rna_normalized": 24,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632355200,
+            "rna_normalized": 6,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632700800,
+            "rna_normalized": 5,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632873600,
+            "rna_normalized": 109,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632960000,
+            "rna_normalized": 11,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1633392000,
+            "rna_normalized": 34,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1633305600,
+            "rna_normalized": 10,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1633564800,
+            "rna_normalized": 21,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1633910400,
+            "rna_normalized": 275,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1633996800,
+            "rna_normalized": 155,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1634169600,
+            "rna_normalized": 33,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1634515200,
+            "rna_normalized": 50,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1634601600,
+            "rna_normalized": 197,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1634774400,
+            "rna_normalized": 276,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635206400,
+            "rna_normalized": 169,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635292800,
+            "rna_normalized": 395,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635379200,
+            "rna_normalized": 262,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635724800,
+            "rna_normalized": 153,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635811200,
+            "rna_normalized": 216,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635984000,
+            "rna_normalized": 300,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1636329600,
+            "rna_normalized": 324,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1636416000,
+            "rna_normalized": 497,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1636588800,
+            "rna_normalized": 391,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1636934400,
+            "rna_normalized": 873,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637020800,
+            "rna_normalized": 539,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637193600,
+            "rna_normalized": 678,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637539200,
+            "rna_normalized": 1940,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637625600,
+            "rna_normalized": 1935,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637712000,
+            "rna_normalized": 506,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637798400,
+            "rna_normalized": 1610,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638144000,
+            "rna_normalized": 568,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638230400,
+            "rna_normalized": 710,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638403200,
+            "rna_normalized": 402,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638316800,
+            "rna_normalized": 429,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638748800,
+            "rna_normalized": 494,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638835200,
+            "rna_normalized": 223,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638921600,
+            "rna_normalized": 180,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639008000,
+            "rna_normalized": 515,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639353600,
+            "rna_normalized": 453,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639440000,
+            "rna_normalized": 490,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639526400,
+            "rna_normalized": 416,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639612800,
+            "rna_normalized": 1048,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640044800,
+            "rna_normalized": 151,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639958400,
+            "rna_normalized": 261,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640217600,
+            "rna_normalized": 620,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640131200,
+            "rna_normalized": 252,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640563200,
+            "rna_normalized": 171,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640649600,
+            "rna_normalized": 569,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640736000,
+            "rna_normalized": 544,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640822400,
+            "rna_normalized": 453,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641254400,
+            "rna_normalized": 271,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641340800,
+            "rna_normalized": 2347,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641168000,
+            "rna_normalized": 319,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641427200,
+            "rna_normalized": 56,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641772800,
+            "rna_normalized": 148,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641859200,
+            "rna_normalized": 190,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641945600,
+            "rna_normalized": 346,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642032000,
+            "rna_normalized": 225,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642377600,
+            "rna_normalized": 229,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642636800,
+            "rna_normalized": 379,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642550400,
+            "rna_normalized": 607,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642982400,
+            "rna_normalized": 469,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643068800,
+            "rna_normalized": 350,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643155200,
+            "rna_normalized": 664,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643241600,
+            "rna_normalized": 391,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642464000,
+            "rna_normalized": 764,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643760000,
+            "rna_normalized": 411,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643673600,
+            "rna_normalized": 169,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643587200,
+            "rna_normalized": 911,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643846400,
+            "rna_normalized": 645,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644192000,
+            "rna_normalized": 413,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644278400,
+            "rna_normalized": 769,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644364800,
+            "rna_normalized": 928,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644451200,
+            "rna_normalized": 1258,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644796800,
+            "rna_normalized": 1652,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644883200,
+            "rna_normalized": 2885,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644969600,
+            "rna_normalized": 2086,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1645056000,
+            "rna_normalized": 161,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1645401600,
+            "rna_normalized": 432,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1645488000,
+            "rna_normalized": 981,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1645574400,
+            "rna_normalized": 265,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1645660800,
+            "rna_normalized": 1120,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646006400,
+            "rna_normalized": 829,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646092800,
+            "rna_normalized": 828,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646179200,
+            "rna_normalized": 1450,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646265600,
+            "rna_normalized": 2120,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646611200,
+            "rna_normalized": 2389,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646697600,
+            "rna_normalized": 1592,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646784000,
+            "rna_normalized": 2399,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646870400,
+            "rna_normalized": 2929,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647216000,
+            "rna_normalized": 2460,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647302400,
+            "rna_normalized": 1809,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647388800,
+            "rna_normalized": 1930,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647475200,
+            "rna_normalized": 1797,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647820800,
+            "rna_normalized": 1457,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647907200,
+            "rna_normalized": 1767,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1648080000,
+            "rna_normalized": 1455,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1648425600,
+            "rna_normalized": 1314,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1648512000,
+            "rna_normalized": 1307,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1648598400,
+            "rna_normalized": 1502,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1648684800,
+            "rna_normalized": 3593,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649030400,
+            "rna_normalized": 6816,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649116800,
+            "rna_normalized": 1141,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649203200,
+            "rna_normalized": 1365,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649635200,
+            "rna_normalized": 372,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649721600,
+            "rna_normalized": 580,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649808000,
+            "rna_normalized": 563,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649894400,
+            "rna_normalized": 450,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650240000,
+            "rna_normalized": 788,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650326400,
+            "rna_normalized": 384,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650412800,
+            "rna_normalized": 340,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650844800,
+            "rna_normalized": 265,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650499200,
+            "rna_normalized": 327,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650931200,
+            "rna_normalized": 221,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651017600,
+            "rna_normalized": 229,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651104000,
+            "rna_normalized": 298,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651449600,
+            "rna_normalized": 163,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651622400,
+            "rna_normalized": 363,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651536000,
+            "rna_normalized": 347,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651708800,
+            "rna_normalized": 223,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652054400,
+            "rna_normalized": 111,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652227200,
+            "rna_normalized": 116,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652140800,
+            "rna_normalized": 97,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652313600,
+            "rna_normalized": 113,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652659200,
+            "rna_normalized": 133,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652745600,
+            "rna_normalized": 164,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652832000,
+            "rna_normalized": 93,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652918400,
+            "rna_normalized": 410,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1653264000,
+            "rna_normalized": 103,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1653350400,
+            "rna_normalized": 43,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1653523200,
+            "rna_normalized": 43,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1653868800,
+            "rna_normalized": 217,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1653955200,
+            "rna_normalized": 84,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1654041600,
+            "rna_normalized": 171,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1654128000,
+            "rna_normalized": 197,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1654473600,
+            "rna_normalized": 98,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1654560000,
+            "rna_normalized": 46,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1654732800,
+            "rna_normalized": 89,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655078400,
+            "rna_normalized": 229,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655164800,
+            "rna_normalized": 355,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655251200,
+            "rna_normalized": 1053,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655337600,
+            "rna_normalized": 320,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655683200,
+            "rna_normalized": 589,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655769600,
+            "rna_normalized": 1036,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655856000,
+            "rna_normalized": 827,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655942400,
+            "rna_normalized": 793,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1656288000,
+            "rna_normalized": 1915,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1656374400,
+            "rna_normalized": 657,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1656892800,
+            "rna_normalized": 1293,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1656460800,
+            "rna_normalized": 924,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1656979200,
+            "rna_normalized": 1052,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657065600,
+            "rna_normalized": 782,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657152000,
+            "rna_normalized": 1279,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657497600,
+            "rna_normalized": 1396,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657584000,
+            "rna_normalized": 1105,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657670400,
+            "rna_normalized": 540,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657756800,
+            "rna_normalized": 1099,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658102400,
+            "rna_normalized": 1376,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658188800,
+            "rna_normalized": 1060,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658275200,
+            "rna_normalized": 1986,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658361600,
+            "rna_normalized": 769,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658707200,
+            "rna_normalized": 1560,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658793600,
+            "rna_normalized": 957,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658880000,
+            "rna_normalized": 875,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658966400,
+            "rna_normalized": 1018,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1659312000,
+            "rna_normalized": 1735,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1659398400,
+            "rna_normalized": 907,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1659484800,
+            "rna_normalized": 667,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1659571200,
+            "rna_normalized": 645,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1659916800,
+            "rna_normalized": 277,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660003200,
+            "rna_normalized": 310,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660176000,
+            "rna_normalized": 493,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660089600,
+            "rna_normalized": 345,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660521600,
+            "rna_normalized": 474,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660608000,
+            "rna_normalized": 387,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660694400,
+            "rna_normalized": 502,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660780800,
+            "rna_normalized": 285,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661126400,
+            "rna_normalized": 493,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661212800,
+            "rna_normalized": 317,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661299200,
+            "rna_normalized": 96,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661385600,
+            "rna_normalized": 153,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661817600,
+            "rna_normalized": 269,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661731200,
+            "rna_normalized": 295,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661904000,
+            "rna_normalized": 141,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661990400,
+            "rna_normalized": 202,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1662422400,
+            "rna_normalized": 745,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1662336000,
+            "rna_normalized": 373,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1662508800,
+            "rna_normalized": 313,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1662595200,
+            "rna_normalized": 202,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1662940800,
+            "rna_normalized": 381,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663027200,
+            "rna_normalized": 369,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663113600,
+            "rna_normalized": 372,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663200000,
+            "rna_normalized": 573,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663545600,
+            "rna_normalized": 413,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663632000,
+            "rna_normalized": 307,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663718400,
+            "rna_normalized": 273,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663804800,
+            "rna_normalized": 693,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664236800,
+            "rna_normalized": 694,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664323200,
+            "rna_normalized": 1349,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664409600,
+            "rna_normalized": 1671,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664755200,
+            "rna_normalized": 2715,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664841600,
+            "rna_normalized": 1114,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664928000,
+            "rna_normalized": 2360,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665014400,
+            "rna_normalized": 1755,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665360000,
+            "rna_normalized": 2460,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665446400,
+            "rna_normalized": 1941,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665619200,
+            "rna_normalized": 3341,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665532800,
+            "rna_normalized": 4921,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665964800,
+            "rna_normalized": 1829,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666051200,
+            "rna_normalized": 694,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666137600,
+            "rna_normalized": 472,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666224000,
+            "rna_normalized": 2008,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666569600,
+            "rna_normalized": 1978,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666656000,
+            "rna_normalized": 505,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666742400,
+            "rna_normalized": 1071,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666828800,
+            "rna_normalized": 1056,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667174400,
+            "rna_normalized": 750,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667260800,
+            "rna_normalized": 933,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667347200,
+            "rna_normalized": 759,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667433600,
+            "rna_normalized": 1750,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667779200,
+            "rna_normalized": 212,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667952000,
+            "rna_normalized": 352,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667865600,
+            "rna_normalized": 633,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668038400,
+            "rna_normalized": 355,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668384000,
+            "rna_normalized": 749,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668470400,
+            "rna_normalized": 1568,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668556800,
+            "rna_normalized": 1193,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668643200,
+            "rna_normalized": 333,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668988800,
+            "rna_normalized": 474,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669075200,
+            "rna_normalized": 373,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669161600,
+            "rna_normalized": 1219,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669248000,
+            "rna_normalized": 718,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669593600,
+            "rna_normalized": 990,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669680000,
+            "rna_normalized": 593,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669766400,
+            "rna_normalized": 663,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669852800,
+            "rna_normalized": 824,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670198400,
+            "rna_normalized": 1263,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670371200,
+            "rna_normalized": 880,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670284800,
+            "rna_normalized": 1361,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670457600,
+            "rna_normalized": 1137,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670803200,
+            "rna_normalized": 1889,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670889600,
+            "rna_normalized": 1096,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670976000,
+            "rna_normalized": 1713,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1671062400,
+            "rna_normalized": 1685,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1671408000,
+            "rna_normalized": 3264,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1671580800,
+            "rna_normalized": 787,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1671667200,
+            "rna_normalized": 4010,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672012800,
+            "rna_normalized": 1072,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672272000,
+            "rna_normalized": 961,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672099200,
+            "rna_normalized": 1271,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672617600,
+            "rna_normalized": 635,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672704000,
+            "rna_normalized": 1239,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672790400,
+            "rna_normalized": 1122,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672876800,
+            "rna_normalized": 360,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673308800,
+            "rna_normalized": 623,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673395200,
+            "rna_normalized": 501,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673222400,
+            "rna_normalized": 1216,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673481600,
+            "rna_normalized": 817,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673827200,
+            "rna_normalized": 891,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674000000,
+            "rna_normalized": 369,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674086400,
+            "rna_normalized": 211,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674432000,
+            "rna_normalized": 488,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673913600,
+            "rna_normalized": 168,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674604800,
+            "rna_normalized": 463,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674518400,
+            "rna_normalized": 408,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674691200,
+            "rna_normalized": 1136,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675036800,
+            "rna_normalized": 394,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675209600,
+            "rna_normalized": 1337,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675123200,
+            "rna_normalized": 448,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675296000,
+            "rna_normalized": 815,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675641600,
+            "rna_normalized": 891,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675728000,
+            "rna_normalized": 441,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675900800,
+            "rna_normalized": 882,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1676246400,
+            "rna_normalized": 289,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1676332800,
+            "rna_normalized": 425,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1676505600,
+            "rna_normalized": 964,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1676937600,
+            "rna_normalized": 1485,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1677110400,
+            "rna_normalized": 1613,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1677456000,
+            "rna_normalized": 2256,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1677542400,
+            "rna_normalized": 5416,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1676851200,
+            "rna_normalized": 1067,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1677715200,
+            "rna_normalized": 2247,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1678060800,
+            "rna_normalized": 4659,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1678147200,
+            "rna_normalized": 4863,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1678320000,
+            "rna_normalized": 5533,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1678665600,
+            "rna_normalized": 1451,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1678752000,
+            "rna_normalized": 3178,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1678924800,
+            "rna_normalized": 2275,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1679270400,
+            "rna_normalized": 973,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1679356800,
+            "rna_normalized": 1374,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1679529600,
+            "rna_normalized": 1820,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1679961600,
+            "rna_normalized": 934,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1679875200,
+            "rna_normalized": 1457,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1680134400,
+            "rna_normalized": 1234,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1680480000,
+            "rna_normalized": 287,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1680566400,
+            "rna_normalized": 478,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1680739200,
+            "rna_normalized": 2429,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681084800,
+            "rna_normalized": 1013,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681171200,
+            "rna_normalized": 455,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681344000,
+            "rna_normalized": 712,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681689600,
+            "rna_normalized": 498,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681776000,
+            "rna_normalized": 222,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681948800,
+            "rna_normalized": 1335,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1682294400,
+            "rna_normalized": 118,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1682380800,
+            "rna_normalized": 391,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1682553600,
+            "rna_normalized": 436,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1682899200,
+            "rna_normalized": 655,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1683072000,
+            "rna_normalized": 432,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1683158400,
+            "rna_normalized": 499,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1683590400,
+            "rna_normalized": 494,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1683504000,
+            "rna_normalized": 282,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1683763200,
+            "rna_normalized": 218,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684195200,
+            "rna_normalized": 107,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684368000,
+            "rna_normalized": 62,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684108800,
+            "rna_normalized": 194,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684800000,
+            "rna_normalized": 69,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684713600,
+            "rna_normalized": 241,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684972800,
+            "rna_normalized": 53,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1685318400,
+            "rna_normalized": 51,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1685404800,
+            "rna_normalized": 82,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1685577600,
+            "rna_normalized": 128,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1685923200,
+            "rna_normalized": 81,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1686009600,
+            "rna_normalized": 34,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1686182400,
+            "rna_normalized": 176,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1686614400,
+            "rna_normalized": 13,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1686528000,
+            "rna_normalized": 45,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1686787200,
+            "rna_normalized": 122,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687132800,
+            "rna_normalized": 32,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687219200,
+            "rna_normalized": 44,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687392000,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687737600,
+            "rna_normalized": 41,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687824000,
+            "rna_normalized": 27,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687996800,
+            "rna_normalized": 9,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1688342400,
+            "rna_normalized": 13,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1688428800,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1688601600,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1689033600,
+            "rna_normalized": 198,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1688947200,
+            "rna_normalized": 145,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1689206400,
+            "rna_normalized": 26,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1689552000,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1689811200,
+            "rna_normalized": 19,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1690156800,
+            "rna_normalized": 261,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1690416000,
+            "rna_normalized": 138,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1690761600,
+            "rna_normalized": 68,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1691020800,
+            "rna_normalized": 163,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1691366400,
+            "rna_normalized": 163,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1691625600,
+            "rna_normalized": 107,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1691971200,
+            "rna_normalized": 291,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1692230400,
+            "rna_normalized": 466,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1692576000,
+            "rna_normalized": 368,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1692835200,
+            "rna_normalized": 255,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1693180800,
+            "rna_normalized": 119,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1693440000,
+            "rna_normalized": 186,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1693785600,
+            "rna_normalized": 449,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1694044800,
+            "rna_normalized": 639,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1694390400,
+            "rna_normalized": 1006,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1694649600,
+            "rna_normalized": 189,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1694995200,
+            "rna_normalized": 1023,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1695254400,
+            "rna_normalized": 1100,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1695600000,
+            "rna_normalized": 439,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1695859200,
+            "rna_normalized": 225,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1696204800,
+            "rna_normalized": 355,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1696377600,
+            "rna_normalized": 448,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1696809600,
+            "rna_normalized": 486,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1696982400,
+            "rna_normalized": 858,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1697414400,
+            "rna_normalized": 133,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1697587200,
+            "rna_normalized": 1066,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1698019200,
+            "rna_normalized": 551,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1698624000,
+            "rna_normalized": 1683,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1698796800,
+            "rna_normalized": 685,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1699228800,
+            "rna_normalized": 621,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1699401600,
+            "rna_normalized": 589,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1699833600,
+            "rna_normalized": 1618,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1698192000,
+            "rna_normalized": 1211,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1700006400,
+            "rna_normalized": 1062,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1700438400,
+            "rna_normalized": 829,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1700611200,
+            "rna_normalized": 1657,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1701216000,
+            "rna_normalized": 1442,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1701820800,
+            "rna_normalized": 4827,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1702252800,
+            "rna_normalized": 3756,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1702425600,
+            "rna_normalized": 2190,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1702857600,
+            "rna_normalized": 4164,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1703030400,
+            "rna_normalized": 4403,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1703548800,
+            "rna_normalized": 1178,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1703721600,
+            "rna_normalized": 1921,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1704672000,
+            "rna_normalized": 842,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1705276800,
+            "rna_normalized": 712,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1705881600,
+            "rna_normalized": 1046,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1706486400,
+            "rna_normalized": 343,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1707177600,
+            "rna_normalized": 952,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1708473600,
+            "rna_normalized": 210,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1708905600,
+            "rna_normalized": 12,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1709769600,
+            "rna_normalized": 33,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1710288000,
+            "rna_normalized": 77,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1710806400,
+            "rna_normalized": 34,
+            "date_of_insertion_unix": 1711544762
+          }
+        ],
+        "last_value": {
+          "date_unix": 1710806400,
+          "rna_normalized": 34,
+          "date_of_insertion_unix": 1711544762
+        }
+      },
+      {
+        "rwzi_awzi_name": "Nieuwgraaf",
+        "values": [
+          {
+            "date_unix": 1600214400,
+            "rna_normalized": 27,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1600819200,
+            "rna_normalized": 64,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1601424000,
+            "rna_normalized": 108,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1602028800,
+            "rna_normalized": 139,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1602633600,
+            "rna_normalized": 137,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1603065600,
+            "rna_normalized": 214,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1603238400,
+            "rna_normalized": 196,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1603670400,
+            "rna_normalized": 364,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1603843200,
+            "rna_normalized": 78,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1604275200,
+            "rna_normalized": 359,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1604448000,
+            "rna_normalized": 176,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1604880000,
+            "rna_normalized": 302,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1605052800,
+            "rna_normalized": 192,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1605484800,
+            "rna_normalized": 800,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1606089600,
+            "rna_normalized": 95,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1605657600,
+            "rna_normalized": 269,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1606262400,
+            "rna_normalized": 135,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1606694400,
+            "rna_normalized": 530,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1606867200,
+            "rna_normalized": 68,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1607299200,
+            "rna_normalized": 113,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1607472000,
+            "rna_normalized": 203,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1607904000,
+            "rna_normalized": 1801,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1608076800,
+            "rna_normalized": 682,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1608508800,
+            "rna_normalized": 219,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1608681600,
+            "rna_normalized": 232,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1609113600,
+            "rna_normalized": 162,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1609286400,
+            "rna_normalized": 63,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1609891200,
+            "rna_normalized": 74,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1609718400,
+            "rna_normalized": 115,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1610323200,
+            "rna_normalized": 145,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1610496000,
+            "rna_normalized": 186,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1611100800,
+            "rna_normalized": 112,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1610928000,
+            "rna_normalized": 164,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1611532800,
+            "rna_normalized": 458,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1611705600,
+            "rna_normalized": 161,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1612137600,
+            "rna_normalized": 46,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1612310400,
+            "rna_normalized": 215,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1612742400,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1613347200,
+            "rna_normalized": 368,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1613520000,
+            "rna_normalized": 134,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1612915200,
+            "rna_normalized": 52,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1613952000,
+            "rna_normalized": 91,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1614124800,
+            "rna_normalized": 153,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1614556800,
+            "rna_normalized": 39,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1614729600,
+            "rna_normalized": 92,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1615161600,
+            "rna_normalized": 132,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1615334400,
+            "rna_normalized": 146,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1615766400,
+            "rna_normalized": 72,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1616371200,
+            "rna_normalized": 127,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1615939200,
+            "rna_normalized": 54,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1616544000,
+            "rna_normalized": 70,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1616976000,
+            "rna_normalized": 72,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1617148800,
+            "rna_normalized": 100,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1617580800,
+            "rna_normalized": 82,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1617753600,
+            "rna_normalized": 270,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1618185600,
+            "rna_normalized": 184,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1618358400,
+            "rna_normalized": 117,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1618790400,
+            "rna_normalized": 176,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1618963200,
+            "rna_normalized": 111,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1619395200,
+            "rna_normalized": 216,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1620000000,
+            "rna_normalized": 79,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1620604800,
+            "rna_normalized": 158,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1621209600,
+            "rna_normalized": 47,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1621987200,
+            "rna_normalized": 164,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1622592000,
+            "rna_normalized": 254,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1622937600,
+            "rna_normalized": 84,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1623628800,
+            "rna_normalized": 62,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1624406400,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1624838400,
+            "rna_normalized": 6,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1625443200,
+            "rna_normalized": 150,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1626220800,
+            "rna_normalized": 679,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1626652800,
+            "rna_normalized": 136,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1626825600,
+            "rna_normalized": 288,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1627257600,
+            "rna_normalized": 208,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1627430400,
+            "rna_normalized": 87,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1627862400,
+            "rna_normalized": 108,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1628035200,
+            "rna_normalized": 411,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1628467200,
+            "rna_normalized": 253,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1629072000,
+            "rna_normalized": 442,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1629244800,
+            "rna_normalized": 406,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1628640000,
+            "rna_normalized": 210,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1629676800,
+            "rna_normalized": 425,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1629849600,
+            "rna_normalized": 577,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1630368000,
+            "rna_normalized": 46,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1630540800,
+            "rna_normalized": 367,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1630281600,
+            "rna_normalized": 69,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1630972800,
+            "rna_normalized": 109,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1631145600,
+            "rna_normalized": 93,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1631404800,
+            "rna_normalized": 111,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1631491200,
+            "rna_normalized": 5,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1631664000,
+            "rna_normalized": 239,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1631750400,
+            "rna_normalized": 95,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632268800,
+            "rna_normalized": 29,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632182400,
+            "rna_normalized": 28,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632355200,
+            "rna_normalized": 73,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632700800,
+            "rna_normalized": 21,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632873600,
+            "rna_normalized": 80,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1632960000,
+            "rna_normalized": 169,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1633392000,
+            "rna_normalized": 112,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1633305600,
+            "rna_normalized": 70,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1633564800,
+            "rna_normalized": 74,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1633910400,
+            "rna_normalized": 318,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1633996800,
+            "rna_normalized": 179,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1634169600,
+            "rna_normalized": 37,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1634515200,
+            "rna_normalized": 188,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1634601600,
+            "rna_normalized": 487,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1634774400,
+            "rna_normalized": 647,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635120000,
+            "rna_normalized": 336,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635206400,
+            "rna_normalized": 431,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635379200,
+            "rna_normalized": 240,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635724800,
+            "rna_normalized": 539,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635811200,
+            "rna_normalized": 242,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1635984000,
+            "rna_normalized": 270,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1636329600,
+            "rna_normalized": 577,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1636416000,
+            "rna_normalized": 371,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1636934400,
+            "rna_normalized": 786,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1636588800,
+            "rna_normalized": 298,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637020800,
+            "rna_normalized": 1026,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637193600,
+            "rna_normalized": 421,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637539200,
+            "rna_normalized": 1317,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637625600,
+            "rna_normalized": 1106,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637712000,
+            "rna_normalized": 1173,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1637798400,
+            "rna_normalized": 734,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638144000,
+            "rna_normalized": 1765,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638230400,
+            "rna_normalized": 717,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638316800,
+            "rna_normalized": 318,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638403200,
+            "rna_normalized": 501,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638748800,
+            "rna_normalized": 658,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638835200,
+            "rna_normalized": 218,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1638921600,
+            "rna_normalized": 524,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639008000,
+            "rna_normalized": 441,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639353600,
+            "rna_normalized": 693,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639440000,
+            "rna_normalized": 582,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639526400,
+            "rna_normalized": 558,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639612800,
+            "rna_normalized": 911,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640044800,
+            "rna_normalized": 480,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1639958400,
+            "rna_normalized": 310,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640217600,
+            "rna_normalized": 1442,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640131200,
+            "rna_normalized": 594,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640563200,
+            "rna_normalized": 504,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640649600,
+            "rna_normalized": 372,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640736000,
+            "rna_normalized": 1010,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1640822400,
+            "rna_normalized": 1803,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641168000,
+            "rna_normalized": 679,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641254400,
+            "rna_normalized": 656,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641340800,
+            "rna_normalized": 1228,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641427200,
+            "rna_normalized": 268,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641772800,
+            "rna_normalized": 468,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641859200,
+            "rna_normalized": 182,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1641945600,
+            "rna_normalized": 1976,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642032000,
+            "rna_normalized": 413,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642377600,
+            "rna_normalized": 837,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642636800,
+            "rna_normalized": 1233,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642982400,
+            "rna_normalized": 2531,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642550400,
+            "rna_normalized": 208,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643068800,
+            "rna_normalized": 609,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643155200,
+            "rna_normalized": 997,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643241600,
+            "rna_normalized": 1321,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643587200,
+            "rna_normalized": 2319,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1642464000,
+            "rna_normalized": 664,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643673600,
+            "rna_normalized": 2527,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643760000,
+            "rna_normalized": 2040,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1643846400,
+            "rna_normalized": 2033,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644192000,
+            "rna_normalized": 1923,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644278400,
+            "rna_normalized": 2857,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644364800,
+            "rna_normalized": 2440,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644451200,
+            "rna_normalized": 2731,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644796800,
+            "rna_normalized": 2334,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644883200,
+            "rna_normalized": 1196,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1644969600,
+            "rna_normalized": 2513,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1645056000,
+            "rna_normalized": 961,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1645401600,
+            "rna_normalized": 1730,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1645488000,
+            "rna_normalized": 932,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1645574400,
+            "rna_normalized": 857,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1645660800,
+            "rna_normalized": 2406,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646006400,
+            "rna_normalized": 1562,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646092800,
+            "rna_normalized": 1531,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646179200,
+            "rna_normalized": 2745,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646265600,
+            "rna_normalized": 3460,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646697600,
+            "rna_normalized": 3067,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646611200,
+            "rna_normalized": 3606,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646784000,
+            "rna_normalized": 2982,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1646870400,
+            "rna_normalized": 4390,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647216000,
+            "rna_normalized": 3378,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647302400,
+            "rna_normalized": 3223,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647388800,
+            "rna_normalized": 1832,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647475200,
+            "rna_normalized": 2458,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647820800,
+            "rna_normalized": 1106,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647907200,
+            "rna_normalized": 1279,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1647993600,
+            "rna_normalized": 2336,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1648080000,
+            "rna_normalized": 1528,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1648425600,
+            "rna_normalized": 1166,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1648512000,
+            "rna_normalized": 1541,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1648598400,
+            "rna_normalized": 1214,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1648684800,
+            "rna_normalized": 2057,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649030400,
+            "rna_normalized": 1061,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649116800,
+            "rna_normalized": 554,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649203200,
+            "rna_normalized": 585,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649289600,
+            "rna_normalized": 621,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649635200,
+            "rna_normalized": 696,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649721600,
+            "rna_normalized": 824,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649808000,
+            "rna_normalized": 961,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1649894400,
+            "rna_normalized": 493,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650326400,
+            "rna_normalized": 480,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650240000,
+            "rna_normalized": 305,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650412800,
+            "rna_normalized": 325,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650499200,
+            "rna_normalized": 410,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650844800,
+            "rna_normalized": 389,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1650931200,
+            "rna_normalized": 92,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651017600,
+            "rna_normalized": 91,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651104000,
+            "rna_normalized": 186,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651449600,
+            "rna_normalized": 290,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651536000,
+            "rna_normalized": 566,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651622400,
+            "rna_normalized": 115,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1651708800,
+            "rna_normalized": 361,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652054400,
+            "rna_normalized": 269,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652227200,
+            "rna_normalized": 137,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652140800,
+            "rna_normalized": 297,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652313600,
+            "rna_normalized": 219,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652659200,
+            "rna_normalized": 181,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652745600,
+            "rna_normalized": 164,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652832000,
+            "rna_normalized": 120,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1652918400,
+            "rna_normalized": 234,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1653264000,
+            "rna_normalized": 150,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1653350400,
+            "rna_normalized": 27,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1653523200,
+            "rna_normalized": 138,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1653868800,
+            "rna_normalized": 140,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1653955200,
+            "rna_normalized": 155,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1654041600,
+            "rna_normalized": 223,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1654128000,
+            "rna_normalized": 622,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1654473600,
+            "rna_normalized": 221,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1654560000,
+            "rna_normalized": 228,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1654732800,
+            "rna_normalized": 440,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655078400,
+            "rna_normalized": 627,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655164800,
+            "rna_normalized": 826,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655251200,
+            "rna_normalized": 2031,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655337600,
+            "rna_normalized": 1173,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655683200,
+            "rna_normalized": 729,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655769600,
+            "rna_normalized": 911,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655856000,
+            "rna_normalized": 766,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1655942400,
+            "rna_normalized": 1170,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1656288000,
+            "rna_normalized": 1732,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1656374400,
+            "rna_normalized": 885,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1656547200,
+            "rna_normalized": 2239,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1656892800,
+            "rna_normalized": 1842,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1656979200,
+            "rna_normalized": 1383,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657152000,
+            "rna_normalized": 1145,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657065600,
+            "rna_normalized": 1207,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657497600,
+            "rna_normalized": 2991,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657584000,
+            "rna_normalized": 2020,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657670400,
+            "rna_normalized": 2726,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1657756800,
+            "rna_normalized": 2313,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658102400,
+            "rna_normalized": 1627,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658188800,
+            "rna_normalized": 1115,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658275200,
+            "rna_normalized": 3370,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658361600,
+            "rna_normalized": 2137,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658707200,
+            "rna_normalized": 2048,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658793600,
+            "rna_normalized": 2000,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658880000,
+            "rna_normalized": 2318,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1658966400,
+            "rna_normalized": 1689,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1659312000,
+            "rna_normalized": 541,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1659398400,
+            "rna_normalized": 1011,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1659484800,
+            "rna_normalized": 916,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1659571200,
+            "rna_normalized": 1061,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1659916800,
+            "rna_normalized": 617,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660003200,
+            "rna_normalized": 707,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660176000,
+            "rna_normalized": 387,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660089600,
+            "rna_normalized": 465,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660521600,
+            "rna_normalized": 693,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660608000,
+            "rna_normalized": 577,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660694400,
+            "rna_normalized": 627,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1660780800,
+            "rna_normalized": 349,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661212800,
+            "rna_normalized": 241,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661126400,
+            "rna_normalized": 543,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661385600,
+            "rna_normalized": 335,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661299200,
+            "rna_normalized": 208,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661731200,
+            "rna_normalized": 401,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661817600,
+            "rna_normalized": 199,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661904000,
+            "rna_normalized": 538,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1661990400,
+            "rna_normalized": 194,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1662422400,
+            "rna_normalized": 945,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1662336000,
+            "rna_normalized": 250,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1662508800,
+            "rna_normalized": 418,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1662595200,
+            "rna_normalized": 137,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1662940800,
+            "rna_normalized": 816,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663027200,
+            "rna_normalized": 354,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663113600,
+            "rna_normalized": 657,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663200000,
+            "rna_normalized": 271,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663545600,
+            "rna_normalized": 254,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663632000,
+            "rna_normalized": 834,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663718400,
+            "rna_normalized": 449,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1663804800,
+            "rna_normalized": 1276,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664236800,
+            "rna_normalized": 1087,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664323200,
+            "rna_normalized": 1527,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664409600,
+            "rna_normalized": 1773,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664755200,
+            "rna_normalized": 1236,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664841600,
+            "rna_normalized": 1366,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1664928000,
+            "rna_normalized": 2987,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665014400,
+            "rna_normalized": 2476,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665360000,
+            "rna_normalized": 1278,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665446400,
+            "rna_normalized": 2391,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665619200,
+            "rna_normalized": 2632,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665532800,
+            "rna_normalized": 1472,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1665964800,
+            "rna_normalized": 2330,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666051200,
+            "rna_normalized": 2273,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666137600,
+            "rna_normalized": 1536,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666310400,
+            "rna_normalized": 1278,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666569600,
+            "rna_normalized": 1337,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666656000,
+            "rna_normalized": 981,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1666828800,
+            "rna_normalized": 1028,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667260800,
+            "rna_normalized": 543,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667347200,
+            "rna_normalized": 412,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667433600,
+            "rna_normalized": 817,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667174400,
+            "rna_normalized": 1238,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667779200,
+            "rna_normalized": 424,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667952000,
+            "rna_normalized": 468,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1667865600,
+            "rna_normalized": 839,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668038400,
+            "rna_normalized": 284,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668384000,
+            "rna_normalized": 506,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668470400,
+            "rna_normalized": 2131,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668556800,
+            "rna_normalized": 451,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668643200,
+            "rna_normalized": 400,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1668988800,
+            "rna_normalized": 281,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669075200,
+            "rna_normalized": 501,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669161600,
+            "rna_normalized": 1293,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669248000,
+            "rna_normalized": 1188,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669593600,
+            "rna_normalized": 904,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669680000,
+            "rna_normalized": 1064,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669766400,
+            "rna_normalized": 854,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1669852800,
+            "rna_normalized": 615,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670198400,
+            "rna_normalized": 1473,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670284800,
+            "rna_normalized": 1256,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670371200,
+            "rna_normalized": 1717,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670457600,
+            "rna_normalized": 1369,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670803200,
+            "rna_normalized": 1160,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670889600,
+            "rna_normalized": 1474,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1670976000,
+            "rna_normalized": 2206,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1671062400,
+            "rna_normalized": 1013,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1671408000,
+            "rna_normalized": 1730,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1671580800,
+            "rna_normalized": 900,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1671667200,
+            "rna_normalized": 1740,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672012800,
+            "rna_normalized": 1561,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672272000,
+            "rna_normalized": 1940,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672617600,
+            "rna_normalized": 749,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672099200,
+            "rna_normalized": 496,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672704000,
+            "rna_normalized": 864,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672790400,
+            "rna_normalized": 1056,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1672876800,
+            "rna_normalized": 1175,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673308800,
+            "rna_normalized": 194,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673395200,
+            "rna_normalized": 396,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673222400,
+            "rna_normalized": 956,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673481600,
+            "rna_normalized": 574,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673913600,
+            "rna_normalized": 234,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1673827200,
+            "rna_normalized": 1033,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674000000,
+            "rna_normalized": 413,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674086400,
+            "rna_normalized": 527,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674432000,
+            "rna_normalized": 496,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674518400,
+            "rna_normalized": 182,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674604800,
+            "rna_normalized": 425,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1674691200,
+            "rna_normalized": 558,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675036800,
+            "rna_normalized": 372,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675123200,
+            "rna_normalized": 498,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675209600,
+            "rna_normalized": 1269,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675296000,
+            "rna_normalized": 1033,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675641600,
+            "rna_normalized": 784,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675728000,
+            "rna_normalized": 656,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1675900800,
+            "rna_normalized": 1512,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1676246400,
+            "rna_normalized": 587,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1676332800,
+            "rna_normalized": 608,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1676505600,
+            "rna_normalized": 347,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1676937600,
+            "rna_normalized": 568,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1677110400,
+            "rna_normalized": 849,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1676851200,
+            "rna_normalized": 1904,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1677456000,
+            "rna_normalized": 1274,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1677542400,
+            "rna_normalized": 674,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1677715200,
+            "rna_normalized": 749,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1678060800,
+            "rna_normalized": 750,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1678233600,
+            "rna_normalized": 1209,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1678665600,
+            "rna_normalized": 1001,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1678752000,
+            "rna_normalized": 641,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1678924800,
+            "rna_normalized": 1702,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1679356800,
+            "rna_normalized": 1166,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1679270400,
+            "rna_normalized": 1550,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1679529600,
+            "rna_normalized": 1344,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1679961600,
+            "rna_normalized": 978,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1679875200,
+            "rna_normalized": 869,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1680134400,
+            "rna_normalized": 1619,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1680480000,
+            "rna_normalized": 378,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1680566400,
+            "rna_normalized": 254,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1680739200,
+            "rna_normalized": 1232,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681084800,
+            "rna_normalized": 853,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681171200,
+            "rna_normalized": 428,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681344000,
+            "rna_normalized": 219,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681689600,
+            "rna_normalized": 276,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681776000,
+            "rna_normalized": 651,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1681948800,
+            "rna_normalized": 429,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1682294400,
+            "rna_normalized": 273,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1682380800,
+            "rna_normalized": 688,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1682553600,
+            "rna_normalized": 556,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1682899200,
+            "rna_normalized": 328,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1683072000,
+            "rna_normalized": 175,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1683158400,
+            "rna_normalized": 815,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1683590400,
+            "rna_normalized": 64,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1683504000,
+            "rna_normalized": 288,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1683763200,
+            "rna_normalized": 243,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684108800,
+            "rna_normalized": 155,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684195200,
+            "rna_normalized": 42,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684368000,
+            "rna_normalized": 37,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684713600,
+            "rna_normalized": 52,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1685318400,
+            "rna_normalized": 223,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684972800,
+            "rna_normalized": 260,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1685404800,
+            "rna_normalized": 75,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1684886400,
+            "rna_normalized": 59,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1685577600,
+            "rna_normalized": 116,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1685923200,
+            "rna_normalized": 19,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1686009600,
+            "rna_normalized": 49,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1686182400,
+            "rna_normalized": 73,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1686614400,
+            "rna_normalized": 10,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1686528000,
+            "rna_normalized": 5,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1686787200,
+            "rna_normalized": 52,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687132800,
+            "rna_normalized": 90,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687219200,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687392000,
+            "rna_normalized": 39,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687737600,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687824000,
+            "rna_normalized": 25,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1687996800,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1688342400,
+            "rna_normalized": 40,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1688428800,
+            "rna_normalized": 19,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1688601600,
+            "rna_normalized": 111,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1688947200,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1689033600,
+            "rna_normalized": 36,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1689206400,
+            "rna_normalized": 87,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1689552000,
+            "rna_normalized": 27,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1689811200,
+            "rna_normalized": 61,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1690156800,
+            "rna_normalized": 178,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1690416000,
+            "rna_normalized": 97,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1690761600,
+            "rna_normalized": 557,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1691020800,
+            "rna_normalized": 13,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1691366400,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1691971200,
+            "rna_normalized": 81,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1692230400,
+            "rna_normalized": 103,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1692576000,
+            "rna_normalized": 351,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1692835200,
+            "rna_normalized": 291,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1693180800,
+            "rna_normalized": 305,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1693785600,
+            "rna_normalized": 383,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1694044800,
+            "rna_normalized": 355,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1693353600,
+            "rna_normalized": 200,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1694390400,
+            "rna_normalized": 244,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1694649600,
+            "rna_normalized": 318,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1694995200,
+            "rna_normalized": 1380,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1695254400,
+            "rna_normalized": 1379,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1695600000,
+            "rna_normalized": 353,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1695859200,
+            "rna_normalized": 119,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1696204800,
+            "rna_normalized": 65,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1696377600,
+            "rna_normalized": 172,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1696809600,
+            "rna_normalized": 562,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1696982400,
+            "rna_normalized": 153,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1697414400,
+            "rna_normalized": 29,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1697587200,
+            "rna_normalized": 377,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1698019200,
+            "rna_normalized": 95,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1698192000,
+            "rna_normalized": 148,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1698624000,
+            "rna_normalized": 159,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1699228800,
+            "rna_normalized": 1306,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1698796800,
+            "rna_normalized": 1512,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1699401600,
+            "rna_normalized": 1012,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1699833600,
+            "rna_normalized": 1110,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1700006400,
+            "rna_normalized": 1186,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1700438400,
+            "rna_normalized": 486,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1700611200,
+            "rna_normalized": 2009,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1701043200,
+            "rna_normalized": 3524,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1701216000,
+            "rna_normalized": 2575,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1701820800,
+            "rna_normalized": 7536,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1701648000,
+            "rna_normalized": 7125,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1702252800,
+            "rna_normalized": 6148,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1702425600,
+            "rna_normalized": 2950,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1702857600,
+            "rna_normalized": 3191,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1703030400,
+            "rna_normalized": 4931,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1703548800,
+            "rna_normalized": 2026,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1703721600,
+            "rna_normalized": 2366,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1704067200,
+            "rna_normalized": 2087,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1704240000,
+            "rna_normalized": 1511,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1704672000,
+            "rna_normalized": 1074,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1704844800,
+            "rna_normalized": 823,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1705276800,
+            "rna_normalized": 517,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1705449600,
+            "rna_normalized": 1266,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1705881600,
+            "rna_normalized": 994,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1706140800,
+            "rna_normalized": 506,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1706486400,
+            "rna_normalized": 749,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1706659200,
+            "rna_normalized": 256,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1707177600,
+            "rna_normalized": 542,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1707350400,
+            "rna_normalized": 764,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1707696000,
+            "rna_normalized": 279,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1708300800,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1708473600,
+            "rna_normalized": 47,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1709078400,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1708905600,
+            "rna_normalized": 33,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1709769600,
+            "rna_normalized": 173,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1710115200,
+            "rna_normalized": 0,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1710288000,
+            "rna_normalized": 62,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1710806400,
+            "rna_normalized": 14,
+            "date_of_insertion_unix": 1711544762
+          },
+          {
+            "date_unix": 1710979200,
+            "rna_normalized": 27,
+            "date_of_insertion_unix": 1711544762
+          }
+        ],
+        "last_value": {
+          "date_unix": 1710979200,
+          "rna_normalized": 27,
+          "date_of_insertion_unix": 1711544762
+        }
+      }
+    ]
+  },
+  "static_values": {
+    "population_count": 44645,
+    "population_count_connected_to_rwzis": 44636
+  }
+}

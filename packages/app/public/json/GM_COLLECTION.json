@@ -1,0 +1,2744 @@
+{
+  "name": "GM_COLLECTION",
+  "code": "GM_COLLECTION",
+  "proto_name": "GM_COLLECTION",
+  "last_generated": "1711724421",
+  "sewer": [
+    {
+      "gmcode": "GM1980",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 101,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1970",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 83,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1954",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 5,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1911",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 97,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1903",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 52,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1901",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 19,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1891",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 20,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1884",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 57,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1883",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 14,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1729",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 88,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1714",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 145,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1706",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 215,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1700",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 6,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1699",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 38,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1695",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 19,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1690",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 48,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1676",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 53,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1667",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 68,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1659",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 44,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1641",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 16,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1598",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 88,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0995",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 146,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0994",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 1,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0986",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0981",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 90,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0971",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 26,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0935",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 23,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0928",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 83,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0888",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 1,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0867",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 278,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0861",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 82,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0852",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 15,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0851",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 50,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0848",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 80,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0840",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 36,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0826",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 40,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0824",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 25,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0797",
+      "date_start_unix": 1709510400,
+      "date_end_unix": 1710028800,
+      "average": 167,
+      "data_is_outdated": true,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0796",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 107,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0784",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 25,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0770",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 80,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0765",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0748",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 35,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0715",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 19,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0687",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 45,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0677",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 116,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0638",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 138,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0632",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 57,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0610",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 39,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0589",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0579",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 100,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0553",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0547",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 100,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0542",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 90,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0537",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 69,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0523",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 33,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0518",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 157,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0489",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 66,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0482",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 68,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0451",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0450",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 87,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0439",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 15,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0437",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 101,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0431",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 178,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0405",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 32,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0402",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 84,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0399",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 49,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0397",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 25,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0376",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 51,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0375",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 87,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0363",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 53,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0361",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 65,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0335",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 123,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0331",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 9,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0327",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 46,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0317",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 51,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0307",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 46,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0301",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 20,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0293",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 21,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0268",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 54,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0246",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 14,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0230",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 43,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0228",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 22,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0209",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 55,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0203",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 34,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0193",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 132,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0180",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 38,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0175",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 59,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0160",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 84,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0147",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 227,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0109",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 46,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0090",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 64,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0060",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 325,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0059",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 16,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0037",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 6,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1991",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 58,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1978",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 43,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1969",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 28,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1960",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 46,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1952",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 13,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1940",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 79,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1916",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 138,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1900",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 43,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1895",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 49,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1892",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 84,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1876",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 36,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1734",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 45,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1724",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 82,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1719",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 55,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1711",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 20,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1705",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 72,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1701",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 79,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1680",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 32,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1669",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1586",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 41,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1525",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 100,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1507",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 67,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0917",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 1,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0899",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 15,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0866",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 82,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0865",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 25,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0823",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 52,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0809",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 534,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0794",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 44,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0772",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 82,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0766",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 61,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0762",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 53,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0758",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 124,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0757",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0743",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 84,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0736",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 178,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0717",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 45,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0654",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 94,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0642",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 65,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0637",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 138,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0627",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 36,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0569",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 26,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0512",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 20,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0505",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 39,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0502",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 43,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0498",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 32,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0479",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 67,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0448",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 53,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0400",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 36,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0394",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 54,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0392",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 125,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0388",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 32,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0385",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 3,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0383",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 87,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0358",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0356",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 9,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0355",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 130,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0352",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 72,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0345",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0312",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 39,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0299",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 21,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0281",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 21,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0275",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 28,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0269",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 86,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0263",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 8,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0252",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 61,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0243",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 155,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0221",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 34,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0214",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 59,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0200",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 27,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0183",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 9,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0171",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 72,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0168",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 41,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0166",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 92,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0164",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 227,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0114",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 40,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0088",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 501,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0085",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 17,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0072",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 23,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0014",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 165,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1979",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 220,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1961",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 177,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1955",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 30,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1950",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 31,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1949",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 26,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1931",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 66,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1926",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 138,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1924",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 18,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1904",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 89,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1894",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 76,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1842",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 128,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1773",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 175,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1771",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 82,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1740",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 13,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1735",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 59,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1731",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 36,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1728",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 68,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1721",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 50,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1696",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 84,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1681",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 14,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1674",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 36,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1658",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 82,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1655",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 36,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1652",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 44,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1640",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 6,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1509",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 41,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0965",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 17,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0957",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0946",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 1,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0944",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0938",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0889",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 79,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0882",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 21,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0880",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 78,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0879",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 124,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0855",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 49,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0847",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 85,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0845",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 29,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0820",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 82,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0785",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 106,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0622",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 110,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0606",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 110,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0603",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 138,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0599",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 116,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0597",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 33,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0590",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 65,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0556",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 110,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0534",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 22,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0531",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 65,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0417",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 51,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0415",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 15,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0384",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 54,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0377",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 76,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0373",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 73,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0353",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 9,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0351",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 93,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0340",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 63,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0313",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 46,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0310",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 138,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0296",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 55,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0289",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0285",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 17,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0279",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 93,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0274",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0273",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 154,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0267",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 51,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0232",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 23,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0226",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 21,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0222",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 55,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0202",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 36,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0197",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 32,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0189",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 22,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0184",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 72,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0177",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 43,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0163",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 15,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0153",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0148",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 17,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0118",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 49,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0098",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 29,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0096",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0080",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 86,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0050",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 6,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0034",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 63,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1992",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 53,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1982",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 54,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1966",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 72,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1963",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 33,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1959",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 24,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1948",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 50,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1945",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 43,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1942",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 54,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1930",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 2,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1896",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1859",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 71,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1783",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 131,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1774",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 60,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1742",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 6,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1730",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 55,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1723",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 68,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1709",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 36,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1708",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 57,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1621",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 97,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM1581",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 41,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0988",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 69,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0984",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0983",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 79,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0907",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0893",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 1,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0873",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 31,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0858",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 82,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0828",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 110,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0798",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 58,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0779",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 35,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0777",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 123,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0755",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 49,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0753",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 52,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0744",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 352,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0737",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 123,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0718",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 45,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0716",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 69,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0703",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 7,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0678",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 94,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0668",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 92,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0664",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 94,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0629",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 138,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0626",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 92,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0613",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 58,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0575",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 22,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0546",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 100,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0532",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 32,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0513",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 24,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0503",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 138,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0484",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 28,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0473",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 102,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0453",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 61,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0441",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 101,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0432",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 70,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0420",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 32,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0406",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 6,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0396",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 87,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0362",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 101,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0344",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 146,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0342",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 86,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0339",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0321",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 83,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0308",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 86,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0303",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 7,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0302",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 43,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0297",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 0,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0294",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 33,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0277",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 21,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0262",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 19,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0244",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 87,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0233",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 155,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0225",
+      "date_start_unix": 1710115200,
+      "date_end_unix": 1710633600,
+      "average": 27,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0216",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 210,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0213",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 113,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0173",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 52,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0158",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 32,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0150",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 152,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0141",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 24,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0119",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 39,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0106",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 89,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0093",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 188,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0086",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 91,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0074",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 276,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    },
+    {
+      "gmcode": "GM0047",
+      "date_start_unix": 1710720000,
+      "date_end_unix": 1711238400,
+      "average": 8,
+      "data_is_outdated": false,
+      "date_of_insertion_unix": 1711544758
+    }
+  ]
+}

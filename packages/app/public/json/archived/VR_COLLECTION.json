@@ -1,0 +1,662 @@
+{
+  "name": "VR_COLLECTION",
+  "code": "VR_COLLECTION",
+  "proto_name": "VR_COLLECTION",
+  "last_generated": "1691566854",
+  "vulnerable_nursing_home_archived_20230711": [
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR01",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR02",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR03",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR04",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 1.16,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR05",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 0.88,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR06",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 0.64,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR07",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR08",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 1.23,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR09",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR10",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR11",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR12",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR13",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 1.19,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR14",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR15",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR16",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR17",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR18",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR19",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR20",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR21",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR22",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 0.99,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR23",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 1.28,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR24",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 1.02,
+      "date_of_insertion_unix": 1689077132
+    },
+    {
+      "date_unix": 1688947200,
+      "vrcode": "VR25",
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "date_of_insertion_unix": 1689077132
+    }
+  ],
+  "disability_care_archived_20230126": [
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR25"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 5,
+      "infected_locations_percentage": 3.6,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR16"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR14"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 1.43,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR12"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 1.11,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR10"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 2.78,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR23"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 2,
+      "infected_locations_percentage": 2.86,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR21"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR19"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 2,
+      "infected_locations_percentage": 0.78,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR17"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR08"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 7,
+      "infected_locations_percentage": 2.87,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR06"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 4,
+      "infected_locations_percentage": 3.42,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR04"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR02"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 1.54,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR24"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 3.33,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR22"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 2,
+      "infected_locations_percentage": 2.25,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR20"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR18"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 4,
+      "infected_locations_percentage": 2.41,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR07"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 3,
+      "infected_locations_percentage": 2.33,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR05"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 1.02,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR03"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 3,
+      "infected_locations_percentage": 2.75,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR01"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 0,
+      "infected_locations_percentage": 0.0,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR15"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 0.81,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR13"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 1,
+      "infected_locations_percentage": 2.13,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR11"
+    },
+    {
+      "newly_infected_people": 0,
+      "newly_infected_locations": 0,
+      "infected_locations_total": 5,
+      "infected_locations_percentage": 2.84,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565539,
+      "vrcode": "VR09"
+    }
+  ],
+  "elderly_at_home_archived_20230126": [
+    {
+      "positive_tested_daily": 8,
+      "positive_tested_daily_per_100k": 21.6,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR25"
+    },
+    {
+      "positive_tested_daily": 6,
+      "positive_tested_daily_per_100k": 6.1,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR24"
+    },
+    {
+      "positive_tested_daily": 2,
+      "positive_tested_daily_per_100k": 2.5,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR23"
+    },
+    {
+      "positive_tested_daily": 4,
+      "positive_tested_daily_per_100k": 3.72,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR22"
+    },
+    {
+      "positive_tested_daily": 4,
+      "positive_tested_daily_per_100k": 4.45,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR21"
+    },
+    {
+      "positive_tested_daily": 6,
+      "positive_tested_daily_per_100k": 3.93,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR20"
+    },
+    {
+      "positive_tested_daily": 7,
+      "positive_tested_daily_per_100k": 11.13,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR19"
+    },
+    {
+      "positive_tested_daily": 6,
+      "positive_tested_daily_per_100k": 9.37,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR18"
+    },
+    {
+      "positive_tested_daily": 4,
+      "positive_tested_daily_per_100k": 2.52,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR17"
+    },
+    {
+      "positive_tested_daily": 11,
+      "positive_tested_daily_per_100k": 10.38,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR16"
+    },
+    {
+      "positive_tested_daily": 7,
+      "positive_tested_daily_per_100k": 5.54,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR15"
+    },
+    {
+      "positive_tested_daily": 1,
+      "positive_tested_daily_per_100k": 2.63,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR14"
+    },
+    {
+      "positive_tested_daily": 7,
+      "positive_tested_daily_per_100k": 7.24,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR13"
+    },
+    {
+      "positive_tested_daily": 5,
+      "positive_tested_daily_per_100k": 6.98,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR12"
+    },
+    {
+      "positive_tested_daily": 6,
+      "positive_tested_daily_per_100k": 13.02,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR11"
+    },
+    {
+      "positive_tested_daily": 2,
+      "positive_tested_daily_per_100k": 2.05,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR10"
+    },
+    {
+      "positive_tested_daily": 5,
+      "positive_tested_daily_per_100k": 3.24,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR09"
+    },
+    {
+      "positive_tested_daily": 6,
+      "positive_tested_daily_per_100k": 8.7,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR08"
+    },
+    {
+      "positive_tested_daily": 3,
+      "positive_tested_daily_per_100k": 3.37,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR07"
+    },
+    {
+      "positive_tested_daily": 9,
+      "positive_tested_daily_per_100k": 7.18,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR06"
+    },
+    {
+      "positive_tested_daily": 5,
+      "positive_tested_daily_per_100k": 5.74,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR05"
+    },
+    {
+      "positive_tested_daily": 4,
+      "positive_tested_daily_per_100k": 6.11,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR04"
+    },
+    {
+      "positive_tested_daily": 8,
+      "positive_tested_daily_per_100k": 10.29,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR03"
+    },
+    {
+      "positive_tested_daily": 5,
+      "positive_tested_daily_per_100k": 5.27,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR02"
+    },
+    {
+      "positive_tested_daily": 3,
+      "positive_tested_daily_per_100k": 3.85,
+      "deceased_daily": 0,
+      "date_unix": 1672617600,
+      "date_of_insertion_unix": 1674565534,
+      "vrcode": "VR01"
+    }
+  ]
+}
