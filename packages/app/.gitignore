@@ -37,8 +37,8 @@ yarn-error.log*
 /*.code-workspace
 /debug.log
 
-#src/locale/*_export.json
-#src/locale/site-text.d.ts
+src/locale/*_export.json
+src/locale/site-text.d.ts
 
 # Typescript compiler traces
 trace*
