@@ -2,7 +2,7 @@
 
 ## Project
 
-- [Release Procedure](release-procedure.md)
+- ~~[Release Procedure](release-procedure.md)~~
 
 ## Infrastructure
 

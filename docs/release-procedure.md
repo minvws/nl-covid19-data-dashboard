@@ -1,4 +1,4 @@
-# Release Procedure
+# **DEPRECATED** Release Procedure
 
 ## Sprint Release
 

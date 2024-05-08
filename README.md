@@ -6,17 +6,16 @@ give a broad perspective on the subject.
 
 ## Contact
 
-If you want to contact the dashboard team, feel free to open an issue for
+~~If you want to contact the dashboard team, feel free to open an issue for
 technical questions, bug reports, or security findings. If you have a generic question or remark about the
-corona policy of the Dutch government, please consult the [frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) or [contact page](https://coronadashboard.rijksoverheid.nl/contact) on the dashboard.
+corona policy of the Dutch government, please consult the [frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) or [contact page](https://coronadashboard.rijksoverheid.nl/contact) on the dashboard.~~
 
 ## Development & Contribution process
 
-The core team works directly from this open-source repository. If you plan to
+~~The core team works directly from this open-source repository. If you plan to
 propose changes, we recommend opening an issue beforehand where we can discuss
 your planned changes. This increases the chance that we might be able to use
-your contribution (or it avoids doing work if there are reasons why we wouldn't
-be able to use it).
+your contribution (or it avoids doing work if there are reasons why we wouldn't be able to use it).~~
 
 ## Packages
 
@@ -47,7 +46,7 @@ $ yarn dev
 In this project, we use Yarn instead of NPM, so the documentation assumes you
 have the `yarn` executable installed on your system.
 
-If you would like to run the code on your local machine check out the readme
+If you would like to run the code on your local machine check out the README
 documentation of the [app](/packages/app/README.md) and (optionally the)
 [cms](/packages/cms/README.md) packages.
 

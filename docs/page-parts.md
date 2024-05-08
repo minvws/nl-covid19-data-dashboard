@@ -1,8 +1,8 @@
 # Page Parts
 
-All pages found on routes `landelijk/[page]` or `gemeente/[code]/[page]` can contain 
-sections for FAQs, data explanations, and articles. These are referred to as page parts 
-(or `Pagina onderdelen` in Sanity Studio). A collection of page parts refers to a 
+All pages found on routes `landelijk/[page]` or `gemeente/[code]/[page]` can contain
+sections for FAQs, data explanations, and articles. These are referred to as page parts
+(or `Pagina onderdelen` in Sanity Studio). A collection of page parts refers to a
 `Page composition`. This document outlines how page parts work.
 
 ## Data model
@@ -15,21 +15,22 @@ the title is **only used to display a human readable name in the Sanity Studio**
 
 For any page part, you must first configure the fields found within the
 `Page configuration (Pagine configuratie)` fieldset. This fieldset consists of:
-* Title (`Menu titel`) -  Only used to display a human readable name in the Sanity Studio.
-* Page ID (`Pagina ID`) - This is a reference to a `pageIdentifier`.
-* Page data type (`Pagina data soort`) - This is a unique identfier for a page part. 
-You can read more about this field in the **Data kind** section below.
+
+- Title (`Menu titel`) - Only used to display a human readable name in the Sanity Studio.
+- Page ID (`Pagina ID`) - This is a reference to a `pageIdentifier`.
+- Page data type (`Pagina data soort`) - This is a unique identfier for a page part.
+  You can read more about this field in the **Data kind** section below.
 
 At the moment, we support the following page parts:
 
 ### Articles
 
-Also referred to as `Pagina Artikelen`, this page part allows you to add a list of articles to a page. 
-There is an interface to select a list of articles as well as an interface to add a title for the 
+Also referred to as `Pagina Artikelen`, this page part allows you to add a list of articles to a page.
+There is an interface to select a list of articles as well as an interface to add a title for the
 articles section on a given page.
 
-The document also has `minNumber` and `maxNumber` fields that indicate a minimum and maximum 
-number of references. These fields are only visible to administrators, so normal users will only 
+The document also has `minNumber` and `maxNumber` fields that indicate a minimum and maximum
+number of references. These fields are only visible to administrators, so normal users will only
 be able to edit the article list and the section title.
 
 ### Data explained
@@ -43,7 +44,7 @@ has an interface for selecting a data explanation item to link to.
 
 Also referred to as `Pagina FAQ's`, this page part allows for the addition of FAQ items to a given page.
 Similar to the data explained page part, configuring FAQs for a page will create a button at the top of
-the page which links to the FAQs at the bottom of the same page. 
+the page which links to the FAQs at the bottom of the same page.
 
 The document consists of fields allowing for the configuration of the button's title and subtitle.
 Similar to page articles, there is a field to add a section title for the FAQ section of a page. Finally,
@@ -57,8 +58,8 @@ only be able to edit the links list.
 
 ### Highlighted items
 
-A list of highlighted items, currently only used on the Actueel pages. The document also 
-has `minNumber` and `maxNumber` fields that indicate a minimum and maximum number of items. 
+A list of highlighted items, currently only used on the Actueel pages. The document also
+has `minNumber` and `maxNumber` fields that indicate a minimum and maximum number of items.
 These fields are only visible to administrators, so normal users will only be able to edit the item list.
 
 ## Data kind
@@ -69,8 +70,8 @@ page. The page data kind is used in the code to query the content for a particul
 
 For example:
 
-This functionality can be use so multiple lists of articles can be added to a page, for example. 
-One list can be called 'mainPageArticles', another 'specialPageArticles', this name is then 
+This functionality can be use so multiple lists of articles can be added to a page, for example.
+One list can be called 'mainPageArticles', another 'specialPageArticles', this name is then
 used to identify each list after it has been received from a Sanity query.
 
 ## Querying page parts
@@ -82,9 +83,7 @@ there are dedicated functions to retrieve any kind of page part.
 For example:
 
 ```ts
-const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(
-  () => getPagePartsQuery('sewer_page')
-)(context);
+const { content } = await createGetContent<PagePartQueryResult<ArticleParts>>(() => getPagePartsQuery('sewer_page'))(context);
 
 return {
   content: {
@@ -101,9 +100,10 @@ return {
 The workflow for adding a new page with page parts is fairly simple:
 
 [Page part] - Refers to any of the available page parts
+
 1. Create a new page identifier document (in Sanity, Pagina onderdelen -> Page Identifier)
 2. Create a new page part -> (in Sanity, Pagina onderdelen -> [Page part])
-4. Configure the page part by filling in the fields
-5. Query the data in the application's page and off you go.
+3. Configure the page part by filling in the fields
+4. Query the data in the application's page and off you go.
 
 [Back to index](index.md)

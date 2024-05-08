@@ -5,7 +5,7 @@ developers that have access to the CMS.
 
 ## Usage
 
-Run `yarn dev` to serve the CMS. This will run the `sanity dev` command. The CMS can be run on an alternate port using `--port XXXX` in which `XXXX` is the port number.
+Run `yarn dev` to serve the CMS. This will run the `sanity dev` command. The CMS can be run on an alternate port using `--port XXXX` in which `XXXX` is the port number. The command cannot be run in parallel with `yarn dev`from the app root folder.
 
 Previewing production builds of the CMS are done using `yarn build` and `yarn start` from this directory respectively.
 
