@@ -136,9 +136,11 @@ fallback.~~
 ~~After syncing texts, the import script is called to update your local JSON file
 and re-generate the SiteText type interface.~~
 
-~~The Sanity Lokalize dataset will remain immutable with the archival of the application.~~
+The Sanity Lokalize dataset will remain immutable with the archival of the application.
 
 ### **DEPRECATED** Delete/Move Mutations
+
+` As of 02-04-2024, the Coronadashboard has been brought offline, so some sections of this chapter are no longer relevant.`
 
 Because feature branches plus the development deployment all use the same Sanity
 dataset, we can not simply remove a lokalize text document from the dataset
@@ -161,6 +163,8 @@ history and drafts.
 
 ### **DEPRECATED** Flow to Production
 
+` As of 02-04-2024, the Coronadashboard has been brought offline, so this chapter is no longer relevant.`
+
 Texts are first added to the development dataset. When the feature branch gets
 merged, a GitHub action will inject any new texts into the production dataset
 and flag them as being new.
@@ -169,6 +173,8 @@ The communication team is then able to see a list of newly added texts and
 prepare them for an upcoming release.
 
 ## **DEPRECATED** Sync After Feature
+
+` As of 02-04-2024, the Coronadashboard has been brought offline, so this chapter is no longer relevant.`
 
 The `sync-after-feature` command is triggered automatically by a GitHub Action
 whenever a feature branch is merged to the develop branch. It contains the
@@ -187,6 +193,8 @@ merged, those deletions will propagate to production after the release using the
 `sync-after-release` command.
 
 ## **DEPRECATED** Sync After Release
+
+` As of 02-04-2024, the Coronadashboard has been brought offline, so this chapter is no longer relevant.`
 
 The `sync-after-release` command should be triggered manually shortly after a
 release has been deployed to production. It can not really hurt to forget to run
@@ -216,6 +224,8 @@ from development between deploying the release and running the
 production set and block the deployment.
 
 ## **DEPRECATED** Sync Texts From Production
+
+` As of 02-04-2024, the Coronadashboard has been brought offline, so this chapter is no longer relevant.`
 
 Because in the development dataset we typically inject a lot of placeholder
 texts, running the app locally doesn't always give a good impression of what it

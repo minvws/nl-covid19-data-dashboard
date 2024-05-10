@@ -1,5 +1,7 @@
 # ARCHIVED NL Coronavirus Dashboard - App
 
+` As of 02-04-2024, the Coronadashboard has been brought offline, so this file is no longer relevant.`
+
 The main application that contains the front-end part of the dashboard. This
 React application uses Next.js as its framework.
 
@@ -17,7 +19,7 @@ cp packages/app/.env.local.example packages/app/.env.local
 
 Then from the repository root you can run:
 
-1. `yarn download` - ~~Downloads latest data~~ The latest production protos have been added to the repository. The user is not required to download them.
+1. ~~`yarn download` - Downloads latest data~~ The latest production protos have been added to the repository. The user is not required to download them.
 2. `yarn bootstrap` - Downloads / builds all other requirements
 3. `yarn dev` - Starts the development server
 

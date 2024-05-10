@@ -1,4 +1,6 @@
-# NL Coronavirus Dashboard
+# Archived NL Coronavirus Dashboard
+
+` As of 02-04-2024, the Coronadashboard has been brought offline, so some of the sections are not relevant anymore.`
 
 The dashboard provides information on the outbreak and prevalence of COVID-19 in
 The Netherlands. It combines measured and modelled data from various sources to
@@ -6,11 +8,15 @@ give a broad perspective on the subject.
 
 ## Contact
 
+` As of 02-04-2024, the Coronadashboard has been brought offline. This section is not applicable anymore.`
+
 ~~If you want to contact the dashboard team, feel free to open an issue for
 technical questions, bug reports, or security findings. If you have a generic question or remark about the
 corona policy of the Dutch government, please consult the [frequently asked questions](https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen) or [contact page](https://coronadashboard.rijksoverheid.nl/contact) on the dashboard.~~
 
 ## Development & Contribution process
+
+` As of 02-04-2024, the Coronadashboard has been brought offline. This section is not applicable anymore.`
 
 ~~The core team works directly from this open-source repository. If you plan to
 propose changes, we recommend opening an issue beforehand where we can discuss

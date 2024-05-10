@@ -1,5 +1,7 @@
 # **DEPRECATED** Release Procedure
 
+` As of 02-04-2024, the Coronadashboard has been brought offline, so this chapter is no longer relevant.`
+
 ## Sprint Release
 
 1. Create a branch called `release/x.xx.0` based on `master`(\*).
