@@ -9,7 +9,7 @@ The theme that holds all of the styling constants is located at **app/src/style/
 all styling information, so fonts, font sizes, font weights, colors, etc.
 Inline styles that set their own property values that are not described in the theme are highly discouraged.
 The only kinds of exceptions that this rule might be very localized padding and margin settings, for example,
-but te rule of thumb is that theme values need to be used whenever possible.
+but the rule of thumb is that theme values need to be used whenever possible.
 
 ## Typography
 

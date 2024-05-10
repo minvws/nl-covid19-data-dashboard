@@ -1,4 +1,4 @@
-# Timelines && Timeline Events
+# Timelines & Timeline Events
 
 All time-series charts can optionally render events on a timeline to illustrate
 and describe certain parts of the data.

@@ -1,5 +1,7 @@
 # Sanity & Lokalize Texts
 
+` As of 02-04-2024, the Coronadashboard has been brought offline. Some parts of this section are not applicable anymore.`
+
 This section describes some of the ins and outs around locale texts that we use
 to translate short-copy. These strings used to be managed by a tool called
 Lokalize. After a while we concluded that their application did not meet our
@@ -22,27 +24,30 @@ In summary these are the most important things you should be aware of:
 - The `import` command brings your local JSON files up-to-date with the Sanity
   dataset. The TypeScript compiler will error when your JSON files do not
   contain all the texts which are referenced in the code.
-- The JSON import contains document ids as part of the keys. You can make
-  changes locally to the **app/src/locale/nl_export.json** file. Add new keys,
-  delete them or rename and move existing ones. After you make changes run the
+- The JSON import contains document ids as part of the keys. You can ONLY make
+  changes locally to the **app/src/locale/nl_export.json** or **app/src/locale/en_export.json** file. Add new keys,
+  delete them or rename and move existing ones.
+  ~~After you make changes run the
   `lokalize:apply-json-edits` script. This will give you a list of changes and
   you can decide which ones to apply. Changes are written in a mutation log
   file, and at the end the JSON is re-imported to reflect all changes.
   It is recommended to run `lokalize:apply-json-edits` after the feature has
   been finished, right before merging it to develop since during development
-  changes to the **nl_export.json** file might fluctuate.
-- Merge conflicts in the mutations file are common, but **always** choose to
+  changes to the **nl_export.json** file might fluctuate.~~
+- ~~Merge conflicts in the mutations file are common, but **always** choose to
   **accept both changes**, so that you never remove any mutations. You do not
   have to worry about the order of the timestamps, as these mutations are sorted
-  before they are applied.
-- When a feature branch gets merged into develop, the `sync-after-feature`
+  before they are applied.~~
+- The `sync-after-feature` script is not in use anymore.
+  ~~When a feature branch gets merged into develop, the `sync-after-feature`
   command runs which adds new texts to production so that the communication team
-  can prepare them for upcoming releases.
-- After a release, we manually run the `sync-after-release`, which then strips
+  can prepare them for upcoming releases.~~
+- The `sync-after-release` procedure is applicable anymore.
+  ~~After a release, we manually run the `sync-after-release`, which then strips
   all keys from production that are not in use in development anymore. This also
   clears the mutations log file which should then be committed. **Do not delete
   texts from development between deploying the release and running the
-  `sync-after-release` command**.
+  `sync-after-release` command**.~~
 
 ## Mutations File
 
@@ -67,9 +72,10 @@ when resolving conflicts, so that none of the lines are ever deleted.
 
 The application reads its locale strings from
 **packages/app/public/nl_export.json** and **packages/app/public/en_export.json**.
-These JSONs are imported from the Sanity lokalize documents, but they are not
+These JSONs are imported from the Sanity lokalize documents, but the latest versions are available in the `develop` branch. The `export` files are immutable since the app is archived.
+~~but they are not
 part of the repository. Therefore, you will regularly need to run `yarn lokalize:import` in
-order to keep your local JSON file up-to-date with the Sanity dataset.
+order to keep your local JSON file up-to-date with the Sanity dataset.~~
 
 The JSONs will include Sanity document ids in every leaf-key which are used to
 detect add-/delete-/move-actions of texts (`some_key__@__{document_id}`). These
@@ -113,7 +119,7 @@ and unflattens this list of paths into a JSON file. (The Dutch texts are seriali
 paths and saves those to Sanity. Obviously there is a bunch of logic involved that checks if a path is new or existing, but for those
 details we refer to the source code.
 
-## How to Add, Delete or Move Texts
+## **DEPRECATED** How to Add, Delete or Move Texts
 
 First make sure the JSONs include document ids (`some_key__@__{document_id}`).
 Run `yarn lokalize:import` if these are not yet present in your JSONs.
@@ -122,17 +128,21 @@ You can add, delete and move keys by mutating the **nl_export.json** file. The
 sync script will automagically detect additions, deletions or moved lokalize
 texts.
 
-After you're done with the changes run `yarn lokalize:apply-json-edits` and
+~~After you're done with the changes run `yarn lokalize:apply-json-edits` and
 after confirmation all selected mutations will be written to the mutations log
-file.
+file.~~
 
-New texts will only have an NL (Dutch) string when they are added and will use NL as a
-fallback.
+~~New texts will only have an NL (Dutch) string when they are added and will use NL as a
+fallback.~~
 
-After syncing texts, the import script is called to update your local JSON file
-and re-generate the SiteText type interface.
+~~After syncing texts, the import script is called to update your local JSON file
+and re-generate the SiteText type interface.~~
 
-### Delete/Move Mutations
+The Sanity Lokalize dataset will remain immutable with the archival of the application.
+
+### **DEPRECATED** Delete/Move Mutations
+
+` As of 02-04-2024, the Coronadashboard has been brought offline, so some sections of this chapter are no longer relevant.`
 
 Because feature branches plus the development deployment all use the same Sanity
 dataset, we can not simply remove a lokalize text document from the dataset
@@ -153,7 +163,9 @@ documents. During sync-after-feature the move is finalized by changing the key
 and subject properties of the targeted document. This preserves the document
 history and drafts.
 
-### Flow to Production
+### **DEPRECATED** Flow to Production
+
+` As of 02-04-2024, the Coronadashboard has been brought offline, so this chapter is no longer relevant.`
 
 Texts are first added to the development dataset. When the feature branch gets
 merged, a GitHub action will inject any new texts into the production dataset
@@ -162,7 +174,9 @@ and flag them as being new.
 The communication team is then able to see a list of newly added texts and
 prepare them for an upcoming release.
 
-## Sync After Feature
+## **DEPRECATED** Sync After Feature
+
+` As of 02-04-2024, the Coronadashboard has been brought offline, so this chapter is no longer relevant.`
 
 The `sync-after-feature` command is triggered automatically by a GitHub Action
 whenever a feature branch is merged to the develop branch. It contains the
@@ -180,7 +194,9 @@ If the text additions of a feature branch get deleted after the branch was
 merged, those deletions will propagate to production after the release using the
 `sync-after-release` command.
 
-## Sync After Release
+## **DEPRECATED** Sync After Release
+
+` As of 02-04-2024, the Coronadashboard has been brought offline, so this chapter is no longer relevant.`
 
 The `sync-after-release` command should be triggered manually shortly after a
 release has been deployed to production. It can not really hurt to forget to run
@@ -209,7 +225,9 @@ from development between deploying the release and running the
 `sync-after-release`. Because then those keys will get removed from the
 production set and block the deployment.
 
-## Sync Texts From Production
+## **DEPRECATED** Sync Texts From Production
+
+` As of 02-04-2024, the Coronadashboard has been brought offline, so this chapter is no longer relevant.`
 
 Because in the development dataset we typically inject a lot of placeholder
 texts, running the app locally doesn't always give a good impression of what it
