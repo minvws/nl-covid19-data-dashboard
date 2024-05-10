@@ -1,5 +1,7 @@
 # Sanity & Lokalize Texts
 
+` As of 02-04-2024, the Coronadashboard has been brought offline. Some parts of this section are not applicable anymore.`
+
 This section describes some of the ins and outs around locale texts that we use
 to translate short-copy. These strings used to be managed by a tool called
 Lokalize. After a while we concluded that their application did not meet our
