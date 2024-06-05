@@ -10,7 +10,7 @@ React application uses Next.js as its framework.
 First run `yarn install` or simply `yarn` at the root of the repository if you
 haven't already. This installs all the dependencies for all of the packages.
 
-For developers only! Make sure you have an `.env.local` file in `packages/app` with correct environment variables. To
+Make sure you have an `.env.local` file in `packages/app` with correct environment variables. To
 get started, you can copy `.env.local.example`:
 
 ```sh
@@ -40,19 +40,19 @@ JSON data files represent a collection of archived and non-archived "protos" fil
 
 ### CMS Dataset
 
-By default, the site builds using the development dataset. If you would like the
-production content instead you can create a `.env.local` file in `packages/app`
+By default, the site builds using the production dataset. If you would like the
+development content instead you can create a `.env.local` file in `packages/app`
 with the following content:
 
 ```sh
-NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_DATASET=development
 ```
 
 The "Lokalize" part of Sanity is exported and consumed by the app as JSON. You will
 need to run this script regularly as an outdated JSON file will result in
 compile or build-time errors.
 
-`yarn cms:lokalize-import`
+`yarn cms:lokalize-import:prd`
 
 Alternatively you can run this from `packages/cms` as `yarn lokalize:import`
 
@@ -61,10 +61,10 @@ To learn more about the rationale behind Lokalize and how it works [read the doc
 ### Locale
 
 By default, the site builds the Dutch version. If you would like to build the English
-version instead, update the following variable in your `packages/app/.env.local` file:
+version instead, update the following variable in your `packages/app/next.config.js` file:
 
-```sh
-NEXT_PUBLIC_LOCALE=en
+```
+defaultLocale: 'en'
 ```
 
 ## Running a Production Build
