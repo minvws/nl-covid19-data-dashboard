@@ -78,7 +78,7 @@ NEXT_PUBLIC_COMMIT_ID=__commit_id_placeholder
 
 The value doesn't actually matter, so it can be anything.
 
-To build a production version you can run `yarn build`, and after that `yarn start` to
+To build a production version you can run `yarn build:app`, and after that `yarn start` to
 serve the built files.
 
 ## Available Scripts
