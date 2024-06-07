@@ -6,7 +6,7 @@ The dashboard provides information on the outbreak and prevalence of COVID-19 in
 The Netherlands. It combines measured and modelled data from various sources to
 give a broad perspective on the subject.
 
-This repository uses .json files in the form of the archive `protos.zip` as source for data visualisation.. The `protos.zip` archive is ingested by the front-end application to display all the data on the Coronadashboard. The code for the back-end application can be found **[here](https://github.com/minvws/nl-covid19-data-backend-processing)**.
+This repository uses .json files in the form of the archive `protos.zip` as source for data visualisation. The `protos.zip` archive is ingested by the front-end application to display all the data on the Coronadashboard. The code for the back-end application can be found **[here](https://github.com/minvws/nl-covid19-data-backend-processing)**.
 
 ## Contact
 
