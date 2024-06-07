@@ -54,8 +54,6 @@ compile or build-time errors.
 
 `yarn cms:lokalize-import:prd`
 
-Alternatively you can run this from `packages/cms` as `yarn lokalize:import`
-
 To learn more about the rationale behind Lokalize and how it works [read the documentation](/packages/cms/README.md#lokalize-texts).
 
 ### Locale
